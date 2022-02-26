@@ -7,9 +7,13 @@
 
 import UIKit
 
-class WelcomeSignInViewController: UIViewController
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
+    @IBOutlet private weak var debugButton: VesselButton!
+    @IBOutlet private weak var environmentLabel: UILabel!
+    
+    //these are the words that animate under "In pursuit of better"
     let goals = [NSLocalizedString("focus", comment:""),
                  NSLocalizedString("energy", comment:""),
                  NSLocalizedString("immunity", comment:""),
@@ -20,13 +24,29 @@ class WelcomeSignInViewController: UIViewController
                  NSLocalizedString("beauty", comment:""),
                  NSLocalizedString("living", comment:"")]
     var goalIndex = 0
+    let lock = [1,0,0,0,1,0]
+    var key = [0,0,0,0,0,0]
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
-        mindLabel.text = goals[0]
+        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+        //kick off first word
+        mindLabel.text = goals[goalIndex]
         updateGoals()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        updateEnvironmentLabel()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let destination = segue.destination as? DebugViewController
+        {
+            destination.delegate = self
+        }
     }
     
     @objc func updateGoals()
@@ -42,6 +62,26 @@ class WelcomeSignInViewController: UIViewController
         }
     }
     
+    @IBAction func onLeftButton()
+    {
+        key.append(0)
+        key.remove(at: 0)
+        //print("LEFT: \(key)")
+    }
+    
+    @IBAction func onRightButton()
+    {
+        
+        key.append(1)
+        key.remove(at: 0)
+        //print("RIGHT: \(key)")
+    }
+    
+    @IBAction func onDebug()
+    {
+        performSegue(withIdentifier: "showDebug", sender: self)        
+    }
+    
     @IBAction func onSignIn()
     {
         
@@ -49,6 +89,41 @@ class WelcomeSignInViewController: UIViewController
     
     @IBAction func onCreateAccount()
     {
+        if key == lock
+        {
+            //show debug button
+            debugButton.isHidden = false
+            key.append(1)
+            key.remove(at: 0)
+        }
+        else
+        {
+            //begin create account flow
+            //performSegue(withIdentifier: "createAccount", sender: self)
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "SignupEmailCheckingViewController")
+            self.navigationController?.fadeTo(vc)
+        }
+    }
+    
+    func updateEnvironmentLabel()
+    {
+        let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch savedEnvironment
+        {
+        case Constants.PROD_INDEX:
+            environmentLabel.isHidden = true
+        case Constants.STAGING_INDEX:
+            environmentLabel.isHidden = false
+            environmentLabel.text = "Staging Environment"
+        default:
+            environmentLabel.isHidden = false
+            environmentLabel.text = "Dev Environment"
+        }
         
+    }
+    func didChangeEnvironment(env: Int)
+    {
+        updateEnvironmentLabel()
     }
 }
