@@ -333,16 +333,6 @@
                                                     <outlet property="delegate" destination="RGa-TW-w2X" id="avR-Ir-yXQ"/>
                                                 </connections>
                                             </textField>
-                                            <textField hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contact ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NxK-p1-TiY" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="150" width="354" height="60"/>
-                                                <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="41x-53-wDN"/>
-                                                </constraints>
-                                                <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
-                                            </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-po-Qud">
                                                 <rect key="frame" x="0.0" y="160" width="354" height="60"/>
                                                 <subviews>
@@ -407,14 +397,12 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="17F-uw-kO4" secondAttribute="trailing" id="KJv-gx-YYc"/>
-                                            <constraint firstItem="NxK-p1-TiY" firstAttribute="trailing" secondItem="17F-uw-kO4" secondAttribute="trailing" id="LTU-WN-cHI"/>
                                             <constraint firstItem="ZV5-SL-Vdn" firstAttribute="leading" secondItem="tEu-lb-yVD" secondAttribute="leading" id="Med-8Q-GIP"/>
                                             <constraint firstItem="w6Z-po-Qud" firstAttribute="leading" secondItem="tEu-lb-yVD" secondAttribute="leading" id="Sxj-Gi-FEa"/>
                                             <constraint firstAttribute="trailing" secondItem="w6Z-po-Qud" secondAttribute="trailing" id="ZZC-hf-2XC"/>
                                             <constraint firstAttribute="trailing" secondItem="tYR-xa-fcT" secondAttribute="trailing" id="aJc-Zv-c9v"/>
                                             <constraint firstItem="tYR-xa-fcT" firstAttribute="leading" secondItem="tEu-lb-yVD" secondAttribute="leading" id="cHY-LT-drp"/>
                                             <constraint firstAttribute="trailing" secondItem="ZV5-SL-Vdn" secondAttribute="trailing" id="hha-9y-fPr"/>
-                                            <constraint firstItem="NxK-p1-TiY" firstAttribute="leading" secondItem="17F-uw-kO4" secondAttribute="leading" id="hxH-x7-fRE"/>
                                             <constraint firstItem="17F-uw-kO4" firstAttribute="leading" secondItem="tEu-lb-yVD" secondAttribute="leading" id="nGu-3l-njr"/>
                                         </constraints>
                                     </stackView>
@@ -428,22 +416,6 @@
                                         <rect key="frame" x="30" y="462.5" width="354" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmv-3v-Wls" userLabel="TEMP - Please Sign In">
-                                        <rect key="frame" x="30" y="463.5" width="200" height="47.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="LSt-7k-Ma6"/>
-                                        </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Please enter your email and password to sign in">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" metaFont="system" size="16"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5OZ-Ro-Tah">
@@ -515,10 +487,8 @@
                                     <constraint firstAttribute="trailing" secondItem="tEu-lb-yVD" secondAttribute="trailing" constant="30" id="NeC-kJ-iIV"/>
                                     <constraint firstItem="svL-Zk-oOZ" firstAttribute="top" secondItem="n0p-V9-gDe" secondAttribute="bottom" constant="20" id="OH1-MQ-4Ka"/>
                                     <constraint firstItem="5OZ-Ro-Tah" firstAttribute="leading" secondItem="tEu-lb-yVD" secondAttribute="leading" id="Vuq-LD-c0n"/>
-                                    <constraint firstItem="dmv-3v-Wls" firstAttribute="leading" secondItem="G7I-bY-l4K" secondAttribute="leading" constant="30" id="Y1s-Xj-qLn"/>
                                     <constraint firstItem="tEu-lb-yVD" firstAttribute="top" secondItem="Drv-Su-C73" secondAttribute="bottom" constant="16" id="bXd-aB-uoJ"/>
                                     <constraint firstItem="IKr-mQ-Zor" firstAttribute="top" secondItem="5OZ-Ro-Tah" secondAttribute="bottom" constant="8" id="bnV-vS-s0d"/>
-                                    <constraint firstItem="dmv-3v-Wls" firstAttribute="bottom" secondItem="17F-uw-kO4" secondAttribute="top" constant="-16" id="c5y-Ko-5ZP"/>
                                     <constraint firstItem="n0p-V9-gDe" firstAttribute="leading" secondItem="G7I-bY-l4K" secondAttribute="leading" constant="30" id="cNe-mV-Xcf"/>
                                     <constraint firstItem="tEu-lb-yVD" firstAttribute="leading" secondItem="G7I-bY-l4K" secondAttribute="leading" constant="30" id="cPh-ST-50p"/>
                                     <constraint firstItem="wsg-FO-WmX" firstAttribute="top" secondItem="svL-Zk-oOZ" secondAttribute="bottom" constant="8" id="dMJ-7W-85g"/>

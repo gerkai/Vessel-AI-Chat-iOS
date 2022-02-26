@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
+//  TODO: Fix layout for small screens (iPhone SE)
 
 import UIKit
 
@@ -21,7 +22,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -84,7 +84,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else
         {
-            
             // if keyboard size is not available for some reason, dont do anything
            return
         }
@@ -94,7 +93,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         // if active text field is not nil
         if let activeTextField = activeTextField
         {
-            
             let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
             let topOfKeyboard = self.view.frame.height - keyboardSize.height
             
