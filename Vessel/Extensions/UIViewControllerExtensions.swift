@@ -15,6 +15,7 @@ extension UIViewController
         if let url = URL(string: url)
         {
             let vc = SFSafariViewController(url: url)
+            vc.modalPresentationStyle = .overCurrentContext
             present(vc, animated: true)
         }
     }

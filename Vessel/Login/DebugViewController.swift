@@ -29,12 +29,12 @@ class DebugViewController: UIViewController
         if environmentControl.selectedSegmentIndex != savedEnvironment
         {
             UserDefaults.standard.set(environmentControl.selectedSegmentIndex, forKey: Constants.environmentKey)
-            delegate?.didChangeEnvironment(env: environmentControl.selectedSegmentIndex)
         }
     }
     
     @IBAction func onEnvironment(_ sender: UISegmentedControl)
     {
+        delegate?.didChangeEnvironment(env: environmentControl.selectedSegmentIndex)
         switch sender.selectedSegmentIndex
         {
             case Constants.PROD_INDEX:

@@ -41,7 +41,8 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     override func viewWillAppear(_ animated: Bool)
     {
-        updateEnvironmentLabel()
+        let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        updateEnvironmentLabel(env: savedEnvironment)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -109,10 +110,9 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
     }
     
-    func updateEnvironmentLabel()
+    func updateEnvironmentLabel(env: Int)
     {
-        let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
-        switch savedEnvironment
+        switch env
         {
         case Constants.PROD_INDEX:
             environmentLabel.isHidden = true
@@ -123,10 +123,10 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             environmentLabel.isHidden = false
             environmentLabel.text = "Dev Environment"
         }
-        
     }
+    
     func didChangeEnvironment(env: Int)
     {
-        updateEnvironmentLabel()
+        updateEnvironmentLabel(env: env)
     }
 }
