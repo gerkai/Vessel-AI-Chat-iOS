@@ -160,7 +160,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RA4-wR-TGS">
-                                <rect key="frame" x="134" y="850.5" width="146.5" height="20.5"/>
+                                <rect key="frame" x="134" y="841.5" width="146.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -178,7 +178,7 @@
                             <constraint firstItem="V3u-fj-37a" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="Olv-yp-C9P"/>
                             <constraint firstItem="PPN-lI-RkX" firstAttribute="centerY" secondItem="Nck-y3-Gb4" secondAttribute="centerY" id="OnG-mg-I9e"/>
                             <constraint firstItem="Nck-y3-Gb4" firstAttribute="top" secondItem="V3u-fj-37a" secondAttribute="top" id="TrG-hx-df0"/>
-                            <constraint firstItem="RA4-wR-TGS" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="9" id="V0u-cG-jVT"/>
+                            <constraint firstItem="RA4-wR-TGS" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="V0u-cG-jVT"/>
                             <constraint firstItem="cEK-f8-FUY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="30" id="WZR-Zz-grd"/>
                             <constraint firstItem="CLE-qB-BDH" firstAttribute="top" secondItem="VUe-GW-bRC" secondAttribute="bottom" constant="-15" id="fsl-qv-WOB"/>
                             <constraint firstItem="RA4-wR-TGS" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="mvR-MU-MQI"/>
@@ -327,12 +327,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-hZ-FOV">
-                                        <rect key="frame" x="30" y="169" width="180" height="64"/>
+                                        <rect key="frame" x="30" y="169" width="180" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="bdB-nD-rOS"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Let’s get started. Please enter your email to create your account">
+                                            <fragment content="Let’s get started.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="16" name="NoeText"/>
@@ -342,8 +342,8 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign Up with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDP-0O-z69">
-                                        <rect key="frame" x="144" y="547.5" width="126" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or enter your email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDP-0O-z69">
+                                        <rect key="frame" x="129.5" y="547.5" width="155" height="20.5"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
