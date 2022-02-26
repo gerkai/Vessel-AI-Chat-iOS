@@ -11,7 +11,6 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate
 {
     @IBOutlet weak var googleAuthButton: UIButton!
     @IBOutlet weak var appleAuthButton: UIButton!
-    @IBOutlet var formFields: [UITextField]!
     
     // to store the current active textfield
     var activeTextField : UITextField? = nil

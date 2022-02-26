@@ -88,7 +88,10 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     @IBAction func onSignIn()
     {
-        
+        //begin login flow
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        self.navigationController?.fadeTo(vc)
     }
     
     @IBAction func onCreateAccount()

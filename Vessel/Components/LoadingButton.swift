@@ -8,7 +8,8 @@
 
 import UIKit
 
-class LoadingButton: VesselButton {
+class LoadingButton: VesselButton
+{
 
     var originalButtonText: String?
     var originalButtonImage: UIImage?
@@ -18,40 +19,46 @@ class LoadingButton: VesselButton {
     @IBInspectable
     let activityIndicatorColor: UIColor = .lightGray
 
-    func showLoading() {
+    func showLoading()
+    {
         isUserInteractionEnabled = false
         originalButtonText = self.titleLabel?.text
         originalButtonImage = self.imageView?.image
         setTitle("", for: .normal)
         setImage(nil, for: .normal)
-        if (activityIndicator == nil) {
+        if (activityIndicator == nil)
+        {
             activityIndicator = createActivityIndicator()
         }
         showSpinning()
     }
 
-    func hideLoading() {
+    func hideLoading()
+    {
         isUserInteractionEnabled = true
         setTitle(originalButtonText, for: .normal)
         setImage(originalButtonImage, for: .normal)
         activityIndicator.stopAnimating()
     }
 
-    private func createActivityIndicator() -> UIActivityIndicatorView {
+    private func createActivityIndicator() -> UIActivityIndicatorView
+    {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = activityIndicatorColor
         return activityIndicator
     }
 
-    private func showSpinning() {
+    private func showSpinning()
+    {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activityIndicator)
         centerActivityIndicatorInButton()
         activityIndicator.startAnimating()
     }
 
-    private func centerActivityIndicatorInButton() {
+    private func centerActivityIndicatorInButton()
+    {
         let xCenterConstraint = NSLayoutConstraint(item: self,
                                                    attribute: .centerX,
                                                    relatedBy: .equal,

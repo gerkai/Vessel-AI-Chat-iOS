@@ -17,6 +17,9 @@
 		3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */; };
 		3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */; };
 		3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547BE27C9F105006E3098 /* AppConstants.swift */; };
+		3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */; };
+		3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547C227CA94F1006E3098 /* StringExtensions.swift */; };
+		3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F527C9B39100231D42 /* VesselButton.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
@@ -39,7 +42,6 @@
 		3FE369ED27C9A82A00231D42 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
-		3FE369F627C9B39100231D42 /* VesselButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F527C9B39100231D42 /* VesselButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtensions.swift; sourceTree = "<group>"; };
 		3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		3F0547BE27C9F105006E3098 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		3F0547C227CA94F1006E3098 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
+				3F0547C227CA94F1006E3098 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */,
 				3F0547B027C9DB8F006E3098 /* DebugViewController.swift */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
+				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -408,9 +414,11 @@
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
+				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
+				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
-				3FE369F627C9B39100231D42 /* VesselButton.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
+				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 			);
