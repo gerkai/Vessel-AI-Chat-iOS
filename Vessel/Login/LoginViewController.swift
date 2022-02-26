@@ -44,6 +44,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     @IBAction func onContinueButtonPressed()
     {
         self.view.endEditing(true)
+        if let email = emailTextField.text, let password = passwordTextField.text
+        {
+            Server.shared.login(email: email, password: password)
+            {
+                print("LOGIN SUCCESS")
+            }
+            onFailure:
+            { object in
+                var errorString = NSLocalizedString("Server Error", comment:"")
+                //print("\(object)")
+                if let message = object["message"] as? String
+                {
+                    errorString = message
+                }
+                UIView.showError(text: "Sign In", detailText: errorString, image: nil)
+            }
+        }
     }
     
     @IBAction func onForgotPassword()

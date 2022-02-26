@@ -12,10 +12,13 @@ let STAGING_API = "https://staging-api.vesselhealth.com/v2/"
 let PROD_API = "https://api.vesselhealth.com/v2/"
 
 let SERVER_FORGOT_PASSWORD_PATH =       "auth/forgot-password"
+let SERVER_LOGIN_PATH =                 "auth/login"
 
 class Server: NSObject
 {
     static let shared = Server()
+    var accessToken: String?
+    var refreshToken: String?
     
     func API() -> String
     {
@@ -106,8 +109,55 @@ class Server: NSObject
             { (string) in
                 DispatchQueue.main.async()
                 {
-                    failure(["Failure" : "Error deleting pet from server"])
-                    print("Remove Pet Failure: \(string)")
+                    failure(["Failure" : NSLocalizedString("Server Error", comment:"")])
+                }
+            })
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func login(email: String, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ object: [String : Any]) -> Void)
+    {
+        var dictPostBody = [String : String]()
+        dictPostBody["email"] = email
+        dictPostBody["password"] = password 
+        do
+        {
+            let jsonData = try JSONSerialization.data(withJSONObject: dictPostBody, options: .prettyPrinted)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+
+            let Url = String(format:"\(API())\(SERVER_LOGIN_PATH)")
+            guard let serviceUrl = URL(string: Url) else { return }
+            var request = URLRequest(url: serviceUrl)
+            request.httpBody = jsonData
+            
+            serverPost(request: request, onSuccess:
+            { (object) in
+                DispatchQueue.main.async()
+                {
+                    if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
+                    {
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
+                        success()
+                    }
+                    else
+                    {
+                        failure(["message": NSLocalizedString("Bad username or password", comment:"")])
+                    }
+                    
+                }
+            },
+            onFailure:
+            { (string) in
+                DispatchQueue.main.async()
+                {
+                    print("FAILURE: \(string)")
+                    failure(["Failure" : NSLocalizedString("Server Error", comment:"")])
                 }
             })
         }
