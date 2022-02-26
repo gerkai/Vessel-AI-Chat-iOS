@@ -4,6 +4,9 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
+//  User can bring up debugViewController by tapping left and right buttons (invisible and located near top of screen)
+//  in order specified by "lock" array below. After tapping in the correct order, tap the create account button to
+//  reveal a new Debug button.
 
 import UIKit
 
@@ -24,7 +27,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                  NSLocalizedString("beauty", comment:""),
                  NSLocalizedString("living", comment:"")]
     var goalIndex = 0
-    let lock = [1,0,0,0,1,0]
+    let lock = [1,0,0,0,1,0] //this is the pattern the user must enter (1 is right button, 0 is left button)
     var key = [0,0,0,0,0,0]
     
     override func viewDidLoad()
@@ -79,7 +82,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     @IBAction func onDebug()
     {
-        performSegue(withIdentifier: "showDebug", sender: self)        
+        performSegue(withIdentifier: "showDebug", sender: self)
     }
     
     @IBAction func onSignIn()
