@@ -4,22 +4,27 @@
 
 struct Contact: Codable
 {
+    var id: Int?                //make non optional
+    var first_name: String?     //make non optional
+    var last_name: String?      //make non optional
+    var gender: String?         //make non optional
+    var height: Double?         //make non optional
+    var weight: Double?         //make non optional
+    var birth_date: String?     //make non optional
+    //var diets: [Lookup]?      //needs to be an array of dietIDs (Int)
+    //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
+    //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
+    var email: String?          //can be nil if they signed in with social and didn't share e-mail
+    var is_verified: Bool?      //make non optional
+    
+    //things to add
+    var tutorialVersion: Int    //version of latest tutorial they've seen
+    
+    //discuss whether or not these should be included
     var last_login: String?
     var insert_date: String?
-    var birth_date: String?
-    var email: String?
-    var password: String?
-    var gender: String?
-    var id: Int?
-    var weight: Double?
-    var first_name: String?
-    var last_name: String?
-    var height: Double?
-    //var goals: [GoalElement]?
-    //var diets: [Lookup]?
-    //var allergies: [Lookup]?
+    var password: String?       //shouldn't store this in the app
     var image_url: String?
-    var is_verified: Bool?
     var occupation: String?
     var location_description: String?
     var tests_taken: Int?
@@ -43,6 +48,7 @@ struct Contact: Codable
          //diets: [Lookup]? = nil,
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
+         tutorialVersion: Int = 0,
          insert_date:String? = nil,
          image_url: String? = nil,
          is_verified: Bool?  = false,
@@ -66,6 +72,7 @@ struct Contact: Codable
         self.first_name = firstName
         self.last_name = lastName
         self.height = height
+        self.tutorialVersion = tutorialVersion
         //self.diets = diets
         //self.allergies = allergies
         //self.goals = goals

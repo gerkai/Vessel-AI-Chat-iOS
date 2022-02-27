@@ -15,6 +15,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
     @IBOutlet private weak var environmentLabel: UILabel!
+    @IBOutlet private weak var buttonStackView: UIStackView!
     
     //these are the words that animate under "In pursuit of better"
     let goals = [NSLocalizedString("focus", comment:""),
@@ -99,7 +100,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         if key == lock
         {
             //show debug button
-            debugButton.isHidden = false
+            debugButton.showAnimated(in: buttonStackView)
             key.append(1)
             key.remove(at: 0)
         }

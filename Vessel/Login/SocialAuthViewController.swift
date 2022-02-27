@@ -110,16 +110,17 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                     HTTPCookieStorage.shared.setCookie(cookie)
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0)
+                Server.shared.getTokens(isGoogle: self.bIsGoogle, onSuccess:
                 {
-                    Server.shared.getTokens(isGoogle: self.bIsGoogle, onSuccess:
+                    self.dismiss(animated: true)
                     {
                         self.delegate?.gotSocialAuthToken()
-                        self.dismiss(animated: true, completion: nil)
-                    }, onFailure: {
-                        print("FAILED")
-                    })
-                }
+                    }
+                },
+                onFailure:
+                {
+                    print("FAILED")
+                })
             }
             decisionHandler(.cancel)
             return

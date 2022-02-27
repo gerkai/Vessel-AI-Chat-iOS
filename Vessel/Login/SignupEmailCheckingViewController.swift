@@ -163,5 +163,15 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
     {
         #warning("CW FIX - Login social")
         print("LOGGED IN")
+        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+        { (action) in
+            //print("You've pressed cancel");
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true)
     }
 }

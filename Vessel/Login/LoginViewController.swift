@@ -71,7 +71,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         {
             Server.shared.login(email: email, password: password)
             {
-                print("LOGIN SUCCESS")
+                self.showLoginComplete()
                 Server.shared.getContact
                 {
                     print("GOT CONTACT")
@@ -80,7 +80,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
                 {
                     print("FAILED TO GET CONTACT")
                 }
-
             }
             onFailure:
             { string in
@@ -97,12 +96,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         present(vc, animated: true)
     }
     
-    func gotSocialAuthToken(/*accessToken: String, refreshToken: String*/)
+    func gotSocialAuthToken()
     {
         //print("Access token: \(accessToken)")
         //print("Refresh token: \(refreshToken)")
         #warning("CW FIX - Login Social")
         print("LOGGED IN")
+        showLoginComplete()
+    }
+    
+    func showLoginComplete()
+    {
+        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+        { (action) in
+            //print("You've pressed cancel");
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true)
     }
     
     //MARK: - textfield delegates

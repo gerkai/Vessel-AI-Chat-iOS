@@ -4,6 +4,8 @@
 //
 //  Created by Carson Whitsett on 2/26/22.
 //
+//  All back end communication goes through here.
+//  All callbacks are dispatched on MainQueue
 
 import Foundation
 
@@ -240,57 +242,55 @@ class Server: NSObject
         guard let serviceUrl = URL(string: Url) else { return }
         let request = URLRequest(url: serviceUrl)
         
-       // if isGoogle == true
-       // {
-            var mutableRequest = request
-            mutableRequest.httpMethod = "GET"
-            mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-            mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-            
-            let session = URLSession.shared
-            session.dataTask(with: mutableRequest)
-            { (data, response, error) in
+        var mutableRequest = request
+        mutableRequest.httpMethod = "GET"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
 
-                if let data = data //unwrap data
+            if let data = data //unwrap data
+            {
+                do
                 {
-                    do
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let object = json as? [String: Any]
                     {
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        if let object = json as? [String: Any]
+                        if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
                         {
-                            if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
-                            {
-                                self.accessToken = accessToken
-                                self.refreshToken = refreshToken
-                                DispatchQueue.main.async()
-                                {
-                                    success()
-                                }
-                            }
-                            
-                            print("SUCCESS: \(object)")
-                        }
-                        else
-                        {
-                            //failure("Unable to parse response from server")
-                            //print("FAILURE")
+                            self.accessToken = accessToken
+                            self.refreshToken = refreshToken
                             DispatchQueue.main.async()
                             {
-                                failure()
+                                success()
                             }
                         }
+                        
+                        //print("SUCCESS: \(object)")
                     }
-                    catch
+                    else
                     {
-                        let string = String.init(data: data, encoding: .utf8)
-                        print("ERROR: \(string ?? "Unknown")")
+                        //failure("Unable to parse response from server")
+                        //print("FAILURE")
                         DispatchQueue.main.async()
                         {
                             failure()
                         }
                     }
                 }
-            }.resume()
+                catch
+                {
+                    let string = String.init(data: data, encoding: .utf8)
+                    print("ERROR: \(string ?? "Unknown")")
+                    DispatchQueue.main.async()
+                    {
+                        failure()
+                    }
+                }
+            }
+        }.resume()
     }
     
     func getContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
@@ -318,7 +318,7 @@ class Server: NSObject
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
                         if let object = json as? [String: Any]
                         {
-                            print("SUCCESS: \(object)")
+                            //print("SUCCESS: \(object)")
                             DispatchQueue.main.async()
                             {
                                 success()
