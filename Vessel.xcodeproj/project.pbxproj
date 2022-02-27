@@ -21,6 +21,15 @@
 		3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547C227CA94F1006E3098 /* StringExtensions.swift */; };
 		3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F527C9B39100231D42 /* VesselButton.swift */; };
 		3F0547C927CA9FF1006E3098 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547C827CA9FF1006E3098 /* Server.swift */; };
+		3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */; };
+		3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */; };
+		3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547CF27CAEE3B006E3098 /* Contact.swift */; };
+		3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */; };
+		3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */; };
+		3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */; };
+		3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */; };
+		3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */; };
+		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
@@ -78,6 +87,15 @@
 		3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		3F0547C227CA94F1006E3098 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3F0547C827CA9FF1006E3098 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthViewController.swift; sourceTree = "<group>"; };
+		3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebviewExtension.swift; sourceTree = "<group>"; };
+		3F0547CF27CAEE3B006E3098 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCardExistCheckingViewController.swift; sourceTree = "<group>"; };
+		3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardOnboardViewController.swift; sourceTree = "<group>"; };
+		3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtCardLoginViewController.swift; sourceTree = "<group>"; };
+		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
+		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,18 +159,19 @@
 				A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */,
 				19047202DE476CDF8D072DD8 /* Pods-Vessel.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		3F0547AD27C9B8EA006E3098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3F0547C227CA94F1006E3098 /* StringExtensions.swift */,
+				3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */,
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
 				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
-				3F0547C227CA94F1006E3098 /* StringExtensions.swift */,
+				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -163,6 +182,14 @@
 				3F0547C827CA9FF1006E3098 /* Server.swift */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		3F0547CE27CAEE3B006E3098 /* Core Objects */ = {
+			isa = PBXGroup;
+			children = (
+				3F0547CF27CAEE3B006E3098 /* Contact.swift */,
+			);
+			path = "Core Objects";
 			sourceTree = "<group>";
 		};
 		3FE3699327C9A07E00231D42 = {
@@ -194,6 +221,7 @@
 				3F0547BE27C9F105006E3098 /* AppConstants.swift */,
 				3FE369CF27C9A71D00231D42 /* Assets */,
 				3FE369F227C9B34A00231D42 /* Components */,
+				3F0547CE27CAEE3B006E3098 /* Core Objects */,
 				3F0547AD27C9B8EA006E3098 /* Extensions */,
 				3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */,
 				3FE369EB27C9A82A00231D42 /* Login */,
@@ -268,12 +296,18 @@
 		3FE369EB27C9A82A00231D42 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */,
+				3F0547B027C9DB8F006E3098 /* DebugViewController.swift */,
+				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
+				3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */,
+				3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */,
 				3FE369EC27C9A82A00231D42 /* Login.storyboard */,
 				3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */,
-				3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */,
-				3F0547B027C9DB8F006E3098 /* DebugViewController.swift */,
+				3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
-				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
+				3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */,
+				3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */,
+				3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -484,16 +518,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
+				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */,
+				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
+				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
+				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
+				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
+				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
+				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
+				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
@@ -502,6 +544,7 @@
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
+				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

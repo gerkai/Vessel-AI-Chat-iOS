@@ -8,12 +8,15 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate
+class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthViewDelegate
 {
     // to store the current active textfield
     var activeTextField : UITextField? = nil
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    //caller can plug a string in here
+    var prepopulatedEmail: String?
     
     override func viewDidLoad()
     {
@@ -24,16 +27,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        emailTextField.text = prepopulatedEmail
     }
     
     @IBAction func googleAuthAction(_ sender: Any)
     {
-       // googleLogin()
+        launchSocialAuth(isGoogle: true)
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-       // appleLogin()
+        launchSocialAuth(isGoogle: false)
+    }
+    
+    func launchSocialAuth(isGoogle: Bool)
+    {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SocialAuthViewController") as! SocialAuthViewController
+        if isGoogle
+        {
+            vc.strURL = Server.shared.googleLoginURL()
+        }
+        else
+        {
+            vc.strURL = Server.shared.appleLoginURL()
+        }
+        vc.modalPresentationStyle = .fullScreen
+        vc.delegate = self
+        vc.bIsGoogle = isGoogle
+        self.present(vc, animated: true)
     }
     
     @IBAction func onBackButtonPressed(_ sender: Any)
@@ -49,16 +72,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate
             Server.shared.login(email: email, password: password)
             {
                 print("LOGIN SUCCESS")
+                Server.shared.getContact
+                {
+                    print("GOT CONTACT")
+                }
+                onFailure:
+                {
+                    print("FAILED TO GET CONTACT")
+                }
+
             }
             onFailure:
-            { object in
-                var errorString = NSLocalizedString("Server Error", comment:"")
-                //print("\(object)")
-                if let message = object["message"] as? String
-                {
-                    errorString = message
-                }
-                UIView.showError(text: "Sign In", detailText: errorString, image: nil)
+            { string in
+                UIView.showError(text: "Sign In", detailText: string, image: nil)
             }
         }
     }
@@ -69,6 +95,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         let vc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController")
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true)
+    }
+    
+    func gotSocialAuthToken(/*accessToken: String, refreshToken: String*/)
+    {
+        //print("Access token: \(accessToken)")
+        //print("Refresh token: \(refreshToken)")
+        #warning("CW FIX - Login Social")
+        print("LOGGED IN")
     }
     
     //MARK: - textfield delegates

@@ -17,4 +17,6 @@ struct Constants
     static let PROD_INDEX = 0
     static let STAGING_INDEX = 1
     static let DEV_INDEX = 2
+    
+    static let MinimumPasswordLength: Int = 6
 }

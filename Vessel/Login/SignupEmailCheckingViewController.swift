@@ -7,10 +7,11 @@
 
 import UIKit
 
-class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate
+class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, SocialAuthViewDelegate
 {
     @IBOutlet weak var googleAuthButton: UIButton!
     @IBOutlet weak var appleAuthButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
     
     // to store the current active textfield
     var activeTextField : UITextField? = nil
@@ -35,13 +36,32 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate
     
     @IBAction func googleAuthAction(_ sender: Any)
     {
-       // googleLogin()
+        launchSocialAuth(isGoogle: true)
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-       // appleLogin()
+        launchSocialAuth(isGoogle: false)
     }
+    
+    func launchSocialAuth(isGoogle: Bool)
+    {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SocialAuthViewController") as! SocialAuthViewController
+        if isGoogle
+        {
+            vc.strURL = Server.shared.googleLoginURL()
+        }
+        else
+        {
+            vc.strURL = Server.shared.appleLoginURL()
+        }
+        vc.modalPresentationStyle = .fullScreen
+        vc.delegate = self
+        vc.bIsGoogle = isGoogle
+        self.present(vc, animated: true)
+    }
+    
     
     @IBAction func onPrivacyButtonTapped(_ sender: Any)
     {
@@ -57,7 +77,30 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
-        //checkEmail()
+        if let email = emailTextField.text
+        {
+            Server.shared.contactExists(email: email)
+            { exists in
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                if exists == true
+                {
+                    //navigate to LoginViewController and pre-populate e-mail field
+                    let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                    vc.prepopulatedEmail = email
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                else
+                {
+                    //navigate to TestCardExistCheckingViewController
+                    let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            onFailure:
+            { string in
+                
+            }
+        }
     }
     
     //MARK: - textfield delegates
@@ -113,5 +156,12 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate
         // go through all of the textfield inside the view, and end editing thus resigning first responder
         // ie. it will trigger a keyboardWillHide notification
         self.view.endEditing(true)
+    }
+    
+    //MARK: - SocialAuth delegates
+    func gotSocialAuthToken()
+    {
+        #warning("CW FIX - Login social")
+        print("LOGGED IN")
     }
 }
