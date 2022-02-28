@@ -4,18 +4,18 @@
 
 struct Contact: Codable
 {
-    var id: Int?                //make non optional
-    var first_name: String?     //make non optional
-    var last_name: String?      //make non optional
-    var gender: String?         //make non optional
-    var height: Double?         //make non optional
-    var weight: Double?         //make non optional
+    var id: Int
+    var first_name: String
+    var last_name: String
+    var gender: String
+    var height: Double?         //make non optional, can this be int?
+    var weight: Double?         //make non optional, can this be int?
     var birth_date: String?     //make non optional
     //var diets: [Lookup]?      //needs to be an array of dietIDs (Int)
     //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
     //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
     var email: String?          //can be nil if they signed in with social and didn't share e-mail
-    var is_verified: Bool?      //make non optional
+    var is_verified: Bool
     
     //things to add
 //    var tutorialVersion: Int    //version of latest tutorial they've seen
@@ -35,10 +35,10 @@ struct Contact: Codable
     var main_goal_id: Int?
     var has_samples: Bool?
     
-    init(id: Int? = nil,
-         firstName: String? = nil,
-         lastName: String? = nil,
-         gender: String? = nil,
+    init(id: Int = 0,
+         firstName: String = "",
+         lastName: String = "",
+         gender: String = "",
          height: Double? = nil,
          weight: Double? = nil,
          birthDate: String? = nil,
@@ -46,7 +46,7 @@ struct Contact: Codable
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
          email: String? = nil,
-         is_verified: Bool?  = false,
+         is_verified: Bool  = false,
          
  //        tutorialVersion: Int = 0,
          
