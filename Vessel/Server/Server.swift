@@ -9,6 +9,7 @@
 
 import Foundation
 
+//Environment Constants
 let DEV_API = "https://dev-api.vesselhealth.com/v2/"
 let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
 
@@ -18,11 +19,13 @@ let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
 let PROD_API = "https://api.vesselhealth.com/v2/"
 let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
 
+//Security strings
 let AUTH_PREFIX =                       "Bearer"
 let AUTH_KEY  =                         "Authorization"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
 
+//Endpoints
 let SERVER_FORGOT_PASSWORD_PATH =       "auth/forgot-password"
 let SERVER_LOGIN_PATH =                 "auth/login"
 let APPLE_LOGIN_PATH =                  "auth/apple/login"
@@ -76,11 +79,10 @@ class Server: NSObject
         var mutableRequest = request
         mutableRequest.httpMethod = "POST"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        /*if(MainUser.shared.profile != nil)
+        if accessToken != nil
         {
-            mutableRequest.setValue("\(AUTH_PREFIX) \(MainUser.shared.profile!.AuthToken)", forHTTPHeaderField: AUTH_KEY)
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
         }
-         */
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
         
         let session = URLSession.shared
@@ -236,115 +238,133 @@ class Server: NSObject
         return "\(API())\(GOOGLE_RETRIEVE_PATH)"
     }
     
-    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    private func debugJSONResponse(data: Data)
     {
-        let Url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
-        guard let serviceUrl = URL(string: Url) else { return }
+        do
+        {
+            let jsonString = String(data: data, encoding: .utf8)!
+            print("SUCCESS: \(jsonString)")
+        }
+    }
+    
+    private func serverGet(url : String, onSuccess success: @escaping (_ data : Data) -> Void, onFailure failure: @escaping (_ string : String) -> Void)
+    {
+        guard let serviceUrl = URL(string: url) else { return }
         let request = URLRequest(url: serviceUrl)
         
         var mutableRequest = request
         mutableRequest.httpMethod = "GET"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if accessToken != nil
+        {
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
+        }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
         
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
-
             if let data = data //unwrap data
             {
-                do
+                self.debugJSONResponse(data: data)
+                success(data)
+            }
+            else
+            {
+                //print(error)
+                failure("Error: no data returned")
+            }
+        }.resume()
+    }
+    
+    //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
+    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    {
+        let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
+        serverGet(url: url)
+        { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Any]
                 {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let object = json as? [String: Any]
+                    if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
                     {
-                        if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
-                        {
-                            self.accessToken = accessToken
-                            self.refreshToken = refreshToken
-                            DispatchQueue.main.async()
-                            {
-                                success()
-                            }
-                        }
-                        
-                        //print("SUCCESS: \(object)")
-                    }
-                    else
-                    {
-                        //failure("Unable to parse response from server")
-                        //print("FAILURE")
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
                         DispatchQueue.main.async()
                         {
-                            failure()
+                            success()
                         }
                     }
                 }
-                catch
+                else
                 {
-                    let string = String.init(data: data, encoding: .utf8)
-                    print("ERROR: \(string ?? "Unknown")")
                     DispatchQueue.main.async()
                     {
                         failure()
                     }
                 }
             }
-        }.resume()
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    failure()
+                }
+            }
+        }
+        onFailure:
+        { string in
+            
+        }
     }
     
     func getContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
     {
         if accessToken != nil
         {
-            let Url = "\(API())\(CONTACT_PATH)"
-            guard let serviceUrl = URL(string: Url) else { return }
-            let request = URLRequest(url: serviceUrl)
-            
-            var mutableRequest = request
-            mutableRequest.httpMethod = "GET"
-            mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
-            mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-            
-            let session = URLSession.shared
-            session.dataTask(with: mutableRequest)
-            { (data, response, error) in
-
-                if let data = data //unwrap data
+            let url = "\(API())\(CONTACT_PATH)"
+            serverGet(url: url)
+            { data in
+                let decoder = JSONDecoder()
+                self.debugJSONResponse(data: data)
+                do
                 {
-                    do
-                    {
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        if let object = json as? [String: Any]
-                        {
-                            //print("SUCCESS: \(object)")
-                            DispatchQueue.main.async()
-                            {
-                                success()
-                            }
-                        }
-                        else
-                        {
-                            //failure("Unable to parse response from server")
-                            //print("FAILURE")
-                            DispatchQueue.main.async()
-                            {
-                                failure()
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        let string = String.init(data: data, encoding: .utf8)
-                        print("ERROR: \(string ?? "Unknown")")
-                        DispatchQueue.main.async()
-                        {
-                            failure()
-                        }
-                    }
+                    let contact = try decoder.decode(Contact.self, from: data)
+                    print(contact)
+#warning ("CW Fix: need to save primary contact here")
                 }
-            }.resume()
+                /*
+                 //cw: good for debugging JSON responses
+                 catch DecodingError.dataCorrupted(let context)
+                {
+                    print(context)
+                }
+                catch DecodingError.keyNotFound(let key, let context)
+                {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                }
+                catch DecodingError.valueNotFound(let value, let context)
+                {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                }
+                catch DecodingError.typeMismatch(let type, let context)
+                {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                }*/
+                catch
+                {
+                    print("error: ", error)
+                }
+            }
+            onFailure:
+            { string in
+                
+            }
         }
     }
 }

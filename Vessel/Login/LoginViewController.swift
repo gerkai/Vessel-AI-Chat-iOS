@@ -103,6 +103,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         #warning("CW FIX - Login Social")
         print("LOGGED IN")
         showLoginComplete()
+        Server.shared.getContact
+        {
+            print("GOT CONTACT")
+        }
+        onFailure:
+        {
+            print("FAILED TO GET CONTACT")
+        }
     }
     
     func showLoginComplete()
