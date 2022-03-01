@@ -35,6 +35,8 @@ class BoughtCardLoginViewController: UIViewController
 {
     
     @IBOutlet var formFields: [VesselTextField]!
+    @IBOutlet weak var doYouRememberLabel: UILabel!
+    
     //private lazy var analyticManager = AnalyticManager()
     private var validator = BoughtCardLoginValidator()
     //private let authenticationRepository: AuthenticationRepositoryProtocol = AuthenticationRepository()
@@ -45,6 +47,10 @@ class BoughtCardLoginViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
+        {
+            doYouRememberLabel.text = NSLocalizedString("Remember what email you used?", comment: "Short version of 'Do you remember what email you used?")
+        }
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)
@@ -68,8 +74,26 @@ class BoughtCardLoginViewController: UIViewController
         let validationResult = validate()
         if validationResult
         {
-            let form = BoughtCardLoginForm(email: formFields[0].text, password: formFields[1].text)
-            getAuthenticationToken(with: form)
+            self.view.endEditing(true)
+            if let email = formFields[0].text, let password = formFields[1].text
+            {
+                Server.shared.login(email: email , password: password)
+                {
+                    self.showLoginComplete()
+                    Server.shared.getContact
+                    {
+                        print("GOT CONTACT")
+                    }
+                    onFailure:
+                    {
+                        print("FAILED TO GET CONTACT")
+                    }
+                }
+                onFailure:
+                { string in
+                    UIView.showError(text: "Sign In", detailText: string, image: nil)
+                }
+            }
         }
     }
     
@@ -89,90 +113,24 @@ class BoughtCardLoginViewController: UIViewController
         //let event = AnalyticEvent.FORGOT_PASSWORD_TAPPED
         //analyticManager.trackEvent(event: event)
         
-        /*UIView.animate(withDuration: 0.1, animations:
-        {
-            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        },
-        completion:
-        { _ in
-            UIView.animate(withDuration: 0.1)
-            { [weak self] in*/
-                            
-                //sender.transform = CGAffineTransform.identity
-                            
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                    
-                let fpvc = storyboard.instantiateViewController(identifier: "ForgotPasswordViewController")
-                navigationController?.pushViewController(fpvc, animated: true)
-           // }
-        //})
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController")
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: true)
     }
     
-    
-}
-
-//MARK: - NetworkCalls
-extension BoughtCardLoginViewController
-{
-    private func getAuthenticationToken(with form: BoughtCardLoginForm)
+    //temp until we get more screens
+    func showLoginComplete()
     {
-        #warning("CW FIX")
-        /*
-        let credentials = Login(email: form.email ?? "", password: form.password ?? "", contact_id_override: nil)
-        authenticationRepository.login(parameters: credentials) { [weak self] result in
-            guard let self = self else { return }
-            switch result
-            {
-            case .success(let tokens):
-                if let accessToken = tokens.access_token,
-                   let refreshToken = tokens.refresh_token
-                {
-                    SessionManager.shared.storeAuthenticationInfo(email: form.email ?? "", password: form.password ?? "", token: accessToken, refreshToken: refreshToken)
-                    let event = AnalyticEvent.SIGN_IN_SUCCESS(email: form.email ?? "")
-                    self.analyticManager.trackEvent(event: event)
-                    self.getContact()
-                }
-                else
-                {
-                    UIView.showError(text: "Sign In", detailText: "Something went wrong", image: nil)
-                    let event = AnalyticEvent.SIGN_IN_FAIL(email: form.email ?? "", error:  "Something went wrong")
-                    self.analyticManager.trackEvent(event: event)
-                }
-            case .failure(let error):
-                UIView.showError(text: "Sign In", detailText: error.localizedDescription, image: nil)
-                let event = AnalyticEvent.SIGN_IN_FAIL(email: form.email ?? "", error:  error.localizedDescription)
-                self.analyticManager.trackEvent(event: event)
-            }
-        }*/
-    }
-    
-    private func getContact()
-    {
-        #warning("CW FIX")
-        /*
-        contactRepositroy.get
-        { [weak self] result in
-            guard let self = self else { return }
-            switch result
-            {
-            case .success(let contact):
-                UserManager.shared.contact = contact
-                if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
-                {
-                    Bugsee.setEmail(userEmail)
-                    Bugsee.setAttribute("contact_id", value: contactId)
-                }
-                self.analyticManager.setupUserIdentity()
-                if let isFirstReminder = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstReminder.rawValue) as? Bool,
-                   isFirstReminder
-                {
-                    self.pushwooshManager.register()
-                }
-                NotificationCenter.default.post(name: Notification.Name.didAuthenticate, object: nil)
-                
-            case .failure(let error):
-                UIView.showError(text: "Sign In", detailText: error.localizedDescription, image: nil)
-            }
-        }*/
+        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+        { (action) in
+            //print("You've pressed cancel");
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true)
     }
 }

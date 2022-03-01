@@ -14,6 +14,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     var activeTextField : UITextField? = nil
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var orSignInLabel: UILabel!
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
@@ -29,6 +31,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         emailTextField.text = prepopulatedEmail
+        
+        //Hide some unnecessary fields on small screens to ease crowding
+        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
+        {
+            instructionsLabel.isHidden = true
+            orSignInLabel.isHidden = true
+        }
     }
     
     @IBAction func googleAuthAction(_ sender: Any)
@@ -113,6 +122,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         }
     }
     
+    //temp until we get more screens
     func showLoginComplete()
     {
         let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
