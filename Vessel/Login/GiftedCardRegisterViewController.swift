@@ -11,14 +11,16 @@ import UIKit
 //import Bugsee
 import IQKeyboardManagerSwift
 
-struct GiftedCardRegisterForm {
+struct GiftedCardRegisterForm
+{
     var email: String?
     var firstName: String?
     var lastName: String?
     var password: String?
 }
 
-struct GiftedCardSocialRegisterForm {
+struct GiftedCardSocialRegisterForm
+{
     var firstName: String?
     var lastName: String?
 }

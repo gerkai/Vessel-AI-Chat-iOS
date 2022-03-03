@@ -209,7 +209,7 @@ class Server: NSObject
             }
             else
             {
-                failure(NSLocalizedString("Bad username or password", comment:""))
+                failure(NSLocalizedString("Incorrect username or password", comment:""))
             }
         }
         onFailure:

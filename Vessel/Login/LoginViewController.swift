@@ -78,21 +78,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         self.view.endEditing(true)
         if let email = emailTextField.text, let password = passwordTextField.text
         {
-            Server.shared.login(email: email, password: password)
+            if email.isValidEmail()
             {
-                self.showLoginComplete()
-                Server.shared.getContact
+                Server.shared.login(email: email, password: password)
                 {
-                    print("GOT CONTACT")
+                    self.showLoginComplete()
+                    Server.shared.getContact
+                    {
+                        print("GOT CONTACT")
+                    }
+                    onFailure:
+                    {
+                        print("FAILED TO GET CONTACT")
+                    }
                 }
                 onFailure:
-                {
-                    print("FAILED TO GET CONTACT")
+                { string in
+                    UIView.showError(text: NSLocalizedString("Sign In", comment: ""), detailText: string, image: nil)
                 }
             }
-            onFailure:
-            { string in
-                UIView.showError(text: "Sign In", detailText: string, image: nil)
+            else
+            {
+                UIView.showError(text: NSLocalizedString("Error", comment: ""), detailText: NSLocalizedString("Wrong Email", comment:""), image: nil)
             }
         }
     }
