@@ -81,12 +81,13 @@ class BoughtCardLoginViewController: UIViewController
                 {
                     self.showLoginComplete()
                     Server.shared.getContact
-                    {
-                        print("GOT CONTACT")
+                    { contact in
+                        MainContact = contact
+                        Storage.store(contact)
                     }
                     onFailure:
-                    {
-                        print("FAILED TO GET CONTACT")
+                    { error in
+                        print("FAILED TO GET CONTACT: \(error)")
                     }
                 }
                 onFailure:

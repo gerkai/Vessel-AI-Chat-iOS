@@ -91,6 +91,9 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
                 }
                 else
                 {
+                    //save e-mail for use later during sign-up process
+                    SavedEmail = email
+                    
                     //navigate to TestCardExistCheckingViewController
                     let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
                     self.navigationController?.pushViewController(vc, animated: true)

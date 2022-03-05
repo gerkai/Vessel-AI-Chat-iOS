@@ -2,8 +2,8 @@
 //  GiftedCardRegisterViewController.swift
 //  vessel-ios
 //
-//  Created by Mohamed El-Taweel on 05/26/2021.
-//  Copyright © 2021 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 3/3/2022.
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
@@ -11,72 +11,20 @@ import UIKit
 //import Bugsee
 import IQKeyboardManagerSwift
 
-struct GiftedCardRegisterForm
-{
-    var email: String?
-    var firstName: String?
-    var lastName: String?
-    var password: String?
-}
-
-struct GiftedCardSocialRegisterForm
-{
-    var firstName: String?
-    var lastName: String?
-}
-
-
-struct GiftedCardRegisterFormValidator
-{
-    func validateForm(form: GiftedCardRegisterForm)->(isValid: Bool,error: String?)
-    {
-        guard let email = form.email?.trimmingCharacters(in: .whitespacesAndNewlines), email.count > 0, email.isValidEmail() else
-        {
-            return  (isValid: false,error: "Wrong Email")
-        }
-        guard let firstName = form.firstName,firstName.count > 0,firstName.isLettersOnly else
-        {
-            return  (isValid: false,error: "Wrong First Name")
-        }
-        guard let lastName = form.lastName,lastName.count > 0,lastName.isLettersOnly else
-        {
-            return  (isValid: false,error: "Wrong Last Name")
-        }
-        guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
-        {
-            return  (isValid: false,error: "Wrong Password")
-        }
-        return (isValid: true,error: nil)
-    }
-    
-    func validateSocialForm(form: GiftedCardSocialRegisterForm)->(isValid: Bool,error: String?)
-    {
-        guard let firstName = form.firstName,firstName.count > 0,firstName.isLettersOnly else
-        {
-            return  (isValid: false,error: "Wrong First Name")
-        }
-        guard let lastName = form.lastName,lastName.count > 0,lastName.isLettersOnly else
-        {
-            return  (isValid: false,error: "Wrong Last Name")
-        }
-        return (isValid: true,error: nil)
-    }
-}
-
 
 class GiftedCardRegisterViewController: UIViewController
 {
     @IBOutlet var formFields: [VesselTextField]!
     
     @IBOutlet weak var passwordFieldContraint: NSLayoutConstraint!
-    private let validator = GiftedCardRegisterFormValidator()
     //private lazy var analyticManager = AnalyticManager()
-    //private let contactRepository: ContactRepositoryProtocol = ContactRepository()
     //private lazy var pushwooshManager = PushwooshHelper()
-
-    var email = ""
-    var firstName: String = ""
-    var lastName: String = ""
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    var initialFirstName: String = ""
+    var initialLastName: String = ""
     var socialAuth: Bool = false
     
     override func viewDidLoad()
@@ -85,9 +33,9 @@ class GiftedCardRegisterViewController: UIViewController
         
         if socialAuth
         {
-            passwordFieldContraint.constant = 0
-            formFields[0].text = firstName
-            formFields[1].text = lastName
+            firstNameTextField.text = initialFirstName
+            lastNameTextField.text = initialLastName
+            passwordTextField.isHidden = true
         }
     }
     
@@ -106,35 +54,49 @@ class GiftedCardRegisterViewController: UIViewController
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
-        register()
+        if let firstName = firstNameTextField.text, firstName.isValidName()
+        {
+            if let lastName = lastNameTextField.text, lastName.isValidName()
+            {
+                if socialAuth
+                {
+                    //all fields valid!
+                    //createContact()
+                }
+                else
+                {
+                    if let password = passwordTextField.text, password.isValidPassword()
+                    {
+                        //all fields valid!
+                        //createContact()
+                    }
+                    else
+                    {
+                        UIView.showError(text: "Error", detailText: NSLocalizedString("Password too short", comment: ""), image: nil)
+                    }
+                }
+            }
+            else
+            {
+                UIView.showError(text: "Error", detailText: NSLocalizedString("Please enter a valid last name", comment: ""), image: nil)
+            }
+        }
+        else
+        {
+            UIView.showError(text: "Error", detailText: NSLocalizedString("Please enter a valid first name", comment: ""), image: nil)
+        }
     }
     
     @IBAction func onBackButtonTapped(_ sender: Any)
     {
         self.navigationController?.popViewController(animated: true)
     }
+
     
-    private func register()
+    private func createContact(firstName: String, lastName: String, password: String)
     {
-        var isFormValid = false
-        if socialAuth
-        {
-            isFormValid = validateSocialForm()
-        }
-        else
-        {
-            isFormValid = validateForm()
-        }
+        //cwlet contact =  Contact(email: SavedEmail ?? "", password: passwordTextField.text ?? "", firstName: firstName, lastName: lastName)
         
-        if isFormValid
-        {
-            createContact()
-        }
-    }
-    
-    private func createContact()
-    {
-        #warning("CW FIX - CREATE CONTACT")
         /*
         if socialAuth
         {
@@ -215,7 +177,7 @@ class GiftedCardRegisterViewController: UIViewController
             NotificationCenter.default.post(name: Notification.Name.didSignup, object: nil)
         }*/
     }
-    
+    /*
     private func validateForm()->Bool
     {
         let form = GiftedCardRegisterForm(email: email, firstName: formFields[0].text, lastName: formFields[1].text, password: formFields[2].text)
@@ -236,5 +198,5 @@ class GiftedCardRegisterViewController: UIViewController
             UIView.showError(text: "Error", detailText: validationResult.error ?? "", image: nil)
         }
         return validationResult.isValid
-    }
+    }*/
 }

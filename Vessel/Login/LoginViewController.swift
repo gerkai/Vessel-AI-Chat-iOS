@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     @IBOutlet weak var orSignInLabel: UILabel!
     
     //caller can plug a string in here
-    var prepopulatedEmail: String?
+    var prepopulatedEmail: String? = "carson@vesselhealth.com"
     
     override func viewDidLoad()
     {
@@ -82,14 +82,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
             {
                 Server.shared.login(email: email, password: password)
                 {
-                    self.showLoginComplete()
+                    //self.showLoginComplete()
                     Server.shared.getContact
-                    {
-                        print("GOT CONTACT")
+                    {contact in
+                        MainContact = contact
+                        Storage.store(contact)
+                        let vc = OnboardingNextViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                     onFailure:
-                    {
-                        print("FAILED TO GET CONTACT")
+                    {error in
+                        print("FAILED TO GET CONTACT: \(error)")
                     }
                 }
                 onFailure:
@@ -116,16 +119,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     {
         //print("Access token: \(accessToken)")
         //print("Refresh token: \(refreshToken)")
-        #warning("CW FIX - Login Social")
-        print("LOGGED IN")
+        //print("LOGGED IN")
         showLoginComplete()
         Server.shared.getContact
-        {
-            print("GOT CONTACT")
+        { contact in
+            Storage.store(contact)
+            MainContact = contact
+            if contact.isBrandNew()
+            {
+                //navigate to TestCardExistCheckingViewController
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else
+            {
+                let vc = OnboardingNextViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         onFailure:
-        {
-            print("FAILED TO GET CONTACT")
+        { error in
+            print("FAILED TO GET CONTACT: \(error)")
         }
     }
     

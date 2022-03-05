@@ -4,6 +4,8 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
+// TODO: Add auto-login
+// TODO: Add server logs debug on/off toggle
 
 import UIKit
 

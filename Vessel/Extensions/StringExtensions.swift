@@ -16,6 +16,24 @@ extension String
         return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
     }
     
+    func isValidName() -> Bool
+    {
+        if self.count > 0 && self.isLettersOnly
+        {
+            return true
+        }
+        return false
+    }
+    
+    func isValidPassword() -> Bool
+    {
+        if self.count > Constants.MinimumPasswordLength
+        {
+            return true
+        }
+        return false
+    }
+    
     var isLettersOnly: Bool
     {
         return !isEmpty && range(of: "[^a-zA-Z]", options: .regularExpression) == nil

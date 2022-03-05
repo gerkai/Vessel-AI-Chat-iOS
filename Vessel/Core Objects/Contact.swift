@@ -2,19 +2,25 @@
 // Contact.swift
 //
 
-struct Contact: Codable
+
+
+var SavedEmail: String?
+var MainContact: Contact?
+
+struct Contact: CoreObjectProtocol, Codable
 {
     var id: Int
     var first_name: String
     var last_name: String
-    var gender: String
+    var email: String?          //can be nil if they signed in with social and didn't share e-mail
+    var gender: String?
     var height: Double?         //make non optional, can this be int?
     var weight: Double?         //make non optional, can this be int?
     var birth_date: String?     //make non optional
     //var diets: [Lookup]?      //needs to be an array of dietIDs (Int)
     //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
     //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
-    var email: String?          //can be nil if they signed in with social and didn't share e-mail
+    
     var is_verified: Bool
     
     //things to add
@@ -97,6 +103,18 @@ struct Contact: Codable
     var fullName: String
     {
         return [first_name, last_name].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ")
+    }
+    
+    //if the contact doesn't have basic info filled out, then it's brand new
+    func isBrandNew() -> Bool
+    {
+        if first_name.count == 0 &&
+            last_name.count == 0 &&
+            gender != nil
+        {
+            return true
+        }
+        return false
     }
 }
 
