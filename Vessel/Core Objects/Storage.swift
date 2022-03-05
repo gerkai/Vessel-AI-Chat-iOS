@@ -4,7 +4,7 @@
 //
 //  Created by Carson Whitsett on 3/4/22.
 //
-//  Handles storage and retrieval of core objects.
+//  Handles storage and retrieval of core objects to/from flash.
 //  Objects can be saved to the documents directory (backed up by iCloud) or the caches directory
 //  defaults to caches directory of no directory provided by caller.
 
@@ -49,10 +49,8 @@ public class Storage
         }
     }
     
-    /*
-     .appendingPathComponent("\(object.id)", isDirectory: false)
-     
-     */
+    //MARK: - public functions
+    
     /// Store an encodable struct to the specified directory on disk
     ///
     /// - Parameters:

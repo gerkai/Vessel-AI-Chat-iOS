@@ -188,7 +188,30 @@ class Server: NSObject
             print(error.localizedDescription)
         }
     }
+    
+    func appleLoginURL() -> String
+    {
+        return "\(API())\(APPLE_LOGIN_PATH)"
+    }
+    
+    func appleRetrieveURL() -> String
+    {
+        return "\(API())\(APPLE_RETRIEVE_PATH)"
+    }
+    
+    func googleLoginURL() -> String
+    {
+        return "\(API())\(GOOGLE_LOGIN_PATH)"
+    }
+    
+    func googleRetrieveURL() -> String
+    {
+        return "\(API())\(GOOGLE_RETRIEVE_PATH)"
+    }
+    
     //MARK: - Public functions
+    
+    
     
     func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String : Any]) -> Void)
     {
@@ -244,26 +267,6 @@ class Server: NSObject
                 failure(string)
             }
         }
-    }
-    
-    func appleLoginURL() -> String
-    {
-        return "\(API())\(APPLE_LOGIN_PATH)"
-    }
-    
-    func appleRetrieveURL() -> String
-    {
-        return "\(API())\(APPLE_RETRIEVE_PATH)"
-    }
-    
-    func googleLoginURL() -> String
-    {
-        return "\(API())\(GOOGLE_LOGIN_PATH)"
-    }
-    
-    func googleRetrieveURL() -> String
-    {
-        return "\(API())\(GOOGLE_RETRIEVE_PATH)"
     }
     
     private func debugJSONResponse(data: Data)
@@ -329,11 +332,17 @@ class Server: NSObject
         { object in
             if let exists = object["exists"] as? Bool
             {
-                success(exists)
+                DispatchQueue.main.async()
+                {
+                    success(exists)
+                }
             }
             else
             {
-                failure("ContactExists: Unexpected Server Response")
+                DispatchQueue.main.async()
+                {
+                    failure("ContactExists: Unexpected Server Response")
+                }
             }
         }
         onFailure:
@@ -342,12 +351,17 @@ class Server: NSObject
         }
     }
     
-    func getContact(onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    //pass an ID to get a specific contact or leave nil to get the primary contact
+    func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         //print("GET CONTACT...")
         if accessToken != nil
         {
-            let url = "\(API())\(CONTACT_PATH)"
+            var url = "\(API())\(CONTACT_PATH)"
+            if id != nil
+            {
+                url = url + "/\(id!)"
+            }
             serverGet(url: url)
             { data in
                 let decoder = JSONDecoder()
@@ -405,47 +419,33 @@ class Server: NSObject
         if accessToken != nil
         {
             let url = "\(API())\(CONTACT_PATH)"
-            
-            
-            //do
-            //{
-                //serialize contact into JSON
-                
-                //let jsonData = try JSONSerialization.data(withJSONObject: contact, options: .prettyPrinted)
-                //let jsonString = String(data: jsonData, encoding: .utf8)!
-                //print(jsonString)
 
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .prettyPrinted
-                let data = try! encoder.encode(contact)
-                let jsonString = String(data: data, encoding: .utf8)!
-                print(jsonString)
-                
-                let Url = String(format:url)
-                guard let serviceUrl = URL(string: Url) else { return }
-                var request = URLRequest(url: serviceUrl)
-                request.httpBody = data
-                
-                //send it to server
-                serverPut(request: request, onSuccess:
-                { (object) in
-                    DispatchQueue.main.async()
-                    {
-                        success()
-                    }
-                },
-                onFailure:
-                { (string) in
-                    DispatchQueue.main.async()
-                    {
-                        failure(NSLocalizedString("Server Error", comment:""))
-                    }
-                })
-            //}
-            //catch
-            //{
-            //    print(error.localizedDescription)
-            //}
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try! encoder.encode(contact)
+            let jsonString = String(data: data, encoding: .utf8)!
+            print(jsonString)
+            
+            let Url = String(format:url)
+            guard let serviceUrl = URL(string: Url) else { return }
+            var request = URLRequest(url: serviceUrl)
+            request.httpBody = data
+            
+            //send it to server
+            serverPut(request: request, onSuccess:
+            { (object) in
+                DispatchQueue.main.async()
+                {
+                    success()
+                }
+            },
+            onFailure:
+            { (string) in
+                DispatchQueue.main.async()
+                {
+                    failure(NSLocalizedString("Server Error", comment:""))
+                }
+            })
         }
     }
 }

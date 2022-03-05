@@ -141,6 +141,7 @@
                                             <constraint firstAttribute="height" constant="60" id="Eui-iF-EcF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Sign In" image="white_arrow_button">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -160,6 +161,7 @@
                                             <constraint firstAttribute="height" constant="60" id="HlK-VL-KdU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Create an Account" image="dark_arrow_button">
                                             <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -403,6 +405,7 @@
                                                                     <constraint firstAttribute="height" constant="60" id="lOf-0r-9WG"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 <state key="normal" title="Continue" image="white_arrow_button">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
@@ -695,6 +698,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="tUK-U1-23s"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Continue" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1181,6 +1185,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="Ol9-xV-L5F"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Continue" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1351,6 +1356,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="Hid-Yk-3je"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Continue" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1428,7 +1434,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you remember what email you used? " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUJ-SB-X2U">
-                                        <rect key="frame" x="30" y="75" width="200" height="163.5"/>
+                                        <rect key="frame" x="30" y="75" width="200" height="157"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="fqS-NO-P6X"/>
                                         </constraints>
@@ -1437,7 +1443,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdb-Hj-WYW">
-                                        <rect key="frame" x="30" y="252.5" width="200" height="112"/>
+                                        <rect key="frame" x="30" y="246" width="200" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="sjD-yD-5G2"/>
                                         </constraints>
@@ -1453,7 +1459,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-eP-KEk" userLabel="callCustomerSupport">
-                                        <rect key="frame" x="30" y="378.5" width="130" height="31"/>
+                                        <rect key="frame" x="30" y="356" width="130" height="31"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Chat with support">
@@ -1523,6 +1529,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="8Aw-dN-QuW"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Continue" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1686,6 +1693,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="l9q-OS-gg5"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Buy Wellness Test Cards" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1859,6 +1867,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="U9O-bU-7SF"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Continue" image="white_arrow_button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>

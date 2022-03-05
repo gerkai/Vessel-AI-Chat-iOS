@@ -38,9 +38,9 @@ class GiftedCardOnboardViewController: UIViewController
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
         vc.socialAuth = socialAuth
-        vc.email = email
-        vc.firstName = firstName
-        vc.lastName = lastName
+        SavedEmail = email
+        vc.initialFirstName = firstName
+        vc.initialLastName = lastName
         //analyticManager.trackEvent(event: .SIGN_UP_GIFTED_CONTINUE(email: email))
         self.navigationController?.pushViewController(vc, animated: true)
     }

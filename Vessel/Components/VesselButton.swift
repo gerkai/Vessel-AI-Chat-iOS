@@ -2,35 +2,30 @@
 //  VesselButton.swift
 //  vessel-ios
 //
-//  Created by Paul Wong on 4/19/20.
-//  Copyright © 2020 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 3/5/2022.
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
 
 class VesselButton: BounceButton
 {
-
-    private static let cornerRadius: CGFloat = 22.0
-    private static let padding: CGFloat = 30.0
-
-    override func setupView()
+    override func layoutSubviews()
     {
-        super.setupView()
-        
-        layer.cornerRadius = VesselButton.cornerRadius
-        
-        if let imageView = imageView, imageView.image != nil
+        //position imageView on right side of button, inset the same distance the title is from the left side.
+        super.layoutSubviews()
+        //determine title inset
+        if let horizInset = titleLabel?.frame.origin.x
         {
-            // only set title insets if there is an image
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: 20.0, bottom: 0, right: 0)
+            if let imageSize = imageView?.bounds.size
+            {
+                imageView?.frame = CGRect(
+                    x: bounds.width - imageSize.width - horizInset,
+                    y: (bounds.height/2 - imageSize.height/2),
+                    width: imageSize.width,
+                    height: imageSize.height)
+            
+            }
         }
-    }
-    
-    public override func imageRect(forContentRect contentRect: CGRect) -> CGRect
-    {
-        var imageFrame = super.imageRect(forContentRect: contentRect)
-        imageFrame.origin.x = bounds.maxX - imageFrame.width - VesselButton.padding
-        return imageFrame
     }
 }

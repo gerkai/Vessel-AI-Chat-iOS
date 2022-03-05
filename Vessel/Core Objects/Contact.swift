@@ -5,10 +5,10 @@
 
 
 var SavedEmail: String?
-var MainContact: Contact?
 
 struct Contact: CoreObjectProtocol, Codable
 {
+    static var MainID: Int = 0
     var id: Int
     var first_name: String
     var last_name: String

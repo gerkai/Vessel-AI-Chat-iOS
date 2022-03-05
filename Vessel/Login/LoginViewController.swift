@@ -82,11 +82,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
             {
                 Server.shared.login(email: email, password: password)
                 {
-                    //self.showLoginComplete()
                     Server.shared.getContact
                     {contact in
-                        MainContact = contact
-                        Storage.store(contact)
+                        Contact.MainID = contact.id
+                        ObjectStore.shared.serverSave(contact)
                         let vc = OnboardingNextViewController()
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
@@ -124,7 +123,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         Server.shared.getContact
         { contact in
             Storage.store(contact)
-            MainContact = contact
+            Contact.MainID = contact.id
             if contact.isBrandNew()
             {
                 //navigate to TestCardExistCheckingViewController

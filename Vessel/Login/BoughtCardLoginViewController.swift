@@ -82,8 +82,8 @@ class BoughtCardLoginViewController: UIViewController
                     self.showLoginComplete()
                     Server.shared.getContact
                     { contact in
-                        MainContact = contact
-                        Storage.store(contact)
+                        Contact.MainID = contact.id
+                        ObjectStore.shared.serverSave(contact)
                     }
                     onFailure:
                     { error in

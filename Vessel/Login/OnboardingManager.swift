@@ -10,15 +10,18 @@ import UIKit
 func OnboardingNextViewController() -> UIViewController
 {
     //MainContact is guaranteed
-    var contact = MainContact!
-    contact.gender = nil //cw temp
-    
-    if contact.gender == nil
+    if let contact = ObjectStore.shared.getContact(id: Contact.MainID)
     {
-        //show gender selector
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as! GenderSelectViewController
-        return vc
+        var mutableContact = contact
+        mutableContact.gender = nil //cw temp
+        
+        if contact.gender == nil
+        {
+            //show gender selector
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as! GenderSelectViewController
+            return vc
+        }
     }
     return UIViewController()
 }
