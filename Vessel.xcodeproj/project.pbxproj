@@ -32,10 +32,10 @@
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
 		3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */; };
 		3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95E27D2C41C00D589F7 /* Storage.swift */; };
-		3F87B96127D2E68700D589F7 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96027D2E68700D589F7 /* OnboardingManager.swift */; };
-		3F87B96327D2F8B600D589F7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B96227D2F8B600D589F7 /* Onboarding.storyboard */; };
-		3F87B96527D2F97C00D589F7 /* GenderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96427D2F97C00D589F7 /* GenderSelectViewController.swift */; };
 		3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96627D4209F00D589F7 /* Encodable.swift */; };
+		3F87B96C27D429E000D589F7 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96927D429E000D589F7 /* OnboardingManager.swift */; };
+		3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B96A27D429E000D589F7 /* Onboarding.storyboard */; };
+		3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
@@ -105,10 +105,10 @@
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		3F87B95E27D2C41C00D589F7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		3F87B96027D2E68700D589F7 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
-		3F87B96227D2F8B600D589F7 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
-		3F87B96427D2F97C00D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B96627D4209F00D589F7 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
+		3F87B96927D429E000D589F7 /* OnboardingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
+		3F87B96A27D429E000D589F7 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +207,16 @@
 			path = "Core Objects";
 			sourceTree = "<group>";
 		};
+		3F87B96827D429E000D589F7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3F87B96927D429E000D589F7 /* OnboardingManager.swift */,
+				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
+				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		3FE3699327C9A07E00231D42 = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +251,7 @@
 				3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */,
 				3FE369EB27C9A82A00231D42 /* Login */,
 				3FE369A527C9A07E00231D42 /* Main.storyboard */,
+				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
 				3FE369A327C9A07E00231D42 /* ViewController.swift */,
@@ -314,14 +325,11 @@
 				3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */,
 				3F0547B027C9DB8F006E3098 /* DebugViewController.swift */,
 				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
-				3F87B96427D2F97C00D589F7 /* GenderSelectViewController.swift */,
 				3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */,
 				3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */,
 				3FE369EC27C9A82A00231D42 /* Login.storyboard */,
 				3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */,
 				3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */,
-				3F87B96227D2F8B600D589F7 /* Onboarding.storyboard */,
-				3F87B96027D2E68700D589F7 /* OnboardingManager.swift */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
 				3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */,
 				3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */,
@@ -461,7 +469,6 @@
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3FE369A727C9A07E00231D42 /* Main.storyboard in Resources */,
-				3F87B96327D2F8B600D589F7 /* Onboarding.storyboard in Resources */,
 				3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */,
 				3FE369ED27C9A82A00231D42 /* Login.storyboard in Resources */,
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
@@ -470,6 +477,7 @@
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
 				3FE369DF27C9A74B00231D42 /* BananaGrotesk-Light.otf in Resources */,
+				3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,10 +563,11 @@
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
+				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
-				3F87B96127D2E68700D589F7 /* OnboardingManager.swift in Sources */,
+				3F87B96C27D429E000D589F7 /* OnboardingManager.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
@@ -567,7 +576,6 @@
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
-				3F87B96527D2F97C00D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
