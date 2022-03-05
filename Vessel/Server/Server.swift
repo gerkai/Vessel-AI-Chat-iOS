@@ -414,6 +414,63 @@ class Server: NSObject
         }
     }
     
+    func createContact(contact: Contact, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CONTACT_PATH)"
+        
+        if var contactDict = contact.dictionary
+        {
+            contactDict.removeValue(forKey: "id")
+            do
+            {
+                let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                print(jsonString)
+                
+                let Url = String(format:url)
+                guard let serviceUrl = URL(string: Url) else { return }
+                var request = URLRequest(url: serviceUrl)
+                request.httpBody = jsonData
+                
+                //send it to server
+                serverPost(request: request, onSuccess:
+                { (object) in
+                    if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
+                    {
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
+                        DispatchQueue.main.async()
+                        {
+                            success()
+                        }
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            failure(NSLocalizedString("Incorrect username or password", comment:""))
+                        }
+                    }
+                },
+                onFailure:
+                { (string) in
+                    DispatchQueue.main.async()
+                    {
+                        failure(NSLocalizedString("Server Error", comment:""))
+                    }
+                })
+            }
+            catch
+            {
+                print(error.localizedDescription)
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     func updateContact(contact: Contact, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         if accessToken != nil

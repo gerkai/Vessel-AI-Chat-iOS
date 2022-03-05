@@ -1835,7 +1835,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1r-u9-u1Q" userLabel="lastNameTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="80" width="315" height="60"/>
@@ -1845,7 +1845,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewA-SR-X4F" userLabel="passTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="160" width="315" height="60"/>
@@ -1929,10 +1929,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="firstNameTextField" destination="7qJ-UT-3cD" id="hBU-lb-slY"/>
+                        <outlet property="lastNameTextField" destination="D1r-u9-u1Q" id="AXm-6K-22t"/>
                         <outlet property="passwordFieldContraint" destination="vS0-Kh-kcp" id="1PC-vu-3zh"/>
-                        <outletCollection property="formFields" destination="7qJ-UT-3cD" collectionClass="NSMutableArray" id="BlR-Nt-onc"/>
-                        <outletCollection property="formFields" destination="D1r-u9-u1Q" collectionClass="NSMutableArray" id="rqe-Wh-ch3"/>
-                        <outletCollection property="formFields" destination="ewA-SR-X4F" collectionClass="NSMutableArray" id="56h-FV-OLg"/>
+                        <outlet property="passwordTextField" destination="ewA-SR-X4F" id="8R5-5V-MIA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gv5-3u-a1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

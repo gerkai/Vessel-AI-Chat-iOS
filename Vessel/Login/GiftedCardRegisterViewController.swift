@@ -68,7 +68,7 @@ class GiftedCardRegisterViewController: UIViewController
                     if let password = passwordTextField.text, password.isValidPassword()
                     {
                         //all fields valid!
-                        //createContact()
+                        createContact(firstName: firstName, lastName: lastName, password: password)
                     }
                     else
                     {
@@ -92,111 +92,27 @@ class GiftedCardRegisterViewController: UIViewController
         self.navigationController?.popViewController(animated: true)
     }
 
-    
     private func createContact(firstName: String, lastName: String, password: String)
     {
-        //cwlet contact =  Contact(email: SavedEmail ?? "", password: passwordTextField.text ?? "", firstName: firstName, lastName: lastName)
-        
-        /*
-        if socialAuth
+        let contact =  Contact(firstName: firstName, lastName: lastName, email: SavedEmail ?? "", password: password)
+        Server.shared.createContact(contact: contact)
         {
-            //let event = AnalyticEvent.CREATE_ACCOUNT_SUCCESS(email: email)
-            //self.analyticManager.trackEvent(event: event)
-            if let isFirstReminder = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstReminder.rawValue) as? Bool,
-               isFirstReminder
-            {
-                self.pushwooshManager.register()
+            Server.shared.getContact
+            { contact in
+                Contact.MainID = contact.id
+                ObjectStore.shared.serverSave(contact)
+                //begin onboarding flow
+                let vc = OnboardingNextViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            NotificationCenter.default.post(name: Notification.Name.didSignup, object: nil)
-            return
-        }
-        
-        let contact =  Contact(email: email, password: formFields[2].text ?? "", firstName: formFields[0].text ?? "", lastName: formFields[1].text ?? "")
-        contactRepository.create(parameters: contact)
-        { [weak self] result in
-            guard let self = self else { return }
-            switch result
-            {
-            case .success(let tokens):
-                Analytics.logEvent("create_account_2", parameters: nil)
-                if let accessToken = tokens.access_token,
-                   let refreshToken = tokens.refresh_token,
-                    let email = contact.email,
-                    let password = contact.password
-                {
-                    SessionManager.shared.storeAuthenticationInfo(email: email, password: password, token: accessToken, refreshToken: refreshToken)
-                    let event = AnalyticEvent.CREATE_ACCOUNT_SUCCESS(email: contact.email ?? "")
-                    self.analyticManager.trackEvent(event: event)
-                    if let isFirstReminder = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstReminder.rawValue) as? Bool,
-                       isFirstReminder
-                    {
-                        self.pushwooshManager.register()
-                    }
-                    self.getContactDetails(from: contact)
-                }
-                else
-                {
-                    UIView.showError(text: "Sign Up", detailText: "Something went wrong", image: nil)
-                    let event = AnalyticEvent.CREATE_ACCOUNT_FAIL(email: contact.email ?? "", error: "Something went wrong")
-                    self.analyticManager.trackEvent(event: event)
-                }
-            case .failure(let error):
-                UIView.showError(text: "Sign Up", detailText: error.localizedDescription, image: nil)
-                let event = AnalyticEvent.CREATE_ACCOUNT_FAIL(email: contact.email ?? "", error: error.localizedDescription)
-                self.analyticManager.trackEvent(event: event)
+            onFailure:
+            { error in
+                print("FAILED TO GET CONTACT: \(error)")
             }
-        }*/
-    }
-    
-    private func getContactDetails(from contact: Contact)
-    {
-#warning("CW FIX")
-        /*
-        contactRepository.get
-        {[weak self] result in
-            switch result
-            {
-                case .success(let contact):
-                    UserManager.shared.contact = contact
-                    self?.analyticManager.setupUserIdentity()
-                    if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
-                    {
-                        Bugsee.setEmail(userEmail)
-                        Bugsee.setAttribute("contact_id", value: contactId)
-                    }
-                    
-                case .failure:
-                    UserManager.shared.contact = contact
-                    if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
-                    {
-                        Bugsee.setEmail(userEmail)
-                        Bugsee.setAttribute("contact_id", value: contactId)
-                    }
-            }
-        
-            NotificationCenter.default.post(name: Notification.Name.didSignup, object: nil)
-        }*/
-    }
-    /*
-    private func validateForm()->Bool
-    {
-        let form = GiftedCardRegisterForm(email: email, firstName: formFields[0].text, lastName: formFields[1].text, password: formFields[2].text)
-        let validationResult = validator.validateForm(form: form)
-        if !validationResult.isValid
-        {
-            UIView.showError(text: "Error", detailText: validationResult.error ?? "", image: nil)
         }
-        return validationResult.isValid
-    }
-    
-    private func validateSocialForm()->Bool
-    {
-        let form = GiftedCardSocialRegisterForm(firstName: formFields[0].text, lastName: formFields[1].text)
-        let validationResult = validator.validateSocialForm(form: form)
-        if !validationResult.isValid
-        {
-            UIView.showError(text: "Error", detailText: validationResult.error ?? "", image: nil)
+        onFailure:
+        { error in
+            UIView.showError(text: "Sign Up", detailText: error, image: nil)
         }
-        return validationResult.isValid
-    }*/
+    }
 }

@@ -77,7 +77,7 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
-        if let email = emailTextField.text
+        if let email = emailTextField.text, email.isValidEmail() == true
         {
             Server.shared.contactExists(email: email)
             { exists in
@@ -103,6 +103,10 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
             { string in
                 
             }
+        }
+        else
+        {
+            UIView.showError(text: "Sign Up", detailText: NSLocalizedString("Invalid email", comment: ""), image: nil)
         }
     }
     

@@ -18,10 +18,6 @@ class TestCardExistCheckingViewController: UIViewController
     //private lazy var analyticManager = AnalyticManager()
 
     private var selectedOption: Int? = nil
-    var email: String = ""
-    var firstName: String = ""
-    var lastName: String = ""
-    var socialAuth: Bool = false
 
     override func viewDidLoad()
     {
@@ -68,24 +64,19 @@ class TestCardExistCheckingViewController: UIViewController
         if selectedOption == 1
         {
             let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-            vc.socialAuth = socialAuth
-            vc.email = email
-            vc.firstName = firstName
-            vc.lastName = lastName
+
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP GIFTED"))
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if selectedOption == 2
         {
             let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
-            vc.email = email
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP BOUGHT ON WEB"))
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else
         {
             let vc = storyboard.instantiateViewController(identifier: "NoTestCardOnboardViewController") as! NoTestCardOnboardViewController
-            vc.email = email
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP NO CARDS"))
             self.navigationController?.pushViewController(vc, animated: true)
         }

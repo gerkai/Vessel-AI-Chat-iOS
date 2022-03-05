@@ -12,10 +12,10 @@ func OnboardingNextViewController() -> UIViewController
     //MainContact is guaranteed
     if let contact = ObjectStore.shared.getContact(id: Contact.MainID)
     {
-        var mutableContact = contact
-        mutableContact.gender = nil //cw temp
+        var contact = contact //cw temp
+        contact.gender = nil //cw temp
         
-        if contact.gender == nil
+        if contact.gender == nil || contact.gender == ""
         {
             //show gender selector
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -23,5 +23,7 @@ func OnboardingNextViewController() -> UIViewController
             return vc
         }
     }
+    //something majorly wrong. Log out
+    //TODO: Log Out here
     return UIViewController()
 }

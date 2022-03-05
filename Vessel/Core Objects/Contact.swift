@@ -110,7 +110,7 @@ struct Contact: CoreObjectProtocol, Codable
     {
         if first_name.count == 0 &&
             last_name.count == 0 &&
-            gender != nil
+            ((gender == nil) || (gender == ""))
         {
             return true
         }
