@@ -41,6 +41,11 @@ struct Contact: CoreObjectProtocol, Codable
     var main_goal_id: Int?
     var has_samples: Bool?
     
+    static func main() -> Contact?
+    {
+        return ObjectStore.shared.getContact(id: Contact.MainID) 
+    }
+    
     init(id: Int = 0,
          firstName: String = "",
          lastName: String = "",

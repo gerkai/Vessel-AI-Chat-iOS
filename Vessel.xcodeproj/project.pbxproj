@@ -36,6 +36,10 @@
 		3F87B96C27D429E000D589F7 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96927D429E000D589F7 /* OnboardingManager.swift */; };
 		3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B96A27D429E000D589F7 /* Onboarding.storyboard */; };
 		3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */; };
+		3F87B97027D42BEB00D589F7 /* HeightSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96F27D42BEB00D589F7 /* HeightSelectViewController.swift */; };
+		3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97127D44F4A00D589F7 /* LastViewController.swift */; };
+		3F87B97427D4556900D589F7 /* WeightSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */; };
+		3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
@@ -109,6 +113,10 @@
 		3F87B96927D429E000D589F7 /* OnboardingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		3F87B96A27D429E000D589F7 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
+		3F87B96F27D42BEB00D589F7 /* HeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSelectViewController.swift; sourceTree = "<group>"; };
+		3F87B97127D44F4A00D589F7 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
+		3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightSelectViewController.swift; sourceTree = "<group>"; };
+		3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -210,9 +218,13 @@
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				3F87B97127D44F4A00D589F7 /* LastViewController.swift */,
 				3F87B96927D429E000D589F7 /* OnboardingManager.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
+				3F87B96F27D42BEB00D589F7 /* HeightSelectViewController.swift */,
+				3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */,
+				3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -545,11 +557,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
+				3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */,
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
+				3F87B97027D42BEB00D589F7 /* HeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
+				3F87B97427D4556900D589F7 /* WeightSelectViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
@@ -571,6 +586,7 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
+				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,

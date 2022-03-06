@@ -30,7 +30,7 @@ class GiftedCardOnboardViewController: UIViewController
     {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
-        if let contact = ObjectStore.shared.getContact(id: Contact.MainID)
+        if let contact = Contact.main()
         {
             vc.initialFirstName = contact.first_name
             vc.initialLastName = contact.last_name
