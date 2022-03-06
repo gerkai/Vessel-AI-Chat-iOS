@@ -16,4 +16,10 @@ class LastViewController: UIViewController
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func logOut()
+    {
+        self.navigationController?.popToRootViewController(animated: true)
+        Server.shared.logOut()
+    }
 }

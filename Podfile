@@ -5,6 +5,7 @@
 inhibit_all_warnings!
 
 def pods
+  pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
   pod 'SwiftEntryKit', '1.2.3'
 end

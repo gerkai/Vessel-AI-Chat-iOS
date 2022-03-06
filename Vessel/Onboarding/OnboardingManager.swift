@@ -14,8 +14,8 @@ func OnboardingNextViewController() -> UIViewController
     //MainContact is guaranteed
     if let contact = Contact.main()
     {
-       var contact = contact //cw temp
-       contact.birth_date = nil //cw temp
+       //var contact = contact //cw temp
+       //contact.birth_date = nil //cw temp
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         
         if contact.gender == nil || contact.gender == ""

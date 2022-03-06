@@ -320,6 +320,13 @@ class Server: NSObject
             
         }
     }
+    
+    func logOut()
+    {
+        accessToken = nil
+        refreshToken = nil
+    }
+    
     //MARK:  Contact
     
     ///will return true if contact e-mail exists on back end

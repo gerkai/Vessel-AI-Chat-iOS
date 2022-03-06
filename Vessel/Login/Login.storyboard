@@ -181,6 +181,7 @@
                                             <constraint firstAttribute="height" constant="60" id="hmi-om-epJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Debug Menu" image="dark_arrow_button">
                                             <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>

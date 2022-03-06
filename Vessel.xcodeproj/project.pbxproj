@@ -43,6 +43,7 @@
 		3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */; };
 		3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */; };
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
+		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
@@ -123,6 +124,7 @@
 		3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCheckmarkView.swift; sourceTree = "<group>"; };
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
+		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		3F96181E27D56DE100CB37B6 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		3FE3699327C9A07E00231D42 = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +309,7 @@
 		3FE369CF27C9A71D00231D42 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3F96181E27D56DE100CB37B6 /* Config */,
 				3FE369D227C9A74B00231D42 /* Fonts */,
 				3FE369D027C9A71D00231D42 /* Assets.xcassets */,
 			);
@@ -496,6 +507,7 @@
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
+				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
 				3FE369DF27C9A74B00231D42 /* BananaGrotesk-Light.otf in Resources */,
@@ -798,7 +810,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vesselhealth.Vessel;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -828,7 +840,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vesselhealth.Vessel;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

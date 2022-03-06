@@ -1,0 +1,6 @@
+framework module Pods_Vessel {
+  umbrella header "Pods-Vessel-umbrella.h"
+
+  export *
+  module * { export * }
+}
