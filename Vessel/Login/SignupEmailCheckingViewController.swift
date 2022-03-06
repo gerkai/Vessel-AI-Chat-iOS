@@ -168,17 +168,26 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
     //MARK: - SocialAuth delegates
     func gotSocialAuthToken()
     {
-        #warning("CW FIX - Login social")
-        print("LOGGED IN")
-        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
-        { (action) in
-            //print("You've pressed cancel");
-            self.dismiss(animated: true, completion: nil)
+        Server.shared.getContact
+        { contact in
+            Storage.store(contact)
+            Contact.MainID = contact.id
+            if contact.isBrandNew()
+            {
+                //navigate to TestCardExistCheckingViewController
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else
+            {
+                let vc = OnboardingNextViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated:true)
+        onFailure:
+        { error in
+            print("FAILED TO GET CONTACT: \(error)")
+        }
     }
 }

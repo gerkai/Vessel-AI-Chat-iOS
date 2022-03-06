@@ -47,7 +47,6 @@
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
-		3FE369A727C9A07E00231D42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369A527C9A07E00231D42 /* Main.storyboard */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
 		3FE369B727C9A07F00231D42 /* VesselTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369B627C9A07F00231D42 /* VesselTests.swift */; };
 		3FE369C127C9A07F00231D42 /* VesselUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369C027C9A07F00231D42 /* VesselUITests.swift */; };
@@ -129,7 +128,6 @@
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3FE369A327C9A07E00231D42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3FE369A627C9A07E00231D42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FE369AB27C9A07F00231D42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FE369AD27C9A07F00231D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FE369B227C9A07F00231D42 /* VesselTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VesselTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,7 +277,6 @@
 				3F0547AD27C9B8EA006E3098 /* Extensions */,
 				3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */,
 				3FE369EB27C9A82A00231D42 /* Login */,
-				3FE369A527C9A07E00231D42 /* Main.storyboard */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
@@ -501,7 +498,6 @@
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
-				3FE369A727C9A07E00231D42 /* Main.storyboard in Resources */,
 				3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */,
 				3FE369ED27C9A82A00231D42 /* Login.storyboard in Resources */,
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
@@ -653,14 +649,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3FE369A527C9A07E00231D42 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3FE369A627C9A07E00231D42 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

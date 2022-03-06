@@ -118,12 +118,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     {
         //print("Access token: \(accessToken)")
         //print("Refresh token: \(refreshToken)")
-        //print("LOGGED IN")
-        showLoginComplete()
         Server.shared.getContact
         { contact in
-            Storage.store(contact)
             Contact.MainID = contact.id
+            ObjectStore.shared.serverSave(contact)
             if contact.isBrandNew()
             {
                 //navigate to TestCardExistCheckingViewController
@@ -144,7 +142,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     }
     
     //temp until we get more screens
-    func showLoginComplete()
+    /*func showLoginComplete()
     {
         let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
         
@@ -156,7 +154,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         
         alertController.addAction(okAction)
         self.present(alertController, animated:true)
-    }
+    }*/
     
     //MARK: - textfield delegates
     func textFieldDidBeginEditing(_ textField: UITextField)
