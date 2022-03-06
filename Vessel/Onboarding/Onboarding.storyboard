@@ -342,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UeK-a6-aRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2233" y="58"/>
+            <point key="canvasLocation" x="3113" y="45"/>
         </scene>
         <!--Weight Select View Controller-->
         <scene sceneID="jrs-tw-LiX">
@@ -488,6 +488,156 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lzm-yx-Avx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1633" y="45"/>
+        </scene>
+        <!--Birthday Select View Controller-->
+        <scene sceneID="jsv-Rw-oQA">
+            <objects>
+                <viewController storyboardIdentifier="BirthdaySelectViewController" id="gvs-Lr-2DR" customClass="BirthdaySelectViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m4U-Ks-N4O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="YAK-y7-8uX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="llx-70-7An">
+                                <rect key="frame" x="30" y="751" width="354" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-E4-7T9" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="105" id="NEv-It-na8"/>
+                                            <constraint firstAttribute="height" constant="60" id="qzb-UZ-QZM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="back" destination="gvs-Lr-2DR" eventType="touchUpInside" id="kYJ-gx-s11"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="121" y="0.0" width="233" height="60"/>
+                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="qQY-lu-OYh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Continue" image="white_arrow_button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="next" destination="gvs-Lr-2DR" eventType="touchUpInside" id="ZAZ-6B-FiW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djN-hb-kZd">
+                                <rect key="frame" x="156.5" y="831" width="101" height="31"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Privacy Policy">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <font key="NSFont" metaFont="system" size="16"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="privacyPolicyButton" destination="gvs-Lr-2DR" eventType="touchUpInside" id="mzf-vM-bht"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Birth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nhn-zr-88B">
+                                <rect key="frame" x="30" y="222" width="207" height="39.5"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
+                                <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB0-mG-t0R">
+                                <rect key="frame" x="30" y="273.5" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="vl8-vn-EqG"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="What is your date of birth?">
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="eMX-4P-3t1">
+                                <rect key="frame" x="30" y="60" width="125" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="85g-91-yEY"/>
+                                    <constraint firstAttribute="width" constant="125" id="GKy-K6-CD6"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGA-HQ-bku" customClass="SelectionCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="445" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="vz1-rw-Yct"/>
+                                </constraints>
+                            </view>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="gdK-x4-M1W">
+                                <rect key="frame" x="0.0" y="515" width="414" height="216"/>
+                            </datePicker>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yTK-e4-RXp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="llx-70-7An" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" constant="30" id="0bU-cv-OpG"/>
+                            <constraint firstItem="nhn-zr-88B" firstAttribute="centerY" secondItem="m4U-Ks-N4O" secondAttribute="bottom" multiplier="0.27" id="1be-5z-GII"/>
+                            <constraint firstItem="gdK-x4-M1W" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" id="589-1t-fkx"/>
+                            <constraint firstItem="yTK-e4-RXp" firstAttribute="trailing" secondItem="oGA-HQ-bku" secondAttribute="trailing" constant="30" id="5qb-7H-vpz"/>
+                            <constraint firstItem="hB0-mG-t0R" firstAttribute="top" secondItem="nhn-zr-88B" secondAttribute="bottom" constant="12" id="AKc-ud-Ng2"/>
+                            <constraint firstItem="YAK-y7-8uX" firstAttribute="top" secondItem="m4U-Ks-N4O" secondAttribute="top" id="AdH-Ms-5Ag"/>
+                            <constraint firstItem="nhn-zr-88B" firstAttribute="width" secondItem="m4U-Ks-N4O" secondAttribute="width" multiplier="0.5" id="D5C-yl-K60"/>
+                            <constraint firstItem="oGA-HQ-bku" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" constant="30" id="EGs-ut-mXO"/>
+                            <constraint firstItem="eMX-4P-3t1" firstAttribute="top" secondItem="yTK-e4-RXp" secondAttribute="top" constant="16" id="KUU-Ox-RWL"/>
+                            <constraint firstItem="oGA-HQ-bku" firstAttribute="bottom" secondItem="gdK-x4-M1W" secondAttribute="top" constant="-10" id="Twg-tY-d2K"/>
+                            <constraint firstItem="YAK-y7-8uX" firstAttribute="trailing" secondItem="yTK-e4-RXp" secondAttribute="trailing" id="cRG-FS-H8p"/>
+                            <constraint firstItem="YAK-y7-8uX" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" id="ebe-xs-Qz0"/>
+                            <constraint firstItem="nhn-zr-88B" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" constant="30" id="iwN-0e-KWO"/>
+                            <constraint firstItem="djN-hb-kZd" firstAttribute="centerX" secondItem="yTK-e4-RXp" secondAttribute="centerX" id="m7y-gd-S4U"/>
+                            <constraint firstItem="YAK-y7-8uX" firstAttribute="bottom" secondItem="m4U-Ks-N4O" secondAttribute="bottom" id="mly-j3-myk"/>
+                            <constraint firstItem="hB0-mG-t0R" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" constant="30" id="mzw-gc-aEQ"/>
+                            <constraint firstItem="eMX-4P-3t1" firstAttribute="leading" secondItem="yTK-e4-RXp" secondAttribute="leading" constant="30" id="p4G-L0-QTO"/>
+                            <constraint firstItem="llx-70-7An" firstAttribute="top" secondItem="gdK-x4-M1W" secondAttribute="bottom" constant="20" id="pTb-Xl-5se"/>
+                            <constraint firstItem="djN-hb-kZd" firstAttribute="bottom" secondItem="yTK-e4-RXp" secondAttribute="bottom" id="tPl-3A-UDb"/>
+                            <constraint firstItem="yTK-e4-RXp" firstAttribute="trailing" secondItem="llx-70-7An" secondAttribute="trailing" constant="30" id="ufx-8u-4xl"/>
+                            <constraint firstItem="llx-70-7An" firstAttribute="bottom" secondItem="djN-hb-kZd" secondAttribute="top" constant="-20" id="wwD-ry-GFq"/>
+                            <constraint firstItem="gdK-x4-M1W" firstAttribute="trailing" secondItem="yTK-e4-RXp" secondAttribute="trailing" id="xHB-kc-mbY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="checkmarkView" destination="oGA-HQ-bku" id="Qyg-Oi-mIj"/>
+                        <outlet property="datePicker" destination="gdK-x4-M1W" id="Zd5-v2-o57"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kvj-lX-8Sf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2369.5652173913045" y="44.866071428571423"/>
         </scene>
     </scenes>
     <resources>

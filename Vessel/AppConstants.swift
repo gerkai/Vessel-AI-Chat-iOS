@@ -21,4 +21,6 @@ struct Constants
     static let MinimumPasswordLength: Int = 6
     
     static let SMALL_SCREEN_HEIGHT_THRESHOLD  =  700.0
+    
+    static let SERVER_DATE_FORMAT = "yyyy-MM-dd"
 }

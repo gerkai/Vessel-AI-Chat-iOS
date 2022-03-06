@@ -38,4 +38,10 @@ extension String
     {
         return !isEmpty && range(of: "[^a-zA-Z]", options: .regularExpression) == nil
     }
+
+    var firstUppercased: String
+    {
+        prefix(1).uppercased() + dropFirst()
+    }
+    
 }

@@ -15,7 +15,7 @@ func OnboardingNextViewController() -> UIViewController
     if let contact = Contact.main()
     {
        var contact = contact //cw temp
-       contact.weight = nil //cw temp
+       contact.birth_date = nil //cw temp
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         
         if contact.gender == nil || contact.gender == ""
@@ -33,6 +33,11 @@ func OnboardingNextViewController() -> UIViewController
         else if contact.weight == nil
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "WeightSelectViewController") as! WeightSelectViewController
+            return vc
+        }
+        else if contact.birth_date == nil
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
             return vc
         }
         else
