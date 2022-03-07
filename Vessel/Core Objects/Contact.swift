@@ -14,7 +14,7 @@ struct Contact: CoreObjectProtocol, Codable
     var last_name: String
     var email: String?          //can be nil if they signed in with social and didn't share e-mail
     var gender: String?
-    var height: Double?         
+    var height: Double?
     var weight: Double?
     var birth_date: String?     //in yyyy-mm-dd format
     //var diets: [Lookup]?      //needs to be an array of dietIDs (Int)

@@ -34,6 +34,7 @@ class ObjectStore: NSObject
     
     //MARK: - Public functions
     
+    //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T)
     {
         //This is an object we received from the back end. Save it to the object store and post a notification that
@@ -44,6 +45,7 @@ class ObjectStore: NSObject
         //TODO: post notification here
     }
     
+    //Call this to save objects that have been modified by the client
     func ClientSave<T: CoreObjectProtocol>(_ object: T)
     {
         //Storage.store(object)
