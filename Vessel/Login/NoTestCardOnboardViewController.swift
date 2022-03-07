@@ -12,7 +12,6 @@ class NoTestCardOnboardViewController: UIViewController
 {
     
     //private lazy var analyticManager = AnalyticManager()
-    var email = ""
     override func viewDidLoad()
     {
         super.viewDidLoad()

@@ -41,15 +41,6 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
         let result = feetCentimeters + inchesCentimeters
         return result.value
     }
-    /*
-    func setSelections(answers: [String])
-    {
-        if let first = answers.first, let centimeters = Double(first)
-        {
-            let (feet, inches) = convertCentimetersToFeetInches(centimeters: centimeters)
-            setHeightForPickerView(feet: feet, inches: inches)
-        }
-    }*/
     
     private func convertCentimetersToFeetInches(centimeters: Double) -> (Int, Int)
     {
@@ -94,12 +85,12 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
         let heightComponent = HeightComponent(rawValue: component)
         switch heightComponent
         {
-        case .feet:
-            return "\(row) ft"
-        case .inches:
-            return "\(row) in"
-        default:
-            return ""
+            case .feet:
+                return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row)
+            case .inches:
+                return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row)
+            default:
+                return ""
         }
     }
     

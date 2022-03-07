@@ -3,7 +3,7 @@
 //  Vessel
 //
 //  Created by Carson Whitsett on 3/5/22.
-//
+//  Temporary viewController at end of onboarding flow. Simply provides a logout button.
 
 import UIKit
 

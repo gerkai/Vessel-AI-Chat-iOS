@@ -25,6 +25,7 @@ class SelectionCheckmarkView: UIView
     {
         didSet
         {
+            //animate checkmark
             UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
             {
                 self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -73,8 +74,6 @@ class SelectionCheckmarkView: UIView
         self.backgroundColor = .clear
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        
-        //textLabel.text = defaultText
     }
     
     @IBAction func checkmarkPressed()

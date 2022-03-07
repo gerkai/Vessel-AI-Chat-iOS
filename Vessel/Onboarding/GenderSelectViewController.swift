@@ -29,15 +29,15 @@ class GenderSelectViewController: UIViewController
     
     @IBAction func continueButton()
     {
-        var genderString = "o"
+        var genderString = Constants.GENDER_OTHER
         switch segmentedControl.selectedSegmentIndex
         {
-        case 0:
-            genderString = "m"
-        case 1:
-            genderString = "f"
-        default:
-            break
+            case 0:
+                genderString = Constants.GENDER_MALE
+            case 1:
+                genderString = Constants.GENDER_FEMALE
+            default:
+                break
         }
         if var contact = Contact.main()
         {

@@ -116,8 +116,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     
     func gotSocialAuthToken()
     {
-        //print("Access token: \(accessToken)")
-        //print("Refresh token: \(refreshToken)")
         Server.shared.getContact
         { contact in
             Contact.MainID = contact.id
