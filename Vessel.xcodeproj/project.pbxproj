@@ -46,7 +46,6 @@
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
-		3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A327C9A07E00231D42 /* ViewController.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
 		3FE369B727C9A07F00231D42 /* VesselTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369B627C9A07F00231D42 /* VesselTests.swift */; };
 		3FE369C127C9A07F00231D42 /* VesselUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369C027C9A07F00231D42 /* VesselUITests.swift */; };
@@ -127,7 +126,6 @@
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3FE369A327C9A07E00231D42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3FE369AB27C9A07F00231D42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FE369AD27C9A07F00231D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FE369B227C9A07F00231D42 /* VesselTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VesselTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,7 +278,6 @@
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
-				3FE369A327C9A07E00231D42 /* ViewController.swift */,
 				3FE369AD27C9A07F00231D42 /* Info.plist */,
 			);
 			path = Vessel;
@@ -577,7 +574,6 @@
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
-				3FE369A427C9A07E00231D42 /* ViewController.swift in Sources */,
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
