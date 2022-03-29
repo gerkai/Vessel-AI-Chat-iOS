@@ -10,7 +10,7 @@ import UIKit
 class GenderSelectViewController: UIViewController
 {
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControl: VesselSegmentedControl!
     
     override func viewDidLoad()
     {

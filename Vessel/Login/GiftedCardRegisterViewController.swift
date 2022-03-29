@@ -61,6 +61,7 @@ class GiftedCardRegisterViewController: UIViewController
                 if socialAuth
                 {
                     //all fields valid!
+                    //TODO: update firsat and last name if user changed them
                     //createContact()
                 }
                 else

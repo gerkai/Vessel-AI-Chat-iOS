@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     @IBOutlet weak var orSignInLabel: UILabel!
     
     //caller can plug a string in here
-    var prepopulatedEmail: String? = "carson@vesselhealth.com"
+    var prepopulatedEmail: String? = "carson@aa.com"
     
     override func viewDidLoad()
     {

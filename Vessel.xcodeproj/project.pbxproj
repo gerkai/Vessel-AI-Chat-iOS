@@ -44,6 +44,7 @@
 		3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */; };
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
+		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -123,6 +124,7 @@
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
+				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
+				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
