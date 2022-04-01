@@ -39,9 +39,16 @@ class WeightSelectViewController: UIViewController, UITextFieldDelegate
                     ObjectStore.shared.ClientSave(contact)
                 }
             }
-            let vc = OnboardingNextViewController()
-            //navigationController?.pushViewController(vc, animated: true)
-            navigationController?.fadeTo(vc)
+            if let vc = OnboardingNextViewController()
+            {
+                //navigationController?.pushViewController(vc, animated: true)
+                navigationController?.fadeTo(vc)
+            }
+            else
+            {
+                self.navigationController?.popToRootViewController(animated: true)
+                Server.shared.logOut()
+            }
         }
         else
         {

@@ -9,22 +9,17 @@ import UIKit
 
 class GenderSelectViewController: UIViewController
 {
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let contact = Contact.main()
-        {
-            let localizedGreeting = String(format: NSLocalizedString("Hi %@", comment: "Greeting by first name"), contact.first_name)
-            nameLabel.text = localizedGreeting
-        }
     }
     
     @IBAction func backButton()
     {
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
+        navigationController?.fadeOut()
     }
     
     @IBAction func continueButton()
@@ -44,9 +39,16 @@ class GenderSelectViewController: UIViewController
             contact.gender = genderString
             ObjectStore.shared.ClientSave(contact)
         }
-        let vc = OnboardingNextViewController()
-        //navigationController?.pushViewController(vc, animated: true)
-        navigationController?.fadeTo(vc)
+        if let vc = OnboardingNextViewController()
+        {
+            //navigationController?.pushViewController(vc, animated: true)
+            navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            self.navigationController?.popToRootViewController(animated: true)
+            Server.shared.logOut()
+        }
     }
     
     @IBAction func privacyPolicyButton()

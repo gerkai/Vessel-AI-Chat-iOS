@@ -30,6 +30,9 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
         {
             setHeightForPickerView(feet: 5, inches: 0)
         }
+        
+        //change default gray selection color to white
+        heightPickerView.subviews[1].backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
     
     func getSelections() -> Double
@@ -69,9 +72,16 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
             contact.height = getSelections()
             ObjectStore.shared.ClientSave(contact)
         }
-        let vc = OnboardingNextViewController()
-        //navigationController?.pushViewController(vc, animated: true)
-        navigationController?.fadeTo(vc)
+        if let vc = OnboardingNextViewController()
+        {
+            //navigationController?.pushViewController(vc, animated: true)
+            navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            self.navigationController?.popToRootViewController(animated: true)
+            Server.shared.logOut()
+        }
     }
     
     @IBAction func privacyPolicyButton()
@@ -93,7 +103,6 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
                 return ""
         }
     }
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {

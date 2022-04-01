@@ -9,7 +9,14 @@
 
 import UIKit
 
-func OnboardingNextViewController() -> UIViewController
+func OnboardingStartViewController() -> UIViewController
+{
+    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+    return vc
+}
+
+func OnboardingNextViewController() -> UIViewController?
 {
     //MainContact is guaranteed
     if let contact = Contact.main()
@@ -46,7 +53,6 @@ func OnboardingNextViewController() -> UIViewController
             return vc
         }
     }
-    //something majorly wrong. Log out
-    //TODO: Log Out here
-    return UIViewController()
+    //something majorly wrong. We'll be logging out
+    return nil
 }

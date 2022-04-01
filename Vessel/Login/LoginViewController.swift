@@ -86,8 +86,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
                     {contact in
                         Contact.MainID = contact.id
                         ObjectStore.shared.serverSave(contact)
-                        let vc = OnboardingNextViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        let vc = OnboardingStartViewController()
+                        //self.navigationController?.pushViewController(vc, animated: true)
+                        self.navigationController?.fadeTo(vc)
                     }
                     onFailure:
                     {error in
@@ -129,8 +130,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
             }
             else
             {
-                let vc = OnboardingNextViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                let vc = OnboardingStartViewController()
+                
+                self.navigationController?.fadeTo(vc)
             }
         }
         onFailure:

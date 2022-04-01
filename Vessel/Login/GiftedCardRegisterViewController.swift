@@ -103,8 +103,15 @@ class GiftedCardRegisterViewController: UIViewController
                 Contact.MainID = contact.id
                 ObjectStore.shared.serverSave(contact)
                 //begin onboarding flow
-                let vc = OnboardingNextViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                if let vc = OnboardingNextViewController()
+                {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                else
+                {
+                    self.navigationController?.popToRootViewController(animated: true)
+                    Server.shared.logOut()
+                }
             }
             onFailure:
             { error in

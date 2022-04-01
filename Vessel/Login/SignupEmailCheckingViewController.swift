@@ -181,8 +181,9 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
             }
             else
             {
-                let vc = OnboardingNextViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                let vc = OnboardingStartViewController()
+                
+                self.navigationController?.fadeTo(vc)
             }
         }
         onFailure:
