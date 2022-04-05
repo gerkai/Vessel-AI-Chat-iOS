@@ -735,7 +735,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="onboarding_splash" width="1131" height="2436"/>
+        <image name="onboarding_splash" width="1125" height="2436"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="white_arrow_button" width="8" height="12.5"/>
         <systemColor name="systemBackgroundColor">
