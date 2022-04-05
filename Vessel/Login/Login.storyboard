@@ -274,9 +274,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EOU-e9-o66">
-                                <rect key="frame" x="81" y="157" width="227" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-g2-TUq">
+                                <rect key="frame" x="20" y="91" width="96" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EOU-e9-o66">
+                                <rect key="frame" x="20" y="157" width="335" height="32"/>
                                 <segments>
                                     <segment title="PROD"/>
                                     <segment title="STAGING"/>
@@ -286,16 +291,16 @@
                                     <action selector="onEnvironment:" destination="Dhf-WK-NsZ" eventType="valueChanged" id="sh2-Kt-SgD"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Environment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-g2-TUq">
-                                <rect key="frame" x="20" y="91" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="akE-lT-8Lq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="akE-lT-8Lq" firstAttribute="trailing" secondItem="EOU-e9-o66" secondAttribute="trailing" constant="20" id="7Ug-sL-7Wq"/>
+                            <constraint firstItem="EOU-e9-o66" firstAttribute="top" secondItem="l8U-g2-TUq" secondAttribute="bottom" constant="45" id="DM1-fc-RYo"/>
+                            <constraint firstItem="l8U-g2-TUq" firstAttribute="leading" secondItem="akE-lT-8Lq" secondAttribute="leading" constant="20" id="tLy-0k-B6e"/>
+                            <constraint firstItem="l8U-g2-TUq" firstAttribute="top" secondItem="akE-lT-8Lq" secondAttribute="top" constant="91" id="zAQ-Ob-2ZW"/>
+                            <constraint firstItem="EOU-e9-o66" firstAttribute="leading" secondItem="akE-lT-8Lq" secondAttribute="leading" constant="20" id="zc7-ey-eZJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="krT-2s-mMS"/>
                     <connections>
@@ -304,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGA-XK-Q4y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19" y="832"/>
+            <point key="canvasLocation" x="18.399999999999999" y="831.63418290854577"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="5Lg-Ny-l71">
@@ -976,7 +981,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes, I was given a test card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5Y-nm-WYs" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="194.5" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="188.5" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1037,7 +1042,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes, I bought it on the website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkQ-zy-tWh" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="216" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="213" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1098,7 +1103,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No, I don't have a test card yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiC-od-27Z" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="220.5" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="212.5" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1948,7 +1953,7 @@
         <image name="apple_auth_button" width="16.5" height="20"/>
         <image name="dark_arrow_button" width="8" height="12.5"/>
         <image name="google_auth_button" width="20" height="20"/>
-        <image name="onboarding_splash" width="1131" height="2436"/>
+        <image name="onboarding_splash" width="1125" height="2436"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="vessel_logo_horizontal" width="124.5" height="44.5"/>
         <image name="white_arrow_button" width="8" height="12.5"/>

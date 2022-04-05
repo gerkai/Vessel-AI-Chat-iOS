@@ -10,14 +10,16 @@
 
 import Foundation
 
+let ENDPOINT_ROOT = "v3/"
+
 //Environment Constants
-let DEV_API = "https://dev-api.vesselhealth.com/v3/"
+let DEV_API = "https://dev-api.vesselhealth.com/" + ENDPOINT_ROOT
 let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
 
-let STAGING_API = "https://staging-api.vesselhealth.com/v3/"
+let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
 let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
 
-let PROD_API = "https://api.vesselhealth.com/v3/"
+let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
 let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
 
 //Security strings

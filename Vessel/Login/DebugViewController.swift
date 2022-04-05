@@ -22,6 +22,11 @@ class DebugViewController: UIViewController
         super.viewDidLoad()
         savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         environmentControl.selectedSegmentIndex = savedEnvironment
+        
+        //bypass appearance settings for this control
+        let font = UIFont(name: "BananaGrotesk-Semibold", size: 16.0)!
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
+        environmentControl.setTitleTextAttributes(selectedAttribute, for: .selected)
     }
     
     deinit
