@@ -10,6 +10,7 @@ import UIKit
 
 class VesselTextField: UITextField
 {
+    let RESTRICTED_CHARACTERS = "'*=+[]\\|;:'\",<>/?%"
     let LABEL_FONT_SIZE = 16.0
     private static let cornerRadius: CGFloat = 22.0
     private var blurColor: UIColor = .white
@@ -58,4 +59,10 @@ class VesselTextField: UITextField
         borderColor = UIColor.clear
     }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn _: NSRange, replacementString string: String) -> Bool {
+        let set = CharacterSet(charactersIn: RESTRICTED_CHARACTERS)
+        let inverted = set.inverted
+        let filtered = string.components(separatedBy: inverted).joined(separator: "")
+        return filtered != string
+    }
 }
