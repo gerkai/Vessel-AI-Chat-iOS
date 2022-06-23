@@ -213,7 +213,11 @@ class Server: NSObject
     
     //MARK: - Public functions
     
-    
+    func isLoggedIn() -> Bool
+    {
+        //if we have an access token, then we're assumed to be logged in
+        return accessToken != nil
+    }
     
     func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String : Any]) -> Void)
     {

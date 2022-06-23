@@ -16,6 +16,9 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var debugButton: VesselButton!
     @IBOutlet private weak var environmentLabel: UILabel!
     @IBOutlet private weak var buttonStackView: UIStackView!
+    @IBOutlet private weak var splashView: UIView!
+    
+    let labelRefreshInterval = 2.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
     let goals = [NSLocalizedString("focus", comment:""),
@@ -34,10 +37,14 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
+        UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+        {
+            self.splashView.alpha = 0.0
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -57,9 +64,9 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @objc func updateGoals()
     {
         mindLabel.text = goals[goalIndex]
-        mindLabel.pushTransition(1)
-        mindLabel.fadeIn(duration: 1)
-        mindLabel.fadeOut(duration: 2.0)
+        mindLabel.pushTransition(labelRefreshInterval / 2)
+        mindLabel.fadeIn(duration: labelRefreshInterval / 2)
+        mindLabel.fadeOut(duration: labelRefreshInterval)
         goalIndex += 1
         if(goalIndex == goals.count)
         {
