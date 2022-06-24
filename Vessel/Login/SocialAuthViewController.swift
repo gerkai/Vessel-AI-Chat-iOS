@@ -18,6 +18,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
 {
     @IBOutlet weak var webContentView: UIView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
+    @IBOutlet weak var webView: WKWebView!
     
     let googleRetrieveLink = Server.shared.googleRetrieveURL()
     let appleRetrieveLink  = Server.shared.appleRetrieveURL()
@@ -26,19 +27,6 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     var bIsGoogle: Bool = true
     var delegate: SocialAuthViewDelegate?
     
-    
-    lazy var webView: WKWebView =
-    {
-        let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.allowsBackForwardNavigationGestures = true
-        webView.isUserInteractionEnabled = true
-        return webView
-    }()
     
     override func viewDidLoad()
     {
@@ -54,29 +42,13 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         }
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        //webView.allowsBackForwardNavigationGestures = true
         
         activity.startAnimating()
         activity.hidesWhenStopped = true
-        setupUI()
         let url = URL(string: strURL)
         let request = URLRequest(url: url!)
         webView.load(request)
-    }
-    
-    func setupUI()
-    {
-        self.webContentView.addSubview(webView)
-        
-        NSLayoutConstraint.activate([
-            webView.topAnchor
-                .constraint(equalTo: self.webContentView.topAnchor),
-            webView.leftAnchor
-                .constraint(equalTo: self.webContentView.leftAnchor),
-            webView.bottomAnchor
-                .constraint(equalTo: self.webContentView.bottomAnchor),
-            webView.rightAnchor
-                .constraint(equalTo: self.webContentView.rightAnchor)
-        ])
     }
     
     @IBAction func doneButtonAction(_ sender: Any)
