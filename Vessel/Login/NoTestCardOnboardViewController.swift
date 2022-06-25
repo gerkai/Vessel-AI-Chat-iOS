@@ -2,8 +2,8 @@
 //  NoTestCardOnboardViewController.swift
 //  vessel-ios
 //
-//  Created by Mohamed El-Taweel on 26/05/2021.
-//  Copyright © 2021 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 3/26/2022
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
@@ -30,6 +30,6 @@ class NoTestCardOnboardViewController: UIViewController
     
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.fadeOut()
     }
 }

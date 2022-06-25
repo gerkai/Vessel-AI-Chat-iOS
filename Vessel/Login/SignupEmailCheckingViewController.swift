@@ -92,7 +92,7 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
                 else
                 {
                     //save e-mail for use later during sign-up process
-                    SavedEmail = email
+                    Contact.SavedEmail = email
                     
                     //navigate to TestCardExistCheckingViewController
                     let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
@@ -166,29 +166,20 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
     }
     
     //MARK: - SocialAuth delegates
-    func gotSocialAuthToken()
+    func gotSocialAuthToken(isBrandNewAccount: Bool)
     {
-        Server.shared.getContact
-        { contact in
-            Storage.store(contact)
-            Contact.MainID = contact.id
-            if contact.isBrandNew()
-            {
-                //navigate to TestCardExistCheckingViewController
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            else
-            {
-                let vc = OnboardingStartViewController()
-                
-                self.navigationController?.fadeTo(vc)
-            }
+        if isBrandNewAccount
+        {
+            //navigate to TestCardExistCheckingViewController
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        onFailure:
-        { error in
-            print("FAILED TO GET CONTACT: \(error)")
+        else
+        {
+            let vc = OnboardingNextViewController()
+            
+            self.navigationController?.fadeTo(vc)
         }
     }
 }

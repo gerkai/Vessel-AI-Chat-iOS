@@ -39,16 +39,16 @@ class GenderSelectViewController: UIViewController
             contact.gender = genderString
             ObjectStore.shared.ClientSave(contact)
         }
-        if let vc = OnboardingNextViewController()
-        {
+        let vc = OnboardingNextViewController()
+        //{
             //navigationController?.pushViewController(vc, animated: true)
             navigationController?.fadeTo(vc)
-        }
+        /*}
         else
         {
             self.navigationController?.popToRootViewController(animated: true)
             Server.shared.logOut()
-        }
+        }*/
     }
     
     @IBAction func privacyPolicyButton()

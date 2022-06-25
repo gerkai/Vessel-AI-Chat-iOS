@@ -1,14 +1,16 @@
 //
 // Contact.swift
+//  Vessel
+//
+//  Created by Carson Whitsett on 3/25/22.
 //
 
 
 
-var SavedEmail: String?
-
 struct Contact: CoreObjectProtocol, Codable
 {
     static var MainID: Int = 0
+    static var SavedEmail: String? //temporary place to hold e-mail during account creation
     var id: Int
     var first_name: String
     var last_name: String
@@ -113,9 +115,7 @@ struct Contact: CoreObjectProtocol, Codable
     //if the contact doesn't have basic info filled out, then it's brand new
     func isBrandNew() -> Bool
     {
-        if first_name.count == 0 &&
-            last_name.count == 0 &&
-            ((gender == nil) || (gender == ""))
+        if ((gender == nil) || (gender == ""))
         {
             return true
         }

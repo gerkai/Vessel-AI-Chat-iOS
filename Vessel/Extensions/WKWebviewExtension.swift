@@ -1,8 +1,8 @@
 //
 //  WKWebviewExtension.swift
-//  vessel-ios
+//  Vessel
 //
-//  Created by QTS Coder on 05/01/2022.
+//  Created by Carson Whitsett on 3/25/2022.
 //  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
@@ -11,7 +11,6 @@ import WebKit
 
 extension WKWebView
 {
-
     private var httpCookieStore: WKHTTPCookieStore  { return WKWebsiteDataStore.default().httpCookieStore }
 
     func getCookiesDict(for domain: String? = nil, completion: @escaping ([String : Any])->())

@@ -2,8 +2,8 @@
 //  BoughtCardLoginViewController.swift
 //  vessel-ios
 //
-//  Created by Mohamed El-Taweel on 05/26/2021.
-//  Copyright © 2021 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 05/26/2022.
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
@@ -21,11 +21,11 @@ struct BoughtCardLoginValidator
     {
         guard let email = form.email?.trimmingCharacters(in: .whitespacesAndNewlines), email.count > 0, email.isValidEmail() else
         {
-            return  (isValid: false,error: "Wrong Email")
+            return  (isValid: false,error: "Please enter a valid email")
         }
         guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
         {
-            return  (isValid: false,error: "Wrong Password")
+            return  (isValid: false,error: "Please enter your password")
         }
         return (isValid: true,error: nil)
     }
@@ -60,7 +60,7 @@ class BoughtCardLoginViewController: UIViewController
     
     @IBAction func onBackButtonTapped(_ sender: UIButton)
     {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.fadeOut()
     }
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
@@ -79,15 +79,22 @@ class BoughtCardLoginViewController: UIViewController
             {
                 Server.shared.login(email: email , password: password)
                 {
-                    self.showLoginComplete()
                     Server.shared.getContact
                     { contact in
                         Contact.MainID = contact.id
                         ObjectStore.shared.serverSave(contact)
+                        
+                        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                        let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
+                        
+                        //analyticManager.trackEvent(event: .SIGN_UP_GIFTED_CONTINUE(email: email))
+                        //self.navigationController?.pushViewController(vc, animated: true)
+                        self.navigationController?.fadeTo(vc)
+                        
                     }
                     onFailure:
                     { error in
-                        print("FAILED TO GET CONTACT: \(error)")
+                        UIView.showError(text: "The email and password combination is incorrect", detailText: "\(error)", image: nil)
                     }
                 }
                 onFailure:
@@ -104,7 +111,7 @@ class BoughtCardLoginViewController: UIViewController
         let validationResult = validator.validateForm(form: form)
         if !validationResult.isValid
         {
-            UIView.showError(text: "Error", detailText: validationResult.error ?? "", image: nil)
+            UIView.showError(text: "", detailText: validationResult.error ?? "", image: nil)
         }
         return validationResult.isValid
     }
@@ -118,20 +125,5 @@ class BoughtCardLoginViewController: UIViewController
         let vc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController")
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true)
-    }
-    
-    //temp until we get more screens
-    func showLoginComplete()
-    {
-        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
-        { (action) in
-            //print("You've pressed cancel");
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated:true)
     }
 }

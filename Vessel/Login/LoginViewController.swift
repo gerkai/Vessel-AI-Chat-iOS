@@ -4,7 +4,6 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
-//  TODO: Fix layout for small screens (iPhone SE)
 
 import UIKit
 
@@ -86,13 +85,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
                     {contact in
                         Contact.MainID = contact.id
                         ObjectStore.shared.serverSave(contact)
-                        let vc = OnboardingStartViewController()
+                        let vc = OnboardingNextViewController()
                         //self.navigationController?.pushViewController(vc, animated: true)
                         self.navigationController?.fadeTo(vc)
                     }
                     onFailure:
                     {error in
-                        print("FAILED TO GET CONTACT: \(error)")
+                        UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
                     }
                 }
                 onFailure:
@@ -102,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
             }
             else
             {
-                UIView.showError(text: NSLocalizedString("Error", comment: ""), detailText: NSLocalizedString("Wrong Email", comment:""), image: nil)
+                UIView.showError(text: NSLocalizedString("Sign In", comment: ""), detailText: NSLocalizedString("Invalid Email", comment:""), image: nil)
             }
         }
     }
@@ -115,46 +114,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         present(vc, animated: true)
     }
     
-    func gotSocialAuthToken()
+    func gotSocialAuthToken(isBrandNewAccount: Bool)
     {
-        Server.shared.getContact
-        { contact in
-            Contact.MainID = contact.id
-            ObjectStore.shared.serverSave(contact)
-            if contact.isBrandNew()
-            {
-                //navigate to TestCardExistCheckingViewController
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            else
-            {
-                let vc = OnboardingStartViewController()
-                
-                self.navigationController?.fadeTo(vc)
-            }
+       if isBrandNewAccount
+        {
+            //navigate to TestCardExistCheckingViewController
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        onFailure:
-        { error in
-            print("FAILED TO GET CONTACT: \(error)")
+        else
+        {
+            //navigate to start of Onboarding
+            let vc = OnboardingNextViewController()
+                
+            self.navigationController?.fadeTo(vc)
         }
     }
-    
-    //temp until we get more screens
-    /*func showLoginComplete()
-    {
-        let alertController = UIAlertController(title: NSLocalizedString("Logged In", comment: ""), message: NSLocalizedString("You've successfully logged in. The end.", comment:""), preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
-        { (action) in
-            //print("You've pressed cancel");
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated:true)
-    }*/
     
     //MARK: - textfield delegates
     func textFieldDidBeginEditing(_ textField: UITextField)

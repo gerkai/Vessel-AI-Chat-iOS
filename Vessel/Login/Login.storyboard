@@ -619,8 +619,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4W-w4-xoI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="TEP-xN-bGX">
+                                        <rect key="frame" x="30" y="0.0" width="125" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="6Au-mn-96f"/>
+                                            <constraint firstAttribute="height" constant="45" id="f8e-l4-snY"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGl-nG-IN7">
-                                        <rect key="frame" x="30" y="109" width="200" height="43.5"/>
+                                        <rect key="frame" x="30" y="88" width="200" height="43.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="WDH-yM-hIC"/>
                                         </constraints>
@@ -636,7 +643,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-hZ-FOV">
-                                        <rect key="frame" x="30" y="166.5" width="180" height="16"/>
+                                        <rect key="frame" x="30" y="145.5" width="180" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="bdB-nD-rOS"/>
                                         </constraints>
@@ -731,11 +738,31 @@
                                                     <outlet property="delegate" destination="dua-k8-BRV" id="VSc-V9-ObH"/>
                                                 </connections>
                                             </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MMQ-Bb-BGt">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MMQ-Bb-BGt">
                                                 <rect key="frame" x="0.0" y="80" width="315" height="60"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naD-yC-VIh" userLabel="Back Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="60"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.3982305463576159" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="105" id="HPv-m8-Klg"/>
+                                                            <constraint firstAttribute="height" constant="60" id="JyN-fv-8nt"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <state key="normal" title="Back">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onBackButtonPressed:" destination="dua-k8-BRV" eventType="touchUpInside" id="pHk-k7-VsU"/>
+                                                        </connections>
+                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqg-8e-8Fm" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
+                                                        <rect key="frame" x="120" y="0.0" width="195" height="60"/>
                                                         <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="tUK-U1-23s"/>
@@ -818,6 +845,7 @@
                                     <constraint firstItem="7wj-4b-0tR" firstAttribute="leading" secondItem="fQV-QE-Vbf" secondAttribute="leading" id="7DX-Zt-9ik"/>
                                     <constraint firstItem="7wj-4b-0tR" firstAttribute="trailing" secondItem="fQV-QE-Vbf" secondAttribute="trailing" id="7iG-th-dxm"/>
                                     <constraint firstAttribute="bottom" secondItem="fQV-QE-Vbf" secondAttribute="bottomMargin" id="E3H-Ho-sHk"/>
+                                    <constraint firstItem="WGl-nG-IN7" firstAttribute="top" secondItem="TEP-xN-bGX" secondAttribute="bottom" constant="43" id="Kh3-mh-6Kn"/>
                                     <constraint firstItem="fQV-QE-Vbf" firstAttribute="leading" secondItem="m4W-w4-xoI" secondAttribute="leading" constant="30" id="LIJ-hO-iw3"/>
                                     <constraint firstAttribute="trailing" secondItem="fQV-QE-Vbf" secondAttribute="trailing" constant="30" id="Lvy-gA-3Oz"/>
                                     <constraint firstItem="tN8-hZ-FOV" firstAttribute="leading" secondItem="WGl-nG-IN7" secondAttribute="leading" id="Qt6-qj-XLD"/>
@@ -825,19 +853,11 @@
                                     <constraint firstItem="fQV-QE-Vbf" firstAttribute="top" secondItem="GDP-0O-z69" secondAttribute="bottom" constant="20" id="dFb-7h-MB6"/>
                                     <constraint firstItem="GDP-0O-z69" firstAttribute="top" secondItem="7wj-4b-0tR" secondAttribute="bottom" constant="20" id="egt-4R-i60"/>
                                     <constraint firstItem="tN8-hZ-FOV" firstAttribute="top" secondItem="WGl-nG-IN7" secondAttribute="bottom" constant="14" id="htV-Vx-95F"/>
+                                    <constraint firstItem="TEP-xN-bGX" firstAttribute="leading" secondItem="m4W-w4-xoI" secondAttribute="leading" constant="30" id="jBW-9n-zOD"/>
+                                    <constraint firstItem="TEP-xN-bGX" firstAttribute="top" secondItem="m4W-w4-xoI" secondAttribute="top" id="m2e-rc-fBR"/>
                                     <constraint firstItem="WGl-nG-IN7" firstAttribute="leading" secondItem="m4W-w4-xoI" secondAttribute="leading" constant="30" id="xOG-fd-qB3"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naD-yC-VIh" userLabel="Back Button">
-                                <rect key="frame" x="20" y="28" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="JyN-fv-8nt"/>
-                                </constraints>
-                                <state key="normal" image="square_back_button"/>
-                                <connections>
-                                    <action selector="onBackButtonPressed:" destination="dua-k8-BRV" eventType="touchUpInside" id="pHk-k7-VsU"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J6d-bw-7fh"/>
                         <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -845,12 +865,9 @@
                             <constraint firstItem="i4Q-7U-D7w" firstAttribute="leading" secondItem="Xso-wy-bNd" secondAttribute="leading" id="1K4-YE-oId"/>
                             <constraint firstItem="m4W-w4-xoI" firstAttribute="leading" secondItem="J6d-bw-7fh" secondAttribute="leading" id="1sU-Ep-kH3"/>
                             <constraint firstItem="m4W-w4-xoI" firstAttribute="top" secondItem="J6d-bw-7fh" secondAttribute="top" id="2ew-6B-9YP"/>
-                            <constraint firstItem="WGl-nG-IN7" firstAttribute="top" secondItem="naD-yC-VIh" secondAttribute="bottom" constant="31" id="FGN-eJ-w35"/>
                             <constraint firstItem="J6d-bw-7fh" firstAttribute="bottom" secondItem="m4W-w4-xoI" secondAttribute="bottom" constant="20" id="Swx-9w-gaq"/>
                             <constraint firstItem="J6d-bw-7fh" firstAttribute="trailing" secondItem="m4W-w4-xoI" secondAttribute="trailing" id="Wkl-2g-EBZ"/>
-                            <constraint firstItem="naD-yC-VIh" firstAttribute="leading" secondItem="J6d-bw-7fh" secondAttribute="leading" constant="20" id="ajp-SI-AhE"/>
                             <constraint firstItem="i4Q-7U-D7w" firstAttribute="bottom" secondItem="Xso-wy-bNd" secondAttribute="bottom" id="d0Q-ge-a0s"/>
-                            <constraint firstItem="naD-yC-VIh" firstAttribute="top" secondItem="J6d-bw-7fh" secondAttribute="top" constant="28" id="k03-28-67Z"/>
                             <constraint firstItem="i4Q-7U-D7w" firstAttribute="top" secondItem="Xso-wy-bNd" secondAttribute="top" id="kWn-4H-o3w"/>
                             <constraint firstItem="i4Q-7U-D7w" firstAttribute="trailing" secondItem="Xso-wy-bNd" secondAttribute="trailing" id="oeb-ln-ozz"/>
                         </constraints>
@@ -874,24 +891,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRZ-ve-OmF" userLabel="Back Button">
-                                <rect key="frame" x="30" y="0.0" width="50" height="50"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="V5F-Oa-MAd">
+                                <rect key="frame" x="30" y="0.0" width="125" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ZLC-jX-VkJ"/>
+                                    <constraint firstAttribute="width" constant="125" id="2dR-ZZ-j8I"/>
+                                    <constraint firstAttribute="height" constant="45" id="Ufr-hZ-Pe9"/>
                                 </constraints>
-                                <state key="normal" image="square_back_button"/>
-                                <connections>
-                                    <action selector="onBackButton" destination="TSh-fQ-ZKf" eventType="touchUpInside" id="PtV-U0-NUD"/>
-                                </connections>
-                            </button>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HJ-7f-ZYU">
-                                <rect key="frame" x="30" y="80" width="315" height="39.5"/>
+                                <rect key="frame" x="30" y="88" width="315" height="39.5"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email address below and we'll send an email to reset your password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbJ-Np-6pf">
-                                <rect key="frame" x="30" y="149.5" width="315" height="32"/>
+                                <rect key="frame" x="30" y="157.5" width="315" height="32"/>
                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -913,25 +927,50 @@
                                             <outlet property="delegate" destination="TSh-fQ-ZKf" id="Tjn-yv-2qN"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4W-Rh-I3L" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="296-P7-aku">
                                         <rect key="frame" x="0.0" y="80" width="315" height="60"/>
-                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="ZQo-tj-VSf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                        <state key="normal" title="Submit">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onSubmitButton" destination="TSh-fQ-ZKf" eventType="touchUpInside" id="JjK-k2-feE"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRZ-ve-OmF" userLabel="Back Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="105" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="0.40017073675496689" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="105" id="ARL-Ib-HGT"/>
+                                                    <constraint firstAttribute="height" constant="60" id="ZLC-jX-VkJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                <state key="normal" title="Back">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onBackButton" destination="TSh-fQ-ZKf" eventType="touchUpInside" id="PtV-U0-NUD"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4W-Rh-I3L" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="120" y="0.0" width="195" height="60"/>
+                                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="ZQo-tj-VSf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onSubmitButton" destination="TSh-fQ-ZKf" eventType="touchUpInside" id="JjK-k2-feE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -941,13 +980,13 @@
                             <constraint firstItem="Bf6-tA-PTx" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="4d0-K3-09L"/>
                             <constraint firstItem="iRE-YX-3fa" firstAttribute="bottom" secondItem="Bf6-tA-PTx" secondAttribute="bottom" constant="34" id="5JQ-jm-0yV"/>
                             <constraint firstItem="iRE-YX-3fa" firstAttribute="trailing" secondItem="bbJ-Np-6pf" secondAttribute="trailing" constant="30" id="6A0-hd-Jla"/>
-                            <constraint firstItem="jRZ-ve-OmF" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="Cog-4V-D4B"/>
+                            <constraint firstItem="3HJ-7f-ZYU" firstAttribute="top" secondItem="V5F-Oa-MAd" secondAttribute="bottom" constant="43" id="VQE-cL-1kR"/>
                             <constraint firstItem="bbJ-Np-6pf" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="Wo9-GO-JUw"/>
                             <constraint firstItem="iRE-YX-3fa" firstAttribute="trailing" secondItem="Bf6-tA-PTx" secondAttribute="trailing" constant="30" id="Ywm-D6-MyC"/>
-                            <constraint firstItem="jRZ-ve-OmF" firstAttribute="top" secondItem="vUf-h1-6SB" secondAttribute="topMargin" id="iLb-4X-8r0"/>
                             <constraint firstItem="3HJ-7f-ZYU" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="jmq-Vc-7nV"/>
-                            <constraint firstItem="3HJ-7f-ZYU" firstAttribute="top" secondItem="jRZ-ve-OmF" secondAttribute="bottom" constant="30" id="lcx-pD-kvM"/>
                             <constraint firstItem="bbJ-Np-6pf" firstAttribute="top" secondItem="3HJ-7f-ZYU" secondAttribute="bottom" constant="30" id="nkT-hW-8T4"/>
+                            <constraint firstItem="V5F-Oa-MAd" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="rh8-iQ-2fO"/>
+                            <constraint firstItem="V5F-Oa-MAd" firstAttribute="top" secondItem="iRE-YX-3fa" secondAttribute="top" id="wGM-My-jW5"/>
                             <constraint firstItem="iRE-YX-3fa" firstAttribute="trailing" secondItem="3HJ-7f-ZYU" secondAttribute="trailing" constant="30" id="wnp-be-tES"/>
                         </constraints>
                     </view>
@@ -1017,7 +1056,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes, I was given a test card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5Y-nm-WYs" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="188.5" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="194.5" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1078,7 +1117,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes, I bought it on the website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkQ-zy-tWh" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="213" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="216" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1139,7 +1178,7 @@
                                                         <rect key="frame" x="20" y="0.0" width="291" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No, I don't have a test card yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiC-od-27Z" userLabel="label">
-                                                                <rect key="frame" x="36" y="16" width="212.5" height="28"/>
+                                                                <rect key="frame" x="36" y="16" width="220.5" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1842,6 +1881,13 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="O6T-1u-0Lr">
+                                        <rect key="frame" x="30" y="0.0" width="125" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="ARa-8h-aHl"/>
+                                            <constraint firstAttribute="width" constant="125" id="T1D-b5-mRI"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlF-yy-yXl">
                                         <rect key="frame" x="30" y="195" width="200" height="54.5"/>
                                         <constraints>
@@ -1868,7 +1914,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QZS-Aa-5xG">
-                                        <rect key="frame" x="30" y="333" width="315" height="300"/>
+                                        <rect key="frame" x="30" y="253" width="315" height="380"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7qJ-UT-3cD" userLabel="firstNameTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
@@ -1900,11 +1946,40 @@
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oqW-7f-ytC">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLB-S4-Juz">
                                                 <rect key="frame" x="0.0" y="240" width="315" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="0.39482615894039741" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="SlB-64-Y0f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oqW-7f-ytC">
+                                                <rect key="frame" x="0.0" y="320" width="315" height="60"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07m-9T-A0O" userLabel="Back Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="60"/>
+                                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="105" id="1fX-ez-vGx"/>
+                                                            <constraint firstAttribute="height" constant="60" id="CcJ-gN-oek"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <state key="normal" title="Back">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onBackButtonTapped:" destination="8Rm-9i-XrW" eventType="touchUpInside" id="LUR-2I-nAp"/>
+                                                        </connections>
+                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MY1-Tm-vad" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
+                                                        <rect key="frame" x="121" y="0.0" width="194" height="60"/>
                                                         <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="U9O-bU-7SF"/>
@@ -1936,25 +2011,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="O6T-1u-0Lr" firstAttribute="leading" secondItem="GKf-eZ-wez" secondAttribute="leading" constant="30" id="0OW-lw-ThV"/>
                                     <constraint firstItem="Vio-H5-Jcj" firstAttribute="top" secondItem="GKf-eZ-wez" secondAttribute="top" constant="135" id="3dL-qg-SKg"/>
                                     <constraint firstAttribute="bottom" secondItem="QZS-Aa-5xG" secondAttribute="bottomMargin" id="GUr-VE-xiN"/>
                                     <constraint firstItem="Vio-H5-Jcj" firstAttribute="leading" secondItem="GKf-eZ-wez" secondAttribute="leading" constant="30" id="SNW-NZ-m9R"/>
                                     <constraint firstAttribute="trailing" secondItem="QZS-Aa-5xG" secondAttribute="trailing" constant="30" id="Tgv-HO-0vv"/>
                                     <constraint firstItem="AlF-yy-yXl" firstAttribute="top" secondItem="Vio-H5-Jcj" secondAttribute="bottom" constant="14" id="acw-m7-ogK"/>
                                     <constraint firstItem="QZS-Aa-5xG" firstAttribute="leading" secondItem="GKf-eZ-wez" secondAttribute="leading" constant="30" id="bfH-hJ-Ulc"/>
+                                    <constraint firstItem="O6T-1u-0Lr" firstAttribute="top" secondItem="GKf-eZ-wez" secondAttribute="top" id="mz3-PF-N99"/>
                                     <constraint firstItem="AlF-yy-yXl" firstAttribute="leading" secondItem="Vio-H5-Jcj" secondAttribute="leading" id="wS4-Zf-CJy"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07m-9T-A0O" userLabel="Back Button">
-                                <rect key="frame" x="20" y="28" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CcJ-gN-oek"/>
-                                </constraints>
-                                <state key="normal" image="square_back_button"/>
-                                <connections>
-                                    <action selector="onBackButtonTapped:" destination="8Rm-9i-XrW" eventType="touchUpInside" id="LUR-2I-nAp"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vuk-TS-DDA"/>
                         <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -1962,8 +2029,6 @@
                             <constraint firstAttribute="trailing" secondItem="HZA-oR-G6T" secondAttribute="trailing" id="7pu-5q-7jk"/>
                             <constraint firstItem="vuk-TS-DDA" firstAttribute="trailing" secondItem="GKf-eZ-wez" secondAttribute="trailing" id="BOc-wb-Kaj"/>
                             <constraint firstItem="HZA-oR-G6T" firstAttribute="leading" secondItem="yB6-Ka-NxI" secondAttribute="leading" id="Cw7-3A-vg3"/>
-                            <constraint firstItem="07m-9T-A0O" firstAttribute="leading" secondItem="vuk-TS-DDA" secondAttribute="leading" constant="20" id="hsD-ef-vZS"/>
-                            <constraint firstItem="07m-9T-A0O" firstAttribute="top" secondItem="vuk-TS-DDA" secondAttribute="top" constant="28" id="hy0-Lw-4cY"/>
                             <constraint firstItem="vuk-TS-DDA" firstAttribute="bottom" secondItem="GKf-eZ-wez" secondAttribute="bottom" constant="34" id="iXu-CA-xdf"/>
                             <constraint firstItem="GKf-eZ-wez" firstAttribute="top" secondItem="vuk-TS-DDA" secondAttribute="top" id="rWR-LK-zp4"/>
                             <constraint firstItem="HZA-oR-G6T" firstAttribute="top" secondItem="yB6-Ka-NxI" secondAttribute="top" id="x5k-JS-8aU"/>
@@ -1972,6 +2037,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="confirmPasswordTextField" destination="HLB-S4-Juz" id="Wv0-L8-dcm"/>
                         <outlet property="firstNameTextField" destination="7qJ-UT-3cD" id="hBU-lb-slY"/>
                         <outlet property="lastNameTextField" destination="D1r-u9-u1Q" id="AXm-6K-22t"/>
                         <outlet property="passwordFieldContraint" destination="vS0-Kh-kcp" id="1PC-vu-3zh"/>

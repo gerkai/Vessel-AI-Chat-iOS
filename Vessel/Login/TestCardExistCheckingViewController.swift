@@ -2,8 +2,8 @@
 //  TestCardExistCheckingViewController.swift
 //  vessel-ios
 //
-//  Created by Mohamed El-Taweel on 25/05/2021.
-//  Copyright © 2021 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 3/26/2022
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
@@ -66,19 +66,21 @@ class TestCardExistCheckingViewController: UIViewController
             let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
 
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP GIFTED"))
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.fadeTo(vc)
         }
         else if selectedOption == 2
         {
             let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP BOUGHT ON WEB"))
-            self.navigationController?.pushViewController(vc, animated: true)
+            //self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.fadeTo(vc)
         }
         else
         {
             let vc = storyboard.instantiateViewController(identifier: "NoTestCardOnboardViewController") as! NoTestCardOnboardViewController
             //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP NO CARDS"))
-            self.navigationController?.pushViewController(vc, animated: true)
+            //self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.fadeTo(vc)
         }
     }
 }

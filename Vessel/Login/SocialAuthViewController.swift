@@ -2,8 +2,8 @@
 //  SocialAuthViewController.swift
 //  vessel-ios
 //
-//  Created by swift on 11/24/21.
-//  Copyright © 2021 Vessel Health Inc. All rights reserved.
+//  Created by Carson Whitsett on 3/24/22.
+//  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import WebKit
 
 protocol SocialAuthViewDelegate
 {
-    func gotSocialAuthToken()
+    func gotSocialAuthToken(isBrandNewAccount: Bool)
 }
 
 class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
@@ -56,6 +56,30 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         self.dismiss(animated: true, completion: nil)
     }
 
+    func loadContact()
+    {
+        Server.shared.getContact
+        { contact in
+            //store the main contactID for use whenever we need to reference the main contact later in the app.
+            Contact.MainID = contact.id
+            
+            //save this contact into the object store
+            ObjectStore.shared.serverSave(contact)
+            if contact.isBrandNew()
+            {
+                self.delegate?.gotSocialAuthToken(isBrandNewAccount: true)
+            }
+            else
+            {
+                self.delegate?.gotSocialAuthToken(isBrandNewAccount: false)
+            }
+        }
+        onFailure:
+        { error in
+            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+        }
+    }
+    
 //MARK: webView delegates
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
     {
@@ -70,9 +94,11 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         let urlString = navigationAction.request.url?.absoluteString
-        //print("\(urlString)")
-        //print("Retrieve URL: \(retrieveURL)")
-        if urlString!.contains(retrieveURL)
+#warning ("CW: Temporary fix until backend gets fixed")
+        let fixString = urlString?.replacingOccurrences(of: "/v2/", with: "/v3/")
+        print("\(fixString)")
+        print("Retrieve URL: \(retrieveURL)")
+        if fixString!.contains(retrieveURL)
         {
             let host = navigationAction.request.url?.host ?? Server.shared.API().replacingOccurrences(of: "https://", with: "")
             webView.getCookies(for: host)
@@ -86,12 +112,12 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                 {
                     self.dismiss(animated: true)
                     {
-                        self.delegate?.gotSocialAuthToken()
+                        self.loadContact()
                     }
                 },
                 onFailure:
-                {
-                    print("FAILED")
+                {string in
+                    UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error"), detailText: "\(string)", image: nil)
                 })
             }
             decisionHandler(.cancel)

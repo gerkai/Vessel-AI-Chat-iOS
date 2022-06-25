@@ -285,7 +285,7 @@ class Server: NSObject
     }
     
     //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
-    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
         serverGet(url: url)
@@ -309,7 +309,7 @@ class Server: NSObject
                 {
                     DispatchQueue.main.async()
                     {
-                        failure()
+                        failure(NSLocalizedString("Unable to decode access token", comment:"Server error message"))
                     }
                 }
             }
@@ -317,13 +317,16 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    failure()
+                    failure(NSLocalizedString("Unable to decode access token", comment:"Server error message"))
                 }
             }
         }
         onFailure:
         { string in
-            
+            DispatchQueue.main.async()
+            {
+                failure(string)
+            }
         }
     }
     

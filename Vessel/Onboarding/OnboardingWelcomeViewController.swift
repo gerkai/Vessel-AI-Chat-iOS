@@ -27,7 +27,9 @@ class OnboardingWelcomeViewController: UIViewController
     
     @IBAction func onContinue()
     {
-        if let vc = OnboardingNextViewController()
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as? GenderSelectViewController
+        //if let vc = OnboardingNextViewController()
         {
             //navigationController?.pushViewController(vc, animated: true)
             navigationController?.fadeTo(vc)

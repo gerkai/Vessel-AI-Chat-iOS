@@ -22,6 +22,7 @@ class GiftedCardRegisterViewController: UIViewController
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     var initialFirstName: String = ""
     var initialLastName: String = ""
@@ -31,11 +32,15 @@ class GiftedCardRegisterViewController: UIViewController
     {
         super.viewDidLoad()
         
-        if socialAuth
+        if let contact = Contact.main()
         {
-            firstNameTextField.text = initialFirstName
-            lastNameTextField.text = initialLastName
+            firstNameTextField.text = contact.first_name
+            lastNameTextField.text = contact.last_name
+            initialFirstName = contact.first_name
+            initialLastName = contact.last_name
             passwordTextField.isHidden = true
+            confirmPasswordTextField.isHidden = true
+            socialAuth = true
         }
     }
     
@@ -61,7 +66,16 @@ class GiftedCardRegisterViewController: UIViewController
                 if socialAuth
                 {
                     //all fields valid!
-                    //TODO: update firsat and last name if user changed them
+                    //Update first and last name if user changed them
+                    if (initialFirstName != firstName) || (initialLastName != lastName)
+                    {
+                        if var contact = Contact.main()
+                        {
+                            contact.first_name = firstName
+                            contact.last_name = lastName
+                            ObjectStore.shared.ClientSave(contact)
+                        }
+                    }
                     //createContact()
                 }
                 else
@@ -69,7 +83,14 @@ class GiftedCardRegisterViewController: UIViewController
                     if let password = passwordTextField.text, password.isValidPassword()
                     {
                         //all fields valid!
-                        createContact(firstName: firstName, lastName: lastName, password: password)
+                        if let confirmPassword = confirmPasswordTextField.text, confirmPassword == password
+                        {
+                            createContact(firstName: firstName, lastName: lastName, password: password)
+                        }
+                        else
+                        {
+                            UIView.showError(text: NSLocalizedString("Passwords do not match", comment: "Error message"), detailText: "", image: nil)
+                        }
                     }
                     else
                     {
@@ -90,12 +111,12 @@ class GiftedCardRegisterViewController: UIViewController
     
     @IBAction func onBackButtonTapped(_ sender: Any)
     {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.fadeOut()
     }
 
     private func createContact(firstName: String, lastName: String, password: String)
     {
-        let contact =  Contact(firstName: firstName, lastName: lastName, email: SavedEmail ?? "", password: password)
+        let contact =  Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "", password: password)
         Server.shared.createContact(contact: contact)
         {
             Server.shared.getContact
@@ -103,24 +124,24 @@ class GiftedCardRegisterViewController: UIViewController
                 Contact.MainID = contact.id
                 ObjectStore.shared.serverSave(contact)
                 //begin onboarding flow
-                if let vc = OnboardingNextViewController()
-                {
+                let vc = OnboardingNextViewController()
+                //{
                     self.navigationController?.pushViewController(vc, animated: true)
-                }
+                /*}
                 else
                 {
                     self.navigationController?.popToRootViewController(animated: true)
                     Server.shared.logOut()
-                }
+                }*/
             }
             onFailure:
             { error in
-                print("FAILED TO GET CONTACT: \(error)")
+                UIView.showError(text: NSLocalizedString("Server Error", comment: "Server error"), detailText: error, image: nil)
             }
         }
         onFailure:
         { error in
-            UIView.showError(text: "Sign Up", detailText: error, image: nil)
+            UIView.showError(text: NSLocalizedString("Sign Up", comment:""), detailText: error, image: nil)
         }
     }
 }
