@@ -43,6 +43,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         webView.uiDelegate = self
         webView.navigationDelegate = self
         //webView.allowsBackForwardNavigationGestures = true
+        //the below line resolves 403 error: disallowed_useragent when signing in with google
+        webView.customUserAgent = "Chrome/56.0.0.0 Mobile"
         
         activity.startAnimating()
         activity.hidesWhenStopped = true
