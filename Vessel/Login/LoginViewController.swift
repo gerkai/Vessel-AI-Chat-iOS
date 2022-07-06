@@ -14,7 +14,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var instructionsLabel: UILabel!
-    @IBOutlet weak var orSignInLabel: UILabel!
+    //@IBOutlet weak var orSignInLabel: UILabel!
     
     //caller can plug a string in here
     var prepopulatedEmail: String? = "carson@aa.com"
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
         {
             instructionsLabel.isHidden = true
-            orSignInLabel.isHidden = true
+            //orSignInLabel.isHidden = true
         }
     }
     
@@ -79,29 +79,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         {
             if email.isValidEmail()
             {
-                Server.shared.login(email: email, password: password)
+                if password.isValidPassword()
                 {
-                    Server.shared.getContact
-                    {contact in
-                        Contact.MainID = contact.id
-                        ObjectStore.shared.serverSave(contact)
-                        let vc = OnboardingNextViewController()
-                        //self.navigationController?.pushViewController(vc, animated: true)
-                        self.navigationController?.fadeTo(vc)
+                    Server.shared.login(email: email, password: password)
+                    {
+                        Server.shared.getContact
+                        {contact in
+                            Contact.MainID = contact.id
+                            ObjectStore.shared.serverSave(contact)
+                            let vc = OnboardingNextViewController()
+                            //self.navigationController?.pushViewController(vc, animated: true)
+                            self.navigationController?.fadeTo(vc)
+                        }
+                        onFailure:
+                        {error in
+                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+                        }
                     }
                     onFailure:
-                    {error in
-                        UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+                    { string in
+                        UIView.showError(text: "", detailText: string, image: nil)
                     }
                 }
-                onFailure:
-                { string in
-                    UIView.showError(text: NSLocalizedString("Sign In", comment: ""), detailText: string, image: nil)
+                else
+                {
+                    UIView.showError(text: "", detailText: NSLocalizedString("Please enter your password", comment:""), image: nil)
                 }
             }
             else
             {
-                UIView.showError(text: NSLocalizedString("Sign In", comment: ""), detailText: NSLocalizedString("Invalid Email", comment:""), image: nil)
+                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment:""), image: nil)
             }
         }
     }

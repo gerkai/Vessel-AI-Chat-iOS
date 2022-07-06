@@ -4,13 +4,13 @@
 //
 //  Created by Carson Whitsett on 3/25/22.
 //
+import Foundation
 
-
-
-struct Contact: CoreObjectProtocol, Codable
+class Contact: CoreObjectProtocol
 {
     static var MainID: Int = 0
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
+    
     var id: Int
     var first_name: String
     var last_name: String

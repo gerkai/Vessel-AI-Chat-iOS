@@ -13,6 +13,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var submitButton: LoadingButton!
     @IBOutlet weak var emailTextField: VesselTextField!
+    //@IBOutlet weak var backButton: UIButton!
+    //@IBOutlet weak var logoImage: UIImageView!
     
     enum mode
     {
@@ -32,6 +34,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
         initialTitle = titleLabel.text
         initialDescription = descriptionLabel.text
+        //disable wonky orphaned word prevention (started with iOS 11)
+        //titleLabel.lineBreakStrategy = []
+        
         initialSubmitTitle = submitButton.title(for: .normal)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
@@ -110,7 +115,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
                 
                 alertController.addAction(okAction)
                 self.present(alertController, animated:true)
-                
             }
         }
     }

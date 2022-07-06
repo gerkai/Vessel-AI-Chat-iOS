@@ -11,7 +11,6 @@ import UIKit
 class NoTestCardOnboardViewController: UIViewController
 {
     
-    //private lazy var analyticManager = AnalyticManager()
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -19,13 +18,7 @@ class NoTestCardOnboardViewController: UIViewController
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
-        //analyticManager.trackEvent(event: .SIGN_UP_BUY_ON_WEB(email: email))
-        openInSafari(url: Server.shared.OrderCardsURL())
-    }
-    
-    @IBAction func onCallCustomerSupport(_ sender: Any)
-    {
-        openInSafari(url: Server.shared.SupportURL())
+        openInSafari(url: Server.shared.QuizURL())
     }
     
     @IBAction func onBackButtonPressed(_ sender: Any)

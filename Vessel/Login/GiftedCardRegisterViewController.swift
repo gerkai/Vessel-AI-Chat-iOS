@@ -7,8 +7,6 @@
 //
 
 import UIKit
-//import FirebaseAnalytics
-//import Bugsee
 import IQKeyboardManagerSwift
 
 
@@ -17,12 +15,10 @@ class GiftedCardRegisterViewController: UIViewController
     @IBOutlet var formFields: [VesselTextField]!
     
     @IBOutlet weak var passwordFieldContraint: NSLayoutConstraint!
-    //private lazy var analyticManager = AnalyticManager()
-    //private lazy var pushwooshManager = PushwooshHelper()
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var firstNameTextField: VesselTextField!
+    @IBOutlet weak var lastNameTextField: VesselTextField!
+    @IBOutlet weak var passwordTextField: VesselTextField!
+    @IBOutlet weak var confirmPasswordTextField: VesselTextField!
     
     var initialFirstName: String = ""
     var initialLastName: String = ""
@@ -77,6 +73,9 @@ class GiftedCardRegisterViewController: UIViewController
                         }
                     }
                     //createContact()
+                    let vc = OnboardingNextViewController()
+                    //self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.fadeTo(vc)
                 }
                 else
                 {
@@ -94,18 +93,18 @@ class GiftedCardRegisterViewController: UIViewController
                     }
                     else
                     {
-                        UIView.showError(text: "Error", detailText: NSLocalizedString("Password too short", comment: ""), image: nil)
+                        UIView.showError(text: "", detailText: NSLocalizedString("Password must be at least 6 characters", comment: ""), image: nil)
                     }
                 }
             }
             else
             {
-                UIView.showError(text: "Error", detailText: NSLocalizedString("Please enter a valid last name", comment: ""), image: nil)
+                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid last name", comment: ""), image: nil)
             }
         }
         else
         {
-            UIView.showError(text: "Error", detailText: NSLocalizedString("Please enter a valid first name", comment: ""), image: nil)
+            UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid first name", comment: ""), image: nil)
         }
     }
     

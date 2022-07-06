@@ -63,16 +63,16 @@ class TestCardExistCheckingViewController: UIViewController
  
         if selectedOption == 1
         {
-            let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-
-            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP GIFTED"))
+            let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
+            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP BOUGHT ON WEB"))
+            //self.navigationController?.pushViewController(vc, animated: true)
             self.navigationController?.fadeTo(vc)
         }
         else if selectedOption == 2
         {
-            let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
-            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP BOUGHT ON WEB"))
-            //self.navigationController?.pushViewController(vc, animated: true)
+            let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
+
+            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP GIFTED"))
             self.navigationController?.fadeTo(vc)
         }
         else

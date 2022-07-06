@@ -15,12 +15,6 @@ class GiftedCardOnboardViewController: UIViewController
         super.viewDidLoad()
     }
     
-    @IBAction func openVesselLink(_ sender: Any)
-    {
-        //analyticManager.trackEvent(event: .SIGN_GIFT_BECOME_A_MEMBER_LINK(email: email))
-        openInSafari(url: Server.shared.OrderCardsURL())
-    }
-    
     @IBAction func onBackButtonTapped(_ sender: Any)
     {
         self.navigationController?.fadeOut()

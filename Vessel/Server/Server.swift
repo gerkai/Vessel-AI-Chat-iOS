@@ -14,13 +14,16 @@ let ENDPOINT_ROOT = "v3/"
 
 //Environment Constants
 let DEV_API = "https://dev-api.vesselhealth.com/" + ENDPOINT_ROOT
-let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
+//let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
+let DEV_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
-let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
+//let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
+let STAGING_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 
 let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
-let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
+//let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
+let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 
 //Security strings
 let AUTH_PREFIX =                       "Bearer"
@@ -41,6 +44,7 @@ let CONTACT_EXISTS_PATH =               "contact/exists"
 class Server: NSObject
 {
     static let shared = Server()
+    //TODO: Move access and refresh tokens to secure storage
     var accessToken: String?
     var refreshToken: String?
     
@@ -58,17 +62,17 @@ class Server: NSObject
         }
     }
     
-    func OrderCardsURL() -> String
+    func QuizURL() -> String
     {
         let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         switch index
         {
             case Constants.DEV_INDEX:
-                return DEV_ORDER_CARDS_URL
+                return DEV_QUIZ_URL
             case Constants.STAGING_INDEX:
-                return STAGING_ORDER_CARDS_URL
+                return STAGING_QUIZ_URL
             default:
-                return PROD_ORDER_CARDS_URL
+                return PROD_QUIZ_URL
         }
     }
     
@@ -262,7 +266,7 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("Incorrect username or password", comment:""))
+                    failure(NSLocalizedString("This email and password combination is incorrect", comment:""))
                 }
             }
         }
@@ -464,7 +468,7 @@ class Server: NSObject
                     {
                         DispatchQueue.main.async()
                         {
-                            failure(NSLocalizedString("Incorrect username or password", comment:""))
+                            failure(NSLocalizedString("This email and password combination is incorrect", comment:""))
                         }
                     }
                 },
@@ -522,3 +526,17 @@ class Server: NSObject
         }
     }
 }
+/*
+ 
+ 
+{
+    "id": Int,
+    "lastUpdated": Int,
+    "title": String,
+    "link_url": String,
+    "link_text": String,
+    "description": String,
+    "insert_date": String(Date)
+}
+
+*/

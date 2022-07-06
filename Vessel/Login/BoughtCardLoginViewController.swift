@@ -99,7 +99,7 @@ class BoughtCardLoginViewController: UIViewController
                 }
                 onFailure:
                 { string in
-                    UIView.showError(text: "Sign In", detailText: string, image: nil)
+                    UIView.showError(text: "", detailText: string, image: nil)
                 }
             }
         }

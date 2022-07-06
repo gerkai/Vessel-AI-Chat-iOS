@@ -106,7 +106,7 @@ class SignupEmailCheckingViewController: UIViewController, UITextFieldDelegate, 
         }
         else
         {
-            UIView.showError(text: "Sign Up", detailText: NSLocalizedString("Invalid email", comment: ""), image: nil)
+            UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment: ""), image: nil)
         }
     }
     
