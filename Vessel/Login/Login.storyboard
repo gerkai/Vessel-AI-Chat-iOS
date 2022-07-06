@@ -394,7 +394,7 @@
                                             <fragment content="Please enter your email and password to sign in">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -491,7 +491,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="ffI-2I-ix0"/>
                                                         </constraints>
                                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -509,7 +509,7 @@
                                                             <constraint firstAttribute="height" constant="60" id="x6f-Px-96O"/>
                                                         </constraints>
                                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -659,7 +659,7 @@
                                             <fragment content="Let’s get started. Please enter your email to create your account.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -735,7 +735,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="P5n-tk-hVm"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1061,6 +1061,7 @@
                                                             </label>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myc-Dj-RFg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="291" height="60"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="onOptionViewButtonTapped:" destination="Qgd-Ud-pPN" eventType="touchUpInside" id="cq1-Jh-TYD"/>
@@ -1122,6 +1123,7 @@
                                                             </label>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-yG-O9p">
                                                                 <rect key="frame" x="0.0" y="0.0" width="291" height="60"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="onOptionViewButtonTapped:" destination="Qgd-Ud-pPN" eventType="touchUpInside" id="mso-KP-7ed"/>
@@ -1183,6 +1185,7 @@
                                                             </label>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Mv-m6-4hk">
                                                                 <rect key="frame" x="0.0" y="0.0" width="291" height="60"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="onOptionViewButtonTapped:" destination="Qgd-Ud-pPN" eventType="touchUpInside" id="oh5-OM-dhJ"/>
@@ -1368,7 +1371,7 @@
                                             <fragment content="Someone must really like you. :) We want to offer you a Free Trial. We hope you enjoy the experience.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1492,7 +1495,7 @@
                                             <fragment content="Please login with the email you used to purchase your membership. Forgot which email you used? ">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1688,7 +1691,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-QY-Mgd">
-                                        <rect key="frame" x="30" y="235.5" width="200" height="153"/>
+                                        <rect key="frame" x="30" y="235.5" width="200" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6yQ-DB-0lO"/>
                                         </constraints>
@@ -1696,7 +1699,7 @@
                                             <fragment content="Vessel offers a free 14-day trial. We'll ship you out a free test card and build a personalized program just for you.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" metaFont="system" size="16"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1819,7 +1822,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlF-yy-yXl">
-                                        <rect key="frame" x="30" y="149.5" width="200" height="54.5"/>
+                                        <rect key="frame" x="30" y="149.5" width="200" height="45.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="dR2-pc-W4A"/>
                                         </constraints>
@@ -1828,15 +1831,15 @@
                                                 <string key="content">Let's finish setting up
 </string>
                                                 <attributes>
-                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" metaFont="system" size="16"/>
+                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment content="your account.">
                                                 <attributes>
-                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" metaFont="system" size="16"/>
+                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1853,7 +1856,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="Qw2-qm-KxZ"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -1868,7 +1871,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="ZP6-R1-FOG"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -1883,7 +1886,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="vS0-Kh-kcp"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -1891,7 +1894,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLB-S4-Juz" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLB-S4-Juz" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="240" width="315" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.39482615894039741" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>

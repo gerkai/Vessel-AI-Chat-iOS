@@ -188,13 +188,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WxB-Xk-KOJ">
-                                <rect key="frame" x="30" y="221.5" width="207" height="41"/>
+                                <rect key="frame" x="30" y="222" width="207" height="39.5"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                 <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXU-4f-BKN">
-                                <rect key="frame" x="30" y="274.5" width="200" height="61.5"/>
+                                <rect key="frame" x="30" y="273.5" width="200" height="51.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="3MH-gS-bFy"/>
                                 </constraints>
@@ -202,7 +202,7 @@
                                     <fragment content="What gender do you identify with?">
                                         <attributes>
                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -342,13 +342,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dXY-GP-28c">
-                                <rect key="frame" x="30" y="221.5" width="207" height="41"/>
+                                <rect key="frame" x="30" y="222" width="207" height="39.5"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-Gl-y1q">
-                                <rect key="frame" x="30" y="274.5" width="200" height="31"/>
+                                <rect key="frame" x="30" y="273.5" width="200" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="ECE-nD-Huv"/>
                                 </constraints>
@@ -356,7 +356,7 @@
                                     <fragment content="How tall are you?">
                                         <attributes>
                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -512,15 +512,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjj-WR-ft7">
-                                <rect key="frame" x="30" y="273.5" width="200" height="31"/>
+                                <rect key="frame" x="30" y="273.5" width="200" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="YLn-hb-IFb"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="What is your weight (lbs)?">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -602,7 +602,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB0-mG-t0R">
-                                <rect key="frame" x="30" y="273.5" width="200" height="31"/>
+                                <rect key="frame" x="30" y="273.5" width="200" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="vl8-vn-EqG"/>
                                 </constraints>
@@ -610,7 +610,7 @@
                                     <fragment content="What is your date of birth?">
                                         <attributes>
                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>

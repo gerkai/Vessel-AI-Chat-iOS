@@ -5,6 +5,8 @@
 //  Created by Carson Whitsett on 3/5/22.
 //
 
+//TODO: Rename to HeightWeightSelectViewController. Also fix bug where screen doesn't return to original position after bringing up keyboard on non-home button devices.
+
 import UIKit
 
 class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
