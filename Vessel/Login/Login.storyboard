@@ -649,7 +649,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-hZ-FOV">
-                                        <rect key="frame" x="30" y="141" width="180" height="64"/>
+                                        <rect key="frame" x="30" y="141" width="180" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="bdB-nD-rOS"/>
                                         </constraints>
@@ -665,13 +665,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign Up with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDP-0O-z69">
-                                        <rect key="frame" x="124.5" y="396.5" width="126" height="20.5"/>
+                                        <rect key="frame" x="123.5" y="396" width="128" height="21"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wj-4b-0tR">
-                                        <rect key="frame" x="30" y="240.5" width="315" height="136"/>
+                                        <rect key="frame" x="30" y="240" width="315" height="136"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PY-h5-qwU">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
@@ -1035,7 +1035,7 @@
                                             <fragment content="Do you have a Vessel test card?">
                                                 <attributes>
                                                     <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
