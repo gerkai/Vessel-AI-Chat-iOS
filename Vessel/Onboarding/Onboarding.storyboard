@@ -62,15 +62,14 @@
                                     <action selector="back" destination="zkZ-Rb-yza" eventType="touchUpInside" id="lvE-Tt-Zrw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xod-6U-lcS" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xod-6U-lcS" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="802" width="354" height="60"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="t1k-vD-bZB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Continue" image="white_arrow_button">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -149,15 +148,14 @@
                                 </segments>
                                 <color key="selectedSegmentTintColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHT-Mx-P4c" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHT-Mx-P4c" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="lgB-f4-B0I"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Continue" image="white_arrow_button">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -303,15 +301,14 @@
                                     <constraint firstAttribute="trailing" secondItem="cgh-q5-XbM" secondAttribute="trailing" id="pdD-4I-kxv"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqk-dh-b2H" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqk-dh-b2H" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="agB-UD-8zT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Continue" image="white_arrow_button">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -467,15 +464,14 @@
                                     <action selector="onBackButtonPressed:" destination="QxX-bK-lJ5" eventType="touchUpInside" id="dP9-GM-YiL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fev-Ph-Soc" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fev-Ph-Soc" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="lWO-S0-XnB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Continue" image="white_arrow_button">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -652,15 +648,14 @@
                                     <constraint firstItem="gdK-x4-M1W" firstAttribute="top" secondItem="shm-CF-ynQ" secondAttribute="top" id="yMa-9V-sEj"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="qQY-lu-OYh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Continue" image="white_arrow_button">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -739,6 +734,5 @@
     <resources>
         <image name="Smiling Woman" width="375" height="812"/>
         <image name="square_back_button" width="50" height="50"/>
-        <image name="white_arrow_button" width="8" height="12.5"/>
     </resources>
 </document>
