@@ -9,11 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BananaGrotesk-Bold.otf">
-            <string>BananaGrotesk-Bold</string>
-        </array>
         <array key="BananaGrotesk-Regular.otf">
             <string>BananaGrotesk-Regular</string>
+        </array>
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
         </array>
         <array key="Noe-Text-Regular.ttf">
             <string>NoeText-Regular</string>
@@ -113,7 +113,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="aW9-A3-esl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="aW9-A3-esl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="V3u-fj-37a">
@@ -124,16 +124,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUe-GW-bRC">
-                                <rect key="frame" x="30" y="151" width="200" height="140"/>
+                                <rect key="frame" x="30" y="151" width="185" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="gfH-ZH-kAC"/>
-                                    <constraint firstAttribute="width" constant="200" id="k2u-Su-aVU"/>
+                                    <constraint firstAttribute="width" constant="185" id="k2u-Su-aVU"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="In pursuit of better">
                                         <attributes>
-                                            <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -252,7 +252,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cEK-f8-FUY" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" constant="-30" id="3XH-1F-NCH"/>
                             <constraint firstItem="Epr-an-DNc" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="4ro-Zx-fnx"/>
@@ -349,7 +349,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-Uk-sbp">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-Uk-sbp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndO-hD-zQh">
@@ -379,7 +379,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="nWS-kL-XIo"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                         <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -450,7 +450,7 @@
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBR-mY-6f6" userLabel="Left Line">
                                                                 <rect key="frame" x="0.0" y="9.5" width="136.5" height="1"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="lYI-yI-lqV"/>
                                                                 </constraints>
@@ -463,7 +463,7 @@
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9A-fS-UM5" userLabel="Right Line">
                                                                 <rect key="frame" x="178.5" y="9.5" width="136.5" height="1"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="9Vn-iP-TbA"/>
                                                                 </constraints>
@@ -482,7 +482,7 @@
                                                             <constraint firstItem="JBR-mY-6f6" firstAttribute="centerY" secondItem="hxd-et-aKg" secondAttribute="centerY" id="w9N-bc-swH"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="carson@vesselhealth.com" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17F-uw-kO4" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17F-uw-kO4" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="188" width="315" height="60"/>
                                                         <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -491,6 +491,11 @@
                                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="RGa-TW-w2X" id="T4r-dP-kbO"/>
                                                         </connections>
@@ -504,6 +509,11 @@
                                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="RGa-TW-w2X" id="avR-Ir-yXQ"/>
                                                         </connections>
@@ -566,7 +576,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9fU-Jx-YhB"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ndO-hD-zQh" firstAttribute="leading" secondItem="9fU-Jx-YhB" secondAttribute="leading" constant="30" id="4rU-Rf-vaV"/>
                             <constraint firstItem="9fU-Jx-YhB" firstAttribute="top" secondItem="ndO-hD-zQh" secondAttribute="top" id="QGi-Eh-uuV"/>
@@ -596,7 +606,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="i4Q-7U-D7w">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="i4Q-7U-D7w">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4W-w4-xoI">
@@ -631,7 +641,7 @@
                                             <fragment content="Welcome">
                                                 <attributes>
                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -728,6 +738,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -835,7 +848,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J6d-bw-7fh"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="i4Q-7U-D7w" firstAttribute="leading" secondItem="Xso-wy-bNd" secondAttribute="leading" id="1K4-YE-oId"/>
                             <constraint firstItem="m4W-w4-xoI" firstAttribute="leading" secondItem="J6d-bw-7fh" secondAttribute="leading" id="1sU-Ep-kH3"/>
@@ -887,7 +900,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HJ-7f-ZYU">
                                 <rect key="frame" x="30" y="86" width="315" height="39.5"/>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -916,6 +929,11 @@
                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="send" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="TSh-fQ-ZKf" eventType="editingChanged" id="0vP-Rb-RPF"/>
                                             <outlet property="delegate" destination="TSh-fQ-ZKf" id="Tjn-yv-2qN"/>
@@ -949,7 +967,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iRE-YX-3fa"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Bf6-tA-PTx" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="4d0-K3-09L"/>
                             <constraint firstItem="iRE-YX-3fa" firstAttribute="bottom" secondItem="Bf6-tA-PTx" secondAttribute="bottom" constant="34" id="5JQ-jm-0yV"/>
@@ -983,7 +1001,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="uZr-8Q-hgf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="1dp-p6-2tL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-tz-gek">
@@ -1261,17 +1279,17 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lbj-YW-p60"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="uZr-8Q-hgf" firstAttribute="top" secondItem="leL-Wv-E93" secondAttribute="top" id="9Ng-Kv-Prd"/>
+                            <constraint firstItem="1dp-p6-2tL" firstAttribute="leading" secondItem="leL-Wv-E93" secondAttribute="leading" id="8Zs-0e-xKl"/>
                             <constraint firstItem="cmY-tz-gek" firstAttribute="leading" secondItem="lbj-YW-p60" secondAttribute="leading" id="JPh-Ut-IVW"/>
                             <constraint firstItem="cmY-tz-gek" firstAttribute="top" secondItem="lbj-YW-p60" secondAttribute="top" id="Ll9-gS-ica"/>
                             <constraint firstItem="lbj-YW-p60" firstAttribute="bottom" secondItem="cmY-tz-gek" secondAttribute="bottom" constant="34" id="NaI-K2-Daw"/>
-                            <constraint firstAttribute="bottom" secondItem="uZr-8Q-hgf" secondAttribute="bottom" id="eZf-eN-lzO"/>
+                            <constraint firstItem="1dp-p6-2tL" firstAttribute="top" secondItem="leL-Wv-E93" secondAttribute="top" id="OlX-sF-j0O"/>
                             <constraint firstItem="FXR-V8-ZUT" firstAttribute="leading" secondItem="lbj-YW-p60" secondAttribute="leading" constant="30" id="ehD-Hp-sZD"/>
                             <constraint firstItem="lbj-YW-p60" firstAttribute="trailing" secondItem="cmY-tz-gek" secondAttribute="trailing" id="hgn-sk-6we"/>
-                            <constraint firstAttribute="trailing" secondItem="uZr-8Q-hgf" secondAttribute="trailing" id="qkl-6a-kBh"/>
-                            <constraint firstItem="uZr-8Q-hgf" firstAttribute="leading" secondItem="leL-Wv-E93" secondAttribute="leading" id="sEo-iH-Ysf"/>
+                            <constraint firstItem="1dp-p6-2tL" firstAttribute="trailing" secondItem="leL-Wv-E93" secondAttribute="trailing" id="iXr-w4-xWr"/>
+                            <constraint firstItem="1dp-p6-2tL" firstAttribute="bottom" secondItem="leL-Wv-E93" secondAttribute="bottom" id="odL-zV-Rc1"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1298,7 +1316,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-sh-c7o">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-sh-c7o">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2I-Ba-qNr">
@@ -1332,7 +1350,7 @@
                                             <fragment content="Welcome!  We’re glad you’re here.  ">
                                                 <attributes>
                                                     <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1404,7 +1422,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jy5-6p-CFn"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="S4z-sh-c7o" firstAttribute="top" secondItem="VLM-Xc-jOI" secondAttribute="top" id="9lY-sl-Kue"/>
                             <constraint firstItem="j2I-Ba-qNr" firstAttribute="top" secondItem="Jy5-6p-CFn" secondAttribute="top" id="S52-aD-Up7"/>
@@ -1429,7 +1447,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="Ads-ff-kw2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="Ads-ff-kw2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hhv-BG-y0L">
@@ -1459,7 +1477,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="fqS-NO-P6X"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                         <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1509,6 +1527,11 @@
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Grm-Rb-YP2" userLabel="passwordTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="80" width="315" height="60"/>
@@ -1519,6 +1542,11 @@
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r48-6b-ulY">
                                                 <rect key="frame" x="0.0" y="160" width="315" height="60"/>
@@ -1586,7 +1614,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8cI-hX-TyQ"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ads-ff-kw2" firstAttribute="leading" secondItem="mqf-JF-WJo" secondAttribute="leading" id="6d9-N3-JzX"/>
                             <constraint firstAttribute="trailing" secondItem="Ads-ff-kw2" secondAttribute="trailing" id="ECf-ix-F2N"/>
@@ -1616,7 +1644,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-9n-r6f">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-9n-r6f">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoy-iI-pHa">
@@ -1642,7 +1670,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ec-2j-bRf">
-                                        <rect key="frame" x="30" y="86" width="180" height="135"/>
+                                        <rect key="frame" x="30" y="86" width="180" height="129.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="Pgf-Tz-a36"/>
                                         </constraints>
@@ -1650,7 +1678,7 @@
                                             <fragment content="Let's get you some test cards  ">
                                                 <attributes>
                                                     <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1658,7 +1686,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-QY-Mgd">
-                                        <rect key="frame" x="30" y="235" width="200" height="153"/>
+                                        <rect key="frame" x="30" y="229.5" width="200" height="153"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6yQ-DB-0lO"/>
                                         </constraints>
@@ -1722,7 +1750,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g4b-7p-Sch"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fmu-9n-r6f" firstAttribute="top" secondItem="LLb-Qj-Jti" secondAttribute="top" id="4NE-Ob-vU4"/>
                             <constraint firstItem="fmu-9n-r6f" firstAttribute="leading" secondItem="LLb-Qj-Jti" secondAttribute="leading" id="4vW-Ns-Zys"/>
@@ -1747,7 +1775,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_splash" translatesAutoresizingMaskIntoConstraints="NO" id="HZA-oR-G6T">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="HZA-oR-G6T">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKf-eZ-wez">
@@ -1781,7 +1809,7 @@
                                             <fragment content="Welcome">
                                                 <attributes>
                                                     <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Regular"/>
+                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1825,6 +1853,11 @@
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1r-u9-u1Q" userLabel="lastNameTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="80" width="315" height="60"/>
@@ -1835,6 +1868,11 @@
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewA-SR-X4F" userLabel="passTextField" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="160" width="315" height="60"/>
@@ -1845,6 +1883,11 @@
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Regular" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLB-S4-Juz" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="240" width="315" height="60"/>
@@ -1855,6 +1898,11 @@
                                                 <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oqW-7f-ytC">
                                                 <rect key="frame" x="0.0" y="320" width="315" height="60"/>
@@ -1904,7 +1952,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vuk-TS-DDA"/>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="HZA-oR-G6T" secondAttribute="trailing" id="7pu-5q-7jk"/>
                             <constraint firstItem="vuk-TS-DDA" firstAttribute="trailing" secondItem="GKf-eZ-wez" secondAttribute="trailing" id="BOc-wb-Kaj"/>
@@ -1932,9 +1980,9 @@
     <resources>
         <image name="Checkbox_green_selected" width="48" height="48"/>
         <image name="Checkbox_green_unselected" width="48" height="48"/>
+        <image name="Smiling Woman" width="375" height="812"/>
         <image name="apple_auth_button" width="16.5" height="20"/>
         <image name="google_auth_button" width="20" height="20"/>
-        <image name="onboarding_splash" width="1125" height="2436"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="vessel_logo_horizontal" width="124.5" height="44.5"/>
         <image name="vessel_logo_vertical" width="100" height="130"/>
