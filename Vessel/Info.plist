@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BananaGrotesk-Thin.otf</string>
+		<string>BananaGrotesk-Semibold.otf</string>
+		<string>BananaGrotesk-Regular.otf</string>
+		<string>BananaGrotesk-Medium.otf</string>
+		<string>BananaGrotesk-Light.otf</string>
+		<string>BananaGrotesk-Extralight.otf</string>
+		<string>BananaGrotesk-Extrabold.otf</string>
+		<string>BananaGrotesk-Bold.otf</string>
+		<string>NoeText.otf</string>
+		<string>NoeText-Book.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
