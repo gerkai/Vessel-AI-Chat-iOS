@@ -82,7 +82,7 @@ class BirthdaySelectViewController: UIViewController
     
     @IBAction func next()
     {
-        if var contact = Contact.main()
+        if let contact = Contact.main()
         {
             if checkmarkView.isChecked
             {

@@ -65,7 +65,7 @@ class GiftedCardRegisterViewController: UIViewController
                     //Update first and last name if user changed them
                     if (initialFirstName != firstName) || (initialLastName != lastName)
                     {
-                        if var contact = Contact.main()
+                        if let contact = Contact.main()
                         {
                             contact.first_name = firstName
                             contact.last_name = lastName

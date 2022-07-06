@@ -67,7 +67,7 @@ class HeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func next()
     {
-        if var contact = Contact.main()
+        if let contact = Contact.main()
         {
             contact.height = getSelections()
             ObjectStore.shared.ClientSave(contact)

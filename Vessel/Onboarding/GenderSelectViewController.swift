@@ -34,7 +34,7 @@ class GenderSelectViewController: UIViewController
             default:
                 break
         }
-        if var contact = Contact.main()
+        if let contact = Contact.main()
         {
             contact.gender = genderString
             ObjectStore.shared.ClientSave(contact)

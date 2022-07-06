@@ -31,7 +31,7 @@ class WeightSelectViewController: UIViewController, UITextFieldDelegate
         self.view.endEditing(true)
         if let weight = weightTextField.text, weight.count != 0
         {
-            if var contact = Contact.main()
+            if let contact = Contact.main()
             {
                 if let weight = weightTextField.text, let weightValue = Double(weight)
                 {
