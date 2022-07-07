@@ -98,8 +98,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         let urlString = navigationAction.request.url?.absoluteString
 #warning ("CW: Temporary fix until backend gets fixed")
         let fixString = urlString?.replacingOccurrences(of: "/v2/", with: "/v3/")
-        print("\(fixString)")
-        print("Retrieve URL: \(retrieveURL)")
+        print("\(String(describing: fixString))")
+        print("Retrieve URL: \(String(describing: retrieveURL))")
         if fixString!.contains(retrieveURL)
         {
             let host = navigationAction.request.url?.host ?? Server.shared.API().replacingOccurrences(of: "https://", with: "")
