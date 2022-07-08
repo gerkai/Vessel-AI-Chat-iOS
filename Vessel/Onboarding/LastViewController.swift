@@ -21,5 +21,6 @@ class LastViewController: UIViewController
     {
         self.navigationController?.popToRootViewController(animated: true)
         Server.shared.logOut()
+        Contact.reset()
     }
 }

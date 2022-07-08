@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ap8-EN-Z63" userLabel="Rounded View">
-                    <rect key="frame" x="15" y="8" width="562" height="72"/>
+                    <rect key="frame" x="15" y="0.0" width="562" height="88"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hec-hH-M5p">
-                            <rect key="frame" x="32" y="8" width="514" height="56"/>
+                            <rect key="frame" x="32" y="8" width="514" height="72"/>
                             <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                             <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -73,11 +74,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="ap8-EN-Z63" firstAttribute="trailing" secondItem="cFz-De-7Io" secondAttribute="trailing" constant="15" id="0kj-nT-eMT"/>
-                <constraint firstAttribute="bottom" secondItem="ap8-EN-Z63" secondAttribute="bottom" constant="8" id="4zT-4b-AyX"/>
+                <constraint firstAttribute="bottom" secondItem="ap8-EN-Z63" secondAttribute="bottom" id="4zT-4b-AyX"/>
                 <constraint firstItem="Gk4-7G-JYl" firstAttribute="centerY" secondItem="ap8-EN-Z63" secondAttribute="centerY" id="LQ0-Jd-5wy"/>
                 <constraint firstItem="VaE-XY-FIb" firstAttribute="top" secondItem="diW-tB-ESp" secondAttribute="top" id="Rtl-L6-xD2"/>
                 <constraint firstItem="ap8-EN-Z63" firstAttribute="leading" secondItem="cFz-De-7Io" secondAttribute="leading" constant="15" id="TSZ-fs-93P"/>
-                <constraint firstItem="ap8-EN-Z63" firstAttribute="top" secondItem="diW-tB-ESp" secondAttribute="top" constant="8" id="UIr-cJ-VbS"/>
+                <constraint firstItem="ap8-EN-Z63" firstAttribute="top" secondItem="diW-tB-ESp" secondAttribute="top" id="UIr-cJ-VbS"/>
                 <constraint firstItem="Gk4-7G-JYl" firstAttribute="leading" secondItem="diW-tB-ESp" secondAttribute="leading" id="V0i-CB-FC5"/>
                 <constraint firstItem="VaE-XY-FIb" firstAttribute="leading" secondItem="diW-tB-ESp" secondAttribute="leading" id="i1Y-16-7DP"/>
                 <constraint firstAttribute="bottom" secondItem="VaE-XY-FIb" secondAttribute="bottom" id="neB-ol-Ztv"/>

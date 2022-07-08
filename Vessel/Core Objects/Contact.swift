@@ -19,7 +19,7 @@ class Contact: CoreObjectProtocol
     var height: Double?
     var weight: Double?
     var birth_date: String?     //in yyyy-mm-dd format
-    //var diets: [Lookup]?      //needs to be an array of dietIDs (Int)
+    var diet_ids: [Int]
     //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
     //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
     
@@ -48,6 +48,13 @@ class Contact: CoreObjectProtocol
         return ObjectStore.shared.getContact(id: Contact.MainID) 
     }
     
+    //call when logging out
+    static func reset()
+    {
+        MainID = 0
+        SavedEmail = nil
+    }
+    
     init(id: Int = 0,
          firstName: String = "",
          lastName: String = "",
@@ -55,7 +62,7 @@ class Contact: CoreObjectProtocol
          height: Double? = nil,
          weight: Double? = nil,
          birthDate: String? = nil,
-         //diets: [Lookup]? = nil,
+         diet_ids: [Int] = [],
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
          email: String? = nil,
@@ -84,7 +91,7 @@ class Contact: CoreObjectProtocol
         self.height = height
         self.weight = weight
         self.birth_date = birthDate
-        //self.diets = diets
+        self.diet_ids = []
         //self.allergies = allergies
         //self.goals = goals
         self.email = email

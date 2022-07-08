@@ -14,7 +14,7 @@ class VesselSegmentedControl: UISegmentedControl
     override func layoutSubviews()
     {
         let segmentInset: CGFloat = 5       //inset amount
-        let segmentImage: UIImage? = UIImage(color: Constants.DARK_GRAY_TRANSLUCENT)
+        let segmentImage: UIImage? = UIImage(color: Constants.SOLID_BLACK) //DARK_GRAY_TRANSLUCENT
         
         super.layoutSubviews()
         layer.cornerRadius = Constants.CORNER_RADIUS

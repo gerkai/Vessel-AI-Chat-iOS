@@ -3,7 +3,7 @@
 //  Vessel
 //
 //  Created by Carson Whitsett on 3/6/22.
-//
+//  Based on Onboarding Flow: https://www.notion.so/vesselhealth/Onboarding-79efd903aaf349098bf4e972bd9292cb
 
 import UIKit
 
@@ -12,8 +12,9 @@ class BirthdaySelectViewController: UIViewController
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var checkmarkView: SelectionCheckmarkView!
     
-    let minAge = 18
-    let maxAge = 100
+    let minAge = Constants.MIN_AGE
+    let averageAge = Constants.AVERAGE_AGE
+    let maxAge = Constants.MAX_AGE
     private let calendar = Calendar.current
     private var minDateComponents = DateComponents()
     private var maxDateComponents = DateComponents()
@@ -30,12 +31,12 @@ class BirthdaySelectViewController: UIViewController
     
     private func setDatePickerInitialValue()
     {
-        // set the initial year to current year - minAge
+        // set the initial year to current year - averageAge
         var dateComponents = calendar.dateComponents([.day, .month, .year], from: Date())
         
         if let year = dateComponents.year
         {
-            dateComponents.year  = year - minAge
+            dateComponents.year  = year - averageAge
         }
         if let date = calendar.date(from: dateComponents)
         {

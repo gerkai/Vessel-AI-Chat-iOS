@@ -3,6 +3,7 @@
 //  Vessel
 //
 //  Created by Carson Whitsett on 3/4/22.
+//  Based on Onboarding Flow: https://www.notion.so/vesselhealth/Onboarding-79efd903aaf349098bf4e972bd9292cb
 //
 //  Chooses which viewController to show next in the onboarding process based on what fields of the main Contact
 //  contain data.
@@ -26,12 +27,7 @@ func OnboardingNextViewController() -> UIViewController
     }
     else if contact.height == nil
     {
-        let vc = storyboard.instantiateViewController(withIdentifier: "HeightSelectViewController") as! HeightSelectViewController
-        return vc
-    }
-    else if contact.weight == nil
-    {
-        let vc = storyboard.instantiateViewController(withIdentifier: "WeightSelectViewController") as! WeightSelectViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
         return vc
     }
     else if contact.birth_date == nil
@@ -39,6 +35,11 @@ func OnboardingNextViewController() -> UIViewController
         let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
         return vc
     }
+    /*else if contact.diets.count == 0
+    {
+        let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+        return vc
+    }*/
     else
     {
         let vc = storyboard.instantiateViewController(withIdentifier: "LastViewController") as! LastViewController
