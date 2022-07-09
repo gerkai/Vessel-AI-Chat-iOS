@@ -22,7 +22,8 @@ func OnboardingNextViewController() -> UIViewController
     if contact.gender == nil || contact.gender == ""
     {
         //show gender selector flow
-        let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+        //let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
         return vc
     }
     else if contact.height == nil

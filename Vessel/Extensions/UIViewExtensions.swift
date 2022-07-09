@@ -10,6 +10,11 @@ import SwiftEntryKit
 
 extension UIView
 {
+    static var nib: UINib
+    {
+        return UINib(nibName: self.className, bundle: nil)
+    }
+    
     func pushTransition(_ duration:CFTimeInterval)
     {
         let animation:CATransition = CATransition()

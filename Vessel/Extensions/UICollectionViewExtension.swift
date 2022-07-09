@@ -13,7 +13,7 @@ extension UICollectionView {
     {
         register(T.self, forCellWithReuseIdentifier: T.className)
     }
-    /*
+    
     func registerFromNib<T: UICollectionViewCell>(_: T.Type)
     {
         register(T.nib, forCellWithReuseIdentifier: T.className)
@@ -22,7 +22,7 @@ extension UICollectionView {
     func register<T: UICollectionReusableView>(_: T.Type, with kind: String)
     {
         register(T.nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.className)
-    }*/
+    }
     
     func dequeueCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T
     {

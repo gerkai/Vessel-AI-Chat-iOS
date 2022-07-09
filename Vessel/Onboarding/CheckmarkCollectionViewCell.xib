@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckmarkCollectionViewCell" id="gTV-IL-0wX" customClass="CheckmarkCollectionViewCell" customModule="Vessel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4l-Ky-qSI" userLabel="rootView">
+                        <rect key="frame" x="22" y="0.0" width="138" height="60"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ss2-Rk-tuR">
+                                <rect key="frame" x="-51" y="-34" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zTF-fb-4yb">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJi-pF-maC" userLabel="titleLabel">
+                                <rect key="frame" x="39" y="8" width="87.5" height="44"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZJi-pF-maC" firstAttribute="top" secondItem="x4l-Ky-qSI" secondAttribute="top" constant="8" id="ag7-3F-FmA"/>
+                            <constraint firstItem="ZJi-pF-maC" firstAttribute="bottom" secondItem="x4l-Ky-qSI" secondAttribute="bottom" constant="-8" id="gMo-oW-sS0"/>
+                            <constraint firstAttribute="trailing" secondItem="ZJi-pF-maC" secondAttribute="trailing" constant="8" id="lfE-eI-GGU"/>
+                            <constraint firstItem="ZJi-pF-maC" firstAttribute="leading" secondItem="x4l-Ky-qSI" secondAttribute="leading" constant="39" id="xAW-4U-eL4"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="22"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lfE-eI-GGU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A59-fk-jx7">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                        <state key="selected" image="Checkbox_beige_selected"/>
+                        <connections>
+                            <action selector="onTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fXT-mK-7oA"/>
+                        </connections>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkbox_green_unselected" translatesAutoresizingMaskIntoConstraints="NO" id="WL8-hP-EQT">
+                        <rect key="frame" x="0.0" y="8" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="3JV-00-bzF"/>
+                            <constraint firstAttribute="height" constant="44" id="ELv-4b-uKe"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="WL8-hP-EQT" firstAttribute="centerY" secondItem="x4l-Ky-qSI" secondAttribute="centerY" id="02n-UK-FDq"/>
+                <constraint firstItem="A59-fk-jx7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2YL-w4-1pe"/>
+                <constraint firstItem="x4l-Ky-qSI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="6E5-2p-qFO"/>
+                <constraint firstItem="x4l-Ky-qSI" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="ExK-Um-wuP"/>
+                <constraint firstItem="x4l-Ky-qSI" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="LbN-w7-0a4"/>
+                <constraint firstItem="x4l-Ky-qSI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dbc-nl-HKB"/>
+                <constraint firstAttribute="bottom" secondItem="A59-fk-jx7" secondAttribute="bottom" id="dxf-HV-fc2"/>
+                <constraint firstItem="A59-fk-jx7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="q2i-bO-JSm"/>
+                <constraint firstAttribute="trailing" secondItem="A59-fk-jx7" secondAttribute="trailing" id="tQt-AP-YxB"/>
+                <constraint firstItem="WL8-hP-EQT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wiZ-UL-ImA"/>
+            </constraints>
+            <size key="customSize" width="160" height="114"/>
+            <connections>
+                <outlet property="checkImage" destination="WL8-hP-EQT" id="aDc-yZ-gCd"/>
+                <outlet property="titleLabel" destination="ZJi-pF-maC" id="0cI-d4-eBA"/>
+            </connections>
+            <point key="canvasLocation" x="217.39130434782609" y="119.19642857142857"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Checkbox_beige_selected" width="48" height="48"/>
+        <image name="Checkbox_green_unselected" width="48" height="48"/>
+    </resources>
+</document>
