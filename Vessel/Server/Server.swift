@@ -142,6 +142,7 @@ class Server: NSObject
                 do
                 {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
+//CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
                     {
                         success(object)

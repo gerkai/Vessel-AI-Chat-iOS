@@ -71,6 +71,22 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
+        {
+            if isMetric
+            {
+                if let weightLbs = Double(weight)
+                {
+                    let weightKG = weightLbs * 0.45359237 // pounds to kilograms conversion
+                    weightTextField.text = "\(weightKG)"
+                }
+            }
+            else
+            {
+                weightTextField.text = weight
+            }
+        }
     }
     
     override func viewDidLayoutSubviews()

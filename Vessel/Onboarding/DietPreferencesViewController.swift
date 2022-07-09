@@ -5,10 +5,9 @@
 //  Created by Carson Whitsett on 7/7/22.
 //
 
-import Foundation
 import UIKit
 
-class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+class DietPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -17,9 +16,15 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
         self.navigationController?.fadeOut()
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
+    }
+
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: collectionView.frame.width * 0.45, height: 58)
+        return CGSize(width: collectionView.frame.width * 0.5, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int

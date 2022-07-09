@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
     //@IBOutlet weak var orSignInLabel: UILabel!
     
     //caller can plug a string in here
-    var prepopulatedEmail: String? //= "carson@aa.com"
+    var prepopulatedEmail: String?
     
     override func viewDidLoad()
     {
@@ -29,7 +29,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        emailTextField.text = prepopulatedEmail
+        if prepopulatedEmail != nil
+        {
+            emailTextField.text = prepopulatedEmail
+        }
+        else if let email = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_LOGIN_EMAIL)
+        {
+            emailTextField.text = email
+        }
+        
+        if let pw = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_LOGIN_PASSWORD)
+        {
+            passwordTextField.text = pw
+        }
         
         //Hide some unnecessary fields on small screens to ease crowding
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD

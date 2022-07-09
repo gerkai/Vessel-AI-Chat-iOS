@@ -35,11 +35,11 @@ func OnboardingNextViewController() -> UIViewController
         let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
         return vc
     }
-    /*else if contact.diets.count == 0
+    else if contact.diet_ids.count == 0
     {
         let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
         return vc
-    }*/
+    }
     else
     {
         let vc = storyboard.instantiateViewController(withIdentifier: "LastViewController") as! LastViewController

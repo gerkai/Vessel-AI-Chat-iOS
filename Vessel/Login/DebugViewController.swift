@@ -11,11 +11,18 @@ protocol DebugViewControllerDelegate: AnyObject
     func didChangeEnvironment(env: Int)
 }
 
-class DebugViewController: UIViewController
+class DebugViewController: UIViewController, UITextFieldDelegate
 {
     @IBOutlet weak var environmentControl: UISegmentedControl!
+    @IBOutlet weak var defaultLoginNameTextField: UITextField!
+    @IBOutlet weak var defaultLoginPasswordTextField: UITextField!
+    @IBOutlet weak var defaultWeightTextField: UITextField!
+    
     var savedEnvironment: Int!
     var delegate: DebugViewControllerDelegate?
+    let emailFieldTag = 0
+    let passwordFieldTag = 1
+    let weightFieldTag = 2
     
     override func viewDidLoad()
     {
@@ -27,6 +34,19 @@ class DebugViewController: UIViewController
         let font = UIFont(name: "BananaGrotesk-Semibold", size: 16.0)!
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
         environmentControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        
+        if let email = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_LOGIN_EMAIL)
+        {
+            defaultLoginNameTextField.text = email
+        }
+        if let pw = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_LOGIN_PASSWORD)
+        {
+            defaultLoginPasswordTextField.text = pw
+        }
+        if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
+        {
+            defaultWeightTextField.text = weight
+        }
     }
     
     deinit
@@ -48,6 +68,45 @@ class DebugViewController: UIViewController
                 print("STAGING")
             default:
                 print("DEV")
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        let text = textField.text ?? ""
+        
+        if textField.tag == emailFieldTag
+        {
+            if text.count == 0
+            {
+                UserDefaults.standard.removeObject(forKey: Constants.KEY_DEFAULT_LOGIN_EMAIL)
+            }
+            else
+            {
+                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_LOGIN_EMAIL)
+            }
+        }
+        else if textField.tag == passwordFieldTag
+        {
+            if text.count == 0
+            {
+                UserDefaults.standard.removeObject(forKey: Constants.KEY_DEFAULT_LOGIN_PASSWORD)
+            }
+            else
+            {
+                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_LOGIN_PASSWORD)
+            }
+        }
+        else if textField.tag == weightFieldTag
+        {
+            if text.count == 0
+            {
+                UserDefaults.standard.removeObject(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
+            }
+            else
+            {
+                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_WEIGHT_LBS)
+            }
         }
     }
 }
