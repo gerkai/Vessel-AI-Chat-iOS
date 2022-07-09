@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -726,15 +727,15 @@
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FoodFilterCollectionViewCell" id="Xha-fU-jXO" customClass="FoodFilterCollectionViewCell" customModule="Vessel" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="114"/>
                                                         <autoresizingMask key="autoresizingMask"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2xF-eG-qV4">
                                                             <rect key="frame" x="0.0" y="0.0" width="160" height="114"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dJ-MF-4Jq" userLabel="rootView">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dJ-MF-4Jq" userLabel="rootView">
                                                                     <rect key="frame" x="22" y="0.0" width="138" height="114"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Filter" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW6-lT-6av" userLabel="titleLabel">
-                                                                            <rect key="frame" x="24" y="8" width="77.5" height="44"/>
+                                                                            <rect key="frame" x="24" y="8" width="106" height="98"/>
                                                                             <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                                                             <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -743,10 +744,11 @@
                                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstItem="qW6-lT-6av" firstAttribute="top" secondItem="2dJ-MF-4Jq" secondAttribute="top" constant="8" id="DkF-5y-lPq"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="qW6-lT-6av" secondAttribute="trailing" constant="8" id="RQ0-hB-l2v"/>
+                                                                        <constraint firstAttribute="width" priority="250" constant="138" id="Ehq-1G-Lda"/>
+                                                                        <constraint firstItem="qW6-lT-6av" firstAttribute="trailing" secondItem="2dJ-MF-4Jq" secondAttribute="trailing" constant="-8" id="RQ0-hB-l2v"/>
                                                                         <constraint firstItem="qW6-lT-6av" firstAttribute="leading" secondItem="2dJ-MF-4Jq" secondAttribute="leading" constant="24" id="UQO-Vt-rPi"/>
                                                                         <constraint firstAttribute="height" constant="60" id="fQD-Z4-UAX"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="qW6-lT-6av" secondAttribute="bottom" constant="8" id="tFz-2U-70b"/>
+                                                                        <constraint firstItem="qW6-lT-6av" firstAttribute="bottom" secondItem="2dJ-MF-4Jq" secondAttribute="bottom" constant="-8" id="tFz-2U-70b"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -754,8 +756,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNT-aA-H3U" userLabel="selectButton">
-                                                                    <rect key="frame" x="0.0" y="35" width="44" height="44"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNT-aA-H3U" userLabel="selectButton">
+                                                                    <rect key="frame" x="0.0" y="37" width="40" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="6du-WJ-ScY"/>
                                                                         <constraint firstAttribute="width" constant="40" id="QRO-pp-6f1"/>
@@ -767,16 +769,16 @@
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
-                                                        </view>
-                                                        <viewLayoutGuide key="safeArea" id="908-TA-6ZU"/>
-                                                        <constraints>
-                                                            <constraint firstItem="2dJ-MF-4Jq" firstAttribute="bottom" secondItem="Xha-fU-jXO" secondAttribute="bottom" id="9EV-eA-qkO"/>
-                                                            <constraint firstItem="wNT-aA-H3U" firstAttribute="leading" secondItem="Xha-fU-jXO" secondAttribute="leading" id="Ioc-wL-edX"/>
-                                                            <constraint firstItem="wNT-aA-H3U" firstAttribute="centerY" secondItem="Xha-fU-jXO" secondAttribute="centerY" id="Wkp-RI-4aI"/>
-                                                            <constraint firstItem="2dJ-MF-4Jq" firstAttribute="trailing" secondItem="Xha-fU-jXO" secondAttribute="trailing" id="bpN-8R-y37"/>
-                                                            <constraint firstItem="2dJ-MF-4Jq" firstAttribute="leading" secondItem="Xha-fU-jXO" secondAttribute="leading" constant="22" id="mso-FW-obb"/>
-                                                            <constraint firstItem="2dJ-MF-4Jq" firstAttribute="top" secondItem="Xha-fU-jXO" secondAttribute="top" id="xRh-m9-bHG"/>
-                                                        </constraints>
+                                                            <viewLayoutGuide key="safeArea" id="EpQ-uE-BXH"/>
+                                                            <constraints>
+                                                                <constraint firstItem="2dJ-MF-4Jq" firstAttribute="bottom" secondItem="2xF-eG-qV4" secondAttribute="bottom" id="9EV-eA-qkO"/>
+                                                                <constraint firstItem="wNT-aA-H3U" firstAttribute="leading" secondItem="2xF-eG-qV4" secondAttribute="leading" id="Ioc-wL-edX"/>
+                                                                <constraint firstItem="wNT-aA-H3U" firstAttribute="centerY" secondItem="2xF-eG-qV4" secondAttribute="centerY" id="Wkp-RI-4aI"/>
+                                                                <constraint firstItem="2dJ-MF-4Jq" firstAttribute="trailing" secondItem="2xF-eG-qV4" secondAttribute="trailing" id="bpN-8R-y37"/>
+                                                                <constraint firstItem="2dJ-MF-4Jq" firstAttribute="leading" secondItem="2xF-eG-qV4" secondAttribute="leading" constant="22" id="mso-FW-obb"/>
+                                                                <constraint firstItem="2dJ-MF-4Jq" firstAttribute="top" secondItem="2xF-eG-qV4" secondAttribute="top" id="xRh-m9-bHG"/>
+                                                            </constraints>
+                                                        </collectionViewCellContentView>
                                                         <size key="customSize" width="160" height="114"/>
                                                         <connections>
                                                             <outlet property="rootView" destination="2dJ-MF-4Jq" id="x8l-V8-RDM"/>
