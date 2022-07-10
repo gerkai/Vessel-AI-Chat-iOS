@@ -68,7 +68,7 @@ class OnboardingViewModel
             //show gender selector flow
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
             //uncomment for testing to jump directly to desired VC
-            //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+            //let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
@@ -93,6 +93,12 @@ class OnboardingViewModel
         else if onboardingViewModel!.curState == .AllergySelect
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "AllergyPreferencesViewController") as! AllergyPreferencesViewController
+            vc.viewModel = onboardingViewModel
+            return vc
+        }
+        else if onboardingViewModel!.curState == .ViewTerms
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
@@ -300,6 +306,17 @@ class OnboardingViewModel
         if let contact = Contact.main()
         {
             contact.allergy_ids = userAllergies
+            ObjectStore.shared.ClientSave(contact)
+        }
+    }
+    
+    //MARK: - Terms
+    
+    func userViewedTerms()
+    {
+        if let contact = Contact.main()
+        {
+            contact.flags |= Constants.VIEWED_TERMS
             ObjectStore.shared.ClientSave(contact)
         }
     }

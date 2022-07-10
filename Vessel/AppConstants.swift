@@ -60,7 +60,8 @@ struct Constants
     static let ID_NO_ALLERGIES = 20
     
     //Contact Flags
-    static let DECLINED_BIRTH_DATE = 0x00000001
+    static let DECLINED_BIRTH_DATE  = 0x00000001
+    static let VIEWED_TERMS         = 0x00000002
     
     //Colors
     static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)

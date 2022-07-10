@@ -109,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mt5-yd-cnM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-795" y="60"/>
+            <point key="canvasLocation" x="-767" y="60"/>
         </scene>
         <!--Gender Select View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -517,7 +517,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UeK-a6-aRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4154" y="45"/>
+            <point key="canvasLocation" x="5914" y="45"/>
         </scene>
         <!--Birthday Select View Controller-->
         <scene sceneID="jsv-Rw-oQA">
@@ -916,9 +916,154 @@
             </objects>
             <point key="canvasLocation" x="3523" y="60"/>
         </scene>
+        <!--Terms View Controller-->
+        <scene sceneID="M9t-x3-qOD">
+            <objects>
+                <viewController storyboardIdentifier="TermsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2bO-GG-VGr" customClass="TermsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p1f-kI-iXj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="lN7-Dm-Qwa">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKD-UA-RDD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mbz-Du-SCS">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2Z-Rk-4kh" userLabel="Back Button">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="DXb-k1-6Wk"/>
+                                    <constraint firstAttribute="height" constant="50" id="N7R-ob-Wym"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Back" image="square_back_button">
+                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="2bO-GG-VGr" eventType="touchUpInside" id="F2y-Ew-Pbi"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="kvf-Kx-eDb">
+                                <rect key="frame" x="30" y="114" width="354" height="634"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qir-be-dK2" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="501"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preexisting Conditions Notification" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89s-kD-ZfB">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="118"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="GbA-HC-Jj0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKy-lf-Jgf">
+                                                <rect key="frame" x="0.0" y="138" width="354" height="363"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional.   By tapping continue, I acknowledge I have read the disclaimer.</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" metaFont="system" size="14"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="HKy-lf-Jgf" firstAttribute="trailing" secondItem="Qir-be-dK2" secondAttribute="trailing" id="Lek-iu-3gD"/>
+                                            <constraint firstItem="89s-kD-ZfB" firstAttribute="leading" secondItem="Qir-be-dK2" secondAttribute="leading" id="M7u-NB-AIe"/>
+                                            <constraint firstItem="HKy-lf-Jgf" firstAttribute="leading" secondItem="Qir-be-dK2" secondAttribute="leading" id="bFk-jy-ALn"/>
+                                            <constraint firstItem="HKy-lf-Jgf" firstAttribute="top" secondItem="89s-kD-ZfB" secondAttribute="bottom" constant="20" id="eJm-pk-TSc"/>
+                                            <constraint firstItem="89s-kD-ZfB" firstAttribute="top" secondItem="Qir-be-dK2" secondAttribute="top" id="eTc-ZQ-Zy7"/>
+                                            <constraint firstAttribute="bottom" secondItem="HKy-lf-Jgf" secondAttribute="bottom" id="rpp-3L-H5O"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Qir-be-dK2" firstAttribute="centerY" secondItem="X7h-RJ-IWa" secondAttribute="centerY" priority="750" id="Ckv-08-WtW"/>
+                                    <constraint firstItem="Qir-be-dK2" firstAttribute="centerX" secondItem="kvf-Kx-eDb" secondAttribute="centerX" id="EeP-bi-oNH"/>
+                                    <constraint firstItem="Qir-be-dK2" firstAttribute="trailing" secondItem="kvf-Kx-eDb" secondAttribute="trailing" id="XZI-FN-Fgx"/>
+                                    <constraint firstItem="Qir-be-dK2" firstAttribute="bottom" secondItem="kvf-Kx-eDb" secondAttribute="bottom" priority="750" id="aUh-xm-1Qf"/>
+                                    <constraint firstItem="Qir-be-dK2" firstAttribute="width" secondItem="kvf-Kx-eDb" secondAttribute="width" id="pGS-r7-oht"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="X7h-RJ-IWa"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Nbd-JM-jH6"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2bO-GG-VGr" id="hay-BO-VgN"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcH-Be-LOl" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="768" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="JFd-Rs-0dp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Next" image="white_arrow_button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onNextButtonTapped" destination="2bO-GG-VGr" eventType="touchUpInside" id="EHg-Uw-nQh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GJo-vh-lDh"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lN7-Dm-Qwa" firstAttribute="top" secondItem="p1f-kI-iXj" secondAttribute="top" id="2fj-OB-I03"/>
+                            <constraint firstItem="lN7-Dm-Qwa" firstAttribute="bottom" secondItem="p1f-kI-iXj" secondAttribute="bottom" id="3ye-Pm-Can"/>
+                            <constraint firstItem="BKD-UA-RDD" firstAttribute="bottom" secondItem="p1f-kI-iXj" secondAttribute="bottom" id="ET0-wu-TTu"/>
+                            <constraint firstItem="kvf-Kx-eDb" firstAttribute="trailing" secondItem="GJo-vh-lDh" secondAttribute="trailing" constant="-30" id="Ffl-8U-xu5"/>
+                            <constraint firstItem="kvf-Kx-eDb" firstAttribute="leading" secondItem="GJo-vh-lDh" secondAttribute="leading" constant="30" id="G9z-fS-3Js"/>
+                            <constraint firstItem="NcH-Be-LOl" firstAttribute="trailing" secondItem="GJo-vh-lDh" secondAttribute="trailing" constant="-30" id="MmH-SE-rQw"/>
+                            <constraint firstItem="kvf-Kx-eDb" firstAttribute="top" secondItem="r2Z-Rk-4kh" secondAttribute="bottom" constant="20" id="Nn7-cD-JHf"/>
+                            <constraint firstItem="BKD-UA-RDD" firstAttribute="leading" secondItem="p1f-kI-iXj" secondAttribute="leading" id="OFZ-8v-eoN"/>
+                            <constraint firstItem="NcH-Be-LOl" firstAttribute="leading" secondItem="GJo-vh-lDh" secondAttribute="leading" constant="30" id="QcW-Ne-dCX"/>
+                            <constraint firstItem="lN7-Dm-Qwa" firstAttribute="trailing" secondItem="GJo-vh-lDh" secondAttribute="trailing" id="Son-yb-y95"/>
+                            <constraint firstItem="r2Z-Rk-4kh" firstAttribute="leading" secondItem="GJo-vh-lDh" secondAttribute="leading" constant="30" id="Ve7-Bq-bo8"/>
+                            <constraint firstItem="BKD-UA-RDD" firstAttribute="top" secondItem="p1f-kI-iXj" secondAttribute="top" id="f1H-sL-q00"/>
+                            <constraint firstItem="r2Z-Rk-4kh" firstAttribute="top" secondItem="GJo-vh-lDh" secondAttribute="top" id="gsr-KK-EgP"/>
+                            <constraint firstItem="BKD-UA-RDD" firstAttribute="trailing" secondItem="p1f-kI-iXj" secondAttribute="trailing" id="jfL-LK-Mfy"/>
+                            <constraint firstItem="NcH-Be-LOl" firstAttribute="bottom" secondItem="GJo-vh-lDh" secondAttribute="bottom" constant="-34" id="kie-AP-h0y"/>
+                            <constraint firstItem="kvf-Kx-eDb" firstAttribute="bottom" secondItem="NcH-Be-LOl" secondAttribute="top" constant="-20" id="n1a-sh-ybz"/>
+                            <constraint firstItem="lN7-Dm-Qwa" firstAttribute="leading" secondItem="GJo-vh-lDh" secondAttribute="leading" id="wbt-Vu-4H3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="NcH-Be-LOl" id="A7P-Ws-qyr"/>
+                        <outlet property="scrollView" destination="kvf-Kx-eDb" id="85x-su-bKl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q3l-dc-aXI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4346" y="45"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Smiling Woman" width="375" height="812"/>
         <image name="square_back_button" width="50" height="50"/>
+        <image name="white_arrow_button" width="8" height="12.333333015441895"/>
     </resources>
 </document>

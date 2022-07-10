@@ -34,6 +34,8 @@
 		3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F006287A6B4800FCC52E /* DateExtensions.swift */; };
 		3F12F009287A733400FCC52E /* AllergyPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F008287A733400FCC52E /* AllergyPreferencesViewController.swift */; };
 		3F12F00B287A736600FCC52E /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00A287A736600FCC52E /* Allergy.swift */; };
+		3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00C287B3C6900FCC52E /* TermsViewController.swift */; };
+		3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7942877C28000C74FB9 /* DietPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
@@ -121,6 +123,8 @@
 		3F12F006287A6B4800FCC52E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		3F12F008287A733400FCC52E /* AllergyPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergyPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F12F00A287A736600FCC52E /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
+		3F12F00C287B3C6900FCC52E /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -218,9 +222,10 @@
 				3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */,
 				3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
-				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
+				3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
+				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 			);
 			path = Extensions;
@@ -260,6 +265,7 @@
 				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
+				3F12F00C287B3C6900FCC52E /* TermsViewController.swift */,
 				3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */,
 			);
 			path = Onboarding;
@@ -617,6 +623,7 @@
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
+				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
@@ -650,6 +657,7 @@
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
+				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
