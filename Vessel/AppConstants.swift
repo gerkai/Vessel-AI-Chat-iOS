@@ -56,7 +56,8 @@ struct Constants
     static let KEY_DEFAULT_WEIGHT_LBS = "KEY_DEFAULT_WEIGHT_LBS"
     
     //Database IDs
-    static let ID_NO_DIET = 17
+    static let ID_NO_DIETS = 17
+    static let ID_NO_ALLERGIES = 20
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE = 0x00000001

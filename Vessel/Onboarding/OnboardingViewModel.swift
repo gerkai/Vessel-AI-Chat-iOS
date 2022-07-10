@@ -40,6 +40,7 @@ class OnboardingViewModel
 {
     var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
+    var userAllergies: [Int] = []
     var userGender: Int?
     var userHeight: Double?
     var userWeight: Double?
@@ -83,6 +84,12 @@ class OnboardingViewModel
         else if onboardingViewModel!.curState == .DietSelect
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+            vc.viewModel = onboardingViewModel
+            return vc
+        }
+        else if onboardingViewModel!.curState == .AllergySelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "AllergyPreferencesViewController") as! AllergyPreferencesViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
@@ -187,7 +194,7 @@ class OnboardingViewModel
         if selected
         {
             //add dietID to chosenDiets
-            if dietID == Constants.ID_NO_DIET
+            if dietID == Constants.ID_NO_DIETS
             {
                 //clear any previously chosen diets
                 userDiets = []
@@ -195,7 +202,7 @@ class OnboardingViewModel
             else
             {
                 //remove ID_NO_DIET from chosenDiets
-                userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIET}
+                userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
             }
             userDiets.append(dietID)
         }
@@ -209,6 +216,53 @@ class OnboardingViewModel
         if let contact = Contact.main()
         {
             contact.diet_ids = userDiets
+            ObjectStore.shared.ClientSave(contact)
+        }
+    }
+    
+    func allergyIsChecked(allergyID: Int) -> Bool
+    {
+        var result = false
+        for id in userAllergies
+        {
+            if id == allergyID
+            {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func selectAllergy(allergyID: Int, selected: Bool)
+    {
+        //this will add/remove selected diets from the chosenDiets array based on selected parameter.
+        //If user selects NO DIET then any previously selected diets are erased.
+        //If user selects any diet while NO DIET is selected, then NO DIET will be cleared.
+        if selected
+        {
+            //add dietID to chosenDiets
+            if allergyID == Constants.ID_NO_ALLERGIES
+            {
+                //clear any previously chosen diets
+                userAllergies = []
+            }
+            else
+            {
+                //remove ID_NO_DIET from chosenDiets
+                userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
+            }
+            userAllergies.append(allergyID)
+        }
+        else
+        {
+            //remove dietID from chosenDiets
+            userAllergies = userAllergies.filter(){$0 != allergyID}
+        }
+        
+        //TODO: Update contact
+        if let contact = Contact.main()
+        {
+            contact.allergy_ids = userAllergies
             ObjectStore.shared.ClientSave(contact)
         }
     }

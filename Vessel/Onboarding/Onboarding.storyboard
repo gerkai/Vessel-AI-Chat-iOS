@@ -512,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UeK-a6-aRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3325" y="45"/>
+            <point key="canvasLocation" x="4154" y="45"/>
         </scene>
         <!--Birthday Select View Controller-->
         <scene sceneID="jsv-Rw-oQA">
@@ -785,7 +785,123 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D34-9a-6Ar" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2571" y="45"/>
+            <point key="canvasLocation" x="2787" y="45"/>
+        </scene>
+        <!--Allergy Preferences View Controller-->
+        <scene sceneID="WAX-nZ-uEm">
+            <objects>
+                <viewController storyboardIdentifier="AllergyPreferencesViewController" id="tfZ-Gl-Aiv" customClass="AllergyPreferencesViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zmm-wy-xfR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="heG-vI-AGL">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc2-A7-CZO">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="V5J-0j-Ztg"/>
+                                    <constraint firstAttribute="width" constant="50" id="oHL-rJ-7qK"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="back" destination="tfZ-Gl-Aiv" eventType="touchUpInside" id="yQt-Ez-RBa"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xih-PO-azg">
+                                <rect key="frame" x="30" y="203" width="142" height="40"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-wC-SVB">
+                                <rect key="frame" x="30" y="263" width="200" height="51.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="4Mu-ER-qJ5"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Do you have any food allergies?">
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kX4-e4-LYs">
+                                <rect key="frame" x="30" y="334.5" width="354" height="413.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="200" id="CfL-yO-bIE"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="8" sectionInsetReference="safeArea" id="TA3-Yc-Cip">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="tfZ-Gl-Aiv" id="nD8-RH-bSJ"/>
+                                    <outlet property="delegate" destination="tfZ-Gl-Aiv" id="myn-cS-ifv"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voy-ZK-66I" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="768" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="psN-UT-4Lg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="next" destination="tfZ-Gl-Aiv" eventType="touchUpInside" id="QbP-Ej-l2a"/>
+                                    <action selector="next" destination="gvs-Lr-2DR" eventType="touchUpInside" id="TBe-dP-4AL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QKl-80-xhk"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="heG-vI-AGL" secondAttribute="trailing" id="2DU-Rr-Uyg"/>
+                            <constraint firstItem="Zc2-A7-CZO" firstAttribute="leading" secondItem="QKl-80-xhk" secondAttribute="leading" constant="30" id="2Fn-Z8-YWF"/>
+                            <constraint firstItem="QKl-80-xhk" firstAttribute="trailing" secondItem="kX4-e4-LYs" secondAttribute="trailing" constant="30" id="5mf-Je-Bhk"/>
+                            <constraint firstItem="Xih-PO-azg" firstAttribute="top" secondItem="Zc2-A7-CZO" secondAttribute="bottom" constant="109" id="CmR-7K-1zF"/>
+                            <constraint firstItem="Voy-ZK-66I" firstAttribute="leading" secondItem="QKl-80-xhk" secondAttribute="leading" constant="30" id="DQT-bc-ISY"/>
+                            <constraint firstItem="heG-vI-AGL" firstAttribute="leading" secondItem="zmm-wy-xfR" secondAttribute="leading" id="ExC-jn-3ac"/>
+                            <constraint firstItem="X6E-wC-SVB" firstAttribute="leading" secondItem="QKl-80-xhk" secondAttribute="leading" constant="30" id="Q0c-mY-OqR"/>
+                            <constraint firstItem="Xih-PO-azg" firstAttribute="leading" secondItem="QKl-80-xhk" secondAttribute="leading" constant="30" id="QNx-yY-Dxd"/>
+                            <constraint firstItem="QKl-80-xhk" firstAttribute="trailing" secondItem="Voy-ZK-66I" secondAttribute="trailing" constant="30" id="Zcv-ME-mxY"/>
+                            <constraint firstItem="Zc2-A7-CZO" firstAttribute="top" secondItem="QKl-80-xhk" secondAttribute="top" id="d5j-7z-oyc"/>
+                            <constraint firstItem="kX4-e4-LYs" firstAttribute="top" secondItem="X6E-wC-SVB" secondAttribute="bottom" constant="20" id="d74-lz-BKU"/>
+                            <constraint firstItem="QKl-80-xhk" firstAttribute="bottom" secondItem="Voy-ZK-66I" secondAttribute="bottom" constant="34" id="eGe-xL-NY5"/>
+                            <constraint firstAttribute="bottom" secondItem="heG-vI-AGL" secondAttribute="bottom" id="fuq-Ue-4cR"/>
+                            <constraint firstItem="kX4-e4-LYs" firstAttribute="leading" secondItem="QKl-80-xhk" secondAttribute="leading" constant="30" id="hXf-Mm-3D9"/>
+                            <constraint firstItem="heG-vI-AGL" firstAttribute="top" secondItem="zmm-wy-xfR" secondAttribute="top" id="i5l-nY-e4b"/>
+                            <constraint firstItem="Voy-ZK-66I" firstAttribute="centerX" secondItem="QKl-80-xhk" secondAttribute="centerX" id="lxU-kH-Msw"/>
+                            <constraint firstItem="Voy-ZK-66I" firstAttribute="top" secondItem="kX4-e4-LYs" secondAttribute="bottom" constant="20" id="mK9-S6-Icy"/>
+                            <constraint firstItem="X6E-wC-SVB" firstAttribute="top" secondItem="Xih-PO-azg" secondAttribute="bottom" constant="20" id="nEZ-iM-kz2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="allergyLabelSpacing" destination="CmR-7K-1zF" id="40i-nw-OvE"/>
+                        <outlet property="collectionView" destination="kX4-e4-LYs" id="XL9-co-W4x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Z8-lT-SDB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3523" y="60"/>
         </scene>
     </scenes>
     <resources>
