@@ -61,7 +61,7 @@
                                     <action selector="back" destination="zkZ-Rb-yza" eventType="touchUpInside" id="lvE-Tt-Zrw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xod-6U-lcS" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xod-6U-lcS" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="802" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -147,7 +147,7 @@
                                 </segments>
                                 <color key="selectedSegmentTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHT-Mx-P4c" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHT-Mx-P4c" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -393,7 +393,7 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqk-dh-b2H" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqk-dh-b2H" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -607,7 +607,7 @@
                                     <constraint firstItem="gdK-x4-M1W" firstAttribute="top" secondItem="shm-CF-ynQ" secondAttribute="top" id="yMa-9V-sEj"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="751" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -744,9 +744,9 @@
                                     <outlet property="delegate" destination="7b4-BJ-qa9" id="Qeq-fQ-HeO"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xui-pj-glq" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xui-pj-glq" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="768" width="354" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.32941176470588235" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yW4-CB-An9"/>
                                 </constraints>
@@ -754,6 +754,7 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="highlighted" title="Next"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="22"/>
@@ -791,6 +792,7 @@
                     <connections>
                         <outlet property="collectionView" destination="tVc-tW-y4n" id="2HL-hK-eQn"/>
                         <outlet property="dietLabelSpacing" destination="z7q-CH-Kzw" id="Jwv-Jo-avV"/>
+                        <outlet property="nextButton" destination="Xui-pj-glq" id="uhP-Pe-1dn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D34-9a-6Ar" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -860,7 +862,7 @@
                                     <outlet property="delegate" destination="tfZ-Gl-Aiv" id="myn-cS-ifv"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voy-ZK-66I" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voy-ZK-66I" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="768" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -907,6 +909,7 @@
                     <connections>
                         <outlet property="allergyLabelSpacing" destination="CmR-7K-1zF" id="40i-nw-OvE"/>
                         <outlet property="collectionView" destination="kX4-e4-LYs" id="XL9-co-W4x"/>
+                        <outlet property="nextButton" destination="Voy-ZK-66I" id="dBI-OM-cBS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Z8-lT-SDB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

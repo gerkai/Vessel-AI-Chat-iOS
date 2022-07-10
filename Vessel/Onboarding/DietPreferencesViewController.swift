@@ -11,6 +11,7 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
 {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dietLabelSpacing: NSLayoutConstraint!
+    @IBOutlet weak var nextButton: UIButton!
     
     var viewModel: OnboardingViewModel?
     
@@ -23,6 +24,7 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
         {
             dietLabelSpacing.constant = Constants.MIN_VERT_SPACING_TO_BACK_BUTTON
         }
+        updateNextButton()
     }
     
     @IBAction func back()
@@ -33,8 +35,27 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
     
     @IBAction func next()
     {
-        let vc = OnboardingViewModel.NextViewController()
-        navigationController?.fadeTo(vc)
+        if viewModel?.anyDietChecked() == true
+        {
+            let vc = OnboardingViewModel.NextViewController()
+            navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            UIView.showError(text: "", detailText: NSLocalizedString("Please select an answer", comment:"Error message when user hasn't yet made a selection"), image: nil)
+        }
+    }
+    
+    func updateNextButton()
+    {
+        if viewModel?.anyDietChecked() == true
+        {
+            nextButton.backgroundColor = Constants.vesselBlack
+        }
+        else
+        {
+            nextButton.backgroundColor = Constants.vesselGray
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -68,6 +89,7 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
     {
         viewModel?.selectDiet(dietID: cell.tag, selected: checked)
         collectionView.reloadData()
+        updateNextButton()
     }
     
     func canCheckMoreButtons() -> Bool

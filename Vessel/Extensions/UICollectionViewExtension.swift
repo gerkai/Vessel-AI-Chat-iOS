@@ -26,7 +26,6 @@ extension UICollectionView {
     
     func dequeueCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T
     {
-        print("\(T.className)")
         return dequeueReusableCell(withReuseIdentifier: T.className, for: indexPath) as! T
     }
     

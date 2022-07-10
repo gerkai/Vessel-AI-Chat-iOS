@@ -7,11 +7,13 @@
 //
 //  All business logic for the Onboarding Flow is handled here.
 //  NextViewController chooses which viewController to show next in the onboarding process based on what fields of the main Contact contain data.
+//  TODO: Ensure viewModel gets deallocated once onboarding flow is complete
 
 import UIKit
 
 var onboardingViewModel: OnboardingViewModel?
 
+//this enum determines the order the onboarding screens will appear
 enum OnboardingState: Int
 {
     case Initial
@@ -47,10 +49,10 @@ class OnboardingViewModel
     var userBirthdate: Date?
     var userWithheldBirthdate: Bool = false
     
+    //MARK: - navigation
     static func NextViewController() -> UIViewController
     {
         //MainContact is guaranteed
-        let contact = Contact.main()!
         
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if onboardingViewModel == nil
@@ -65,6 +67,7 @@ class OnboardingViewModel
         {
             //show gender selector flow
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+            //uncomment for testing to jump directly to desired VC
             //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
             vc.viewModel = onboardingViewModel
             return vc
@@ -100,6 +103,12 @@ class OnboardingViewModel
         }
     }
     
+    func backup()
+    {
+        onboardingViewModel!.curState.back()
+    }
+    
+    //MARK: - gender
     func setGender(gender: Int)
     {
         userGender = gender
@@ -120,6 +129,7 @@ class OnboardingViewModel
         }
     }
     
+    //MARK: - height/weight
     func setHeightWeight(height: Double, weight: Double)
     {
         userHeight = height
@@ -132,6 +142,7 @@ class OnboardingViewModel
         }
     }
     
+    //MARK: - birthdate
     func setBirthDate(birthdate: Date?)
     {
         //can be set to nil if user prefers not to share their birthdate
@@ -156,6 +167,7 @@ class OnboardingViewModel
     
     func defaultBirthDate() -> Date
     {
+        //returns a date based on the average age of a member as defined in Constants
         let calendar = Calendar.current
         let averageAge = Constants.AVERAGE_AGE
         // set the initial year to current year - averageAge
@@ -173,6 +185,7 @@ class OnboardingViewModel
         return Date("2000-07-09") //arbitrary
     }
     
+    //MARK: - diets
     func dietIsChecked(dietID: Int) -> Bool
     {
         var result = false
@@ -184,6 +197,18 @@ class OnboardingViewModel
             }
         }
         return result
+    }
+    
+    func anyDietChecked() -> Bool
+    {
+        if userDiets.count == 0
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
     }
     
     func selectDiet(dietID: Int, selected: Bool)
@@ -219,7 +244,7 @@ class OnboardingViewModel
             ObjectStore.shared.ClientSave(contact)
         }
     }
-    
+    //MARK: - allergies
     func allergyIsChecked(allergyID: Int) -> Bool
     {
         var result = false
@@ -231,6 +256,18 @@ class OnboardingViewModel
             }
         }
         return result
+    }
+    
+    func anyAllergyChecked() -> Bool
+    {
+        if userAllergies.count == 0
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
     }
     
     func selectAllergy(allergyID: Int, selected: Bool)
@@ -265,11 +302,6 @@ class OnboardingViewModel
             contact.allergy_ids = userAllergies
             ObjectStore.shared.ClientSave(contact)
         }
-    }
-    
-    func backup()
-    {
-        onboardingViewModel!.curState.back()
     }
 }
 
