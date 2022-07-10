@@ -38,11 +38,19 @@ enum OnboardingState: Int
     }
 }
 
+enum ItemPreferencesType
+{
+    case Diet
+    case Allergy
+    case Goal
+}
+
 class OnboardingViewModel
 {
     var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
+    var userGoals: [Int] = []
     var userGender: Int?
     var userHeight: Double?
     var userWeight: Double?
@@ -68,7 +76,7 @@ class OnboardingViewModel
             //show gender selector flow
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
             //uncomment for testing to jump directly to desired VC
-            //let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
+            //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
@@ -86,20 +94,35 @@ class OnboardingViewModel
         }
         else if onboardingViewModel!.curState == .DietSelect
         {
-            let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
             vc.viewModel = onboardingViewModel
+            vc.titleText = NSLocalizedString("Diet", comment:"Title of Diet Preferences screen")
+            vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment:"Subtext of Diet Preferences screen")
+            vc.itemType = .Diet
             return vc
         }
         else if onboardingViewModel!.curState == .AllergySelect
         {
-            let vc = storyboard.instantiateViewController(withIdentifier: "AllergyPreferencesViewController") as! AllergyPreferencesViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
             vc.viewModel = onboardingViewModel
+            vc.titleText = NSLocalizedString("Allergies", comment:"Title of Allergy Preferences screen")
+            vc.subtext = NSLocalizedString("Do you have any food allergies?", comment:"Subtext of Allergy Preferences screen")
+            vc.itemType = .Allergy
             return vc
         }
         else if onboardingViewModel!.curState == .ViewTerms
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
             vc.viewModel = onboardingViewModel
+            return vc
+        }
+        else if onboardingViewModel!.curState == .GoalsSelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+            vc.viewModel = onboardingViewModel
+            vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
+            vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment:"Subtext of Goal Preferences screen")
+            vc.itemType = .Goal
             return vc
         }
         else
@@ -191,125 +214,206 @@ class OnboardingViewModel
         return Date("2000-07-09") //arbitrary
     }
     
-    //MARK: - diets
-    func dietIsChecked(dietID: Int) -> Bool
+    //MARK: - preferenceItem (Diet, Allergy, Goal)
+    func anyItemChecked(_ type: ItemPreferencesType) -> Bool
+    {
+        switch type
+        {
+        case .Diet:
+            if userDiets.count == 0
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        case .Allergy:
+            if userAllergies.count == 0
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        case .Goal:
+            if userGoals.count < Constants.MAX_GOALS_AT_A_TIME
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        }
+    }
+    func infoForItemAt(indexPath: IndexPath, type: ItemPreferencesType) -> (name: String, id: Int)
+    {
+        let row = indexPath.row
+        switch type
+        {
+            case .Diet:
+                return (Diets[row].name.capitalized, Diets[row].id)
+            case .Allergy:
+                return (Allergies[row].name.capitalized, Allergies[row].id)
+            case .Goal:
+                return (Goals[row].name.capitalized, Goals[row].id)
+        }
+    }
+    
+    func itemCount(_ type: ItemPreferencesType) -> Int
+    {
+        switch type
+        {
+            case .Diet:
+                return Diets.count
+            case .Allergy:
+                return Allergies.count
+            case .Goal:
+                return Goals.count
+        }
+    }
+    func itemIsChecked(type: ItemPreferencesType, id: Int) -> Bool
     {
         var result = false
-        for id in userDiets
+        switch type
         {
-            if id == dietID
-            {
-                result = true
-            }
+            case .Diet:
+                for dietID in userDiets
+                {
+                    if dietID == id
+                    {
+                        result = true
+                        break
+                    }
+                }
+            case .Allergy:
+                for allergyID in userAllergies
+                {
+                    if allergyID == id
+                    {
+                        result = true
+                        break
+                    }
+                }
+                
+            case .Goal:
+                for goalID in userGoals
+                {
+                    if goalID == id
+                    {
+                        result = true
+                        break
+                    }
+                }
         }
         return result
     }
     
-    func anyDietChecked() -> Bool
+    func selectItem(type: ItemPreferencesType, id: Int, selected: Bool)
     {
-        if userDiets.count == 0
+        //this will add/remove selected items from the chosen[items] array based on selected parameter.
+        //If user selects NONE then any previously selected items are erased.
+        //If user selects any item while NONE is selected, then NONE will be cleared.
+        switch type
         {
-            return false
-        }
-        else
-        {
-            return true
-        }
-    }
-    
-    func selectDiet(dietID: Int, selected: Bool)
-    {
-        //this will add/remove selected diets from the chosenDiets array based on selected parameter.
-        //If user selects NO DIET then any previously selected diets are erased.
-        //If user selects any diet while NO DIET is selected, then NO DIET will be cleared.
-        if selected
-        {
-            //add dietID to chosenDiets
-            if dietID == Constants.ID_NO_DIETS
+            case .Diet:
+                if selected
+                {
+                    //add id to userDiets
+                    if id == Constants.ID_NO_DIETS
+                    {
+                        //clear any previously chosen diets
+                        userDiets = []
+                    }
+                    else
+                    {
+                        //remove ID_NO_DIET from chosenDiets
+                        userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
+                    }
+                    userDiets.append(id)
+                }
+                else
+                {
+                    //remove dietID from chosenDiets
+                    userDiets = userDiets.filter(){$0 != id}
+                }
+                
+                //TODO: Update contact
+                if let contact = Contact.main()
+                {
+                    contact.diet_ids = userDiets
+                    ObjectStore.shared.ClientSave(contact)
+                }
+            case .Allergy:
+                
+                if selected
+                {
+                    //add id to chosenDiets
+                    if id == Constants.ID_NO_ALLERGIES
+                    {
+                        //clear any previously chosen ids
+                        userAllergies = []
+                    }
+                    else
+                    {
+                        //remove ID_NO_ALLERGIES from userAllergies
+                        userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
+                    }
+                    userAllergies.append(id)
+                }
+                else
+                {
+                    //remove id from chosenDiets
+                    userAllergies = userAllergies.filter(){$0 != id}
+                }
+                
+                //TODO: Update contact
+                if let contact = Contact.main()
+                {
+                    contact.allergy_ids = userAllergies
+                    ObjectStore.shared.ClientSave(contact)
+                }
+        case .Goal:
+            if selected
             {
-                //clear any previously chosen diets
-                userDiets = []
+                //only allow maximum selected amount. If user selects more, delete the oldest
+                if userGoals.count >= Constants.MAX_GOALS_AT_A_TIME
+                {
+                    userGoals.removeFirst()
+                }
+                //add id to chosenGoals
+                userGoals.append(id)
             }
             else
             {
-                //remove ID_NO_DIET from chosenDiets
-                userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
+                //remove id from chosenGoals
+                userGoals = userGoals.filter(){$0 != id}
             }
-            userDiets.append(dietID)
-        }
-        else
-        {
-            //remove dietID from chosenDiets
-            userDiets = userDiets.filter(){$0 != dietID}
-        }
-        
-        //TODO: Update contact
-        if let contact = Contact.main()
-        {
-            contact.diet_ids = userDiets
-            ObjectStore.shared.ClientSave(contact)
-        }
-    }
-    //MARK: - allergies
-    func allergyIsChecked(allergyID: Int) -> Bool
-    {
-        var result = false
-        for id in userAllergies
-        {
-            if id == allergyID
+            
+            //TODO: Update contact
+            if let contact = Contact.main()
             {
-                result = true
+                contact.allergy_ids = userAllergies
+                ObjectStore.shared.ClientSave(contact)
             }
-        }
-        return result
-    }
-    
-    func anyAllergyChecked() -> Bool
-    {
-        if userAllergies.count == 0
-        {
-            return false
-        }
-        else
-        {
-            return true
         }
     }
     
-    func selectAllergy(allergyID: Int, selected: Bool)
+    func tooFewItemsSelectedText(type: ItemPreferencesType) -> String
     {
-        //this will add/remove selected diets from the chosenDiets array based on selected parameter.
-        //If user selects NO DIET then any previously selected diets are erased.
-        //If user selects any diet while NO DIET is selected, then NO DIET will be cleared.
-        if selected
+        let defaultText = NSLocalizedString("Please select an answer", comment:"Error message when user hasn't yet made a selection")
+        switch type
         {
-            //add dietID to chosenDiets
-            if allergyID == Constants.ID_NO_ALLERGIES
-            {
-                //clear any previously chosen diets
-                userAllergies = []
-            }
-            else
-            {
-                //remove ID_NO_DIET from chosenDiets
-                userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
-            }
-            userAllergies.append(allergyID)
-        }
-        else
-        {
-            //remove dietID from chosenDiets
-            userAllergies = userAllergies.filter(){$0 != allergyID}
-        }
-        
-        //TODO: Update contact
-        if let contact = Contact.main()
-        {
-            contact.allergy_ids = userAllergies
-            ObjectStore.shared.ClientSave(contact)
+            case .Diet:
+                return defaultText
+            case .Allergy:
+                return defaultText
+            case .Goal:
+                return NSLocalizedString("Please choose 3 goals", comment:"Error message when user hasn't chosen 3 goals")
         }
     }
-    
     //MARK: - Terms
     
     func userViewedTerms()

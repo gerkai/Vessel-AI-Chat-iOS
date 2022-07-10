@@ -1,19 +1,24 @@
 //
-//  AllergyPreferencesViewController.swift
+//  ItemPreferencesViewController.swift
 //  Vessel
 //
-//  Created by Carson Whitsett on 7/9/22.
+//  Created by Carson Whitsett on 7/7/22.
 //
 
 import UIKit
 
-class AllergyPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate
+class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var allergyLabelSpacing: NSLayoutConstraint!
+    @IBOutlet weak var titleLabelSpacing: NSLayoutConstraint!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTextLabel: UILabel!
     
     var viewModel: OnboardingViewModel?
+    var titleText: String?
+    var subtext: String?
+    var itemType: ItemPreferencesType = .Diet
     
     override func viewDidLoad()
     {
@@ -22,9 +27,15 @@ class AllergyPreferencesViewController: UIViewController, UICollectionViewDelega
         //without making the user have to scroll.
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
         {
-            allergyLabelSpacing.constant = Constants.MIN_VERT_SPACING_TO_BACK_BUTTON
+            titleLabelSpacing.constant = Constants.MIN_VERT_SPACING_TO_BACK_BUTTON
         }
         updateNextButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        titleLabel.text = titleText
+        subTextLabel.text = subtext
     }
     
     @IBAction func back()
@@ -35,20 +46,21 @@ class AllergyPreferencesViewController: UIViewController, UICollectionViewDelega
     
     @IBAction func next()
     {
-        if viewModel?.anyAllergyChecked() == true
+        if viewModel?.anyItemChecked(itemType) == true
         {
             let vc = OnboardingViewModel.NextViewController()
             navigationController?.fadeTo(vc)
         }
         else
         {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please select an answer", comment:"Error message when user hasn't yet made a selection"), image: nil)
+            let text = viewModel!.tooFewItemsSelectedText(type: itemType)
+            UIView.showError(text: "", detailText: text, image: nil)
         }
     }
     
     func updateNextButton()
     {
-        if viewModel?.anyAllergyChecked() == true
+        if viewModel?.anyItemChecked(itemType) == true
         {
             nextButton.backgroundColor = Constants.vesselBlack
         }
@@ -70,24 +82,25 @@ class AllergyPreferencesViewController: UIViewController, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return Allergies.count
+        return viewModel!.itemCount(itemType)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-        cell.titleLabel.text = Allergies[indexPath.row].name.capitalized
-        //we'll use the tag to hold the allergyID
-        cell.tag = Allergies[indexPath.row].id
+        let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
+        cell.titleLabel.text = info.name
+        //we'll use the tag to hold the diet/allergy/goal ID
+        cell.tag = info.id
         cell.delegate = self
-        cell.isChecked = viewModel?.allergyIsChecked(allergyID: cell.tag) ?? false
+        cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
         return cell
     }
     
     //MARK: - CheckmarkCollectionViewCell delegates
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     {
-        viewModel?.selectAllergy(allergyID: cell.tag, selected: checked)
+        viewModel!.selectItem(type: itemType, id: cell.tag, selected: checked)
         collectionView.reloadData()
         updateNextButton()
     }

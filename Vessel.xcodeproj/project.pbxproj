@@ -32,12 +32,12 @@
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
 		3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */; };
 		3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F006287A6B4800FCC52E /* DateExtensions.swift */; };
-		3F12F009287A733400FCC52E /* AllergyPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F008287A733400FCC52E /* AllergyPreferencesViewController.swift */; };
 		3F12F00B287A736600FCC52E /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00A287A736600FCC52E /* Allergy.swift */; };
 		3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00C287B3C6900FCC52E /* TermsViewController.swift */; };
 		3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */; };
+		3F12F011287B4C0600FCC52E /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F010287B4C0600FCC52E /* Goal.swift */; };
+		3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
-		3F13A7942877C28000C74FB9 /* DietPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
@@ -121,12 +121,12 @@
 		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
 		3F12F006287A6B4800FCC52E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		3F12F008287A733400FCC52E /* AllergyPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergyPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F12F00A287A736600FCC52E /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		3F12F00C287B3C6900FCC52E /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		3F12F010287B4C0600FCC52E /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
-		3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				3F12F00A287A736600FCC52E /* Allergy.swift */,
+				3F12F010287B4C0600FCC52E /* Goal.swift */,
 				3F0547CF27CAEE3B006E3098 /* Contact.swift */,
 				3F13A7912877BEA200C74FB9 /* Diet.swift */,
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
@@ -254,13 +255,12 @@
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				3F12F008287A733400FCC52E /* AllergyPreferencesViewController.swift */,
 				3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */,
 				3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */,
 				3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */,
-				3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */,
 				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
 				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
+				3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */,
 				3F87B97127D44F4A00D589F7 /* LastViewController.swift */,
 				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
@@ -628,12 +628,13 @@
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
+				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
-				3F12F009287A733400FCC52E /* AllergyPreferencesViewController.swift in Sources */,
+				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
@@ -647,7 +648,6 @@
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */,
-				3F13A7942877C28000C74FB9 /* DietPreferencesViewController.swift in Sources */,
 				3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
