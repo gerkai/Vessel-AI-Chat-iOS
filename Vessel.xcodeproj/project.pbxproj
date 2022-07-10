@@ -31,7 +31,6 @@
 		3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */; };
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
 		3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */; };
-		3F12F005287A3CA400FCC52E /* MVVMOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F004287A3CA400FCC52E /* MVVMOnboardingViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7942877C28000C74FB9 /* DietPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
@@ -116,7 +115,6 @@
 		3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtCardLoginViewController.swift; sourceTree = "<group>"; };
 		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
-		3F12F004287A3CA400FCC52E /* MVVMOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVMOnboardingViewController.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7932877C28000C74FB9 /* DietPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPreferencesViewController.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
 				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
 				3F87B97127D44F4A00D589F7 /* LastViewController.swift */,
-				3F12F004287A3CA400FCC52E /* MVVMOnboardingViewController.swift */,
 				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
@@ -618,7 +615,6 @@
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
-				3F12F005287A3CA400FCC52E /* MVVMOnboardingViewController.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,

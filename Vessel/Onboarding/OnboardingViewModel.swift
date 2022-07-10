@@ -5,6 +5,7 @@
 //  Created by Carson Whitsett on 3/4/22.
 //  Based on Onboarding Flow: https://www.notion.so/vesselhealth/Onboarding-79efd903aaf349098bf4e972bd9292cb
 //
+//  All business logic for the Onboarding Flow is handled here.
 //  NextViewController chooses which viewController to show next in the onboarding process based on what fields of the main Contact contain data.
 
 import UIKit
@@ -29,8 +30,8 @@ class OnboardingViewModel
         if contact.gender == nil || contact.gender == ""
         {
             //show gender selector flow
-            //let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
-            let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+            //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
@@ -55,7 +56,6 @@ class OnboardingViewModel
         else
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "LastViewController") as! LastViewController
-            //vc.viewModel = onboardingViewModel
             return vc
         }
     }
@@ -112,9 +112,11 @@ class OnboardingViewModel
         return result
     }
     
-    func selectDiet(dietID: Int, selected: Bool)// -> Bool
+    func selectDiet(dietID: Int, selected: Bool)
     {
-        //var shouldReloadDiets = false
+        //this will add/remove selected diets from the chosenDiets array based on selected parameter.
+        //If user selects NO DIET then any previously selected diets are erased.
+        //If user selects any diet while NO DIET is selected, then NO DIET will be cleared.
         if selected
         {
             //add dietID to chosenDiets
@@ -122,7 +124,6 @@ class OnboardingViewModel
             {
                 //clear any previously chosen diets
                 chosenDiets = []
-                //shouldReloadDiets = true
             }
             else
             {
@@ -136,9 +137,7 @@ class OnboardingViewModel
             //remove dietID from chosenDiets
             chosenDiets = chosenDiets.filter(){$0 != dietID}
         }
-        print("Diets: \(chosenDiets)")
         //TODO: Update contact
-       // return shouldReloadDiets
     }
 }
 

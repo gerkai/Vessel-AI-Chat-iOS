@@ -71,6 +71,5 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
                 self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
             }
         }
-        
     }
 }
