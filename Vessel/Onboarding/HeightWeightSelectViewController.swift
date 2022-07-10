@@ -42,7 +42,7 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         if isMetric
         {
             weightUnitsLabel.text = NSLocalizedString("Kg", comment: "Abbreviation for Kilograms")
-            if let height_cm = Contact.main()?.height
+            if let height_cm = viewModel?.userHeight
             {
                 self.setHeightForPickerView(centimeters: Int(height_cm))
             }
@@ -53,7 +53,7 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         }
         else
         {
-            if let height_cm = Contact.main()?.height
+            if let height_cm = viewModel?.userHeight
             {
                 let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: height_cm)
                 self.setHeightForPickerView(feet: feet, inches: inches)
@@ -71,7 +71,7 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+                
         if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
         {
             if isMetric
@@ -85,6 +85,21 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
             else
             {
                 weightTextField.text = weight
+            }
+        }
+        
+        //if we had previously chosen a weight on this screen then use that value instead
+        if let weight = viewModel?.userWeight
+        {
+            if isMetric
+            {
+                let weightKG = weight * 0.45359237 // pounds to kilograms conversion
+                weightTextField.text = "\(weightKG)"
+                
+            }
+            else
+            {
+                weightTextField.text = "\(weight)"
             }
         }
     }
@@ -146,6 +161,11 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBAction func back()
     {
+        if let weight = weightTextField.text, weight.count != 0
+        {
+            viewModel?.setHeightWeight(height: getSelections(), weight: Double(weight)!)
+        }
+        viewModel?.backup()
         navigationController?.fadeOut()
     }
     

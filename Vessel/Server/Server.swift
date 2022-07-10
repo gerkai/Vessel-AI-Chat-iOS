@@ -385,6 +385,9 @@ class Server: NSObject
             }
             serverGet(url: url)
             { data in
+                let str = String(decoding: data, as: UTF8.self)
+                print (str)
+                
                 let decoder = JSONDecoder()
                 do
                 {
@@ -395,7 +398,7 @@ class Server: NSObject
                         success(contact)
                     }
                 }
-                /*
+                
                  //cw: good for debugging JSON responses
                  catch DecodingError.dataCorrupted(let context)
                 {
@@ -415,7 +418,7 @@ class Server: NSObject
                 {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
-                }*/
+                }
                 catch
                 {
                     print("error: ", error)

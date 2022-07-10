@@ -15,6 +15,10 @@ class GenderSelectViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if let gender = viewModel?.userGender
+        {
+            segmentedControl.selectedSegmentIndex = gender
+        }
     }
     
     @IBAction func backButton()
@@ -24,18 +28,7 @@ class GenderSelectViewController: UIViewController
     
     @IBAction func continueButton()
     {
-        var genderString = Constants.GENDER_OTHER
-        switch segmentedControl.selectedSegmentIndex
-        {
-            case 0:
-                genderString = Constants.GENDER_MALE
-            case 1:
-                genderString = Constants.GENDER_FEMALE
-            default:
-                break
-        }
-        
-        viewModel?.setGender(gender: genderString)
+        viewModel?.setGender(gender: segmentedControl.selectedSegmentIndex)
         
         let vc = OnboardingViewModel.NextViewController()
         navigationController?.fadeTo(vc)

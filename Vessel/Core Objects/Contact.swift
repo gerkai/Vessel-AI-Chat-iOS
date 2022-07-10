@@ -20,6 +20,11 @@ class Contact: CoreObjectProtocol
     var weight: Double?
     var birth_date: String?     //in yyyy-mm-dd format
     var diet_ids: [Int]
+    var flags: Int              //object is not returned from server yet so we mock it with a private var _flags
+    { get { _flags ?? 0}
+        set { _flags = newValue}
+        
+    }
     //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
     //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
     
@@ -43,6 +48,8 @@ class Contact: CoreObjectProtocol
     var main_goal_id: Int?
     var has_samples: Bool?
     
+    private var _flags: Int?
+    
     static func main() -> Contact?
     {
         return ObjectStore.shared.getContact(id: Contact.MainID) 
@@ -63,6 +70,7 @@ class Contact: CoreObjectProtocol
          weight: Double? = nil,
          birthDate: String? = nil,
          diet_ids: [Int] = [],
+         flags: Int = 0,
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
          email: String? = nil,
@@ -91,7 +99,8 @@ class Contact: CoreObjectProtocol
         self.height = height
         self.weight = weight
         self.birth_date = birthDate
-        self.diet_ids = []
+        self.diet_ids = diet_ids
+        _flags = flags
         //self.allergies = allergies
         //self.goals = goals
         self.email = email
@@ -127,6 +136,16 @@ class Contact: CoreObjectProtocol
             return true
         }
         return false
+    }
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case id
+        case first_name
+        case last_name
+        case _flags = "flags"
+        case diet_ids
+        case is_verified
     }
 }
 

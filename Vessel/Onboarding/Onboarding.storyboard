@@ -691,7 +691,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="square_back_button"/>
                                 <connections>
-                                    <action selector="onBackButtonPressed:" destination="7b4-BJ-qa9" eventType="touchUpInside" id="PxD-53-iuH"/>
+                                    <action selector="back" destination="7b4-BJ-qa9" eventType="touchUpInside" id="Bwf-1L-b6z"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-gD-gCr">
@@ -751,6 +751,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="next" destination="gvs-Lr-2DR" eventType="touchUpInside" id="SKA-u2-Ikr"/>
+                                    <action selector="next" destination="7b4-BJ-qa9" eventType="touchUpInside" id="WWa-Fe-8qK"/>
                                 </connections>
                             </button>
                         </subviews>

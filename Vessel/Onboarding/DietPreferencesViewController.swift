@@ -25,9 +25,16 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
         }
     }
     
-    @IBAction func onBackButtonPressed(_ sender: Any)
+    @IBAction func back()
     {
+        viewModel?.backup()
         self.navigationController?.fadeOut()
+    }
+    
+    @IBAction func next()
+    {
+        let vc = OnboardingViewModel.NextViewController()
+        navigationController?.fadeTo(vc)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize

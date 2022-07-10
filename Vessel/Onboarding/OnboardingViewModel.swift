@@ -12,9 +12,39 @@ import UIKit
 
 var onboardingViewModel: OnboardingViewModel?
 
+enum OnboardingState: Int
+{
+    case Initial
+    case WelcomeGender
+    case HeightWeight
+    case BirthdaySelect
+    case DietSelect
+    case AllergySelect
+    case ViewTerms
+    case GoalsSelect
+    case SingleGoalSelect
+    case FinalOnboarding
+    
+    mutating func next()
+    {
+        self = OnboardingState(rawValue: rawValue + 1) ?? .Initial
+    }
+    
+    mutating func back()
+    {
+        self = OnboardingState(rawValue: rawValue - 1) ?? .Initial
+    }
+}
+
 class OnboardingViewModel
 {
-    var chosenDiets: [Int] = []
+    var curState: OnboardingState = .Initial
+    var userDiets: [Int] = []
+    var userGender: Int?
+    var userHeight: Double?
+    var userWeight: Double?
+    var userBirthdate: Date?
+    var userWithheldBirthdate: Bool = false
     
     static func NextViewController() -> UIViewController
     {
@@ -27,7 +57,10 @@ class OnboardingViewModel
             onboardingViewModel = OnboardingViewModel()
         }
         
-        if contact.gender == nil || contact.gender == ""
+        //increment to next state
+        onboardingViewModel!.curState.next()
+        
+        if onboardingViewModel!.curState == .WelcomeGender
         {
             //show gender selector flow
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
@@ -35,19 +68,19 @@ class OnboardingViewModel
             vc.viewModel = onboardingViewModel
             return vc
         }
-        else if contact.height == nil
+        else if onboardingViewModel!.curState == .HeightWeight
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
-        else if contact.birth_date == nil
+        else if onboardingViewModel!.curState == .BirthdaySelect
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
-        else if contact.diet_ids.count == 0
+        else if onboardingViewModel!.curState == .DietSelect
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
             vc.viewModel = onboardingViewModel
@@ -60,17 +93,30 @@ class OnboardingViewModel
         }
     }
     
-    func setGender(gender: String)
+    func setGender(gender: Int)
     {
+        userGender = gender
         if let contact = Contact.main()
         {
-            contact.gender = gender
+            var genderString = Constants.GENDER_OTHER
+            switch gender
+            {
+                case 0:
+                    genderString = Constants.GENDER_MALE
+                case 1:
+                    genderString = Constants.GENDER_FEMALE
+                default:
+                    break
+            }
+            contact.gender = genderString
             ObjectStore.shared.ClientSave(contact)
         }
     }
     
     func setHeightWeight(height: Double, weight: Double)
     {
+        userHeight = height
+        userWeight = weight
         if let contact = Contact.main()
         {
             contact.height = height
@@ -82,11 +128,13 @@ class OnboardingViewModel
     func setBirthDate(birthdate: Date?)
     {
         //can be set to nil if user prefers not to share their birthdate
+        userBirthdate = birthdate
         if let contact = Contact.main()
         {
             if birthdate == nil
             {
                 contact.birth_date = nil
+                contact.flags |= Constants.DECLINED_BIRTH_DATE
             }
             else
             {
@@ -99,10 +147,29 @@ class OnboardingViewModel
         }
     }
     
+    func defaultBirthDate() -> Date
+    {
+        let calendar = Calendar.current
+        let averageAge = Constants.AVERAGE_AGE
+        // set the initial year to current year - averageAge
+        var dateComponents = calendar.dateComponents([.day, .month, .year], from: Date())
+        
+        if let year = dateComponents.year
+        {
+            dateComponents.year  = year - averageAge
+        }
+        if let date = calendar.date(from: dateComponents)
+        {
+            return date
+        }
+        //should always return a date above but just in case...
+        return Date("2000-07-09") //arbitrary
+    }
+    
     func dietIsChecked(dietID: Int) -> Bool
     {
         var result = false
-        for id in chosenDiets
+        for id in userDiets
         {
             if id == dietID
             {
@@ -123,21 +190,32 @@ class OnboardingViewModel
             if dietID == Constants.ID_NO_DIET
             {
                 //clear any previously chosen diets
-                chosenDiets = []
+                userDiets = []
             }
             else
             {
                 //remove ID_NO_DIET from chosenDiets
-                chosenDiets = chosenDiets.filter(){$0 != Constants.ID_NO_DIET}
+                userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIET}
             }
-            chosenDiets.append(dietID)
+            userDiets.append(dietID)
         }
         else
         {
             //remove dietID from chosenDiets
-            chosenDiets = chosenDiets.filter(){$0 != dietID}
+            userDiets = userDiets.filter(){$0 != dietID}
         }
+        
         //TODO: Update contact
+        if let contact = Contact.main()
+        {
+            contact.diet_ids = userDiets
+            ObjectStore.shared.ClientSave(contact)
+        }
+    }
+    
+    func backup()
+    {
+        onboardingViewModel!.curState.back()
     }
 }
 

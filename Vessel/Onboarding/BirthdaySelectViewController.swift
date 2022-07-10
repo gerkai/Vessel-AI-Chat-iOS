@@ -13,7 +13,6 @@ class BirthdaySelectViewController: UIViewController
     @IBOutlet weak var checkmarkView: SelectionCheckmarkView!
     
     let minAge = Constants.MIN_AGE
-    let averageAge = Constants.AVERAGE_AGE
     let maxAge = Constants.MAX_AGE
     private let calendar = Calendar.current
     private var minDateComponents = DateComponents()
@@ -28,22 +27,22 @@ class BirthdaySelectViewController: UIViewController
         setDatePickerMinMaxValues()
         setDatePickerInitialValue()
         checkmarkView.defaultText = NSLocalizedString("I prefer not to say", comment: "")
+        if viewModel!.userWithheldBirthdate
+        {
+            checkmarkView.isChecked = true
+        }
     }
     
     private func setDatePickerInitialValue()
     {
-        // set the initial year to current year - averageAge
-        var dateComponents = calendar.dateComponents([.day, .month, .year], from: Date())
-        
-        if let year = dateComponents.year
+        if let savedBirthday = viewModel?.userBirthdate
         {
-            dateComponents.year  = year - averageAge
+            datePicker.setDate(savedBirthday, animated: false)
         }
-        if let date = calendar.date(from: dateComponents)
+        else
         {
-            datePicker.setDate(date, animated: false)
+            datePicker.setDate(viewModel!.defaultBirthDate(), animated: false)
         }
-        
     }
     
     private func setDatePickerMinMaxValues ()
@@ -74,6 +73,9 @@ class BirthdaySelectViewController: UIViewController
     
     @IBAction func back()
     {
+        viewModel!.userWithheldBirthdate = checkmarkView.isChecked
+        viewModel?.setBirthDate(birthdate: datePicker.date)
+        viewModel?.backup()
         navigationController?.fadeOut()
     }
     
@@ -84,6 +86,7 @@ class BirthdaySelectViewController: UIViewController
     
     @IBAction func next()
     {
+        viewModel!.userWithheldBirthdate = checkmarkView.isChecked
         if checkmarkView.isChecked
         {
             //user prefers not to share birth date

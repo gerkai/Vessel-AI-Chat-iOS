@@ -57,4 +57,7 @@ struct Constants
     
     //Database IDs
     static let ID_NO_DIET = 17
+    
+    //Contact Flags
+    static let DECLINED_BIRTH_DATE = 0x00000001
 }
