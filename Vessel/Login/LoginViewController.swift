@@ -99,8 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
                         {contact in
                             Contact.MainID = contact.id
                             ObjectStore.shared.serverSave(contact)
-                            let vc = OnboardingNextViewController()
-                            //self.navigationController?.pushViewController(vc, animated: true)
+                            let vc = OnboardingViewModel.NextViewController()
                             self.navigationController?.fadeTo(vc)
                         }
                         onFailure:
@@ -145,7 +144,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, SocialAuthView
         else
         {
             //navigate to start of Onboarding
-            let vc = OnboardingNextViewController()
+            let vc = OnboardingViewModel.NextViewController()
                 
             self.navigationController?.fadeTo(vc)
         }

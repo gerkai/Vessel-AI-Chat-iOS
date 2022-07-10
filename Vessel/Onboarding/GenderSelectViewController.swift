@@ -10,6 +10,7 @@ import UIKit
 class GenderSelectViewController: UIViewController
 {
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
+    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {
@@ -18,7 +19,6 @@ class GenderSelectViewController: UIViewController
     
     @IBAction func backButton()
     {
-        //self.navigationController?.popViewController(animated: true)
         navigationController?.fadeOut()
     }
     
@@ -34,21 +34,11 @@ class GenderSelectViewController: UIViewController
             default:
                 break
         }
-        if let contact = Contact.main()
-        {
-            contact.gender = genderString
-            ObjectStore.shared.ClientSave(contact)
-        }
-        let vc = OnboardingNextViewController()
-        //{
-            //navigationController?.pushViewController(vc, animated: true)
-            navigationController?.fadeTo(vc)
-        /*}
-        else
-        {
-            self.navigationController?.popToRootViewController(animated: true)
-            Server.shared.logOut()
-        }*/
+        
+        viewModel?.setGender(gender: genderString)
+        
+        let vc = OnboardingViewModel.NextViewController()
+        navigationController?.fadeTo(vc)
     }
     
     @IBAction func privacyPolicyButton()

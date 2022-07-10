@@ -73,8 +73,7 @@ class GiftedCardRegisterViewController: UIViewController
                         }
                     }
                     //createContact()
-                    let vc = OnboardingNextViewController()
-                    //self.navigationController?.pushViewController(vc, animated: true)
+                    let vc = OnboardingViewModel.NextViewController()
                     self.navigationController?.fadeTo(vc)
                 }
                 else
@@ -123,15 +122,8 @@ class GiftedCardRegisterViewController: UIViewController
                 Contact.MainID = contact.id
                 ObjectStore.shared.serverSave(contact)
                 //begin onboarding flow
-                let vc = OnboardingNextViewController()
-                //{
-                    self.navigationController?.pushViewController(vc, animated: true)
-                /*}
-                else
-                {
-                    self.navigationController?.popToRootViewController(animated: true)
-                    Server.shared.logOut()
-                }*/
+                let vc = OnboardingViewModel.NextViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             onFailure:
             { error in

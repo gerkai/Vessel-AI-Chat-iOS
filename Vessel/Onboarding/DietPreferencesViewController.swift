@@ -11,7 +11,8 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
 {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dietLabelSpacing: NSLayoutConstraint!
-    var chosenDiets: [Int] = []
+    
+    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {
@@ -51,35 +52,19 @@ class DietPreferencesViewController: UIViewController, UICollectionViewDelegate,
         //we'll use the tag to hold the dietID
         cell.tag = Diets[indexPath.row].id
         cell.delegate = self
-        
+        cell.isChecked = viewModel?.dietIsChecked(dietID: cell.tag) ?? false
         return cell
     }
     
     //MARK: - CheckmarkCollectionViewCell delegates
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     {
-        if checked
-        {
-            //add dietID to chosenDiets
-            chosenDiets.append(cell.tag)
-        }
-        else
-        {
-            //remove dietID from chosenDiets
-            chosenDiets = chosenDiets.filter(){$0 != cell.tag}
-        }
-        print("Diets: \(chosenDiets)")
+        viewModel?.selectDiet(dietID: cell.tag, selected: checked)
+        collectionView.reloadData()
     }
     
     func canCheckMoreButtons() -> Bool
     {
-        if chosenDiets.count < 3
-        {
-            return true
-        }
-        else
-        {
-            return false
-        }
+        return true
     }
 }

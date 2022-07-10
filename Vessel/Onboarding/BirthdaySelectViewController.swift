@@ -20,6 +20,7 @@ class BirthdaySelectViewController: UIViewController
     private var maxDateComponents = DateComponents()
     private var maxDate = Date()
     private var minDate = Date()
+    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {
@@ -83,32 +84,17 @@ class BirthdaySelectViewController: UIViewController
     
     @IBAction func next()
     {
-        if let contact = Contact.main()
+        if checkmarkView.isChecked
         {
-            if checkmarkView.isChecked
-            {
-                contact.birth_date = nil
-            }
-            else
-            {
-                let formatter = DateFormatter()
-                formatter.dateFormat = Constants.SERVER_DATE_FORMAT
-                let strDate = formatter.string(from: datePicker.date)
-                contact.birth_date = strDate
-            }
-            ObjectStore.shared.ClientSave(contact)
+            //user prefers not to share birth date
+            viewModel?.setBirthDate(birthdate: nil)
         }
-        
-        let vc = OnboardingNextViewController()
-        //{
-            //navigationController?.pushViewController(vc, animated: true)
-            navigationController?.fadeTo(vc)
-        /*}
         else
         {
-            self.navigationController?.popToRootViewController(animated: true)
-            Server.shared.logOut()
-        }*/
+            viewModel?.setBirthDate(birthdate: datePicker.date)
+        }
+        
+        let vc = OnboardingViewModel.NextViewController()
+        navigationController?.fadeTo(vc)
     }
-    
 }

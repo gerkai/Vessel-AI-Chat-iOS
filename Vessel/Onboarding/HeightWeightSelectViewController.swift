@@ -17,7 +17,7 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
     @IBOutlet weak var heightPickerView: UIPickerView!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var weightUnitsLabel: UILabel!
-    
+    var viewModel: OnboardingViewModel?
     var isMetric: Bool!
     
     private enum HeightComponentImperial: Int, CaseIterable
@@ -153,43 +153,10 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
     {
         if let weight = weightTextField.text, weight.count != 0
         {
-            if let contact = Contact.main()
-            {
-                contact.weight = Double(weight)
-                contact.height = getSelections()
-                ObjectStore.shared.ClientSave(contact)
-            }
-            let vc = OnboardingNextViewController()
-            //{
-                //navigationController?.pushViewController(vc, animated: true)
-                navigationController?.fadeTo(vc)
-            /*}
-            else
-            {
-                self.navigationController?.popToRootViewController(animated: true)
-                Server.shared.logOut()
-            }*/
+            viewModel?.setHeightWeight(height: getSelections(), weight: Double(weight)!)
             
-            /*
-            if let contact = Contact.main()
-            {
-                if let weight = weightTextField.text, let weightValue = Double(weight)
-                {
-                    contact.weight = weightValue
-                    ObjectStore.shared.ClientSave(contact)
-                }
-            }
-            let vc = OnboardingNextViewController()
-            //{
-                //navigationController?.pushViewController(vc, animated: true)
-                navigationController?.fadeTo(vc)
-            /*}
-            else
-            {
-                self.navigationController?.popToRootViewController(animated: true)
-                Server.shared.logOut()
-            }*/
-             */
+            let vc = OnboardingViewModel.NextViewController()
+            navigationController?.fadeTo(vc)
         }
         else
         {

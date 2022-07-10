@@ -10,6 +10,8 @@ import UIKit
 class OnboardingWelcomeViewController: UIViewController
 {
     @IBOutlet weak var nameLabel: UILabel!
+    var viewModel: OnboardingViewModel?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,8 +31,8 @@ class OnboardingWelcomeViewController: UIViewController
     {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as? GenderSelectViewController
-        //if let vc = OnboardingNextViewController()
         {
+            vc.viewModel = viewModel
             //navigationController?.pushViewController(vc, animated: true)
             navigationController?.fadeTo(vc)
         }

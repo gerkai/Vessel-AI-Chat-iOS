@@ -18,8 +18,21 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
-    var isChecked = false
     weak var delegate: CheckmarkCollectionViewCellDelegate?
+    var isChecked = false
+    {
+        didSet
+        {
+            if isChecked
+            {
+                self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+            }
+            else
+            {
+                self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
+            }
+        }
+    }
     
     override func awakeFromNib()
     {
@@ -52,20 +65,12 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
             UIView.animate(withDuration: 0.1)
             {
                 self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                if self.isChecked
-                {
-                    self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
-                }
-                else
-                {
-                    self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
-                }
             }
             completion:
             { _ in
-                
+                self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
             }
         }
-        self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
+        
     }
 }
