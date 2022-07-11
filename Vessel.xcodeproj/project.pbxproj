@@ -42,6 +42,7 @@
 		3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */; };
 		3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F01D287C90BC00FCC52E /* MainViewController.swift */; };
 		3F12F01F287C9FF700FCC52E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F01C287C908600FCC52E /* Main.storyboard */; };
+		3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
@@ -78,7 +79,6 @@
 		3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DB27C9A74B00231D42 /* BananaGrotesk-Extrabold.otf */; };
 		3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DD27C9A74B00231D42 /* NoeText.otf */; };
 		3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DE27C9A74B00231D42 /* NoeText-Book.otf */; };
-		3FE369ED27C9A82A00231D42 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
@@ -543,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
+				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
@@ -550,7 +551,6 @@
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
 				3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */,
 				3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */,
-				3FE369ED27C9A82A00231D42 /* Login.storyboard in Resources */,
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,

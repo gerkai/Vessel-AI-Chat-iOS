@@ -121,17 +121,11 @@ extension UIView
     
     func cutHalfCircle(with radius: CGFloat = 100)
     {
-        //Borrowed from V2 app. Used for adding transparency border around Vessel button on home screen
+        //Used for cutting out a transparency border around Vessel button on home screen
         let center = CGPoint(x: UIScreen.main.bounds.midX, y: 0)
         let path = UIBezierPath(rect: bounds)
         path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-        let shiftingValue: CGFloat = 35
-        let rightEdgePoint = CGPoint(x: center.x + shiftingValue, y: 0)
-        path.move(to: rightEdgePoint)
-        path.addCurve(to: CGPoint(x: rightEdgePoint.x, y: 2), controlPoint1: CGPoint(x: rightEdgePoint.x + 3, y: 0), controlPoint2: CGPoint(x: rightEdgePoint.x + 1, y: 0))
-        let leftEdgePoint = CGPoint(x: center.x - shiftingValue, y: 0)
-        path .move(to: leftEdgePoint)
-        path.addCurve(to: CGPoint(x: leftEdgePoint.x, y: 2), controlPoint1: CGPoint(x: leftEdgePoint.x - 3, y: 0), controlPoint2: CGPoint(x: leftEdgePoint.x - 1, y: 0))
+
         let mask = CAShapeLayer()
         mask.fillRule = .evenOdd
         mask.path = path.cgPath
