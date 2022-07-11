@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    //var curState: OnboardingState = .Initial
+    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
