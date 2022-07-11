@@ -81,8 +81,6 @@ class OnboardingViewModel
             {
                 //show gender selector flow
                 let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
-                //uncomment for testing to jump directly to desired VC
-                //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
                 vc.viewModel = onboardingViewModel
                 return vc
             }
