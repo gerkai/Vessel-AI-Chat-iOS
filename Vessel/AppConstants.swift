@@ -64,8 +64,8 @@ struct Constants
     static let VIEWED_TERMS         = 0x00000002
     
     //Colors
-    static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)
-    static let vesselGray   = #colorLiteral(red: 0.3289078772, green: 0.3246636391, blue: 0.3246636391, alpha: 1)
+    static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514
+    static let vesselGray   = #colorLiteral(red: 0.3289078772, green: 0.3246636391, blue: 0.3246636391, alpha: 1)     //#545353
     
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
