@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate
+class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabelSpacing: NSLayoutConstraint!
@@ -23,6 +23,7 @@ class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad()
     {
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
+        collectionView.registerFromNib(CheckmarkImageCollectionViewCell.self)
         //on smaller screens move everything up so all checkboxes have best chance of fitting on screen
         //without making the user have to scroll.
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
@@ -77,6 +78,11 @@ class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate,
         {
             height = Constants.SMALL_SCREEN_CHECK_BUTTON_HEIGHT
         }
+        //SingleGoal uses bigger cells
+        if itemType == .SingleGoal
+        {
+            height = collectionView.frame.width * 0.48
+        }
         return CGSize(width: collectionView.frame.width * 0.48, height: height)
     }
     
@@ -87,14 +93,28 @@ class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-        let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
-        cell.titleLabel.text = info.name
-        //we'll use the tag to hold the diet/allergy/goal ID
-        cell.tag = info.id
-        cell.delegate = self
-        cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
-        return cell
+        if itemType == .SingleGoal
+        {
+            let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
+            let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
+            cell.titleLabel.text = info.name
+            //we'll use the tag to hold the goal ID
+            cell.tag = info.id
+            cell.delegate = self
+            cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
+            return cell
+        }
+        else
+        {
+            let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
+            let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
+            cell.titleLabel.text = info.name
+            //we'll use the tag to hold the diet/allergy/goal ID
+            cell.tag = info.id
+            cell.delegate = self
+            cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
+            return cell
+        }
     }
     
     //MARK: - CheckmarkCollectionViewCell delegates

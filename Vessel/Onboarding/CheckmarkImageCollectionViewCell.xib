@@ -15,20 +15,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckmarkCollectionViewCell" id="gTV-IL-0wX" customClass="CheckmarkCollectionViewCell" customModule="Vessel" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckmarkImageCollectionViewCell" id="gTV-IL-0wX" customClass="CheckmarkImageCollectionViewCell" customModule="Vessel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="111"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                <rect key="frame" x="0.0" y="0.0" width="160" height="111"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4l-Ky-qSI" userLabel="rootView">
-                        <rect key="frame" x="22" y="0.0" width="138" height="60"/>
+                        <rect key="frame" x="22" y="0.0" width="138" height="111"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ss2-Rk-tuR">
-                                <rect key="frame" x="0.0" y="0.0" width="138" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="138" height="111"/>
                                 <view key="contentView" hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zTF-fb-4yb">
-                                    <rect key="frame" x="0.0" y="0.0" width="138" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="138" height="111"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="light"/>
@@ -39,7 +39,7 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJi-pF-maC" userLabel="titleLabel">
-                                <rect key="frame" x="34" y="8" width="87.5" height="44"/>
+                                <rect key="frame" x="34" y="29" width="87.5" height="18"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
                                 <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -57,19 +57,25 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <integer key="value" value="22"/>
+                                <integer key="value" value="24"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ag7-3F-FmA"/>
+                                <exclude reference="gMo-oW-sS0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A59-fk-jx7">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="111"/>
                         <state key="selected" image="Checkbox_beige_selected"/>
                         <connections>
                             <action selector="onTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fXT-mK-7oA"/>
                         </connections>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkbox_green_unselected" translatesAutoresizingMaskIntoConstraints="NO" id="WL8-hP-EQT">
-                        <rect key="frame" x="0.0" y="8" width="44" height="44"/>
+                        <rect key="frame" x="0.0" y="16" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="3JV-00-bzF"/>
                             <constraint firstAttribute="height" constant="44" id="ELv-4b-uKe"/>
@@ -84,19 +90,26 @@
                 <constraint firstItem="x4l-Ky-qSI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="6E5-2p-qFO"/>
                 <constraint firstItem="x4l-Ky-qSI" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="ExK-Um-wuP"/>
                 <constraint firstItem="x4l-Ky-qSI" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="LbN-w7-0a4"/>
+                <constraint firstItem="ZJi-pF-maC" firstAttribute="centerY" secondItem="WL8-hP-EQT" secondAttribute="centerY" id="OMe-Pb-Szz"/>
                 <constraint firstItem="x4l-Ky-qSI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dbc-nl-HKB"/>
                 <constraint firstItem="A59-fk-jx7" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="dxf-HV-fc2"/>
+                <constraint firstItem="WL8-hP-EQT" firstAttribute="top" secondItem="x4l-Ky-qSI" secondAttribute="top" constant="16" id="laI-9h-HxZ"/>
                 <constraint firstItem="A59-fk-jx7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="q2i-bO-JSm"/>
                 <constraint firstItem="A59-fk-jx7" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="tQt-AP-YxB"/>
                 <constraint firstItem="WL8-hP-EQT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wiZ-UL-ImA"/>
             </constraints>
-            <size key="customSize" width="160" height="114"/>
+            <size key="customSize" width="160" height="165"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="02n-UK-FDq"/>
+                </mask>
+            </variation>
             <connections>
-                <outlet property="checkImage" destination="WL8-hP-EQT" id="aDc-yZ-gCd"/>
-                <outlet property="rootView" destination="x4l-Ky-qSI" id="0iU-eK-ESo"/>
+                <outlet property="checkImage" destination="WL8-hP-EQT" id="MBn-Fu-Z2y"/>
+                <outlet property="rootView" destination="x4l-Ky-qSI" id="MPk-ab-fIc"/>
                 <outlet property="titleLabel" destination="ZJi-pF-maC" id="0cI-d4-eBA"/>
             </connections>
-            <point key="canvasLocation" x="217.39130434782609" y="119.19642857142857"/>
+            <point key="canvasLocation" x="217.39130434782609" y="136.27232142857142"/>
         </collectionViewCell>
     </objects>
     <resources>

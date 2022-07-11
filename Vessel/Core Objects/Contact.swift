@@ -21,6 +21,8 @@ class Contact: CoreObjectProtocol
     var birth_date: String?     //in yyyy-mm-dd format
     var diet_ids: [Int]
     var allergy_ids: [Int]
+    var goal_ids: [Int]
+    var mainGoal: Int?
     var flags: Int              //object is not returned from server yet so we mock it with a private var _flags
     { get { _flags ?? 0}
         set { _flags = newValue}
@@ -72,6 +74,8 @@ class Contact: CoreObjectProtocol
          birthDate: String? = nil,
          diet_ids: [Int] = [],
          allergy_ids: [Int] = [],
+         goal_ids: [Int] = [],
+         mainGoal: Int? = nil,
          flags: Int = 0,
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
@@ -103,6 +107,8 @@ class Contact: CoreObjectProtocol
         self.birth_date = birthDate
         self.diet_ids = diet_ids
         self.allergy_ids = allergy_ids
+        self.goal_ids = goal_ids
+        self.mainGoal = mainGoal
         _flags = flags
         //self.allergies = allergies
         //self.goals = goals
@@ -149,6 +155,8 @@ class Contact: CoreObjectProtocol
         case _flags = "flags"
         case diet_ids
         case allergy_ids
+        case goal_ids
+        case mainGoal
         case is_verified
     }
 }

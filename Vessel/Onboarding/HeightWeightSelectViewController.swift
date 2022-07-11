@@ -231,10 +231,10 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         }
         else
         {
-            let (maxFeet, maxInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
-            let (minFeet, minInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
-            print("MAX: \(maxFeet), \(maxInches)")
-            print("MIN: \(minFeet), \(minInches)")
+            //let (maxFeet, maxInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
+            //let (minFeet, minInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
+            //print("MAX: \(maxFeet), \(maxInches)")
+            //print("MIN: \(minFeet), \(minInches)")
             let heightComponent = HeightComponentImperial(rawValue: component)
             switch heightComponent
             {

@@ -1,25 +1,26 @@
 //
-//  CheckmarkCollectionViewCell.swift
+//  CheckmarkImageCollectionViewCell.swift
 //  vessel-ios
 //
-//  Created by Carson Whitsett on 7/9/22.
+//  Created by Carson Whitsett on 7/10/22.
 //  Copyright © 2022 Vessel Health Inc. All rights reserved.
 //
 
 import UIKit
 
-protocol CheckmarkCollectionViewCellDelegate: AnyObject
+protocol CheckmarkImageCollectionViewCellDelegate: AnyObject
 {
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     func canCheckMoreButtons() -> Bool
 }
 
-class CheckmarkCollectionViewCell: UICollectionViewCell
+class CheckmarkImageCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var rootView: UIView!
-    weak var delegate: CheckmarkCollectionViewCellDelegate?
+    
+    weak var delegate: CheckmarkImageCollectionViewCellDelegate?
     var originalColor: UIColor!
     
     var isChecked = false

@@ -11,8 +11,10 @@ import UIKit
 class SelectionCheckmarkView: UIView
 {
     @IBOutlet var contentView: UIView!
+    @IBOutlet var roundedView: UIView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
+    var originalColor: UIColor!
     
     var defaultText: String?
     {
@@ -35,10 +37,12 @@ class SelectionCheckmarkView: UIView
                 if self.isChecked == true
                 {
                     self.checkImage.image = UIImage(named:"checkbox_selected")
+                    self.roundedView.backgroundColor = UIColor.white
                 }
                 else
                 {
                     self.checkImage.image = UIImage(named:"checkbox_unselected")
+                    self.roundedView.backgroundColor = self.originalColor
                 }
                 
                 UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
@@ -74,6 +78,13 @@ class SelectionCheckmarkView: UIView
         self.backgroundColor = .clear
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+    }
+    
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+        originalColor = roundedView.backgroundColor
     }
     
     @IBAction func checkmarkPressed()

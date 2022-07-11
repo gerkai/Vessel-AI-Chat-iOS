@@ -43,6 +43,7 @@ enum ItemPreferencesType
     case Diet
     case Allergy
     case Goal
+    case SingleGoal
 }
 
 class OnboardingViewModel
@@ -51,6 +52,7 @@ class OnboardingViewModel
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
+    var mainGoal: Int?
     var userGender: Int?
     var userHeight: Double?
     var userWeight: Double?
@@ -61,6 +63,7 @@ class OnboardingViewModel
     static func NextViewController() -> UIViewController
     {
         //MainContact is guaranteed
+        let contact = Contact.main()!
         
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if onboardingViewModel == nil
@@ -73,63 +76,139 @@ class OnboardingViewModel
         
         if onboardingViewModel!.curState == .WelcomeGender
         {
-            //show gender selector flow
-            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
-            //uncomment for testing to jump directly to desired VC
-            //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+            if contact.gender == nil
+            {
+                //show gender selector flow
+                let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+                //uncomment for testing to jump directly to desired VC
+                //let vc = storyboard.instantiateViewController(withIdentifier: "DietPreferencesViewController") as! DietPreferencesViewController
+                vc.viewModel = onboardingViewModel
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .HeightWeight
+        {
+            if contact.height == nil || contact.weight == nil
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
+                vc.viewModel = onboardingViewModel
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .BirthdaySelect
+        {
+            if contact.birth_date == nil && (contact.flags & Constants.DECLINED_BIRTH_DATE) == 0
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
+                vc.viewModel = onboardingViewModel
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .DietSelect
+        {
+            if contact.diet_ids.count == 0
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+                vc.viewModel = onboardingViewModel
+                vc.titleText = NSLocalizedString("Diet", comment:"Title of Diet Preferences screen")
+                vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment:"Subtext of Diet Preferences screen")
+                vc.itemType = .Diet
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .AllergySelect
+        {
+            if contact.allergy_ids.count == 0
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+                vc.viewModel = onboardingViewModel
+                vc.titleText = NSLocalizedString("Allergies", comment:"Title of Allergy Preferences screen")
+                vc.subtext = NSLocalizedString("Do you have any food allergies?", comment:"Subtext of Allergy Preferences screen")
+                vc.itemType = .Allergy
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .ViewTerms
+        {
+            if contact.flags & Constants.VIEWED_TERMS == 0
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
+                vc.viewModel = onboardingViewModel
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .GoalsSelect
+        {
+            if contact.goal_ids.count == 0
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+                vc.viewModel = onboardingViewModel
+                vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
+                vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment:"Subtext of Goal Preferences screen")
+                vc.itemType = .Goal
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .SingleGoalSelect
+        {
+            if contact.mainGoal == nil
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+                vc.viewModel = onboardingViewModel
+                vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
+                vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment:"Subtext of Goal Preferences screen")
+                vc.itemType = .SingleGoal
+                return vc
+            }
+            else
+            {
+                //skip and go to next state
+                onboardingViewModel!.curState.next()
+            }
+        }
+        if onboardingViewModel!.curState == .FinalOnboarding
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
             vc.viewModel = onboardingViewModel
             return vc
         }
-        else if onboardingViewModel!.curState == .HeightWeight
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
-            vc.viewModel = onboardingViewModel
-            return vc
-        }
-        else if onboardingViewModel!.curState == .BirthdaySelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
-            vc.viewModel = onboardingViewModel
-            return vc
-        }
-        else if onboardingViewModel!.curState == .DietSelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-            vc.viewModel = onboardingViewModel
-            vc.titleText = NSLocalizedString("Diet", comment:"Title of Diet Preferences screen")
-            vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment:"Subtext of Diet Preferences screen")
-            vc.itemType = .Diet
-            return vc
-        }
-        else if onboardingViewModel!.curState == .AllergySelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-            vc.viewModel = onboardingViewModel
-            vc.titleText = NSLocalizedString("Allergies", comment:"Title of Allergy Preferences screen")
-            vc.subtext = NSLocalizedString("Do you have any food allergies?", comment:"Subtext of Allergy Preferences screen")
-            vc.itemType = .Allergy
-            return vc
-        }
-        else if onboardingViewModel!.curState == .ViewTerms
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
-            vc.viewModel = onboardingViewModel
-            return vc
-        }
-        else if onboardingViewModel!.curState == .GoalsSelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-            vc.viewModel = onboardingViewModel
-            vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
-            vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment:"Subtext of Goal Preferences screen")
-            vc.itemType = .Goal
-            return vc
-        }
-        else
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "LastViewController") as! LastViewController
-            return vc
-        }
+        let vc = storyboard.instantiateViewController(withIdentifier: "LastViewController") as! LastViewController
+        return vc
     }
     
     func backup()
@@ -219,33 +298,30 @@ class OnboardingViewModel
     {
         switch type
         {
-        case .Diet:
-            if userDiets.count == 0
-            {
-                return false
-            }
-            else
-            {
+            case .Diet:
+                if userDiets.count == 0
+                {
+                    return false
+                }
                 return true
-            }
-        case .Allergy:
-            if userAllergies.count == 0
-            {
-                return false
-            }
-            else
-            {
+            case .Allergy:
+                if userAllergies.count == 0
+                {
+                    return false
+                }
                 return true
-            }
-        case .Goal:
-            if userGoals.count < Constants.MAX_GOALS_AT_A_TIME
-            {
-                return false
-            }
-            else
-            {
+            case .Goal:
+                if userGoals.count < Constants.MAX_GOALS_AT_A_TIME
+                {
+                    return false
+                }
                 return true
-            }
+            case .SingleGoal:
+                if mainGoal == nil
+                {
+                    return false
+                }
+                return true
         }
     }
     func infoForItemAt(indexPath: IndexPath, type: ItemPreferencesType) -> (name: String, id: Int)
@@ -259,6 +335,17 @@ class OnboardingViewModel
                 return (Allergies[row].name.capitalized, Allergies[row].id)
             case .Goal:
                 return (Goals[row].name.capitalized, Goals[row].id)
+            case .SingleGoal:
+                //search the 3 goals the user selected
+                for goal in Goals
+                {
+                    if goal.id == userGoals[row]
+                    {
+                        return (goal.name.capitalized, userGoals[row])
+                    }
+                }
+                //this will never get called
+                return (Goals[0].name.capitalized, Goals[0].id)
         }
     }
     
@@ -272,6 +359,8 @@ class OnboardingViewModel
                 return Allergies.count
             case .Goal:
                 return Goals.count
+            case .SingleGoal:
+                return userGoals.count
         }
     }
     func itemIsChecked(type: ItemPreferencesType, id: Int) -> Bool
@@ -307,6 +396,15 @@ class OnboardingViewModel
                         break
                     }
                 }
+            case .SingleGoal:
+                if mainGoal != nil
+                {
+                    if mainGoal! == id
+                    {
+                        return true
+                    }
+                }
+                return false
         }
         return result
     }
@@ -398,6 +496,16 @@ class OnboardingViewModel
                 contact.allergy_ids = userAllergies
                 ObjectStore.shared.ClientSave(contact)
             }
+        case .SingleGoal:
+            if selected
+            {
+                mainGoal = id
+            }
+            else
+            {
+                mainGoal = nil
+            }
+            
         }
     }
     
@@ -412,6 +520,8 @@ class OnboardingViewModel
                 return defaultText
             case .Goal:
                 return NSLocalizedString("Please choose 3 goals", comment:"Error message when user hasn't chosen 3 goals")
+            case .SingleGoal:
+                return defaultText
         }
     }
     //MARK: - Terms
@@ -423,6 +533,22 @@ class OnboardingViewModel
             contact.flags |= Constants.VIEWED_TERMS
             ObjectStore.shared.ClientSave(contact)
         }
+    }
+    
+    //MARK: - Final
+    
+    func finalScreenText() -> String
+    {
+        for goal in Goals
+        {
+            if goal.id == mainGoal
+            {
+                let text = String(format:NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
+                return text
+            }
+        }
+        //should never get here
+        return ""
     }
 }
 

@@ -37,6 +37,9 @@
 		3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */; };
 		3F12F011287B4C0600FCC52E /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F010287B4C0600FCC52E /* Goal.swift */; };
 		3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */; };
+		3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */; };
+		3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */; };
+		3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
@@ -126,6 +129,9 @@
 		3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		3F12F010287B4C0600FCC52E /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewController.swift; sourceTree = "<group>"; };
+		3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalViewController.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -258,10 +264,13 @@
 				3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */,
 				3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */,
 				3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */,
+				3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */,
+				3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */,
 				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
 				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
 				3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */,
 				3F87B97127D44F4A00D589F7 /* LastViewController.swift */,
+				3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */,
 				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
@@ -539,6 +548,7 @@
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
+				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
@@ -640,6 +650,7 @@
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
+				3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */,
@@ -658,6 +669,7 @@
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
+				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
