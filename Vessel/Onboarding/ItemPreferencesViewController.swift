@@ -4,6 +4,8 @@
 //
 //  Created by Carson Whitsett on 7/7/22.
 //
+//  Used for Diet Preferences, Allergy Preferences, and Goal selection
+//  Will use CheckmarkCollectionViewCell or the larger CheckmarkImageCollectionViewCell depending on itemType variable.
 
 import UIKit
 
