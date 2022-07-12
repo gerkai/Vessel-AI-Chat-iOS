@@ -43,6 +43,13 @@
 		3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F01D287C90BC00FCC52E /* MainViewController.swift */; };
 		3F12F01F287C9FF700FCC52E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F01C287C908600FCC52E /* Main.storyboard */; };
 		3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
+		3F12F045287DCC6900FCC52E /* TakeTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F044287DCC6900FCC52E /* TakeTest.storyboard */; };
+		3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */; };
+		3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */; };
+		3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */; };
+		3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */; };
+		3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */; };
+		3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
@@ -136,6 +143,13 @@
 		3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalViewController.swift; sourceTree = "<group>"; };
 		3F12F01C287C908600FCC52E /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "/Users/carsonwhitsett/Projects/Ditty Labs/Clients/Vessel Health/New Vessel/Vessel/Vessel/Main.storyboard"; sourceTree = "<absolute>"; };
 		3F12F01D287C90BC00FCC52E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3F12F044287DCC6900FCC52E /* TakeTest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TakeTest.storyboard; sourceTree = "<group>"; };
+		3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulTestTipsViewController.swift; sourceTree = "<group>"; };
+		3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeeTipViewController.swift; sourceTree = "<group>"; };
+		3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupTipViewController.swift; sourceTree = "<group>"; };
+		3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCheckmarkView.swift; sourceTree = "<group>"; };
+		3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCheckmarkView.xib; sourceTree = "<group>"; };
+		3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadingView.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -262,6 +276,17 @@
 			path = "Core Objects";
 			sourceTree = "<group>";
 		};
+		3F12F043287DCC6900FCC52E /* TakeTest */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
+				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
+				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
+				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
+			);
+			path = TakeTest;
+			sourceTree = "<group>";
+		};
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +355,7 @@
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
+				3F12F043287DCC6900FCC52E /* TakeTest */,
 				3FE369AD27C9A07F00231D42 /* Info.plist */,
 			);
 			path = Vessel;
@@ -418,6 +444,9 @@
 			isa = PBXGroup;
 			children = (
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
+				3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */,
+				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
+				3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
@@ -557,10 +586,12 @@
 				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
+				3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
 				3FE369DF27C9A74B00231D42 /* BananaGrotesk-Light.otf in Resources */,
 				3F12F01F287C9FF700FCC52E /* Main.storyboard in Resources */,
 				3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */,
+				3F12F045287DCC6900FCC52E /* TakeTest.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
@@ -638,8 +670,10 @@
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
+				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
+				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
@@ -658,6 +692,7 @@
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
+				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
 				3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
@@ -671,6 +706,7 @@
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
+				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
@@ -849,7 +885,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -881,7 +917,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

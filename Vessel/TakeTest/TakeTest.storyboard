@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Successful Test Tips View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SuccessfulTestTipsViewController" id="Y6W-OH-hqX" customClass="SuccessfulTestTipsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwj-nA-ong">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GHW-0j-k0W"/>
+                                    <constraint firstAttribute="width" constant="50" id="IrF-j9-AGn"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="back" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pLK-03-U1z"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you prefer to use a cup or pee directly on the card?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXQ-1x-Irc">
+                                <rect key="frame" x="30" y="133" width="354" height="54"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEr-nD-3Aa">
+                                <rect key="frame" x="30" y="199" width="354" height="115.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">We recommend using a cup because it's the easiest way to ensure a successful test.  You can also pee directly on the card, just make sure to follow the instructions carefully.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPq-Oe-8wt" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="342.5" width="354" height="138"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="138" id="Gx7-IL-GHO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0q-Dt-HOA" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="492.5" width="354" height="138"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="138" id="CWf-Tt-mOp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" red="0.99323421720000005" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CPq-Oe-8wt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="9LK-N1-cgi"/>
+                            <constraint firstItem="CPq-Oe-8wt" firstAttribute="top" secondItem="tEr-nD-3Aa" secondAttribute="bottom" constant="28" id="ESb-Nu-nZl"/>
+                            <constraint firstItem="P0q-Dt-HOA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Hi9-IP-14N"/>
+                            <constraint firstItem="tEr-nD-3Aa" firstAttribute="top" secondItem="gXQ-1x-Irc" secondAttribute="bottom" constant="12" id="Mxa-ka-pfZ"/>
+                            <constraint firstItem="gXQ-1x-Irc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="NeU-Vk-2Aj"/>
+                            <constraint firstItem="tEr-nD-3Aa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="RXl-2u-cIf"/>
+                            <constraint firstItem="dwj-nA-ong" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="30" id="TIQ-Hh-qNK"/>
+                            <constraint firstItem="gXQ-1x-Irc" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" constant="-30" id="UcB-1n-McP"/>
+                            <constraint firstItem="dwj-nA-ong" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="VJo-Di-X8a"/>
+                            <constraint firstItem="gXQ-1x-Irc" firstAttribute="top" secondItem="dwj-nA-ong" secondAttribute="bottom" constant="39" id="cZW-ad-vvt"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="P0q-Dt-HOA" secondAttribute="trailing" constant="30" id="e7p-kW-IEG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CPq-Oe-8wt" secondAttribute="trailing" constant="30" id="epS-3y-Om1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tEr-nD-3Aa" secondAttribute="trailing" constant="30" id="l2s-KC-EVR"/>
+                            <constraint firstItem="P0q-Dt-HOA" firstAttribute="top" secondItem="CPq-Oe-8wt" secondAttribute="bottom" constant="12" id="zXK-4w-VF9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="botView" destination="P0q-Dt-HOA" id="leh-hd-ZY5"/>
+                        <outlet property="botViewHeight" destination="CWf-Tt-mOp" id="svR-N6-zXc"/>
+                        <outlet property="topView" destination="CPq-Oe-8wt" id="MzK-eV-rmo"/>
+                        <outlet property="topViewHeight" destination="Gx7-IL-GHO" id="jPO-cn-lmY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="102.89855072463769" y="44.866071428571423"/>
+        </scene>
+        <!--Pee Tip View Controller-->
+        <scene sceneID="ggy-pb-OQW">
+            <objects>
+                <viewController storyboardIdentifier="PeeTipViewController" id="spg-sE-JSD" customClass="PeeTipViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mtR-I7-lLS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PEE TIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1he-4e-L0I">
+                                <rect key="frame" x="178" y="438" width="59" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNt-tB-gXA">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5v6-Vr-dpl"/>
+                                    <constraint firstAttribute="width" constant="50" id="Frh-hj-ULS"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="back" destination="spg-sE-JSD" eventType="touchUpInside" id="CUf-iP-Dzd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eEM-Fv-I6h"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zNt-tB-gXA" firstAttribute="leading" secondItem="eEM-Fv-I6h" secondAttribute="leading" constant="30" id="bTQ-lu-m2f"/>
+                            <constraint firstItem="zNt-tB-gXA" firstAttribute="top" secondItem="eEM-Fv-I6h" secondAttribute="top" id="mvk-cO-LFJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b7s-gb-HzY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="955" y="45"/>
+        </scene>
+        <!--Cup Tip View Controller-->
+        <scene sceneID="FSs-UU-QdH">
+            <objects>
+                <viewController storyboardIdentifier="CupTipViewController" id="fQb-oe-f2i" customClass="CupTipViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vUN-U6-aXF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CUP TIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqe-M5-sjK">
+                                <rect key="frame" x="175" y="438" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JM-fq-AIU">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="96J-lp-Tk9"/>
+                                    <constraint firstAttribute="width" constant="50" id="k16-Q7-0G1"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="back" destination="fQb-oe-f2i" eventType="touchUpInside" id="8JJ-Ci-awy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ytV-45-8iM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6JM-fq-AIU" firstAttribute="top" secondItem="ytV-45-8iM" secondAttribute="top" id="D45-ha-yA4"/>
+                            <constraint firstItem="6JM-fq-AIU" firstAttribute="leading" secondItem="ytV-45-8iM" secondAttribute="leading" constant="30" id="cvA-ca-jRU"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OR7-gv-N7E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1680" y="45"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="square_back_button" width="50" height="50"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -69,4 +69,6 @@ struct Constants
     
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
+    static let MORNING_TEST_TIME_START = 4 /* 4am */
+    static let MORNING_TEST_TIME_END = 9 /* 9am */
 }

@@ -56,7 +56,7 @@ class MainViewController: UITabBarController
             button.scale = 1.2
             button.setupView()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.addTarget(self, action: #selector(pressed), for: .touchUpInside)
+            button.addTarget(self, action: #selector(vesselButtonPressed), for: .touchUpInside)
             
             view.addSubview(button)
             tabBar.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
@@ -64,8 +64,42 @@ class MainViewController: UITabBarController
         }
     }
     
-    @objc func pressed()
+    @objc func vesselButtonPressed()
     {
-        selectedIndex = vesselButtonIndex
+        if isWithinTestingWindow()
+        {
+            selectedIndex = vesselButtonIndex
+        }
+        else
+        {
+            print("OUTSIDE TESTING WINDOW")
+            //selectedIndex = vesselButtonIndex
+        }
+    }
+    
+    func isWithinTestingWindow()->Bool
+    {
+        //return true if we're currently inside the testing window (MORNING_TEST_TIME_START ~ MORNING_TEST_TIME_END)
+        var timeExist:Bool
+        let calendar = Calendar.current
+        let startTimeComponent = DateComponents(calendar: calendar, hour: Constants.MORNING_TEST_TIME_START)
+        let endTimeComponent   = DateComponents(calendar: calendar, hour: Constants.MORNING_TEST_TIME_END)
+
+        let now = Date()
+        let startOfToday = calendar.startOfDay(for: now)
+        let startTime    = calendar.date(byAdding: startTimeComponent, to:
+        startOfToday)!
+        let endTime      = calendar.date(byAdding: endTimeComponent, to:
+        startOfToday)!
+
+        if startTime <= now && now <= endTime
+        {
+            timeExist = true
+        }
+        else
+        {
+            timeExist = false
+        }
+        return timeExist
     }
 }

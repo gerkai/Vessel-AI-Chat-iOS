@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    var curState: OnboardingState = .Initial
+    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    //var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
@@ -168,7 +168,7 @@ class OnboardingViewModel
         }
         if onboardingViewModel!.curState == .GoalsSelect
         {
-            if contact.goal_ids.count == 0
+            if contact.goal_ids.count < Constants.MAX_GOALS_AT_A_TIME
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
@@ -181,6 +181,7 @@ class OnboardingViewModel
             {
                 //skip and go to next state
                 onboardingViewModel!.curState.next()
+                onboardingViewModel!.userGoals = contact.goal_ids
             }
         }
         if onboardingViewModel!.curState == .SingleGoalSelect
