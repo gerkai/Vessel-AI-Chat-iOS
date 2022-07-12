@@ -13,10 +13,13 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
+    private let analytics = MixpanelAnalytics()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
-        FirebaseApp.configure()
         
+        FirebaseApp.configure()
+        analytics.setup()
         configureAppearance()
         
         return true

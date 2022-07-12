@@ -8,6 +8,7 @@ def pods
   pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
   pod 'SwiftEntryKit', '1.2.3'
+  pod 'Mixpanel-swift'
 end
 
 target 'Vessel' do

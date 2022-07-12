@@ -95,6 +95,9 @@
 		3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DE27C9A74B00231D42 /* NoeText-Book.otf */; };
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
+		723A1463287D2C2900BEE971 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 723A1462287D2C2900BEE971 /* Main.storyboard */; };
+		72D4FC0F287D2D0B00EA2EA3 /* AnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* AnalyticsProtocol.swift */; };
+		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 /* End PBXBuildFile section */
 
@@ -210,6 +213,9 @@
 		3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSignInViewController.swift; sourceTree = "<group>"; };
 		3FE369F327C9B34A00231D42 /* BounceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
 		3FE369F527C9B39100231D42 /* VesselButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VesselButton.swift; sourceTree = "<group>"; };
+		723A1462287D2C2900BEE971 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		72D4FC0E287D2D0B00EA2EA3 /* AnalyticsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsProtocol.swift; sourceTree = "<group>"; };
+		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -376,6 +382,7 @@
 		3FE3699E27C9A07E00231D42 /* Vessel */ = {
 			isa = PBXGroup;
 			children = (
+				72D4FC0D287D2CD400EA2EA3 /* Analytics */,
 				3FE3699F27C9A07E00231D42 /* AppDelegate.swift */,
 				3F0547BE27C9F105006E3098 /* AppConstants.swift */,
 				3FE369CF27C9A71D00231D42 /* Assets */,
@@ -384,7 +391,8 @@
 				3F0547AD27C9B8EA006E3098 /* Extensions */,
 				3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */,
 				3FE369EB27C9A82A00231D42 /* Login */,
-				3F12F054287E28AA00FCC52E /* Main */,
+				723A1462287D2C2900BEE971 /* Main.storyboard */,
+				3F12F01D287C90BC00FCC52E /* MainViewController.swift */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
@@ -490,6 +498,15 @@
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		72D4FC0D287D2CD400EA2EA3 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				72D4FC0E287D2D0B00EA2EA3 /* AnalyticsProtocol.swift */,
+				72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
@@ -626,6 +643,7 @@
 				3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
 				3FE369DF27C9A74B00231D42 /* BananaGrotesk-Light.otf in Resources */,
+				723A1463287D2C2900BEE971 /* Main.storyboard in Resources */,
 				3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */,
 				3F12F045287DCC6900FCC52E /* TakeTest.storyboard in Resources */,
 			);
@@ -711,6 +729,7 @@
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
+				72D4FC0F287D2D0B00EA2EA3 /* AnalyticsProtocol.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
@@ -722,6 +741,7 @@
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
 				3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */,
