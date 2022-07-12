@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
+//  TODO: Implement our own way to display errors in ShowError(). Then we can remove SwiftEntryKit Pod
 
 import UIKit
 import SwiftEntryKit
