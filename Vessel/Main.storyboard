@@ -28,10 +28,7 @@
                         <viewLayoutGuide key="safeArea" id="eZe-f0-71K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Plan" image="Plan-Icon" id="OED-Xy-1RK">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="-9"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="7"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Plan" image="Plan-Icon" id="OED-Xy-1RK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jU-Mt-8UZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -56,10 +53,7 @@
                         <viewLayoutGuide key="safeArea" id="dVU-0E-yXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="Chat-Icon" id="bkk-Po-fvx">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="-9"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="7"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Chat" image="Chat-Icon" id="bkk-Po-fvx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Um5-Cg-1be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -84,10 +78,7 @@
                         <viewLayoutGuide key="safeArea" id="L9N-Hj-exo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="cdQ-k9-hpb">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="-9"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="7"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="cdQ-k9-hpb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVi-fV-cNU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,10 +103,7 @@
                         <viewLayoutGuide key="safeArea" id="9IQ-TA-VWQ"/>
                         <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="Xst-F5-x7s">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="-9"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="7"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="Xst-F5-x7s"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVM-lX-cc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,10 +128,7 @@
                         <viewLayoutGuide key="safeArea" id="DBa-yp-3PZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="W3v-YN-aVx">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="-9"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="7"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" id="W3v-YN-aVx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34A-ga-OtR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

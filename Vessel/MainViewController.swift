@@ -19,6 +19,22 @@ class MainViewController: UITabBarController
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
+        
+        //On devices with a safe area below (no home button), the tab bar icons are too close to the top of the tab bar.
+        //this will move them down. Skip this for devices with home button (iPhone SE for example)
+        if let window = UIApplication.shared.windows.first
+        {
+            let bottomPadding = window.safeAreaInsets.bottom
+            
+            if bottomPadding != 0
+            {
+                for vc in self.viewControllers!
+                {
+                    vc.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+                }
+                tabBar.items?.forEach({ $0.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: 7.0) })
+            }
+        }
     }
     
     override func viewWillLayoutSubviews()
