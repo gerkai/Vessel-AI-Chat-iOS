@@ -5,11 +5,13 @@
 //  Created by Nicolas Medina on 7/11/22.
 //
 
-import UIKit
+import Foundation
 import Mixpanel
 
-class MixpanelAnalytics: Analytics {
-    private var analyticsToken: String {
+class MixpanelAnalytics: Analytics
+{
+    private var analyticsToken: String
+    {
         let environment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         switch environment
         {
@@ -22,7 +24,8 @@ class MixpanelAnalytics: Analytics {
         }
     }
     
-    private var analyticsAppSecret: String {
+    private var analyticsAppSecret: String
+    {
         let environment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         switch environment
         {
@@ -35,14 +38,50 @@ class MixpanelAnalytics: Analytics {
         }
     }
     
-    func setup() {
+    func setup()
+    {
         Mixpanel.initialize(token: analyticsToken)
     }
     
-    func log(event: String, properties: [String: Any]) {
-        guard let properties = properties as? [String: MixpanelType] else {
+    func log(event: AnalyticsEvent, properties: [String: Any])
+    {
+        guard let properties = properties as? [String: MixpanelType] else
+        {
             fatalError("Not valid types found in properties for event: \(event)")
         }
-        Mixpanel.mainInstance().track(event: event, properties: properties)
+        Mixpanel.mainInstance().track(event: event.rawValue, properties: properties)
+    }
+    
+    func setSuperProperty(property: String, value: Any)
+    {
+        setSuperProperties(properties: [property: value])
+    }
+    
+    func setSuperProperties(properties: [String: Any]) {
+        let mixpanelProperties = properties.compactMapValues
+        { value in
+            return value as? MixpanelType
+        }
+        
+        Mixpanel.mainInstance().registerSuperProperties(mixpanelProperties)
+    }
+    
+    func identify(id: String)
+    {
+        Mixpanel.mainInstance().identify(distinctId: id)
+    }
+    
+    func setUserProperty(property: String, value: Any)
+    {
+        setUserProperties(properties: [property: value])
+    }
+    
+    func setUserProperties(properties: [String : Any]) {
+        let mixpanelProperties = properties.compactMapValues
+        { value in
+            return value as? MixpanelType
+        }
+        
+        Mixpanel.mainInstance().people.set(properties: mixpanelProperties)
     }
 }

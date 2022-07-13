@@ -17,6 +17,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
+    @Resolved private var analytics: Analytics
     
     override func viewDidLoad()
     {
