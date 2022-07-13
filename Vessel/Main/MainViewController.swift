@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UITabBarController
+class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDelegate
 {
     var didLayout = false
     let vesselButtonIndex = 2
@@ -72,8 +72,10 @@ class MainViewController: UITabBarController
         }
         else
         {
-            print("OUTSIDE TESTING WINDOW")
-            //selectedIndex = vesselButtonIndex
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestAfterWakingUpViewController") as! TestAfterWakingUpViewController
+            vc.delegate = self
+            self.present(vc, animated: false)
         }
     }
     
@@ -101,5 +103,14 @@ class MainViewController: UITabBarController
             timeExist = false
         }
         return timeExist
+    }
+    
+    //MARK: - TestAfterWakingUpViewController delegates
+    func didAnswerTestAfterWakingUp(result: TestAfterWakingUpResult)
+    {
+        if result == .TestNow
+        {
+            selectedIndex = vesselButtonIndex
+        }
     }
 }

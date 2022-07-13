@@ -39,6 +39,8 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
         botView.delegate = self
         botView.iconImage.image = UIImage.init(named: "PeeOnCard-icon")
         botView.textLabel.text = NSLocalizedString("I'd rather pee\ndirectly on it", comment: "")
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func back()

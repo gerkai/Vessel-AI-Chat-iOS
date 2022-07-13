@@ -141,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLE-qB-BDH" userLabel="mindLabel">
-                                <rect key="frame" x="30" y="276" width="86.5" height="35"/>
+                                <rect key="frame" x="30" y="276" width="78" height="41"/>
                                 <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -1739,7 +1739,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ec-2j-bRf">
-                                        <rect key="frame" x="30" y="86" width="180" height="129.5"/>
+                                        <rect key="frame" x="30" y="86" width="180" height="135"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="Pgf-Tz-a36"/>
                                         </constraints>
@@ -1755,7 +1755,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-QY-Mgd">
-                                        <rect key="frame" x="30" y="235.5" width="200" height="128"/>
+                                        <rect key="frame" x="30" y="241" width="200" height="149.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6yQ-DB-0lO"/>
                                         </constraints>
