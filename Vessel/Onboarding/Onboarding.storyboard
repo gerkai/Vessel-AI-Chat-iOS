@@ -675,6 +675,7 @@
                     <connections>
                         <outlet property="checkmarkView" destination="oGA-HQ-bku" id="Qyg-Oi-mIj"/>
                         <outlet property="datePicker" destination="gdK-x4-M1W" id="Zd5-v2-o57"/>
+                        <outlet property="pickerContainer" destination="shm-CF-ynQ" id="Wzz-IH-PR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvj-lX-8Sf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
