@@ -71,6 +71,7 @@
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
+		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -175,6 +176,7 @@
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
+		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		3F12F043287DCC6900FCC52E /* TakeTest */ = {
 			isa = PBXGroup;
 			children = (
+				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
@@ -710,6 +713,7 @@
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
+				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,

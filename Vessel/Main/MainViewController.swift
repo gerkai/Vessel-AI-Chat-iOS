@@ -114,7 +114,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         if result == .TestNow
         {
-            selectedIndex = vesselButtonIndex
+            self.performSegue(withIdentifier: "ScanCardSegue", sender: self)
         }
     }
 }

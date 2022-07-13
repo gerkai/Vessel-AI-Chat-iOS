@@ -17,13 +17,14 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
     @IBOutlet weak var botView: IconCheckmarkView!
     
     let smallScreenCheckmarkHeight = 100.0
+    
     let peeInCupTag = 0
     let peeOnCardTag = 1
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        print("STTVC Load")
         //reduce height on checkboxes so they fit on smaller screen w/o needing to scroll
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
         {
@@ -32,7 +33,7 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
         }
         topView.tag = peeInCupTag
         topView.delegate = self
-        topView.iconImage.image = UIImage.init(named: "CardInCup-icon")
+        topView.iconImage.image = UIImage.init(named: "PeeInCup-icon")
         topView.textLabel.text = NSLocalizedString("Sounds good,\nI'll use a cup", comment: "")
         
         botView.tag = peeOnCardTag
@@ -54,14 +55,14 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
         if view.tag == peeInCupTag
         {
             let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PeeTipViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "CupTipViewController")
             navigationController?.fadeTo(vc)
             botView.isChecked = false
         }
         else
         {
             let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CupTipViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "PeeTipViewController")
             navigationController?.fadeTo(vc)
             topView.isChecked = false
         }

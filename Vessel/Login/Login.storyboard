@@ -657,6 +657,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="17F-uw-kO4" id="WCK-fh-fuk"/>
                         <outlet property="instructionsLabel" destination="wsg-FO-WmX" id="GtO-oG-VkT"/>
+                        <outlet property="nextButton" destination="jEF-7y-syt" id="vxu-xO-rqF"/>
                         <outlet property="passwordTextField" destination="tYR-xa-fcT" id="inT-XP-bRQ"/>
                     </connections>
                 </viewController>
@@ -1008,7 +1009,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="296-P7-aku">
                                         <rect key="frame" x="0.0" y="80" width="315" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4W-Rh-I3L" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4W-Rh-I3L" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>

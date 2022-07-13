@@ -9,8 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
         <array key="BananaGrotesk-Semibold.otf">
             <string>BananaGrotesk-Semibold</string>
+        </array>
+        <array key="NoeText-Book.otf">
+            <string>NoeText-Book</string>
         </array>
     </customFonts>
     <scenes>
@@ -23,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwj-nA-ong">
-                                <rect key="frame" x="30" y="88" width="50" height="50"/>
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GHW-0j-k0W"/>
                                     <constraint firstAttribute="width" constant="50" id="IrF-j9-AGn"/>
@@ -35,13 +41,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you prefer to use a cup or pee directly on the card?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXQ-1x-Irc">
-                                <rect key="frame" x="30" y="177" width="354" height="54"/>
+                                <rect key="frame" x="30" y="133" width="354" height="54"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                 <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEr-nD-3Aa">
-                                <rect key="frame" x="30" y="243" width="354" height="115.5"/>
+                                <rect key="frame" x="30" y="199" width="354" height="115.5"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">We recommend using a cup because it's the easiest way to ensure a successful test.  You can also pee directly on the card, just make sure to follow the instructions carefully.</string>
@@ -55,14 +61,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPq-Oe-8wt" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="30" y="386.5" width="354" height="138"/>
+                                <rect key="frame" x="30" y="342.5" width="354" height="138"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="Gx7-IL-GHO"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0q-Dt-HOA" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="30" y="536.5" width="354" height="138"/>
+                                <rect key="frame" x="30" y="492.5" width="354" height="138"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="CWf-Tt-mOp"/>
@@ -103,9 +109,9 @@
         <!--Navigation Controller-->
         <scene sceneID="Jun-Zz-tws">
             <objects>
-                <navigationController storyboardIdentifier="TakeTestShowTip" id="N2L-JR-k1X" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TakeTestShowTip" navigationBarHidden="YES" id="N2L-JR-k1X" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j8g-qN-BfI">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -124,13 +130,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PEE TIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1he-4e-L0I">
-                                <rect key="frame" x="178" y="438" width="59" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNt-tB-gXA">
                                 <rect key="frame" x="30" y="44" width="50" height="50"/>
                                 <constraints>
@@ -140,21 +139,251 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="square_back_button"/>
                                 <connections>
-                                    <action selector="back" destination="spg-sE-JSD" eventType="touchUpInside" id="CUf-iP-Dzd"/>
+                                    <action selector="back" destination="spg-sE-JSD" eventType="touchUpInside" id="5yb-sp-TPq"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VKf-9z-qpj">
+                                <rect key="frame" x="30" y="114" width="354" height="634"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to pee on the card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhM-rM-trH">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="zjQ-Vq-TJa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-dI-Sw7">
+                                        <rect key="frame" x="0.0" y="61" width="354" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJX-cC-dPy">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52Q-mX-81Y">
+                                                        <rect key="frame" x="16" y="9" width="8" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="52Q-mX-81Y" firstAttribute="centerY" secondItem="PJX-cC-dPy" secondAttribute="centerY" id="PQD-Pr-hl5"/>
+                                                    <constraint firstAttribute="height" constant="40" id="hAQ-G4-mjq"/>
+                                                    <constraint firstAttribute="width" constant="40" id="ib9-87-thT"/>
+                                                    <constraint firstItem="52Q-mX-81Y" firstAttribute="centerX" secondItem="PJX-cC-dPy" secondAttribute="centerX" id="ktV-v9-pZp"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold the test card vertically." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPB-v5-xP9">
+                                                <rect key="frame" x="52" y="12" width="302" height="16"/>
+                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NKc-F8-B78">
+                                        <rect key="frame" x="0.0" y="117" width="354" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhA-4v-vgr">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFi-jz-UZC">
+                                                        <rect key="frame" x="14" y="9" width="12" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="9Ns-yV-1qM"/>
+                                                    <constraint firstItem="SFi-jz-UZC" firstAttribute="centerX" secondItem="fhA-4v-vgr" secondAttribute="centerX" id="AGe-uS-wLS"/>
+                                                    <constraint firstItem="SFi-jz-UZC" firstAttribute="centerY" secondItem="fhA-4v-vgr" secondAttribute="centerY" id="N2k-4w-uxh"/>
+                                                    <constraint firstAttribute="width" constant="40" id="jWD-EA-yM9"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pee on the 3 white squares and the 15 colored squares." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18c-sh-gaH">
+                                                <rect key="frame" x="52" y="0.0" width="302" height="32"/>
+                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1l6-3e-OZo">
+                                        <rect key="frame" x="0.0" y="173" width="354" height="64"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqF-8d-EeG">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlW-Py-Caq">
+                                                        <rect key="frame" x="14.5" y="9" width="11.5" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="SlW-Py-Caq" firstAttribute="centerX" secondItem="LqF-8d-EeG" secondAttribute="centerX" id="OAR-Yz-sc8"/>
+                                                    <constraint firstAttribute="height" constant="40" id="RW4-fx-Bjd"/>
+                                                    <constraint firstItem="SlW-Py-Caq" firstAttribute="centerY" secondItem="LqF-8d-EeG" secondAttribute="centerY" id="cjf-N9-96T"/>
+                                                    <constraint firstAttribute="width" constant="40" id="rJ9-W0-lSl"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hf-IG-k7M">
+                                                <rect key="frame" x="52" y="0.0" width="302" height="64"/>
+                                                <string key="text">Pee on the card for 3 to 5 seconds. Count in your head 'one one-thousand, two one-thousand', etc. and stop at 'four one-thousand'.</string>
+                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wx6-kD-h6p">
+                                        <rect key="frame" x="0.0" y="253" width="354" height="305"/>
+                                        <subviews>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZs-bO-tkH" userLabel="Time Badge">
+                                                <rect key="frame" x="15" y="29" width="121.5" height="140.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="j36-Ek-nlz">
+                                                        <rect key="frame" x="24" y="24" width="73.5" height="92.5"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-F3-ub9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="0qo-Vv-wIY"/>
+                                                                    <constraint firstAttribute="height" constant="24" id="83O-Nw-1wX"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="3-5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DG8-Ad-C5D">
+                                                                <rect key="frame" x="0.0" y="24" width="38.5" height="52.5"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                                <color key="textColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbf-vW-VhN">
+                                                                <rect key="frame" x="0.0" y="76.5" width="59.5" height="16"/>
+                                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="j36-Ek-nlz" secondAttribute="bottom" constant="24" id="BbU-pq-zQ6"/>
+                                                    <constraint firstAttribute="width" secondItem="ZZs-bO-tkH" secondAttribute="height" multiplier="0.864" id="I8N-Lr-3vh"/>
+                                                    <constraint firstItem="j36-Ek-nlz" firstAttribute="leading" secondItem="ZZs-bO-tkH" secondAttribute="leading" constant="24" id="O6E-8u-2Pn"/>
+                                                    <constraint firstItem="j36-Ek-nlz" firstAttribute="top" secondItem="ZZs-bO-tkH" secondAttribute="top" constant="24" id="qww-Ea-eiE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="j36-Ek-nlz" secondAttribute="trailing" constant="24" id="yht-z3-KF0"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardColorimetrics" translatesAutoresizingMaskIntoConstraints="NO" id="lC6-M1-K9C">
+                                                <rect key="frame" x="224" y="49.5" width="130" height="206"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="lC6-M1-K9C" secondAttribute="height" multiplier="65:103" id="52b-qS-0Fv"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peeOnCardTipImage" translatesAutoresizingMaskIntoConstraints="NO" id="XRc-p3-hrU">
+                                                <rect key="frame" x="0.0" y="70.5" width="354" height="164"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="XRc-p3-hrU" secondAttribute="height" multiplier="2.155" id="eQ0-i4-V3C"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="XRc-p3-hrU" firstAttribute="centerY" secondItem="Wx6-kD-h6p" secondAttribute="centerY" id="PxI-xw-haZ"/>
+                                            <constraint firstItem="XRc-p3-hrU" firstAttribute="width" secondItem="Wx6-kD-h6p" secondAttribute="width" id="RAQ-5w-8IN"/>
+                                            <constraint firstItem="lC6-M1-K9C" firstAttribute="centerY" secondItem="Wx6-kD-h6p" secondAttribute="centerY" id="a7o-dk-al9"/>
+                                            <constraint firstItem="lC6-M1-K9C" firstAttribute="height" relation="lessThanOrEqual" secondItem="Wx6-kD-h6p" secondAttribute="height" id="esM-il-7PN"/>
+                                            <constraint firstItem="XRc-p3-hrU" firstAttribute="centerX" secondItem="Wx6-kD-h6p" secondAttribute="centerX" id="k6p-kU-cOI"/>
+                                            <constraint firstItem="lC6-M1-K9C" firstAttribute="trailing" secondItem="Wx6-kD-h6p" secondAttribute="trailing" id="kHV-pl-uyE"/>
+                                            <constraint firstItem="ZZs-bO-tkH" firstAttribute="top" secondItem="Wx6-kD-h6p" secondAttribute="top" constant="29" id="mF7-Yt-3EB"/>
+                                            <constraint firstItem="ZZs-bO-tkH" firstAttribute="leading" secondItem="Wx6-kD-h6p" secondAttribute="leading" constant="15" id="xoo-Ra-CZR"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lzw-FV-p30" customClass="SelectionCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="574" width="354" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Vep-N4-yCn"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZZs-bO-tkH" firstAttribute="width" secondItem="VKf-9z-qpj" secondAttribute="width" multiplier="0.343" id="6O5-cN-QPf"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="he5-dq-gsD" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="768" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="rsQ-zO-hHh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="OK, got it!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scale">
+                                        <real key="value" value="1.2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="next" destination="spg-sE-JSD" eventType="touchUpInside" id="tJ0-Uo-pjy"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eEM-Fv-I6h"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.99323421720000005" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="he5-dq-gsD" firstAttribute="leading" secondItem="eEM-Fv-I6h" secondAttribute="leading" constant="30" id="Apx-2L-PUv"/>
+                            <constraint firstItem="eEM-Fv-I6h" firstAttribute="trailing" secondItem="VKf-9z-qpj" secondAttribute="trailing" constant="30" id="Kje-nF-wlB"/>
+                            <constraint firstItem="eEM-Fv-I6h" firstAttribute="bottom" secondItem="he5-dq-gsD" secondAttribute="bottom" constant="34" id="MvX-95-3mT"/>
+                            <constraint firstItem="eEM-Fv-I6h" firstAttribute="trailing" secondItem="he5-dq-gsD" secondAttribute="trailing" constant="30" id="ZMc-2R-PRQ"/>
                             <constraint firstItem="zNt-tB-gXA" firstAttribute="leading" secondItem="eEM-Fv-I6h" secondAttribute="leading" constant="30" id="bTQ-lu-m2f"/>
+                            <constraint firstItem="VKf-9z-qpj" firstAttribute="top" secondItem="zNt-tB-gXA" secondAttribute="bottom" constant="20" id="cil-gh-izI"/>
+                            <constraint firstItem="he5-dq-gsD" firstAttribute="top" secondItem="VKf-9z-qpj" secondAttribute="bottom" constant="20" id="lvd-GQ-RKl"/>
                             <constraint firstItem="zNt-tB-gXA" firstAttribute="top" secondItem="eEM-Fv-I6h" secondAttribute="top" id="mvk-cO-LFJ"/>
+                            <constraint firstItem="VKf-9z-qpj" firstAttribute="leading" secondItem="eEM-Fv-I6h" secondAttribute="leading" constant="30" id="op3-X8-ayg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="hideTipSelectorView" destination="Lzw-FV-p30" id="Adf-S2-pxa"/>
+                        <outlet property="mainStackView" destination="VKf-9z-qpj" id="njn-1K-Q7n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7s-gb-HzY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="955" y="45"/>
+            <point key="canvasLocation" x="953.62318840579712" y="44.866071428571423"/>
         </scene>
         <!--Cup Tip View Controller-->
         <scene sceneID="FSs-UU-QdH">
@@ -180,24 +409,201 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="square_back_button"/>
                                 <connections>
-                                    <action selector="back" destination="fQb-oe-f2i" eventType="touchUpInside" id="8JJ-Ci-awy"/>
+                                    <action selector="back" destination="fQb-oe-f2i" eventType="touchUpInside" id="TlU-yz-egb"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="ASZ-En-CLX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7E9-NW-9JY">
+                                        <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="baj-cM-foq"/>
+                                            <constraint firstAttribute="width" constant="50" id="qIN-1Q-1ug"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="square_back_button"/>
+                                        <connections>
+                                            <action selector="onBack" destination="fQb-oe-f2i" eventType="touchUpInside" id="h6r-a3-UyT"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="IqO-Lu-80Y">
+                                        <rect key="frame" x="30" y="114" width="354" height="634"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to use a cup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDc-cX-pOC">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="13y-ar-ZaI"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-ao-CYH">
+                                                <rect key="frame" x="0.0" y="77" width="354" height="56"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPT-Q9-Pt4">
+                                                        <rect key="frame" x="0.0" y="8" width="40" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGR-od-v7O">
+                                                                <rect key="frame" x="16" y="9" width="8" height="22.5"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="pGR-od-v7O" firstAttribute="centerY" secondItem="mPT-Q9-Pt4" secondAttribute="centerY" id="0wg-bN-dbw"/>
+                                                            <constraint firstAttribute="width" constant="40" id="3ql-1T-GMV"/>
+                                                            <constraint firstItem="pGR-od-v7O" firstAttribute="centerX" secondItem="mPT-Q9-Pt4" secondAttribute="centerX" id="Tg4-m8-Qfd"/>
+                                                            <constraint firstAttribute="height" constant="40" id="XtF-WG-OQR"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dip the test card vertically, just past the three white squares." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWd-Ga-qwv">
+                                                        <rect key="frame" x="52" y="12" width="302" height="32"/>
+                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hkz-xC-ygD">
+                                                <rect key="frame" x="0.0" y="165" width="354" height="40"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiM-Q7-ilw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgW-1I-Ldq">
+                                                                <rect key="frame" x="14" y="9" width="12" height="22.5"/>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="jgW-1I-Ldq" firstAttribute="centerX" secondItem="jiM-Q7-ilw" secondAttribute="centerX" id="JWu-l0-A59"/>
+                                                            <constraint firstAttribute="width" constant="40" id="VZw-2S-UXE"/>
+                                                            <constraint firstItem="jgW-1I-Ldq" firstAttribute="centerY" secondItem="jiM-Q7-ilw" secondAttribute="centerY" id="hV4-cX-Utw"/>
+                                                            <constraint firstAttribute="height" constant="40" id="xrj-pV-f7O"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dip for only 1-2 seconds. Count in your head 'one one-thousand' then pull out." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bm3-Vm-P03">
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="32"/>
+                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6v-iG-oPk">
+                                                <rect key="frame" x="0.0" y="237" width="354" height="305"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peeInCupTipImage" translatesAutoresizingMaskIntoConstraints="NO" id="tM7-70-6tw">
+                                                        <rect key="frame" x="-30" y="-361.5" width="414" height="1028"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="tM7-70-6tw" firstAttribute="centerY" secondItem="e6v-iG-oPk" secondAttribute="centerY" id="14x-jr-KhD"/>
+                                                    <constraint firstItem="tM7-70-6tw" firstAttribute="centerX" secondItem="e6v-iG-oPk" secondAttribute="centerX" id="bxs-G8-5bi"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea1-SW-VlU" customClass="SelectionCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="574" width="354" height="60"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="d7P-mU-CSm"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrP-Al-l7w" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="30" y="768" width="354" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="lhO-pe-fcP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="OK, got it!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="next" destination="fQb-oe-f2i" eventType="touchUpInside" id="v5t-3w-7Vv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="kbV-u7-1vY"/>
+                                <color key="backgroundColor" red="0.99323421720000005" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7E9-NW-9JY" firstAttribute="top" secondItem="kbV-u7-1vY" secondAttribute="top" id="EV7-ua-E4y"/>
+                                    <constraint firstItem="IqO-Lu-80Y" firstAttribute="top" secondItem="7E9-NW-9JY" secondAttribute="bottom" constant="20" id="P1E-p3-bXi"/>
+                                    <constraint firstItem="kbV-u7-1vY" firstAttribute="bottom" secondItem="yrP-Al-l7w" secondAttribute="bottom" constant="34" id="YLF-We-LCt"/>
+                                    <constraint firstItem="kbV-u7-1vY" firstAttribute="trailing" secondItem="yrP-Al-l7w" secondAttribute="trailing" constant="30" id="b4m-Qr-4w9"/>
+                                    <constraint firstItem="7E9-NW-9JY" firstAttribute="leading" secondItem="kbV-u7-1vY" secondAttribute="leading" constant="30" id="da4-oF-pmQ"/>
+                                    <constraint firstItem="IqO-Lu-80Y" firstAttribute="leading" secondItem="kbV-u7-1vY" secondAttribute="leading" constant="30" id="h9S-iS-ajK"/>
+                                    <constraint firstItem="yrP-Al-l7w" firstAttribute="leading" secondItem="kbV-u7-1vY" secondAttribute="leading" constant="30" id="i4o-k2-II7"/>
+                                    <constraint firstItem="kbV-u7-1vY" firstAttribute="trailing" secondItem="IqO-Lu-80Y" secondAttribute="trailing" constant="30" id="ihp-7c-uma"/>
+                                    <constraint firstItem="yrP-Al-l7w" firstAttribute="top" secondItem="IqO-Lu-80Y" secondAttribute="bottom" constant="20" id="pvI-cq-nJF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ytV-45-8iM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6JM-fq-AIU" firstAttribute="top" secondItem="ytV-45-8iM" secondAttribute="top" id="D45-ha-yA4"/>
+                            <constraint firstItem="tM7-70-6tw" firstAttribute="width" secondItem="vUN-U6-aXF" secondAttribute="width" id="QGN-yW-FCf"/>
                             <constraint firstItem="6JM-fq-AIU" firstAttribute="leading" secondItem="ytV-45-8iM" secondAttribute="leading" constant="30" id="cvA-ca-jRU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="hideTipSelectorView" destination="ea1-SW-VlU" id="MWo-X0-r4P"/>
+                        <outlet property="mainStackView" destination="IqO-Lu-80Y" id="OYg-Ex-Sf4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OR7-gv-N7E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1680" y="45"/>
         </scene>
+        <!--Capture Intro View Controller-->
+        <scene sceneID="bUQ-iM-GCo">
+            <objects>
+                <viewController storyboardIdentifier="CaptureIntroViewController" id="Qf3-HK-CgW" customClass="CaptureIntroViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dr7-P1-prK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wWB-Hd-B6n"/>
+                        <color key="backgroundColor" red="0.99323421720000005" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ib4-ou-O9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2566" y="53"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="CardColorimetrics" width="130" height="206"/>
+        <image name="Clock-icon" width="21" height="24"/>
+        <image name="peeInCupTipImage" width="1500" height="1028"/>
+        <image name="peeOnCardTipImage" width="1500" height="684"/>
         <image name="square_back_button" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

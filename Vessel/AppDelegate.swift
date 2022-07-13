@@ -50,9 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         //app-wide tab bar appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Semibold", size: 16)!], for: .normal)
-        //UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Semibold", size: 11)!], for: .selected)
-        //UITabBar.appearance().barTintColor = .orange
-            //UITabBar.appearance().tintColor = .green
     }
 }
 

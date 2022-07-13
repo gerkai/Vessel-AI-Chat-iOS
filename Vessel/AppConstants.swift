@@ -65,6 +65,7 @@ struct Constants
     //Contact Flags
     static let DECLINED_BIRTH_DATE  = 0x00000001
     static let VIEWED_TERMS         = 0x00000002
+    static let HIDE_PEE_TIPS        = 0x00000004
     
     //Colors
     static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514
@@ -74,4 +75,7 @@ struct Constants
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
     static let MORNING_TEST_TIME_START = 4 /* 4am */
     static let MORNING_TEST_TIME_END = 9 /* 9am */
+    
+    //Common Strings
+    static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")
 }

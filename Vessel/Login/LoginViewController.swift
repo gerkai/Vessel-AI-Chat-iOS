@@ -13,6 +13,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var nextButton: LoadingButton!
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
@@ -84,10 +85,12 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 if password.isValidPassword()
                 {
+                    nextButton.showLoading()
                     Server.shared.login(email: email, password: password)
                     {
                         Server.shared.getContact
                         {contact in
+                            self.nextButton.hideLoading()
                             Contact.MainID = contact.id
                             ObjectStore.shared.serverSave(contact)
                             let vc = OnboardingViewModel.NextViewController()
@@ -95,11 +98,13 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         }
                         onFailure:
                         {error in
+                            self.nextButton.hideLoading()
                             UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
                         }
                     }
                     onFailure:
                     { string in
+                        self.nextButton.hideLoading()
                         UIView.showError(text: "", detailText: string, image: nil)
                     }
                 }
