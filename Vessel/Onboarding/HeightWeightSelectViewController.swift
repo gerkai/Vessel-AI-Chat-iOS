@@ -8,11 +8,9 @@
 //  A BOOL, isMetric is initialized in viewDidLoad. It is used when deciding whether to present picker and weight
 //  in imperial units or metric units.
 
-//TODO: Fix bug where screen doesn't return to original position after bringing up keyboard on non-home button devices.
-
 import UIKit
 
-class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
+class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource
 {
     @IBOutlet weak var heightPickerView: UIPickerView!
     @IBOutlet weak var weightTextField: UITextField!
@@ -65,13 +63,6 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
             }
         }
         
-        //add stuff to support weight UITextField
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
-        self.view.addGestureRecognizer(tapGestureRecognizer)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-                
         if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
         {
             if isMetric
@@ -255,27 +246,14 @@ class HeightWeightSelectViewController: UIViewController, UIPickerViewDelegate, 
         return true
     }
     
-    //MARK: - Handle sliding view up/down so textfield isn't blocked by keyboard
-    @objc func keyboardWillShow(notification: NSNotification)
+    //MARK: - textfield delegates
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else
-        {
-            // if keyboard size is not available for some reason, dont do anything
-           return
-        }
-        self.view.frame.origin.y = 0 - keyboardSize.height
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification)
-    {
-        self.view.frame.origin.y = 0
+        self.activeTextField = textField
     }
     
-    @objc func backgroundTap(_ sender: UITapGestureRecognizer)
+    func textFieldDidEndEditing(_ textField: UITextField)
     {
-        // go through all of the textfield inside the view, and end editing thus resigning first responder
-        // ie. it will trigger a keyboardWillHide notification
-        self.view.endEditing(true)
+        self.activeTextField = nil
     }
 }

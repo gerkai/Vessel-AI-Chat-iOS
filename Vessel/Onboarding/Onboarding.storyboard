@@ -386,6 +386,9 @@
                                         <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="pr0-qA-49b" id="Cwq-a6-GFq"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYL-xW-Xkl">
                                 <rect key="frame" x="337.5" y="692" width="26.5" height="18"/>
@@ -675,6 +678,7 @@
                     <connections>
                         <outlet property="checkmarkView" destination="oGA-HQ-bku" id="Qyg-Oi-mIj"/>
                         <outlet property="datePicker" destination="gdK-x4-M1W" id="Zd5-v2-o57"/>
+                        <outlet property="pickerContainer" destination="shm-CF-ynQ" id="Wzz-IH-PR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvj-lX-8Sf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

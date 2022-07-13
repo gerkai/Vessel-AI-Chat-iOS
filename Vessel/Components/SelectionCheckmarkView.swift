@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SelectionCheckmarkViewDelegate
+{
+    func didTapCheckmark(_ isChecked: Bool)
+}
 
 class SelectionCheckmarkView: UIView
 {
@@ -15,6 +19,7 @@ class SelectionCheckmarkView: UIView
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
     var originalColor: UIColor!
+    var delegate: SelectionCheckmarkViewDelegate?
     
     var defaultText: String?
     {
@@ -27,6 +32,9 @@ class SelectionCheckmarkView: UIView
     {
         didSet
         {
+            //if there's a delegate, let it know
+            delegate?.didTapCheckmark(isChecked)
+            
             //animate checkmark
             UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
             {

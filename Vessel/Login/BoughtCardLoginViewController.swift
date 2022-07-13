@@ -7,7 +7,6 @@
 //  Based on Login Flow: https://www.notion.so/vesselhealth/Login-2dbc7f76cf4c4953abd8b4aa7bc34bc5
 
 import UIKit
-//import Bugsee
 
 struct BoughtCardLoginForm
 {
@@ -31,17 +30,13 @@ struct BoughtCardLoginValidator
     }
 }
 
-class BoughtCardLoginViewController: UIViewController
+class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate
 {
     
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
     
-    //private lazy var analyticManager = AnalyticManager()
     private var validator = BoughtCardLoginValidator()
-    //private let authenticationRepository: AuthenticationRepositoryProtocol = AuthenticationRepository()
-    //private let contactRepositroy: ContactRepositoryProtocol = ContactRepository()
-    //private lazy var pushwooshManager = PushwooshHelper()
     var email = ""
     
     override func viewDidLoad()
@@ -65,7 +60,6 @@ class BoughtCardLoginViewController: UIViewController
     
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
-        //analyticManager.trackEvent(event: .SIGN_UP_LOG_IN(email: email))
         login()
     }
     
@@ -87,8 +81,6 @@ class BoughtCardLoginViewController: UIViewController
                         let storyboard = UIStoryboard(name: "Login", bundle: nil)
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         
-                        //analyticManager.trackEvent(event: .SIGN_UP_GIFTED_CONTINUE(email: email))
-                        //self.navigationController?.pushViewController(vc, animated: true)
                         self.navigationController?.fadeTo(vc)
                         
                     }
@@ -118,12 +110,36 @@ class BoughtCardLoginViewController: UIViewController
     
     @IBAction func onForgetPasswordButton(_ sender: UIButton)
     {
-        //let event = AnalyticEvent.FORGOT_PASSWORD_TAPPED
-        //analyticManager.trackEvent(event: event)
-        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController")
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true)
+    }
+    
+    //MARK: - textfield delegates
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        self.activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        self.activeTextField = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField
+        {
+            nextField.becomeFirstResponder()
+        }
+        else
+        {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
     }
 }

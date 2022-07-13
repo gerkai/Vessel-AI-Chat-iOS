@@ -10,7 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 
 
-class GiftedCardRegisterViewController: UIViewController
+class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFieldDelegate
 {
     @IBOutlet var formFields: [VesselTextField]!
     
@@ -134,5 +134,35 @@ class GiftedCardRegisterViewController: UIViewController
         { error in
             UIView.showError(text: NSLocalizedString("Sign Up", comment:""), detailText: error, image: nil)
         }
+    }
+    
+    //MARK: - textfield delegates
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        if textField.tag >= 1
+        {
+            self.activeTextField = textField
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        self.activeTextField = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField
+        {
+            nextField.becomeFirstResponder()
+        }
+        else
+        {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
     }
 }

@@ -1,58 +1,25 @@
 //
-//  WeightSelectViewController.swift
+//  KeyboardFriendlyViewController.swift
 //  Vessel
 //
-//  Created by Carson Whitsett on 3/5/22.
+//  Created by Carson Whitsett on 7/12/22.
 //
 
 import UIKit
 
-class WeightSelectViewController: UIViewController, UITextFieldDelegate
+class KeyboardFriendlyViewController: UIViewController
 {
-    @IBOutlet weak var weightTextField: UITextField!
+    // to store the current active textfield
+    var activeTextField : UITextField? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @IBAction func onBackButtonPressed(_ sender: Any)
-    {
-        self.navigationController?.fadeOut()
-    }
-    
-    @IBAction func onContinueButtonPressed()
-    {
-        self.view.endEditing(true)
-        if let weight = weightTextField.text, weight.count != 0
-        {
-            if let contact = Contact.main()
-            {
-                if let weight = weightTextField.text, let weightValue = Double(weight)
-                {
-                    contact.weight = weightValue
-                    ObjectStore.shared.ClientSave(contact)
-                }
-            }
-            let vc = OnboardingViewModel.NextViewController()
-            navigationController?.fadeTo(vc)
-        }
-        else
-        {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please enter your weight", comment:""))
-        }
-    }
-    
-    //MARK: - textfield delegates
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        return true
     }
     
     //MARK: - Handle sliding view up/down so textfield isn't blocked by keyboard
@@ -64,7 +31,25 @@ class WeightSelectViewController: UIViewController, UITextFieldDelegate
             // if keyboard size is not available for some reason, dont do anything
            return
         }
-        self.view.frame.origin.y = 0 - keyboardSize.height
+        
+        var shouldMoveViewUp = false
+        
+        // if active text field is not nil
+        if let activeTextField = activeTextField
+        {
+            let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
+            let topOfKeyboard = self.view.frame.height - keyboardSize.height
+            
+            if bottomOfTextField > topOfKeyboard
+            {
+                shouldMoveViewUp = true
+            }
+        }
+        
+        if(shouldMoveViewUp)
+        {
+            self.view.frame.origin.y = 0 - keyboardSize.height
+        }
     }
 
     @objc func keyboardWillHide(notification: NSNotification)
@@ -79,3 +64,5 @@ class WeightSelectViewController: UIViewController, UITextFieldDelegate
         self.view.endEditing(true)
     }
 }
+
+

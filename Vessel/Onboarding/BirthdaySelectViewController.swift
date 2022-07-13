@@ -7,10 +7,11 @@
 
 import UIKit
 
-class BirthdaySelectViewController: UIViewController
+class BirthdaySelectViewController: UIViewController, SelectionCheckmarkViewDelegate
 {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var checkmarkView: SelectionCheckmarkView!
+    @IBOutlet weak var pickerContainer: UIView!
     
     let minAge = Constants.MIN_AGE
     let maxAge = Constants.MAX_AGE
@@ -31,6 +32,7 @@ class BirthdaySelectViewController: UIViewController
         {
             checkmarkView.isChecked = true
         }
+        checkmarkView.delegate = self
     }
     
     private func setDatePickerInitialValue()
@@ -99,5 +101,24 @@ class BirthdaySelectViewController: UIViewController
         
         let vc = OnboardingViewModel.NextViewController()
         navigationController?.fadeTo(vc)
+    }
+    
+    //MARK: - SelectionCheckmarkView delegates
+    func didTapCheckmark(_ isChecked: Bool)
+    {
+        var pickerAlpha = 1.0
+        if isChecked
+        {
+            pickerAlpha = 0.0
+        }
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .beginFromCurrentState)
+        {
+            self.pickerContainer.alpha = pickerAlpha
+        }
+        completion:
+        { _ in
+            
+        }
+
     }
 }
