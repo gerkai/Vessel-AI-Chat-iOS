@@ -16,9 +16,12 @@ struct Constants
     
     //server environment
     static let environmentKey = "Environment"
-    static let PROD_INDEX = 0
+    //TODO: swap DEV_INDEX and PROD_INDEX before release. Currently we default to DEV_INDEX so app starts pointing to dev environment
+    //which is the only environment that works with /v3 currently.
+    //Also update the segmented control tabs in DebugViewController
+    static let DEV_INDEX = 0
     static let STAGING_INDEX = 1
-    static let DEV_INDEX = 2
+    static let PROD_INDEX = 2
     
     static let MinimumPasswordLength: Int = 6
     

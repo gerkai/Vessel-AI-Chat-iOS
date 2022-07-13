@@ -45,7 +45,7 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
     
     @IBAction func back()
     {
-        self.navigationController?.fadeOut()
+        dismiss(animated: true)
     }
     
     //MARK: - IconCheckmarkView delegates

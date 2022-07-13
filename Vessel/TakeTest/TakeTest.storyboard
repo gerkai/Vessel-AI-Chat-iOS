@@ -17,13 +17,13 @@
         <!--Successful Test Tips View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="SuccessfulTestTipsViewController" hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="SuccessfulTestTipsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SuccessfulTestTipsViewController" modalPresentationStyle="overFullScreen" hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="SuccessfulTestTipsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwj-nA-ong">
-                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <rect key="frame" x="30" y="88" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GHW-0j-k0W"/>
                                     <constraint firstAttribute="width" constant="50" id="IrF-j9-AGn"/>
@@ -35,13 +35,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you prefer to use a cup or pee directly on the card?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXQ-1x-Irc">
-                                <rect key="frame" x="30" y="133" width="354" height="54"/>
+                                <rect key="frame" x="30" y="177" width="354" height="54"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                 <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEr-nD-3Aa">
-                                <rect key="frame" x="30" y="199" width="354" height="115.5"/>
+                                <rect key="frame" x="30" y="243" width="354" height="115.5"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">We recommend using a cup because it's the easiest way to ensure a successful test.  You can also pee directly on the card, just make sure to follow the instructions carefully.</string>
@@ -55,14 +55,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPq-Oe-8wt" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="30" y="342.5" width="354" height="138"/>
+                                <rect key="frame" x="30" y="386.5" width="354" height="138"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="Gx7-IL-GHO"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0q-Dt-HOA" customClass="IconCheckmarkView" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="30" y="492.5" width="354" height="138"/>
+                                <rect key="frame" x="30" y="536.5" width="354" height="138"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="CWf-Tt-mOp"/>
@@ -88,6 +88,7 @@
                             <constraint firstItem="P0q-Dt-HOA" firstAttribute="top" secondItem="CPq-Oe-8wt" secondAttribute="bottom" constant="12" id="zXK-4w-VF9"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="afU-Z7-1zP"/>
                     <connections>
                         <outlet property="botView" destination="P0q-Dt-HOA" id="leh-hd-ZY5"/>
                         <outlet property="botViewHeight" destination="CWf-Tt-mOp" id="svR-N6-zXc"/>
@@ -98,6 +99,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="102.89855072463769" y="44.866071428571423"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jun-Zz-tws">
+            <objects>
+                <navigationController storyboardIdentifier="TakeTestShowTip" id="N2L-JR-k1X" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j8g-qN-BfI">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="pcV-Gf-PvA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAW-t1-NbL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-812" y="45"/>
         </scene>
         <!--Pee Tip View Controller-->
         <scene sceneID="ggy-pb-OQW">

@@ -68,7 +68,11 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         if isWithinTestingWindow()
         {
-            selectedIndex = vesselButtonIndex
+            //allow enough time for Vessel button to finish animating
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
+            {
+                self.performSegue(withIdentifier: "ScanCardSegue", sender: self)
+            }
         }
         else
         {
