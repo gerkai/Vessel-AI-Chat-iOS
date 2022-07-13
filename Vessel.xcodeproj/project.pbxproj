@@ -43,6 +43,7 @@
 		3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F01D287C90BC00FCC52E /* MainViewController.swift */; };
 		3F12F01F287C9FF700FCC52E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F01C287C908600FCC52E /* Main.storyboard */; };
 		3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
+		3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
@@ -136,6 +137,7 @@
 		3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalViewController.swift; sourceTree = "<group>"; };
 		3F12F01C287C908600FCC52E /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "/Users/carsonwhitsett/Projects/Ditty Labs/Clients/Vessel Health/New Vessel/Vessel/Vessel/Main.storyboard"; sourceTree = "<absolute>"; };
 		3F12F01D287C90BC00FCC52E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFriendlyViewController.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -151,7 +153,6 @@
 		3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B97127D44F4A00D589F7 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
-		3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewController.swift; sourceTree = "<group>"; };
 		3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCheckmarkView.swift; sourceTree = "<group>"; };
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
@@ -279,7 +280,6 @@
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
 				3F12F00C287B3C6900FCC52E /* TermsViewController.swift */,
-				3F87B97327D4556900D589F7 /* WeightSelectViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -418,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
+				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
@@ -670,6 +671,7 @@
 				3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
+				3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
