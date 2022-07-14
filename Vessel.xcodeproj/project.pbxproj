@@ -73,7 +73,7 @@
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FA6683A287F54DF0006166D /* test_card_tutorial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3FA66839287F54DF0006166D /* test_card_tutorial.mp4 */; };
-		3FA6683C287F64960006166D /* TipInstuctionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstuctionsViewController.swift */; };
+		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
@@ -182,7 +182,7 @@
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA66839287F54DF0006166D /* test_card_tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_card_tutorial.mp4; sourceTree = "<group>"; };
-		3FA6683B287F64960006166D /* TipInstuctionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstuctionsViewController.swift; sourceTree = "<group>"; };
+		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,7 +299,7 @@
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
 				3FA6683D287F69830006166D /* TakeTestViewModel.swift */,
-				3FA6683B287F64960006166D /* TipInstuctionsViewController.swift */,
+				3FA6683B287F64960006166D /* TipInstructionsViewController.swift */,
 			);
 			path = TakeTest;
 			sourceTree = "<group>";
@@ -728,7 +728,7 @@
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
-				3FA6683C287F64960006166D /* TipInstuctionsViewController.swift in Sources */,
+				3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */,
 				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
 				3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,

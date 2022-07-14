@@ -27,6 +27,19 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         setupFirstTipTextView()
     }
 
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        navigationItem.setHidesBackButton(true, animated: false)
+        playerViewController?.player?.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        playerViewController?.player?.pause()
+    }
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
     {
         if keyPath == "rate", let player = object as? AVPlayer
@@ -52,7 +65,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         let attributedString = NSMutableAttributedString(string: str,attributes: [NSAttributedString.Key.foregroundColor : UIColor.grayText,NSAttributedString.Key.font: UIFont(name: "NoeText-Book", size: 16.0)!,NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        let foundRange = attributedString.mutableString.range(of: "test instructions")
+        let foundRange = attributedString.mutableString.range(of: NSLocalizedString("test instructions", comment:"must match exactly 'test instructions' in the string 'Follow the video or test instructions to apply pee to all 18 squares.'"))
         attributedString.addAttribute(NSAttributedString.Key.link, value: "https://www.google.com", range: foundRange)
     //        attributedString.addAttributes([NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue], range: foundRange)
         let linkAttributes: [NSAttributedString.Key : Any] = [
@@ -143,6 +156,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     
     @IBAction func startTimerSelected(_ sender: Any)
     {
+        
         /*
         let passedTime = Int(Date().timeIntervalSince(self.startVideoDate ?? Date()))
         let minimumTimeWatchingVideo = 104
@@ -176,16 +190,11 @@ extension CaptureIntroViewController: UITextViewDelegate
 {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
     {
-        /*let storyboard = UIStoryboard(name: "Tip", bundle: nil)
-        let instructionView = storyboard.instantiateViewController(identifier: "TipInstuctionsViewController") as! TipInstuctionsViewController
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "TipInstructionsViewController") as! TipInstructionsViewController
+        navigationController?.pushViewController(vc, animated: true)
         
-        /*
-        instructionView.onDimiss =
-        {[weak self] in
-            self?.playerViewController?.player?.play()
-        }*/
-        self.navigationController?.pushViewController(instructionView, animated: true)*/
-        print("Tapped TextView")
+        
         return false
     }
 }
