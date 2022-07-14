@@ -34,7 +34,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eZe-f0-71K"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Plan" image="Plan-Icon" id="OED-Xy-1RK"/>
                 </viewController>
@@ -59,7 +59,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dVU-0E-yXU"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chat" image="Chat-Icon" id="bkk-Po-fvx"/>
                 </viewController>
@@ -84,7 +84,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="L9N-Hj-exo"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="cdQ-k9-hpb"/>
                 </viewController>
@@ -287,13 +287,21 @@
             </objects>
             <point key="canvasLocation" x="-212" y="64"/>
         </scene>
+        <!--TakeTestCaptureIntro-->
+        <scene sceneID="wIj-Yh-bWp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TakeTest" referencedIdentifier="TakeTestCaptureIntro" id="61w-lh-wq3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wh4-dD-2bh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="-741"/>
+        </scene>
         <!--TakeTestShowTip-->
         <scene sceneID="tqb-Qt-2PB">
             <objects>
                 <viewControllerPlaceholder storyboardName="TakeTest" referencedIdentifier="TakeTestShowTip" id="JVI-HS-e9J" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZa-r4-HdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="-572"/>
+            <point key="canvasLocation" x="572" y="-824"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="iA0-jZ-Ze0">
@@ -307,17 +315,18 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="JVI-HS-e9J" kind="presentation" identifier="ScanCardSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="0AY-Ha-dlP"/>
+                        <segue destination="JVI-HS-e9J" kind="presentation" identifier="TakeTestShowTipsSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="0AY-Ha-dlP"/>
                         <segue destination="m60-5Z-PVe" kind="relationship" relationship="viewControllers" id="fEb-mh-0Hw"/>
                         <segue destination="rl9-Ca-nXs" kind="relationship" relationship="viewControllers" id="icx-vb-a10"/>
                         <segue destination="Q43-6E-S0t" kind="relationship" relationship="viewControllers" id="nfB-PU-xfX"/>
                         <segue destination="hxb-kY-V2d" kind="relationship" relationship="viewControllers" id="MYN-pK-gal"/>
                         <segue destination="eXD-Zt-N22" kind="relationship" relationship="viewControllers" id="Bza-h7-bVT"/>
+                        <segue destination="61w-lh-wq3" kind="presentation" identifier="TakeTestCaptureIntroSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="N7k-9A-YhU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bia-vo-iLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-258" y="-779"/>
+            <point key="canvasLocation" x="-213" y="-824"/>
         </scene>
     </scenes>
     <resources>

@@ -23,7 +23,7 @@ extension UIColor {
     static var backgroundLightRed = UIColor(hex: "#F1DCCE")
     static var darkGreyText = UIColor(hex: "#5A5A57")
     static var reddishBrown = UIColor(hex: "#E8B3A8")
-    static var greyText = UIColor(hex: "#555553")
+    //static var greyText = UIColor(hex: "#555553")
     static var grayColor  = UIColor(hex: "#EAEBE5")
     static var pixieGreen = UIColor(hex: "#CBDEC0")
     static var willowGreen = UIColor(hex: "#E6F1E3")

@@ -11,6 +11,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
 {
     var didLayout = false
     let vesselButtonIndex = 2
+    let takeTestViewModel = TakeTestViewModel()
     
     override func viewDidLoad()
     {
@@ -71,7 +72,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
             //allow enough time for Vessel button to finish animating
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
             {
-                self.performSegue(withIdentifier: "ScanCardSegue", sender: self)
+                self.segueToNextVC()
             }
         }
         else
@@ -109,12 +110,50 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         return timeExist
     }
     
+    func segueToNextVC()
+    {
+        //let vc = takeTestViewModel.nextViewController()
+        //self.present(vc, animated: true)
+        //jump straight to the intro video if user opted to not show tips. Otherwise, show tips
+        if self.takeTestViewModel.shouldShowTips()
+        {
+            self.performSegue(withIdentifier: "TakeTestShowTipsSegue", sender: self)
+        }
+        else
+        {
+            takeTestViewModel.curState = .TestTips
+            self.performSegue(withIdentifier: "TakeTestCaptureIntroSegue", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "TakeTestShowTipsSegue"
+        {
+            takeTestViewModel.curState = .TestTips
+            if let dest = segue.destination as? UINavigationController
+            {
+                let rootVC = dest.viewControllers.first as! TakeTestMVVMViewController
+                rootVC.viewModel = takeTestViewModel
+            }
+        }
+        if segue.identifier == "TakeTestCaptureIntroSegue"
+        {
+            takeTestViewModel.curState = .CaptureIntro
+            if let dest = segue.destination as? UINavigationController
+            {
+                let rootVC = dest.viewControllers.first as! TakeTestMVVMViewController
+                rootVC.viewModel = takeTestViewModel
+            }
+        }
+    }
+    
     //MARK: - TestAfterWakingUpViewController delegates
     func didAnswerTestAfterWakingUp(result: TestAfterWakingUpResult)
     {
         if result == .TestNow
         {
-            self.performSegue(withIdentifier: "ScanCardSegue", sender: self)
+            self.segueToNextVC()
         }
     }
 }

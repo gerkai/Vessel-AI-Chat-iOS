@@ -9,18 +9,17 @@ import UIKit
 
 
 
-class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDelegate
+class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmarkViewDelegate
 {
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     @IBOutlet weak var botViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topView: IconCheckmarkView!
     @IBOutlet weak var botView: IconCheckmarkView!
     
-    let smallScreenCheckmarkHeight = 100.0
+    let smallScreenCheckmarkHeight = 100.0 //reduce checkmark heights on small screens so they'll fit better
     
     let peeInCupTag = 0
     let peeOnCardTag = 1
-    
     
     override func viewDidLoad()
     {
@@ -46,6 +45,7 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
     
     @IBAction func back()
     {
+        viewModel.curState.back()
         dismiss(animated: true)
     }
     
@@ -55,14 +55,16 @@ class SuccessfulTestTipsViewController: UIViewController, IconCheckmarkViewDeleg
         if view.tag == peeInCupTag
         {
             let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CupTipViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "CupTipViewController") as! CupTipViewController
+            vc.initWithViewModel(vm: viewModel)
             navigationController?.fadeTo(vc)
             botView.isChecked = false
         }
         else
         {
             let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PeeTipViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "PeeTipViewController") as! PeeTipViewController
+            vc.initWithViewModel(vm: viewModel)
             navigationController?.fadeTo(vc)
             topView.isChecked = false
         }

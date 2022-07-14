@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PeeTipViewController: UIViewController
+class PeeTipViewController: TakeTestMVVMViewController
 {
     @IBOutlet weak var hideTipSelectorView: SelectionCheckmarkView!
     @IBOutlet weak var mainStackView: UIStackView!
@@ -31,9 +31,9 @@ class PeeTipViewController: UIViewController
     {
         if hideTipSelectorView.isChecked
         {
-            //MainContact is guaranteed
-            let contact = Contact.main()!
-            contact.flags |= Constants.HIDE_PEE_TIPS
+            viewModel.hideTips()
         }
+        let vc = viewModel.nextViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
