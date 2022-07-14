@@ -12,7 +12,6 @@ import Foundation
 
 public class Storage
 {
-    
     fileprivate init() { }
     
     enum Directory

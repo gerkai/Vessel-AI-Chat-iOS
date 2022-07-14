@@ -174,7 +174,6 @@ class Server: NSObject
             //print(jsonString)
 
             let Url = String(format: url)
-            // swiftlint:disable opening_braces_in_newline
             guard let serviceUrl = URL(string: Url) else { return }
             var request = URLRequest(url: serviceUrl)
             request.httpBody = jsonData
@@ -456,7 +455,6 @@ class Server: NSObject
                 //print(jsonString)
                 
                 let Url = String(format: url)
-                // swiftlint:disable opening_braces_in_newline
                 guard let serviceUrl = URL(string: Url) else { return }
                 var request = URLRequest(url: serviceUrl)
                 request.httpBody = jsonData
@@ -513,7 +511,6 @@ class Server: NSObject
             //print(jsonString)
             
             let Url = String(format: url)
-            // swiftlint:disable opening_braces_in_newline
             guard let serviceUrl = URL(string: Url) else { return }
             var request = URLRequest(url: serviceUrl)
             request.httpBody = data

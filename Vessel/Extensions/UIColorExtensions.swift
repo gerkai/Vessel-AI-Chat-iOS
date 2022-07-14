@@ -8,7 +8,8 @@
 
 import UIKit
 
-extension UIColor {
+extension UIColor
+{
     static var transparentGray: UIColor { UIColor(hex: "#000000").withAlphaComponent(0.46) }
     static var linenYellow: UIColor { return UIColor(hex: "#FBF3EB") }
     static var grayText: UIColor { UIColor(hex: "#555553") }
