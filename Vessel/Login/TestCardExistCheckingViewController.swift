@@ -10,8 +10,6 @@ import UIKit
 
 class TestCardExistCheckingViewController: UIViewController
 {
-
-    
     @IBOutlet var testCardOptionsButtons: [UIButton]!
     @IBOutlet var testCardOptionsViewButtons: [UIButton]!
     @IBOutlet var testCardOptionsViews: [UIView]!

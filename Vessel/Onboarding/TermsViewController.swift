@@ -48,7 +48,7 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
         }
         else
         {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please read the entire disclaimer", comment:"Error message when user hasn't yet made a selection"), image: nil)
+            UIView.showError(text: "", detailText: NSLocalizedString("Please read the entire disclaimer", comment: "Error message when user hasn't yet made a selection"), image: nil)
         }
     }
     

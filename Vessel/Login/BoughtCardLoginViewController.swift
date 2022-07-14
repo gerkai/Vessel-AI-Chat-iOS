@@ -16,23 +16,22 @@ struct BoughtCardLoginForm
 
 struct BoughtCardLoginValidator
 {
-    func validateForm(form: BoughtCardLoginForm)->(isValid: Bool,error: String?)
+    func validateForm(form: BoughtCardLoginForm) ->(isValid: Bool, error: String?)
     {
         guard let email = form.email?.trimmingCharacters(in: .whitespacesAndNewlines), email.count > 0, email.isValidEmail() else
         {
-            return  (isValid: false,error: "Please enter a valid email")
+            return  (isValid: false, error: "Please enter a valid email")
         }
         guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
         {
-            return  (isValid: false,error: "Please enter your password")
+            return  (isValid: false, error: "Please enter your password")
         }
-        return (isValid: true,error: nil)
+        return (isValid: true, error: nil)
     }
 }
 
 class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate
 {
-    
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
     
@@ -71,7 +70,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
             self.view.endEditing(true)
             if let email = formFields[0].text, let password = formFields[1].text
             {
-                Server.shared.login(email: email , password: password)
+                Server.shared.login(email: email, password: password)
                 {
                     Server.shared.getContact
                     { contact in
@@ -82,7 +81,6 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         
                         self.navigationController?.fadeTo(vc)
-                        
                     }
                     onFailure:
                     { error in
@@ -97,7 +95,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
         }
     }
     
-    private func validate()->Bool
+    private func validate() -> Bool
     {
         let form = BoughtCardLoginForm(email: formFields[0].text, password: formFields[1].text)
         let validationResult = validator.validateForm(form: form)

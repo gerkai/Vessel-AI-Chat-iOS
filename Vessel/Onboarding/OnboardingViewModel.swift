@@ -124,8 +124,8 @@ class OnboardingViewModel
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
-                vc.titleText = NSLocalizedString("Diet", comment:"Title of Diet Preferences screen")
-                vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment:"Subtext of Diet Preferences screen")
+                vc.titleText = NSLocalizedString("Diet", comment: "Title of Diet Preferences screen")
+                vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment: "Subtext of Diet Preferences screen")
                 vc.itemType = .Diet
                 return vc
             }
@@ -141,8 +141,8 @@ class OnboardingViewModel
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
-                vc.titleText = NSLocalizedString("Allergies", comment:"Title of Allergy Preferences screen")
-                vc.subtext = NSLocalizedString("Do you have any food allergies?", comment:"Subtext of Allergy Preferences screen")
+                vc.titleText = NSLocalizedString("Allergies", comment: "Title of Allergy Preferences screen")
+                vc.subtext = NSLocalizedString("Do you have any food allergies?", comment: "Subtext of Allergy Preferences screen")
                 vc.itemType = .Allergy
                 return vc
             }
@@ -172,8 +172,8 @@ class OnboardingViewModel
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
-                vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
-                vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment:"Subtext of Goal Preferences screen")
+                vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
+                vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment: "Subtext of Goal Preferences screen")
                 vc.itemType = .Goal
                 return vc
             }
@@ -190,8 +190,8 @@ class OnboardingViewModel
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
-                vc.titleText = NSLocalizedString("Goals", comment:"Title of Goal Preferences screen")
-                vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment:"Subtext of Goal Preferences screen")
+                vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
+                vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
                 vc.itemType = .SingleGoal
                 return vc
             }
@@ -289,7 +289,7 @@ class OnboardingViewModel
         
         if let year = dateComponents.year
         {
-            dateComponents.year  = year - averageAge
+            dateComponents.year = year - averageAge
         }
         if let date = calendar.date(from: dateComponents)
         {
@@ -511,13 +511,12 @@ class OnboardingViewModel
             {
                 mainGoal = nil
             }
-            
         }
     }
     
     func tooFewItemsSelectedText(type: ItemPreferencesType) -> String
     {
-        let defaultText = NSLocalizedString("Please select an answer", comment:"Error message when user hasn't yet made a selection")
+        let defaultText = NSLocalizedString("Please select an answer", comment: "Error message when user hasn't yet made a selection")
         switch type
         {
             case .Diet:
@@ -525,7 +524,7 @@ class OnboardingViewModel
             case .Allergy:
                 return defaultText
             case .Goal:
-                return NSLocalizedString("Please choose 3 goals", comment:"Error message when user hasn't chosen 3 goals")
+                return NSLocalizedString("Please choose 3 goals", comment: "Error message when user hasn't chosen 3 goals")
             case .SingleGoal:
                 return defaultText
         }
@@ -549,7 +548,7 @@ class OnboardingViewModel
         {
             if goal.id == mainGoal
             {
-                let text = String(format:NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
+                let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
                 return text
             }
         }
@@ -557,5 +556,3 @@ class OnboardingViewModel
         return ""
     }
 }
-
-

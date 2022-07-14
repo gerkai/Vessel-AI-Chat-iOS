@@ -20,7 +20,7 @@ class ObjectStore: NSObject
     
     private func saveObject<T: CoreObjectProtocol>(_ object: T)
     {
-        let objectName = String(describing: type(of:object))
+        let objectName = String(describing: type(of: object))
         if repo[objectName] != nil
         {
             repo[objectName]![object.id] = object
@@ -50,7 +50,7 @@ class ObjectStore: NSObject
     {
         //Storage.store(object)
         saveObject(object)
-        if String(describing: type(of:object)) == "Contact"
+        if String(describing: type(of: object)) == "Contact"
         {
             Server.shared.updateContact(contact: object as! Contact)
             {

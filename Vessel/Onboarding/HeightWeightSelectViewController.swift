@@ -85,8 +85,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
             if isMetric
             {
                 let weightKG = weight * 0.45359237 // pounds to kilograms conversion
-                weightTextField.text = "\(weightKG)"
-                
+                weightTextField.text = "\(weightKG)" 
             }
             else
             {
@@ -171,7 +170,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
         else
         {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please enter your weight", comment:""))
+            UIView.showError(text: "", detailText: NSLocalizedString("Please enter your weight", comment: ""))
         }
     }
     

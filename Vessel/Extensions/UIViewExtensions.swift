@@ -16,9 +16,9 @@ extension UIView
         return UINib(nibName: self.className, bundle: nil)
     }
     
-    func pushTransition(_ duration:CFTimeInterval)
+    func pushTransition(_ duration: CFTimeInterval)
     {
-        let animation:CATransition = CATransition()
+        let animation: CATransition = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.type = CATransitionType.push
         animation.subtype = CATransitionSubtype.fromBottom
@@ -42,11 +42,12 @@ extension UIView
         })
     }
     
-    func shake(count : Float = 4, for duration : TimeInterval = 0.25, withTranslation translation : Float = 5) {
-        let animation : CABasicAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+    func shake(count: Float = 4, for duration: TimeInterval = 0.25, withTranslation translation: Float = 5)
+    {
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.repeatCount = count
-        animation.duration = duration/TimeInterval(animation.repeatCount)
+        animation.duration = duration / TimeInterval(animation.repeatCount)
         animation.autoreverses = true
         animation.fromValue = NSValue(cgPoint: CGPoint(x: CGFloat(-translation), y: self.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: CGFloat(translation), y: self.center.y))
@@ -56,7 +57,7 @@ extension UIView
     static func showError(text: String, detailText: String, image: UIImage? = nil)
     {
         let textColor: EKColor = .white
-        let backgroundUIColor: UIColor = UIColor(red: 243/255, green: 167/255, blue: 165/255, alpha: 1)
+        let backgroundUIColor: UIColor = UIColor(red: 243 / 255, green: 167 / 255, blue: 165 / 255, alpha: 1)
         let backgroundColor = EKColor(backgroundUIColor)
         // Generate top floating entry and set some properties
         var attributes = EKAttributes.topToast

@@ -24,9 +24,16 @@ class Contact: CoreObjectProtocol
     var goal_ids: [Int]
     var mainGoal: Int?
     var flags: Int              //object is not returned from server yet so we mock it with a private var _flags
-    { get { _flags ?? 0}
-        set { _flags = newValue}
-        
+
+    {
+        get
+        {
+            _flags ?? 0
+        }
+        set
+        {
+            _flags = newValue
+        }
     }
     //var allergies: [Lookup]?  //needs to be an array of allergyIDs (Int)
     //var goals: [GoalElement]? //array of 3 goal IDs (Int). First one is the focus goal
@@ -80,12 +87,12 @@ class Contact: CoreObjectProtocol
          //allergies: [Lookup]? = nil,
          //goals: [GoalElement]? = nil,
          email: String? = nil,
-         is_verified: Bool  = false,
+         is_verified: Bool = false,
          
  //        tutorialVersion: Int = 0,
          
          lastLogin: String? = nil,
-         insert_date:String? = nil,
+         insert_date: String? = nil,
          password: String? = nil,
          image_url: String? = nil,
          occupation: String? = nil,

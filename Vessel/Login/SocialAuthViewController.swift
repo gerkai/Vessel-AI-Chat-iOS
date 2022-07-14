@@ -27,7 +27,6 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     var bIsGoogle: Bool = true
     var delegate: SocialAuthViewDelegate?
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -78,7 +77,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         }
         onFailure:
         { error in
-            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
         }
     }
     
@@ -96,7 +95,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         let urlString = navigationAction.request.url?.absoluteString
-#warning ("CW: Temporary fix until backend gets fixed")
+        #warning ("CW: Temporary fix until backend gets fixed")
         let fixString = urlString?.replacingOccurrences(of: "/v2/", with: "/v3/")
         print("\(String(describing: fixString))")
         print("Retrieve URL: \(String(describing: retrieveURL))")
