@@ -170,7 +170,7 @@ class Server: NSObject
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
+            //let jsonString = String(data: jsonData, encoding: .utf8)!
             //print(jsonString)
 
             let Url = String(format: url)
@@ -451,7 +451,7 @@ class Server: NSObject
             do
             {
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
-                let jsonString = String(data: jsonData, encoding: .utf8)!
+                //let jsonString = String(data: jsonData, encoding: .utf8)!
                 //print(jsonString)
                 
                 let Url = String(format: url)
@@ -507,7 +507,7 @@ class Server: NSObject
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try! encoder.encode(contact)
-            let jsonString = String(data: data, encoding: .utf8)!
+            //let jsonString = String(data: data, encoding: .utf8)!
             //print(jsonString)
             
             let Url = String(format: url)

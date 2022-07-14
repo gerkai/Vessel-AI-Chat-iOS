@@ -104,9 +104,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_2473 1" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-Y6-MAh">
-                                <rect key="frame" x="0.0" y="0.0" width="390.5" height="896"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AL5-s2-D7l">
                                 <rect key="frame" x="20" y="90" width="374" height="717"/>
                                 <subviews>
@@ -212,21 +209,12 @@
                             <constraint firstItem="AL5-s2-D7l" firstAttribute="leading" secondItem="ccR-Rq-Tc2" secondAttribute="leading" constant="20" id="CVu-i9-SOq"/>
                             <constraint firstItem="AL5-s2-D7l" firstAttribute="top" secondItem="hzv-Zd-ita" secondAttribute="top" constant="46" id="I62-cI-r56"/>
                             <constraint firstItem="GWS-BR-vWt" firstAttribute="leading" secondItem="ccR-Rq-Tc2" secondAttribute="leading" id="JnG-1L-qB9"/>
-                            <constraint firstItem="xjO-Y6-MAh" firstAttribute="top" secondItem="ccR-Rq-Tc2" secondAttribute="top" id="Lka-MM-Lj8"/>
-                            <constraint firstItem="xjO-Y6-MAh" firstAttribute="trailing" secondItem="ccR-Rq-Tc2" secondAttribute="trailing" id="UIQ-3H-7LA"/>
-                            <constraint firstItem="xjO-Y6-MAh" firstAttribute="bottom" secondItem="ccR-Rq-Tc2" secondAttribute="bottom" id="WOO-WH-A7Z"/>
-                            <constraint firstItem="xjO-Y6-MAh" firstAttribute="leading" secondItem="ccR-Rq-Tc2" secondAttribute="leading" id="aVQ-yk-hwg"/>
                             <constraint firstItem="GWS-BR-vWt" firstAttribute="bottom" secondItem="ccR-Rq-Tc2" secondAttribute="bottom" id="auq-uc-8A7"/>
                             <constraint firstItem="AL5-s2-D7l" firstAttribute="bottom" secondItem="hzv-Zd-ita" secondAttribute="bottom" constant="-55" id="g83-kN-zgR"/>
                             <constraint firstItem="AL5-s2-D7l" firstAttribute="trailing" secondItem="ccR-Rq-Tc2" secondAttribute="trailing" constant="-20" id="g9F-8E-K10"/>
                             <constraint firstItem="GWS-BR-vWt" firstAttribute="trailing" secondItem="ccR-Rq-Tc2" secondAttribute="trailing" id="p41-uq-1mw"/>
                             <constraint firstItem="GWS-BR-vWt" firstAttribute="top" secondItem="ccR-Rq-Tc2" secondAttribute="top" id="twM-H7-nUz"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="xjO-Y6-MAh"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="darkenView" destination="GWS-BR-vWt" id="hEr-T8-hKI"/>
@@ -331,7 +319,6 @@
     </scenes>
     <resources>
         <image name="Chat-Icon" width="21" height="18"/>
-        <image name="IMG_2473 1" width="375" height="812"/>
         <image name="More-Icon" width="19" height="5"/>
         <image name="Plan-Icon" width="18" height="18"/>
         <image name="Results-Icon" width="19" height="18"/>
