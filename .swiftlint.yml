@@ -1,0 +1,41 @@
+# By default, SwiftLint uses a set of sensible default rules you can adjust:
+# disabled_rules: # rule identifiers turned on by default to exclude from running
+# opt_in_rules: # some rules are turned off by default, so you need to opt-in
+# Specify all rules explicitly by uncommenting this option:
+only_rules: # delete `disabled_rules` & `opt_in_rules` if using this
+# - force_unwrapping
+- closing_brace
+- colon
+- comma
+- custom_rules
+- leading_whitespace
+- operator_usage_whitespace
+- operator_whitespace
+- return_arrow_whitespace
+- unused_import
+- vertical_whitespace
+- vertical_whitespace_closing_braces
+- vertical_whitespace_opening_braces
+
+custom_rules:
+    opening_braces_in_newline:
+        name: "Opening Braces not on Next Line"
+        message: "Opening braces should be placed on the next line."
+        include: "*.swift"
+        regex: '[a-zA-Z)] ?\{$'
+        severity: warning
+
+included: # paths to include during linting. `--path` is ignored if present.
+  - Vessel
+  - VesselTests
+  - VesselUITests
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - Source/ExcludedFolder
+  - Source/ExcludedFile.swift
+  - Source/*/ExcludedFile.swift # Exclude files with a wildcard
+# analyzer_rules: # Rules run by `swiftlint analyze`
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, codeclimate, junit, html, emoji, sonarqube, markdown, github-actions-logging)
+
