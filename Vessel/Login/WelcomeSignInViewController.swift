@@ -22,18 +22,18 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     let labelRefreshInterval = 2.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
-    let goals = [NSLocalizedString("focus", comment:""),
-                 NSLocalizedString("energy", comment:""),
-                 NSLocalizedString("immunity", comment:""),
-                 NSLocalizedString("sleep", comment:""),
-                 NSLocalizedString("body", comment:""),
-                 NSLocalizedString("mood", comment:""),
-                 NSLocalizedString("digestion", comment:""),
-                 NSLocalizedString("beauty", comment:""),
-                 NSLocalizedString("living", comment:"")]
+    let goals = [NSLocalizedString("focus", comment: ""),
+                 NSLocalizedString("energy", comment: ""),
+                 NSLocalizedString("immunity", comment: ""),
+                 NSLocalizedString("sleep", comment: ""),
+                 NSLocalizedString("body", comment: ""),
+                 NSLocalizedString("mood", comment: ""),
+                 NSLocalizedString("digestion", comment: ""),
+                 NSLocalizedString("beauty", comment: ""),
+                 NSLocalizedString("living", comment: "")]
     var goalIndex = 0
-    let lock = [1,0,0,0,1,0] //this is the pattern the user must enter (1 is right button, 0 is left button)
-    var key = [0,0,0,0,0,0]
+    let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
+    var key = [0, 0, 0, 0, 0, 0]
     
     override func viewDidLoad()
     {
@@ -84,7 +84,6 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     @IBAction func onRightButton()
     {
-        
         key.append(1)
         key.remove(at: 0)
         //print("RIGHT: \(key)")

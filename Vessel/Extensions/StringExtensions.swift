@@ -14,7 +14,7 @@ extension String
         //make sure e-mail address has an @ and a . in it. Also should contain valid alphanumeric characters / symbols
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
     }
     
@@ -45,5 +45,4 @@ extension String
     {
         prefix(1).uppercased() + dropFirst()
     }
-    
 }

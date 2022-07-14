@@ -10,7 +10,6 @@ import UIKit
 
 class NoTestCardOnboardViewController: UIViewController
 {
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()

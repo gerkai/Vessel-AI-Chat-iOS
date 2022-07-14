@@ -10,7 +10,6 @@ import UIKit
 
 class LoadingButton: VesselButton
 {
-
     var originalButtonText: String?
     var originalButtonImage: UIImage?
 

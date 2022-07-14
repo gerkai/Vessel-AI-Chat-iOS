@@ -26,17 +26,17 @@ struct Constants
     static let MinimumPasswordLength: Int = 6
     
     //used for reducing content on smaller screens
-    static let SMALL_SCREEN_HEIGHT_THRESHOLD  =  700.0
+    static let SMALL_SCREEN_HEIGHT_THRESHOLD = 700.0
     
     //geometry
     static let MIN_VERT_SPACING_TO_BACK_BUTTON = 20.0
-    static let CORNER_RADIUS  =  22.0
+    static let CORNER_RADIUS = 22.0
     static let CHECK_BUTTON_HEIGHT = 60.0
     static let SMALL_SCREEN_CHECK_BUTTON_HEIGHT = 50.0
     
     //colors
     static let DARK_GRAY_TRANSLUCENT = UIColor.init(red: 0.0863, green: 0.0824, blue: 0.0784, alpha: 0.7)
-    static let VESSEL_BLACK = UIColor.init(red: 22.0/255.0, green: 21.0/255.0, blue: 20.0/255.0, alpha: 1.0)
+    static let VESSEL_BLACK = UIColor.init(red: 22.0 / 255.0, green: 21.0 / 255.0, blue: 20.0 / 255.0, alpha: 1.0)
     static let SOLID_BLACK = UIColor.black
     
     //common date formats

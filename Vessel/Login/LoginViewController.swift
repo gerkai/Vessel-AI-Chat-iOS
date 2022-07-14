@@ -99,7 +99,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         onFailure:
                         {error in
                             self.nextButton.hideLoading()
-                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment:"Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
                         }
                     }
                     onFailure:
@@ -110,12 +110,12 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                 }
                 else
                 {
-                    UIView.showError(text: "", detailText: NSLocalizedString("Please enter your password", comment:""), image: nil)
+                    UIView.showError(text: "", detailText: NSLocalizedString("Please enter your password", comment: ""), image: nil)
                 }
             }
             else
             {
-                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment:""), image: nil)
+                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment: ""), image: nil)
             }
         }
     }

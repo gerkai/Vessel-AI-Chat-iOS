@@ -10,7 +10,7 @@ import UIKit
 class KeyboardFriendlyViewController: UIViewController
 {
     // to store the current active textfield
-    var activeTextField : UITextField? = nil
+    var activeTextField: UITextField? = nil
     
     override func viewDidLoad()
     {
@@ -25,7 +25,6 @@ class KeyboardFriendlyViewController: UIViewController
     //MARK: - Handle sliding view up/down so textfield isn't blocked by keyboard
     @objc func keyboardWillShow(notification: NSNotification)
     {
-        
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else
         {
             // if keyboard size is not available for some reason, dont do anything
@@ -64,5 +63,3 @@ class KeyboardFriendlyViewController: UIViewController
         self.view.endEditing(true)
     }
 }
-
-

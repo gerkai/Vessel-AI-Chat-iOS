@@ -60,7 +60,7 @@ public class Storage
     {
         do
         {
-            let directoryUrl = getURL(for: directory, objectName: String(describing: type(of:object)))
+            let directoryUrl = getURL(for: directory, objectName: String(describing: type(of: object)))
             //print("Storing \(object) to URL: \(directoryUrl)")
             if !FileManager.default.fileExists(atPath: directoryUrl.path)
             {

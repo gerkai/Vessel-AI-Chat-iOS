@@ -49,7 +49,7 @@ class VesselTextField: UITextField
     
     func showInvalidState()
     {
-        borderColor = UIColor(red: 243/255, green: 167/255, blue: 165/255, alpha: 1)
+        borderColor = UIColor(red: 243 / 255, green: 167 / 255, blue: 165 / 255, alpha: 1)
         shake()
         becomeFirstResponder()
     }

@@ -10,7 +10,6 @@ import UIKit
 
 public class BounceButton: UIButton
 {
-
     private static let cornerRadius: CGFloat = 22.0
     
     @IBInspectable var scale: CGFloat = 0.95

@@ -13,9 +13,9 @@ extension WKWebView
 {
     private var httpCookieStore: WKHTTPCookieStore  { return WKWebsiteDataStore.default().httpCookieStore }
 
-    func getCookiesDict(for domain: String? = nil, completion: @escaping ([String : Any])->())
+    func getCookiesDict(for domain: String? = nil, completion: @escaping ([String: Any]) ->())
     {
-        var cookieDict = [String : AnyObject]()
+        var cookieDict = [String: AnyObject]()
         httpCookieStore.getAllCookies
         { cookies in
             for cookie in cookies
@@ -36,7 +36,7 @@ extension WKWebView
         }
     }
     
-    func getCookies(for domain: String? = nil, completion: @escaping ([HTTPCookie])->())
+    func getCookies(for domain: String? = nil, completion: @escaping ([HTTPCookie]) ->())
     {
         var data = [HTTPCookie]()
         httpCookieStore.getAllCookies

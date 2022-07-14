@@ -21,7 +21,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     }
     
     var screenMode = mode.firstScreen
-    var initialTitle : String?
+    var initialTitle: String?
     var initialDescription: String?
     var initialSubmitTitle: String?
     
@@ -34,7 +34,6 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
         //titleLabel.lineBreakStrategy = []
         
         initialSubmitTitle = submitButton.title(for: .normal)
-        
     }
     
     @IBAction func onBackButton()
@@ -95,7 +94,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
             onFailure:
             { object in
                 print("\(object)")
-                let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're having trouble communicating with the server. Please try again later.", comment:""), preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're having trouble communicating with the server. Please try again later.", comment: ""), preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
                 { (action) in
@@ -104,7 +103,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
                 }
                 
                 alertController.addAction(okAction)
-                self.present(alertController, animated:true)
+                self.present(alertController, animated: true)
             }
         }
     }
@@ -120,13 +119,13 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
         },
         completion:
         {_ in
-            self.titleLabel.text = NSLocalizedString("Request sent successfully", comment:"")
-            self.descriptionLabel.text = NSLocalizedString("Please check your inbox for a link to reset your password.", comment:"")
+            self.titleLabel.text = NSLocalizedString("Request sent successfully", comment: "")
+            self.descriptionLabel.text = NSLocalizedString("Please check your inbox for a link to reset your password.", comment: "")
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations:
             {
                 self.titleLabel.alpha = 1
                 self.descriptionLabel.alpha = 1
-                self.submitButton.setTitle(NSLocalizedString("Login", comment:""), for: .normal)
+                self.submitButton.setTitle(NSLocalizedString("Login", comment: ""), for: .normal)
             },
             completion:
             {_ in

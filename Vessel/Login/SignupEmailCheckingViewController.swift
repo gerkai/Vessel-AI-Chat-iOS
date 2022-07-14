@@ -13,7 +13,6 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     @IBOutlet weak var appleAuthButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
-    
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
         self.navigationController?.fadeOut()
@@ -46,7 +45,6 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         vc.bIsGoogle = isGoogle
         self.present(vc, animated: true)
     }
-    
     
     @IBAction func onPrivacyButtonTapped(_ sender: Any)
     {
@@ -86,7 +84,6 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
             }
             onFailure:
             { string in
-                
             }
         }
         else

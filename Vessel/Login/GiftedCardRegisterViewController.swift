@@ -9,7 +9,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
 class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFieldDelegate
 {
     @IBOutlet var formFields: [VesselTextField]!
@@ -114,7 +113,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
 
     private func createContact(firstName: String, lastName: String, password: String)
     {
-        let contact =  Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "", password: password)
+        let contact = Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "", password: password)
         Server.shared.createContact(contact: contact)
         {
             Server.shared.getContact
@@ -132,7 +131,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         }
         onFailure:
         { error in
-            UIView.showError(text: NSLocalizedString("Sign Up", comment:""), detailText: error, image: nil)
+            UIView.showError(text: NSLocalizedString("Sign Up", comment: ""), detailText: error, image: nil)
         }
     }
     

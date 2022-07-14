@@ -83,7 +83,7 @@ class DebugViewController: UIViewController, UITextFieldDelegate
             }
             else
             {
-                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_LOGIN_EMAIL)
+                UserDefaults.standard.set(textField.text, forKey: Constants.KEY_DEFAULT_LOGIN_EMAIL)
             }
         }
         else if textField.tag == passwordFieldTag
@@ -94,7 +94,7 @@ class DebugViewController: UIViewController, UITextFieldDelegate
             }
             else
             {
-                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_LOGIN_PASSWORD)
+                UserDefaults.standard.set(textField.text, forKey: Constants.KEY_DEFAULT_LOGIN_PASSWORD)
             }
         }
         else if textField.tag == weightFieldTag
@@ -105,7 +105,7 @@ class DebugViewController: UIViewController, UITextFieldDelegate
             }
             else
             {
-                UserDefaults.standard.set(textField.text, forKey:Constants.KEY_DEFAULT_WEIGHT_LBS)
+                UserDefaults.standard.set(textField.text, forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
             }
         }
     }

@@ -26,20 +26,20 @@ let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
 let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 
 //Security strings
-let AUTH_PREFIX =                       "Bearer"
-let AUTH_KEY  =                         "Authorization"
+let AUTH_PREFIX = "Bearer"
+let AUTH_KEY = "Authorization"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
 
 //Endpoints
-let SERVER_FORGOT_PASSWORD_PATH =       "auth/forgot-password"
-let SERVER_LOGIN_PATH =                 "auth/login"
-let APPLE_LOGIN_PATH =                  "auth/apple/login"
-let APPLE_RETRIEVE_PATH =               "auth/apple/retrieve"
-let GOOGLE_LOGIN_PATH =                 "auth/google/login"
-let GOOGLE_RETRIEVE_PATH =              "auth/google/retrieve"
-let CONTACT_PATH =                      "contact"
-let CONTACT_EXISTS_PATH =               "contact/exists"
+let SERVER_FORGOT_PASSWORD_PATH = "auth/forgot-password"
+let SERVER_LOGIN_PATH = "auth/login"
+let APPLE_LOGIN_PATH = "auth/apple/login"
+let APPLE_RETRIEVE_PATH = "auth/apple/retrieve"
+let GOOGLE_LOGIN_PATH = "auth/google/login"
+let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
+let CONTACT_PATH = "contact"
+let CONTACT_EXISTS_PATH = "contact/exists"
 
 class Server: NSObject
 {
@@ -81,7 +81,7 @@ class Server: NSObject
         return SUPPORT_URL
     }
 
-    private func serverGet(url : String, onSuccess success: @escaping (_ data : Data) -> Void, onFailure failure: @escaping (_ string : String) -> Void)
+    private func serverGet(url: String, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         guard let serviceUrl = URL(string: url) else { return }
         let request = URLRequest(url: serviceUrl)
@@ -112,17 +112,17 @@ class Server: NSObject
         }.resume()
     }
     
-    private func serverPost(request : URLRequest, onSuccess success: @escaping (_ json : [String : Any]) -> Void, onFailure failure: @escaping (_ string : String) -> Void)
+    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         serverWrite(request: request, requestType: "POST", onSuccess: success, onFailure: failure)
     }
     
-    private func serverPut(request : URLRequest, onSuccess success: @escaping (_ json : [String : Any]) -> Void, onFailure failure: @escaping (_ string : String) -> Void)
+    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
     }
     
-    private func serverWrite(request : URLRequest, requestType: String, onSuccess success: @escaping (_ json : [String : Any]) -> Void, onFailure failure: @escaping (_ string : String) -> Void)
+    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         var mutableRequest = request
         mutableRequest.httpMethod = "POST"
@@ -140,7 +140,6 @@ class Server: NSObject
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
-
             if let data = data //unwrap data
             {
                 do
@@ -166,7 +165,7 @@ class Server: NSObject
         }.resume()
     }
     
-    private func postToServer(dictBody: [String : String], url: String, onSuccess success: @escaping (_ object: [String : Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
+    private func postToServer(dictBody: [String: String], url: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
     {
         do
         {
@@ -174,7 +173,8 @@ class Server: NSObject
             let jsonString = String(data: jsonData, encoding: .utf8)!
             //print(jsonString)
 
-            let Url = String(format:url)
+            let Url = String(format: url)
+            // swiftlint:disable opening_braces_in_newline
             guard let serviceUrl = URL(string: Url) else { return }
             var request = URLRequest(url: serviceUrl)
             request.httpBody = jsonData
@@ -190,7 +190,7 @@ class Server: NSObject
             { (string) in
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("Server Error", comment:""))
+                    failure(NSLocalizedString("Server Error", comment: ""))
                 }
             })
         }
@@ -228,9 +228,9 @@ class Server: NSObject
         return accessToken != nil
     }
     
-    func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String : Any]) -> Void)
+    func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String: Any]) -> Void)
     {
-        var dictPostBody = [String : String]()
+        var dictPostBody = [String: String]()
         dictPostBody["email"] = email
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_FORGOT_PASSWORD_PATH)")
@@ -246,13 +246,13 @@ class Server: NSObject
         }
         onFailure:
         { message in
-            failure(["Failure" : NSLocalizedString("Server Error", comment:"")])
+            failure(["Failure": NSLocalizedString("Server Error", comment: "")])
         }
     }
     
     func login(email: String, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
-        var dictPostBody = [String : String]()
+        var dictPostBody = [String: String]()
         dictPostBody["email"] = email
         dictPostBody["password"] = password
         
@@ -271,7 +271,7 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("This email and password combination is incorrect", comment:""))
+                    failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
                 }
             }
         }
@@ -318,7 +318,7 @@ class Server: NSObject
                 {
                     DispatchQueue.main.async()
                     {
-                        failure(NSLocalizedString("Unable to decode access token", comment:"Server error message"))
+                        failure(NSLocalizedString("Unable to decode access token", comment: "Server error message"))
                     }
                 }
             }
@@ -326,7 +326,7 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("Unable to decode access token", comment:"Server error message"))
+                    failure(NSLocalizedString("Unable to decode access token", comment: "Server error message"))
                 }
             }
         }
@@ -350,7 +350,7 @@ class Server: NSObject
     ///will return true if contact e-mail exists on back end
     func contactExists(email: String, onSuccess success: @escaping (_ exists: Bool) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
-        var dictPostBody = [String : String]()
+        var dictPostBody = [String: String]()
         dictPostBody["email"] = email
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(CONTACT_EXISTS_PATH)")
@@ -372,7 +372,7 @@ class Server: NSObject
         }
         onFailure:
         { message in
-            failure(NSLocalizedString("Server Error", comment:""))
+            failure(NSLocalizedString("Server Error", comment: ""))
         }
     }
     
@@ -455,7 +455,8 @@ class Server: NSObject
                 let jsonString = String(data: jsonData, encoding: .utf8)!
                 //print(jsonString)
                 
-                let Url = String(format:url)
+                let Url = String(format: url)
+                // swiftlint:disable opening_braces_in_newline
                 guard let serviceUrl = URL(string: Url) else { return }
                 var request = URLRequest(url: serviceUrl)
                 request.httpBody = jsonData
@@ -476,7 +477,7 @@ class Server: NSObject
                     {
                         DispatchQueue.main.async()
                         {
-                            failure(NSLocalizedString("This email and password combination is incorrect", comment:""))
+                            failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
                         }
                     }
                 },
@@ -484,7 +485,7 @@ class Server: NSObject
                 { (string) in
                     DispatchQueue.main.async()
                     {
-                        failure(NSLocalizedString("Server Error", comment:""))
+                        failure(NSLocalizedString("Server Error", comment: ""))
                     }
                 })
             }
@@ -511,7 +512,8 @@ class Server: NSObject
             let jsonString = String(data: data, encoding: .utf8)!
             //print(jsonString)
             
-            let Url = String(format:url)
+            let Url = String(format: url)
+            // swiftlint:disable opening_braces_in_newline
             guard let serviceUrl = URL(string: Url) else { return }
             var request = URLRequest(url: serviceUrl)
             request.httpBody = data
@@ -528,7 +530,7 @@ class Server: NSObject
             { (string) in
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("Server Error", comment:""))
+                    failure(NSLocalizedString("Server Error", comment: ""))
                 }
             })
         }

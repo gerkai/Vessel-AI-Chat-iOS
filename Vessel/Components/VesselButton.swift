@@ -21,10 +21,9 @@ class VesselButton: BounceButton
             {
                 imageView?.frame = CGRect(
                     x: bounds.width - imageSize.width - horizInset,
-                    y: (bounds.height/2 - imageSize.height/2),
+                    y: (bounds.height / 2 - imageSize.height / 2),
                     width: imageSize.width,
-                    height: imageSize.height)
-            
+                    height: imageSize.height)   
             }
         }
     }

@@ -10,7 +10,6 @@ import UIKit
 
 extension UITextField
 {
-    
     enum PaddingSide
     {
         case left(CGFloat)
@@ -20,7 +19,6 @@ extension UITextField
     
     func addPadding(_ padding: PaddingSide)
     {
-        
         self.leftViewMode = .always
         self.layer.masksToBounds = true
         
