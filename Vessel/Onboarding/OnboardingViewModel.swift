@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    //var curState: OnboardingState = .Initial
+    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
@@ -210,6 +210,11 @@ class OnboardingViewModel
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         return vc
+    }
+    
+    init()
+    {
+        print("Init Onboarding View Model")
     }
     
     func backup()

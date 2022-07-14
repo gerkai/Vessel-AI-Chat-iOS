@@ -95,13 +95,13 @@ class Server: NSObject
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
         
-        print("\(mutableRequest)")
+        //print("\(mutableRequest)")
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
             if let data = data //unwrap data
             {
-                self.debugJSONResponse(data: data)
+                //self.debugJSONResponse(data: data)
                 success(data)
             }
             else
@@ -132,7 +132,11 @@ class Server: NSObject
             mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        print("\(mutableRequest)")
+        if let url = request.url
+        {
+            print("POST: \(url)")
+        }
+        //print("\(mutableRequest)")
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -168,7 +172,7 @@ class Server: NSObject
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
+            //print(jsonString)
 
             let Url = String(format:url)
             guard let serviceUrl = URL(string: Url) else { return }
@@ -385,14 +389,14 @@ class Server: NSObject
             }
             serverGet(url: url)
             { data in
-                let str = String(decoding: data, as: UTF8.self)
-                print (str)
+                //let str = String(decoding: data, as: UTF8.self)
+                //print (str)
                 
                 let decoder = JSONDecoder()
                 do
                 {
                     let contact = try decoder.decode(Contact.self, from: data)
-                    print(contact)
+                    //print(contact)
                     DispatchQueue.main.async()
                     {
                         success(contact)
@@ -449,7 +453,7 @@ class Server: NSObject
             {
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
                 let jsonString = String(data: jsonData, encoding: .utf8)!
-                print(jsonString)
+                //print(jsonString)
                 
                 let Url = String(format:url)
                 guard let serviceUrl = URL(string: Url) else { return }
@@ -505,7 +509,7 @@ class Server: NSObject
             encoder.outputFormatting = .prettyPrinted
             let data = try! encoder.encode(contact)
             let jsonString = String(data: data, encoding: .utf8)!
-            print(jsonString)
+            //print(jsonString)
             
             let Url = String(format:url)
             guard let serviceUrl = URL(string: Url) else { return }

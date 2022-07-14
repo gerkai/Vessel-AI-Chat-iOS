@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthdaySelectViewController: UIViewController, SelectionCheckmarkViewDelegate
+class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheckmarkViewDelegate
 {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var checkmarkView: SelectionCheckmarkView!
@@ -20,7 +20,6 @@ class BirthdaySelectViewController: UIViewController, SelectionCheckmarkViewDele
     private var maxDateComponents = DateComponents()
     private var maxDate = Date()
     private var minDate = Date()
-    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {

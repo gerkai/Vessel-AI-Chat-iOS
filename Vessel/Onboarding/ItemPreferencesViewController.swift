@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
+class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabelSpacing: NSLayoutConstraint!
@@ -17,7 +17,6 @@ class ItemPreferencesViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTextLabel: UILabel!
     
-    var viewModel: OnboardingViewModel?
     var titleText: String?
     var subtext: String?
     var itemType: ItemPreferencesType = .Diet

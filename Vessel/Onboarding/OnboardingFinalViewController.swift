@@ -7,12 +7,10 @@
 
 import UIKit
 
-class OnboardingFinalViewController: UIViewController
+class OnboardingFinalViewController: OnboardingMVVMViewController
 {
     @IBOutlet weak var titleLabel: UILabel!
-    
-    var viewModel: OnboardingViewModel?
-    
+        
     override func viewDidLoad()
     {
         titleLabel.text = viewModel?.finalScreenText()

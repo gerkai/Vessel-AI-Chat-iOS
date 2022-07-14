@@ -64,7 +64,6 @@
 		3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B96A27D429E000D589F7 /* Onboarding.storyboard */; };
 		3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */; };
 		3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */; };
-		3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97127D44F4A00D589F7 /* LastViewController.swift */; };
 		3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */; };
 		3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */; };
 		3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */; };
@@ -76,6 +75,7 @@
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
+		3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -173,7 +173,6 @@
 		3F87B96A27D429E000D589F7 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewController.swift; sourceTree = "<group>"; };
-		3F87B97127D44F4A00D589F7 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
 		3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewController.swift; sourceTree = "<group>"; };
 		3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCheckmarkView.swift; sourceTree = "<group>"; };
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
@@ -185,6 +184,7 @@
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
+		3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMVVMViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -293,11 +293,11 @@
 			isa = PBXGroup;
 			children = (
 				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
-				3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
+				3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */,
 				3FA6683D287F69830006166D /* TakeTestViewModel.swift */,
 				3FA6683B287F64960006166D /* TipInstructionsViewController.swift */,
 			);
@@ -325,8 +325,8 @@
 				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
 				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
 				3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */,
-				3F87B97127D44F4A00D589F7 /* LastViewController.swift */,
 				3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */,
+				3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */,
 				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
 				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
@@ -698,7 +698,6 @@
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
-				3F87B97227D44F4A00D589F7 /* LastViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
@@ -719,6 +718,7 @@
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
+				3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,

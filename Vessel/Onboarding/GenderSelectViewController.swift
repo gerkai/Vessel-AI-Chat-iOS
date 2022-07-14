@@ -7,10 +7,9 @@
 
 import UIKit
 
-class GenderSelectViewController: UIViewController
+class GenderSelectViewController: OnboardingMVVMViewController
 {
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
-    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {

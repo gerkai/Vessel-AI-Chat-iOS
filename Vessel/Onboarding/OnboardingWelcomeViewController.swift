@@ -7,10 +7,9 @@
 
 import UIKit
 
-class OnboardingWelcomeViewController: UIViewController
+class OnboardingWelcomeViewController: OnboardingMVVMViewController
 {
     @IBOutlet weak var nameLabel: UILabel!
-    var viewModel: OnboardingViewModel?
     
     override func viewDidLoad()
     {

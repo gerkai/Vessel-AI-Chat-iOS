@@ -7,8 +7,6 @@
 
 import UIKit
 
-//var takeTestViewModel: TakeTestViewModel?
-
 //this enum determines the order the take test screens will appear
 enum TakeTextState: Int
 {
@@ -29,12 +27,6 @@ enum TakeTextState: Int
     mutating func back()
     {
         self = TakeTextState(rawValue: rawValue - 1) ?? .Initial
-        /*let contact = Contact.main()!
-        //
-        if contact.flags & Constants.HIDE_PEE_TIPS != 0
-        {
-            self = .Initial
-        }*/
     }
 }
 

@@ -8,12 +8,11 @@
 
 import UIKit
 
-class TermsViewController: UIViewController, UIScrollViewDelegate
+class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
 {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var viewModel: OnboardingViewModel?
     var allowNextButton = false
     override func viewDidLoad()
     {
