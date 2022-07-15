@@ -64,9 +64,8 @@ struct Constants
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001
-    static let VIEWED_TERMS                 = 0x00000002
-    static let HIDE_PEE_TIPS                = 0x00000004
-    static let WATCHED_INSTRUCTION_VIDEO    = 0x00000008
+    static let HIDE_PEE_TIPS                = 0x00000002
+    static let WATCHED_INSTRUCTION_VIDEO    = 0x00000004
     
     //Colors
     static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514

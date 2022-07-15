@@ -42,7 +42,6 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
     {
         if allowNextButton
         {
-            viewModel?.userViewedTerms()
             let vc = OnboardingViewModel.NextViewController()
             navigationController?.fadeTo(vc)
         }

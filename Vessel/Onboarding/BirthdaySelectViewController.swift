@@ -27,22 +27,19 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
         setDatePickerMinMaxValues()
         setDatePickerInitialValue()
         checkmarkView.defaultText = NSLocalizedString("I prefer not to say", comment: "")
-        if viewModel!.userWithheldBirthdate
-        {
-            checkmarkView.isChecked = true
-        }
         checkmarkView.delegate = self
     }
     
     private func setDatePickerInitialValue()
     {
-        if let savedBirthday = viewModel?.userBirthdate
+        if let result = viewModel?.getBirthDate()
         {
-            datePicker.setDate(savedBirthday, animated: false)
-        }
-        else
-        {
-            datePicker.setDate(viewModel!.defaultBirthDate(), animated: false)
+            datePicker.setDate(result.date, animated: false)
+            checkmarkView.isChecked = result.preferNotToSay
+            if result.preferNotToSay
+            {
+                pickerContainer.alpha = 0.0
+            }
         }
     }
     
@@ -74,8 +71,7 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
     
     @IBAction func back()
     {
-        viewModel!.userWithheldBirthdate = checkmarkView.isChecked
-        viewModel?.setBirthDate(birthdate: datePicker.date)
+        viewModel?.setBirthDate(birthDate: datePicker.date, preferNotToSay: checkmarkView.isChecked)
         viewModel?.backup()
         navigationController?.fadeOut()
     }
@@ -87,16 +83,7 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
     
     @IBAction func next()
     {
-        viewModel!.userWithheldBirthdate = checkmarkView.isChecked
-        if checkmarkView.isChecked
-        {
-            //user prefers not to share birth date
-            viewModel?.setBirthDate(birthdate: nil)
-        }
-        else
-        {
-            viewModel?.setBirthDate(birthdate: datePicker.date)
-        }
+        viewModel?.setBirthDate(birthDate: datePicker.date, preferNotToSay: checkmarkView.isChecked)
         
         let vc = OnboardingViewModel.NextViewController()
         navigationController?.fadeTo(vc)

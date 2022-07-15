@@ -55,10 +55,10 @@ class OnboardingViewModel
     var userGoals: [Int] = []
     var mainGoal: Int?
     var userGender: Int?
-    var userHeight: Double?
+    var userHeight: Double = Double(Constants.DEFAULT_HEIGHT)
     var userWeight: Double?
-    var userBirthdate: Date?
-    var userWithheldBirthdate: Bool = false
+    var userBirthdate: Date = Date.defaultBirthDate()
+    var preferNotToShareBirthdate: Bool = false
     
     //MARK: - navigation
     static func NextViewController() -> UIViewController
@@ -72,55 +72,31 @@ class OnboardingViewModel
             onboardingViewModel = OnboardingViewModel()
         }
         
-        //increment to next state
-        onboardingViewModel!.curState.next()
-        
-        if onboardingViewModel!.curState == .WelcomeGender
+        if contact.gender == nil
         {
-            if contact.gender == nil
+            //increment to next state
+            onboardingViewModel!.curState.next()
+        
+            if onboardingViewModel!.curState == .WelcomeGender
             {
                 //show gender selector flow
                 let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
                 vc.viewModel = onboardingViewModel
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .HeightWeight
-        {
-            if contact.height == nil || contact.weight == nil
+            else if onboardingViewModel!.curState == .HeightWeight
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
                 vc.viewModel = onboardingViewModel
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .BirthdaySelect
-        {
-            if contact.birth_date == nil && (contact.flags & Constants.DECLINED_BIRTH_DATE) == 0
+            else if onboardingViewModel!.curState == .BirthdaySelect
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
                 vc.viewModel = onboardingViewModel
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .DietSelect
-        {
-            if contact.diet_ids.count == 0
+            else if onboardingViewModel!.curState == .DietSelect
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
@@ -129,15 +105,7 @@ class OnboardingViewModel
                 vc.itemType = .Diet
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .AllergySelect
-        {
-            if contact.allergy_ids.count == 0
+            else if onboardingViewModel!.curState == .AllergySelect
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
@@ -146,29 +114,14 @@ class OnboardingViewModel
                 vc.itemType = .Allergy
                 return vc
             }
-            else
+            else if onboardingViewModel!.curState == .ViewTerms
             {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .ViewTerms
-        {
-            if contact.flags & Constants.VIEWED_TERMS == 0
-            {
+                
                 let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
                 vc.viewModel = onboardingViewModel
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-            }
-        }
-        if onboardingViewModel!.curState == .GoalsSelect
-        {
-            if contact.goal_ids.count < Constants.MAX_GOALS_AT_A_TIME
+            else if onboardingViewModel!.curState == .GoalsSelect
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
@@ -177,16 +130,7 @@ class OnboardingViewModel
                 vc.itemType = .Goal
                 return vc
             }
-            else
-            {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
-                onboardingViewModel!.userGoals = contact.goal_ids
-            }
-        }
-        if onboardingViewModel!.curState == .SingleGoalSelect
-        {
-            if contact.mainGoal == nil
+            else if onboardingViewModel!.curState == .SingleGoalSelect
             {
                 let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
                 vc.viewModel = onboardingViewModel
@@ -195,27 +139,30 @@ class OnboardingViewModel
                 vc.itemType = .SingleGoal
                 return vc
             }
-            else
+            else if onboardingViewModel!.curState == .FinalOnboarding
             {
-                //skip and go to next state
-                onboardingViewModel!.curState.next()
+                let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
+                vc.viewModel = onboardingViewModel
+                return vc
             }
-        }
-        if onboardingViewModel!.curState == .FinalOnboarding
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
-            vc.viewModel = onboardingViewModel
-            return vc
         }
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        
+        //save the data collected during onboarding
+        onboardingViewModel!.saveDemographics()
         return vc
     }
-    
+    /*
     init()
     {
         print("Init Onboarding View Model")
     }
+    
+    deinit
+    {
+        print("Dealloc Onboarding View Model")
+    }*/
     
     func backup()
     {
@@ -223,80 +170,38 @@ class OnboardingViewModel
     }
     
     //MARK: - gender
+    func getGender() -> Int?
+    {
+        return userGender
+    }
+    
     func setGender(gender: Int)
     {
         userGender = gender
-        if let contact = Contact.main()
-        {
-            var genderString = Constants.GENDER_OTHER
-            switch gender
-            {
-                case 0:
-                    genderString = Constants.GENDER_MALE
-                case 1:
-                    genderString = Constants.GENDER_FEMALE
-                default:
-                    break
-            }
-            contact.gender = genderString
-            ObjectStore.shared.ClientSave(contact)
-        }
     }
     
     //MARK: - height/weight
+    func getHeightWeight() -> (height: Double, weight: Double?)
+    {
+        return (userHeight, userWeight)
+    }
+    
     func setHeightWeight(height: Double, weight: Double)
     {
         userHeight = height
         userWeight = weight
-        if let contact = Contact.main()
-        {
-            contact.height = height
-            contact.weight = weight
-            ObjectStore.shared.ClientSave(contact)
-        }
     }
     
     //MARK: - birthdate
-    func setBirthDate(birthdate: Date?)
+    func getBirthDate() -> (date: Date, preferNotToSay: Bool)
     {
-        //can be set to nil if user prefers not to share their birthdate
-        userBirthdate = birthdate
-        if let contact = Contact.main()
-        {
-            if birthdate == nil
-            {
-                contact.birth_date = nil
-                contact.flags |= Constants.DECLINED_BIRTH_DATE
-            }
-            else
-            {
-                let formatter = DateFormatter()
-                formatter.dateFormat = Constants.SERVER_DATE_FORMAT
-                let strDate = formatter.string(from: birthdate!)
-                contact.birth_date = strDate
-            }
-            ObjectStore.shared.ClientSave(contact)
-        }
+        return (userBirthdate, preferNotToShareBirthdate)
     }
     
-    func defaultBirthDate() -> Date
+    func setBirthDate(birthDate: Date, preferNotToSay: Bool)
     {
-        //returns a date based on the average age of a member as defined in Constants
-        let calendar = Calendar.current
-        let averageAge = Constants.AVERAGE_AGE
-        // set the initial year to current year - averageAge
-        var dateComponents = calendar.dateComponents([.day, .month, .year], from: Date())
-        
-        if let year = dateComponents.year
-        {
-            dateComponents.year = year - averageAge
-        }
-        if let date = calendar.date(from: dateComponents)
-        {
-            return date
-        }
-        //should always return a date above but just in case...
-        return Date("2000-07-09") //arbitrary
+        userBirthdate = birthDate
+        preferNotToShareBirthdate = preferNotToSay
     }
     
     //MARK: - preferenceItem (Diet, Allergy, Goal)
@@ -444,12 +349,6 @@ class OnboardingViewModel
                     userDiets = userDiets.filter(){$0 != id}
                 }
                 
-                //TODO: Update contact
-                if let contact = Contact.main()
-                {
-                    contact.diet_ids = userDiets
-                    ObjectStore.shared.ClientSave(contact)
-                }
             case .Allergy:
                 
                 if selected
@@ -473,12 +372,6 @@ class OnboardingViewModel
                     userAllergies = userAllergies.filter(){$0 != id}
                 }
                 
-                //TODO: Update contact
-                if let contact = Contact.main()
-                {
-                    contact.allergy_ids = userAllergies
-                    ObjectStore.shared.ClientSave(contact)
-                }
         case .Goal:
             if selected
             {
@@ -495,13 +388,7 @@ class OnboardingViewModel
                 //remove id from chosenGoals
                 userGoals = userGoals.filter(){$0 != id}
             }
-            
-            //TODO: Update contact
-            if let contact = Contact.main()
-            {
-                contact.allergy_ids = userAllergies
-                ObjectStore.shared.ClientSave(contact)
-            }
+
         case .SingleGoal:
             if selected
             {
@@ -529,16 +416,6 @@ class OnboardingViewModel
                 return defaultText
         }
     }
-    //MARK: - Terms
-    
-    func userViewedTerms()
-    {
-        if let contact = Contact.main()
-        {
-            contact.flags |= Constants.VIEWED_TERMS
-            ObjectStore.shared.ClientSave(contact)
-        }
-    }
     
     //MARK: - Final
     
@@ -554,5 +431,47 @@ class OnboardingViewModel
         }
         //should never get here
         return ""
+    }
+    
+    func saveDemographics()
+    {
+        if let contact = Contact.main()
+        {
+            //gender
+            var genderString = Constants.GENDER_OTHER
+            switch userGender!
+            {
+                case 0:
+                    genderString = Constants.GENDER_MALE
+                case 1:
+                    genderString = Constants.GENDER_FEMALE
+                default:
+                    break
+            }
+            contact.gender = genderString
+            
+            //height / weight
+            contact.height = userHeight
+            contact.weight = userWeight
+            
+            //birthday
+            let formatter = DateFormatter()
+            formatter.dateFormat = Constants.SERVER_DATE_FORMAT
+            let strDate = formatter.string(from: userBirthdate)
+            contact.birth_date = strDate
+            
+            if preferNotToShareBirthdate
+            {
+                contact.flags |= Constants.DECLINED_BIRTH_DATE
+            }
+            
+            //diets, allergies, goals
+            contact.diet_ids = userDiets
+            contact.allergy_ids = userAllergies
+            contact.goal_ids = userGoals
+            contact.mainGoal = mainGoal
+            
+            ObjectStore.shared.ClientSave(contact)
+        }
     }
 }
