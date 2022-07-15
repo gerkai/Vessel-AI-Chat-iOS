@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="-1761" y="57"/>
         </scene>
-        <!--Chat-->
+        <!--Coach-->
         <scene sceneID="lfp-s1-Coc">
             <objects>
                 <viewController id="hxb-kY-V2d" sceneMemberID="viewController">
@@ -50,8 +50,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTn-ZU-LEb">
-                                <rect key="frame" x="185" y="438" width="49" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COACH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTn-ZU-LEb">
+                                <rect key="frame" x="185" y="438" width="59" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -61,7 +61,7 @@
                         <viewLayoutGuide key="safeArea" id="dVU-0E-yXU"/>
                         <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="Coach-icon" id="bkk-Po-fvx"/>
+                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="bkk-Po-fvx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Um5-Cg-1be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,7 +242,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9IQ-TA-VWQ"/>
-                        <color key="backgroundColor" red="0.75792567027006796" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="Xst-F5-x7s"/>
                 </viewController>

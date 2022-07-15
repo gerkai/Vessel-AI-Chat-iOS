@@ -70,7 +70,8 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
                 if let weightLbs = Double(weight)
                 {
                     let weightKG = weightLbs * 0.45359237 // pounds to kilograms conversion
-                    weightTextField.text = "\(weightKG)"
+                    
+                    weightTextField.text = String(format: "%.1f", weightKG)
                 }
             }
             else
