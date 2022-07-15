@@ -38,6 +38,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Body" translatesAutoresizingMaskIntoConstraints="NO" id="hKp-CI-Ohn">
+                                <rect key="frame" x="49" y="21" width="89" height="90"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJi-pF-maC" userLabel="titleLabel">
                                 <rect key="frame" x="34" y="29" width="87.5" height="18"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
@@ -48,9 +51,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ss2-Rk-tuR" firstAttribute="leading" secondItem="x4l-Ky-qSI" secondAttribute="leading" id="96f-I6-l2r"/>
+                            <constraint firstItem="hKp-CI-Ohn" firstAttribute="bottom" secondItem="x4l-Ky-qSI" secondAttribute="bottom" id="KoJ-kq-8fz"/>
                             <constraint firstItem="ss2-Rk-tuR" firstAttribute="top" secondItem="x4l-Ky-qSI" secondAttribute="top" id="YBK-R4-hxU"/>
                             <constraint firstItem="ZJi-pF-maC" firstAttribute="top" secondItem="x4l-Ky-qSI" secondAttribute="top" constant="8" id="ag7-3F-FmA"/>
                             <constraint firstItem="ZJi-pF-maC" firstAttribute="bottom" secondItem="x4l-Ky-qSI" secondAttribute="bottom" constant="-8" id="gMo-oW-sS0"/>
+                            <constraint firstItem="hKp-CI-Ohn" firstAttribute="trailing" secondItem="x4l-Ky-qSI" secondAttribute="trailing" id="lys-DD-PRM"/>
                             <constraint firstAttribute="bottom" secondItem="ss2-Rk-tuR" secondAttribute="bottom" id="meH-Nl-XEs"/>
                             <constraint firstAttribute="trailing" secondItem="ss2-Rk-tuR" secondAttribute="trailing" id="qcU-RV-Tp9"/>
                             <constraint firstItem="ZJi-pF-maC" firstAttribute="leading" secondItem="x4l-Ky-qSI" secondAttribute="leading" constant="34" id="xAW-4U-eL4"/>
@@ -105,6 +110,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="backgroundImage" destination="hKp-CI-Ohn" id="29m-L5-odD"/>
                 <outlet property="checkImage" destination="WL8-hP-EQT" id="MBn-Fu-Z2y"/>
                 <outlet property="rootView" destination="x4l-Ky-qSI" id="MPk-ab-fIc"/>
                 <outlet property="titleLabel" destination="ZJi-pF-maC" id="0cI-d4-eBA"/>
@@ -113,6 +119,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Body" width="89" height="90"/>
         <image name="Checkbox_beige_selected" width="48" height="48"/>
         <image name="Checkbox_green_unselected" width="48" height="48"/>
     </resources>

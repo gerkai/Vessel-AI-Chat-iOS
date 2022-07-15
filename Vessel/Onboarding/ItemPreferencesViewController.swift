@@ -96,9 +96,11 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
     {
         if itemType == .SingleGoal
         {
+            //show image checkmark cell
             let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
             let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
             cell.titleLabel.text = info.name
+            cell.backgroundImage.image = info.image
             //we'll use the tag to hold the goal ID
             cell.tag = info.id
             cell.delegate = self
@@ -107,6 +109,7 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
         }
         else
         {
+            //show regular checkmark cell
             let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
             let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
             cell.titleLabel.text = info.name

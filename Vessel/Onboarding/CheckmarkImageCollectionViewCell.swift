@@ -19,6 +19,7 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var rootView: UIView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     weak var delegate: CheckmarkImageCollectionViewCellDelegate?
     var originalColor: UIColor!

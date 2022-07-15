@@ -235,29 +235,29 @@ class OnboardingViewModel
                 return true
         }
     }
-    func infoForItemAt(indexPath: IndexPath, type: ItemPreferencesType) -> (name: String, id: Int)
+    func infoForItemAt(indexPath: IndexPath, type: ItemPreferencesType) -> (name: String, id: Int, image: UIImage?)
     {
         let row = indexPath.row
         switch type
         {
             case .Diet:
-                return (Diets[row].name.capitalized, Diets[row].id)
+                return (Diets[row].name.capitalized, Diets[row].id, image: nil)
             case .Allergy:
-                return (Allergies[row].name.capitalized, Allergies[row].id)
+                return (Allergies[row].name.capitalized, Allergies[row].id, image: nil)
             case .Goal:
-                return (Goals[row].name.capitalized, Goals[row].id)
+                return (Goals[row].name.capitalized, Goals[row].id, image: nil)
             case .SingleGoal:
                 //search the 3 goals the user selected
                 for goal in Goals
                 {
                     if goal.id == userGoals[row]
                     {
-                        return (goal.name.capitalized, userGoals[row])
+                        return (goal.name.capitalized, userGoals[row], image: UIImage.init(named:goal.imageName))
                     }
                 }
-                //this will never get called
-                return (Goals[0].name.capitalized, Goals[0].id)
         }
+        //this will never get called
+        return (Goals[0].name.capitalized, Goals[0].id, image: nil)
     }
     
     func itemCount(_ type: ItemPreferencesType) -> Int
