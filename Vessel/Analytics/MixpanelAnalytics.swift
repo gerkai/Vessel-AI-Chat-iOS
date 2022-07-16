@@ -30,11 +30,11 @@ class MixpanelAnalytics: Analytics
         switch environment
         {
             case Constants.DEV_INDEX:
-                return Constants.DevMixpanelAppSecret
+                return Constants.DevMixpanelAPISecret
             case Constants.STAGING_INDEX:
-                return Constants.StagingMixpanelAppSecret
+                return Constants.StagingMixpanelAPISecret
             default:
-                return Constants.ProdMixpanelAppSecret
+                return Constants.ProdMixpanelAPISecret
         }
     }
     
