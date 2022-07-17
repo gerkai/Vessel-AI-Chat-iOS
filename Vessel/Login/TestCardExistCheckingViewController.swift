@@ -13,7 +13,7 @@ class TestCardExistCheckingViewController: UIViewController
     @IBOutlet var testCardOptionsButtons: [UIButton]!
     @IBOutlet var testCardOptionsViewButtons: [UIButton]!
     @IBOutlet var testCardOptionsViews: [UIView]!
-    //private lazy var analyticManager = AnalyticManager()
+    @Resolved private var analytics: Analytics
 
     private var selectedOption: Int? = nil
 
@@ -68,22 +68,19 @@ class TestCardExistCheckingViewController: UIViewController
         if selectedOption == 1
         {
             let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
-            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP BOUGHT ON WEB"))
-            //self.navigationController?.pushViewController(vc, animated: true)
+            analytics.log(event: .identification, properties: ["Type": "Purchased"])
             self.navigationController?.fadeTo(vc)
         }
         else if selectedOption == 2
         {
             let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-
-            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP GIFTED"))
+            analytics.log(event: .identification, properties: ["Type": "Gifted"])
             self.navigationController?.fadeTo(vc)
         }
         else
         {
             let vc = storyboard.instantiateViewController(identifier: "NoTestCardOnboardViewController") as! NoTestCardOnboardViewController
-            //analyticManager.trackEvent(event: .SIGN_UP_TYPE_SELECTED(email: email, type: "SIGN UP NO CARDS"))
-            //self.navigationController?.pushViewController(vc, animated: true)
+            analytics.log(event: .identification, properties: ["Type": "Dont Have Yet"])
             self.navigationController?.fadeTo(vc)
         }
     }
