@@ -57,7 +57,8 @@ class MixpanelAnalytics: Analytics
         setSuperProperties(properties: [property: value])
     }
     
-    func setSuperProperties(properties: [String: Any]) {
+    func setSuperProperties(properties: [String: Any])
+    {
         let mixpanelProperties = properties.compactMapValues
         { value in
             return value as? MixpanelType
@@ -76,7 +77,8 @@ class MixpanelAnalytics: Analytics
         setUserProperties(properties: [property: value])
     }
     
-    func setUserProperties(properties: [String : Any]) {
+    func setUserProperties(properties: [String: Any])
+    {
         let mixpanelProperties = properties.compactMapValues
         { value in
             return value as? MixpanelType

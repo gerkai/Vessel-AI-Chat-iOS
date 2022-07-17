@@ -9,8 +9,8 @@ import Foundation
 /// type uses the service multiple times, it should declare the `@Resolved` property
 /// to ensure the instance uses the same service each time.
 @propertyWrapper
-public struct Resolved<Service>: Resolving {
-
+public struct Resolved<Service>: Resolving
+{
     public init() { }
 
     /// Once the `Service` is resolved, it isn't resolved again. This prevents behavior from changing
@@ -29,11 +29,13 @@ public struct Resolved<Service>: Resolving {
     /// `CurrentDataViewModel` and `PastDataViewModel` that both adopt the `ViewModel` protocol.
     /// Setting the name parameter, controls what is resolved:
     ///
-    ///     class ViewController {
+    ///     class ViewController
+    ///     {
     ///         @Resolved private var viewModel: ViewModel
     ///         var showCurrent: Bool = false
     ///
-    ///         override viewDidLoad() {
+    ///         override viewDidLoad()
+    ///         {
     ///             _viewModel.name = showCurrent ? "current" : "past"
     ///             viewModel.configure(myData)
     ///         }
@@ -41,17 +43,22 @@ public struct Resolved<Service>: Resolving {
     ///
     /// You must have registered the two view models previously:
     ///
-    ///     func setupMyRegistrations {
+    ///     func setupMyRegistrations
+    ///     {
     ///         register(name: "current") { CurrentDataViewModel() as ViewModel }
     ///         register(name: "currentLoans") { PastDataViewModel() as ViewModel }
     ///     }
     public var name: String?
 
-    public var wrappedValue: Service {
-        mutating get {
-            if let resolved = service {
+    public var wrappedValue: Service
+    {
+        mutating get
+        {
+            if let resolved = service
+            {
                 return resolved
-            } else {
+            } else
+            {
                 let resolved = resolver.resolve(Service.self, name: name)
                 service = resolved
                 return resolved
@@ -60,7 +67,8 @@ public struct Resolved<Service>: Resolving {
     }
 
     // MARK: Resolving
-    public var resolver: Resolver {
+    public var resolver: Resolver
+    {
         return container ?? Resolver.root
     }
 }

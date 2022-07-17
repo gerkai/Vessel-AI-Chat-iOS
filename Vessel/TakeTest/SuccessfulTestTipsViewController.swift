@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmarkViewDelegate
 {
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!

@@ -95,12 +95,14 @@ PODS:
   - QuickLayout (3.0.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftLint (0.47.1)
 
 DEPENDENCIES:
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
   - Mixpanel-swift
   - SwiftEntryKit (= 1.2.3)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -119,6 +121,7 @@ SPEC REPOS:
     - PromisesObjC
     - QuickLayout
     - SwiftEntryKit
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
@@ -136,7 +139,8 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 93e90de2bb3076f33e20576ccd90021a2f913775
+PODFILE CHECKSUM: 1e3679f13d552c7872e37cc11dc4e6e87c81c8be
 
 COCOAPODS: 1.11.3

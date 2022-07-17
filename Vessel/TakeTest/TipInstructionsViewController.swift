@@ -33,9 +33,7 @@ class TipInstructionsViewController: TakeTestMVVMViewController
                 self.peeView.alpha = 0.0
             } completion:
             { _ in
-                
             }
-
         }
         else
         {
@@ -45,7 +43,6 @@ class TipInstructionsViewController: TakeTestMVVMViewController
                 self.peeView.alpha = 1.0
             } completion:
             { _ in
-                
             }
         }
     }

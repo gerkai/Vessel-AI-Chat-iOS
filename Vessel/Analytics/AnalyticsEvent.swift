@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum AnalyticsEvent: String {
+enum AnalyticsEvent: String
+{
     case PageView = "Page View"
 }

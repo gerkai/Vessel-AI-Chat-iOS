@@ -84,10 +84,10 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         }
     }
     
-    func isWithinTestingWindow()->Bool
+    func isWithinTestingWindow() -> Bool
     {
         //return true if we're currently inside the testing window (MORNING_TEST_TIME_START ~ MORNING_TEST_TIME_END)
-        var timeExist:Bool
+        var timeExist: Bool
         let calendar = Calendar.current
         let startTimeComponent = DateComponents(calendar: calendar, hour: Constants.MORNING_TEST_TIME_START)
         let endTimeComponent   = DateComponents(calendar: calendar, hour: Constants.MORNING_TEST_TIME_END)
