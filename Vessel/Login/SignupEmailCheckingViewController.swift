@@ -13,6 +13,8 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     @IBOutlet weak var appleAuthButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
+    @Resolved private var analytics: Analytics
+    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -26,19 +28,19 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     
     @IBAction func googleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(isGoogle: true)
+        launchSocialAuth(loginType: .google)
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(isGoogle: false)
+        launchSocialAuth(loginType: .apple)
     }
     
-    func launchSocialAuth(isGoogle: Bool)
+    func launchSocialAuth(loginType: LoginType)
     {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SocialAuthViewController") as! SocialAuthViewController
-        if isGoogle
+        if loginType == .google
         {
             vc.strURL = Server.shared.googleLoginURL()
         }
@@ -48,7 +50,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         }
         vc.modalPresentationStyle = .fullScreen
         vc.delegate = self
-        vc.bIsGoogle = isGoogle
+        vc.loginType = loginType
         self.present(vc, animated: true)
     }
     
@@ -110,19 +112,20 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     }
     
     //MARK: - SocialAuth delegates
-    func gotSocialAuthToken(isBrandNewAccount: Bool)
+    func gotSocialAuthToken(isBrandNewAccount: Bool, loginType: LoginType)
     {
         if isBrandNewAccount
         {
             //navigate to TestCardExistCheckingViewController
+            analytics.log(event: .signUp, properties: ["Login Type": loginType.rawValue])
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else
         {
+            analytics.log(event: .logIn, properties: ["Login Type": loginType.rawValue])
             let vc = OnboardingViewModel.NextViewController()
-            
             self.navigationController?.fadeTo(vc)
         }
     }
