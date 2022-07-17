@@ -14,6 +14,8 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     @IBOutlet weak var submitButton: LoadingButton!
     @IBOutlet weak var emailTextField: VesselTextField!
     
+    @Resolved private var analytics: Analytics
+    
     enum mode
     {
         case firstScreen
@@ -93,12 +95,15 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
         if let email = emailTextField.text
         {
             Server.shared.forgotPassword(email: email)
-            { message in
+            { [weak self] message in
+                guard let self = self else { return }
                 print("\(message)")
+                self.analytics.log(event: .forgotPassword, properties: [:])
                 self.transitionToSecondScreen()
             }
             onFailure:
-            { object in
+            { [weak self] object in
+                guard let self = self else { return }
                 print("\(object)")
                 let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're having trouble communicating with the server. Please try again later.", comment: ""), preferredStyle: .alert)
                 
