@@ -44,6 +44,12 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func googleAuthAction(_ sender: Any)
     {
         launchSocialAuth(isGoogle: true)

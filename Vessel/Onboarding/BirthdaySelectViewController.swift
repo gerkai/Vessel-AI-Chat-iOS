@@ -30,6 +30,12 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
         checkmarkView.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     private func setDatePickerInitialValue()
     {
         if let result = viewModel?.getBirthDate()

@@ -41,6 +41,12 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func back()
     {
         viewModel.curState.back()

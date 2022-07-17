@@ -13,6 +13,12 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     @IBOutlet weak var appleAuthButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
         self.navigationController?.fadeOut()

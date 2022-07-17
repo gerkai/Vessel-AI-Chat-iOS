@@ -39,6 +39,12 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)

@@ -15,6 +15,12 @@ class NoTestCardOnboardViewController: UIViewController
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onContinueButtonTapped(_ sender: Any)
     {
         openInSafari(url: Server.shared.QuizURL())

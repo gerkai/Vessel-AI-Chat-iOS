@@ -22,6 +22,12 @@ class TestCardExistCheckingViewController: UIViewController
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onOptionButtonTapped(_ sender: UIButton)
     {
         testCardOptionsButtons.forEach{ $0.isSelected = false }

@@ -49,6 +49,12 @@ class DebugViewController: UIViewController, UITextFieldDelegate
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     deinit
     {
         if environmentControl.selectedSegmentIndex != savedEnvironment

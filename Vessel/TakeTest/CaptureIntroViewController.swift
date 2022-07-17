@@ -26,6 +26,12 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         setupVideo()
         setupFirstTipTextView()
     }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
 
     override func viewWillAppear(_ animated: Bool)
     {

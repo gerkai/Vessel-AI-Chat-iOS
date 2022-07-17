@@ -52,6 +52,12 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         webView.load(request)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func doneButtonAction(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)

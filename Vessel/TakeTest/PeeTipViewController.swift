@@ -22,6 +22,12 @@ class PeeTipViewController: TakeTestMVVMViewController
         hideTipSelectorView.textLabel.text = Constants.DONT_SHOW_AGAIN_STRING
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func back()
     {
         self.navigationController?.fadeOut()

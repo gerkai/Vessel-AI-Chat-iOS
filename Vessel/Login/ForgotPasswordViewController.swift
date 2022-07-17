@@ -36,6 +36,12 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
         initialSubmitTitle = submitButton.title(for: .normal)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onBackButton()
     {
         if screenMode == .firstScreen

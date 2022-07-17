@@ -19,6 +19,12 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     override func viewDidLayoutSubviews()
     {
         if scrollView.isAtBottom

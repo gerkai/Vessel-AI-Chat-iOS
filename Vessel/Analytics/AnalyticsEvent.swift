@@ -9,5 +9,9 @@ import Foundation
 
 enum AnalyticsEvent: String
 {
-    case PageView = "Page View"
+    case viewedPage = "Viewed Page"
+    case logIn = "Log In"
+    case signUp = "Sign Up"
+    case forgotPassword = "Forgot Password"
+    case identification = "Identification"
 }
