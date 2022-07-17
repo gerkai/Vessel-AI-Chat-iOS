@@ -10,5 +10,6 @@ extension Resolver
     public static func registerAnalytics()
     {
         register { MixpanelAnalytics() as Analytics }
+        //register { ConsolePrintedAnalytics() as Analytics } // Uncomment to print analytics to console
     }
 }

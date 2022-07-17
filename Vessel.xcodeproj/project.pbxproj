@@ -95,6 +95,7 @@
 		7206C4E128837AE6000130DA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainViewController.swift */; };
 		7206C4E228837AE6000130DA /* TestAfterWakingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DF28837AE6000130DA /* TestAfterWakingUpViewController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
+		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
 		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
@@ -219,6 +220,7 @@
 		7206C4DE28837AE6000130DA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7206C4DF28837AE6000130DA /* TestAfterWakingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAfterWakingUpViewController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
 		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		72411CF6287E413C004A312E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		72411CF7287E413C004A312E /* Resolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolved.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */,
 				72411CF0287E0715004A312E /* AnalyticsEvent.swift */,
 				72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */,
+				7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
+				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
