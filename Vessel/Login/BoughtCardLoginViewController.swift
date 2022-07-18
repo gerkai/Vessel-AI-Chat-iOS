@@ -47,6 +47,12 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onCallCustomerSupport(_ sender: UIButton)
     {
         openInSafari(url: Server.shared.SupportURL())

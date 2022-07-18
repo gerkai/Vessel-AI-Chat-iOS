@@ -40,7 +40,6 @@
 		3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */; };
 		3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */; };
 		3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */; };
-		3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F01D287C90BC00FCC52E /* MainViewController.swift */; };
 		3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369EC27C9A82A00231D42 /* Login.storyboard */; };
 		3F12F045287DCC6900FCC52E /* TakeTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F044287DCC6900FCC52E /* TakeTest.storyboard */; };
 		3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */; };
@@ -49,8 +48,6 @@
 		3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */; };
 		3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */; };
 		3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */; };
-		3F12F053287E283800FCC52E /* TestAfterWakingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F052287E283800FCC52E /* TestAfterWakingUpViewController.swift */; };
-		3F12F056287E28EB00FCC52E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F055287E28EB00FCC52E /* Main.storyboard */; };
 		3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
@@ -95,7 +92,19 @@
 		3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DE27C9A74B00231D42 /* NoeText-Book.otf */; };
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
+		7206C4E128837AE6000130DA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainViewController.swift */; };
+		7206C4E228837AE6000130DA /* TestAfterWakingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DF28837AE6000130DA /* TestAfterWakingUpViewController.swift */; };
+		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
+		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
+		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
+		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
+		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
+		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
+		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
+		72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */; };
+		72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
+		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +126,7 @@
 
 /* Begin PBXFileReference section */
 		19047202DE476CDF8D072DD8 /* Pods-Vessel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.release.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.release.xcconfig"; sourceTree = "<group>"; };
+		31DFC10A288ABC41346E4209 /* Pods-VesselTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.release.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.release.xcconfig"; sourceTree = "<group>"; };
 		3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		3F0547B027C9DB8F006E3098 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +158,6 @@
 		3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalViewController.swift; sourceTree = "<group>"; };
-		3F12F01D287C90BC00FCC52E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3F12F044287DCC6900FCC52E /* TakeTest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TakeTest.storyboard; sourceTree = "<group>"; };
 		3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulTestTipsViewController.swift; sourceTree = "<group>"; };
 		3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeeTipViewController.swift; sourceTree = "<group>"; };
@@ -156,8 +165,6 @@
 		3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCheckmarkView.swift; sourceTree = "<group>"; };
 		3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCheckmarkView.xib; sourceTree = "<group>"; };
 		3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadingView.swift; sourceTree = "<group>"; };
-		3F12F052287E283800FCC52E /* TestAfterWakingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAfterWakingUpViewController.swift; sourceTree = "<group>"; };
-		3F12F055287E28EB00FCC52E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFriendlyViewController.swift; sourceTree = "<group>"; };
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -210,7 +217,20 @@
 		3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSignInViewController.swift; sourceTree = "<group>"; };
 		3FE369F327C9B34A00231D42 /* BounceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
 		3FE369F527C9B39100231D42 /* VesselButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VesselButton.swift; sourceTree = "<group>"; };
+		7206C4DE28837AE6000130DA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7206C4DF28837AE6000130DA /* TestAfterWakingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAfterWakingUpViewController.swift; sourceTree = "<group>"; };
+		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
+		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		72411CF6287E413C004A312E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
+		72411CF7287E413C004A312E /* Resolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolved.swift; sourceTree = "<group>"; };
+		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
+		72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Injection.swift"; sourceTree = "<group>"; };
+		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
+		D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.debug.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +265,8 @@
 			children = (
 				A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */,
 				19047202DE476CDF8D072DD8 /* Pods-Vessel.release.xcconfig */,
+				D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */,
+				31DFC10A288ABC41346E4209 /* Pods-VesselTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -251,6 +274,8 @@
 		3F0547AD27C9B8EA006E3098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */,
+				72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */,
 				3F12F006287A6B4800FCC52E /* DateExtensions.swift */,
 				3F87B96627D4209F00D589F7 /* Encodable.swift */,
 				3F87B97D27D5338D00D589F7 /* NibRegistry.swift */,
@@ -302,16 +327,6 @@
 				3FA6683B287F64960006166D /* TipInstructionsViewController.swift */,
 			);
 			path = TakeTest;
-			sourceTree = "<group>";
-		};
-		3F12F054287E28AA00FCC52E /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				3F12F055287E28EB00FCC52E /* Main.storyboard */,
-				3F12F01D287C90BC00FCC52E /* MainViewController.swift */,
-				3F12F052287E283800FCC52E /* TestAfterWakingUpViewController.swift */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
@@ -376,6 +391,7 @@
 		3FE3699E27C9A07E00231D42 /* Vessel */ = {
 			isa = PBXGroup;
 			children = (
+				72D4FC0D287D2CD400EA2EA3 /* Analytics */,
 				3FE3699F27C9A07E00231D42 /* AppDelegate.swift */,
 				3F0547BE27C9F105006E3098 /* AppConstants.swift */,
 				3FE369CF27C9A71D00231D42 /* Assets */,
@@ -384,11 +400,12 @@
 				3F0547AD27C9B8EA006E3098 /* Extensions */,
 				3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */,
 				3FE369EB27C9A82A00231D42 /* Login */,
-				3F12F054287E28AA00FCC52E /* Main */,
+				7206C4DD28837AE6000130DA /* Main */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
 				3F12F043287DCC6900FCC52E /* TakeTest */,
+				72411CF2287E4091004A312E /* Third-Party Libraries */,
 				3FE369AD27C9A07F00231D42 /* Info.plist */,
 			);
 			path = Vessel;
@@ -492,10 +509,49 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		7206C4DD28837AE6000130DA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7206C4DE28837AE6000130DA /* MainViewController.swift */,
+				7206C4DF28837AE6000130DA /* TestAfterWakingUpViewController.swift */,
+				7206C4E028837AE6000130DA /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		72411CF2287E4091004A312E /* Third-Party Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				72411CF5287E413C004A312E /* Resolver */,
+			);
+			path = "Third-Party Libraries";
+			sourceTree = "<group>";
+		};
+		72411CF5287E413C004A312E /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				72411CF6287E413C004A312E /* Resolver.swift */,
+				72411CF7287E413C004A312E /* Resolved.swift */,
+			);
+			path = Resolver;
+			sourceTree = "<group>";
+		};
+		72D4FC0D287D2CD400EA2EA3 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */,
+				72411CF0287E0715004A312E /* AnalyticsEvent.swift */,
+				72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */,
+				7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */,
+				7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -512,6 +568,7 @@
 				3FE3699927C9A07E00231D42 /* Frameworks */,
 				3FE3699A27C9A07E00231D42 /* Resources */,
 				9A12A64D682B5E96466F0488 /* [CP] Embed Pods Frameworks */,
+				7206C4E42883A545000130DA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -526,6 +583,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FE369C927C9A07F00231D42 /* Build configuration list for PBXNativeTarget "VesselTests" */;
 			buildPhases = (
+				289494D91FFE7C056F3197BF /* [CP] Check Pods Manifest.lock */,
 				3FE369AE27C9A07F00231D42 /* Sources */,
 				3FE369AF27C9A07F00231D42 /* Frameworks */,
 				3FE369B027C9A07F00231D42 /* Resources */,
@@ -606,12 +664,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F12F056287E28EB00FCC52E /* Main.storyboard in Resources */,
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				3FA6683A287F54DF0006166D /* test_card_tutorial.mp4 in Resources */,
+				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
@@ -648,6 +706,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		289494D91FFE7C056F3197BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VesselTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7206C4E42883A545000130DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		9A12A64D682B5E96466F0488 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,6 +794,7 @@
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
+				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
@@ -704,6 +802,7 @@
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
+				7206C4E228837AE6000130DA /* TestAfterWakingUpViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
@@ -711,10 +810,13 @@
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
+				72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
+				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
+				7206C4E128837AE6000130DA /* MainViewController.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
@@ -722,9 +824,11 @@
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
+				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
+				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
-				3F12F01E287C90BC00FCC52E /* MainViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
@@ -737,7 +841,9 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
+				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
+				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */,
 				3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */,
@@ -756,7 +862,6 @@
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
-				3F12F053287E283800FCC52E /* TestAfterWakingUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +1091,7 @@
 		};
 		3FE369CA27C9A07F00231D42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1006,6 +1112,7 @@
 		};
 		3FE369CB27C9A07F00231D42 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31DFC10A288ABC41346E4209 /* Pods-VesselTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

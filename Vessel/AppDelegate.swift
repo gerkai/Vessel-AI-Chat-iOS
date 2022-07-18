@@ -13,10 +13,12 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
+    @Resolved private var analytics: Analytics
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         FirebaseApp.configure()
-        
+        analytics.setup()
         configureAppearance()
         
         return true

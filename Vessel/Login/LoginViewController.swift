@@ -17,6 +17,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
+    @Resolved private var analytics: Analytics
     
     override func viewDidLoad()
     {
@@ -43,21 +44,27 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func googleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(isGoogle: true)
+        launchSocialAuth(loginType: .google)
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(isGoogle: false)
+        launchSocialAuth(loginType: .apple)
     }
     
-    func launchSocialAuth(isGoogle: Bool)
+    func launchSocialAuth(loginType: LoginType)
     {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SocialAuthViewController") as! SocialAuthViewController
-        if isGoogle
+        if loginType == .google
         {
             vc.strURL = Server.shared.googleLoginURL()
         }
@@ -67,7 +74,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
         vc.modalPresentationStyle = .fullScreen
         vc.delegate = self
-        vc.bIsGoogle = isGoogle
+        vc.loginType = loginType
         self.present(vc, animated: true)
     }
     
@@ -89,21 +96,25 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                     Server.shared.login(email: email, password: password)
                     {
                         Server.shared.getContact
-                        {contact in
+                        { [weak self] contact in
+                            guard let self = self else { return }
                             self.nextButton.hideLoading()
+                            self.analytics.log(event: .logIn, properties: ["Login Type": "Email"])
                             Contact.MainID = contact.id
                             ObjectStore.shared.serverSave(contact)
                             let vc = OnboardingViewModel.NextViewController()
                             self.navigationController?.fadeTo(vc)
                         }
                         onFailure:
-                        {error in
+                        { [weak self] error in
+                            guard let self = self else { return }
                             self.nextButton.hideLoading()
                             UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
                         }
                     }
                     onFailure:
-                    { string in
+                    { [weak self] string in
+                        guard let self = self else { return }
                         self.nextButton.hideLoading()
                         UIView.showError(text: "", detailText: string, image: nil)
                     }
@@ -128,11 +139,12 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         present(vc, animated: true)
     }
     
-    func gotSocialAuthToken(isBrandNewAccount: Bool)
+    func gotSocialAuthToken(isBrandNewAccount: Bool, loginType: LoginType)
     {
-       if isBrandNewAccount
+        if isBrandNewAccount
         {
             //navigate to TestCardExistCheckingViewController
+            analytics.log(event: .signUp, properties: ["Login Type": loginType.rawValue])
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -140,8 +152,8 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         else
         {
             //navigate to start of Onboarding
+            analytics.log(event: .logIn, properties: ["Login Type": loginType.rawValue])
             let vc = OnboardingViewModel.NextViewController()
-                
             self.navigationController?.fadeTo(vc)
         }
     }

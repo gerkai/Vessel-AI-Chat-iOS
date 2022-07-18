@@ -48,6 +48,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)

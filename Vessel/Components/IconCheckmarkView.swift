@@ -37,7 +37,7 @@ class IconCheckmarkView: NibLoadingView
         {
             if isUnchecking
             {
-                self.checkImage.image = UIImage(named:"checkbox_unselected")
+                self.checkImage.image = UIImage(named: "checkbox_unselected")
                 self.roundedView.backgroundColor = self.originalColor
             }
             else
@@ -51,12 +51,12 @@ class IconCheckmarkView: NibLoadingView
                 { completed in
                     if self.isChecked == true
                     {
-                        self.checkImage.image = UIImage(named:"checkbox_selected")
+                        self.checkImage.image = UIImage(named: "checkbox_selected")
                         self.roundedView.backgroundColor = UIColor.white
                     }
                     else
                     {
-                        self.checkImage.image = UIImage(named:"checkbox_unselected")
+                        self.checkImage.image = UIImage(named: "checkbox_unselected")
                         self.roundedView.backgroundColor = self.originalColor
                     }
                     

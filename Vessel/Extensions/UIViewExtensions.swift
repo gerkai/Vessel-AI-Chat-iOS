@@ -69,10 +69,12 @@ extension UIView
         let title = EKProperty.LabelContent(text: text, style: .init(font: UIFont.systemFont(ofSize: 16.0, weight: .regular), color: textColor, alignment: .center))
         let description = EKProperty.LabelContent(text: detailText, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .bold), color: textColor, alignment: .center))
         let simpleMessage: EKSimpleMessage
-        if let image = image {
+        if let image = image
+        {
             let image = EKProperty.ImageContent(image: image, size: CGSize(width: 35, height: 35))
             simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
-        } else {
+        } else
+        {
             simpleMessage = EKSimpleMessage(image: nil, title: title, description: description)
         }
         let notificationMessage = EKNotificationMessage(simpleMessage: simpleMessage)

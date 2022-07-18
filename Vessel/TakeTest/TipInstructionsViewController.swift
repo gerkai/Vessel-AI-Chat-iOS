@@ -18,6 +18,12 @@ class TipInstructionsViewController: TakeTestMVVMViewController
         peeView.alpha = 0.0
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onBackButton()
     {
         navigationController?.popViewController(animated: true)
@@ -33,9 +39,7 @@ class TipInstructionsViewController: TakeTestMVVMViewController
                 self.peeView.alpha = 0.0
             } completion:
             { _ in
-                
             }
-
         }
         else
         {
@@ -45,7 +49,6 @@ class TipInstructionsViewController: TakeTestMVVMViewController
                 self.peeView.alpha = 1.0
             } completion:
             { _ in
-                
             }
         }
     }

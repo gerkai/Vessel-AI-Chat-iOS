@@ -80,8 +80,10 @@ extension UITextField
     }
     
     //allows us to set placeholder text color in the storyboard
-    @IBInspectable var placeholderColor: UIColor {
-        get {
+    @IBInspectable var placeholderColor: UIColor
+    {
+        get
+        {
             return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
         }
         set

@@ -34,7 +34,8 @@ extension UIColor
     static var blackAlpha7 = UIColor.black.withAlphaComponent(0.7)
     static var whiteAlpha7 = UIColor.white.withAlphaComponent(0.7)
     
-    convenience init(hex string: String) {
+    convenience init(hex string: String)
+    {
       var hex = string.hasPrefix("#")
         ? String(string.dropFirst())
         : string

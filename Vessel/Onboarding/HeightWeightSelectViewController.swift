@@ -95,6 +95,12 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     override func viewDidLayoutSubviews()
     {
         //change default gray selection color to white

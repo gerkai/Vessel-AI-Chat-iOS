@@ -34,6 +34,12 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
         updateNextButton()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         titleLabel.text = titleText

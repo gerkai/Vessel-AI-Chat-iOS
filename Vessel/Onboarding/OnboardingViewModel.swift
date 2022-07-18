@@ -115,8 +115,7 @@ class OnboardingViewModel
                 return vc
             }
             else if onboardingViewModel!.curState == .ViewTerms
-            {
-                
+            {    
                 let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
                 vc.viewModel = onboardingViewModel
                 return vc
@@ -252,7 +251,7 @@ class OnboardingViewModel
                 {
                     if goal.id == userGoals[row]
                     {
-                        return (goal.name.capitalized, userGoals[row], image: UIImage.init(named:goal.imageName))
+                        return (goal.name.capitalized, userGoals[row], image: UIImage.init(named: goal.imageName))
                     }
                 }
         }

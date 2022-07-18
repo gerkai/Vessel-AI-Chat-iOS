@@ -25,6 +25,14 @@ struct Constants
     
     static let MinimumPasswordLength: Int = 6
     
+    //analytics
+    static let ProdMixpanelToken = "d3e262e686a9df32346c3825102b9f39"
+    static let ProdMixpanelAPISecret = "f64ce29607e303927a7634ba44d5a6bb"
+    static let StagingMixpanelToken = "3cce6aca0474012d5ec516506a41a619"
+    static let StagingMixpanelAPISecret = "610c3dfe0f47112e309797c8e266a2f6"
+    static let DevMixpanelToken = "c59e2fe4109393b804d14910f37323b1"
+    static let DevMixpanelAPISecret = "879879b5f7e32ff541ff968e5b249429"
+    
     //used for reducing content on smaller screens
     static let SMALL_SCREEN_HEIGHT_THRESHOLD = 700.0
     

@@ -16,6 +16,12 @@ class OnboardingFinalViewController: OnboardingMVVMViewController
         titleLabel.text = viewModel?.finalScreenText()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onBackButtonPressed()
     {
         viewModel?.backup()

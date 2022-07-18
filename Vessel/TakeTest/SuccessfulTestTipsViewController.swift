@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmarkViewDelegate
 {
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
@@ -41,6 +39,12 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
         botView.textLabel.text = NSLocalizedString("I'd rather pee\ndirectly on it", comment: "")
         
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
     }
     
     @IBAction func back()

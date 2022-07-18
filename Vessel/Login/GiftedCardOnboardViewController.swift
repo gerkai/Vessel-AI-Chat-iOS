@@ -15,6 +15,12 @@ class GiftedCardOnboardViewController: UIViewController
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func onBackButtonTapped(_ sender: Any)
     {
         self.navigationController?.fadeOut()

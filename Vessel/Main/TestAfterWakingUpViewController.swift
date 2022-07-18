@@ -32,6 +32,8 @@ class TestAfterWakingUpViewController: UIViewController
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
+        logPageViewed()
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
         {
             self.darkenView.alpha = 1.0
@@ -45,7 +47,6 @@ class TestAfterWakingUpViewController: UIViewController
             }
             completion:
             { _ in
-                
             }
         }
     }
@@ -62,8 +63,7 @@ class TestAfterWakingUpViewController: UIViewController
     func popOut(finished: @escaping() -> Void)
     {
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
-        {
-            
+        { 
             self.popupView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }
         completion:

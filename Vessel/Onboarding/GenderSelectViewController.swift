@@ -20,6 +20,12 @@ class GenderSelectViewController: OnboardingMVVMViewController
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func backButton()
     {
         navigationController?.fadeOut()

@@ -83,6 +83,9 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.10)
+  - Mixpanel-swift (3.5.0):
+    - Mixpanel-swift/Complete (= 3.5.0)
+  - Mixpanel-swift/Complete (3.5.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -92,11 +95,14 @@ PODS:
   - QuickLayout (3.0.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftLint (0.47.1)
 
 DEPENDENCIES:
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
+  - Mixpanel-swift
   - SwiftEntryKit (= 1.2.3)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -110,10 +116,12 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - IQKeyboardManagerSwift
+    - Mixpanel-swift
     - nanopb
     - PromisesObjC
     - QuickLayout
     - SwiftEntryKit
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
@@ -126,11 +134,13 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  Mixpanel-swift: 8ee88853e1443a14f887de51ecc278c07f832098
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: febce755e75c65380c6ebe457e34d47eec150770
+PODFILE CHECKSUM: 1e3679f13d552c7872e37cc11dc4e6e87c81c8be
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

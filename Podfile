@@ -7,7 +7,9 @@ inhibit_all_warnings!
 def pods
   pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
+  pod 'Mixpanel-swift'
   pod 'SwiftEntryKit', '1.2.3'
+  pod 'SwiftLint'
 end
 
 target 'Vessel' do
@@ -16,10 +18,9 @@ target 'Vessel' do
   use_frameworks!
   pods
 	
-  #target 'VesselTests' do
-  #  inherit! :search_paths
-    # Pods for testing
-  #end
+  target 'VesselTests' do
+    inherit! :search_paths
+  end
 
   #target 'VesselUITests' do
     # Pods for testing

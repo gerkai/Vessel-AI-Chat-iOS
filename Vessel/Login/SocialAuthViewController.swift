@@ -9,9 +9,15 @@
 import UIKit
 import WebKit
 
+enum LoginType: String
+{
+    case google = "Google"
+    case apple = "Apple"
+}
+
 protocol SocialAuthViewDelegate
 {
-    func gotSocialAuthToken(isBrandNewAccount: Bool)
+    func gotSocialAuthToken(isBrandNewAccount: Bool, loginType: LoginType)
 }
 
 class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
@@ -24,14 +30,14 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     let appleRetrieveLink  = Server.shared.appleRetrieveURL()
     var retrieveURL: String!
     var strURL: String!
-    var bIsGoogle: Bool = true
+    var loginType: LoginType = .google
     var delegate: SocialAuthViewDelegate?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        if bIsGoogle
+        if loginType == .google
         {
             retrieveURL = googleRetrieveLink
         }
@@ -52,6 +58,12 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         webView.load(request)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        logPageViewed()
+    }
+    
     @IBAction func doneButtonAction(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
@@ -68,11 +80,11 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
             ObjectStore.shared.serverSave(contact)
             if contact.isBrandNew()
             {
-                self.delegate?.gotSocialAuthToken(isBrandNewAccount: true)
+                self.delegate?.gotSocialAuthToken(isBrandNewAccount: true, loginType: self.loginType)
             }
             else
             {
-                self.delegate?.gotSocialAuthToken(isBrandNewAccount: false)
+                self.delegate?.gotSocialAuthToken(isBrandNewAccount: false, loginType: self.loginType)
             }
         }
         onFailure:
@@ -109,7 +121,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                     HTTPCookieStorage.shared.setCookie(cookie)
                 }
                 
-                Server.shared.getTokens(isGoogle: self.bIsGoogle, onSuccess:
+                Server.shared.getTokens(isGoogle: self.loginType == .google, onSuccess:
                 {
                     self.dismiss(animated: true)
                     {
