@@ -77,7 +77,7 @@
 		<key>Mixpanel-swift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>16</integer>
 		</dict>
 		<key>Pods-Vessel.xcscheme</key>
 		<dict>
@@ -89,7 +89,7 @@
 		<key>Pods-VesselTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>17</integer>
 		</dict>
 		<key>PromisesObjC.xcscheme</key>
 		<dict>
@@ -115,7 +115,7 @@
 		<key>SwiftLint.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>18</integer>
 		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
