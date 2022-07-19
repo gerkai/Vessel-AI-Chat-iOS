@@ -51,6 +51,7 @@
 		3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
+		3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
@@ -73,6 +74,7 @@
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
 		3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */; };
+		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -169,6 +171,7 @@
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
+		3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipTimerPopupViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMVVMViewController.swift; sourceTree = "<group>"; };
+		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -317,9 +321,11 @@
 		3F12F043287DCC6900FCC52E /* TakeTest */ = {
 			isa = PBXGroup;
 			children = (
+				3FA668692885F8380006166D /* ActivateCardViewController.swift */,
 				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
+				3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
 				3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */,
@@ -841,6 +847,7 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
+				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
 				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
@@ -860,6 +867,7 @@
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
+				3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 			);

@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol TakeTestViewModelDelegate
+{
+    func timerUpdate(secondsRemaining: Double, timeUp: Bool)
+}
+
 //this enum determines the order the take test screens will appear
 enum TakeTextState: Int
 {
@@ -33,6 +38,10 @@ enum TakeTextState: Int
 class TakeTestViewModel
 {
     var curState: TakeTextState = .Initial
+    var activationTimer: Timer?
+    var activationTimeRemaining = 0.0
+    let activationTimerInterval = 0.1 /* seconds */
+    var delegate: TakeTestViewModelDelegate?
     
     //MARK: - navigation
     static func NextViewController(viewModel: TakeTestViewModel) -> TakeTestMVVMViewController
@@ -60,10 +69,16 @@ class TakeTestViewModel
             vc.viewModel = viewModel
             return vc
         }
-        else
+        if viewModel.curState == .CaptureIntro
         {
             //show capture intro
             let vc = storyboard.instantiateViewController(withIdentifier: "CaptureIntroViewController") as! CaptureIntroViewController
+            vc.viewModel = viewModel
+            return vc
+        }
+        else
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ActivateCardViewController") as! ActivateCardViewController
             vc.viewModel = viewModel
             return vc
         }
@@ -88,5 +103,31 @@ class TakeTestViewModel
     {
         let contact = Contact.main()!
         contact.flags |= Constants.HIDE_PEE_TIPS
+    }
+    
+    func startTimer()
+    {
+        print("Starting timer)")
+        var expired = false
+        activationTimeRemaining = Constants.CARD_ACTIVATION_SECONDS
+        activationTimer = Timer.scheduledTimer(withTimeInterval: activationTimerInterval, repeats: true, block:
+        { timer in
+            self.activationTimeRemaining -= self.activationTimerInterval
+            if self.activationTimeRemaining < 0
+            {
+                self.activationTimeRemaining = 0
+                //stop the timer
+                self.stopTimer()
+                expired = true
+            }
+            self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, timeUp: expired)
+        })
+    }
+    
+    func stopTimer()
+    {
+        activationTimer?.invalidate()
+        activationTimer = nil
+        activationTimeRemaining = 0.0
     }
 }

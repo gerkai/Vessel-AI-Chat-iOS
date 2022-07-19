@@ -139,50 +139,16 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         }
     }
     
-    @objc func onTextInstructionsTapped(gesture: UITapGestureRecognizer)
-    {
-        print("Text Instructions")
-    }
-    
     @IBAction func backButtonSelected(_ sender: Any)
     {
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func seeTipsButton(_ sender: Any)
-    {
-        //let storyboard = UIStoryboard(name: "Capture", bundle: nil)
-        //let vc = storyboard.instantiateViewController(identifier: "DripsTipsViewController") as! DripsTipsViewController
-        //navigationController?.pushViewController(vc, animated: true)
-        print("TIPS")
-    }
-    
     @IBAction func startTimerSelected(_ sender: Any)
     {
-        /*let passedTime = Int(Date().timeIntervalSince(self.startVideoDate ?? Date()))
-        let minimumTimeWatchingVideo = 104
-        let userDefaultService = UserDefaults.standard
-        let isUserWatchedVideoBefore = userDefaultService.bool(forKey: Constants.USER_WATCHED_INSTRUCTION_VIDEO)
-        if passedTime > minimumTimeWatchingVideo ||
-            isUserWatchedVideoBefore ||
-            UserDefaultsFix.shared.getTestCount() > 0 {
-            userDefaultService.setValue(true, forKey: Constants.USER_WATCHED_INSTRUCTION_VIDEO)
-            trackStartTimerEvent()
-            navigateUserToTest()
-        } else
-        {
-            playerViewController?.player?.pause()
-            let storyboard = UIStoryboard(name: "Tip", bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: "WatchInstructionVideoTipViewController") as! WatchInstructionVideoTipViewController
-            
-            customPresentViewController(customPresenter, viewController: vc, animated: true)
-            vc.onDismiss = {[weak self] in
-                self?.playerViewController?.player?.play()
-                userDefaultService.setValue(true, forKey: Constants.USER_WATCHED_INSTRUCTION_VIDEO)
-            }
-            
-        }*/
+        let vc = viewModel.nextViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
     

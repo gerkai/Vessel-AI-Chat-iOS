@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    var curState: OnboardingState = .Initial
+    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    //var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
@@ -434,43 +434,46 @@ class OnboardingViewModel
     
     func saveDemographics()
     {
-        if let contact = Contact.main()
+        if let gender = userGender
         {
-            //gender
-            var genderString = Constants.GENDER_OTHER
-            switch userGender!
+            if let contact = Contact.main()
             {
-                case 0:
-                    genderString = Constants.GENDER_MALE
-                case 1:
-                    genderString = Constants.GENDER_FEMALE
-                default:
-                    break
+                //gender
+                var genderString = Constants.GENDER_OTHER
+                switch gender
+                {
+                    case 0:
+                        genderString = Constants.GENDER_MALE
+                    case 1:
+                        genderString = Constants.GENDER_FEMALE
+                    default:
+                        break
+                }
+                contact.gender = genderString
+                
+                //height / weight
+                contact.height = userHeight
+                contact.weight = userWeight
+                
+                //birthday
+                let formatter = DateFormatter()
+                formatter.dateFormat = Constants.SERVER_DATE_FORMAT
+                let strDate = formatter.string(from: userBirthdate)
+                contact.birth_date = strDate
+                
+                if preferNotToShareBirthdate
+                {
+                    contact.flags |= Constants.DECLINED_BIRTH_DATE
+                }
+                
+                //diets, allergies, goals
+                contact.diet_ids = userDiets
+                contact.allergy_ids = userAllergies
+                contact.goal_ids = userGoals
+                contact.mainGoal = mainGoal
+                
+                ObjectStore.shared.ClientSave(contact)
             }
-            contact.gender = genderString
-            
-            //height / weight
-            contact.height = userHeight
-            contact.weight = userWeight
-            
-            //birthday
-            let formatter = DateFormatter()
-            formatter.dateFormat = Constants.SERVER_DATE_FORMAT
-            let strDate = formatter.string(from: userBirthdate)
-            contact.birth_date = strDate
-            
-            if preferNotToShareBirthdate
-            {
-                contact.flags |= Constants.DECLINED_BIRTH_DATE
-            }
-            
-            //diets, allergies, goals
-            contact.diet_ids = userDiets
-            contact.allergy_ids = userAllergies
-            contact.goal_ids = userGoals
-            contact.mainGoal = mainGoal
-            
-            ObjectStore.shared.ClientSave(contact)
         }
     }
 }

@@ -83,6 +83,7 @@ struct Constants
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
     static let MORNING_TEST_TIME_START = 4 /* 4am */
     static let MORNING_TEST_TIME_END = 9 /* 9am */
+    static let CARD_ACTIVATION_SECONDS = 10.0  /* defines how much time user has to wait for card to activate */
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")
