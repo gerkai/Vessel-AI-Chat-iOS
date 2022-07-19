@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate
+class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerPopupViewControllerDelegate
 {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var preTimerView: UIView!
@@ -17,6 +17,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
+    var skipTimerPopupVC: SkipTimerPopupViewController?
     
     override func viewDidLoad()
     {
@@ -45,7 +46,15 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SkipTimerPopupViewController") as! SkipTimerPopupViewController
+        vc.delegate = self
         self.present(vc, animated: false)
+        skipTimerPopupVC = vc
+    }
+    
+    @IBAction func onScanButton()
+    {
+        let vc = viewModel.nextViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - ViewModel delegates
@@ -63,6 +72,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         
         if timeUp
         {
+            skipTimerPopupVC?.onCancel()
             titleLabel.text = NSLocalizedString("It's time to scan your card", comment: "")
             UIView.animate(withDuration: 0.25, delay: 0.0)
             {
@@ -70,6 +80,16 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
                 self.preTimerView.alpha = 0.0
                 self.backButton.alpha = 1.0
             }
+        }
+    }
+    
+    //MARK: - SkipTimePopup delegates
+    func skipTimerPopupDone(proceedToSkip: Bool)
+    {
+        skipTimerPopupVC = nil
+        if proceedToSkip
+        {
+            viewModel.skipTimer()
         }
     }
 }

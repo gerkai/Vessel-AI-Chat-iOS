@@ -76,12 +76,29 @@ class TakeTestViewModel
             vc.viewModel = viewModel
             return vc
         }
-        else
+        if viewModel.curState == .ActivateCard
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "ActivateCardViewController") as! ActivateCardViewController
             vc.viewModel = viewModel
             return vc
         }
+        if viewModel.curState == .AfterPeeTips
+        {
+            if contact.flags & Constants.HIDE_DROPLET_TIPS != 0
+            {
+                viewModel.curState = .Capture
+            }
+            else
+            {
+                let vc = storyboard.instantiateViewController(withIdentifier: "ScanningDropletsTipViewController") as! ScanningDropletsTipViewController
+                vc.viewModel = viewModel
+                return vc
+            }
+        }
+       
+        let vc = storyboard.instantiateViewController(withIdentifier: "CaptureViewController") as! CaptureViewController
+        vc.viewModel = viewModel
+        return vc
     }
     
     func nextViewController() -> TakeTestMVVMViewController
@@ -103,6 +120,12 @@ class TakeTestViewModel
     {
         let contact = Contact.main()!
         contact.flags |= Constants.HIDE_PEE_TIPS
+    }
+    
+    func hideDropletTips()
+    {
+        let contact = Contact.main()!
+        contact.flags |= Constants.HIDE_DROPLET_TIPS
     }
     
     func startTimer()
@@ -129,5 +152,11 @@ class TakeTestViewModel
         activationTimer?.invalidate()
         activationTimer = nil
         activationTimeRemaining = 0.0
+    }
+    
+    func skipTimer()
+    {
+        stopTimer()
+        self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, timeUp: true)
     }
 }

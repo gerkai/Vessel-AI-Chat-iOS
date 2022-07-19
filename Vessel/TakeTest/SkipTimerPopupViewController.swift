@@ -17,7 +17,7 @@ class SkipTimerPopupViewController: UIViewController
     @IBOutlet weak var darkenView: UIView!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var popupBottom: NSLayoutConstraint!
-    var canceling = true
+    var canceling = false
     var originalBottom: CGFloat!
     var delegate: SkipTimerPopupViewControllerDelegate?
     
@@ -34,7 +34,7 @@ class SkipTimerPopupViewController: UIViewController
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
         {
             self.darkenView.alpha = 1.0
-            self.popupBottom.constant = self.originalBottom - 120.0 //overshoot a little bit
+            self.popupBottom.constant = self.originalBottom - 30.0 //overshoot a little bit
             self.view.layoutIfNeeded()
         }
         completion:
@@ -67,7 +67,7 @@ class SkipTimerPopupViewController: UIViewController
     
     @IBAction func onContinue()
     {
-       canceling = false
+        canceling = true
         dismissAnimation()
     }
     

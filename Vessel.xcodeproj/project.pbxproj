@@ -52,6 +52,8 @@
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */; };
+		3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */; };
+		3F15ACE628873C04004716CA /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE528873C04004716CA /* CaptureViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
@@ -172,6 +174,8 @@
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipTimerPopupViewController.swift; sourceTree = "<group>"; };
+		3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningDropletsTipViewController.swift; sourceTree = "<group>"; };
+		3F15ACE528873C04004716CA /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -323,8 +327,10 @@
 			children = (
 				3FA668692885F8380006166D /* ActivateCardViewController.swift */,
 				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
+				3F15ACE528873C04004716CA /* CaptureViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
+				3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */,
 				3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
@@ -833,6 +839,7 @@
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
+				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
@@ -860,6 +867,7 @@
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
+				3F15ACE628873C04004716CA /* CaptureViewController.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,

@@ -171,13 +171,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-dI-Sw7">
-                                        <rect key="frame" x="0.0" y="61" width="354" height="40"/>
+                                        <rect key="frame" x="0.0" y="61" width="354" height="51"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJX-cC-dPy">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="0.0" y="5.5" width="40" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52Q-mX-81Y">
-                                                        <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                        <rect key="frame" x="16" y="9" width="8" height="22.5"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -197,7 +197,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold the test card vertically." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPB-v5-xP9">
-                                                <rect key="frame" x="52" y="10.5" width="302" height="19"/>
+                                                <rect key="frame" x="52" y="17.5" width="302" height="16"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -205,13 +205,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NKc-F8-B78">
-                                        <rect key="frame" x="0.0" y="117" width="354" height="40"/>
+                                        <rect key="frame" x="0.0" y="128" width="354" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhA-4v-vgr">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFi-jz-UZC">
-                                                        <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                        <rect key="frame" x="14" y="9" width="12" height="22.5"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -231,7 +231,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pee on the 3 white squares and the 15 colored squares." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18c-sh-gaH">
-                                                <rect key="frame" x="52" y="0.0" width="302" height="37.5"/>
+                                                <rect key="frame" x="52" y="0.0" width="302" height="32"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -239,13 +239,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1l6-3e-OZo">
-                                        <rect key="frame" x="0.0" y="173" width="354" height="75"/>
+                                        <rect key="frame" x="0.0" y="184" width="354" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqF-8d-EeG">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlW-Py-Caq">
-                                                        <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                        <rect key="frame" x="14.5" y="9" width="11.5" height="22.5"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -265,7 +265,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hf-IG-k7M">
-                                                <rect key="frame" x="52" y="0.0" width="302" height="75"/>
+                                                <rect key="frame" x="52" y="0.0" width="302" height="64"/>
                                                 <string key="text">Pee on the card for 3 to 5 seconds. Count in your head 'one one-thousand, two one-thousand', etc. and stop at 'four one-thousand'.</string>
                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -290,13 +290,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="3-5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DG8-Ad-C5D">
-                                                                <rect key="frame" x="0.0" y="24" width="36.5" height="49.5"/>
+                                                                <rect key="frame" x="0.0" y="24" width="38.5" height="52.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.087488718330000007" green="0.0821742788" blue="0.076813302929999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbf-vW-VhN">
-                                                                <rect key="frame" x="0.0" y="73.5" width="61" height="19"/>
+                                                                <rect key="frame" x="0.0" y="76.5" width="59.5" height="16"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -460,7 +460,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGR-od-v7O">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="16" y="9" width="8" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -480,7 +480,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dip the test card vertically, just past the three white squares." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWd-Ga-qwv">
-                                                        <rect key="frame" x="52" y="1.5" width="302" height="37.5"/>
+                                                        <rect key="frame" x="52" y="4" width="302" height="32"/>
                                                         <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -494,7 +494,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgW-1I-Ldq">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="14" y="9" width="12" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -514,7 +514,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Dip for only 1-2 seconds. Count in your head 'one one-thousand' then pull out." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bm3-Vm-P03">
-                                                        <rect key="frame" x="52" y="0.0" width="302" height="37.5"/>
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="32"/>
                                                         <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1248,7 +1248,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="next" destination="spg-sE-JSD" eventType="touchUpInside" id="Itk-fj-N5n"/>
+                                                    <action selector="onScanButton" destination="8wR-C7-oau" eventType="touchUpInside" id="Egl-j5-z1w"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-ms-MTJ" userLabel="ProgressView">
@@ -1456,6 +1456,137 @@
             </objects>
             <point key="canvasLocation" x="5207" y="45"/>
         </scene>
+        <!--Scanning Droplets Tip View Controller-->
+        <scene sceneID="4aY-hi-reM">
+            <objects>
+                <viewController storyboardIdentifier="ScanningDropletsTipViewController" id="6AK-Zm-E3b" customClass="ScanningDropletsTipViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nYa-Dw-cm8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggY-7X-4SP">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AHP-vb-y3K"/>
+                                    <constraint firstAttribute="width" constant="50" id="Acb-cE-RFV"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="onBackButton" destination="6AK-Zm-E3b" eventType="touchUpInside" id="0kd-uy-IhY"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hck-5A-Uqx">
+                                <rect key="frame" x="30" y="122" width="354" height="618"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Before you scan, remove any droplets" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWs-hJ-p2K">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="54"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                        <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp2-tB-aLQ">
+                                        <rect key="frame" x="0.0" y="82" width="354" height="64"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Lightly shake or tap the card to remove droplets on the colored squares">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="2" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ScanningDroplets" translatesAutoresizingMaskIntoConstraints="NO" id="dLl-GP-vS7">
+                                        <rect key="frame" x="0.0" y="174" width="354" height="328"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1AR-2Q-26o" userLabel="SpacerView">
+                                        <rect key="frame" x="0.0" y="530" width="354" height="0.0"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jz3-Gy-gW1" customClass="SelectionCheckmarkView" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="558" width="354" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="oEn-rI-zRt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZm-k3-9eX" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="768" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="gwj-iQ-iv1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton" destination="6AK-Zm-E3b" eventType="touchUpInside" id="1LZ-yf-kox"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hhi-XQ-cyi"/>
+                        <color key="backgroundColor" red="0.99215686319999996" green="0.96470588450000005" blue="0.93333339689999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="Hck-5A-Uqx" firstAttribute="top" secondItem="ggY-7X-4SP" secondAttribute="bottom" constant="28" id="JWJ-kE-d9g"/>
+                            <constraint firstItem="KZm-k3-9eX" firstAttribute="bottom" secondItem="Hhi-XQ-cyi" secondAttribute="bottom" constant="-34" id="KlX-Wl-3hM"/>
+                            <constraint firstItem="KZm-k3-9eX" firstAttribute="leading" secondItem="Hhi-XQ-cyi" secondAttribute="leading" constant="30" id="Nb6-dD-8OP"/>
+                            <constraint firstItem="KZm-k3-9eX" firstAttribute="trailing" secondItem="nYa-Dw-cm8" secondAttribute="trailing" constant="-30" id="bL2-c3-Vf1"/>
+                            <constraint firstItem="KZm-k3-9eX" firstAttribute="top" secondItem="Hck-5A-Uqx" secondAttribute="bottom" constant="28" id="bfL-uM-AMk"/>
+                            <constraint firstItem="Hck-5A-Uqx" firstAttribute="trailing" secondItem="Hhi-XQ-cyi" secondAttribute="trailing" constant="-30" id="bjV-Xm-wPk"/>
+                            <constraint firstItem="ggY-7X-4SP" firstAttribute="leading" secondItem="Hhi-XQ-cyi" secondAttribute="leading" constant="30" id="gab-0z-Rz0"/>
+                            <constraint firstItem="Hck-5A-Uqx" firstAttribute="leading" secondItem="Hhi-XQ-cyi" secondAttribute="leading" constant="30" id="tG2-qj-OZC"/>
+                            <constraint firstItem="ggY-7X-4SP" firstAttribute="top" secondItem="Hhi-XQ-cyi" secondAttribute="top" id="zTX-Yl-D26"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="hideTipSelectorView" destination="jz3-Gy-gW1" id="UW6-h9-aee"/>
+                        <outlet property="titleLabel" destination="RWs-hJ-p2K" id="f2h-8e-2re"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b3m-ez-sLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6017" y="45"/>
+        </scene>
+        <!--Capture View Controller-->
+        <scene sceneID="Gt4-FF-5QN">
+            <objects>
+                <viewController storyboardIdentifier="CaptureViewController" id="Ap2-WZ-eza" customClass="CaptureViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sZA-9H-0jC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-vu-yZf">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bU8-1M-VIx"/>
+                                    <constraint firstAttribute="width" constant="50" id="pSA-dW-KgV"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pjr-3U-Cf1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Afo-vu-yZf" firstAttribute="leading" secondItem="pjr-3U-Cf1" secondAttribute="leading" constant="30" id="8Im-yu-nlG"/>
+                            <constraint firstItem="Afo-vu-yZf" firstAttribute="top" secondItem="pjr-3U-Cf1" secondAttribute="top" id="LCe-m5-dyw"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rMv-Jf-ePP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6801" y="57"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CardColorimetrics" width="130" height="206"/>
@@ -1463,6 +1594,7 @@
         <image name="Instruction1-icon" width="130" height="120"/>
         <image name="Instruction2-icon" width="130" height="120"/>
         <image name="Instruction3-icon" width="130" height="120"/>
+        <image name="ScanningDroplets" width="296" height="334"/>
         <image name="peeInCupTipImage" width="1500" height="1028"/>
         <image name="peeOnCardTipImage" width="1500" height="684"/>
         <image name="progressMark" width="6" height="6"/>

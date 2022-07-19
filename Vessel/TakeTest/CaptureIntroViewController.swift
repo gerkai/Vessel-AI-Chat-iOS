@@ -17,7 +17,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     var looper: AVPlayerLooper?
     private var startVideoDate: Date?
     private var videoThumbImage: UIImageView?
-    private var isVideoObserved = false
+    //private var isVideoObserved = false
     
     override func viewDidLoad()
     {
@@ -59,7 +59,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
 
     deinit
     {
-        if playerViewController?.player != nil, isVideoObserved
+        if playerViewController?.player != nil //, isVideoObserved
         {
             self.playerViewController?.player?.removeObserver(self, forKeyPath: "rate")
         }
@@ -86,7 +86,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     
     func setupVideo()
     {
-        let contact = Contact.main()!
+        //let contact = Contact.main()!
         
         playerViewController = AVPlayerViewController()
         if let playerViewController = playerViewController
@@ -100,29 +100,28 @@ class CaptureIntroViewController: TakeTestMVVMViewController
             videoView.addSubview(playerViewController.view)
             playerViewController.didMove(toParent: self)
             startVideoDate = Date()
-            let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
-            if videoWatchedBefore != 0
-            {
+            //let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
+            //if videoWatchedBefore != 0
+            //{
                 playerViewController.showsPlaybackControls = true
                 self.playerViewController?.player?.addObserver(self, forKeyPath: "rate", options: [], context: nil)
-                self.isVideoObserved = true
-            }
+                //self.isVideoObserved = true
+            /*}
             else
             {
                 playerViewController.showsPlaybackControls = false
                 playerViewController.player?.play()
-            }
+            }*/
         }
     }
 
     private func setThumbForVideo()
     {
-        let contact = Contact.main()!
-        //let userDefaultService = UserDefaults.standard
-        let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
+        //let contact = Contact.main()!
+        //let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
         //let isVideoWatchedBefore = userDefaultService.bool(forKey: Constants.USER_WATCHED_INSTRUCTION_VIDEO)
-        if videoWatchedBefore != 0
-        {
+        //if videoWatchedBefore != 0
+        //{
             guard let mediaURL = Bundle.main.url(forResource: "test_card_tutorial", withExtension: "mp4") else {return}
             let asset = AVAsset(url: mediaURL)
             let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -136,7 +135,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
             guard let playerViewController = playerViewController else{ return }
             videoThumbImage.frame = playerViewController.videoBounds
             self.playerViewController?.contentOverlayView?.addSubview(videoThumbImage)
-        }
+        //}
     }
     
     @IBAction func backButtonSelected(_ sender: Any)
