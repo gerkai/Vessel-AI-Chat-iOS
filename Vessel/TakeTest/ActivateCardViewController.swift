@@ -14,6 +14,9 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var postTimerView: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var progressAmount: NSLayoutConstraint!
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressDot: UIImageView!
     
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
@@ -58,7 +61,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     }
     
     //MARK: - ViewModel delegates
-    func timerUpdate(secondsRemaining: Double, timeUp: Bool)
+    func timerUpdate(secondsRemaining: Double, percentageElapsed: Double, timeUp: Bool)
     {
         let secsRemaining = Int(secondsRemaining)
         if secsRemaining != curSeconds
@@ -69,6 +72,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             let string = String(format: "%2i:%02i", minutes, seconds)
             timerLabel.text = string
         }
+        progressAmount.constant = percentageElapsed * (progressView.frame.width - progressDot.frame.width)
         
         if timeUp
         {

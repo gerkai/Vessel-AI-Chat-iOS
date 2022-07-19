@@ -9,7 +9,7 @@ import UIKit
 
 protocol TakeTestViewModelDelegate
 {
-    func timerUpdate(secondsRemaining: Double, timeUp: Bool)
+    func timerUpdate(secondsRemaining: Double, percentageElapsed: Double, timeUp: Bool)
 }
 
 //this enum determines the order the take test screens will appear
@@ -40,6 +40,7 @@ class TakeTestViewModel
     var curState: TakeTextState = .Initial
     var activationTimer: Timer?
     var activationTimeRemaining = 0.0
+    var percentageElapsed = 0.0
     let activationTimerInterval = 0.1 /* seconds */
     var delegate: TakeTestViewModelDelegate?
     
@@ -136,6 +137,7 @@ class TakeTestViewModel
         activationTimer = Timer.scheduledTimer(withTimeInterval: activationTimerInterval, repeats: true, block:
         { timer in
             self.activationTimeRemaining -= self.activationTimerInterval
+            self.percentageElapsed = (Constants.CARD_ACTIVATION_SECONDS - self.activationTimeRemaining) / Constants.CARD_ACTIVATION_SECONDS
             if self.activationTimeRemaining < 0
             {
                 self.activationTimeRemaining = 0
@@ -143,7 +145,7 @@ class TakeTestViewModel
                 self.stopTimer()
                 expired = true
             }
-            self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, timeUp: expired)
+            self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, percentageElapsed: self.percentageElapsed, timeUp: expired)
         })
     }
     
@@ -157,6 +159,7 @@ class TakeTestViewModel
     func skipTimer()
     {
         stopTimer()
-        self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, timeUp: true)
+        self.percentageElapsed = 1.0
+        self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, percentageElapsed: self.percentageElapsed, timeUp: true)
     }
 }
