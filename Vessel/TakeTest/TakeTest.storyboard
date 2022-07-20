@@ -1180,7 +1180,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fep-gZ-ueQ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="346.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="425.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpj-03-vdP">
                                                 <rect key="frame" x="141" y="99" width="132" height="67.5"/>
@@ -1289,14 +1289,29 @@
                                                     <constraint firstItem="1tR-W2-50g" firstAttribute="leading" secondItem="N2g-ms-MTJ" secondAttribute="leading" id="t1T-bn-v8S"/>
                                                 </constraints>
                                             </view>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YXL-0a-d3q" customClass="VesselSegmentedControl" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="355.5" width="374" height="61"/>
+                                                <color key="backgroundColor" red="0.99215686274509807" green="0.99607843137254903" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="H57-RF-SH6"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="" image="PlayIcon"/>
+                                                    <segment title="" image="PlayIcon"/>
+                                                    <segment title="" image="InsightsIcon"/>
+                                                </segments>
+                                                <color key="tintColor" systemColor="systemRedColor"/>
+                                                <color key="selectedSegmentTintColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Aap-0m-GZb" firstAttribute="top" secondItem="TCI-W3-x2F" secondAttribute="bottom" constant="24" id="0Ax-kt-C2M"/>
-                                            <constraint firstAttribute="bottom" secondItem="N2g-ms-MTJ" secondAttribute="bottom" constant="10" id="2Lp-v2-Kd1"/>
                                             <constraint firstItem="Wpj-03-vdP" firstAttribute="centerX" secondItem="Fep-gZ-ueQ" secondAttribute="centerX" id="64s-yw-7gB"/>
                                             <constraint firstItem="Aap-0m-GZb" firstAttribute="leading" secondItem="Fep-gZ-ueQ" secondAttribute="leading" constant="30" id="GzR-Nf-OAE"/>
+                                            <constraint firstItem="YXL-0a-d3q" firstAttribute="top" secondItem="N2g-ms-MTJ" secondAttribute="bottom" constant="19" id="JCW-xB-feg"/>
                                             <constraint firstItem="N2g-ms-MTJ" firstAttribute="leading" secondItem="Fep-gZ-ueQ" secondAttribute="leading" id="KGg-tW-Hx4"/>
+                                            <constraint firstItem="YXL-0a-d3q" firstAttribute="leading" secondItem="Fep-gZ-ueQ" secondAttribute="leading" constant="20" id="Q6Q-Ab-icD"/>
                                             <constraint firstItem="Aap-0m-GZb" firstAttribute="trailing" secondItem="Fep-gZ-ueQ" secondAttribute="trailing" constant="-30" id="Vg0-Ec-kxU"/>
                                             <constraint firstItem="TCI-W3-x2F" firstAttribute="centerX" secondItem="Fep-gZ-ueQ" secondAttribute="centerX" id="YLy-UJ-LRt"/>
                                             <constraint firstItem="cu3-ID-9xI" firstAttribute="top" secondItem="TCI-W3-x2F" secondAttribute="bottom" constant="2" id="dkS-es-Wb8"/>
@@ -1304,8 +1319,10 @@
                                             <constraint firstItem="TCI-W3-x2F" firstAttribute="top" secondItem="Wpj-03-vdP" secondAttribute="bottom" constant="20" id="iME-Mg-w3m"/>
                                             <constraint firstItem="cu3-ID-9xI" firstAttribute="trailing" secondItem="Fep-gZ-ueQ" secondAttribute="trailing" constant="-20" id="j9q-lF-Bo1"/>
                                             <constraint firstItem="cu3-ID-9xI" firstAttribute="leading" secondItem="Fep-gZ-ueQ" secondAttribute="leading" constant="20" id="ksg-Z7-U6F"/>
+                                            <constraint firstItem="YXL-0a-d3q" firstAttribute="trailing" secondItem="Fep-gZ-ueQ" secondAttribute="trailing" constant="-20" id="qwD-AW-ItH"/>
                                             <constraint firstItem="Wpj-03-vdP" firstAttribute="top" secondItem="Fep-gZ-ueQ" secondAttribute="top" constant="99" id="uij-pE-3fn"/>
                                             <constraint firstItem="N2g-ms-MTJ" firstAttribute="top" secondItem="TCI-W3-x2F" secondAttribute="bottom" constant="117" id="vx7-b9-xza"/>
+                                            <constraint firstAttribute="bottom" secondItem="YXL-0a-d3q" secondAttribute="bottom" constant="10" id="xGB-9E-0J4"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1351,6 +1368,7 @@
                         <outlet property="progressAmount" destination="t1T-bn-v8S" id="he6-r8-JTE"/>
                         <outlet property="progressDot" destination="1tR-W2-50g" id="SeN-kb-dfE"/>
                         <outlet property="progressView" destination="N2g-ms-MTJ" id="TJM-P9-Chi"/>
+                        <outlet property="segmentedControl" destination="YXL-0a-d3q" id="i06-dN-LuX"/>
                         <outlet property="timerLabel" destination="Wpj-03-vdP" id="qK0-hh-Dv2"/>
                         <outlet property="titleLabel" destination="TCI-W3-x2F" id="J8f-tL-b8h"/>
                     </connections>
@@ -1609,9 +1627,11 @@
     <resources>
         <image name="CardColorimetrics" width="130" height="206"/>
         <image name="Clock-icon" width="21" height="24"/>
+        <image name="InsightsIcon" width="18" height="24"/>
         <image name="Instruction1-icon" width="130" height="120"/>
         <image name="Instruction2-icon" width="130" height="120"/>
         <image name="Instruction3-icon" width="130" height="120"/>
+        <image name="PlayIcon" width="16" height="21"/>
         <image name="ScanningDroplets" width="296" height="334"/>
         <image name="peeInCupTipImage" width="1500" height="1028"/>
         <image name="peeOnCardTipImage" width="1500" height="684"/>
@@ -1619,6 +1639,9 @@
         <image name="square_back_button" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

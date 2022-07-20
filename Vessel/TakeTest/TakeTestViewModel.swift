@@ -41,8 +41,9 @@ class TakeTestViewModel
     var activationTimer: Timer?
     var activationTimeRemaining = 0.0
     var percentageElapsed = 0.0
-    let activationTimerInterval = 0.1 /* seconds */
+    let activationTimerInterval = 0.1 /* seconds. How often updates are sent to VC */
     var delegate: TakeTestViewModelDelegate?
+    var timerStartDate: Date!
     
     //MARK: - navigation
     static func NextViewController(viewModel: TakeTestViewModel) -> TakeTestMVVMViewController
@@ -131,21 +132,22 @@ class TakeTestViewModel
     
     func startTimer()
     {
-        print("Starting timer)")
+        timerStartDate = Date()
         var expired = false
-        activationTimeRemaining = Constants.CARD_ACTIVATION_SECONDS
+        let totalTime = Constants.CARD_ACTIVATION_SECONDS
         activationTimer = Timer.scheduledTimer(withTimeInterval: activationTimerInterval, repeats: true, block:
         { timer in
-            self.activationTimeRemaining -= self.activationTimerInterval
-            self.percentageElapsed = (Constants.CARD_ACTIVATION_SECONDS - self.activationTimeRemaining) / Constants.CARD_ACTIVATION_SECONDS
-            if self.activationTimeRemaining < 0
+            var interval = Date().timeIntervalSince(self.timerStartDate)
+
+            self.percentageElapsed = interval / totalTime
+            if interval > Constants.CARD_ACTIVATION_SECONDS
             {
-                self.activationTimeRemaining = 0
-                //stop the timer
+                interval = Constants.CARD_ACTIVATION_SECONDS
                 self.stopTimer()
                 expired = true
             }
-            self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, percentageElapsed: self.percentageElapsed, timeUp: expired)
+
+            self.delegate?.timerUpdate(secondsRemaining: totalTime - interval, percentageElapsed: self.percentageElapsed, timeUp: expired)
         })
     }
     

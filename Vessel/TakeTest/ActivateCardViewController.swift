@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 7/18/22.
 //
+//  Note: Segmented control background color is broken as of iOS 13. We can't set a pure white background color. It ends up being gray. See this article: https://rdovhaliuk.medium.com/ios-13-uisegmentedcontrol-3-important-changes-d3a94fdd6763
 
 import UIKit
 
@@ -17,6 +18,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var progressAmount: NSLayoutConstraint!
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var progressDot: UIImageView!
+    @IBOutlet weak var segmentedControl: VesselSegmentedControl!
     
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
@@ -28,6 +30,18 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         viewModel.delegate = self
         postTimerView.alpha = 0.0
         backButton.alpha = 0.0
+        
+        //this fixes it but it's too aggressive and you can no longer read the text of the selected segment.
+        /*segmentedControl.subviews.forEach { subview in
+          subview.backgroundColor = .white
+        }*/
+        
+        self.segmentedControl.layer.backgroundColor = UIColor.white.cgColor
+        self.segmentedControl.backgroundColor = UIColor.white
+        
+        segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Intro", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 0)
+        segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
+        segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
     }
     
     override func viewDidAppear(_ animated: Bool)
