@@ -475,53 +475,6 @@
             </objects>
             <point key="canvasLocation" x="941" y="45"/>
         </scene>
-        <!--Last View Controller-->
-        <scene sceneID="60Q-87-7md">
-            <objects>
-                <viewController storyboardIdentifier="LastViewController" id="Zx8-Um-7DR" customClass="LastViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nhr-HK-kWV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Future Home of the Today Tab" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zL2-k2-szt">
-                                <rect key="frame" x="92" y="442.5" width="230" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For now, this is the end of the flow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="St7-el-NrN">
-                                <rect key="frame" x="77" y="507" width="260" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-R2-l4z">
-                                <rect key="frame" x="175" y="795" width="64" height="34"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Log Out">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="logOut" destination="Zx8-Um-7DR" eventType="touchUpInside" id="bkG-om-xG8"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="2ay-Ty-ZR3"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="zL2-k2-szt" firstAttribute="centerY" secondItem="2ay-Ty-ZR3" secondAttribute="centerY" id="1H6-LS-2sp"/>
-                            <constraint firstItem="2ay-Ty-ZR3" firstAttribute="bottom" secondItem="aT8-R2-l4z" secondAttribute="bottom" constant="33" id="RSj-qO-gsx"/>
-                            <constraint firstItem="St7-el-NrN" firstAttribute="top" secondItem="zL2-k2-szt" secondAttribute="bottom" constant="43.5" id="Y0z-Zl-LOq"/>
-                            <constraint firstItem="zL2-k2-szt" firstAttribute="centerX" secondItem="2ay-Ty-ZR3" secondAttribute="centerX" id="Z5z-XM-hp1"/>
-                            <constraint firstItem="St7-el-NrN" firstAttribute="centerX" secondItem="2ay-Ty-ZR3" secondAttribute="centerX" id="ZIN-Wq-cff"/>
-                            <constraint firstItem="aT8-R2-l4z" firstAttribute="centerX" secondItem="2ay-Ty-ZR3" secondAttribute="centerX" id="p5n-z0-ke9"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UeK-a6-aRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5914" y="45"/>
-        </scene>
         <!--Birthday Select View Controller-->
         <scene sceneID="jsv-Rw-oQA">
             <objects>
