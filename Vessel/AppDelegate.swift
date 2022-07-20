@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         FirebaseApp.configure()
         analytics.setup()
         configureAppearance()
-        
+        MediaManager.shared.initMedia()
         return true
     }
 

@@ -91,7 +91,8 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         playerViewController = AVPlayerViewController()
         if let playerViewController = playerViewController
         {
-            guard let mediaURL = Bundle.main.url(forResource: "test_card_tutorial", withExtension: "mp4") else {return}
+            //guard let mediaURL = Bundle.main.url(forResource: "test_card_tutorial", withExtension: "mp4") else {return}
+            guard let mediaURL = MediaManager.shared.localPathForFile(filename: Constants.testCardTutorialVideo) else {return}
             let player = AVQueuePlayer()
             looper = AVPlayerLooper(player: player, templateItem: AVPlayerItem(asset: AVAsset(url: mediaURL)))
             playerViewController.player = player

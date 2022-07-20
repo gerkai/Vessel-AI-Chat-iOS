@@ -55,6 +55,8 @@
 		3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */; };
 		3F15ACE628873C04004716CA /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE528873C04004716CA /* CaptureViewController.swift */; };
 		3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE92887759C004716CA /* UIImageExtensions.swift */; };
+		3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACEB288863C6004716CA /* FileDownloader.swift */; };
+		3F15ACEE2888659D004716CA /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACED2888659D004716CA /* MediaManager.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
@@ -72,7 +74,6 @@
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
-		3FA6683A287F54DF0006166D /* test_card_tutorial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3FA66839287F54DF0006166D /* test_card_tutorial.mp4 */; };
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
@@ -178,6 +179,8 @@
 		3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningDropletsTipViewController.swift; sourceTree = "<group>"; };
 		3F15ACE528873C04004716CA /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3F15ACE92887759C004716CA /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		3F15ACEB288863C6004716CA /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		3F15ACED2888659D004716CA /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -196,7 +199,6 @@
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
-		3FA66839287F54DF0006166D /* test_card_tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_card_tutorial.mp4; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				3F0547C827CA9FF1006E3098 /* Server.swift */,
+				3F15ACEB288863C6004716CA /* FileDownloader.swift */,
+				3F15ACED2888659D004716CA /* MediaManager.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -371,14 +375,6 @@
 				3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		3FA66838287F54DF0006166D /* Media */ = {
-			isa = PBXGroup;
-			children = (
-				3FA66839287F54DF0006166D /* test_card_tutorial.mp4 */,
-			);
-			path = Media;
 			sourceTree = "<group>";
 		};
 		3FE3699327C9A07E00231D42 = {
@@ -449,7 +445,6 @@
 				3FE369D027C9A71D00231D42 /* Assets.xcassets */,
 				3F96181E27D56DE100CB37B6 /* Config */,
 				3FE369D227C9A74B00231D42 /* Fonts */,
-				3FA66838287F54DF0006166D /* Media */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -683,7 +678,6 @@
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
-				3FA6683A287F54DF0006166D /* test_card_tutorial.mp4 in Resources */,
 				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
@@ -834,6 +828,7 @@
 				7206C4E128837AE6000130DA /* MainViewController.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
+				3F15ACEE2888659D004716CA /* MediaManager.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
 				3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
@@ -857,6 +852,7 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
+				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
 				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,

@@ -14,6 +14,12 @@ struct Constants
     static let privacyPolicyURL = "\(websiteURL)/privacy-policy.html"
     static let termsOfServiceURL = "\(websiteURL)/terms-of-service.html"
     
+    //media
+    static let mediaPath = "https://dittylabs.com/temp/vessel"
+    static let testCardTutorialVideo = "test_card_tutorial.mp4"
+    static let timerFirstVideo = "timer_first_video.mp4"
+    static let timerSecondVideo = "timer_second_video.mp4"
+    
     //server environment
     static let environmentKey = "Environment"
     //TODO: swap DEV_INDEX and PROD_INDEX before release. Currently we default to DEV_INDEX so app starts pointing to dev environment

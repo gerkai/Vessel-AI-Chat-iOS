@@ -32,10 +32,8 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         backButton.alpha = 0.0
         
         //this fixes it but it's too aggressive and you can no longer read the text of the selected segment.
-        /*segmentedControl.subviews.forEach { subview in
-          subview.backgroundColor = .white
-        }*/
         
+        //segmentedControl.setBackgroundImage(UIImage.init(named: "whiteImage"), for: .normal, barMetrics: .default)
         self.segmentedControl.layer.backgroundColor = UIColor.white.cgColor
         self.segmentedControl.backgroundColor = UIColor.white
         
@@ -48,6 +46,11 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         if !firstTimeAppeared
         {
+            /*segmentedControl.subviews.forEach
+            { subview in
+             // subview.backgroundColor = .white
+                print("Color: \(subview.layer.backgroundColor)")
+            }*/
             firstTimeAppeared = true
             viewModel.startTimer()
         }
