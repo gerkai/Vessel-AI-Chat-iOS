@@ -25,7 +25,7 @@ class CupTipViewController: TakeTestMVVMViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        // TODO: Add analytics page viewed
     }
     
     @IBAction func onBack()

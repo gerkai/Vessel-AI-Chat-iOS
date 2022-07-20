@@ -19,6 +19,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var passwordTextField: VesselTextField!
     @IBOutlet weak var confirmPasswordTextField: VesselTextField!
     
+    @Resolved private var analytics: Analytics
     var initialFirstName: String = ""
     var initialLastName: String = ""
     var socialAuth: Bool = false
@@ -42,7 +43,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .create))
     }
     
     override func viewWillAppear(_ animated: Bool)

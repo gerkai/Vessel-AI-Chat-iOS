@@ -25,7 +25,7 @@ class TestCardExistCheckingViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .identification))
     }
     
     @IBAction func onOptionButtonTapped(_ sender: UIButton)
@@ -68,19 +68,19 @@ class TestCardExistCheckingViewController: UIViewController
         if selectedOption == 1
         {
             let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
-            analytics.log(event: .identification, properties: ["Type": "Purchased"])
+            analytics.log(event: .identification(type: .purchased))
             self.navigationController?.fadeTo(vc)
         }
         else if selectedOption == 2
         {
             let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-            analytics.log(event: .identification, properties: ["Type": "Gifted"])
+            analytics.log(event: .identification(type: .gifted))
             self.navigationController?.fadeTo(vc)
         }
         else
         {
             let vc = storyboard.instantiateViewController(identifier: "NoTestCardOnboardViewController") as! NoTestCardOnboardViewController
-            analytics.log(event: .identification, properties: ["Type": "Dont Have Yet"])
+            analytics.log(event: .identification(type: .dontHaveYet))
             self.navigationController?.fadeTo(vc)
         }
     }

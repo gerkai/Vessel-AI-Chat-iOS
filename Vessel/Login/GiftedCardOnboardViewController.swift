@@ -10,6 +10,8 @@ import UIKit
 
 class GiftedCardOnboardViewController: UIViewController
 {
+    @Resolved private var analytics: Analytics
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -18,7 +20,7 @@ class GiftedCardOnboardViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .gifted))
     }
     
     @IBAction func onBackButtonTapped(_ sender: Any)

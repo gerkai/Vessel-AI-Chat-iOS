@@ -10,6 +10,8 @@ import UIKit
 
 class NoTestCardOnboardViewController: UIViewController
 {
+    @Resolved private var analytics: Analytics
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -18,7 +20,7 @@ class NoTestCardOnboardViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .dontHaveYet))
     }
     
     @IBAction func onContinueButtonTapped(_ sender: Any)

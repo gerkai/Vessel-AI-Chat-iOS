@@ -18,6 +18,7 @@ class DebugViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var defaultLoginPasswordTextField: UITextField!
     @IBOutlet weak var defaultWeightTextField: UITextField!
     
+    @Resolved private var analytics: Analytics
     var savedEnvironment: Int!
     var delegate: DebugViewControllerDelegate?
     let emailFieldTag = 0
@@ -52,7 +53,7 @@ class DebugViewController: UIViewController, UITextFieldDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .debugMenu))
     }
     
     deinit

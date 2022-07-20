@@ -41,7 +41,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .forgotPassword))
     }
     
     @IBAction func onBackButton()
@@ -98,7 +98,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
             { [weak self] message in
                 guard let self = self else { return }
                 print("\(message)")
-                self.analytics.log(event: .forgotPassword, properties: [:])
+                self.analytics.log(event: .forgotPassword)
                 self.transitionToSecondScreen()
             }
             onFailure:
@@ -129,7 +129,8 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
             self.emailTextField.alpha = 0
         },
         completion:
-        {_ in
+        { [weak self] _ in
+            guard let self = self else { return }
             self.titleLabel.text = NSLocalizedString("Request sent successfully", comment: "")
             self.descriptionLabel.text = NSLocalizedString("Please check your inbox for a link to reset your password.", comment: "")
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations:
@@ -141,6 +142,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
             completion:
             {_ in
                 self.screenMode = .secondScreen
+                self.analytics.log(event: .viewedPage(screenName: .forgotPasswordSuccess))
             })
         })
     }
