@@ -47,7 +47,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .welcomeBack))
     }
     
     @IBAction func googleAuthAction(_ sender: Any)
@@ -99,7 +99,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         { [weak self] contact in
                             guard let self = self else { return }
                             self.nextButton.hideLoading()
-                            self.analytics.log(event: .logIn, properties: ["Login Type": "Email"])
+                            self.analytics.log(event: .logIn(loginType: .email))
                             Contact.MainID = contact.id
                             ObjectStore.shared.serverSave(contact)
                             let vc = OnboardingViewModel.NextViewController()
@@ -144,7 +144,10 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         if isBrandNewAccount
         {
             //navigate to TestCardExistCheckingViewController
-            analytics.log(event: .signUp, properties: ["Login Type": loginType.rawValue])
+            if let analyticsLoginType = AnalyticsLoginType(rawValue: loginType.rawValue)
+            {
+                analytics.log(event: .signUp(loginType: analyticsLoginType))
+            }
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -152,7 +155,10 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         else
         {
             //navigate to start of Onboarding
-            analytics.log(event: .logIn, properties: ["Login Type": loginType.rawValue])
+            if let analyticsLoginType = AnalyticsLoginType(rawValue: loginType.rawValue)
+            {
+                analytics.log(event: .logIn(loginType: analyticsLoginType))
+            }
             let vc = OnboardingViewModel.NextViewController()
             self.navigationController?.fadeTo(vc)
         }

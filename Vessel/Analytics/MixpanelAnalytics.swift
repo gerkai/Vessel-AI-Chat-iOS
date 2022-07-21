@@ -43,13 +43,13 @@ class MixpanelAnalytics: Analytics
         Mixpanel.initialize(token: analyticsToken)
     }
     
-    func log(event: AnalyticsEvent, properties: [String: Any])
+    func log(event: AnalyticsEvent)
     {
-        guard let properties = properties as? [String: MixpanelType] else
+        guard let properties = event.properties as? [String: MixpanelType] else
         {
             fatalError("Not valid types found in properties for event: \(event)")
         }
-        Mixpanel.mainInstance().track(event: event.rawValue, properties: properties)
+        Mixpanel.mainInstance().track(event: event.name, properties: properties)
     }
     
     func setSuperProperty(property: String, value: Any)

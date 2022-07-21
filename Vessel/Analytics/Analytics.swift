@@ -15,7 +15,7 @@ import Foundation
 protocol Analytics: AnyObject
 {
     func setup()
-    func log(event: AnalyticsEvent, properties: [String: Any])
+    func log(event: AnalyticsEvent)
     func setSuperProperty(property: String, value: Any)
     func setSuperProperties(properties: [String: Any])
     func identify(id: String)

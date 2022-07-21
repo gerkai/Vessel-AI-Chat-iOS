@@ -38,12 +38,6 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         }
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        logPageViewed()
-    }
-    
     override func viewWillLayoutSubviews()
     {
         if didLayout == false

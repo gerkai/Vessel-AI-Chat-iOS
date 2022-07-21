@@ -35,6 +35,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
     
+    @Resolved private var analytics: Analytics
     private var validator = BoughtCardLoginValidator()
     var email = ""
     
@@ -50,7 +51,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .boughtOnWebsite))
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)

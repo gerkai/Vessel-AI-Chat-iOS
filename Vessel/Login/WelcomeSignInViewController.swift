@@ -19,6 +19,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var buttonStackView: UIStackView!
     @IBOutlet private weak var splashView: UIView!
     
+    @Resolved private var analytics: Analytics
     let labelRefreshInterval = 2.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
@@ -51,7 +52,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .main))
     }
     
     override func viewWillAppear(_ animated: Bool)

@@ -10,12 +10,6 @@ import SafariServices
 
 extension UIViewController
 {
-    func logPageViewed()
-    {
-        @Resolved var analytics: Analytics
-        analytics.log(event: .viewedPage, properties: ["Screen Name": Self.className])
-    }
-    
     func openInSafari(url: String)
     {
         if let url = URL(string: url)

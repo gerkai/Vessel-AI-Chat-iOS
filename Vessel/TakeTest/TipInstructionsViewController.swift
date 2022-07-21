@@ -21,7 +21,7 @@ class TipInstructionsViewController: TakeTestMVVMViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        // TODO: Add analytics for viewed page
     }
     
     @IBAction func onBackButton()

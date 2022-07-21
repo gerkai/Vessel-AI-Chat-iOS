@@ -98,7 +98,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        // TODO: Add analytics for viewed page
     }
     
     override func viewDidLayoutSubviews()

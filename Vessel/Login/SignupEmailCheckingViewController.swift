@@ -18,7 +18,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        logPageViewed()
+        analytics.log(event: .viewedPage(screenName: .welcome))
     }
     
     @IBAction func onBackButtonPressed(_ sender: Any)
@@ -117,14 +117,20 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         if isBrandNewAccount
         {
             //navigate to TestCardExistCheckingViewController
-            analytics.log(event: .signUp, properties: ["Login Type": loginType.rawValue])
+            if let analyticsLoginType = AnalyticsLoginType(rawValue: loginType.rawValue)
+            {
+                analytics.log(event: .signUp(loginType: analyticsLoginType))
+            }
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else
         {
-            analytics.log(event: .logIn, properties: ["Login Type": loginType.rawValue])
+            if let analyticsLoginType = AnalyticsLoginType(rawValue: loginType.rawValue)
+            {
+                analytics.log(event: .logIn(loginType: analyticsLoginType))
+            }
             let vc = OnboardingViewModel.NextViewController()
             self.navigationController?.fadeTo(vc)
         }

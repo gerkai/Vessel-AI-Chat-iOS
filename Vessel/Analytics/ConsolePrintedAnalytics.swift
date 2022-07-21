@@ -14,10 +14,10 @@ class ConsolePrintedAnalytics: Analytics
         print("Analytics: Set up")
     }
     
-    func log(event: AnalyticsEvent, properties: [String: Any])
+    func log(event: AnalyticsEvent)
     {
-        print("Analytics: Log event \(event.rawValue)")
-        print("Analytics:     \(properties)")
+        print("Analytics: Log event \(event.name)")
+        print("Analytics:     \(event.properties)")
     }
     
     func setSuperProperty(property: String, value: Any)
