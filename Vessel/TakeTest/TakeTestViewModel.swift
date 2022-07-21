@@ -13,7 +13,7 @@ protocol TakeTestViewModelDelegate
 }
 
 //this enum determines the order the take test screens will appear
-enum TakeTextState: Int
+enum TakeTestState: Int
 {
     case Initial
     case TestTips
@@ -25,19 +25,20 @@ enum TakeTextState: Int
     
     mutating func next()
     {
-        self = TakeTextState(rawValue: rawValue + 1) ?? .Initial
+        self = TakeTestState(rawValue: rawValue + 1) ?? .Initial
         print("Incrementing to state: \(self)")
     }
     
     mutating func back()
     {
-        self = TakeTextState(rawValue: rawValue - 1) ?? .Initial
+        self = TakeTestState(rawValue: rawValue - 1) ?? .Initial
+        print("Decrementing to state: \(self)")
     }
 }
 
 class TakeTestViewModel
 {
-    var curState: TakeTextState = .Initial
+    var curState: TakeTestState = .Initial
     var activationTimer: Timer?
     var activationTimeRemaining = 0.0
     var percentageElapsed = 0.0

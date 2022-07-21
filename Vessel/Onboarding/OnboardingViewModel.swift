@@ -420,9 +420,10 @@ class OnboardingViewModel
     
     func finalScreenText() -> String
     {
+        let contact = Contact.main()!
         for goal in Goals
         {
-            if goal.id == mainGoal
+            if goal.id == contact.main_goal_id
             {
                 let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
                 return text
@@ -470,7 +471,7 @@ class OnboardingViewModel
                 contact.diet_ids = userDiets
                 contact.allergy_ids = userAllergies
                 contact.goal_ids = userGoals
-                contact.mainGoal = mainGoal
+                contact.main_goal_id = mainGoal
                 
                 ObjectStore.shared.ClientSave(contact)
             }

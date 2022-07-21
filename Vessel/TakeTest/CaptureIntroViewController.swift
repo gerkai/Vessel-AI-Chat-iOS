@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 7/13/22.
 //
+//  Add -DLOOP_VIDEOS to Other Swift Flags in build settings for looped videos
 
 import UIKit
 import AVKit
@@ -14,10 +15,10 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstTipTextView: UITextView!
     private var playerViewController: AVPlayerViewController?
+#if LOOP_VIDEOS
     var looper: AVPlayerLooper?
-    private var startVideoDate: Date?
+#endif
     private var videoThumbImage: UIImageView?
-    //private var isVideoObserved = false
     
     override func viewDidLoad()
     {
@@ -45,7 +46,16 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         super.viewWillDisappear(animated)
         playerViewController?.player?.pause()
     }
-    
+
+    deinit
+    {
+        print("CaptureIntro DeInit")
+        if playerViewController?.player != nil //, isVideoObserved
+        {
+            self.playerViewController?.player?.removeObserver(self, forKeyPath: "rate")
+        }
+    }
+    /*
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?)
     {
         if keyPath == "rate", let player = object as? AVPlayer
@@ -55,15 +65,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
                 videoThumbImage?.removeFromSuperview()
             }
         }
-    }
-
-    deinit
-    {
-        if playerViewController?.player != nil //, isVideoObserved
-        {
-            self.playerViewController?.player?.removeObserver(self, forKeyPath: "rate")
-        }
-    }
+    }*/
 
     private func setupFirstTipTextView()
     {
@@ -86,36 +88,40 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     
     func setupVideo()
     {
-        //let contact = Contact.main()!
-        
         playerViewController = AVPlayerViewController()
         if let playerViewController = playerViewController
         {
-            //guard let mediaURL = Bundle.main.url(forResource: "test_card_tutorial", withExtension: "mp4") else {return}
-            guard let mediaURL = MediaManager.shared.localPathForFile(filename: Constants.testCardTutorialVideo) else {return}
-            let player = AVQueuePlayer()
-            looper = AVPlayerLooper(player: player, templateItem: AVPlayerItem(asset: AVAsset(url: mediaURL)))
-            playerViewController.player = player
-            playerViewController.view.frame = videoView.bounds
-            addChild(playerViewController)
-            videoView.addSubview(playerViewController.view)
-            playerViewController.didMove(toParent: self)
-            startVideoDate = Date()
-            //let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
-            //if videoWatchedBefore != 0
-            //{
-                playerViewController.showsPlaybackControls = true
-                self.playerViewController?.player?.addObserver(self, forKeyPath: "rate", options: [], context: nil)
-                //self.isVideoObserved = true
-            /*}
-            else
+            if let mediaURL = MediaManager.shared.localPathForFile(filename: Constants.testCardTutorialVideo)
             {
-                playerViewController.showsPlaybackControls = false
-                playerViewController.player?.play()
-            }*/
+#if LOOP_VIDEOS
+                let player = AVQueuePlayer()
+                looper = AVPlayerLooper(player: player, templateItem: AVPlayerItem(asset: AVAsset(url: mediaURL)))
+#else
+                let player = AVPlayer(url: mediaURL)
+            
+#endif
+                playerViewController.player = player
+                playerViewController.view.frame = videoView.bounds
+                addChild(playerViewController)
+                videoView.addSubview(playerViewController.view)
+                playerViewController.didMove(toParent: self)
+                //startVideoDate = Date()
+                //let videoWatchedBefore = contact.flags & Constants.WATCHED_INSTRUCTION_VIDEO
+                //if videoWatchedBefore != 0
+                //{
+                    playerViewController.showsPlaybackControls = true
+                    //self.playerViewController?.player?.addObserver(self, forKeyPath: "rate", options: [], context: nil)
+                    //self.isVideoObserved = true
+                /*}
+                else
+                {
+                    playerViewController.showsPlaybackControls = false
+                    playerViewController.player?.play()
+                }*/
+            }
         }
     }
-
+/*
     private func setThumbForVideo()
     {
         //let contact = Contact.main()!
@@ -137,7 +143,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
             videoThumbImage.frame = playerViewController.videoBounds
             self.playerViewController?.contentOverlayView?.addSubview(videoThumbImage)
         //}
-    }
+    }*/
     
     @IBAction func backButtonSelected(_ sender: Any)
     {

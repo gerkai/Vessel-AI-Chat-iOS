@@ -5,8 +5,11 @@
 //  Created by Carson Whitsett on 7/18/22.
 //
 //  Note: Segmented control background color is broken as of iOS 13. We can't set a pure white background color. It ends up being gray. See this article: https://rdovhaliuk.medium.com/ios-13-uisegmentedcontrol-3-important-changes-d3a94fdd6763
+//
+//  Add -DLOOP_VIDEOS to Other Swift Flags in build settings for looped videos
 
 import UIKit
+import AVKit
 
 class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerPopupViewControllerDelegate
 {
@@ -19,27 +22,45 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var progressDot: UIImageView!
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
+    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var tabDetailsLabel: UILabel!
+    
+    private var playerViewController: AVPlayerViewController?
+#if LOOP_VIDEOS
+    var looper: AVPlayerLooper?
+#endif
+    var player1: AVPlayer!
+    var player2: AVPlayer!
     
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
     var skipTimerPopupVC: SkipTimerPopupViewController?
     
+    //segmented control indices
+    let IntroIndex = 0
+    let TourIndex = 1
+    let InsightsIndex = 2
+    let defaultSegmentDetailsString = NSLocalizedString("Your Wellness Test Card", comment: "")
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        setupVideo()
         viewModel.delegate = self
         postTimerView.alpha = 0.0
         backButton.alpha = 0.0
         
         //this fixes it but it's too aggressive and you can no longer read the text of the selected segment.
-        
         //segmentedControl.setBackgroundImage(UIImage.init(named: "whiteImage"), for: .normal, barMetrics: .default)
+        
         self.segmentedControl.layer.backgroundColor = UIColor.white.cgColor
         self.segmentedControl.backgroundColor = UIColor.white
         
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Intro", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 0)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
+        
+        tabDetailsLabel.text = defaultSegmentDetailsString
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -56,8 +77,73 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        playerViewController?.player?.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        playerViewController?.player?.pause()
+    }
+    
+    deinit
+    {
+        print("ActivateCardVC DeInit")
+    }
+    
+    func setupVideo()
+    {
+        playerViewController = AVPlayerViewController()
+        if let playerViewController = playerViewController
+        {
+            if let mediaURL = MediaManager.shared.localPathForFile(filename: Constants.timerFirstVideo)
+            {
+#if LOOP_VIDEOS
+                player1 = AVQueuePlayer()
+                looper = AVPlayerLooper(player: player1, templateItem: AVPlayerItem(asset: AVAsset(url: mediaURL)))
+#else
+                player1 = AVPlayer(url: mediaURL)
+            
+#endif
+            }
+            if let mediaURL = MediaManager.shared.localPathForFile(filename: Constants.timerSecondVideo)
+            {
+#if LOOP_VIDEOS
+                player2 = AVQueuePlayer()
+                looper = AVPlayerLooper(player: player2, templateItem: AVPlayerItem(asset: AVAsset(url: mediaURL)))
+#else
+                player2 = AVPlayer(url: mediaURL)
+            
+#endif
+            }
+            
+            playerViewController.player = player1
+            playerViewController.view.frame = videoView.bounds
+            addChild(playerViewController)
+            videoView.addSubview(playerViewController.view)
+            playerViewController.didMove(toParent: self)
+
+            playerViewController.showsPlaybackControls = true
+        }
+    }
+    
+    
+    
     @IBAction func onBackButton()
     {
+        viewModel.delegate = nil
+#if LOOP_VIDEOS
+        looper?.disableLooping()
+        looper = nil
+#endif
+        playerViewController?.player?.pause()
+        //playerViewController?.removeFromParent()
+        //playerViewController?.view.removeFromSuperview()
+        playerViewController = nil
+        
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
     }
@@ -75,6 +161,43 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         let vc = viewModel.nextViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func insightsText() -> String
+    {
+        let contact = Contact.main()!
+        for goal in Goals
+        {
+            if goal.id == contact.main_goal_id
+            {
+                let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), goal.name)
+                return text
+            }
+        }
+        //should never get here
+        return ""
+    }
+    
+    //MARK: - Segmented Control action
+    @IBAction func onSegmentChoice(_ sender: UISegmentedControl)
+    {
+        switch sender.selectedSegmentIndex
+        {
+            case IntroIndex:
+                tabDetailsLabel.text = defaultSegmentDetailsString
+                player2.pause()
+                playerViewController?.player = player1
+                player1.play()
+            case TourIndex:
+                tabDetailsLabel.text = defaultSegmentDetailsString
+                player1.pause()
+                playerViewController?.player = player2
+                player2.play()
+            default:
+                player1.pause()
+                player2.pause()
+                tabDetailsLabel.text = insightsText()
+        }
     }
     
     //MARK: - ViewModel delegates

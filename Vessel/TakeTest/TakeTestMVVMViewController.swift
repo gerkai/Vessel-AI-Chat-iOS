@@ -9,7 +9,7 @@ import UIKit
 
 class TakeTestMVVMViewController: UIViewController
 {
-    var viewModel: TakeTestViewModel!
+    weak var viewModel: TakeTestViewModel!
     
     func initWithViewModel(vm: TakeTestViewModel)
     {
