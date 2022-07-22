@@ -53,11 +53,10 @@
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
 		3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */; };
 		3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */; };
-		3F15ACE628873C04004716CA /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE528873C04004716CA /* CaptureViewController.swift */; };
 		3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE92887759C004716CA /* UIImageExtensions.swift */; };
 		3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACEB288863C6004716CA /* FileDownloader.swift */; };
 		3F15ACEE2888659D004716CA /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACED2888659D004716CA /* MediaManager.swift */; };
-		3F15ACF1288A50CF004716CA /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACEF288A50CF004716CA /* ScanViewController.swift */; };
+		3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACEF288A50CF004716CA /* ScanCardViewController.swift */; };
 		3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACF0288A50CF004716CA /* DrawingView.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
@@ -179,11 +178,10 @@
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipTimerPopupViewController.swift; sourceTree = "<group>"; };
 		3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningDropletsTipViewController.swift; sourceTree = "<group>"; };
-		3F15ACE528873C04004716CA /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3F15ACE92887759C004716CA /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		3F15ACEB288863C6004716CA /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		3F15ACED2888659D004716CA /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
-		3F15ACEF288A50CF004716CA /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		3F15ACEF288A50CF004716CA /* ScanCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCardViewController.swift; sourceTree = "<group>"; };
 		3F15ACF0288A50CF004716CA /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -338,12 +336,11 @@
 			children = (
 				3FA668692885F8380006166D /* ActivateCardViewController.swift */,
 				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
-				3F15ACE528873C04004716CA /* CaptureViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F15ACF0288A50CF004716CA /* DrawingView.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
 				3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */,
-				3F15ACEF288A50CF004716CA /* ScanViewController.swift */,
+				3F15ACEF288A50CF004716CA /* ScanCardViewController.swift */,
 				3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
@@ -813,7 +810,7 @@
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
-				3F15ACF1288A50CF004716CA /* ScanViewController.swift in Sources */,
+				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
@@ -875,7 +872,6 @@
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
-				3F15ACE628873C04004716CA /* CaptureViewController.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,

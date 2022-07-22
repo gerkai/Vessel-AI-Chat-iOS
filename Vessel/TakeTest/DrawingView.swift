@@ -6,7 +6,7 @@
 //
 //
 // camera is 1920px x 1080px but we rotate 90 degrees (1080px x 1920px)
-//
+// Just some numbers from actual devices to reference during development
 // Device           Camera PX       Frame PX        FrameW / CamW       FrameH / CamH
 //12ProMax stock    1080, 1920      1284, 2778      1.1888888889        1.446875
 //12ProMax .photo   3024, 4032      1284, 2778      0.4246031746        0.6889880952
@@ -41,7 +41,7 @@ class DrawingView: UIView
 {
     var qrBox: [CGPoint]?
     var converted: [CGPoint] = []
-    var cameraSize = CGSize() //1080 x 1920 on iPhone 12 pro max
+    var cameraSize = CGSize()
     var delegate: DrawingViewDelegate?
     let numFiducialsToAverage = 10
     var arrayG: [CGPoint] = []
@@ -49,7 +49,6 @@ class DrawingView: UIView
     
     override func draw(_ rect: CGRect)
     {
-        print("Draw")
         UIGraphicsGetCurrentContext()
         if let context = UIGraphicsGetCurrentContext()
         {
@@ -57,30 +56,8 @@ class DrawingView: UIView
             
             if let box = qrBox
             {
-                print("Valid QR Box")
                 let cWidth = cameraSize.width / UIScreen.main.scale
                 let cHeight = cameraSize.height / UIScreen.main.scale
-
-                //let aspectScaleX = frame.size.width / cWidth
-                //let aspectScaleX = frame.size.width / cHeight
-                
-                //(frameHeight - (frameW / CamW) * CamHeight) / 2
-                //determine where in displayed image, the camera image starts vertically
-                //let yOffset = (frame.height - (aspectScaleX * cHeight)) / 2
-                
-                //print("Aspect XY: (\(aspectScaleX), \(aspectScaleY)")
-                //let width = frame.size.width
-                //let height = frame.size.height
-                //print("Height: \(height), Width: \(width)") //926 x 428
-                //let scaledBox = CGRect(x: cWidth - (box.origin.y * cWidth) * aspectScaleX, y: box.origin.x * cHeight * aspectScaleY, width: box.size.width * cHeight * aspectScaleX, height: box.size.height * cWidth * aspectScaleX)
-                //let scaledBox = CGRect(x: 0.0, y: 0.0, width: width, height: height)
-   
-                //print("Box0: \(box[0].x), \(box[0].y)")
-                //let pointA = CGPoint(x: frame.width - (box[0].y * cWidth) * aspectScaleX, y: yOffset + (box[0].x * cHeight) * aspectScaleX)
-                //let pointA = CGPoint(x: frame.width - (box[0].y * cHeight) * aspectScaleX, y: yOffset + (box[0].x * frame.width) * 1.0)
-                //let wScale = frame.width / cWidth
-                //let scaledCamHeight = cHeight * wScale
-                //let camYOffset = (frame.height - scaledCamHeight) / 2
                 
                 let hScale = frame.height / cHeight
                 let scaledCamWidth = cWidth * hScale
@@ -100,7 +77,6 @@ class DrawingView: UIView
                 
                 let lengthAB = length(pointA, pointB)
                 let lengthCD = length(pointC, pointD)
-                //let lengthAD = length(pointA, pointD)
                 //if camera is dead-on then the lengths of the QR top line and QR bottom line will be equal
                 //otherwise, there will be some ratio depending on perspective (the length of AB gets shorter with respect
                 //to the length of CD if AB is further away from the camera)
@@ -108,16 +84,15 @@ class DrawingView: UIView
                 //amplify any deviation to better approximate lower fiducial locations
                 let fudge = (perspectiveRatio - 1.0) * 5 //value of 5 was chosen based on empirical testing.
                 //print("Ratio: \(perspectiveRatio)")
-                //let tiltRatio = (lengthAB - lengthCD) * 1
+                
                 //print("Tilt: \(tiltRatio)")
-                //card geometry
+                //card geometry (see Card Geometry Omnigraffle for point names and ratios)
                 let ajabRatio = 0.634
                 let bkabRatio = ajabRatio
                 let adjeRatio = 0.134
                 let bckfRatio = adjeRatio
                 let fgbcRatio = 6.061
                 let ehadRatio = fgbcRatio
-                //let ehefRatio = 1.0//2.75
                 
                 //find the four fiducial regions
                 let jX = pointA.x - (pointB.x - pointA.x) * ajabRatio
@@ -132,22 +107,14 @@ class DrawingView: UIView
                 let fY = kY - (pointC.y - pointB.y) * bckfRatio
                 let pointF = CGPoint(x: fX, y: fY)
                 
-                //print("fgbcRatio: \(fgbcRatio), perspRatio:\(perspectiveRatio), fudge: \(fudge)")
                 let gX = pointF.x + (pointC.x - pointB.x) * (fgbcRatio * (perspectiveRatio + fudge))
                 let gY = pointF.y + (pointC.y - pointB.y) * (fgbcRatio * (perspectiveRatio + fudge))
-                //let gX = pointF.x + (pointC.x - pointB.x - tiltRatio) * fgbcRatio
-                //let gY = pointF.y + (pointC.y - pointB.y - tiltRatio) * fgbcRatio
                 let pointG = CGPoint(x: gX, y: gY)
                 arrayG.append(pointG)
                 if arrayG.count > numFiducialsToAverage
                 {
                     arrayG.removeFirst()
                 }
-                //let lengthEF = length(pointE, pointF)
-                //let efDiff = CGPoint(x: pointF.x - pointE.x, y: pointF.y - pointE.y)
-                //let rotatedefDiff = CGPoint(x: efDiff.y, y: -efDiff.x)
-                
-                //let pointG = CGPoint(x: pointF.x + rotatedefDiff.x * ehefRatio, y: pointF.y - rotatedefDiff.y * ehefRatio)
                 
                 let hX = pointE.x + (pointD.x - pointA.x) * (ehadRatio * (perspectiveRatio + fudge))
                 let hY = pointE.y + (pointD.y - pointA.y) * (ehadRatio * (perspectiveRatio + fudge))
@@ -157,7 +124,6 @@ class DrawingView: UIView
                 {
                     arrayH.removeFirst()
                 }
-                //let pointH = CGPoint(x: pointE.x - (pointF.y - pointE.y) * ehefRatio, y: pointE.y + (pointF.x - pointE.x) * ehefRatio)
                 
                 //draw box around qr code
                 context.setStrokeColor(UIColor.yellow.cgColor)
@@ -174,21 +140,7 @@ class DrawingView: UIView
                 
                 //draw fiducials
 
-                //width of card is roughly 0.3 * height of card
-                //height of valid area is 0.929 height of overlayView (which is height of our frame)
-                //valid area height = 0.929 * self.frame.height
-                //valid area width = 0.3 * valid area height
-                
-                //validFrame.x = (frame.width / 2) - (valid area width / 2)
-                //validFrame.y = (frame.height - valid area height) / 2
-                //validFrame.width = valid area width
-                //valid frame.height = valid area height
-                
-                /* video gravity off
-                let frameHeight = frame.height - (yOffset * 2)
-                let validAreaHeight = 0.929 * (frame.height - yOffset * 2)
-                let validAreaWidth = 0.3 * validAreaHeight
-                */
+                //validArea is the rectangle the user must place the card into in order to snap a photo
                 let validAreaHeight = 0.94 * frame.height
                 let validAreaWidth = 0.27 * validAreaHeight
                 
@@ -227,26 +179,6 @@ class DrawingView: UIView
                 {
                     isCloseEnough = 0
                 }
-                /*
-                let camArea = frame.size.width * (frame.size.height - 2 * yOffset) //cWidth * cHeight
-                let cardArea = lengthAB * lengthAD
-                
-                let areaRatio = cardArea / camArea
-                print("Ratio: \(areaRatio)")
-                if areaRatio < 0.026 //0.019 //these values arrived at empirically
-                {
-                    //too far away
-                    isCloseEnough = -1
-                }
-                else if areaRatio > 0.033 //0.030
-                {
-                    //too close
-                    isCloseEnough = 1
-                }
-                else
-                {
-                    isCloseEnough = 0
-                }*/
                 
                 //draw outline of valid scan area
                 if isOnScreen && isCloseEnough == 0

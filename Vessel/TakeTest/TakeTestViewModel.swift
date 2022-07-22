@@ -99,7 +99,7 @@ class TakeTestViewModel
             }
         }
        
-        let vc = storyboard.instantiateViewController(withIdentifier: "ScanViewController") as! ScanViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "ScanCardViewController") as! ScanCardViewController
         vc.viewModel = viewModel
         return vc
     }

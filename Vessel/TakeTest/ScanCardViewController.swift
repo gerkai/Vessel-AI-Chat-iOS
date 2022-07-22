@@ -1,6 +1,5 @@
 //
-//  ScanViewController.swift
-//  Scanner
+//  ScanCardViewController.swift
 //
 //  Created by Carson Whitsett on 7/15/22.
 //
@@ -8,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate
+class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate
 {
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
@@ -83,12 +82,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
             drawingView.cameraSize = cameraSize
             drawingView.delegate = self
             
-            print("Camera Resolution: \(drawingView.cameraSize)")
-            
-            //place the top and bottom of the overlay to match the top and bottom of the camera
-            //let yOffset = overlayYConstraintValue(cameraSize: cameraSize)
-            //overlayTopConstraint.constant = yOffset
-            //overlayBotConstraint.constant = -yOffset
+            //print("Camera Resolution: \(drawingView.cameraSize)")
   
             previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             previewLayer.frame = cameraView.layer.bounds
@@ -104,7 +98,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
     {
         print("ScanViewController deinit")
     }
-    
+    /*
     func overlayYConstraintValue(cameraSize: CGSize) -> CGFloat
     {
         let cWidth = cameraSize.width / UIScreen.main.scale
@@ -116,12 +110,11 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
         //determine where in displayed image, the camera image starts vertically
         let yOffset = (view.bounds.height - (aspectScaleX * cHeight)) / 2
         return yOffset
-    }
+    }*/
     
     override func viewDidLayoutSubviews()
     {
         previewLayer.frame = cameraView.bounds
-        //print("Preview Frame: \(previewLayer.frame)")
     }
     
     func failed()
@@ -163,22 +156,14 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
         // Define default resolution
         var resolution = CGSize(width: 0, height: 0)
 
-        // Get cur video device
-       // let curVideoDevice = useBackCamera ? backCameraDevice : frontCameraDevice
-
-        // Set if video portrait orientation
-        //let portraitOrientation = orientation == .Portrait || orientation == .PortraitUpsideDown
-
         // Get video dimensions
         let formatDescription = curVideoDevice.activeFormat.formatDescription
         
         let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
         resolution = CGSize(width: CGFloat(dimensions.width), height: CGFloat(dimensions.height))
-        //if portraitOrientation
-        //{
-        //invert for portrait orientation
-            resolution = CGSize(width: resolution.height, height: resolution.width)
-        //}
+
+        //swap width and height for portrait orientation
+        resolution = CGSize(width: resolution.height, height: resolution.width)
         
         // Return resolution
         return resolution
@@ -278,7 +263,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
             processingPhoto = true
             
             drawingView.qrBox = nil
-            print("QR Box nil")
+            //print("QR Box nil")
             drawingView.setNeedsDisplay()
             overlayView.isHidden = true
             darkenView.isHidden = true
