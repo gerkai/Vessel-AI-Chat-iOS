@@ -34,13 +34,13 @@ enum AnalyticsEvent
         case .viewedPage(let screenName):
             return ["Screen Name": screenName.rawValue]
         case .logIn(let loginType):
-            return ["Login Type": loginType]
+            return ["Login Type": loginType.rawValue]
         case .signUp(let loginType):
-            return ["Login Type": loginType]
+            return ["Login Type": loginType.rawValue]
         case .forgotPassword:
             return [:]
         case .identification(let identificationType):
-            return ["Type": identificationType]
+            return ["Type": identificationType.rawValue]
         }
     }
 }
