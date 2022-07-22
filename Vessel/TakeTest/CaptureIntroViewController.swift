@@ -70,11 +70,11 @@ class CaptureIntroViewController: TakeTestMVVMViewController
 
     private func setupFirstTipTextView()
     {
-        let str = NSLocalizedString("Follow the video 👆 or\n test instructions to apply pee to all 18 squares.", comment: "")
+        let str = NSLocalizedString("Follow the video 👆 or\n text instructions to apply pee to all 18 squares.", comment: "")
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         let attributedString = NSMutableAttributedString(string: str, attributes: [NSAttributedString.Key.foregroundColor: UIColor.grayText, NSAttributedString.Key.font: UIFont(name: "NoeText-Book", size: 16.0)!, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        let foundRange = attributedString.mutableString.range(of: NSLocalizedString("test instructions", comment: "must match exactly 'test instructions' in the string 'Follow the video or test instructions to apply pee to all 18 squares.'"))
+        let foundRange = attributedString.mutableString.range(of: NSLocalizedString("text instructions", comment: "must match exactly 'text instructions' in the string 'Follow the video or test instructions to apply pee to all 18 squares.'"))
         attributedString.addAttribute(NSAttributedString.Key.link, value: "https://www.google.com", range: foundRange)
     //        attributedString.addAttributes([NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue], range: foundRange)
         let linkAttributes: [NSAttributedString.Key: Any] = [

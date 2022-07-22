@@ -15,7 +15,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var overlayTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var overlayBotConstraint: NSLayoutConstraint!
-    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var darkenView: UIView!
     @IBOutlet weak var overlayView: UIImageView!
     
     var captureSession: AVCaptureSession!
@@ -281,6 +281,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
             print("QR Box nil")
             drawingView.setNeedsDisplay()
             overlayView.isHidden = true
+            darkenView.isHidden = true
             
             let photoSettings = AVCapturePhotoSettings(rawPixelFormatType: availableRawFormat, processedFormat: [AVVideoCodecKey: AVVideoCodecType.jpeg])
             //saving parameters for use by uploader later. We'll do this a different way.

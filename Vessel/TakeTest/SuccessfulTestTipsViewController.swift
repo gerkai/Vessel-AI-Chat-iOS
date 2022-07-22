@@ -47,6 +47,12 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
         // TODO: Add analytics for viewed page
     }
     
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        topView.isChecked = false
+        botView.isChecked = false
+    }
+    
     @IBAction func back()
     {
         viewModel.curState.back()
