@@ -15,6 +15,10 @@
 		<string>NoeText.otf</string>
 		<string>NoeText-Book.otf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Vessel uses the camera to scan the QR code on your wellness card</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

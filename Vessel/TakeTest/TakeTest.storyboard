@@ -1647,6 +1647,88 @@
             </objects>
             <point key="canvasLocation" x="6801" y="57"/>
         </scene>
+        <!--Scan View Controller-->
+        <scene sceneID="99c-tP-avf">
+            <objects>
+                <viewController storyboardIdentifier="ScanViewController" id="qKn-uh-jHL" customClass="ScanViewController" customModule="Scanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5tB-HS-OBT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qou-ex-zMi">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tp6-LO-LoS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="overlay" translatesAutoresizingMaskIntoConstraints="NO" id="2cW-xD-zg3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWa-Xr-FJO" customClass="DrawingView" customModule="Scanner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOG-tI-zy6">
+                                <rect key="frame" x="30" y="144" width="354" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTo-Ek-ArT">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aa5-sN-kAs"/>
+                                    <constraint firstAttribute="width" constant="50" id="vwb-EO-zEp"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="onBackButton" destination="qKn-uh-jHL" eventType="touchUpInside" id="ryw-yZ-lV0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CtN-YS-k2e"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="CtN-YS-k2e" firstAttribute="trailing" secondItem="MOG-tI-zy6" secondAttribute="trailing" constant="30" id="1ZS-2U-OMn"/>
+                            <constraint firstItem="xWa-Xr-FJO" firstAttribute="bottom" secondItem="5tB-HS-OBT" secondAttribute="bottom" id="A3j-ls-aKb"/>
+                            <constraint firstItem="tp6-LO-LoS" firstAttribute="top" secondItem="5tB-HS-OBT" secondAttribute="top" id="KQk-Mm-mN8"/>
+                            <constraint firstItem="2cW-xD-zg3" firstAttribute="leading" secondItem="5tB-HS-OBT" secondAttribute="leading" id="LNT-mH-ZUc"/>
+                            <constraint firstItem="2cW-xD-zg3" firstAttribute="bottom" secondItem="CtN-YS-k2e" secondAttribute="bottom" id="PQ6-l7-CNL"/>
+                            <constraint firstItem="xWa-Xr-FJO" firstAttribute="top" secondItem="5tB-HS-OBT" secondAttribute="top" id="PwI-EC-7Q4"/>
+                            <constraint firstItem="qou-ex-zMi" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="QHk-JR-ewv"/>
+                            <constraint firstItem="qou-ex-zMi" firstAttribute="leading" secondItem="CtN-YS-k2e" secondAttribute="leading" id="RaP-7M-sIC"/>
+                            <constraint firstItem="xWa-Xr-FJO" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="Xd0-x5-Lud"/>
+                            <constraint firstItem="qou-ex-zMi" firstAttribute="bottom" secondItem="5tB-HS-OBT" secondAttribute="bottom" id="c6f-2g-r7O"/>
+                            <constraint firstItem="MOG-tI-zy6" firstAttribute="top" secondItem="CtN-YS-k2e" secondAttribute="top" constant="100" id="eo7-Wa-qIy"/>
+                            <constraint firstItem="xWa-Xr-FJO" firstAttribute="leading" secondItem="5tB-HS-OBT" secondAttribute="leading" id="gqt-tF-LeY"/>
+                            <constraint firstItem="2cW-xD-zg3" firstAttribute="top" secondItem="CtN-YS-k2e" secondAttribute="top" id="isb-lM-vh0"/>
+                            <constraint firstItem="2cW-xD-zg3" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="kzx-Bj-Nyr"/>
+                            <constraint firstItem="MOG-tI-zy6" firstAttribute="leading" secondItem="CtN-YS-k2e" secondAttribute="leading" constant="30" id="mCZ-ch-sji"/>
+                            <constraint firstItem="qou-ex-zMi" firstAttribute="top" secondItem="5tB-HS-OBT" secondAttribute="top" id="mOl-3d-qvg"/>
+                            <constraint firstItem="tp6-LO-LoS" firstAttribute="bottom" secondItem="5tB-HS-OBT" secondAttribute="bottom" id="pQ5-FF-mGg"/>
+                            <constraint firstItem="HTo-Ek-ArT" firstAttribute="leading" secondItem="CtN-YS-k2e" secondAttribute="leading" constant="30" id="rxu-Ur-O0L"/>
+                            <constraint firstItem="HTo-Ek-ArT" firstAttribute="top" secondItem="CtN-YS-k2e" secondAttribute="top" id="sXD-Oy-tcF"/>
+                            <constraint firstItem="tp6-LO-LoS" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="tkR-14-aGX"/>
+                            <constraint firstItem="tp6-LO-LoS" firstAttribute="leading" secondItem="5tB-HS-OBT" secondAttribute="leading" id="utS-Oz-bJs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="qou-ex-zMi" id="f7B-0H-jjd"/>
+                        <outlet property="drawingView" destination="xWa-Xr-FJO" id="pWV-hy-dP2"/>
+                        <outlet property="noticeLabel" destination="MOG-tI-zy6" id="50i-tW-OfE"/>
+                        <outlet property="overlayBotConstraint" destination="PQ6-l7-CNL" id="Po6-3G-7bd"/>
+                        <outlet property="overlayTopConstraint" destination="isb-lM-vh0" id="EoM-dt-Sy6"/>
+                        <outlet property="overlayView" destination="2cW-xD-zg3" id="NGw-Tp-CaX"/>
+                        <outlet property="previewImageView" destination="tp6-LO-LoS" id="nVJ-Ho-NAc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Qb-u4-1wr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7732" y="45"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CardColorimetrics" width="130" height="206"/>
@@ -1657,12 +1739,16 @@
         <image name="Instruction3-icon" width="130" height="120"/>
         <image name="PlayIcon" width="16" height="21"/>
         <image name="ScanningDroplets" width="296" height="334"/>
+        <image name="overlay" width="1399" height="1180"/>
         <image name="peeInCupTipImage" width="1500" height="1028"/>
         <image name="peeOnCardTipImage" width="1500" height="684"/>
         <image name="progressMark" width="6" height="6"/>
         <image name="square_back_button" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -130,8 +130,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
-    
-    
     @IBAction func onBackButton()
     {
         viewModel.delegate = nil
