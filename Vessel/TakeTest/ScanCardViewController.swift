@@ -16,6 +16,8 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     @IBOutlet weak var overlayBotConstraint: NSLayoutConstraint!
     @IBOutlet weak var darkenView: UIView!
     @IBOutlet weak var overlayView: UIImageView!
+    @IBOutlet weak var postCaptureView: UIView!
+    @IBOutlet weak var backButton: UIButton!
     
     var captureSession: AVCaptureSession!
     private var avCaptureDevice: AVCaptureDevice?
@@ -28,7 +30,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        postCaptureView.alpha = 0.0
         cameraView.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo //allows us to shoot in RAW. Camera rez changes to 3024 x 4032!
@@ -169,6 +171,32 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         return resolution
     }
     
+    @IBAction func onLooksGood()
+    {
+        print("LOOKS GOOD")
+    }
+    
+    @IBAction func onRetake()
+    {
+        captureSession.startRunning()
+        overlayView.alpha = 0.0
+        overlayView.isHidden = false
+        darkenView.alpha = 0.0
+        darkenView.isHidden = false
+        processingPhoto = false
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear)
+        {
+            self.postCaptureView.alpha = 0.0
+            self.backButton.alpha = 1.0
+            self.overlayView.alpha = 1.0
+            self.darkenView.alpha = 1.0
+        }
+        completion:
+        { _ in
+        }
+    }
+    
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection)
     {
         if let metadataObject = metadataObjects.first
@@ -199,7 +227,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     {
         print(code)
     }
-
+/*
     override var prefersStatusBarHidden: Bool
     {
         return true
@@ -209,7 +237,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     {
         return .portrait
     }
-    
+*/
     //MARK: - DrawingView delegates
     func drawingStatus(isOnScreen: Bool, isCloseEnough: Int)
     {
@@ -263,7 +291,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             processingPhoto = true
             
             drawingView.qrBox = nil
-            //print("QR Box nil")
             drawingView.setNeedsDisplay()
             overlayView.isHidden = true
             darkenView.isHidden = true
@@ -285,61 +312,50 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?)
     {
         print("DID FINISH PROCESSING PHOTO. Error: \(String(describing: error)), output: \(output), photo: \(photo)")
-        captureSession.stopRunning()
-        //vibrate phone when we capture image with QR code
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-        /*if isManualMode,
-           let data = photo.fileDataRepresentation(),
-           let image = UIImage(data: data)
-         {
-            logicHandler.image = image
-            logicHandler.qrCode = image.validQRCodeContent()
-            
-            let temporaryDirectoryURL = FileManager.default.temporaryDirectory
-            let uniqueURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString)
-            logicHandler.rawImageFileURL = uniqueURL.appendingPathExtension("dng")
-            isManualMode = false
-            guard let rawURL = logicHandler.rawImageFileURL else { return }
-            do
-         {
-                try photo.fileDataRepresentation()?.write(to: rawURL)
-            }
-         catch
-         {
-                showErrorAlert(error: "Error", description: "Error Capturing Card", buttonTitle: "Try Again")
-                return
-            }
-            
-            avSession.stopRunning()
-            DispatchQueue.main.async
-         {
-                self.navigateToConfirmUploadingCard()
-            }
-            return
-        }
-        guard !isManualMode else { return }*/
-        /*
-        if error != nil
+        if error == nil
         {
-            self.logicHandler.canBeginScanningCard = true
-            self.logicHandler.isInCaptureLock = false
+            if photo.isRawPhoto
+            {
+                print("Processing Raw Photo")
+                viewModel.photo = photo
+            }
+            else
+            {
+                print("Processing Regular Photo")
+                if let compressedImageData = photo.fileDataRepresentation()
+                {
+                    viewModel.compressedPhoto = compressedImageData
+                }
+            }
         }
         else
         {
-            logicHandler.onCardCaptured(photo: photo)
-            { [weak self] state in
-                guard let self = self else { return }
-                self.render(state: state)
-            }
-        }*/
+            print("Photo Processing Error: \(String(describing: error))")
+        }
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
-        print("DID FINISH CAPTURE FOR")
-        captureSession.stopRunning()
-        //vibrate phone when we capture image with QR code
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-        //logicHandler.onImageProcessingFinished(then: render(state:))
+        print("DID FINISH CAPTURE")
+        if error == nil
+        {
+            captureSession.stopRunning()
+            
+            //vibrate phone when we capture image with QR code
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear)
+            {
+                self.postCaptureView.alpha = 1.0
+                self.backButton.alpha = 0.0
+            }
+            completion:
+            { _ in
+            }
+        }
+        else
+        {
+            print("Photo Capture Error: \(String(describing: error))")
+        }
     }
 }

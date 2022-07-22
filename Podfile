@@ -5,6 +5,8 @@
 inhibit_all_warnings!
 
 def pods
+  pod 'AWSCore', '~> 2.13'
+  pod 'AWSS3', '~> 2.13.0'
   pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
   pod 'Mixpanel-swift'
