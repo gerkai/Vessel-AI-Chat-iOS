@@ -186,14 +186,17 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
                 player2.pause()
                 playerViewController?.player = player1
                 player1.play()
+                videoView.isHidden = false
             case TourIndex:
                 tabDetailsLabel.text = defaultSegmentDetailsString
                 player1.pause()
                 playerViewController?.player = player2
                 player2.play()
+                videoView.isHidden = false
             default:
                 player1.pause()
                 player2.pause()
+                videoView.isHidden = true
                 tabDetailsLabel.text = insightsText()
         }
     }

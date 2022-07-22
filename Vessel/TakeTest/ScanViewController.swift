@@ -256,7 +256,7 @@ class ScanViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObj
                 if goodAlignmentFrameCounter > 30 //subjective
                 {
                     noticeLabel.text = "Hold Still"
-                    if goodAlignmentFrameCounter > 90 //subjective
+                    if goodAlignmentFrameCounter > 75 //subjective
                     {
                         noticeLabel.text = ""
                         goodAlignmentFrameCounter = 0
