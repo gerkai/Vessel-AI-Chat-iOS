@@ -45,12 +45,11 @@ class MixpanelAnalytics: Analytics
     
     func log(event: AnalyticsEvent)
     {
-        /*cw this was triggering fatal error
         guard let properties = event.properties as? [String: MixpanelType] else
         {
             fatalError("Not valid types found in properties for event: \(event)")
         }
-        Mixpanel.mainInstance().track(event: event.name, properties: event.properties) */
+        Mixpanel.mainInstance().track(event: event.name, properties: properties)
     }
     
     func setSuperProperty(property: String, value: Any)
