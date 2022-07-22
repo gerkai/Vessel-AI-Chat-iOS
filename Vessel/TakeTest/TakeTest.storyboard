@@ -1660,6 +1660,120 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-A7-Tm7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lkq-mc-G9E">
+                                        <rect key="frame" x="30" y="738" width="354" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVg-JM-2Nr" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="167" height="60"/>
+                                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="jWv-0A-jaN"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                <state key="normal" title="Retake">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onRetake" destination="qKn-uh-jHL" eventType="touchUpInside" id="gxv-Jw-2p6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDL-tq-yU0" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="187" y="0.0" width="167" height="60"/>
+                                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="X6N-8z-ra6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                <state key="normal" title="Looks good!">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onLooksGood" destination="qKn-uh-jHL" eventType="touchUpInside" id="iWu-1I-7zl"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="MDL-tq-yU0" firstAttribute="width" secondItem="nVg-JM-2Nr" secondAttribute="width" id="N98-j3-tRh"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OpE-iE-MY4">
+                                        <rect key="frame" x="30" y="38" width="354" height="75"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kQ-im-eOl">
+                                                <rect key="frame" x="24" y="10" width="305" height="55"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Look good?">
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="15" name="BananaGrotesk-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="14" name="BananaGrotesk-Regular"/>
+                                                            <font key="NSOriginalFont" metaFont="systemBold" size="14"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="If the photo looks clear and doesn't have any shadows, glare or droplets hit &quot;looks good!&quot;">
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="14" name="BananaGrotesk-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="6kQ-im-eOl" firstAttribute="top" secondItem="OpE-iE-MY4" secondAttribute="top" constant="10" id="Ifd-ut-J7c"/>
+                                            <constraint firstAttribute="trailing" secondItem="6kQ-im-eOl" secondAttribute="trailing" constant="25" id="OiV-8g-g99"/>
+                                            <constraint firstAttribute="height" constant="75" id="e8g-Gd-QYh"/>
+                                            <constraint firstItem="6kQ-im-eOl" firstAttribute="leading" secondItem="OpE-iE-MY4" secondAttribute="leading" constant="24" id="fh2-Ch-hBv"/>
+                                            <constraint firstAttribute="bottom" secondItem="6kQ-im-eOl" secondAttribute="bottom" constant="10" id="s5f-oq-sFb"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OpE-iE-MY4" firstAttribute="top" secondItem="QMC-A7-Tm7" secondAttribute="top" constant="38" id="AsO-dJ-mN6"/>
+                                    <constraint firstItem="lkq-mc-G9E" firstAttribute="leading" secondItem="QMC-A7-Tm7" secondAttribute="leading" constant="30" id="DQm-UR-TZx"/>
+                                    <constraint firstAttribute="trailing" secondItem="OpE-iE-MY4" secondAttribute="trailing" constant="30" id="Ojl-bh-bJQ"/>
+                                    <constraint firstItem="OpE-iE-MY4" firstAttribute="leading" secondItem="QMC-A7-Tm7" secondAttribute="leading" constant="30" id="RmH-aD-Sta"/>
+                                    <constraint firstAttribute="bottom" secondItem="lkq-mc-G9E" secondAttribute="bottom" constant="20" id="a76-No-pmA"/>
+                                    <constraint firstAttribute="trailing" secondItem="lkq-mc-G9E" secondAttribute="trailing" constant="30" id="sEE-eQ-uNa"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOG-tI-zy6">
                                 <rect key="frame" x="30" y="144" width="354" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1685,12 +1799,16 @@
                         <constraints>
                             <constraint firstItem="MOG-tI-zy6" firstAttribute="trailing" secondItem="CtN-YS-k2e" secondAttribute="trailing" constant="-30" id="1ZS-2U-OMn"/>
                             <constraint firstItem="xWa-Xr-FJO" firstAttribute="bottom" secondItem="5tB-HS-OBT" secondAttribute="bottom" id="A3j-ls-aKb"/>
+                            <constraint firstItem="QMC-A7-Tm7" firstAttribute="trailing" secondItem="CtN-YS-k2e" secondAttribute="trailing" id="AgB-1m-TUT"/>
                             <constraint firstItem="2cW-xD-zg3" firstAttribute="leading" secondItem="5tB-HS-OBT" secondAttribute="leading" id="LNT-mH-ZUc"/>
                             <constraint firstItem="2cW-xD-zg3" firstAttribute="bottom" secondItem="CtN-YS-k2e" secondAttribute="bottom" id="PQ6-l7-CNL"/>
+                            <constraint firstItem="QMC-A7-Tm7" firstAttribute="leading" secondItem="CtN-YS-k2e" secondAttribute="leading" id="PpB-zu-NeY"/>
                             <constraint firstItem="xWa-Xr-FJO" firstAttribute="top" secondItem="5tB-HS-OBT" secondAttribute="top" id="PwI-EC-7Q4"/>
                             <constraint firstItem="qou-ex-zMi" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="QHk-JR-ewv"/>
                             <constraint firstItem="qou-ex-zMi" firstAttribute="leading" secondItem="CtN-YS-k2e" secondAttribute="leading" id="RaP-7M-sIC"/>
+                            <constraint firstItem="QMC-A7-Tm7" firstAttribute="top" secondItem="CtN-YS-k2e" secondAttribute="top" id="S47-hh-VUf"/>
                             <constraint firstItem="xWa-Xr-FJO" firstAttribute="trailing" secondItem="5tB-HS-OBT" secondAttribute="trailing" id="Xd0-x5-Lud"/>
+                            <constraint firstItem="QMC-A7-Tm7" firstAttribute="bottom" secondItem="CtN-YS-k2e" secondAttribute="bottom" id="a2Y-uv-XvQ"/>
                             <constraint firstItem="AjY-vh-ODp" firstAttribute="trailing" secondItem="CtN-YS-k2e" secondAttribute="trailing" id="a42-sl-LCD"/>
                             <constraint firstItem="qou-ex-zMi" firstAttribute="bottom" secondItem="5tB-HS-OBT" secondAttribute="bottom" id="c6f-2g-r7O"/>
                             <constraint firstItem="MOG-tI-zy6" firstAttribute="top" secondItem="CtN-YS-k2e" secondAttribute="top" constant="100" id="eo7-Wa-qIy"/>
@@ -1707,6 +1825,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="HTo-Ek-ArT" id="UmD-6m-g5h"/>
                         <outlet property="cameraView" destination="qou-ex-zMi" id="f7B-0H-jjd"/>
                         <outlet property="darkenView" destination="AjY-vh-ODp" id="GVe-OG-JWb"/>
                         <outlet property="drawingView" destination="xWa-Xr-FJO" id="pWV-hy-dP2"/>
@@ -1714,11 +1833,12 @@
                         <outlet property="overlayBotConstraint" destination="PQ6-l7-CNL" id="Po6-3G-7bd"/>
                         <outlet property="overlayTopConstraint" destination="isb-lM-vh0" id="EoM-dt-Sy6"/>
                         <outlet property="overlayView" destination="2cW-xD-zg3" id="NGw-Tp-CaX"/>
+                        <outlet property="postCaptureView" destination="QMC-A7-Tm7" id="t7l-6b-cP2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qb-u4-1wr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6978" y="45"/>
+            <point key="canvasLocation" x="6976.811594202899" y="44.866071428571423"/>
         </scene>
     </scenes>
     <resources>

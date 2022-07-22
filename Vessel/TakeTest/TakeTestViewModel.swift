@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 protocol TakeTestViewModelDelegate
 {
@@ -45,6 +46,8 @@ class TakeTestViewModel
     let activationTimerInterval = 0.1 /* seconds. How often updates are sent to VC */
     var delegate: TakeTestViewModelDelegate?
     var timerStartDate: Date!
+    var photo: AVCapturePhoto?
+    var compressedPhoto: Data?
     
     //MARK: - navigation
     static func NextViewController(viewModel: TakeTestViewModel) -> TakeTestMVVMViewController

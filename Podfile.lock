@@ -1,4 +1,7 @@
 PODS:
+  - AWSCore (2.13.6)
+  - AWSS3 (2.13.6):
+    - AWSCore (= 2.13.6)
   - Firebase/Core (9.2.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 9.2.0)
@@ -98,6 +101,8 @@ PODS:
   - SwiftLint (0.47.1)
 
 DEPENDENCIES:
+  - AWSCore (~> 2.13)
+  - AWSS3 (~> 2.13.0)
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
   - Mixpanel-swift
@@ -106,6 +111,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AWSCore
+    - AWSS3
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -124,6 +131,8 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
+  AWSCore: 2b6015f278770e745b4863ac5f45e007e647f298
+  AWSS3: ab6da163329bc03fb68e866aab130103453accd2
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
   FirebaseAnalytics: af5a03a8dff7648c7b8486f6a78b1368e0268dd3
   FirebaseCore: 0e27f2a15d8f7b7ef11e7d93e23b1cbab55d748c
@@ -141,6 +150,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 1e3679f13d552c7872e37cc11dc4e6e87c81c8be
+PODFILE CHECKSUM: f9c91138787036516c83c323e5199a56fbfa137a
 
 COCOAPODS: 1.11.2
