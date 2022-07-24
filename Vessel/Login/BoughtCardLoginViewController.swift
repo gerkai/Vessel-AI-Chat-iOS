@@ -91,7 +91,8 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
                     }
                     onFailure:
                     { error in
-                        UIView.showError(text: "The email and password combination is incorrect", detailText: "\(error)", image: nil)
+                        let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+                        UIView.showError(text: "The email and password combination is incorrect", detailText: errorString, image: nil)
                     }
                 }
                 onFailure:

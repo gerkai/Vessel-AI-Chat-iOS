@@ -16,14 +16,23 @@ let ENDPOINT_ROOT = "v3/"
 let DEV_API = "https://dev-api.vesselhealth.com/" + ENDPOINT_ROOT
 //let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
 let DEV_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
+let DEV_S3_BUCKET_NAME = "vessel-ips-dev-sample-images"
+let DEV_S3_ACCESSS_KEY = "AKIAW42KY3LBQXWJLT6K"
+let DEV_S3_SECRET_KEY = "r/h1g6XYMqFz5CkxroXUK0XS9mDV+QZWDzUr5umg"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
 //let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
 let STAGING_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
+let STAGING_S3_BUCKET_NAME = "vessel-ips-staging-sample-images"
+let STAGING_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
+let STAGING_S3_SECRET_KEY = "cFSKNkJyyAG1Vr/wQdGDWzay8910p2h08Zdt1YxW"
 
 let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
 //let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
 let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
+let PROD_S3_BUCKET_NAME = "vessel-ips-production-sample-images"
+let PROD_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
+let PROD_S3_SECRET_KEY = "cFSKNkJyyAG1Vr/wQdGDWzay8910p2h08Zdt1YxW"
 
 //Security strings
 let AUTH_PREFIX = "Bearer"
@@ -40,6 +49,15 @@ let GOOGLE_LOGIN_PATH = "auth/google/login"
 let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
 let CONTACT_PATH = "contact"
 let CONTACT_EXISTS_PATH = "contact/exists"
+let SAMPLE_PATH = "sample"
+let GET_SCORE_PATH = "sample/{sample_uuid}/super"
+
+struct CardAssociation
+{
+    var cardBatchID: String?
+    var cardCalibrationMode: String?
+    var orcaSheetName: String?
+}
 
 class Server: NSObject
 {
@@ -76,12 +94,54 @@ class Server: NSObject
         }
     }
     
+    func S3BucketName() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return DEV_S3_BUCKET_NAME
+            case Constants.STAGING_INDEX:
+                return STAGING_S3_BUCKET_NAME
+            default:
+                return PROD_S3_BUCKET_NAME
+        }
+    }
+    
+    func S3AccessKey() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return DEV_S3_ACCESSS_KEY
+            case Constants.STAGING_INDEX:
+                return STAGING_S3_ACCESS_KEY
+            default:
+                return PROD_S3_ACCESS_KEY
+        }
+    }
+    
+    func S3SecretKey() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return DEV_S3_SECRET_KEY
+            case Constants.STAGING_INDEX:
+                return STAGING_S3_SECRET_KEY
+            default:
+                return PROD_S3_SECRET_KEY
+        }
+    }
+    
     func SupportURL() -> String
     {
         return SUPPORT_URL
     }
 
-    private func serverGet(url: String, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverGet(url: String, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         guard let serviceUrl = URL(string: url) else { return }
         let request = URLRequest(url: serviceUrl)
@@ -101,13 +161,13 @@ class Server: NSObject
         { (data, response, error) in
             if let data = data //unwrap data
             {
-                //self.debugJSONResponse(data: data)
+                self.debugJSONResponse(data: data)
                 success(data)
             }
             else
             {
                 //print(error)
-                failure("Error: no data returned")
+                failure(error)
             }
         }.resume()
     }
@@ -132,11 +192,11 @@ class Server: NSObject
             mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        if let url = request.url
+        /*if let url = request.url
         {
             print("POST: \(url)")
         }
-        //print("\(mutableRequest)")
+        print("POST Mutable Request\(mutableRequest)")*/
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -293,7 +353,7 @@ class Server: NSObject
     }
     
     //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
-    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
         serverGet(url: url)
@@ -317,7 +377,9 @@ class Server: NSObject
                 {
                     DispatchQueue.main.async()
                     {
-                        failure(NSLocalizedString("Unable to decode access token", comment: "Server error message"))
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
+                        //let error = Error(domain: "", code: 400, userInfo: nil)
+                        failure(error)
                     }
                 }
             }
@@ -325,15 +387,16 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    failure(NSLocalizedString("Unable to decode access token", comment: "Server error message"))
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
+                    failure(error)
                 }
             }
         }
         onFailure:
-        { string in
+        { error in
             DispatchQueue.main.async()
             {
-                failure(string)
+                failure(error)
             }
         }
     }
@@ -376,7 +439,7 @@ class Server: NSObject
     }
     
     //pass an ID to get a specific contact or leave nil to get the primary contact
-    func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         //print("GET CONTACT...")
         if accessToken != nil
@@ -427,15 +490,15 @@ class Server: NSObject
                     print("error: ", error)
                     DispatchQueue.main.async()
                     {
-                        failure(error.localizedDescription)
+                        failure(error)
                     }
                 }
             }
             onFailure:
-            { string in
+            { error in
                 DispatchQueue.main.async()
                 {
-                    failure(string)
+                    failure(error)
                 }
             }
         }
@@ -532,18 +595,93 @@ class Server: NSObject
             })
         }
     }
-}
-/*
- 
- 
-{
-    "id": Int,
-    "lastUpdated": Int,
-    "title": String,
-    "link_url": String,
-    "link_text": String,
-    "description": String,
-    "insert_date": String(Date)
+    
+    //MARK:  Sample
+    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(parameters)
+        
+        let urlString = "\(API())\(SAMPLE_PATH)"
+        
+        #warning ("CW: Temporary fix until backend gets fixed")
+        let fixString = urlString.replacingOccurrences(of: "/v3/", with: "/v2/")
+        
+        let url = URL(string: fixString)!
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            //print("SUCCESS: \(object)")
+            DispatchQueue.main.async()
+            {
+                let cardAssociation = CardAssociation(cardBatchID: object["wellness_card_batch_id"] as? String, cardCalibrationMode: object["wellness_card_calibration_mode"] as? String, orcaSheetName: object["orca_sheet_name"] as? String)
+                success(cardAssociation)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error: \(string)", comment: ""))
+            }
+        })
+    }
+    
+    func getScore(sampleID: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        let urlString = "\(API())\(GET_SCORE_PATH)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
+#warning ("CW: Temporary fix until backend gets fixed")
+        let fixString = finalUrlString.replacingOccurrences(of: "/v3/", with: "/v2/")
+        serverGet(url: fixString)
+        { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Any]
+                {
+                    if let message = object["message"] as? String
+                    {
+                        let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                        failure(error)
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            success(object)
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
+                        failure(error)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get score response", comment: "Server error message")])
+                    failure(error)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        }
+    }
 }
 
-*/

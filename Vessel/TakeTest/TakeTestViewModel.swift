@@ -48,6 +48,7 @@ class TakeTestViewModel
     var timerStartDate: Date!
     var photo: AVCapturePhoto?
     var compressedPhoto: Data?
+    var cardQRCode: String!
     
     //MARK: - navigation
     static func NextViewController(viewModel: TakeTestViewModel) -> TakeTestMVVMViewController
@@ -101,8 +102,13 @@ class TakeTestViewModel
                 return vc
             }
         }
-       
-        let vc = storyboard.instantiateViewController(withIdentifier: "ScanCardViewController") as! ScanCardViewController
+        if viewModel.curState == .Capture
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ScanCardViewController") as! ScanCardViewController
+            vc.viewModel = viewModel
+            return vc
+        }
+        let vc = storyboard.instantiateViewController(withIdentifier: "UploadingSampleViewController") as! UploadingSampleViewController
         vc.viewModel = viewModel
         return vc
     }

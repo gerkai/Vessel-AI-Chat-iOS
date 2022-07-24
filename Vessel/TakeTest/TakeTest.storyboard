@@ -1180,25 +1180,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fep-gZ-ueQ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="815.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpj-03-vdP">
-                                                <rect key="frame" x="141" y="99" width="132" height="67.5"/>
+                                                <rect key="frame" x="148.5" y="99" width="117" height="70"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="60"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Card is Activating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCI-W3-x2F">
-                                                <rect key="frame" x="81.5" y="186.5" width="251" height="27"/>
+                                                <rect key="frame" x="85" y="189" width="244" height="28"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cu3-ID-9xI" userLabel="pretimerView">
-                                                <rect key="frame" x="20" y="215.5" width="374" height="68"/>
+                                                <rect key="frame" x="20" y="219" width="374" height="68"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="After the timer completes, scan your card." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meS-iB-NYh">
-                                                        <rect key="frame" x="51" y="5" width="272.5" height="21"/>
+                                                        <rect key="frame" x="55.5" y="5" width="263" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="nBy-qE-Gda"/>
                                                         </constraints>
@@ -1207,7 +1207,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAW-Vg-Vxa">
-                                                        <rect key="frame" x="151" y="26" width="72" height="37"/>
+                                                        <rect key="frame" x="153.5" y="26" width="67" height="37"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="37" id="Yvx-ge-1IZ"/>
@@ -1233,7 +1233,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aap-0m-GZb" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="237.5" width="354" height="60"/>
+                                                <rect key="frame" x="30" y="241" width="354" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="pAy-3m-Bch"/>
@@ -1252,7 +1252,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-ms-MTJ" userLabel="ProgressView">
-                                                <rect key="frame" x="0.0" y="330.5" width="414" height="6"/>
+                                                <rect key="frame" x="0.0" y="334" width="414" height="6"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BC5-Wy-l6t" userLabel="Gray Line">
                                                         <rect key="frame" x="0.0" y="1.5" width="414" height="3"/>
@@ -1290,7 +1290,7 @@
                                                 </constraints>
                                             </view>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YXL-0a-d3q" customClass="VesselSegmentedControl" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="355.5" width="374" height="61"/>
+                                                <rect key="frame" x="20" y="359" width="374" height="61"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="H57-RF-SH6"/>
@@ -1307,13 +1307,13 @@
                                                 </connections>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab Details (DNT)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WV3-Zh-Wke">
-                                                <rect key="frame" x="20" y="455.5" width="374" height="27"/>
+                                                <rect key="frame" x="20" y="459" width="374" height="28"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oh-MF-Igg">
-                                                <rect key="frame" x="0.0" y="510.5" width="414" height="233"/>
+                                                <rect key="frame" x="0.0" y="515" width="414" height="233"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="4oh-MF-Igg" secondAttribute="height" multiplier="16:9" id="Bb0-yn-xnd"/>
@@ -1839,6 +1839,123 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qb-u4-1wr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6976.811594202899" y="44.866071428571423"/>
+        </scene>
+        <!--Uploading Sample View Controller-->
+        <scene sceneID="zqZ-S9-7Sx">
+            <objects>
+                <viewController storyboardIdentifier="UploadingSampleViewController" id="a4P-0a-Xdc" customClass="UploadingSampleViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mjg-HD-6a5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5l-iw-21r">
+                                <rect key="frame" x="103.5" y="200" width="207" height="207"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="p5l-iw-21r" secondAttribute="height" multiplier="1:1" id="vlI-Iw-T9t"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6Tt-i8-U3i">
+                                <rect key="frame" x="48" y="435" width="318" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwj-9J-zwa">
+                                        <rect key="frame" x="0.0" y="0.0" width="318" height="20"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Uploading your image">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh6-gu-iLa" userLabel="statusLabel">
+                                        <rect key="frame" x="0.0" y="30" width="318" height="0.0"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Uploading">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="LucidaGrande"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="GeezaPro"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Image">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="LucidaGrande"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ...">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="GeezaPro"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8I-Lj-dlI" userLabel="percentLabel">
+                                        <rect key="frame" x="0.0" y="40" width="318" height="20"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="0 % ">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.24" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OVA-uD-D3J"/>
+                        <color key="backgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="p5l-iw-21r" firstAttribute="width" secondItem="Mjg-HD-6a5" secondAttribute="width" multiplier="0.5" id="5Dp-ac-Hrj"/>
+                            <constraint firstItem="p5l-iw-21r" firstAttribute="centerX" secondItem="OVA-uD-D3J" secondAttribute="centerX" id="A2o-6F-lvH"/>
+                            <constraint firstItem="p5l-iw-21r" firstAttribute="centerY" secondItem="OVA-uD-D3J" secondAttribute="centerY" multiplier="0.67" id="WsP-YE-81P"/>
+                            <constraint firstItem="6Tt-i8-U3i" firstAttribute="top" secondItem="p5l-iw-21r" secondAttribute="bottom" constant="28" id="aLA-mj-L3C"/>
+                            <constraint firstItem="OVA-uD-D3J" firstAttribute="trailing" secondItem="6Tt-i8-U3i" secondAttribute="trailing" constant="48" id="fSv-RN-lYH"/>
+                            <constraint firstItem="6Tt-i8-U3i" firstAttribute="leading" secondItem="OVA-uD-D3J" secondAttribute="leading" constant="48" id="xQV-c5-1Hu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingView" destination="p5l-iw-21r" id="iU2-OI-BpO"/>
+                        <outlet property="percentLabel" destination="u8I-Lj-dlI" id="8DP-Ds-RRi"/>
+                        <outlet property="statusLabel" destination="Wh6-gu-iLa" id="Up8-zQ-zvr"/>
+                        <outlet property="titleLabel" destination="gwj-9J-zwa" id="fnJ-tD-z7m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="co0-RU-2pQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7989.8550724637689" y="44.866071428571423"/>
         </scene>
     </scenes>
     <resources>

@@ -173,7 +173,8 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onLooksGood()
     {
-        print("LOOKS GOOD")
+        let vc = viewModel.nextViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func onRetake()
@@ -225,7 +226,11 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
     func found(code: String)
     {
-        print(code)
+        //print(code)
+        if viewModel.cardQRCode == nil
+        {
+            viewModel.cardQRCode = code
+        }
     }
 /*
     override var prefersStatusBarHidden: Bool

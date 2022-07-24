@@ -28,8 +28,16 @@ struct Constants
     static let DEV_INDEX = 0
     static let STAGING_INDEX = 1
     static let PROD_INDEX = 2
-    
     static let MinimumPasswordLength: Int = 6
+    enum AWS
+    {
+        static let transferUtilityKey = "vessel-health-transfer-utility"
+        
+        static let WellnessSampleImagesBucket = Server.shared.S3BucketName()
+        
+        static let accessKey = Server.shared.S3AccessKey()
+        static let secretKey = Server.shared.S3SecretKey()
+    }
     
     //analytics
     static let ProdMixpanelToken = "d3e262e686a9df32346c3825102b9f39"

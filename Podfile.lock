@@ -86,6 +86,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.10)
+  - lottie-ios (3.3.0)
   - Mixpanel-swift (3.5.0):
     - Mixpanel-swift/Complete (= 3.5.0)
   - Mixpanel-swift/Complete (3.5.0)
@@ -105,6 +106,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.13.0)
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
+  - lottie-ios
   - Mixpanel-swift
   - SwiftEntryKit (= 1.2.3)
   - SwiftLint
@@ -123,6 +125,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - IQKeyboardManagerSwift
+    - lottie-ios
     - Mixpanel-swift
     - nanopb
     - PromisesObjC
@@ -143,6 +146,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   Mixpanel-swift: 8ee88853e1443a14f887de51ecc278c07f832098
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
@@ -150,6 +154,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: f9c91138787036516c83c323e5199a56fbfa137a
+PODFILE CHECKSUM: 6024f50f912037219cad5c6a360dd5fc90760e4f
 
 COCOAPODS: 1.11.2

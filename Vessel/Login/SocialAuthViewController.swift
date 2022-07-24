@@ -89,7 +89,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         }
         onFailure:
         { error in
-            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+            let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
         }
     }
     
@@ -109,8 +110,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         let urlString = navigationAction.request.url?.absoluteString
         #warning ("CW: Temporary fix until backend gets fixed")
         let fixString = urlString?.replacingOccurrences(of: "/v2/", with: "/v3/")
-        print("\(String(describing: fixString))")
-        print("Retrieve URL: \(String(describing: retrieveURL))")
+        //print("\(String(describing: fixString))")
+        //print("Retrieve URL: \(String(describing: retrieveURL))")
         if fixString!.contains(retrieveURL)
         {
             let host = navigationAction.request.url?.host ?? Server.shared.API().replacingOccurrences(of: "https://", with: "")
@@ -130,7 +131,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                 },
                 onFailure:
                 {string in
-                    UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error"), detailText: "\(string)", image: nil)
+                    UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error"), detailText: "\(String(describing: string))", image: nil)
                 })
             }
             decisionHandler(.cancel)
