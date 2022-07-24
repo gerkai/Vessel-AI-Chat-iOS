@@ -4,6 +4,8 @@
 //
 //  Created by Carson Whitsett on 7/20/22.
 //
+//  This loads files such as videos from a URL and saves them to the documents directory.
+//  The path to the local file is returned.
 
 import Foundation
 

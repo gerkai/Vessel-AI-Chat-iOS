@@ -9,6 +9,7 @@ def pods
   pod 'AWSS3', '~> 2.13.0'
   pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
+  pod 'lottie-ios'
   pod 'Mixpanel-swift'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'

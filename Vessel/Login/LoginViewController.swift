@@ -109,7 +109,8 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         { [weak self] error in
                             guard let self = self else { return }
                             self.nextButton.hideLoading()
-                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: "\(error.localizedCapitalized)", image: nil)
+                            let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
                         }
                     }
                     onFailure:

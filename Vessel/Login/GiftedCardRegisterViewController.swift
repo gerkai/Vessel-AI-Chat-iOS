@@ -133,7 +133,8 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
             }
             onFailure:
             { error in
-                UIView.showError(text: NSLocalizedString("Server Error", comment: "Server error"), detailText: error, image: nil)
+                let errorString = error?.localizedDescription ?? "Couldn't get contact"
+                UIView.showError(text: NSLocalizedString("Server Error", comment: "Server error"), detailText: errorString, image: nil)
             }
         }
         onFailure:
