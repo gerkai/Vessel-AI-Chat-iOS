@@ -165,7 +165,18 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { object in
-            print("Got Score: \(object)")
+            
+            if let score = object["wellness_score"] as? Double
+            {
+                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+                vc.wellnessScore = score
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else
+            {
+                print("Error in object response: \(object)")
+            }
         }
         onFailure:
         { error in

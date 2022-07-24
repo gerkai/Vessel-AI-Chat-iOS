@@ -108,6 +108,7 @@ class TakeTestViewModel
             vc.viewModel = viewModel
             return vc
         }
+
         let vc = storyboard.instantiateViewController(withIdentifier: "UploadingSampleViewController") as! UploadingSampleViewController
         vc.viewModel = viewModel
         return vc
