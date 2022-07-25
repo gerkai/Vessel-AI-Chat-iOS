@@ -28,6 +28,10 @@ enum TakeTestState: Int
     {
         self = TakeTestState(rawValue: rawValue + 1) ?? .Initial
         print("Incrementing to state: \(self)")
+        if self == .Initial
+        {
+            print("BACK TO INITIAL!@")
+        }
     }
     
     mutating func back()
@@ -114,6 +118,11 @@ class TakeTestViewModel
         return vc
     }
     
+    deinit
+    {
+        print("📕: Take Test View Model deinit")
+    }
+    
     func nextViewController() -> TakeTestMVVMViewController
     {
         return TakeTestViewModel.NextViewController(viewModel: self)
@@ -174,5 +183,12 @@ class TakeTestViewModel
         stopTimer()
         self.percentageElapsed = 1.0
         self.delegate?.timerUpdate(secondsRemaining: self.activationTimeRemaining, percentageElapsed: self.percentageElapsed, timeUp: true)
+    }
+    
+    func uploadingFinished()
+    {
+        //OK to free up some memory
+        photo = nil
+        compressedPhoto = nil
     }
 }

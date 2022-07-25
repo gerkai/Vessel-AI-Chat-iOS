@@ -15,4 +15,9 @@ class TakeTestMVVMViewController: UIViewController
     {
         self.viewModel = vm
     }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
+    }
 }

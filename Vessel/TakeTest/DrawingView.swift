@@ -196,7 +196,6 @@ class DrawingView: UIView
             }
             else
             {
-                print("Clear context")
                 context.clear(bounds)
                 context.setFillColor(backgroundColor?.cgColor ?? UIColor.clear.cgColor)
                 context.fill(bounds)

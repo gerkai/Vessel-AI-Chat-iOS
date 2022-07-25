@@ -47,15 +47,6 @@ class CaptureIntroViewController: TakeTestMVVMViewController
         playerViewController?.player?.pause()
     }
 
-    deinit
-    {
-        print("CaptureIntro DeInit")
-        /*
-        if playerViewController?.player != nil //, isVideoObserved
-        {
-            self.playerViewController?.player?.removeObserver(self, forKeyPath: "rate")
-        }*/
-    }
     /*
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?)
     {

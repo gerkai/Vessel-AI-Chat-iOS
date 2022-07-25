@@ -89,11 +89,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         playerViewController?.player?.pause()
     }
     
-    deinit
-    {
-        print("ActivateCardVC DeInit")
-    }
-    
     func setupVideo()
     {
         playerViewController = AVPlayerViewController()

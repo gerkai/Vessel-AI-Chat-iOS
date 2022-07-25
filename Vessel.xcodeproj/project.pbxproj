@@ -64,6 +64,7 @@
 		3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15AD03288C9ADC004716CA /* TestCardUploader.swift */; };
 		3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15AD08288DC87C004716CA /* ResultsViewController.swift */; };
 		3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F15AD0A288DC896004716CA /* AfterTest.storyboard */; };
+		3F21E9EB288E0854002FB44A /* PopupErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
@@ -195,6 +196,7 @@
 		3F15AD03288C9ADC004716CA /* TestCardUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCardUploader.swift; sourceTree = "<group>"; };
 		3F15AD08288DC87C004716CA /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		3F15AD0A288DC896004716CA /* AfterTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AfterTest.storyboard; sourceTree = "<group>"; };
+		3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F15ACF0288A50CF004716CA /* DrawingView.swift */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
+				3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */,
 				3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */,
 				3F15ACEF288A50CF004716CA /* ScanCardViewController.swift */,
 				3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */,
@@ -851,6 +854,7 @@
 				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
+				3F21E9EB288E0854002FB44A /* PopupErrorViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				7206C4E228837AE6000130DA /* TestAfterWakingUpViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,

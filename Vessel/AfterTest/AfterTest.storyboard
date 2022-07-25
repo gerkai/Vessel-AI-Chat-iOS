@@ -5,9 +5,16 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+        <array key="NoeText-Book.otf">
+            <string>NoeText-Book</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Results View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -17,12 +24,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness Score (DNT)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnI-VO-oCE">
-                                <rect key="frame" x="30" y="104" width="354" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNg-RW-FVW" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="157" y="774" width="100" height="60"/>
                                 <constraints>
@@ -37,29 +38,92 @@
                                     <action selector="done" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2lO-s6-0eY"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-N3-tyA">
+                                <rect key="frame" x="20" y="88" width="374" height="272"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp7-fy-VC0">
+                                        <rect key="frame" x="20" y="20" width="170" height="27"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                        <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HappyWoman" translatesAutoresizingMaskIntoConstraints="NO" id="EnJ-1F-lZi">
+                                        <rect key="frame" x="213" y="35" width="161" height="237"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cSq-Wx-YZb">
+                                        <rect key="frame" x="20" y="106" width="124" height="60"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maH-xo-x4u">
+                                                <rect key="frame" x="0.0" y="0.0" width="52.5" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="YPI-iJ-AtT"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="80"/>
+                                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xu8-FI-vki">
+                                                <rect key="frame" x="52.5" y="28" width="71.5" height="32"/>
+                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="32"/>
+                                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-6e-akf">
+                                        <rect key="frame" x="198" y="24" width="19" height="19"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-Sk-TYt">
+                                        <rect key="frame" x="20" y="174" width="139.5" height="28"/>
+                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="28"/>
+                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.76862745098039209" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="Dif-Sk-TYt" firstAttribute="top" secondItem="cSq-Wx-YZb" secondAttribute="bottom" constant="8" symbolic="YES" id="4He-Ft-PAb"/>
+                                    <constraint firstItem="cSq-Wx-YZb" firstAttribute="centerY" secondItem="XEk-N3-tyA" secondAttribute="centerY" id="7Nz-df-lTg"/>
+                                    <constraint firstItem="Dif-Sk-TYt" firstAttribute="leading" secondItem="Rp7-fy-VC0" secondAttribute="leading" id="ERt-YF-zE2"/>
+                                    <constraint firstItem="Rp7-fy-VC0" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="ICP-JX-vdR"/>
+                                    <constraint firstItem="Bpk-6e-akf" firstAttribute="centerY" secondItem="Rp7-fy-VC0" secondAttribute="centerY" id="LRU-ze-KS1"/>
+                                    <constraint firstItem="Bpk-6e-akf" firstAttribute="leading" secondItem="Rp7-fy-VC0" secondAttribute="trailing" constant="8" symbolic="YES" id="gXg-t9-rOd"/>
+                                    <constraint firstItem="EnJ-1F-lZi" firstAttribute="trailing" secondItem="XEk-N3-tyA" secondAttribute="trailing" id="hee-AJ-jZE"/>
+                                    <constraint firstAttribute="height" constant="272" id="qKN-Vi-f9p"/>
+                                    <constraint firstItem="cSq-Wx-YZb" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="rfN-U0-pvk"/>
+                                    <constraint firstItem="Rp7-fy-VC0" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="top" constant="20" id="u8q-Z1-4ts"/>
+                                    <constraint firstItem="EnJ-1F-lZi" firstAttribute="bottom" secondItem="XEk-N3-tyA" secondAttribute="bottom" id="yAC-hK-kKc"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.99215686274509807" green="0.96470588235294119" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KnI-VO-oCE" secondAttribute="trailing" constant="30" id="Nac-wq-ZYL"/>
-                            <constraint firstItem="KnI-VO-oCE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="bU6-XG-2i5"/>
+                            <constraint firstItem="XEk-N3-tyA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="SaH-hU-U2x"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rNg-RW-FVW" secondAttribute="bottom" constant="28" id="cr3-Jz-08C"/>
                             <constraint firstItem="rNg-RW-FVW" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="cvl-AH-mL7"/>
-                            <constraint firstItem="KnI-VO-oCE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="iye-ac-xNe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XEk-N3-tyA" secondAttribute="trailing" constant="20" id="dWl-1V-wmB"/>
+                            <constraint firstItem="XEk-N3-tyA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="44" id="fWW-w8-Een"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="wellnessScoreLabel" destination="KnI-VO-oCE" id="0Ga-x9-9ud"/>
+                        <outlet property="evaluationLabel" destination="Dif-Sk-TYt" id="21B-Ia-61L"/>
+                        <outlet property="wellnessCard" destination="XEk-N3-tyA" id="7fH-R9-9ty"/>
+                        <outlet property="wellnessScoreLabel" destination="maH-xo-x4u" id="T2w-y4-5RC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="80" y="101"/>
+            <point key="canvasLocation" x="79.710144927536234" y="100.44642857142857"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="HappyWoman" width="161" height="237"/>
+        <image name="info-icon" width="19" height="19"/>
     </resources>
 </document>

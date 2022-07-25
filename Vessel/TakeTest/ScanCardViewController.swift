@@ -7,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate
+class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate
 {
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
@@ -35,11 +35,11 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo //allows us to shoot in RAW. Camera rez changes to 3024 x 4032!
         captureSession.automaticallyConfiguresCaptureDeviceForWideColor = false
-        
+ 
         if let videoCaptureDevice = AVCaptureDevice.default(for: .video)
         {
             guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else{ return }
-
+            
             do
             {
                 try videoCaptureDevice.lockForConfiguration()
@@ -63,7 +63,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
                 failed()
                 return
             }
-
+            
             let metadataOutput = AVCaptureMetadataOutput()
 
             if (captureSession.canAddOutput(metadataOutput))
@@ -83,7 +83,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             let cameraSize = getCaptureResolution(curVideoDevice: videoCaptureDevice)
             drawingView.cameraSize = cameraSize
             drawingView.delegate = self
-            
+             
             //print("Camera Resolution: \(drawingView.cameraSize)")
   
             previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -95,24 +95,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             UIApplication.shared.isIdleTimerDisabled = true
         }
     }
-
-    deinit
-    {
-        print("ScanViewController deinit")
-    }
-    /*
-    func overlayYConstraintValue(cameraSize: CGSize) -> CGFloat
-    {
-        let cWidth = cameraSize.width / UIScreen.main.scale
-        let cHeight = cameraSize.height / UIScreen.main.scale
-
-        let aspectScaleX = view.bounds.size.width / cWidth
-        
-        //(frameHeight - (frameW / CamW) * CamHeight) / 2
-        //determine where in displayed image, the camera image starts vertically
-        let yOffset = (view.bounds.height - (aspectScaleX * cHeight)) / 2
-        return yOffset
-    }*/
     
     override func viewDidLayoutSubviews()
     {
@@ -149,8 +131,13 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
     @IBAction func onBackButton()
     {
+        UIApplication.shared.isIdleTimerDisabled = false
+        captureSession.stopRunning()
+        captureSession = nil
+        avCaptureDevice = nil
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
+        drawingView.delegate = nil
     }
     
     private func getCaptureResolution(curVideoDevice: AVCaptureDevice) -> CGSize
@@ -173,7 +160,13 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onLooksGood()
     {
+        UIApplication.shared.isIdleTimerDisabled = false
         let vc = viewModel.nextViewController()
+        
+        if let vc1 = vc as? UploadingSampleViewController
+        {
+            vc1.delegate = self
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -347,7 +340,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             captureSession.stopRunning()
             
             //vibrate phone when we capture image with QR code
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            //AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear)
             {
@@ -362,5 +355,12 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             print("Photo Capture Error: \(String(describing: error))")
         }
+    }
+    
+    //MARK: UploadingSampleViewController delegates
+    func retryScan()
+    {
+        UIApplication.shared.isIdleTimerDisabled = true
+        onRetake()
     }
 }

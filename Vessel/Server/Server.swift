@@ -646,8 +646,22 @@ class Server: NSObject
                 {
                     if let message = object["message"] as? String
                     {
-                        let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
-                        failure(error)
+                        if let errorArray = object["errors"] as? [[String: Any]]
+                        {
+                            if let firstErrorArray = errorArray.first
+                            {
+                                //print("First Error Array: \(firstErrorArray)")
+                                let code = firstErrorArray["code"] as? Int
+                                let label = firstErrorArray["label"] as? String
+                                let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                failure(error)
+                            }
+                        }
+                        else
+                        {
+                            let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                            failure(error)
+                        }
                     }
                     else
                     {

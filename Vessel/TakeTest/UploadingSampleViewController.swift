@@ -24,7 +24,12 @@ struct TestUUID: Encodable
     }
 }
 
-class UploadingSampleViewController: TakeTestMVVMViewController
+protocol UploadingSampleViewControllerDelegate
+{
+    func retryScan()
+}
+
+class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewControllerDelegate
 {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -34,6 +39,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     private var retryCount = 0
     let maxRetryCount = 20
     var sampleUUID: String!
+    var delegate: UploadingSampleViewControllerDelegate?
     
     override func viewDidLoad()
     {
@@ -76,8 +82,8 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     
     private func uploadImage()
     {
-        if let fileData = viewModel.photo?.fileDataRepresentation()
-        {
+        //if let fileData = viewModel.photo?.fileDataRepresentation()
+        //{
             if let contact = Contact.main()
             {
                 sampleUUID = UUID().uuidString
@@ -88,14 +94,17 @@ class UploadingSampleViewController: TakeTestMVVMViewController
                 { cardAssociation in
                     //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
                     //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
-                    self.uploadToS3(
-                        fileData: fileData,
-                        orcaName: cardAssociation.orcaSheetName,
-                        uuid: parameters.uuid,
-                        contactID: String(contact.id),
-                        batchID: cardAssociation.cardBatchID,
-                        calibrationMode: cardAssociation.cardCalibrationMode
-                    )
+                    if let fileData = self.viewModel.photo?.fileDataRepresentation()
+                    {
+                        self.uploadToS3(
+                            fileData: fileData,
+                            orcaName: cardAssociation.orcaSheetName,
+                            uuid: parameters.uuid,
+                            contactID: String(contact.id),
+                            batchID: cardAssociation.cardBatchID,
+                            calibrationMode: cardAssociation.cardCalibrationMode
+                        )
+                    }
                 }
                 onFailure:
                 { error in
@@ -106,20 +115,21 @@ class UploadingSampleViewController: TakeTestMVVMViewController
             {
                 print("Contact not available")
             }
-        }
+       // }
     }
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
-    {
-        TestCardUploader.shared.uploadImage(with: fileData, /*image: detectedImage,*/ uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, progressBlock:
-        { (task, progress) in
+    {        
+        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, progressBlock:
+        { [weak self](task, progress) in
             DispatchQueue.main.async(execute:
             {[weak self] in
-                self?.percentLabel.text = "\(Int(progress.fractionCompleted * 100)) %"
+                guard let self = self else{ return }
+                self.percentLabel.text = "\(Int(progress.fractionCompleted * 100)) %"
                 if Int(progress.fractionCompleted * 100) == 100
                 {
-                    self?.titleLabel.text = NSLocalizedString("You are moments away from getting your results", comment: "")
-                    self?.percentLabel.text = ""
+                    self.titleLabel.text = NSLocalizedString("You are moments away from getting your results", comment: "")
+                    self.percentLabel.text = ""
                 }
             })
         })
@@ -165,12 +175,12 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { object in
-            
             if let score = object["wellness_score"] as? Double
             {
                 let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
                 vc.wellnessScore = score
+                self.viewModel.uploadingFinished()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else
@@ -191,7 +201,17 @@ class UploadingSampleViewController: TakeTestMVVMViewController
                 }
                 else
                 {
-                    print("Error: \(error)")
+                    DispatchQueue.main.async
+                    {
+                        if error.code == 19
+                        {
+                            self.showCropFailurePopup()
+                        }
+                        else
+                        {
+                            print("Error: \(error)")
+                        }
+                    }
                 }
             }
         }
@@ -225,5 +245,20 @@ class UploadingSampleViewController: TakeTestMVVMViewController
             self.navigationController?.popViewController(animated: true)
         }))
         alert.showOverTopViewController()
+    }
+    
+    private func showCropFailurePopup()
+    {
+        let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Apologies, we had a hard time reading your card", comment: ""), message: NSLocalizedString("This could be due to shadow, glare or droplets. Simply check your card, your lighting, and let's give it another shot.", comment: ""), topButtonTitle: "", botButtonTitle: "Try Again", delegate: self)
+        present(vc, animated: false)
+    }
+    
+    //MARK: - PopupErrorViewController delegates
+    func popupErrorDone(button: PopupErrorButton)
+    {
+        delegate?.retryScan()
+        viewModel.uploadingFinished()
+        viewModel.curState.back()
+        navigationController?.popViewController(animated: true)
     }
 }
