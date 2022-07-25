@@ -21,6 +21,7 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
     
     override func viewDidLoad()
     {
+        //print("LOADED SUCCESSFUL TEST TIPS VIEW CONTROLLER")
         super.viewDidLoad()
         //reduce height on checkboxes so they fit on smaller screen w/o needing to scroll
         if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
@@ -29,12 +30,10 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
             botViewHeight.constant = smallScreenCheckmarkHeight
         }
         topView.tag = peeInCupTag
-        topView.delegate = self
         topView.iconImage.image = UIImage.init(named: "PeeInCup-icon")
         topView.textLabel.text = NSLocalizedString("Sounds good,\nI'll use a cup", comment: "")
         
         botView.tag = peeOnCardTag
-        botView.delegate = self
         botView.iconImage.image = UIImage.init(named: "PeeOnCard-icon")
         botView.textLabel.text = NSLocalizedString("I'd rather pee\ndirectly on it", comment: "")
         
@@ -44,6 +43,8 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        topView.delegate = self
+        botView.delegate = self
         // TODO: Add analytics for viewed page
     }
     
@@ -55,6 +56,8 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
     
     @IBAction func back()
     {
+        topView.delegate = nil
+        botView.delegate = nil
         viewModel.curState.back()
         dismiss(animated: true)
     }
@@ -62,6 +65,8 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
     //MARK: - IconCheckmarkView delegates
     func checkmarkViewChecked(view: IconCheckmarkView)
     {
+        topView.delegate = nil
+        botView.delegate = nil
         if view.tag == peeInCupTag
         {
             let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)

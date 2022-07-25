@@ -46,7 +46,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         super.viewDidLoad()
         setupVideo()
-        viewModel.delegate = self
         postTimerView.alpha = 0.0
         backButton.alpha = 0.0
         
@@ -65,6 +64,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     override func viewDidAppear(_ animated: Bool)
     {
+        viewModel.delegate = self
         if !firstTimeAppeared
         {
             /*segmentedControl.subviews.forEach
@@ -152,6 +152,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     @IBAction func onScanButton()
     {
+        viewModel.delegate = nil
         let vc = viewModel.nextViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -230,6 +231,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         if proceedToSkip
         {
             viewModel.skipTimer()
+            viewModel.delegate = nil
         }
     }
 }

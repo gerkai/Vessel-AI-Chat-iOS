@@ -133,8 +133,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     {
         UIApplication.shared.isIdleTimerDisabled = false
         captureSession.stopRunning()
-        captureSession = nil
-        avCaptureDevice = nil
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
         drawingView.delegate = nil
@@ -168,6 +166,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             vc1.delegate = self
         }
         navigationController?.pushViewController(vc, animated: true)
+        drawingView.delegate = nil
     }
     
     @IBAction func onRetake()
@@ -178,6 +177,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         darkenView.alpha = 0.0
         darkenView.isHidden = false
         processingPhoto = false
+        drawingView.delegate = self
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear)
         {
@@ -225,17 +225,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             viewModel.cardQRCode = code
         }
     }
-/*
-    override var prefersStatusBarHidden: Bool
-    {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask
-    {
-        return .portrait
-    }
-*/
+    
     //MARK: - DrawingView delegates
     func drawingStatus(isOnScreen: Bool, isCloseEnough: Int)
     {

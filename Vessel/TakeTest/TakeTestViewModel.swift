@@ -27,17 +27,13 @@ enum TakeTestState: Int
     mutating func next()
     {
         self = TakeTestState(rawValue: rawValue + 1) ?? .Initial
-        print("Incrementing to state: \(self)")
-        if self == .Initial
-        {
-            print("BACK TO INITIAL!@")
-        }
+        //print("Incrementing to state: \(self)")
     }
     
     mutating func back()
     {
         self = TakeTestState(rawValue: rawValue - 1) ?? .Initial
-        print("Decrementing to state: \(self)")
+        //print("Decrementing to state: \(self)")
     }
 }
 
