@@ -67,7 +67,13 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     
     @objc func vesselButtonPressed()
     {
-        if isWithinTestingWindow()
+        let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+        vc.wellnessScore = 1.0
+        //self.viewModel.uploadingFinished()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        /*if isWithinTestingWindow()
         {
             //allow enough time for Vessel button to finish animating
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
@@ -81,7 +87,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
             let vc = storyboard.instantiateViewController(withIdentifier: "TestAfterWakingUpViewController") as! TestAfterWakingUpViewController
             vc.delegate = self
             self.present(vc, animated: false)
-        }
+        }*/
     }
     
     func isWithinTestingWindow() -> Bool

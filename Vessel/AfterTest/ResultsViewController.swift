@@ -7,6 +7,13 @@
 
 import UIKit
 
+struct Color
+{
+    var red: Float
+    var green: Float
+    var blue: Float
+}
+
 class ResultsViewController: UIViewController
 {
     @IBOutlet weak var wellnessScoreLabel: UILabel!
@@ -15,10 +22,15 @@ class ResultsViewController: UIViewController
     
     var wellnessScore: Double!
     var timer: Timer!
+    var iteration = 0
     let wellnessCardAnimationTime = 3.0
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
+    let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
+    let fairColor = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
+    let goodColor = Color(red: 0.8588, green: 0.9216, blue: 0.8353)
+    let greatColor = Color(red: 0.7569, green: 0.8706, blue: 0.7294)
     
     override func viewDidLoad()
     {
@@ -29,9 +41,97 @@ class ResultsViewController: UIViewController
         {
            _ in self.onTick()
         }
+        animateBackgroundColor()
     }
     
-    var iteration = 0
+    func animateBackgroundColor()
+    {
+        //animates background color of wellness card from poor color to fair color, good color and great color depending on
+        //wellness score.
+        let sectionSize = 0.25
+        var remainingScore = wellnessScore!
+        let sectionTime = sectionSize / remainingScore * wellnessCardAnimationTime
+        
+        if remainingScore > sectionSize
+        {
+            remainingScore -= sectionSize
+            print("Animating to Fair with remaining score: \(remainingScore)")
+            var duration = (remainingScore / sectionSize) * sectionTime
+            if duration > sectionTime
+            {
+                duration = sectionTime
+            }
+            var percentage = duration / sectionTime
+            print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
+            UIView.animate(withDuration: duration, delay: sectionTime, options: .curveLinear)
+            {
+                self.setBackgroundColor(startColor: self.poorColor, endColor: self.fairColor, percentage: percentage)
+            }
+            completion:
+            { _ in
+                //Animate to Good
+                remainingScore -= sectionSize
+                if remainingScore > 0
+                {
+                    print("Animating to Good with remaining score: \(remainingScore)")
+                    duration = (remainingScore / sectionSize) * sectionTime
+                    
+                    if duration > sectionTime
+                    {
+                        duration = sectionTime
+                    }
+                    percentage = duration / sectionTime
+                    UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
+                    {
+                        self.setBackgroundColor(startColor: self.fairColor, endColor: self.goodColor, percentage: percentage)
+                    }
+                    completion:
+                    { _ in
+                        //Animate to Great
+                        remainingScore -= sectionSize
+                        if remainingScore > 0
+                        {
+                            print("Animating to Great with remaining score: \(remainingScore)")
+                            duration = (remainingScore / sectionSize) * sectionTime
+                            if duration > sectionTime
+                            {
+                                duration = sectionTime
+                            }
+                            percentage = duration / sectionTime
+                            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
+                            {
+                                self.setBackgroundColor(startColor: self.goodColor, endColor: self.greatColor, percentage: percentage)
+                            }
+                            completion:
+                            { _ in
+                                self.showRanges()
+                            }
+                        }
+                        else
+                        {
+                            self.showRanges()
+                        }
+                    }
+                }
+                else
+                {
+                    self.showRanges()
+                }
+            }
+        }
+        else
+        {
+            self.showRanges()
+        }
+    }
+    
+    func showRanges()
+    {
+        print("SHOW RANGES")
+        DispatchQueue.main.async()
+        {
+        }
+    }
     
     func onTick()
     {
@@ -86,9 +186,25 @@ class ResultsViewController: UIViewController
         return NSLocalizedString("Great", comment: "Health quality")
     }
     
+    func setBackgroundColor(startColor: Color, endColor: Color, percentage: Double)
+    {
+        var percent = Float(percentage)
+        if percent > 1.0
+        {
+            percent = 1.0
+        }
+        let red = startColor.red + (endColor.red - startColor.red) * percent
+        let green = startColor.green + (endColor.green - startColor.green) * percent
+        let blue = startColor.blue + (endColor.blue - startColor.blue) * percent
+
+        self.wellnessCard.backgroundColor = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
+        self.wellnessCard.setNeedsDisplay()
+    }
+    
     @IBAction func done()
     {
         //navigationController?.popToRootViewController(animated: true)
-        dismiss(animated: true)
+        ///dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
