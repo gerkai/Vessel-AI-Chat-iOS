@@ -46,19 +46,19 @@ enum MoreTabOptions
         switch self
         {
         case .myAccount:
-            return "My Account"
+            return NSLocalizedString("My Account", comment: "")
         case .takeATest:
-            return "Take a Test"
+            return NSLocalizedString("Take a Test", comment: "")
         case .orderCards:
-            return "Order Cards"
+            return NSLocalizedString("Order Cards", comment: "")
         case .customSupplements:
-            return "Custom Supplements"
+            return NSLocalizedString("Custom Supplements", comment: "")
         case .chatWithNutritionist:
-            return "Chat with a Nutritionist"
+            return NSLocalizedString("Chat with a Nutritionist", comment: "")
         case .backedByScience:
-            return "Backed by Science"
+            return NSLocalizedString("Backed by Science", comment: "")
         case .support:
-            return "Support"
+            return NSLocalizedString("Support", comment: "")
         }
     }
 }
