@@ -38,7 +38,7 @@ extension MoreViewController: UITableViewDataSource
             assertionFailure("MoreTabCell dequed in a bad state in MoreViewController cellForRowAt indexPath")
             return UITableViewCell()
         }
-        cell.setup(title: option.text, imageName: option.icon)
+        cell.setup(title: option.text, iconName: option.icon)
         return cell
     }
     
