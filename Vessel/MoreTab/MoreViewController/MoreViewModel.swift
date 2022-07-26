@@ -5,7 +5,6 @@
 //  Created by Nicolas Medina on 7/25/22.
 //  Based on the More Tab Flow: https://www.notion.so/vesselhealth/More-Tab-d69ecf4a2e60469096da1f96f33ca01a
 //
-//  All business logic for the Onboarding Flow is handled here.
 
 import Foundation
 
