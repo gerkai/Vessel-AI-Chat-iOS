@@ -44,6 +44,10 @@ class ResultsViewController: UIViewController
         {
            _ in self.onTick()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
         animateBackgroundColor()
     }
     
@@ -71,7 +75,7 @@ class ResultsViewController: UIViewController
                 self.setBackgroundColor(startColor: self.poorColor, endColor: self.fairColor, percentage: percentage)
             }
             completion:
-            { _ in
+            { completed in
                 //Animate to Good
                 remainingScore -= sectionSize
                 if remainingScore > 0
@@ -204,10 +208,10 @@ class ResultsViewController: UIViewController
         self.wellnessCard.setNeedsDisplay()
     }
     
-    @IBAction func done()
+    @IBAction func next()
     {
         //navigationController?.popToRootViewController(animated: true)
-        ///dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+        //navigationController?.popViewController(animated: true)
     }
 }
