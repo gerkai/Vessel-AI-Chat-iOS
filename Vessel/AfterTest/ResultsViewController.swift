@@ -19,6 +19,7 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var wellnessScoreLabel: UILabel!
     @IBOutlet weak var wellnessCard: UIView!
     @IBOutlet weak var evaluationLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var wellnessScore: Double!
     var timer: Timer!
@@ -27,6 +28,8 @@ class ResultsViewController: UIViewController
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
+    
+    //will move these to constants if we start using them in more places
     let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
     let fairColor = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
     let goodColor = Color(red: 0.8588, green: 0.9216, blue: 0.8353)

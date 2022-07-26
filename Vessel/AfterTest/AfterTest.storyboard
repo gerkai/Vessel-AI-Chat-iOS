@@ -8,6 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
         <array key="BananaGrotesk-Semibold.otf">
             <string>BananaGrotesk-Semibold</string>
         </array>
@@ -24,20 +27,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNg-RW-FVW" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="157" y="774" width="100" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Kqy-eI-gtt"/>
-                                    <constraint firstAttribute="width" constant="100" id="gtp-PF-BKi"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="DONE">
-                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="done" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2lO-s6-0eY"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-N3-tyA">
                                 <rect key="frame" x="20" y="88" width="374" height="272"/>
                                 <subviews>
@@ -100,19 +89,46 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGz-fg-glS" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="782" width="354" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="86U-jB-wWJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1p-qy-G9M">
+                                <rect key="frame" x="30" y="400" width="354" height="27"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.96470588235294119" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="DGz-fg-glS" secondAttribute="bottom" constant="20" id="0mx-R3-pLf"/>
+                            <constraint firstItem="k1p-qy-G9M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="0yw-QA-tKP"/>
+                            <constraint firstItem="DGz-fg-glS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="7YE-Mh-bZk"/>
                             <constraint firstItem="XEk-N3-tyA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="SaH-hU-U2x"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rNg-RW-FVW" secondAttribute="bottom" constant="28" id="cr3-Jz-08C"/>
-                            <constraint firstItem="rNg-RW-FVW" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="cvl-AH-mL7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="k1p-qy-G9M" secondAttribute="trailing" constant="30" id="Vby-Co-eDF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XEk-N3-tyA" secondAttribute="trailing" constant="20" id="dWl-1V-wmB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="DGz-fg-glS" secondAttribute="trailing" constant="30" id="diY-JY-38K"/>
+                            <constraint firstItem="k1p-qy-G9M" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="bottom" constant="40" id="eMV-aC-MJy"/>
                             <constraint firstItem="XEk-N3-tyA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="44" id="fWW-w8-Een"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="evaluationLabel" destination="Dif-Sk-TYt" id="21B-Ia-61L"/>
+                        <outlet property="titleLabel" destination="k1p-qy-G9M" id="mzw-yY-CNf"/>
                         <outlet property="wellnessCard" destination="XEk-N3-tyA" id="7fH-R9-9ty"/>
                         <outlet property="wellnessScoreLabel" destination="maH-xo-x4u" id="T2w-y4-5RC"/>
                     </connections>
