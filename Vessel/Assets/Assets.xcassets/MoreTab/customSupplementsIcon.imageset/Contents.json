@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "customSupplementsIcon.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
