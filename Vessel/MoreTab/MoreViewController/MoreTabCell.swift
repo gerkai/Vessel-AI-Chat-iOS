@@ -12,7 +12,8 @@ class MoreTabCell: UITableViewCell
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var iconView: UIImageView!
     
-    func setup(title: String, iconName: String) {
+    func setup(title: String, iconName: String)
+    {
         titleLabel.text = title
         iconView.image = UIImage(named: iconName)
     }
