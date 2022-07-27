@@ -27,7 +27,7 @@ class ResultsViewController: UIViewController
     var wellnessScore: Double!
     var timer: Timer!
     var iteration = 0
-    let wellnessCardAnimationTime = 3.0
+    let wellnessCardAnimationTime = 2.0
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
@@ -107,10 +107,6 @@ class ResultsViewController: UIViewController
         }
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        //animateBouncyViews()
-    }
     override func viewDidAppear(_ animated: Bool)
     {
         animateBouncyViews()
@@ -216,8 +212,6 @@ class ResultsViewController: UIViewController
                 }
                 completion:
                 { complete in
-                    print("Complete2: \(complete)")
-                    
                     view.alpha = 1.0
                 }
             }
@@ -256,8 +250,6 @@ class ResultsViewController: UIViewController
                 }
                 completion:
                 { _ in
-                    //show either ranges or results here
-                    print("DONE")
                 }
             }
         }
