@@ -36,6 +36,15 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
                 tabBar.items?.forEach({ $0.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: 7.0) })
             }
         }
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *)
+        {
+            tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        }
     }
     
     override func viewWillLayoutSubviews()
