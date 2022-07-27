@@ -20,6 +20,9 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var wellnessCard: UIView!
     @IBOutlet weak var evaluationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var leftStackView: UIStackView!
+    @IBOutlet weak var rightStackView: UIStackView!
+    @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
     
     var wellnessScore: Double!
     var timer: Timer!
@@ -28,6 +31,9 @@ class ResultsViewController: UIViewController
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
+    
+    var numTiles = 10
+    var curTile = 0
     
     //will move these to constants if we start using them in more places
     let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
@@ -43,6 +49,54 @@ class ResultsViewController: UIViewController
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
+        }
+        
+        //remove the placeholder views
+        for v in leftStackView.subviews
+        {
+           v.removeFromSuperview()
+        }
+        for v in rightStackView.subviews
+        {
+           v.removeFromSuperview()
+        }
+        
+        titleLabel.text = NSLocalizedString("Ranges", comment: "Wellness score ranges (0-25, 25-50 etc.)")
+        staggerConstraint.constant = 0
+        for i in 0 ..< 4
+        {
+            let reagentView = ReagentTileView(frame: CGRect(x: 0, y: 0, width: 128, height: 78))
+            let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
+            reagentView.addConstraints([heightConstraint])
+            if i == 0
+            {
+                print("Setting Reagent View data")
+                reagentView.titleLabel.text = "0-25"
+                reagentView.subtextLabel.text = NSLocalizedString("Poor", comment: "Quality level")
+                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(poorColor.red), green: CGFloat(poorColor.green), blue: CGFloat(poorColor.blue), alpha: 1.0)
+                leftStackView.addArrangedSubview(reagentView)
+            }
+            else if i == 1
+            {
+                reagentView.titleLabel.text = "25-50"
+                reagentView.subtextLabel.text = NSLocalizedString("Fair", comment: "Quality level")
+                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(fairColor.red), green: CGFloat(fairColor.green), blue: CGFloat(fairColor.blue), alpha: 1.0)
+                rightStackView.addArrangedSubview(reagentView)
+            }
+            else if i == 2
+            {
+                reagentView.titleLabel.text = "50-75"
+                reagentView.subtextLabel.text = NSLocalizedString("Good", comment: "Quality level")
+                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(goodColor.red), green: CGFloat(goodColor.green), blue: CGFloat(goodColor.blue), alpha: 1.0)
+                leftStackView.addArrangedSubview(reagentView)
+            }
+            else
+            {
+                reagentView.titleLabel.text = "75-100"
+                reagentView.subtextLabel.text = NSLocalizedString("Great", comment: "Quality level")
+                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(greatColor.red), green: CGFloat(greatColor.green), blue: CGFloat(greatColor.blue), alpha: 1.0)
+                rightStackView.addArrangedSubview(reagentView)
+            }
         }
     }
     

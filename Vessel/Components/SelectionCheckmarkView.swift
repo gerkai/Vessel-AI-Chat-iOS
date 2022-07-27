@@ -29,6 +29,7 @@ class SelectionCheckmarkView: UIView
             textLabel.text = defaultText
         }
     }
+    
     var isChecked: Bool = false
     {
         didSet
