@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="BananaGrotesk-Bold.otf">
+            <string>BananaGrotesk-Bold</string>
+        </array>
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
         <array key="BananaGrotesk-Semibold.otf">
             <string>BananaGrotesk-Semibold</string>
         </array>
     </customFonts>
     <scenes>
-        <!--More-->
+        <!--More View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="MoreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="MoreViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="MoreViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hTX-5z-DmA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="732"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreTabCell" rowHeight="60" id="CKF-X3-lAe" customClass="MoreTabCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CKF-X3-lAe" id="CmM-76-3oy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jPN-KO-dTt">
-                                                    <rect key="frame" x="32" y="16.5" width="350" height="27"/>
+                                                    <rect key="frame" x="32" y="16.5" width="311" height="27"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myAccountIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iE4-9a-0Hw">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="27"/>
@@ -42,7 +49,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6i-lG-gVw">
-                                                            <rect key="frame" x="70" y="0.0" width="280" height="27"/>
+                                                            <rect key="frame" x="70" y="0.0" width="241" height="27"/>
                                                             <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="22"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -69,7 +76,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version X.X.XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqj-NK-3xT">
-                                <rect key="frame" x="307" y="796" width="97" height="16"/>
+                                <rect key="frame" x="273" y="551.5" width="92" height="16.5"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -78,15 +85,15 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hTX-5z-DmA" secondAttribute="bottom" id="Be0-cl-uw2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eqj-NK-3xT" secondAttribute="bottom" constant="50" id="F8b-bX-MP7"/>
-                            <constraint firstItem="eqj-NK-3xT" firstAttribute="top" secondItem="hTX-5z-DmA" secondAttribute="bottom" constant="20" id="dTJ-td-GlQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eqj-NK-3xT" secondAttribute="trailing" constant="10" id="ehV-Yp-HMc"/>
                             <constraint firstItem="hTX-5z-DmA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="j4w-e8-zSi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hTX-5z-DmA" secondAttribute="trailing" id="skZ-Pj-VXn"/>
-                            <constraint firstItem="hTX-5z-DmA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="t3b-9u-Vsd"/>
+                            <constraint firstItem="hTX-5z-DmA" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="t3b-9u-Vsd"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="DoJ-Q6-Sh6"/>
+                    <navigationItem key="navigationItem" id="dIt-w1-6Ui"/>
                     <connections>
                         <outlet property="tableView" destination="hTX-5z-DmA" id="FgJ-Nu-x7i"/>
                         <outlet property="versionLabel" destination="eqj-NK-3xT" id="YmP-eE-wll"/>
@@ -94,11 +101,173 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="918.84057971014499" y="128.57142857142856"/>
+        </scene>
+        <!--My Account View Controller-->
+        <scene sceneID="GEC-cb-5Zr">
+            <objects>
+                <viewController storyboardIdentifier="MyAccountViewController" id="yZo-eU-bGo" customClass="MyAccountViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V4o-TN-Cwt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VuM-4S-Rub">
+                                <rect key="frame" x="0.0" y="146" width="375" height="416"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyAccountCell" rowHeight="80" id="DQP-6j-xOr" customClass="MyAccountCell" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DQP-6j-xOr" id="9MT-8F-0Vd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK4-0a-kgC">
+                                                    <rect key="frame" x="20" y="10" width="335" height="60"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eu-43-vme">
+                                                            <rect key="frame" x="28" y="20.5" width="39.5" height="19"/>
+                                                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-Aw-0nt">
+                                                            <rect key="frame" x="302" y="23.5" width="9" height="13"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="K3r-Aw-0nt" secondAttribute="trailing" constant="24" id="ISi-Qe-CMU"/>
+                                                        <constraint firstItem="0eu-43-vme" firstAttribute="leading" secondItem="KK4-0a-kgC" secondAttribute="leading" constant="28" id="evV-CM-W9c"/>
+                                                        <constraint firstItem="K3r-Aw-0nt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0eu-43-vme" secondAttribute="trailing" constant="28" id="hBg-xQ-Iaa"/>
+                                                        <constraint firstItem="0eu-43-vme" firstAttribute="centerY" secondItem="KK4-0a-kgC" secondAttribute="centerY" id="u8u-Wv-hRw"/>
+                                                        <constraint firstItem="K3r-Aw-0nt" firstAttribute="centerY" secondItem="KK4-0a-kgC" secondAttribute="centerY" id="yqf-Yz-e2a"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="KK4-0a-kgC" secondAttribute="trailing" constant="20" id="jJC-OB-jgM"/>
+                                                <constraint firstItem="KK4-0a-kgC" firstAttribute="leading" secondItem="9MT-8F-0Vd" secondAttribute="leading" constant="20" id="oDA-zn-R63"/>
+                                                <constraint firstAttribute="bottom" secondItem="KK4-0a-kgC" secondAttribute="bottom" constant="10" id="wfR-FP-anS"/>
+                                                <constraint firstItem="KK4-0a-kgC" firstAttribute="top" secondItem="9MT-8F-0Vd" secondAttribute="top" constant="10" id="xNe-LB-q7c"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="label" destination="0eu-43-vme" id="XRD-bU-ShQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="yZo-eU-bGo" id="yom-JB-aQT"/>
+                                    <outlet property="delegate" destination="yZo-eU-bGo" id="vFP-zv-k9e"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-lL-nB6">
+                                <rect key="frame" x="20" y="77" width="188.5" height="41"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57i-JY-bLz" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HQ5-aa-8O6"/>
+                                    <constraint firstAttribute="width" constant="50" id="Xqe-mD-FaA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" image="square_back_button">
+                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="yZo-eU-bGo" eventType="touchUpInside" id="3Ak-5j-TDJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CEy-b8-AVL" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="30" y="562" width="315" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="tj3-cl-vGR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="w9G-Ft-HYf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wyu-ny-2Jg"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="57i-JY-bLz" firstAttribute="leading" secondItem="Wyu-ny-2Jg" secondAttribute="leading" constant="20" id="10g-Th-CQM"/>
+                            <constraint firstItem="VuM-4S-Rub" firstAttribute="leading" secondItem="Wyu-ny-2Jg" secondAttribute="leading" id="Fl9-1D-8Vn"/>
+                            <constraint firstItem="Wyu-ny-2Jg" firstAttribute="trailing" secondItem="CEy-b8-AVL" secondAttribute="trailing" constant="30" id="S8D-g2-B3u"/>
+                            <constraint firstItem="57i-JY-bLz" firstAttribute="top" secondItem="Wyu-ny-2Jg" secondAttribute="top" id="cUT-Sv-Xh2"/>
+                            <constraint firstItem="Wyu-ny-2Jg" firstAttribute="bottom" secondItem="CEy-b8-AVL" secondAttribute="bottom" constant="45" id="etb-d9-jHF"/>
+                            <constraint firstItem="Xky-lL-nB6" firstAttribute="leading" secondItem="Wyu-ny-2Jg" secondAttribute="leading" constant="20" id="gTb-5g-M5y"/>
+                            <constraint firstItem="CEy-b8-AVL" firstAttribute="top" secondItem="VuM-4S-Rub" secondAttribute="bottom" id="kVa-pJ-SpG"/>
+                            <constraint firstItem="CEy-b8-AVL" firstAttribute="leading" secondItem="Wyu-ny-2Jg" secondAttribute="leading" constant="30" id="lVJ-p6-OdJ"/>
+                            <constraint firstItem="Wyu-ny-2Jg" firstAttribute="trailing" secondItem="VuM-4S-Rub" secondAttribute="trailing" id="mgY-B7-kTC"/>
+                            <constraint firstItem="Xky-lL-nB6" firstAttribute="top" secondItem="57i-JY-bLz" secondAttribute="bottom" constant="27" id="rDE-QD-5IV"/>
+                            <constraint firstItem="VuM-4S-Rub" firstAttribute="top" secondItem="Xky-lL-nB6" secondAttribute="bottom" constant="28" id="yoR-lm-88T"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="VuM-4S-Rub" id="W4a-rJ-aWQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kWJ-59-qJH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776.8" y="128.18590704647679"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="jYO-7R-Fig">
+            <objects>
+                <navigationController storyboardIdentifier="MoreViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="cH1-om-40m" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="DoJ-Q6-Sh6"/>
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9Nx-GP-IER">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="hFh-q0-Wfm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcW-y3-UL8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="128.57142857142856"/>
         </scene>
     </scenes>
     <resources>
         <image name="More-Icon" width="19" height="5"/>
+        <image name="disclosureIndicator" width="9" height="13"/>
         <image name="myAccountIcon" width="27" height="27"/>
+        <image name="square_back_button" width="50" height="50"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

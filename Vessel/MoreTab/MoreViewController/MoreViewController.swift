@@ -62,26 +62,22 @@ extension MoreViewController: UITableViewDelegate
         switch option
         {
         case .myAccount:
-            // TODO: Route to My Account
-            break
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "MyAccountViewController") as! MyAccountViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .takeATest:
-            // TODO: Route to Take a Test
-            break
+            mainViewController?.vesselButtonPressed()
         case .orderCards:
-            // TODO: Route to Order Cards
+            // TODO: Route to Order Cards (URL not available yet)
             break
         case .customSupplements:
-            // TODO: Route to Custom Supplements
-            break
+            openInSafari(url: "https://vesselhealth.com/pages/new-quiz")
         case .chatWithNutritionist:
-            // TODO: Route to Chat with Nutritionist
-            break
+            tabBarController?.selectedIndex = 3
         case .backedByScience:
-            // TODO: Route to Backed by Science
-            break
+            openInSafari(url: "https://vesselhealth.com/pages/backed-by-science")
         case .support:
-            // TODO: Route to Support
-            break
+            openInSafari(url: "https://help.vesselhealth.com")
         }
     }
 }
