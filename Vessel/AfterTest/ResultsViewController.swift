@@ -35,6 +35,8 @@ class ResultsViewController: UIViewController
     var numTiles = 10
     var curTile = 0
     
+    var bouncyViews: [ReagentTileView] = []
+    
     //will move these to constants if we start using them in more places
     let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
     let fairColor = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
@@ -50,7 +52,11 @@ class ResultsViewController: UIViewController
         {
            _ in self.onTick()
         }
-        
+        showRanges()
+    }
+    
+    func showRanges()
+    {
         //remove the placeholder views
         for v in leftStackView.subviews
         {
@@ -65,12 +71,11 @@ class ResultsViewController: UIViewController
         staggerConstraint.constant = 0
         for i in 0 ..< 4
         {
-            let reagentView = ReagentTileView(frame: CGRect(x: 0, y: 0, width: 128, height: 78))
+            let reagentView = ReagentTileView()
             let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
             reagentView.addConstraints([heightConstraint])
             if i == 0
             {
-                print("Setting Reagent View data")
                 reagentView.titleLabel.text = "0-25"
                 reagentView.subtextLabel.text = NSLocalizedString("Poor", comment: "Quality level")
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(poorColor.red), green: CGFloat(poorColor.green), blue: CGFloat(poorColor.blue), alpha: 1.0)
@@ -97,11 +102,18 @@ class ResultsViewController: UIViewController
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(greatColor.red), green: CGFloat(greatColor.green), blue: CGFloat(greatColor.blue), alpha: 1.0)
                 rightStackView.addArrangedSubview(reagentView)
             }
+            reagentView.alpha = 0.0
+            bouncyViews.append(reagentView)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        //animateBouncyViews()
+    }
     override func viewDidAppear(_ animated: Bool)
     {
+        animateBouncyViews()
         animateBackgroundColor()
     }
     
@@ -116,14 +128,14 @@ class ResultsViewController: UIViewController
         if remainingScore > sectionSize
         {
             remainingScore -= sectionSize
-            print("Animating to Fair with remaining score: \(remainingScore)")
+            //print("Animating to Fair with remaining score: \(remainingScore)")
             var duration = (remainingScore / sectionSize) * sectionTime
             if duration > sectionTime
             {
                 duration = sectionTime
             }
             var percentage = duration / sectionTime
-            print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
+            //print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
             UIView.animate(withDuration: duration, delay: sectionTime, options: .curveLinear)
             {
                 self.setBackgroundColor(startColor: self.poorColor, endColor: self.fairColor, percentage: percentage)
@@ -134,7 +146,7 @@ class ResultsViewController: UIViewController
                 remainingScore -= sectionSize
                 if remainingScore > 0
                 {
-                    print("Animating to Good with remaining score: \(remainingScore)")
+                    //print("Animating to Good with remaining score: \(remainingScore)")
                     duration = (remainingScore / sectionSize) * sectionTime
                     
                     if duration > sectionTime
@@ -152,7 +164,7 @@ class ResultsViewController: UIViewController
                         remainingScore -= sectionSize
                         if remainingScore > 0
                         {
-                            print("Animating to Great with remaining score: \(remainingScore)")
+                            //print("Animating to Great with remaining score: \(remainingScore)")
                             duration = (remainingScore / sectionSize) * sectionTime
                             if duration > sectionTime
                             {
@@ -165,32 +177,51 @@ class ResultsViewController: UIViewController
                             }
                             completion:
                             { _ in
-                                self.showRanges()
                             }
-                        }
-                        else
-                        {
-                            self.showRanges()
                         }
                     }
                 }
-                else
-                {
-                    self.showRanges()
-                }
             }
-        }
-        else
-        {
-            self.showRanges()
         }
     }
     
-    func showRanges()
+    func animateBouncyViews()
     {
-        print("SHOW RANGES")
-        DispatchQueue.main.async()
+        var delay = 0.0
+        for view in bouncyViews
         {
+            let newPoint = view.convert(CGPoint(x: 0, y: 0), to: self.view)
+            let newY = self.view.frame.size.height - newPoint.y
+            var frame = view.frame
+            //print("Original Frame: \(view.frame)")
+            view.bounceFrame = view.frame
+            
+            frame.origin.y = newY
+            view.frame = frame
+            
+            UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseOut)
+            {
+                view.alpha = 1.0
+                view.tempFrame = view.bounceFrame
+                view.tempFrame.origin.y -= 20.0
+                view.frame = view.tempFrame
+            }
+            completion:
+            { complete in
+                //print("Complete: \(complete)")
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut)
+                {
+                    view.frame = view.bounceFrame
+                    //print("Animating to: \(view.frame)")
+                }
+                completion:
+                { complete in
+                    print("Complete2: \(complete)")
+                    
+                    view.alpha = 1.0
+                }
+            }
+            delay += 0.2
         }
     }
     
@@ -211,6 +242,7 @@ class ResultsViewController: UIViewController
             timer.invalidate()
             evaluationLabel.text = evaluation(value)
             
+            //pop the evaluation label in
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
             {
                 self.evaluationLabel.alpha = 1.0
@@ -225,6 +257,7 @@ class ResultsViewController: UIViewController
                 completion:
                 { _ in
                     //show either ranges or results here
+                    print("DONE")
                 }
             }
         }
