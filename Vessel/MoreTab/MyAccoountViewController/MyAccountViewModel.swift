@@ -7,12 +7,21 @@
 
 import Foundation
 
-enum MyAccountOptions: String
+enum MyAccountOptions
 {
-    case profile = "Profile"
-    case manageMyGoals = "Manage my Goals"
-    case manageMyDietOrAllergies = "Manage my Diet/Allergies"
-    case manageMembership = "Manage Membership"
+    case profile
+    case manageMyGoals
+    case manageMyDietOrAllergies
+    case manageMembership
+    
+    var title: String {
+        switch self {
+        case .profile: return NSLocalizedString("Profile", comment: "")
+        case .manageMyGoals: return NSLocalizedString("Manage my Goals", comment: "")
+        case .manageMyDietOrAllergies: return NSLocalizedString("Manage my Diet/Allergies", comment: "")
+        case .manageMembership: return NSLocalizedString("Manage Membership", comment: "")
+        }
+    }
 }
 
 class MyAccountViewModel

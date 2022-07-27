@@ -43,7 +43,7 @@ extension MyAccountViewController: UITableViewDataSource
             assertionFailure("MyAccountCell dequed in a bad state in MyAccountViewController cellForRowAt indexPath")
             return UITableViewCell()
         }
-        cell.setup(title: option.rawValue)
+        cell.setup(title: option.title)
         return cell
     }
     
@@ -63,7 +63,7 @@ extension MyAccountViewController: UITableViewDelegate
             return
         }
         
-        print("\(option.rawValue)")
+        print("\(option.title)")
         switch option
         {
         case .profile:
