@@ -5,7 +5,7 @@
 //  Created by Nicolas Medina on 7/26/22.
 //
 
-import UIKit
+import Foundation
 
 enum MyAccountOptions: String
 {
