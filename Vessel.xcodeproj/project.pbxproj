@@ -120,8 +120,11 @@
 		7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D42E289050D800B4E26D /* MoreTabCell.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
 		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
+		72DF47FE2890EDCC00DF33BE /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FD2890EDCC00DF33BE /* MyAccountViewController.swift */; };
+		72DF48002890EE4A00DF33BE /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */; };
 		72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */; };
 		72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */; };
+		72F41EDE289115EE005136B3 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* MyAccountCell.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
 /* End PBXBuildFile section */
@@ -264,8 +267,11 @@
 		7282D42E289050D800B4E26D /* MoreTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTabCell.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
+		72DF47FD2890EDCC00DF33BE /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Injection.swift"; sourceTree = "<group>"; };
+		72F41EDD289115EE005136B3 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.debug.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -603,6 +609,7 @@
 			children = (
 				7282D414288F7CA400B4E26D /* MoreTab.storyboard */,
 				7282D41C288FB78200B4E26D /* MoreViewController */,
+				72DF47FC2890ED9B00DF33BE /* MyAccoountViewController */,
 			);
 			path = MoreTab;
 			sourceTree = "<group>";
@@ -626,6 +633,16 @@
 				7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		72DF47FC2890ED9B00DF33BE /* MyAccoountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72DF47FD2890EDCC00DF33BE /* MyAccountViewController.swift */,
+				72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */,
+				72F41EDD289115EE005136B3 /* MyAccountCell.swift */,
+			);
+			path = MyAccoountViewController;
 			sourceTree = "<group>";
 		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
@@ -919,6 +936,7 @@
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
+				72DF48002890EE4A00DF33BE /* MyAccountViewModel.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
 				3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */,
@@ -929,6 +947,7 @@
 				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
 				3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */,
 				7282D42B288FB92000B4E26D /* ArrayExtension.swift in Sources */,
+				72F41EDE289115EE005136B3 /* MyAccountCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */,
@@ -957,6 +976,7 @@
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
+				72DF47FE2890EDCC00DF33BE /* MyAccountViewController.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */,
