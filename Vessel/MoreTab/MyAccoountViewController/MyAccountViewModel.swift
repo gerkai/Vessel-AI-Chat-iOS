@@ -14,8 +14,10 @@ enum MyAccountOptions
     case manageMyDietOrAllergies
     case manageMembership
     
-    var title: String {
-        switch self {
+    var title: String
+    {
+        switch self
+        {
         case .profile: return NSLocalizedString("Profile", comment: "")
         case .manageMyGoals: return NSLocalizedString("Manage my Goals", comment: "")
         case .manageMyDietOrAllergies: return NSLocalizedString("Manage my Diet/Allergies", comment: "")
