@@ -631,7 +631,7 @@ class Server: NSObject
         })
     }
     
-    func getScore(sampleID: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getScore(sampleID: String, onSuccess success: @escaping (_ result: TestResult) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
@@ -642,32 +642,45 @@ class Server: NSObject
             do
             {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
+                
+                print("JSON: \(json)")
+                
+                if let testResult = try? JSONDecoder().decode(TestResult.self, from: data)
+                {
+                    //print ("Test Result: \(testResult)")
+                    DispatchQueue.main.async()
+                    {
+                        success(testResult)
+                    }
+                }
+                else
                 if let object = json as? [String: Any]
                 {
-                    if let message = object["message"] as? String
+                    DispatchQueue.main.async()
                     {
-                        if let errorArray = object["errors"] as? [[String: Any]]
+                        if let message = object["message"] as? String
                         {
-                            if let firstErrorArray = errorArray.first
+                            if let errorArray = object["errors"] as? [[String: Any]]
                             {
-                                //print("First Error Array: \(firstErrorArray)")
-                                let code = firstErrorArray["code"] as? Int
-                                let label = firstErrorArray["label"] as? String
-                                let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                if let firstErrorArray = errorArray.first
+                                {
+                                    //print("First Error Array: \(firstErrorArray)")
+                                    let code = firstErrorArray["code"] as? Int
+                                    let label = firstErrorArray["label"] as? String
+                                    let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                    failure(error)
+                                }
+                            }
+                            else
+                            {
+                                let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
                                 failure(error)
                             }
                         }
                         else
                         {
-                            let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
                             failure(error)
-                        }
-                    }
-                    else
-                    {
-                        DispatchQueue.main.async()
-                        {
-                            success(object)
                         }
                     }
                 }

@@ -134,11 +134,11 @@
                                         <constraints>
                                             <constraint firstItem="k1p-qy-G9M" firstAttribute="trailing" secondItem="pfH-PT-Dl9" secondAttribute="trailing" constant="-20" id="1xX-cW-WWJ"/>
                                             <constraint firstAttribute="bottom" secondItem="mPF-LQ-Z0e" secondAttribute="bottom" priority="999" id="3qT-Lp-hwC"/>
-                                            <constraint firstItem="k1p-qy-G9M" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="bottom" constant="40" id="4EC-ha-7uZ"/>
                                             <constraint firstItem="k1p-qy-G9M" firstAttribute="leading" secondItem="pfH-PT-Dl9" secondAttribute="leading" constant="20" id="4Ya-en-eoM"/>
                                             <constraint firstItem="mPF-LQ-Z0e" firstAttribute="top" secondItem="3gt-oU-l4J" secondAttribute="top" constant="42" id="CPZ-BH-DmS"/>
                                             <constraint firstItem="k1p-qy-G9M" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="bottom" constant="40" id="En2-P9-rzi"/>
                                             <constraint firstItem="XEk-N3-tyA" firstAttribute="top" secondItem="pfH-PT-Dl9" secondAttribute="top" constant="44" id="HdF-tC-6p8"/>
+                                            <constraint firstItem="3gt-oU-l4J" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="bottom" constant="95" id="NUe-Na-TtV"/>
                                             <constraint firstItem="3gt-oU-l4J" firstAttribute="top" secondItem="k1p-qy-G9M" secondAttribute="bottom" constant="28" id="OXB-SR-8Yn"/>
                                             <constraint firstItem="XEk-N3-tyA" firstAttribute="leading" secondItem="pfH-PT-Dl9" secondAttribute="leading" constant="20" id="P3K-ti-7Ow"/>
                                             <constraint firstItem="mPF-LQ-Z0e" firstAttribute="leading" secondItem="pfH-PT-Dl9" secondAttribute="centerX" constant="5" id="VGi-Qr-FoD"/>
@@ -148,6 +148,11 @@
                                             <constraint firstItem="3gt-oU-l4J" firstAttribute="trailing" secondItem="pfH-PT-Dl9" secondAttribute="centerX" constant="-5" id="kfh-Hd-kux"/>
                                             <constraint firstItem="XEk-N3-tyA" firstAttribute="trailing" secondItem="pfH-PT-Dl9" secondAttribute="trailing" constant="-20" id="khM-v1-wrJ"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="OXB-SR-8Yn"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

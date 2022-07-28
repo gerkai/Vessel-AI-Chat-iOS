@@ -5,7 +5,7 @@
 //  Created by Carson Whitsett on 7/27/22.
 //
 
-import Foundation
+import UIKit
 
 enum ReagentType
 {
@@ -55,12 +55,41 @@ enum Evaluation: String
                 return "detected"
         }
     }
+    
+    var color: UIColor
+    {
+        switch self
+        {
+            case .notAvailable:
+                return UIColor.gray
+        case .notDetected:
+            return UIColor.gray
+        case .veryLow:
+            return Constants.vesselPoor
+        case .low:
+            return Constants.vesselFair
+        case .moderate:
+            return Constants.vesselGood
+        case .good:
+            return Constants.vesselGood
+        case .normal:
+            return Constants.vesselGreat
+        case .elevated:
+            return Constants.vesselFair
+        case .high:
+            return Constants.vesselPoor
+        case .excellent:
+            return Constants.vesselGreat
+        case .detected:
+            return Constants.vesselFair
+        }
+    }
 }
 
 struct Bucket
 {
-    let low: Float
-    let high: Float
+    let low: Double
+    let high: Double
     //let reportedValue: Float?
     let score: Float
     let evaluation: Evaluation
@@ -79,6 +108,59 @@ struct Reagent
     var recommendedDailyAllowance: Int?
     var buckets: [Bucket]
     //var supplementID: Int?
+    
+    func getEvaluation(score: Double) -> Evaluation
+    {
+        var highestBucket: Bucket?
+        var lowestBucket: Bucket?
+        
+        //establish highest and lowest buckets. That way if a value is out of range, we can slam it to highest or lowest.
+        for bucket in buckets
+        {
+            if highestBucket != nil
+            {
+                if bucket.high > highestBucket!.high
+                {
+                    highestBucket = bucket
+                }
+            }
+            else
+            {
+                highestBucket = bucket
+            }
+            if lowestBucket != nil
+            {
+                if bucket.low < lowestBucket!.low
+                {
+                    lowestBucket = bucket
+                }
+            }
+            else
+            {
+                lowestBucket = bucket
+            }
+            
+            if (score >= bucket.low) && (score <= bucket.high)
+            {
+                return bucket.evaluation
+            }
+        }
+        if let highBucket = highestBucket
+        {
+            if score > highBucket.high
+            {
+                return highBucket.evaluation
+            }
+        }
+        if let lowBucket = lowestBucket
+        {
+            if score < lowBucket.low
+            {
+                return lowBucket.evaluation
+            }
+        }
+        return Evaluation.notAvailable
+    }
 }
 
 //Here are the reagents used by the app
@@ -108,7 +190,7 @@ let Reagents: [Int: Reagent] =
                              title: NSLocalizedString("Your urine pH is too basic", comment: ""),
                              description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: ""))]),
  //HYDRATION
- 2: Reagent(name: NSLocalizedString("Specific Gravity", comment: "Reagent name"),
+ 2: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
             unit: NSLocalizedString("sp gr", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .Colorimetric,
@@ -131,7 +213,7 @@ let Reagents: [Int: Reagent] =
                                  evaluation: .low,
                                  title: NSLocalizedString("You're under hydrated", comment: ""),
                                  description: NSLocalizedString("You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: "")),
-                        Bucket(low: 1.0015,
+                        Bucket(low: 1.015,
                                  high: 1.03,
                                  score: 20.0,
                                  evaluation: .veryLow,

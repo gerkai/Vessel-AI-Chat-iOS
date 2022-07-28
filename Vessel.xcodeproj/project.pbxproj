@@ -67,6 +67,7 @@
 		3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15AD08288DC87C004716CA /* ResultsViewController.swift */; };
 		3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F15AD0A288DC896004716CA /* AfterTest.storyboard */; };
 		3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248A2891B5FB00BC539F /* Reagent.swift */; };
+		3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248C2891E8B600BC539F /* TestResult.swift */; };
 		3F21E9EB288E0854002FB44A /* PopupErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
@@ -207,6 +208,7 @@
 		3F15AD08288DC87C004716CA /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		3F15AD0A288DC896004716CA /* AfterTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AfterTest.storyboard; sourceTree = "<group>"; };
 		3F1A248A2891B5FB00BC539F /* Reagent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reagent.swift; sourceTree = "<group>"; };
+		3F1A248C2891E8B600BC539F /* TestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResult.swift; sourceTree = "<group>"; };
 		3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
+				3F1A248C2891E8B600BC539F /* TestResult.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */,
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,

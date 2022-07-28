@@ -13,7 +13,8 @@ class ReagentTileView: UIView
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtextLabel: UILabel!
     
-    var bounceFrame = CGRect()
+    var endFrame = CGRect()
+    var startFrame = CGRect()
     var tempFrame = CGRect()
     
     override init(frame: CGRect)

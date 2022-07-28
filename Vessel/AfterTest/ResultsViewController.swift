@@ -24,7 +24,7 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
     
-    var wellnessScore: Double!
+    var testResult: TestResult! //set by the caller during instantiation
     var timer: Timer!
     var iteration = 0
     let wellnessCardAnimationTime = 2.0
@@ -34,8 +34,9 @@ class ResultsViewController: UIViewController
     
     var numTiles = 10
     var curTile = 0
-    
+    var showingRanges = true
     var bouncyViews: [ReagentTileView] = []
+    var originalStaggerConstraintConstant: CGFloat! //the right stackView is staggered for Results but not staggered for ranges.
     
     //will move these to constants if we start using them in more places
     let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
@@ -48,6 +49,8 @@ class ResultsViewController: UIViewController
         super.viewDidLoad()
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
+        originalStaggerConstraintConstant = staggerConstraint.constant
+        
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
@@ -58,14 +61,7 @@ class ResultsViewController: UIViewController
     func showRanges()
     {
         //remove the placeholder views
-        for v in leftStackView.subviews
-        {
-           v.removeFromSuperview()
-        }
-        for v in rightStackView.subviews
-        {
-           v.removeFromSuperview()
-        }
+        clearStackViews()
         
         titleLabel.text = NSLocalizedString("Ranges", comment: "Wellness score ranges (0-25, 25-50 etc.)")
         staggerConstraint.constant = 0
@@ -76,28 +72,28 @@ class ResultsViewController: UIViewController
             reagentView.addConstraints([heightConstraint])
             if i == 0
             {
-                reagentView.titleLabel.text = "0-25"
+                reagentView.titleLabel.text = NSLocalizedString("0-25", comment: "range 0 - 25")
                 reagentView.subtextLabel.text = NSLocalizedString("Poor", comment: "Quality level")
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(poorColor.red), green: CGFloat(poorColor.green), blue: CGFloat(poorColor.blue), alpha: 1.0)
                 leftStackView.addArrangedSubview(reagentView)
             }
             else if i == 1
             {
-                reagentView.titleLabel.text = "25-50"
+                reagentView.titleLabel.text = NSLocalizedString("25-50", comment: "range 25 - 50")
                 reagentView.subtextLabel.text = NSLocalizedString("Fair", comment: "Quality level")
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(fairColor.red), green: CGFloat(fairColor.green), blue: CGFloat(fairColor.blue), alpha: 1.0)
                 rightStackView.addArrangedSubview(reagentView)
             }
             else if i == 2
             {
-                reagentView.titleLabel.text = "50-75"
+                reagentView.titleLabel.text = NSLocalizedString("50-75", comment: "range 50 - 75")
                 reagentView.subtextLabel.text = NSLocalizedString("Good", comment: "Quality level")
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(goodColor.red), green: CGFloat(goodColor.green), blue: CGFloat(goodColor.blue), alpha: 1.0)
                 leftStackView.addArrangedSubview(reagentView)
             }
             else
             {
-                reagentView.titleLabel.text = "75-100"
+                reagentView.titleLabel.text = NSLocalizedString("75-100", comment: "range 75 - 100")
                 reagentView.subtextLabel.text = NSLocalizedString("Great", comment: "Quality level")
                 reagentView.contentView.backgroundColor = UIColor(red: CGFloat(greatColor.red), green: CGFloat(greatColor.green), blue: CGFloat(greatColor.blue), alpha: 1.0)
                 rightStackView.addArrangedSubview(reagentView)
@@ -118,7 +114,7 @@ class ResultsViewController: UIViewController
         //animates background color of wellness card from poor color to fair color, good color and great color depending on
         //wellness score.
         let sectionSize = 0.25
-        var remainingScore = wellnessScore!
+        var remainingScore = testResult.wellnessScore
         let sectionTime = sectionSize / remainingScore * wellnessCardAnimationTime
         
         if remainingScore > sectionSize
@@ -186,29 +182,29 @@ class ResultsViewController: UIViewController
         var delay = 0.0
         for view in bouncyViews
         {
+            //calculate large enough yOffset to place the view off the bottom of the screen
             let newPoint = view.convert(CGPoint(x: 0, y: 0), to: self.view)
             let newY = self.view.frame.size.height - newPoint.y
             var frame = view.frame
-            //print("Original Frame: \(view.frame)")
-            view.bounceFrame = view.frame
+            view.endFrame = view.frame
             
-            frame.origin.y = newY
+            //move the view past the bottom of the screen
+            frame.origin.y += newY
             view.frame = frame
+            view.startFrame = frame
             
             UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseOut)
             {
                 view.alpha = 1.0
-                view.tempFrame = view.bounceFrame
+                view.tempFrame = view.endFrame
                 view.tempFrame.origin.y -= 20.0
                 view.frame = view.tempFrame
             }
             completion:
             { complete in
-                //print("Complete: \(complete)")
-                UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut)
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut)
                 {
-                    view.frame = view.bounceFrame
-                    //print("Animating to: \(view.frame)")
+                    view.frame = view.endFrame
                 }
                 completion:
                 { complete in
@@ -216,6 +212,86 @@ class ResultsViewController: UIViewController
                 }
             }
             delay += 0.2
+        }
+    }
+    
+    func populateResults()
+    {
+        //populate stackViews with new reagent tiles
+        //set their alpha to 0 so they remain invisible while the layout engine places them in the correct location.
+        for i in 0 ..< testResult.reagents.count
+        {
+            let reagentView = ReagentTileView()
+            let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
+            reagentView.addConstraints([heightConstraint])
+            reagentView.alpha = 0.0
+            let reagent = Reagents[testResult.reagents[i].id]!
+            let value = testResult.reagents[i].value
+            let evaluation = reagent.getEvaluation(score: value)
+            
+            if i & 1 == 0
+            {
+                reagentView.titleLabel.text = reagent.name
+                reagentView.subtextLabel.text = evaluation.title
+                reagentView.contentView.backgroundColor = evaluation.color
+                leftStackView.addArrangedSubview(reagentView)
+            }
+            else
+            {
+                let reagent = Reagents[testResult.reagents[i].id]!
+                reagentView.titleLabel.text = reagent.name
+                reagentView.subtextLabel.text = evaluation.title
+                reagentView.contentView.backgroundColor = evaluation.color
+                rightStackView.addArrangedSubview(reagentView)
+            }
+            bouncyViews.append(reagentView)
+        }
+        
+        //update title label and fade it in
+        titleLabel.text = NSLocalizedString("Results", comment: "Title label showing your wellness results")
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveLinear)
+        {
+            self.titleLabel.alpha = 1.0
+        }
+        completion:
+        { completed in
+            var delay = 0.0
+            
+            //animate reagent tiles up to their original positions
+            for view in self.bouncyViews
+            {
+                //calculate yOffset sufficient to place view off bottom of screen.
+                let newPoint = view.convert(CGPoint(x: 0, y: 0), to: self.view)
+                let newY = self.view.frame.size.height - newPoint.y
+                var frame = view.frame
+                view.endFrame = view.frame
+                
+                //Move tiles to starting position off bottom of screen
+                frame.origin.y += newY
+                view.frame = frame
+                view.startFrame = frame
+                
+                //animate to position slightly above original position (overshoot)
+                UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseOut)
+                {
+                    view.alpha = 1.0
+                    view.tempFrame = view.endFrame
+                    view.tempFrame.origin.y -= 30.0
+                    view.frame = view.tempFrame
+                }
+                completion:
+                { complete in
+                    //And then animate back down to original position
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut)
+                    {
+                        view.frame = view.endFrame
+                    }
+                    completion:
+                    { complete in
+                    }
+                }
+                delay += 0.2
+            }
         }
     }
     
@@ -229,7 +305,7 @@ class ResultsViewController: UIViewController
         {
             percentage = 1.0
         }
-        let value = Int((wellnessScore * percentage) * 100.0)
+        let value = Int((testResult.wellnessScore * percentage) * 100.0)
         wellnessScoreLabel.text = "\(value)"
         if percentage == 1.0
         {
@@ -287,10 +363,58 @@ class ResultsViewController: UIViewController
         self.wellnessCard.setNeedsDisplay()
     }
     
+    func clearStackViews()
+    {
+        for v in leftStackView.subviews
+        {
+           v.removeFromSuperview()
+        }
+        for v in rightStackView.subviews
+        {
+           v.removeFromSuperview()
+        }
+        bouncyViews.removeAll()
+    }
+    
     @IBAction func next()
     {
-        //navigationController?.popToRootViewController(animated: true)
-        dismiss(animated: true)
-        //navigationController?.popViewController(animated: true)
+        if showingRanges
+        {
+            showingRanges = false
+            for view in bouncyViews
+            {
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn)
+                {
+                    view.frame = view.startFrame
+                    self.titleLabel.alpha = 0.0
+                } completion:
+                { _ in
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
+            {
+                self.clearStackViews()
+                self.staggerConstraint.constant = self.originalStaggerConstraintConstant
+                self.populateResults()
+            }
+        }
+        else
+        {
+            //navigationController?.popToRootViewController(animated: true)
+            dismiss(animated: true)
+            //navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func mockTestResult()
+    {
+        //used for test/debug
+        testResult = TestResult(wellnessScore: 0.73, errors: [], reagents: [ReagentResult(id: 11, value: 30.0, score: 1.0),
+                                                                            ReagentResult(id: 8, value: 225.0, score: 0.4),
+                                                                            ReagentResult(id: 1, value: 7.5, score: 1.0),
+                                                                            ReagentResult(id: 3, value: 0.0, score: 0.0),
+                                                                            ReagentResult(id: 4, value: 150.0, score: 0.2),
+                                                                            ReagentResult(id: 2, value: 1.002, score: 0.8),
+                                                                            ReagentResult(id: 5, value: 450.0, score: 1.0)])
     }
 }
