@@ -605,10 +605,7 @@ class Server: NSObject
         
         let urlString = "\(API())\(SAMPLE_PATH)"
         
-        #warning ("CW: Temporary fix until backend gets fixed")
-        let fixString = urlString.replacingOccurrences(of: "/v3/", with: "/v2/")
-        
-        let url = URL(string: fixString)!
+        let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
         request.httpBody = data
@@ -635,9 +632,7 @@ class Server: NSObject
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
-#warning ("CW: Temporary fix until backend gets fixed")
-        let fixString = finalUrlString.replacingOccurrences(of: "/v3/", with: "/v2/")
-        serverGet(url: fixString)
+        serverGet(url: finalUrlString)
         { data in
             do
             {
