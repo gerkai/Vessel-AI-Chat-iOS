@@ -88,6 +88,21 @@ struct Constants
     static let DECLINED_BIRTH_DATE          = 0x00000001
     static let HIDE_PEE_TIPS                = 0x00000002
     static let HIDE_DROPLET_TIPS            = 0x00000004
+    static let SAW_MAGNESIUM_INFO           = 0x00000008
+    static let SAW_SODIUM_INFO              = 0x00000010
+    static let SAW_CALCIUM_INFO             = 0x00000020
+    static let SAW_VITAMIN_C_INFO           = 0x00000040
+    static let SAW_PH_LOW_INFO              = 0x00000080
+    static let SAW_PH_HIGH_INFO             = 0x00000100
+    static let SAW_HYDRATION_LOW_INFO       = 0x00000200
+    static let SAW_HYDRATION_HIGH_INFO      = 0x00000400
+    static let SAW_KETONES_LOW_INFO         = 0x00000800
+    static let SAW_KETONES_ELEVATED_INFO    = 0x00001000
+    static let SAW_KETONES_HIGH_INFO        = 0x00002000
+    static let SAW_B7_LOW_INFO              = 0x00004000
+    static let SAW_CORTISOL_LOW_INFO        = 0x00008000
+    static let SAW_CORTISOL_HIGH_INFO       = 0x00010000
+    static let SAW_TESTING_REMINDER         = 0x00010000
     
     //Colors
     static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514

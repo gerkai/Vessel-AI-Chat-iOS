@@ -101,6 +101,21 @@ struct Bucket
 
 struct Reagent
 {
+    enum ID: Int
+    {
+        case PH = 1
+        case HYDRATION = 2
+        case KETONES_A = 3
+        case VITAMIN_C = 4
+        case MAGNESIUM = 5
+        case CORTISOL = 8
+        case VITAMIN_B7 = 11
+        case CREATININE = 12
+        case CALCIUM = 18
+        case NITRITE = 21
+        case LEUKOCYTE = 22
+        case SODIUM = 23
+    }
     var name: String
     var unit: String // pH, sp gr, mmol/L gm/L, µg/L, etc
     var consumptionUnit: String //mg, µg, etc.
@@ -109,6 +124,25 @@ struct Reagent
     var imageName: String
     var buckets: [Bucket]
     //var supplementID: Int?
+    
+    //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
+    //returns .notAvailable if invalid parameter given
+    static func evaluation(id: Reagent.ID, value: Double) -> Evaluation
+    {
+        var eval = Evaluation.notAvailable
+        
+        if let reagent = Reagents[id]
+        {
+            for bucket in reagent.buckets
+            {
+                if (value >= bucket.low) && (value < bucket.high)
+                {
+                    eval = bucket.evaluation
+                }
+            }
+        }
+        return eval
+    }
     
     func getEvaluation(score: Double) -> Evaluation
     {
@@ -165,9 +199,9 @@ struct Reagent
 }
 
 //Here are the reagents used by the app
-let Reagents: [Int: Reagent] =
+let Reagents: [Reagent.ID: Reagent] =
 //PH
-[1: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
+[Reagent.ID.PH: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
             unit: NSLocalizedString("pH", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("pH", comment: "consumption unit"),
             type: .Colorimetric,
@@ -192,7 +226,7 @@ let Reagents: [Int: Reagent] =
                              title: NSLocalizedString("Your urine pH is too basic", comment: ""),
                              description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: ""))]),
  //HYDRATION
- 2: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
+ Reagent.ID.HYDRATION: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
             unit: NSLocalizedString("sp gr", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .Colorimetric,
@@ -223,7 +257,7 @@ let Reagents: [Int: Reagent] =
                                  title: NSLocalizedString("You’re dehydrated", comment: ""),
                                  description: NSLocalizedString("Not to worry. You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: ""))]),
  //KETONES
- 3: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
+ Reagent.ID.KETONES_A: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
             unit: NSLocalizedString("mmol/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("", comment: "consumption unit"),
             type: .Colorimetric,
@@ -242,7 +276,7 @@ let Reagents: [Int: Reagent] =
                               title: NSLocalizedString("Your Ketone levels are elevated.", comment: ""),
                               description: NSLocalizedString("Good job! The diet is working and your body is switching to ketone bodies as its primary fuel source. If you’re not on a ketogenic diet please check in with your doctor as this could be a sign of an underlying disease. Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Ketones.", comment: ""))]),
  //VITAMIN C
- 4: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
+ Reagent.ID.VITAMIN_C: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
@@ -261,7 +295,7 @@ let Reagents: [Int: Reagent] =
                               title: NSLocalizedString("Your Vitamin C level is great!", comment: ""),
                               description: NSLocalizedString("Good job! You’ve filled up your Vitamin C tank, and a slight excess is spilling out into your urine. This is just what you want. Check out the Science section below to see some of the potential benefits you may experience from being in a good range of Vitamin C.", comment: ""))]),
  //MAGNESIUM
- 5: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
+ Reagent.ID.MAGNESIUM: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
@@ -286,7 +320,7 @@ let Reagents: [Int: Reagent] =
                             title: NSLocalizedString("Your Magnesium level is great!", comment: ""),
                             description: NSLocalizedString("Good job! You’ve filled up your magnesium tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Magnesium.", comment: ""))]),
  //CORTISOL
- 8: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
+ Reagent.ID.CORTISOL: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .LFA,
@@ -311,7 +345,7 @@ let Reagents: [Int: Reagent] =
                                  title: NSLocalizedString("Your Cortisol levels are high", comment: ""),
                                  description: NSLocalizedString("This is usually a sign that your body has mounted a stress response to protect you. This can (and should) happen if you’re sick, have an an injury that is healing, or just did a strenuous workout. However levels should normalize shortly after, so keep checking. Levels are often high due to acute stress, so be sure to check out the lifestyle recommendations below to reduce stress and increase your natural relaxation response.", comment: ""))]),
  //VITAMIN B7
- 11: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
+ Reagent.ID.VITAMIN_B7: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .LFA,
@@ -330,7 +364,7 @@ let Reagents: [Int: Reagent] =
                               title: NSLocalizedString("Your Biotin level is great!", comment: ""),
                               description: NSLocalizedString("Good job! You’ve filled up your body’s Biotin tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Biotin.", comment: ""))]),
  //CALCIUM
- 18: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
+ Reagent.ID.CALCIUM: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -355,7 +389,7 @@ let Reagents: [Int: Reagent] =
                                  title: NSLocalizedString("Your Calcium level is too high", comment: ""),
                                  description: NSLocalizedString("Oops, you overshot the goal. Your calcium level is higher than what your body wants right now, and a high concentration of calcium is being dumped out into your urine. If you’re taking calcium supplements, consider stopping them or reducing the dose. You may also want to cut down on Kiwifruit, bell peppers, and citrus. (Note, levels may be artificially high if you’re on a medication called a loop diuretic such as Lasix/furosemide. If so, you unfortunately can't rely on our test to assess your Calcium levels.)", comment: ""))]),
  //NITRITES
- 21: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
+ Reagent.ID.NITRITE: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -380,7 +414,7 @@ let Reagents: [Int: Reagent] =
                                  title: NSLocalizedString("Nitrites are detected high in urine", comment: ""),
                                  description: NSLocalizedString("Vessel is not intended to be used as a tool to screen for or diagnose illness or disease. However, our product has the ability to screen for nitrates, which are a breakdown product of certain bacteria, in the urine. Your results detect high levels of nitrites in the urine. This may indicate a potential urogenital infection. While False positives are always possible, it is recommended you be evaluated by your physician or medical team, especially if you are experiencing any of the following symptoms: discomfort during urination, the urgency to urinate, or more frequent urination, fever, chills, abdomen, or flank pain, and nausea.", comment: ""))]),
  //LEUKOCYTE
- 22: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
+ Reagent.ID.LEUKOCYTE: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -399,7 +433,7 @@ let Reagents: [Int: Reagent] =
                               title: NSLocalizedString("PLACEHOLDER TEXT - POSITIVE LEUKOCYTE", comment: ""),
                               description: NSLocalizedString("PLACEHOLDER DESCRIPTION - POSITIVE LEUKOCYTE", comment: ""))]),
  //SODIUM CHLORIDE
- 23: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
+ Reagent.ID.SODIUM: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
             unit: NSLocalizedString("mEq/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mEq", comment: "consumption unit"),
             type: .Colorimetric,

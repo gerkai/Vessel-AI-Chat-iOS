@@ -68,6 +68,8 @@
 		3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F15AD0A288DC896004716CA /* AfterTest.storyboard */; };
 		3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248A2891B5FB00BC539F /* Reagent.swift */; };
 		3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248C2891E8B600BC539F /* TestResult.swift */; };
+		3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */; };
+		3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */; };
 		3F21E9EB288E0854002FB44A /* PopupErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
@@ -212,6 +214,8 @@
 		3F15AD0A288DC896004716CA /* AfterTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AfterTest.storyboard; sourceTree = "<group>"; };
 		3F1A248A2891B5FB00BC539F /* Reagent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reagent.swift; sourceTree = "<group>"; };
 		3F1A248C2891E8B600BC539F /* TestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResult.swift; sourceTree = "<group>"; };
+		3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterTestViewModel.swift; sourceTree = "<group>"; };
+		3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				3F15AD08288DC87C004716CA /* ResultsViewController.swift */,
+				3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */,
+				3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */,
 				3F15AD0A288DC896004716CA /* AfterTest.storyboard */,
 			);
 			path = AfterTest;
@@ -948,6 +954,7 @@
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
+				3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* MyAccountViewModel.swift in Sources */,
@@ -966,6 +973,7 @@
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
+				3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,

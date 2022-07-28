@@ -31,6 +31,7 @@ class ResultsViewController: UIViewController
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
+    var viewModel: AfterTestViewModel!
     
     var numTiles = 10
     var curTile = 0
@@ -47,6 +48,7 @@ class ResultsViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        viewModel = AfterTestViewModel(testResult: testResult)
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
         originalStaggerConstraintConstant = staggerConstraint.constant
