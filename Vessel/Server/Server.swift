@@ -643,7 +643,7 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 
-                print("JSON: \(json)")
+               // print("JSON: \(json)")
                 
                 if let testResult = try? JSONDecoder().decode(TestResult.self, from: data)
                 {
