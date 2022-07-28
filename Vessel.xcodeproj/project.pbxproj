@@ -621,7 +621,7 @@
 			children = (
 				7282D414288F7CA400B4E26D /* MoreTab.storyboard */,
 				7282D41C288FB78200B4E26D /* MoreViewController */,
-				72DF47FC2890ED9B00DF33BE /* MyAccoountViewController */,
+				72DF47FC2890ED9B00DF33BE /* MyAccountViewController */,
 			);
 			path = MoreTab;
 			sourceTree = "<group>";
@@ -647,14 +647,14 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		72DF47FC2890ED9B00DF33BE /* MyAccoountViewController */ = {
+		72DF47FC2890ED9B00DF33BE /* MyAccountViewController */ = {
 			isa = PBXGroup;
 			children = (
 				72DF47FD2890EDCC00DF33BE /* MyAccountViewController.swift */,
 				72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */,
 				72F41EDD289115EE005136B3 /* MyAccountCell.swift */,
 			);
-			path = MyAccoountViewController;
+			path = MyAccountViewController;
 			sourceTree = "<group>";
 		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
