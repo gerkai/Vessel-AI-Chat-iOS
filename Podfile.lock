@@ -102,8 +102,8 @@ PODS:
   - SwiftLint (0.47.1)
 
 DEPENDENCIES:
-  - AWSCore (~> 2.13)
-  - AWSS3 (~> 2.13.0)
+  - AWSCore
+  - AWSS3
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
   - lottie-ios
@@ -154,6 +154,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 6024f50f912037219cad5c6a360dd5fc90760e4f
+PODFILE CHECKSUM: a62297a678aa0e683231ab52cea5b4f39911e4ae
 
 COCOAPODS: 1.11.2

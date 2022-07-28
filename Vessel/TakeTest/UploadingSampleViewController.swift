@@ -174,18 +174,18 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     private func getScore()
     {
         Server.shared.getScore(sampleID: sampleUUID)
-        { object in
-            if let score = object["wellness_score"] as? Double
+        { testResult in
+            if testResult.errors.count == 0
             {
                 let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
-                vc.wellnessScore = score
+                vc.testResult = testResult
                 self.viewModel.uploadingFinished()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else
             {
-                print("Error in object response: \(object)")
+                print("Error in object response: \(testResult)")
             }
         }
         onFailure:
@@ -209,7 +209,8 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
                         }
                         else
                         {
-                            print("Error: \(error)")
+                            self.showOtherErrorPopup()
+                            print("The error is: \(error)")
                         }
                     }
                 }
@@ -250,6 +251,12 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     private func showCropFailurePopup()
     {
         let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Apologies, we had a hard time reading your card", comment: ""), message: NSLocalizedString("This could be due to shadow, glare or droplets. Simply check your card, your lighting, and let's give it another shot.", comment: ""), topButtonTitle: "", botButtonTitle: "Try Again", delegate: self)
+        present(vc, animated: false)
+    }
+    
+    private func showOtherErrorPopup()
+    {
+        let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Apologies, we had a hard time uploading your card", comment: ""), message: NSLocalizedString("Please try again.", comment: ""), topButtonTitle: "", botButtonTitle: "Try Again", delegate: self)
         present(vc, animated: false)
     }
     

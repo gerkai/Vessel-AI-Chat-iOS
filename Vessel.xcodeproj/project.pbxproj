@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */; };
+		3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0405C92890A99100ADD5FC /* ReagentTileView.xib */; };
 		3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */; };
 		3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */; };
 		3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547B027C9DB8F006E3098 /* DebugViewController.swift */; };
@@ -64,6 +66,8 @@
 		3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15AD03288C9ADC004716CA /* TestCardUploader.swift */; };
 		3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15AD08288DC87C004716CA /* ResultsViewController.swift */; };
 		3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F15AD0A288DC896004716CA /* AfterTest.storyboard */; };
+		3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248A2891B5FB00BC539F /* Reagent.swift */; };
+		3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A248C2891E8B600BC539F /* TestResult.swift */; };
 		3F21E9EB288E0854002FB44A /* PopupErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
@@ -149,6 +153,8 @@
 /* Begin PBXFileReference section */
 		19047202DE476CDF8D072DD8 /* Pods-Vessel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.release.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.release.xcconfig"; sourceTree = "<group>"; };
 		31DFC10A288ABC41346E4209 /* Pods-VesselTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.release.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.release.xcconfig"; sourceTree = "<group>"; };
+		3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentTileView.swift; sourceTree = "<group>"; };
+		3F0405C92890A99100ADD5FC /* ReagentTileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReagentTileView.xib; sourceTree = "<group>"; };
 		3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		3F0547B027C9DB8F006E3098 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +210,8 @@
 		3F15AD03288C9ADC004716CA /* TestCardUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCardUploader.swift; sourceTree = "<group>"; };
 		3F15AD08288DC87C004716CA /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		3F15AD0A288DC896004716CA /* AfterTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AfterTest.storyboard; sourceTree = "<group>"; };
+		3F1A248A2891B5FB00BC539F /* Reagent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reagent.swift; sourceTree = "<group>"; };
+		3F1A248C2891E8B600BC539F /* TestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResult.swift; sourceTree = "<group>"; };
 		3F21E9EA288E0854002FB44A /* PopupErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +367,8 @@
 				3F12F010287B4C0600FCC52E /* Goal.swift */,
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
+				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
+				3F1A248C2891E8B600BC539F /* TestResult.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -564,10 +574,12 @@
 			children = (
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
 				3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */,
-				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
 				3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */,
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
+				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
+				3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */,
+				3F0405C92890A99100ADD5FC /* ReagentTileView.xib */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
@@ -763,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
+				3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */,
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
@@ -892,6 +905,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */,
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
@@ -974,6 +988,7 @@
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
+				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				72DF47FE2890EDCC00DF33BE /* MyAccountViewController.swift in Sources */,
@@ -982,6 +997,7 @@
 				3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
+				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
