@@ -106,6 +106,7 @@ struct Reagent
     var consumptionUnit: String //mg, µg, etc.
     var type: ReagentType
     var recommendedDailyAllowance: Int?
+    var imageName: String
     var buckets: [Bucket]
     //var supplementID: Int?
     
@@ -171,6 +172,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("pH", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: nil,
+            imageName: "pH",
             buckets: [Bucket(low: 5.0,
                              high: 6.0,
                              score: 30.0,
@@ -195,6 +197,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: nil,
+            imageName: "Hydration",
             buckets: [Bucket(low: 1.0,
                              high: 1.0015,
                              score: 80.0,
@@ -225,6 +228,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: nil,
+            imageName: "Ketones",
             buckets: [Bucket(low: 0.0,
                              high: 2.21,
                              score: 0.0,
@@ -243,6 +247,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: 90,
+            imageName: "Vitamin C",
             buckets: [Bucket(low: 0.0,
                              high: 350.0,
                              score: 20.0,
@@ -261,6 +266,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: 400,
+            imageName: "Magnesium",
             buckets: [Bucket(low: 0.0,
                              high: 100.0,
                              score: 20.0,
@@ -285,6 +291,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .LFA,
             recommendedDailyAllowance: nil,
+            imageName: "Cortisol",
             buckets: [Bucket(low: 0.0,
                              high: 50.0,
                              score: 80.0,
@@ -309,6 +316,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .LFA,
             recommendedDailyAllowance: 30,
+            imageName: "B7",
             buckets: [Bucket(low: 0.0,
                              high: 10.0,
                              score: 50.0,
@@ -327,6 +335,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: 0,
+            imageName: "Calcium",
             buckets: [Bucket(low: 0.0,
                              high: 30.0,
                              score: 30.0,
@@ -351,6 +360,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: nil,
+            imageName: "UrinaryTract",
             buckets: [Bucket(low: 0.0,
                              high: 1.0,
                              score: 0.0,
@@ -375,6 +385,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: nil,
+            imageName: "UrinaryTract",
             buckets: [Bucket(low: 0.0,
                              high: 60.0,
                              score: 0.0,
@@ -393,6 +404,7 @@ let Reagents: [Int: Reagent] =
             consumptionUnit: NSLocalizedString("mEq", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: 0,
+            imageName: "Sodium",
             buckets: [Bucket(low: 0.0,
                              high: 50.0,
                              score: 100.0,

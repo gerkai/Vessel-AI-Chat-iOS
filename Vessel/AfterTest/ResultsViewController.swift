@@ -229,21 +229,20 @@ class ResultsViewController: UIViewController
             let value = testResult.reagents[i].value
             let evaluation = reagent.getEvaluation(score: value)
             
+            reagentView.titleLabel.text = reagent.name
+            reagentView.subtextLabel.text = evaluation.title
+            reagentView.contentView.backgroundColor = evaluation.color
+            reagentView.imageView.image = UIImage.init(named: reagent.imageName)
+            
             if i & 1 == 0
             {
-                reagentView.titleLabel.text = reagent.name
-                reagentView.subtextLabel.text = evaluation.title
-                reagentView.contentView.backgroundColor = evaluation.color
                 leftStackView.addArrangedSubview(reagentView)
             }
             else
             {
-                let reagent = Reagents[testResult.reagents[i].id]!
-                reagentView.titleLabel.text = reagent.name
-                reagentView.subtextLabel.text = evaluation.title
-                reagentView.contentView.backgroundColor = evaluation.color
                 rightStackView.addArrangedSubview(reagentView)
             }
+            
             bouncyViews.append(reagentView)
         }
         

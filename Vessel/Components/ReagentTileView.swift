@@ -12,6 +12,7 @@ class ReagentTileView: UIView
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtextLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     var endFrame = CGRect()
     var startFrame = CGRect()
