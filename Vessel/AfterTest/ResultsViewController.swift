@@ -60,6 +60,11 @@ class ResultsViewController: UIViewController
         showRanges()
     }
     
+    deinit
+    {
+        print("ResultsViewController deinit")
+    }
+    
     func showRanges()
     {
         //remove the placeholder views
@@ -401,16 +406,30 @@ class ResultsViewController: UIViewController
         }
         else
         {
-            //navigationController?.popToRootViewController(animated: true)
-            if let vc = viewModel.nextViewController()
+            let result = viewModel.nextViewControllerData()
+            if result.transition == .dismiss
             {
-                navigationController?.pushViewController(vc, animated: true)
+                if self.navigationController != nil
+                {
+                    navigationController?.popViewController(animated: true)
+                }
+                else
+                {
+                    dismiss(animated: true)
+                }
             }
             else
             {
-                dismiss(animated: true)
+                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
+                vc.viewModel = viewModel
+                vc.titleText = result.title
+                vc.details = result.details
+                vc.image = result.image
+                vc.transition = result.transition
+                
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            //navigationController?.popViewController(animated: true)
         }
     }
     

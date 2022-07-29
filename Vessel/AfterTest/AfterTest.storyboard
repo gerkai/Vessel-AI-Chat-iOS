@@ -20,6 +20,22 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="lFF-u1-u5T">
+            <objects>
+                <navigationController storyboardIdentifier="ResultsNavController" modalPresentationStyle="overFullScreen" id="dih-vh-vgS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uR7-oQ-QSx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="o77-ed-IbU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaF-bf-Rus" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-852" y="100"/>
+        </scene>
         <!--Results View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -183,7 +199,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="next" destination="Y6W-OH-hqX" eventType="touchUpInside" id="QQU-WR-1Yz"/>
+                                    <action selector="next" destination="Y6W-OH-hqX" eventType="touchUpInside" id="spd-LY-6m5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -199,6 +215,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="DGz-fg-glS" secondAttribute="bottom" constant="34" id="ak1-tk-TmH"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5vO-UO-86p"/>
                     <connections>
                         <outlet property="evaluationLabel" destination="Dif-Sk-TYt" id="21B-Ia-61L"/>
                         <outlet property="leftStackView" destination="3gt-oU-l4J" id="LN6-aa-VJO"/>
@@ -221,44 +238,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-6E-PaQ">
-                                <rect key="frame" x="30" y="44" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="7ro-uA-wLc"/>
-                                    <constraint firstAttribute="height" constant="50" id="Cu7-hg-EWr"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="square_back_button"/>
-                                <connections>
-                                    <action selector="back" destination="N32-op-NLS" eventType="touchUpInside" id="K3b-do-Wbf"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVY-d1-de0">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyH-eX-HfG" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="307"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="309.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6o-NN-iby">
-                                                <rect key="frame" x="20" y="114" width="374" height="193"/>
+                                                <rect key="frame" x="20" y="114" width="374" height="195.5"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WUW-8N-X2W">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WUW-8N-X2W">
                                                         <rect key="frame" x="220" y="0.0" width="154" height="104"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="104" id="KsX-ol-1p2"/>
                                                             <constraint firstAttribute="width" constant="154" id="zFw-71-thM"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHo-ET-7cz">
-                                                        <rect key="frame" x="20" y="80" width="334" height="40"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHo-ET-7cz">
+                                                        <rect key="frame" x="20" y="80" width="334" height="39.5"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                         <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EP7-YO-Vpa">
-                                                        <rect key="frame" x="20" y="132" width="334" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EP7-YO-Vpa">
+                                                        <rect key="frame" x="20" y="131.5" width="334" height="24"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Label">
+                                                                <attributes>
+                                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -300,6 +311,18 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="xNe-XC-3ea"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Oo8-fG-bGa"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-6E-PaQ">
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="7ro-uA-wLc"/>
+                                    <constraint firstAttribute="height" constant="50" id="Cu7-hg-EWr"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="square_back_button"/>
+                                <connections>
+                                    <action selector="onBackButton" destination="N32-op-NLS" eventType="touchUpInside" id="KCV-1E-9Du"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEB-hu-dhZ" userLabel="ProgressView">
                                 <rect key="frame" x="0.0" y="722" width="414" height="6"/>
                                 <subviews>
@@ -354,7 +377,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="next" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1Zs-vf-0DK"/>
+                                    <action selector="next" destination="N32-op-NLS" eventType="touchUpInside" id="JZv-hD-daF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -377,6 +400,9 @@
                     </view>
                     <connections>
                         <outlet property="detailsLabel" destination="EP7-YO-Vpa" id="HJt-MY-rXx"/>
+                        <outlet property="progressAmount" destination="hGc-Ak-xFo" id="fGh-5K-LDZ"/>
+                        <outlet property="progressDot" destination="R4r-C3-x6Z" id="IC9-yQ-OzY"/>
+                        <outlet property="progressView" destination="kEB-hu-dhZ" id="nU4-sd-C09"/>
                         <outlet property="reagentImage" destination="WUW-8N-X2W" id="wbE-eN-HSk"/>
                         <outlet property="titleLabel" destination="HHo-ET-7cz" id="cmH-4f-VH8"/>
                     </connections>
