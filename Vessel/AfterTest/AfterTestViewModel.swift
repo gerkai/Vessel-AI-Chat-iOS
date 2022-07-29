@@ -4,6 +4,9 @@
 //
 //  Created by Carson Whitsett on 7/28/22.
 //
+//
+//  TODO: Some screens aren't iplemented yet. They're defined in the enums below but commented out
+//  TODO: After flow is completed, save contactFlags to Contact.main()!.flags
 
 import UIKit
 
@@ -74,107 +77,150 @@ class AfterTestViewModel
     {
         //Determines how many screens will be shown based on evaluation of test results.
         //This allows us to know the maximum value of the progress bar that is displayed on many of the screens.
-        if testResult.isEvaluatedTo(id: Reagent.ID.MAGNESIUM, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_MAGNESIUM_INFO
-            screens.append(.MAG_LOW_1)
-            screens.append(.MAG_LOW_2)
-            //screens.append(.MAG_LOW_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.SODIUM, evaluation: .high)
-        {
-            contactFlags |= Constants.SAW_SODIUM_INFO
-            screens.append(.SOD_HIGH_1)
-            screens.append(.SOD_HIGH_2)
-            screens.append(.SOD_HIGH_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.CALCIUM, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_CALCIUM_INFO
-            screens.append(.CAL_LOW_1)
-            screens.append(.CAL_LOW_2)
-            screens.append(.CAL_LOW_3)
-            //screens.append(.CAL_LOW_4)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.VITAMIN_C, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_VITAMIN_C_INFO
-            screens.append(.VIT_C_LOW_1)
-            screens.append(.VIT_C_LOW_2)
-            //screens.append(.VIT_C_LOW_3)
-            screens.append(.VIT_C_LOW_4)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.PH, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_PH_LOW_INFO
-            screens.append(.PH_LOW_1)
-            screens.append(.PH_LOW_2)
-            //screens.append(.PH_LOW_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.PH, evaluation: .high)
-        {
-            contactFlags |= Constants.SAW_PH_HIGH_INFO
-            screens.append(.PH_HIGH_1)
-            screens.append(.PH_HIGH_2)
-            screens.append(.PH_HIGH_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.HYDRATION, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_HYDRATION_LOW_INFO
-            screens.append(.HYDRO_LOW_1)
-            screens.append(.HYDRO_LOW_2)
-            //screens.append(.HYDRO_LOW_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.HYDRATION, evaluation: .high)
-        {
-            contactFlags |= Constants.SAW_HYDRATION_HIGH_INFO
-            screens.append(.HYDRO_HIGH_1)
-            screens.append(.HYDRO_HIGH_2)
-            screens.append(.HYDRO_HIGH_3)
-            //screens.append(.HYDRO_HIGH_4)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_KETONES_LOW_INFO
-            screens.append(.KETO_LOW_1)
-            screens.append(.KETO_LOW_2)
-            screens.append(.KETO_LOW_3)
-            //screens.append(.KETO_LOW_4)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .elevated)
-        {
-            contactFlags |= Constants.SAW_KETONES_ELEVATED_INFO
-            screens.append(.KETO_ELEVATED_1)
-            //screens.append(.KETO_ELEVATED_2)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .high)
-        {
-            contactFlags |= Constants.SAW_KETONES_HIGH_INFO
-            screens.append(.KETO_HIGH_1)
-            screens.append(.KETO_HIGH_2)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.VITAMIN_B7, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_B7_LOW_INFO
-            screens.append(.B7_LOW_1)
-            screens.append(.B7_LOW_2)
-            //screens.append(.B7_LOW_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.CORTISOL, evaluation: .low)
-        {
-            contactFlags |= Constants.SAW_CORTISOL_LOW_INFO
-            screens.append(.CORT_LOW_1)
-            screens.append(.CORT_LOW_2)
-            //screens.append(.CORT_LOW_3)
-        }
-        if testResult.isEvaluatedTo(id: Reagent.ID.CORTISOL, evaluation: .high)
-        {
-            contactFlags |= Constants.SAW_CORTISOL_HIGH_INFO
-            screens.append(.CORT_HIGH_1)
-            screens.append(.CORT_HIGH_2)
-            //screens.append(.CORT_HIGH_3)
-        }
         let contact = Contact.main()!
+        
+        if contact.flags & Constants.SAW_MAGNESIUM_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.MAGNESIUM, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_MAGNESIUM_INFO
+                screens.append(.MAG_LOW_1)
+                screens.append(.MAG_LOW_2)
+                //screens.append(.MAG_LOW_3)
+            }
+        }
+        if contact.flags & Constants.SAW_SODIUM_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.SODIUM, evaluation: .high)
+            {
+                contactFlags |= Constants.SAW_SODIUM_INFO
+                screens.append(.SOD_HIGH_1)
+                screens.append(.SOD_HIGH_2)
+                screens.append(.SOD_HIGH_3)
+            }
+        }
+        if contact.flags & Constants.SAW_CALCIUM_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.CALCIUM, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_CALCIUM_INFO
+                screens.append(.CAL_LOW_1)
+                screens.append(.CAL_LOW_2)
+                screens.append(.CAL_LOW_3)
+                //screens.append(.CAL_LOW_4)
+            }
+        }
+        if contact.flags & Constants.SAW_VITAMIN_C_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.VITAMIN_C, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_VITAMIN_C_INFO
+                screens.append(.VIT_C_LOW_1)
+                screens.append(.VIT_C_LOW_2)
+                //screens.append(.VIT_C_LOW_3)
+                screens.append(.VIT_C_LOW_4)
+            }
+        }
+        if contact.flags & Constants.SAW_PH_LOW_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.PH, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_PH_LOW_INFO
+                screens.append(.PH_LOW_1)
+                screens.append(.PH_LOW_2)
+                //screens.append(.PH_LOW_3)
+            }
+        }
+        if contact.flags & Constants.SAW_PH_HIGH_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.PH, evaluation: .high)
+            {
+                contactFlags |= Constants.SAW_PH_HIGH_INFO
+                screens.append(.PH_HIGH_1)
+                screens.append(.PH_HIGH_2)
+                screens.append(.PH_HIGH_3)
+            }
+        }
+        if contact.flags & Constants.SAW_HYDRATION_LOW_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.HYDRATION, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_HYDRATION_LOW_INFO
+                screens.append(.HYDRO_LOW_1)
+                screens.append(.HYDRO_LOW_2)
+                //screens.append(.HYDRO_LOW_3)
+            }
+        }
+        if contact.flags & Constants.SAW_HYDRATION_HIGH_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.HYDRATION, evaluation: .high)
+            {
+                contactFlags |= Constants.SAW_HYDRATION_HIGH_INFO
+                screens.append(.HYDRO_HIGH_1)
+                screens.append(.HYDRO_HIGH_2)
+                screens.append(.HYDRO_HIGH_3)
+                //screens.append(.HYDRO_HIGH_4)
+            }
+        }
+        if contact.flags & Constants.SAW_KETONES_LOW_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_KETONES_LOW_INFO
+                screens.append(.KETO_LOW_1)
+                screens.append(.KETO_LOW_2)
+                screens.append(.KETO_LOW_3)
+                //screens.append(.KETO_LOW_4)
+            }
+        }
+        if contact.flags & Constants.SAW_KETONES_ELEVATED_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .elevated)
+            {
+                contactFlags |= Constants.SAW_KETONES_ELEVATED_INFO
+                screens.append(.KETO_ELEVATED_1)
+                //screens.append(.KETO_ELEVATED_2)
+            }
+        }
+        if contact.flags & Constants.SAW_KETONES_HIGH_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .high)
+            {
+                contactFlags |= Constants.SAW_KETONES_HIGH_INFO
+                screens.append(.KETO_HIGH_1)
+                screens.append(.KETO_HIGH_2)
+            }
+        }
+        if contact.flags & Constants.SAW_B7_LOW_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.VITAMIN_B7, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_B7_LOW_INFO
+                screens.append(.B7_LOW_1)
+                screens.append(.B7_LOW_2)
+                //screens.append(.B7_LOW_3)
+            }
+        }
+        if contact.flags & Constants.SAW_CORTISOL_LOW_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.CORTISOL, evaluation: .low)
+            {
+                contactFlags |= Constants.SAW_CORTISOL_LOW_INFO
+                screens.append(.CORT_LOW_1)
+                screens.append(.CORT_LOW_2)
+                //screens.append(.CORT_LOW_3)
+            }
+        }
+        if contact.flags & Constants.SAW_CORTISOL_HIGH_INFO == 0
+        {
+            if testResult.isEvaluatedTo(id: Reagent.ID.CORTISOL, evaluation: .high)
+            {
+                contactFlags |= Constants.SAW_CORTISOL_HIGH_INFO
+                screens.append(.CORT_HIGH_1)
+                screens.append(.CORT_HIGH_2)
+                //screens.append(.CORT_HIGH_3)
+            }
+        }
         if contact.flags & Constants.SAW_TESTING_REMINDER != 0
         {
             contactFlags |= Constants.SAW_TESTING_REMINDER
