@@ -10,6 +10,13 @@ import UIKit
 class AfterTestMVVMViewController: UIViewController
 {
     weak var viewModel: AfterTestViewModel!
+    var transition: ScreenTransistion = .fade
+    
+    enum ScreenTransistion
+    {
+        case fade
+        case push
+    }
     
     func initWithViewModel(vm: AfterTestViewModel)
     {

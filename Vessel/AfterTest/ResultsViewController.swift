@@ -227,7 +227,7 @@ class ResultsViewController: UIViewController
             let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
             reagentView.addConstraints([heightConstraint])
             reagentView.alpha = 0.0
-            let reagent = Reagents[testResult.reagents[i].id]!
+            let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
             let value = testResult.reagents[i].value
             let evaluation = reagent.getEvaluation(score: value)
             
@@ -402,7 +402,14 @@ class ResultsViewController: UIViewController
         else
         {
             //navigationController?.popToRootViewController(animated: true)
-            dismiss(animated: true)
+            if let vc = viewModel.nextViewController()
+            {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            else
+            {
+                dismiss(animated: true)
+            }
             //navigationController?.popViewController(animated: true)
         }
     }
