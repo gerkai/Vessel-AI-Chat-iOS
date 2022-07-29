@@ -316,7 +316,7 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 300.0,
                              high: 1000.0,
                              score: 100.0,
-                            evaluation: .high,
+                            evaluation: .excellent,
                             title: NSLocalizedString("Your Magnesium level is great!", comment: ""),
                             description: NSLocalizedString("Good job! You’ve filled up your magnesium tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Magnesium.", comment: ""))]),
  //CORTISOL
