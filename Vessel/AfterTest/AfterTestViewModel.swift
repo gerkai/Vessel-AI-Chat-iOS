@@ -8,7 +8,7 @@
 //  TODO: Some screens aren't iplemented yet. They're defined in the enums below but commented out
 //  TODO: After flow is completed, save contactFlags to Contact.main()!.flags
 
-import Foundation
+import UIKit
 
 class AfterTestViewModel
 {
@@ -259,37 +259,37 @@ class AfterTestViewModel
                             .fade)
                 case .MAG_LOW_2:
                     return (NSLocalizedString("How to Improve Your Magnesium Levels", comment: ""),
-                            NSLocalizedString("Magnesium levels are improved through food and supplementation and may lead to improved sleep or reduced stress in just a few weeks! Remember, it will still take several months for your body to absorb enough Magnesium to improve your test results.", comment: ""),
+                            NSLocalizedString("Magnesium levels are improved through food and supplementation. While your test results may take a few months to improve; you may notice the benefits of improved sleep and reduced stress in just a few weeks.", comment: ""),
                             "mag-top-right",
                             .push)
                 case .SOD_HIGH_1:
                     return (NSLocalizedString("Your Sodium Levels are High", comment: ""),
-                            NSLocalizedString("High levels of sodium in the urine may be caused by a high sodium diet. High sodium levels in the diet can lead to an increase in calcium loss and could contribute to high blood pressure, stroke, and possible kidney failure. The recommended daily intake of sodium is 2,300 mg, approximately 1 teaspoon of salt per day.", comment: ""),
+                            NSLocalizedString("High levels of sodium in the urine may be caused by a high Sodium diet. High Sodium levels in the diet can lead to an increase in Calcium loss and could contribute to high blood pressure, stroke, and possible kidney failure. The recommended daily intake of sodium is 2,300 mg, approximately 1 teaspoon of salt per day.", comment: ""),
                             "sod-top-right",
                             .fade)
                 case .SOD_HIGH_2:
                     return (NSLocalizedString("Importance of Sodium", comment: ""),
-                            NSLocalizedString("Sodium helps maintain the balance of water inside and outside of your cells. It is a key player in muscle function and nerve conduction. We recommend that you do a dietary inventory of your sodium intake for a few days, reading every food label, determining how many serving sizes you ingest, doing the math and adding up your intake. If your food does not have a label (whole grains, vegetables, fruits, legumes, and unsalted nuts) then assume your sodium intake from that food is zero.", comment: ""),
+                            NSLocalizedString("Sodium helps maintain the balance of water inside and outside of your cells. It is a key player in muscle function and nerve conduction. We recommend that you do a dietary inventory of your Sodium intake for a few days, reading every food label, determining how many serving sizes you ingest, doing the math and adding up your intake. If your food does not have a label (whole grains, vegetables, fruits, legumes, and unsalted nuts) then assume your Sodium intake from that food is zero.", comment: ""),
                             "sod-top-right",
                             .fade)
                 case .SOD_HIGH_3:
                     return (NSLocalizedString("How to Lower Sodium Levels", comment: ""),
-                            NSLocalizedString("Do you best to limit your sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to foods when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
+                            NSLocalizedString("Do you best to limit your Sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to foods when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
                             "sod-top-right",
                             .push)
                 case .CAL_LOW_1:
                     return (NSLocalizedString("Your Calcium Level is Low", comment: ""),
-                            NSLocalizedString("Low calcium ln the urine generally stems from low dietary Calcium intake. When levels begin to drop, our bones will release calcium into the blood. In some cases, low calcium can stem from gastric bypass surgury, medications such as diuretics, and low Vitamin D levels.", comment: ""),
+                            NSLocalizedString("Low Calcium in the urine generally stems from low dietary Calcium intake. When levels begin to drop, our bones will release Calcium into the blood. In some cases, low Calcium can stem from gastric bypass surgery, medications such as diuretics, and low Vitamin D levels.", comment: ""),
                             "cal-top-right",
                             .fade)
                 case .CAL_LOW_2:
                     return (NSLocalizedString("Importance of Calcium", comment: ""),
-                        NSLocalizedString("Calcium is most commonly associated with the health of our bones and teeth. However, calcium is essential for nerve and muscle function, regulating heart rhythms and blood clotting. Symptoms of low calcium levels range from Muscle cramps or weakness, numbness or tingling in fingers, and an abnormal heart rate.", comment: ""),
+                        NSLocalizedString("Calcium is most commonly associated with the health of our bones and teeth. However, Calcium is essential for nerve and muscle function, regulating heart rhythms and blood clotting. Symptoms of low Calcium levels range from muscle cramps or weakness, numbness or tingling in fingers, and an abnormal heart rate.", comment: ""),
                             "cal-top-right",
                             .fade)
                 case .CAL_LOW_3:
                     return (NSLocalizedString("How to Raise Calcium Levels", comment: ""),
-                            NSLocalizedString("You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. The TOTAL from Food and Supplements Combined for calcium intake should be no greater than 1000mg. Supplement active forms such as calcium citrate or Calcium malate to improve absorption. Do not take more than 500mg of elemental calcium at one time to maximize intestinal absorption.", comment: ""),
+                            NSLocalizedString("You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. The TOTAL from food and supplements combined for Calcium intake should be no greater than 1000mg. Supplement using active forms such as Calcium citrate or Calcium malate improve absorption. Do not take more than 500mg of elemental Calcium at one time to maximize intestinal absorption.", comment: ""),
                             "cal-top-right",
                             .push)
                 case .VIT_C_LOW_1:
@@ -299,7 +299,7 @@ class AfterTestViewModel
                                 .fade)
                 case .VIT_C_LOW_2:
                         return (NSLocalizedString("How to Optimize Your Vitamin C Levels", comment: ""),
-                                NSLocalizedString("Your Vessel results indicate a low Vitamin C level. Not to worry! Your Vitamin C status can be improved within a few days to a few weeks through food and supplementation.", comment: ""),
+                                NSLocalizedString("Your Vessel results indicate a low Vitamin C level. Not to worry! Your Vitamin C levels can be improved within a few days to a few weeks through food and supplementation.", comment: ""),
                                 "vitc-top-right",
                                 .fade)
                 case .VIT_C_LOW_4:
@@ -336,12 +336,12 @@ class AfterTestViewModel
                     
                 case .HYDRO_LOW_1:
                     return (NSLocalizedString("Your Hydration is Low", comment: ""),
-                    NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management. Properly hydrated cells are essential for optimal health and wellness.", comment: ""),
+                    NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management.", comment: ""),
                     "hydro-top-right",
                             .fade)
                 case .HYDRO_LOW_2:
                     return (NSLocalizedString("How to Optimize Your Hydration", comment: ""),
-                    NSLocalizedString("Low hydration is an indicator that you may not be intaking sufficient fluids. Within a few days of increasing your fluid intake through water and electrolyte rich foods such as: Spinach, Kale, Avocado, Broccoli, Sweet potato, and berries, you’ll be on your way to “good” hydration levels in no time!", comment: ""),
+                    NSLocalizedString("Low hydration is an indicator that you may not be drinking sufficient fluids. Within a few days of increasing your fluid intake through water and electrolyte rich foods such as: Spinach, Kale, Avocado, Broccoli, Sweet potato, and berries, you’ll be on your way to “good” hydration levels in no time!", comment: ""),
                     "hydro-top-right",
                     .push)
                     
@@ -357,7 +357,7 @@ class AfterTestViewModel
                             .fade)
                 case .HYDRO_HIGH_3:
                     return (NSLocalizedString("How to Improve Your Hydration Levels", comment: ""),
-                    NSLocalizedString("In order to fix this, add more electrolytes into your water daily! You will notice an improvement in hydration leveles within a few days by adding an electrolyte tablet, powder, or pinch of sea salt with lemon to boost your electrolyte intake daily, or add electrolyte-rich foods to your diet such as spinach, avocado, broccoli, and strawberries.", comment: ""),
+                    NSLocalizedString("In order to improve your levels, add more electrolytes into your water daily! You will notice an improvement in hydration levels within a few days by adding an electrolyte tablet, powder, or pinch of sea salt with lemon to boost your electrolyte intake daily, or add electrolyte-rich foods to your diet such as spinach, avocado, broccoli, and strawberries.", comment: ""),
                     "hydro-top-right",
                     .push)
                     
@@ -373,7 +373,7 @@ class AfterTestViewModel
                             .fade)
                 case .KETO_LOW_3:
                     return (NSLocalizedString("How Can You Optimize Ketones", comment: ""),
-                    NSLocalizedString("Achieving a \"good\" or \"high\" ketone reading on your Vessel Wellness card requires increased attention to your diet. Ketones are produced when carbohydrate intakes are very low, typically 20-50g/day, healthy fat intake is high, roughly 70% of caloric intake, and protein intake is moderate.", comment: ""),
+                    NSLocalizedString("Achieving a \"good\" or \"high\" ketone reading on your Vessel Wellness card requires increased attention to your diet. Ketones are produced when carbohydrate intake is very low, typically 20-50g/day, healthy fat intake is high, roughly 70% of caloric intake, and protein intake is moderate.", comment: ""),
                     "keto-top-right",
                     .push)
                     
@@ -385,7 +385,7 @@ class AfterTestViewModel
                     
                 case .KETO_HIGH_1:
                     return (NSLocalizedString("Your Ketones are High", comment: ""),
-                    NSLocalizedString("Long periods of intermintent fasting, exercising regularly or testing with a Vessel card shortly after exercise may show an elevated reading. High ketones may also be a sign of diabetic ketoacidosis (DKA), a life-threatening condition associated with Type 1 Diabetes or alcoholism.", comment: ""),
+                    NSLocalizedString("Long periods of intermittent fasting, exercising regularly or testing with a Vessel card shortly after exercise may show an elevated reading. High ketones may also be a sign of diabetic ketoacidosis (DKA), a life-threatening condition associated with Type 1 Diabetes or alcoholism.", comment: ""),
                     "keto-top-right",
                             .fade)
                 case .KETO_HIGH_2:
@@ -396,12 +396,12 @@ class AfterTestViewModel
                     
                 case .B7_LOW_1:
                     return (NSLocalizedString("Your Biotin Levels are Low", comment: ""),
-                    NSLocalizedString("Studies show biotin is important for improved energy, glowing skin, and balanced digestion due to its role in converting your food into the energy you need as well as regulating gene expression.", comment: ""),
+                    NSLocalizedString("Studies show Biotin plays a role in improving energy, glowing skin, and balanced digestion due to its function in converting your food into energy as well as regulating gene expression.", comment: ""),
                     "b7-top-right",
                             .fade)
                 case .B7_LOW_2:
                     return (NSLocalizedString("Reasons Your Biotin is Low", comment: ""),
-                    NSLocalizedString("The most common cause of low biotin is not eating enough B7 in your diet. Other causes may include alcohol consumption and long-term use of certain medications. With proper food and supplementation, you should see an improvement in biotin levels quickly!", comment: ""),
+                    NSLocalizedString("The most common cause of low Biotin is not consuming enough through your diet. Other causes may include alcohol consumption and long-term use of certain medications. With proper food and supplementation, your Biotin levels may improve in a few days!", comment: ""),
                     "b7-top-right",
                     .push)
                     
@@ -418,12 +418,12 @@ class AfterTestViewModel
                     
                 case .CORT_HIGH_1:
                     return (NSLocalizedString("Your Cortisol Levels are High", comment: ""),
-                    NSLocalizedString("Cortisol is a steroid hormone naturally produced in our body for a variety of reasons such as: regulating metabolism, immune functioning, blood pressure, blood sugar, and our sleep/wake cycles.", comment: ""),
+                    NSLocalizedString("Cortisol is an incredibly important steroid hormone naturally produced in our body for a variety of reasons such as to regulate metabolism, a balanced mood, enhance immunity, blood pressure, blood sugar, and our sleep/wake cycles!", comment: ""),
                     "cort-top-right",
                             .fade)
                 case .CORT_HIGH_2:
                     return (NSLocalizedString("What High Cortisol Could Mean", comment: ""),
-                    NSLocalizedString("High cortisol can be a signal your stress levels are elevated. Stress can be physical, emotional, psychological, environmental, infectious, or any combination. By addressing life stressors, diet, sleep, and supplementation you should notice a change in cortisol levels within a few weeks to a few months.", comment: ""),
+                    NSLocalizedString("High cortisol may be a signal that your stress levels are elevated. Stress can be physical, emotional, psychological, environmental, infectious, or any combination. By addressing life stressors, diet, sleep, and supplementation you should notice a change in cortisol levels within a few weeks to a few months.", comment: ""),
                     "cort-top-right",
                     .push)
                     
