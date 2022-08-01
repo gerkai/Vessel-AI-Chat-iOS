@@ -298,55 +298,55 @@ class AfterTestViewModel
                                 "vitc-top-right",
                                 .fade)
                 case .VIT_C_LOW_2:
-                        return (NSLocalizedString("How to optimize your Vitamin C levels", comment: ""),
+                        return (NSLocalizedString("How to Optimize Your Vitamin C Levels", comment: ""),
                                 NSLocalizedString("Your Vessel results indicate a low Vitamin C level. Not to worry! Your Vitamin C status can be improved within a few days to a few weeks through food and supplementation.", comment: ""),
                                 "vitc-top-right",
                                 .fade)
                 case .VIT_C_LOW_4:
-                    return (NSLocalizedString("What about a Vitamin C Supplement?", comment: ""),
+                    return (NSLocalizedString("What About a Vitamin C Supplement?", comment: ""),
                             NSLocalizedString("Vitamin C supplementation can be a great way to boost your overall levels. In addition to consuming vitamin C rich foods, your Vessel fuel supplement plan will contain vitamin C. Through food and supplementation intake, you can expect to see improvements in your Vitamin C results, and feel the benefits within a few weeks!", comment: ""),
                             "vitc-top-right",
                             .push)
                 case .PH_LOW_1:
-                    return (NSLocalizedString("Your pH is low", comment: ""),
+                    return (NSLocalizedString("Your pH is Low", comment: ""),
                             NSLocalizedString("Studies show a balanced pH level is beneficial for improved energy, endurance, and overall body wellness by preserving muscle mass and decreasing the burden placed on kidneys and cells.", comment: ""),
                             "ph-top-right",
                             .fade)
                 case .PH_LOW_2:
-                    return (NSLocalizedString("Improving your pH level", comment: ""),
+                    return (NSLocalizedString("Improving Your pH Level", comment: ""),
                     NSLocalizedString("A low urine pH indicates that your urine is slightly acidic. A common cause of lower (acidic) pH is eating a standard American diet of foods such as soft drinks, alcohol, refined grains, caffeine, and processed dairy. Low pH is associated with feelings of fatigue. By cutting out these foods and increasing alkaline foods you should see an improvement in your pH levels in a few weeks.", comment: ""),
                     "ph-top-right",
                     .push)
                     
                 case .PH_HIGH_1:
-                    return (NSLocalizedString("Your pH is high", comment: ""),
+                    return (NSLocalizedString("Your pH is High", comment: ""),
                     NSLocalizedString("Studies show a balanced pH level is beneficial for improved energy, endurance, and overall body wellness by preserving muscle mass and decreasing the burden placed on kidneys and cells.", comment: ""),
                     "ph-top-right",
                             .fade)
                 case .PH_HIGH_2:
-                    return (NSLocalizedString("What does a high pH mean?", comment: ""),
+                    return (NSLocalizedString("What Does a High pH Mean?", comment: ""),
                     NSLocalizedString("A high urine pH indicates that your urine is slightly more basic than is desired. A basic pH can put you at risk for or indicate a bacterial infection. Please keep in mind a plant-based diet with high intakes of alkaline foods such as leafy greens, colorful fruits, nuts, seeds, and legumes can also result in a high pH.", comment: ""),
                     "ph-top-right",
                             .fade)
                 case .PH_HIGH_3:
-                    return (NSLocalizedString("Monitoring your high pH", comment: ""),
+                    return (NSLocalizedString("Monitoring Your High pH", comment: ""),
                     NSLocalizedString("It is important to closely monitor your high pH and look out for additional symptoms of urinary tract infection. If you suspect that you may have a UTI, consult your primary care practitioner for additional guidance.", comment: ""),
                     "ph-top-right",
                     .push)
                     
                 case .HYDRO_LOW_1:
-                    return (NSLocalizedString("Your Hydration is low", comment: ""),
+                    return (NSLocalizedString("Your Hydration is Low", comment: ""),
                     NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management. Properly hydrated cells are essential for optimal health and wellness.", comment: ""),
                     "hydro-top-right",
                             .fade)
                 case .HYDRO_LOW_2:
-                    return (NSLocalizedString("How to Optimize your Hydration", comment: ""),
+                    return (NSLocalizedString("How to Optimize Your Hydration", comment: ""),
                     NSLocalizedString("Low hydration is an indicator that you may not be intaking sufficient fluids. Within a few days of increasing your fluid intake through water and electrolyte rich foods such as: Spinach, Kale, Avocado, Broccoli, Sweet potato, and berries, you’ll be on your way to “good” hydration levels in no time!", comment: ""),
                     "hydro-top-right",
                     .push)
                     
                 case .HYDRO_HIGH_1:
-                    return (NSLocalizedString("Your Hydration is high", comment: ""),
+                    return (NSLocalizedString("Your Hydration is High", comment: ""),
                     NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management.", comment: ""),
                     "hydro-top-right",
                             .fade)
@@ -356,73 +356,73 @@ class AfterTestViewModel
                     "hydro-top-right",
                             .fade)
                 case .HYDRO_HIGH_3:
-                    return (NSLocalizedString("How to Improve your Hydration Levels", comment: ""),
+                    return (NSLocalizedString("How to Improve Your Hydration Levels", comment: ""),
                     NSLocalizedString("In order to fix this, add more electrolytes into your water daily! You will notice an improvement in hydration leveles within a few days by adding an electrolyte tablet, powder, or pinch of sea salt with lemon to boost your electrolyte intake daily, or add electrolyte-rich foods to your diet such as spinach, avocado, broccoli, and strawberries.", comment: ""),
                     "hydro-top-right",
                     .push)
                     
                 case .KETO_LOW_1:
-                    return (NSLocalizedString("Your Ketones are low", comment: ""),
+                    return (NSLocalizedString("Your Ketones are Low", comment: ""),
                     NSLocalizedString("Let’s break down how to optimize your production of ketones using the ketogenic diet to raise your level. Keep in mind that it can take several weeks to a month to increase ketone levels.", comment: ""),
                     "keto-top-right",
                             .fade)
                 case .KETO_LOW_2:
-                    return (NSLocalizedString("The benefits of Ketones", comment: ""),
+                    return (NSLocalizedString("The Benefits of Ketones", comment: ""),
                     NSLocalizedString("Studies show that ketones are beneficial for improved focus, healthy weight management, increased energy, and a balanced mood through increasing your metabolic machinery in your cells to more efficiently burn fat for fuel with a lower production of harmful free radicals.", comment: ""),
                     "keto-top-right",
                             .fade)
                 case .KETO_LOW_3:
-                    return (NSLocalizedString("How can you optimize Ketones", comment: ""),
+                    return (NSLocalizedString("How Can You Optimize Ketones", comment: ""),
                     NSLocalizedString("Achieving a \"good\" or \"high\" ketone reading on your Vessel Wellness card requires increased attention to your diet. Ketones are produced when carbohydrate intakes are very low, typically 20-50g/day, healthy fat intake is high, roughly 70% of caloric intake, and protein intake is moderate.", comment: ""),
                     "keto-top-right",
                     .push)
                     
                 case .KETO_ELEVATED_1:
-                    return (NSLocalizedString("Your Ketones are elevated", comment: ""),
+                    return (NSLocalizedString("Your Ketones are Elevated", comment: ""),
                     NSLocalizedString("Great job you are in ketosis! This means that your body is producing ketones as an alternate fuel source and you may be reaping the benefits of improved energy, focus, and healthy weight management.", comment: ""),
                     "keto-top-right",
                     .push)
                     
                 case .KETO_HIGH_1:
-                    return (NSLocalizedString("Your Ketones are high", comment: ""),
+                    return (NSLocalizedString("Your Ketones are High", comment: ""),
                     NSLocalizedString("Long periods of intermintent fasting, exercising regularly or testing with a Vessel card shortly after exercise may show an elevated reading. High ketones may also be a sign of diabetic ketoacidosis (DKA), a life-threatening condition associated with Type 1 Diabetes or alcoholism.", comment: ""),
                     "keto-top-right",
                             .fade)
                 case .KETO_HIGH_2:
-                    return (NSLocalizedString("We recommend", comment: ""),
+                    return (NSLocalizedString("We Recommend", comment: ""),
                     NSLocalizedString("We recommend speaking with your primary care doctor if you continue to receive a high ketone level.", comment: ""),
                     "keto-top-right",
                     .push)
                     
                 case .B7_LOW_1:
-                    return (NSLocalizedString("Your Biotin levels are Low", comment: ""),
+                    return (NSLocalizedString("Your Biotin Levels are Low", comment: ""),
                     NSLocalizedString("Studies show biotin is important for improved energy, glowing skin, and balanced digestion due to its role in converting your food into the energy you need as well as regulating gene expression.", comment: ""),
                     "b7-top-right",
                             .fade)
                 case .B7_LOW_2:
-                    return (NSLocalizedString("Reasons your Biotin is Low", comment: ""),
+                    return (NSLocalizedString("Reasons Your Biotin is Low", comment: ""),
                     NSLocalizedString("The most common cause of low biotin is not eating enough B7 in your diet. Other causes may include alcohol consumption and long-term use of certain medications. With proper food and supplementation, you should see an improvement in biotin levels quickly!", comment: ""),
                     "b7-top-right",
                     .push)
                     
                 case .CORT_LOW_1:
-                    return (NSLocalizedString("Your Cortisol levels are Low", comment: ""),
+                    return (NSLocalizedString("Your Cortisol Levels are Low", comment: ""),
                     NSLocalizedString("Cortisol is an incredibly important steroid hormone naturally produced in our body for a variety of reasons such as to regulate metabolism, a balanced mood, enhance immunity, blood pressure, blood sugar, and our sleep/wake cycles!", comment: ""),
                     "cort-top-right",
                             .fade)
                 case .CORT_LOW_2:
-                    return (NSLocalizedString("What Low Cortisol could mean", comment: ""),
+                    return (NSLocalizedString("What Low Cortisol Could Mean", comment: ""),
                     NSLocalizedString("Low cortisol can be a signal your body has experienced high amounts of stress for long periods of time and your adrenal glands may have difficulty creating enough cortisol. Since it took a while to tire out your adrenal glands, it may take weeks to months of addressing life stressors, diet, sleep, and supplementation to notice a change in cortisol levels.", comment: ""),
                     "cort-top-right",
                     .push)
                     
                 case .CORT_HIGH_1:
-                    return (NSLocalizedString("Your Cortisol levels are High", comment: ""),
+                    return (NSLocalizedString("Your Cortisol Levels are High", comment: ""),
                     NSLocalizedString("Cortisol is a steroid hormone naturally produced in our body for a variety of reasons such as: regulating metabolism, immune functioning, blood pressure, blood sugar, and our sleep/wake cycles.", comment: ""),
                     "cort-top-right",
                             .fade)
                 case .CORT_HIGH_2:
-                    return (NSLocalizedString("What High Cortisol could mean", comment: ""),
+                    return (NSLocalizedString("What High Cortisol Could Mean", comment: ""),
                     NSLocalizedString("High cortisol can be a signal your stress levels are elevated. Stress can be physical, emotional, psychological, environmental, infectious, or any combination. By addressing life stressors, diet, sleep, and supplementation you should notice a change in cortisol levels within a few weeks to a few months.", comment: ""),
                     "cort-top-right",
                     .push)
