@@ -145,6 +145,18 @@ class Contact: CoreObjectProtocol
         return false
     }
     
+    func isOnDiet(_ diet: Diet.ID) -> Bool
+    {
+        for id in diet_ids
+        {
+            if id == diet.rawValue
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     enum CodingKeys: String, CodingKey
     {
         case id
