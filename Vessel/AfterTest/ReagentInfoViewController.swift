@@ -9,12 +9,12 @@ import UIKit
 
 class ReagentInfoViewController: AfterTestMVVMViewController
 {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailsLabel: UILabel!
-    @IBOutlet weak var reagentImage: UIImageView!
-    @IBOutlet weak var progressAmount: NSLayoutConstraint!
-    @IBOutlet weak var progressView: UIView!
-    @IBOutlet weak var progressDot: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var detailsLabel: UILabel!
+    @IBOutlet weak private var reagentImage: UIImageView!
+    @IBOutlet weak private var progressAmount: NSLayoutConstraint!
+    @IBOutlet weak private var progressView: UIView!
+    @IBOutlet weak private var progressDot: UIImageView!
     
     var titleText: String!
     var details: String!

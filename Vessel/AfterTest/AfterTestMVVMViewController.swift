@@ -52,7 +52,7 @@ class AfterTestMVVMViewController: UIViewController
             vc.viewModel = viewModel
             vc.titleText = result.title
             vc.details = result.details
-            vc.image = result.image
+            vc.image = UIImage.init(named: result.imageName)
             vc.transition = result.transition
             vc.backTransition = self.transition
             

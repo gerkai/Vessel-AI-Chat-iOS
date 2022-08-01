@@ -34,7 +34,7 @@ struct TestResult: Codable
         return result
     }
     
-    func getResult(id : Reagent.ID) -> ReagentResult?
+    func getResult(id: Reagent.ID) -> ReagentResult?
     {
         var result: ReagentResult?
         for reagent in reagents
