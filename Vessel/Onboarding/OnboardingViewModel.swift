@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    //var curState: OnboardingState = .Initial
+    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
@@ -240,7 +240,8 @@ class OnboardingViewModel
         switch type
         {
             case .Diet:
-                return (Diets[row].name.capitalized, Diets[row].id, image: nil)
+                let dietID = Diet.ID.allCases[row]
+            return (Diets[dietID]!.name.capitalized, dietID.rawValue, image: nil)
             case .Allergy:
                 return (Allergies[row].name.capitalized, Allergies[row].id, image: nil)
             case .Goal:
