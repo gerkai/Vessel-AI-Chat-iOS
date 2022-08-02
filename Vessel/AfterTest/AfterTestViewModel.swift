@@ -8,7 +8,7 @@
 //  TODO: Some screens aren't iplemented yet. They're defined in the enums below but commented out
 //  TODO: After flow is completed, save contactFlags to Contact.main()!.flags
 
-import UIKit
+import Foundation
 
 class AfterTestViewModel
 {
