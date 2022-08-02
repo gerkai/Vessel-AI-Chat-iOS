@@ -12,12 +12,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var noticeLabel: UILabel!
-    @IBOutlet weak var overlayTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var overlayBotConstraint: NSLayoutConstraint!
     @IBOutlet weak var darkenView: UIView!
-    @IBOutlet weak var overlayView: UIImageView!
     @IBOutlet weak var postCaptureView: UIView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var cardView: UIView!
     
     var captureSession: AVCaptureSession!
     private var avCaptureDevice: AVCaptureDevice?
@@ -99,6 +97,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     override func viewDidLayoutSubviews()
     {
         previewLayer.frame = cameraView.bounds
+        drawingView.validArea = cardView.frame
     }
     
     func failed()
@@ -172,8 +171,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     @IBAction func onRetake()
     {
         captureSession.startRunning()
-        overlayView.alpha = 0.0
-        overlayView.isHidden = false
         darkenView.alpha = 0.0
         darkenView.isHidden = false
         processingPhoto = false
@@ -183,7 +180,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             self.postCaptureView.alpha = 0.0
             self.backButton.alpha = 1.0
-            self.overlayView.alpha = 1.0
             self.darkenView.alpha = 1.0
         }
         completion:
@@ -280,7 +276,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             
             drawingView.qrBox = nil
             drawingView.setNeedsDisplay()
-            overlayView.isHidden = true
             darkenView.isHidden = true
             
             let photoSettings = AVCapturePhotoSettings(rawPixelFormatType: availableRawFormat, processedFormat: [AVVideoCodecKey: AVVideoCodecType.jpeg])
