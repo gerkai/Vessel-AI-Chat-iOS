@@ -1014,13 +1014,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Xjl-My-7AZ">
-                                                <rect key="frame" x="0.0" y="77" width="354" height="56"/>
+                                                <rect key="frame" x="0.0" y="77" width="354" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="769-bH-IaC">
-                                                        <rect key="frame" x="0.0" y="8" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="4" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubr-wF-3hZ">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="16" y="9" width="8" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1040,7 +1040,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-8g-Bbw">
-                                                        <rect key="frame" x="52" y="0.0" width="302" height="56"/>
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="48"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Dip the test card vertically, just past the three white squares.">
                                                                 <attributes>
@@ -1055,13 +1055,13 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Hn6-i0-Q5d">
-                                                <rect key="frame" x="0.0" y="165" width="354" height="56"/>
+                                                <rect key="frame" x="0.0" y="157" width="354" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rk4-Xh-VgB">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-gO-jXg">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="14" y="9" width="12" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1081,7 +1081,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80i-im-81O">
-                                                        <rect key="frame" x="52" y="0.0" width="302" height="56"/>
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="48"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Dip for only 1-2 seconds. Count in your head 'one one-thousand' then pull out.">
                                                                 <attributes>
@@ -1096,10 +1096,10 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2P-SN-L4V">
-                                                <rect key="frame" x="0.0" y="253" width="354" height="407"/>
+                                                <rect key="frame" x="0.0" y="237" width="354" height="423"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peeInCupTipImage" translatesAutoresizingMaskIntoConstraints="NO" id="9fp-k9-Fqt">
-                                                        <rect key="frame" x="-30" y="0.0" width="414" height="407"/>
+                                                        <rect key="frame" x="-30" y="0.0" width="414" height="423"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1142,7 +1142,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-G1-kUi">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="16" y="9" width="8" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1162,7 +1162,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZR-EX-1nK">
-                                                        <rect key="frame" x="52" y="6" width="302" height="28"/>
+                                                        <rect key="frame" x="52" y="8" width="302" height="24"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Hold the test card vertically.">
                                                                 <attributes>
@@ -1177,13 +1177,13 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="z1u-AF-xcA">
-                                                <rect key="frame" x="0.0" y="141" width="354" height="56"/>
+                                                <rect key="frame" x="0.0" y="141" width="354" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHh-n6-pxF">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOU-hS-UNE">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="14" y="9" width="12" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1203,7 +1203,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhn-Xw-VMc">
-                                                        <rect key="frame" x="52" y="0.0" width="302" height="56"/>
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="48"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Pee on the 3 white squares and the 15 colored squares.">
                                                                 <attributes>
@@ -1218,13 +1218,13 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="q4E-7a-fAj">
-                                                <rect key="frame" x="0.0" y="225" width="354" height="112"/>
+                                                <rect key="frame" x="0.0" y="217" width="354" height="96"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIm-wP-ZKK">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-63-WlJ">
-                                                                <rect key="frame" x="14.5" y="8.5" width="11.5" height="23.5"/>
+                                                                <rect key="frame" x="14.5" y="9" width="11.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1244,7 +1244,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh7-Ki-7w9">
-                                                        <rect key="frame" x="52" y="0.0" width="302" height="112"/>
+                                                        <rect key="frame" x="52" y="0.0" width="302" height="96"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">Pee on the card for 3 to 5 seconds. Count in your head 'one one-thousand, two one-thousand', etc. and stop at 'four one-thousand'.</string>
@@ -1260,7 +1260,7 @@
                                                 </subviews>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peeOnCardTipImage" translatesAutoresizingMaskIntoConstraints="NO" id="bMg-Sg-aIs">
-                                                <rect key="frame" x="0.0" y="365" width="354" height="295"/>
+                                                <rect key="frame" x="0.0" y="341" width="354" height="319"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>

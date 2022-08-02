@@ -19,6 +19,34 @@ struct TestResult: Codable
         case errors
         case reagents
     }
+    
+    func isEvaluatedTo(id: Reagent.ID, evaluation: Evaluation) -> Bool
+    {
+        var result = false
+        if let reagentResult = getResult(id: id)
+        {
+            let reagentEval = Reagent.evaluation(id: id, value: reagentResult.value)
+            if reagentEval == evaluation
+            {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func getResult(id: Reagent.ID) -> ReagentResult?
+    {
+        var result: ReagentResult?
+        for reagent in reagents
+        {
+            if id.rawValue == reagent.id
+            {
+                result = reagent
+                break
+            }
+        }
+        return result
+    }
 }
 
 struct ReagentResult: Codable

@@ -78,11 +78,13 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         /*
         let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
-        vc.mockTestResult()
+        let vc = storyboard.instantiateViewController(withIdentifier: "ResultsNavController") as! UINavigationController
+        let root = vc.viewControllers[0] as! ResultsViewController
+        root.mockTestResult()
         //self.viewModel.uploadingFinished()
         //self.navigationController?.pushViewController(vc, animated: true)
         self.present(vc, animated: true)
+        //self.navigationController?.pushViewController(vc, animated: true)
         */
         if isWithinTestingWindow()
         {

@@ -31,6 +31,7 @@ class ResultsViewController: UIViewController
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
+    var viewModel: AfterTestViewModel!
     
     var numTiles = 10
     var curTile = 0
@@ -47,6 +48,7 @@ class ResultsViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        viewModel = AfterTestViewModel(testResult: testResult)
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
         originalStaggerConstraintConstant = staggerConstraint.constant
@@ -56,6 +58,11 @@ class ResultsViewController: UIViewController
            _ in self.onTick()
         }
         showRanges()
+    }
+    
+    deinit
+    {
+        print("ResultsViewController deinit")
     }
     
     func showRanges()
@@ -225,7 +232,7 @@ class ResultsViewController: UIViewController
             let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
             reagentView.addConstraints([heightConstraint])
             reagentView.alpha = 0.0
-            let reagent = Reagents[testResult.reagents[i].id]!
+            let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
             let value = testResult.reagents[i].value
             let evaluation = reagent.getEvaluation(score: value)
             
@@ -399,9 +406,30 @@ class ResultsViewController: UIViewController
         }
         else
         {
-            //navigationController?.popToRootViewController(animated: true)
-            dismiss(animated: true)
-            //navigationController?.popViewController(animated: true)
+            let result = viewModel.nextViewControllerData()
+            if result.transition == .dismiss
+            {
+                if self.navigationController != nil
+                {
+                    navigationController?.popViewController(animated: true)
+                }
+                else
+                {
+                    dismiss(animated: true)
+                }
+            }
+            else
+            {
+                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
+                vc.viewModel = viewModel
+                vc.titleText = result.title
+                vc.details = result.details
+                vc.image = UIImage.init(named: result.imageName)
+                vc.transition = result.transition
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

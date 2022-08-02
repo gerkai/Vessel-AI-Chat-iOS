@@ -90,17 +90,27 @@ struct Bucket
 {
     let low: Double
     let high: Double
-    //let reportedValue: Float?
     let score: Float
     let evaluation: Evaluation
-    let title: String
-    let description: String
-    //let hint: Hint?
-    //let recommendations: RecommendationPlans?
 }
 
 struct Reagent
 {
+    enum ID: Int
+    {
+        case PH = 1
+        case HYDRATION = 2
+        case KETONES_A = 3
+        case VITAMIN_C = 4
+        case MAGNESIUM = 5
+        case CORTISOL = 8
+        case VITAMIN_B7 = 11
+        case CREATININE = 12
+        case CALCIUM = 18
+        case NITRITE = 21
+        case LEUKOCYTE = 22
+        case SODIUM = 23
+    }
     var name: String
     var unit: String // pH, sp gr, mmol/L gm/L, µg/L, etc
     var consumptionUnit: String //mg, µg, etc.
@@ -108,7 +118,25 @@ struct Reagent
     var recommendedDailyAllowance: Int?
     var imageName: String
     var buckets: [Bucket]
-    //var supplementID: Int?
+    
+    //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
+    //returns .notAvailable if invalid parameter given
+    static func evaluation(id: Reagent.ID, value: Double) -> Evaluation
+    {
+        var eval = Evaluation.notAvailable
+        
+        if let reagent = Reagents[id]
+        {
+            for bucket in reagent.buckets
+            {
+                if (value >= bucket.low) && (value < bucket.high)
+                {
+                    eval = bucket.evaluation
+                }
+            }
+        }
+        return eval
+    }
     
     func getEvaluation(score: Double) -> Evaluation
     {
@@ -165,9 +193,9 @@ struct Reagent
 }
 
 //Here are the reagents used by the app
-let Reagents: [Int: Reagent] =
+let Reagents: [Reagent.ID: Reagent] =
 //PH
-[1: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
+[Reagent.ID.PH: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
             unit: NSLocalizedString("pH", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("pH", comment: "consumption unit"),
             type: .Colorimetric,
@@ -176,23 +204,18 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 5.0,
                              high: 6.0,
                              score: 30.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("You're a bit acidic", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 6.0,
                              high: 7.75,
                              score: 100.0,
-                             evaluation: .good,
-                             title: NSLocalizedString("Your pH level is balanced", comment: ""),
-                             description: NSLocalizedString("Good job! You’re keeping your body’s acid-base status well balanced. Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience by having a balanced pH.", comment: "")),
+                             evaluation: .good),
                       Bucket(low: 7.78,
                              high: 8.0,
                              score: 30.0,
-                             evaluation: .high,
-                             title: NSLocalizedString("Your urine pH is too basic", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: ""))]),
+                             evaluation: .high)]),
+
  //HYDRATION
- 2: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
+ Reagent.ID.HYDRATION: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
             unit: NSLocalizedString("sp gr", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .Colorimetric,
@@ -201,29 +224,22 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 1.0,
                              high: 1.0015,
                              score: 80.0,
-                             evaluation: .high,
-                             title: NSLocalizedString("You’re over-hydrated", comment: ""),
-                             description: NSLocalizedString("Oops, you overshot your goal. Your urine is very diluted with water. Try consuming more electrolytes. The best way to do this is by eating more balanced meals that include plenty of fresh fruits and vegetables. Check out your Vessel food recommendations for personalized food recommendations.", comment: "")),
+                             evaluation: .high),
                         Bucket(low: 1.0015,
                                 high: 1.006,
                                 score: 100.0,
-                                evaluation: .good,
-                                title: NSLocalizedString("Your body is well hydrated", comment: ""),
-                                description: NSLocalizedString("Good job! You’re getting enough water to help your body function at its best. Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being well hydrated.", comment: "")),
+                                evaluation: .good),
                         Bucket(low: 1.006,
                                  high: 1.015,
                                  score: 80.0,
-                                 evaluation: .low,
-                                 title: NSLocalizedString("You're under hydrated", comment: ""),
-                                 description: NSLocalizedString("You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: "")),
+                                 evaluation: .low),
                         Bucket(low: 1.015,
                                  high: 1.03,
                                  score: 20.0,
-                                 evaluation: .veryLow,
-                                 title: NSLocalizedString("You’re dehydrated", comment: ""),
-                                 description: NSLocalizedString("Not to worry. You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: ""))]),
+                                 evaluation: .veryLow)]),
+
  //KETONES
- 3: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
+ Reagent.ID.KETONES_A: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
             unit: NSLocalizedString("mmol/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("", comment: "consumption unit"),
             type: .Colorimetric,
@@ -232,17 +248,14 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 2.21,
                              score: 0.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("Your Ketone levels are normal.", comment: ""),
-                             description: NSLocalizedString("This is totally normal in people not trying to do a ketogenic diet. If you are, you might want to re-visit the calculations of your target fat, protein, and carbs each day. We’re here to help. Tap below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 2.21,
                              high: 8.81,
                               score: 0,
-                              evaluation: .high,
-                              title: NSLocalizedString("Your Ketone levels are elevated.", comment: ""),
-                              description: NSLocalizedString("Good job! The diet is working and your body is switching to ketone bodies as its primary fuel source. If you’re not on a ketogenic diet please check in with your doctor as this could be a sign of an underlying disease. Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Ketones.", comment: ""))]),
+                              evaluation: .high)]),
+
  //VITAMIN C
- 4: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
+ Reagent.ID.VITAMIN_C: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
@@ -251,17 +264,14 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 350.0,
                              score: 20.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("You’re low in Vitamin C", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-3 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 350,
                              high: 1000,
                              score: 100.0,
-                              evaluation: .good,
-                              title: NSLocalizedString("Your Vitamin C level is great!", comment: ""),
-                              description: NSLocalizedString("Good job! You’ve filled up your Vitamin C tank, and a slight excess is spilling out into your urine. This is just what you want. Check out the Science section below to see some of the potential benefits you may experience from being in a good range of Vitamin C.", comment: ""))]),
+                              evaluation: .good)]),
+
  //MAGNESIUM
- 5: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
+ Reagent.ID.MAGNESIUM: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
@@ -270,23 +280,18 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 100.0,
                              score: 20.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("You’re low in Magnesium", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 100.0,
                             high: 300.0,
                              score: 80.0,
-                            evaluation: .good,
-                            title: NSLocalizedString("Your Magnesium level is good!", comment: ""),
-                            description: NSLocalizedString("Good job! You’ve filled up your magnesium tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Magnesium.", comment: "")),
+                            evaluation: .good),
                       Bucket(low: 300.0,
                              high: 1000.0,
                              score: 100.0,
-                            evaluation: .high,
-                            title: NSLocalizedString("Your Magnesium level is great!", comment: ""),
-                            description: NSLocalizedString("Good job! You’ve filled up your magnesium tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Magnesium.", comment: ""))]),
+                            evaluation: .excellent)]),
+
  //CORTISOL
- 8: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
+ Reagent.ID.CORTISOL: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
             type: .LFA,
@@ -295,23 +300,18 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 50.0,
                              score: 80.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("Your Cortisol level is low.", comment: ""),
-                             description: NSLocalizedString("This might be a sign that your body has experienced a high amount of stress for a long period of time, and your adrenal glands may have difficulty creating enough cortisol.  Take a look at your personalized lifestyle recommendations to find out some ways to get your cortisol back in the normal range.  Be patient because it can take several months to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 50.0,
                              high: 150.0,
                                 score: 100.0,
-                                evaluation: .good,
-                                title: NSLocalizedString("Your Cortisol level is great!", comment: ""),
-                                description: NSLocalizedString("Good job! Your cortisol levels are in the sweet spot. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Cortisol.", comment: "")),
+                                evaluation: .good),
                       Bucket(low: 150.0,
                              high: 405.0,
                                  score: 50.0,
-                                 evaluation: .high,
-                                 title: NSLocalizedString("Your Cortisol levels are high", comment: ""),
-                                 description: NSLocalizedString("This is usually a sign that your body has mounted a stress response to protect you. This can (and should) happen if you’re sick, have an an injury that is healing, or just did a strenuous workout. However levels should normalize shortly after, so keep checking. Levels are often high due to acute stress, so be sure to check out the lifestyle recommendations below to reduce stress and increase your natural relaxation response.", comment: ""))]),
+                                 evaluation: .high)]),
+
  //VITAMIN B7
- 11: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
+ Reagent.ID.VITAMIN_B7: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .LFA,
@@ -320,17 +320,14 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 10.0,
                              score: 50.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("You’re low in Biotin", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-4 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 10.0,
                              high: 20.0,
                              score: 100.0,
-                              evaluation: .good,
-                              title: NSLocalizedString("Your Biotin level is great!", comment: ""),
-                              description: NSLocalizedString("Good job! You’ve filled up your body’s Biotin tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Biotin.", comment: ""))]),
+                              evaluation: .good)]),
+
  //CALCIUM
- 18: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
+ Reagent.ID.CALCIUM: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
             unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -339,23 +336,18 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 30.0,
                              score: 30.0,
-                             evaluation: .low,
-                             title: NSLocalizedString("You’re low in Calcium", comment: ""),
-                             description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. The TOTAL from Food and Supplements Combined for calcium intake should be no greater than 1000mg. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this! (Note that levels may also be low if you’re on a blood pressure medication called a thiazide diuretic. If you are, unfortunately, you can’t rely on this test to get an accurate calcium level.).", comment: "")),
+                             evaluation: .low),
                       Bucket(low: 30.0,
                              high: 110.0,
                                 score: 100.0,
-                                evaluation: .good,
-                                title: NSLocalizedString("Your Calcium level is great!", comment: ""),
-                                description: NSLocalizedString("Good job! You’ve filled up your body’s calcium tank and a slight excess is spilling out into your urine. This is just what you want. Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Calcium.", comment: "")),
+                                evaluation: .good),
                       Bucket(low: 110.0,
                              high: 160.0,
                                  score: 70.0,
-                                 evaluation: .high,
-                                 title: NSLocalizedString("Your Calcium level is too high", comment: ""),
-                                 description: NSLocalizedString("Oops, you overshot the goal. Your calcium level is higher than what your body wants right now, and a high concentration of calcium is being dumped out into your urine. If you’re taking calcium supplements, consider stopping them or reducing the dose. You may also want to cut down on Kiwifruit, bell peppers, and citrus. (Note, levels may be artificially high if you’re on a medication called a loop diuretic such as Lasix/furosemide. If so, you unfortunately can't rely on our test to assess your Calcium levels.)", comment: ""))]),
+                                 evaluation: .high)]),
+
  //NITRITES
- 21: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
+ Reagent.ID.NITRITE: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -364,23 +356,18 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 1.0,
                              score: 0.0,
-                             evaluation: .good,
-                             title: NSLocalizedString("Nitrites are not detected in urine", comment: ""),
-                             description: NSLocalizedString("Vessel is not intended to be used as a tool to screen for or diagnose illness or disease. Our product has the ability to screen for nitrates, a breakdown product of certain bacteria, in the urine. Your test showed no nitrites, but urogenital infections can be present despite a lack of nitrites. Therefore if you have any symptoms such as burning during urination, frequent urination, abdomen/pelvic pain, or fever/chills, we recommend being evaluated by your physician or medical team. As with any test, false negatives are always possible.", comment: "")),
+                             evaluation: .good),
                       Bucket(low: 1.0,
                              high: 3.0,
                                 score: 0.0,
-                                evaluation: .low,
-                                title: NSLocalizedString("A low level of nitrites is detected in your urine", comment: ""),
-                                description: NSLocalizedString("Vessel is not intended to be used as a tool to screen for or diagnose illness or disease. However, our product has the ability to screen for nitrates, which are breakdown products of certain bacteria, in the urine. Your results detected low levels of nitrites, which may be a sign of a urogenital infection. Low detection of nitrites are common and can be benign. If you have any symptoms such as discomfort during urination, the urgency to urinate, or more frequent urination, fever, chills, abdomen, or flank pain, and nausea, Please be evaluated by your physician or medical team. As with any screening test, False positives and false negatives are always possible.", comment: "")),
+                                evaluation: .low),
                       Bucket(low: 3.0,
                              high: 8.0,
                                  score: 0.0,
-                                 evaluation: .high,
-                                 title: NSLocalizedString("Nitrites are detected high in urine", comment: ""),
-                                 description: NSLocalizedString("Vessel is not intended to be used as a tool to screen for or diagnose illness or disease. However, our product has the ability to screen for nitrates, which are a breakdown product of certain bacteria, in the urine. Your results detect high levels of nitrites in the urine. This may indicate a potential urogenital infection. While False positives are always possible, it is recommended you be evaluated by your physician or medical team, especially if you are experiencing any of the following symptoms: discomfort during urination, the urgency to urinate, or more frequent urination, fever, chills, abdomen, or flank pain, and nausea.", comment: ""))]),
+                                 evaluation: .high)]),
+
  //LEUKOCYTE
- 22: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
+ Reagent.ID.LEUKOCYTE: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
             unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
             type: .Colorimetric,
@@ -389,17 +376,14 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 60.0,
                              score: 0.0,
-                             evaluation: .notDetected,
-                             title: NSLocalizedString("PLACEHOLDER TEXT - NEGATIVE LEUKOCYTE", comment: ""),
-                             description: NSLocalizedString("PLACEHOLDER DESCRIPTION FOR NEGATIVE LEUKOCYTE", comment: "")),
+                             evaluation: .notDetected),
                       Bucket(low: 60.0,
                              high: 120.0,
                              score: 0.0,
-                              evaluation: .detected,
-                              title: NSLocalizedString("PLACEHOLDER TEXT - POSITIVE LEUKOCYTE", comment: ""),
-                              description: NSLocalizedString("PLACEHOLDER DESCRIPTION - POSITIVE LEUKOCYTE", comment: ""))]),
+                              evaluation: .detected)]),
+
  //SODIUM CHLORIDE
- 23: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
+ Reagent.ID.SODIUM: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
             unit: NSLocalizedString("mEq/L", comment: "unit of measurement"),
             consumptionUnit: NSLocalizedString("mEq", comment: "consumption unit"),
             type: .Colorimetric,
@@ -408,13 +392,9 @@ let Reagents: [Int: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 50.0,
                              score: 100.0,
-                             evaluation: .good,
-                             title: NSLocalizedString("Your Sodium results are good", comment: ""),
-                             description: NSLocalizedString("Good job! Your body is excreting healthy amounts of sodium in your urine. This is just what you want. Sodium in urine can be caused by the natural filtration of your kidneys, dietary sodium and hydration intake. Make sure you keep your sodium intake to about 2300mg, 1 teaspoon daily. To keep a healthy sodium intake, you can do dietary inventory of your sodium intake for a few days, reading every food label, determining how many serving sizes you ingest, doing the math and adding up your intake. If your food does not have a label (whole fruits and veggies) then assume your sodium intake from that food is zero. Check out the Science section below to see some of the potential benefits you may experience from being in a good range for sodium. Be sure to chat in with one of our health coaches to better understand food labels and sodium intake.", comment: "")),
+                             evaluation: .good),
                       Bucket(low: 50.0,
                              high: 120.0,
                              score: 50.0,
-                              evaluation: .high,
-                              title: NSLocalizedString("Your Sodium results are too high", comment: ""),
-                              description: NSLocalizedString("Oops, you overshot the goal. Your sodium level is higher than what your body ideally needs at the moment, and a high concentration of sodium is being excreted out into your urine. We recommend that you do a dietary inventory of your sodium intake for a few days, reading every food label, determining how many serving sizes you ingest, doing the math and adding up your intake. If your food does not have a label (whole grains, vegetables, fruits, legumes, and unsalted nuts) then assume your sodium intake from that food is zero. We also recommend that you do not restrict or increase your sodium solely as a result of your Vessel test results. This is because too little or too much sodium seems to be connected to adverse cardiac events (that’s right—too little salt is bad for you too, but very few Americans are in danger of having this issue due to the large amount of sodium already added to the foods we eat). Keep track of any table salt you use to season your food and sodium in any beverages too! Ideally, you want to limit your sodium to no more than 2300mg of sodium each day, approximately 1 teaspoon.", comment: ""))]),
+                              evaluation: .high)]),
 ]
