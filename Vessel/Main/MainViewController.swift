@@ -12,6 +12,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     var didLayout = false
     let vesselButtonIndex = 2
     let takeTestViewModel = TakeTestViewModel()
+    private var vesselButton: BounceButton?
     
     override func viewDidLoad()
     {
@@ -62,12 +63,20 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
             //bar to the correct index.
             
             let button = BounceButton()
+            button.alpha = 0
             button.setImage(UIImage(named: "VesselButton"), for: .normal) //size is inhereted from the image
             button.scale = 1.2
             button.setupView()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(vesselButtonPressed), for: .touchUpInside)
-            
+            vesselButton = button
+
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn)
+            { [weak self] in
+                guard let self = self else { return }
+                self.vesselButton?.alpha = 1
+            }
+  
             view.addSubview(button)
             tabBar.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
             tabBar.topAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
@@ -164,6 +173,19 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
                 let rootVC = dest.viewControllers.first as! TakeTestMVVMViewController
                 rootVC.viewModel = takeTestViewModel
             }
+        }
+    }
+    
+    func hideVesselButton(_ hide: Bool)
+    {
+        if hide
+        {
+            vesselButton?.removeFromSuperview()
+            vesselButton = nil
+        }
+        else
+        {
+            didLayout = false
         }
     }
     

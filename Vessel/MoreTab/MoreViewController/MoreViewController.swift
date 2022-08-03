@@ -58,12 +58,13 @@ extension MoreViewController: UITableViewDelegate
             return
         }
         
-        print("\(option.text)")
         switch option
         {
         case .myAccount:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "MyAccountViewController") as! MyAccountViewController
+            vc.hidesBottomBarWhenPushed = true
+            mainViewController?.hideVesselButton(true)
             navigationController?.pushViewController(vc, animated: true)
         case .takeATest:
             mainViewController?.vesselButtonPressed()

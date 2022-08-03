@@ -194,7 +194,8 @@ public final class Resolver
     ///
     /// - returns: Instance of specified Service.
     ///
-    public static func optional<Service>(_ type: Service.Type = Service.self, name: String? = nil, args: Any? = nil) -> Service? {
+    public static func optional<Service>(_ type: Service.Type = Service.self, name: String? = nil, args: Any? = nil) -> Service?
+    {
         return root.optional(type, name: name, args: args)
     }
 
@@ -207,7 +208,8 @@ public final class Resolver
     ///
     /// - returns: Instance of specified Service.
     ///
-    public final func optional<Service>(_ type: Service.Type = Service.self, name: String? = nil, args: Any? = nil) -> Service? {
+    public final func optional<Service>(_ type: Service.Type = Service.self, name: String? = nil, args: Any? = nil) -> Service?
+    {
         Resolver.performInitialRegistrations?()
         if let registration = lookup(type, name: name ?? NONAME),
             let service = registration.scope.resolve(resolver: self, registration: registration, args: args)
@@ -221,7 +223,8 @@ public final class Resolver
 
     /// Internal function searches the current and parent registries for a ResolverRegistration<Service> that matches
     /// the supplied type and name.
-    private final func lookup<Service>(_ type: Service.Type, name: String) -> ResolverRegistration<Service>? {
+    private final func lookup<Service>(_ type: Service.Type, name: String) -> ResolverRegistration<Service>?
+    {
         if let container = registrations[ObjectIdentifier(Service.self).hashValue] {
             return container[name] as? ResolverRegistration<Service>
         }
@@ -345,7 +348,8 @@ public final class ResolverRegistration<Service>: ResolverOptions<Service>
 
     // MARK: Functions
 
-    public final func resolve(resolver: Resolver, args: Any?) -> Service? {
+    public final func resolve(resolver: Resolver, args: Any?) -> Service?
+    {
         guard let service = factory(resolver, args) else
         {
             return nil
@@ -360,7 +364,8 @@ public final class ResolverRegistration<Service>: ResolverOptions<Service>
 /// Resolver scopes exist to control when resolution occurs and how resolved instances are cached.
 public class ResolverScope
 {
-    func resolve<Service>(resolver: Resolver, registration: ResolverRegistration<Service>, args: Any?) -> Service? {
+    func resolve<Service>(resolver: Resolver, registration: ResolverRegistration<Service>, args: Any?) -> Service?
+    {
         // By default, unique services are created and initialized each and every time they're resolved. Subclass for
         // different behaviors
         return registration.resolve(resolver: resolver, args: args)
@@ -452,7 +457,8 @@ public final class ResolverScopeGraph: ResolverScope
 /// Shared services persist while strong references to them exist. They're then deallocated until the next resolve.
 public final class ResolverScopeShare: ResolverScope
 {
-    public final override func resolve<Service>(resolver: Resolver, registration: ResolverRegistration<Service>, args: Any?) -> Service? {
+    public final override func resolve<Service>(resolver: Resolver, registration: ResolverRegistration<Service>, args: Any?) -> Service?
+    {
         pthread_mutex_lock(&mutex)
         defer { pthread_mutex_unlock(&mutex) }
         if let service = (cachedServices[registration.cacheKey].flatMap { $0 as? Service })
