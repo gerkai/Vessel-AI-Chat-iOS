@@ -7,10 +7,11 @@
 
 import UIKit
 
-//every object should be encodable and decodable and it must have an id
+//every object should be encodable and decodable and it must have an id and a lastUpdated field
 protocol CoreObjectProtocol: Codable
 {
     var id: Int {get}
+    var lastUpdated: Int {get set}
 }
 
 class ObjectStore: NSObject
