@@ -22,7 +22,7 @@ custom_rules:
         name: "Opening Braces not on Next Line"
         message: "Opening braces should be placed on the next line."
         include: "*.swift"
-        regex: '[a-zA-Z)] ?\{$'
+        regex: '[a-zA-Z=?)] ?\{$'
         severity: warning
 
 included: # paths to include during linting. `--path` is ignored if present.

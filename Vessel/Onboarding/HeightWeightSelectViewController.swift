@@ -16,26 +16,15 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var weightUnitsLabel: UILabel!
     var viewModel: OnboardingViewModel?
-    var isMetric: Bool!
-    
-    private enum HeightComponentImperial: Int, CaseIterable
+    var isMetric: Bool
     {
-        case feet
-        case inches
-    }
-    
-    private enum HeightComponentMetric: Int, CaseIterable
-    {
-        case centimeters
+        //determine if we are using imperial or metric units
+        Locale.current.usesMetricSystem
     }
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        //determine if we are using imperial or metric units
-        let locale = Locale.current
-        isMetric = locale.usesMetricSystem
         
         if isMetric
         {

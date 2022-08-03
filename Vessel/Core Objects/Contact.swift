@@ -62,6 +62,36 @@ class Contact: CoreObjectProtocol
         return ObjectStore.shared.getContact(id: Contact.MainID) 
     }
     
+    static func mockContact() -> Contact
+    {
+        return Contact(id: 0,
+                       lastUpdated: 0,
+                       firstName: "Nicolas",
+                       lastName: "Medina",
+                       gender: "m",
+                       height: 182,
+                       weight: 155,
+                       birthDate: "1991-10-31",
+                       email: "nicolas@vesselhealth.com",
+                       flags: 0,
+                       expert_id: nil,
+                       diet_ids: [],
+                       allergy_ids: [],
+                       goal_ids: [],
+                       main_goal_id: 0,
+                       is_verified: true,
+                       lastLogin: nil,
+                       insert_date: nil,
+                       password: nil,
+                       image_url: nil,
+                       occupation: nil,
+                       location_description: nil,
+                       tests_taken: nil,
+                       description: nil,
+                       time_zone: nil,
+                       has_samples: nil)
+    }
+    
     //call when logging out
     static func reset()
     {

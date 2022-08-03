@@ -27,9 +27,16 @@ extension UIViewController
     
     var mainViewController: MainViewController?
     {
-        guard let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController,
-              let mainViewController = navigationController.topViewController as? MainViewController else { return nil }
-        return mainViewController
+        if let mainViewController = UIApplication.shared.windows.first?.rootViewController as? MainViewController
+        {
+            return mainViewController
+        }
+        else if let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController,
+              let mainViewController = navigationController.topViewController as? MainViewController
+        {
+            return mainViewController
+        }
+        return nil
     }
     
     func openInSafari(url: String)

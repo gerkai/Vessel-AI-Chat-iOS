@@ -76,7 +76,8 @@ class MoreViewModel
         .support
     ]
     
-    let versionString: String = {
+    let versionString: String =
+    {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         return "Version \(appVersion)"
     }()

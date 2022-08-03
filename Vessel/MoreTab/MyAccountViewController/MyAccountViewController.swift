@@ -12,8 +12,23 @@ class MyAccountViewController: UIViewController
     // MARK: - Views
     @IBOutlet private weak var tableView: UITableView!
     
-    // MARK: - Model
+    // MARK: Model
     private let viewModel = MyAccountViewModel()
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent
+        {
+            mainViewController?.hideVesselButton(false)
+        }
+    }
     
     // MARK: - Actions
     @IBAction func onBackButtonPressed(_ sender: Any)
@@ -32,12 +47,17 @@ extension MyAccountViewController: UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return viewModel.options.count
+        return viewModel.options.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        guard let option = viewModel.options[safe: indexPath.row],
+        guard indexPath.row > 0 else
+        {
+            return tableView.dequeueReusableCell(withIdentifier: "MyAccountHeader", for: indexPath)
+        }
+        
+        guard let option = viewModel.options[safe: indexPath.row - 1],
               let cell = tableView.dequeueReusableCell(withIdentifier: "MyAccountCell", for: indexPath) as? MyAccountCell else
         {
             assertionFailure("MyAccountCell dequed in a bad state in MyAccountViewController cellForRowAt indexPath")
@@ -57,18 +77,19 @@ extension MyAccountViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        guard let option = viewModel.options[safe: indexPath.row] else
+        guard indexPath.row > 0 else { return }
+        guard let option = viewModel.options[safe: indexPath.row - 1] else
         {
             assertionFailure("MyAccountCell dequed in a bad state in MyAccountViewController didSelectRowAt indexPath")
             return
         }
         
-        print("\(option.title)")
         switch option
         {
         case .profile:
-            // TODO: Route to Profile
-            break
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .manageMyGoals:
             // TODO: Route to Manage my Goals
             break

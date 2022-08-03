@@ -63,6 +63,7 @@ struct Constants
     
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"
+    static let PRESENTATION_DATE_FORMAT = "dd MM yyyy"
     
     //demographics
     static let GENDER_MALE = "m"
