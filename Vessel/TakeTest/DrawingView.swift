@@ -28,6 +28,11 @@
 //  scaled camera image is: 1284 x 2282.66667
 
 // Y offset = (frameHeight - (frameW / CamW) * CamHeight) / 2
+
+// Card width = 1.554"
+// Card height = 5.335"
+// Card aspect ratio = 3.43 : 1
+
 import UIKit
 
 protocol DrawingViewDelegate
@@ -46,6 +51,7 @@ class DrawingView: UIView
     let numFiducialsToAverage = 10
     var arrayG: [CGPoint] = []
     var arrayH: [CGPoint] = []
+    var validArea: CGRect = CGRect()
     
     override func draw(_ rect: CGRect)
     {
@@ -139,25 +145,18 @@ class DrawingView: UIView
                 context.strokePath()
                 
                 //draw fiducials
-
-                //validArea is the rectangle the user must place the card into in order to snap a photo
-                let validAreaHeight = 0.94 * frame.height
-                let validAreaWidth = 0.27 * validAreaHeight
-                
-                let validFrame = CGRect(x: (frame.width / 2) - (validAreaWidth / 2), y: safeAreaInsets.top + (frame.height - validAreaHeight) / 2, width: validAreaWidth, height: validAreaHeight - safeAreaInsets.top - safeAreaInsets.bottom)
-                
                 context.setStrokeColor(UIColor.green.cgColor)
                 var error = 0
-                error = error + drawFiducialAtPoint(pointE, context: context, validFrame: validFrame)
-                error = error + drawFiducialAtPoint(pointF, context: context, validFrame: validFrame)
-                error = error + drawFiducialAtPoint(averagePoint(points: arrayG), context: context, validFrame: validFrame)
-                error = error + drawFiducialAtPoint(averagePoint(points: arrayH), context: context, validFrame: validFrame)
+                error = error + drawFiducialAtPoint(pointE, context: context, validFrame: validArea)
+                error = error + drawFiducialAtPoint(pointF, context: context, validFrame: validArea)
+                error = error + drawFiducialAtPoint(averagePoint(points: arrayG), context: context, validFrame: validArea)
+                error = error + drawFiducialAtPoint(averagePoint(points: arrayH), context: context, validFrame: validArea)
                 context.strokePath()
                 
                 var isOnScreen = true
                 var isCloseEnough = 0
                 
-                //if any fiducials are off screen, set isOnScreen to false
+                //if any fiducials are outside of valid card area set isOnScreen to false
                 if error != 0
                 {
                     isOnScreen = false
@@ -165,12 +164,14 @@ class DrawingView: UIView
                 
                 //if area of fiducial box is significantly less than area of cameraView set isCloseEnough to false
                 let widthEF = length(pointE, pointF)
-                if widthEF < validAreaWidth * 0.6 //subjective
+                //uncomment below to determine too-close / too-far values
+                //print("Distance: \(widthEF / validArea.size.width)")
+                if widthEF < validArea.size.width * 0.72 //subjective
                 {
                     //too far away
                     isCloseEnough = -1
                 }
-                else if widthEF > validAreaWidth * 0.75 //subjective
+                else if widthEF > validArea.size.width * 0.82 //subjective
                 {
                     //too cloase
                     isCloseEnough = 1
@@ -189,7 +190,7 @@ class DrawingView: UIView
                 {
                     context.setStrokeColor(UIColor.red.cgColor)
                 }
-                context.addRect(validFrame)
+                context.addRect(validArea)
                 context.strokePath()
                 
                 delegate?.drawingStatus(isOnScreen: isOnScreen, isCloseEnough: isCloseEnough)

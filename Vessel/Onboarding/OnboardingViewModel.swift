@@ -48,8 +48,8 @@ enum ItemPreferencesType
 
 class OnboardingViewModel
 {
-    //var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
-    var curState: OnboardingState = .Initial
+    var curState: OnboardingState = .FinalOnboarding //uncomment to skip onboarding flow
+    //var curState: OnboardingState = .Initial
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
@@ -421,10 +421,9 @@ class OnboardingViewModel
     
     func finalScreenText() -> String
     {
-        let contact = Contact.main()!
         for goal in Goals
         {
-            if goal.id == contact.main_goal_id
+            if goal.id == mainGoal
             {
                 let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
                 return text
