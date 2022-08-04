@@ -103,7 +103,7 @@ struct Constants
     static let SAW_B7_LOW_INFO              = 0x00004000
     static let SAW_CORTISOL_LOW_INFO        = 0x00008000
     static let SAW_CORTISOL_HIGH_INFO       = 0x00010000
-    static let SAW_TESTING_REMINDER         = 0x00010000
+    static let SAW_TESTING_REMINDER         = 0x00020000
     
     //Colors
     static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514

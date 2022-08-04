@@ -55,6 +55,7 @@ class ObjectStore: NSObject
             Server.shared.updateContact(contact: object as! Contact)
             {
                 //Navigate to next screen in onboard
+                print("Saved Contact")
             }
             onFailure:
             { result in

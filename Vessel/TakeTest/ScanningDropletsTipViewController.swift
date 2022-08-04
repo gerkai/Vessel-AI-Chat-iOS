@@ -28,10 +28,7 @@ class ScanningDropletsTipViewController: TakeTestMVVMViewController
     
     @IBAction func nextButton()
     {
-        if hideTipSelectorView.isChecked
-        {
-            viewModel.hideDropletTips()
-        }
+        viewModel.hideDropletTips(shouldHide: hideTipSelectorView.isChecked)
         let vc = viewModel.nextViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
