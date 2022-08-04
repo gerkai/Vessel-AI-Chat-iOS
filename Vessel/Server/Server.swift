@@ -264,7 +264,7 @@ class Server: NSObject
         }
     }
     
-    func refreshTokens(onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
         let request = URLRequest(url: url)
@@ -273,7 +273,7 @@ class Server: NSObject
         mutableRequest.httpMethod = "POST"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        mutableRequest.setValue("\(accessToken!)", forHTTPHeaderField: ACCESS_TOKEN_KEY)
+        mutableRequest.setValue("\(AUTH_PREFIX) \(refreshToken!)", forHTTPHeaderField: AUTH_KEY)
         
         //print("\(mutableRequest)")
         let session = URLSession.shared
@@ -281,6 +281,39 @@ class Server: NSObject
         { (data, response, error) in
             if let data = data //unwrap data
             {
+                do
+                {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let object = json as? [String: Any]
+                    {
+                        if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                        {
+                            self.accessToken = accessToken
+                            let accessData = Data(accessToken.utf8)
+                            KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                            success()
+                        }
+                    }
+                }
+                catch
+                {
+                    let string = String.init(data: data, encoding: .utf8)
+                    print("ERROR: \(string ?? "Unknown")")
+                    failure(error)
+                }
+            }
+            /*if let data = data //unwrap data
+            {
+               
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+//CW: Put a breakpoint here to see json response from server
+                if let object = json as? [String: Any]
+                {
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                    {
+                        
+                    }
+                }
                 print("Need to handle new tokens here")
                 self.debugJSONResponse(data: data)
                 success(data)
@@ -288,8 +321,8 @@ class Server: NSObject
             else
             {
                 failure(error)
-            }
-        }
+            }*/
+        }.resume()
     }
     
     func appleLoginURL() -> String
@@ -362,7 +395,7 @@ class Server: NSObject
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
         { object in
-            if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
+            if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
             {
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
@@ -415,7 +448,7 @@ class Server: NSObject
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
                     {
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
@@ -618,15 +651,15 @@ class Server: NSObject
                 //send it to server
                 serverPost(request: request, onSuccess:
                 { (object) in
-                    if let accessToken = object["access_token"] as? String, let refreshToken = object["refresh_token"] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
                     {
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
                         print("createContact() saving tokens to keychain")
                         let accessData = Data(accessToken.utf8)
-                        KeychainHelper.standard.save(accessData, service: "access-token", account: "vessel")
+                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
                         let refreshData = Data(refreshToken.utf8)
-                        KeychainHelper.standard.save(refreshData, service: "refresh-token", account: "vessel")
+                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
 
                         DispatchQueue.main.async()
                         {
@@ -662,7 +695,6 @@ class Server: NSObject
     
     func updateContact(contact: Contact, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-
         let url = "\(API())\(CONTACT_PATH)"
 
         let encoder = JSONEncoder()

@@ -16,6 +16,13 @@ class CoachViewController: UIViewController
     
     @IBAction func invalidateToken()
     {
-        Server.shared.invalidateAccessToken()
+        Server.shared.refreshTokens
+        {
+            print("Success!")
+        }
+        onFailure:
+        { error in
+            print("Failed: \(String(describing: error?.localizedDescription))")
+        }
     }
 }
