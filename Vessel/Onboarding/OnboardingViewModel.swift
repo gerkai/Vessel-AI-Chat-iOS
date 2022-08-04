@@ -136,6 +136,7 @@ class OnboardingViewModel
                 vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
                 vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
                 vc.itemType = .SingleGoal
+                vc.hideBackground = true
                 return vc
             }
             else if onboardingViewModel!.curState == .FinalOnboarding
