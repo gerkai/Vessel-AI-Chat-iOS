@@ -11,15 +11,17 @@ import UIKit
 
 class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabelSpacing: NSLayoutConstraint!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTextLabel: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var titleLabelSpacing: NSLayoutConstraint!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subTextLabel: UILabel!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
     
     var titleText: String?
     var subtext: String?
     var itemType: ItemPreferencesType = .Diet
+    var hideBackground: Bool = false
     
     override func viewDidLoad()
     {
@@ -44,6 +46,7 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
     {
         titleLabel.text = titleText
         subTextLabel.text = subtext
+        backgroundImageView.isHidden = hideBackground
     }
     
     @IBAction func back()
