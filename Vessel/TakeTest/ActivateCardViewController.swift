@@ -160,11 +160,11 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     func insightsText() -> String
     {
         let contact = Contact.main()!
-        for goal in Goals
+        if contact.main_goal_id != nil
         {
-            if goal.id == contact.main_goal_id
+            if let key = Goal.ID(rawValue: contact.main_goal_id!)
             {
-                let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), goal.name)
+                let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), Goals[key]!.name)
                 return text
             }
         }
