@@ -603,7 +603,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="onContinueButtonPressed" destination="RGa-TW-w2X" eventType="touchUpInside" id="cfa-uF-N9o"/>
+                                                                    <action selector="onNextButtonPressed" destination="RGa-TW-w2X" eventType="touchUpInside" id="0L8-Dq-8Fl"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -833,7 +833,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="onContinueButtonTapped:" destination="dua-k8-BRV" eventType="touchUpInside" id="WkZ-YC-Ty8"/>
+                                                            <action selector="onNextButtonTapped:" destination="dua-k8-BRV" eventType="touchUpInside" id="Auk-UI-Bpe"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

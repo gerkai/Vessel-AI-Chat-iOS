@@ -28,12 +28,26 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     
     @IBAction func googleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(loginType: .google)
+        if Reachability.isConnectedToNetwork()
+        {
+            launchSocialAuth(loginType: .google)
+        }
+        else
+        {
+            UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
+        }
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(loginType: .apple)
+        if Reachability.isConnectedToNetwork()
+        {
+            launchSocialAuth(loginType: .apple)
+        }
+        else
+        {
+            UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
+        }
     }
     
     func launchSocialAuth(loginType: LoginType)
@@ -66,37 +80,44 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         openInSafari(url: Constants.termsOfServiceURL)
     }
     
-    @IBAction func onContinueButtonTapped(_ sender: Any)
+    @IBAction func onNextButtonTapped(_ sender: Any)
     {
         if let email = emailTextField.text, email.isValidEmail() == true
         {
-            Server.shared.contactExists(email: email)
-            { exists in
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                if exists == true
-                {
-                    //navigate to LoginViewController and pre-populate e-mail field
-                    let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                    vc.prepopulatedEmail = email
-                    self.navigationController?.pushViewController(vc, animated: true)
+            if Reachability.isConnectedToNetwork()
+            {
+                Server.shared.contactExists(email: email)
+                { exists in
+                    let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                    if exists == true
+                    {
+                        //navigate to LoginViewController and pre-populate e-mail field
+                        let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                        vc.prepopulatedEmail = email
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    else
+                    {
+                        //save e-mail for use later during sign-up process
+                        Contact.SavedEmail = email
+                        
+                        //navigate to TestCardExistCheckingViewController
+                        let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
-                else
-                {
-                    //save e-mail for use later during sign-up process
-                    Contact.SavedEmail = email
-                    
-                    //navigate to TestCardExistCheckingViewController
-                    let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-                    self.navigationController?.pushViewController(vc, animated: true)
+                onFailure:
+                { string in
                 }
             }
-            onFailure:
-            { string in
+            else
+            {
+                UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
             }
         }
         else
         {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment: ""), image: nil)
+            UIView.showError(text: "", detailText: Constants.ENTER_VALID_EMAIL_STRING, image: nil)
         }
     }
     
