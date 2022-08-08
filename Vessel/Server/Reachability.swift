@@ -3,7 +3,7 @@
 //  Vessel
 //
 //  Created by Carson Whitsett on 8/8/22.
-//
+//  Based on: https://stackoverflow.com/questions/30743408/check-for-internet-connection-with-swift
 
 import Foundation
 import SystemConfiguration
