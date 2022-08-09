@@ -53,7 +53,7 @@ class OnboardingViewModel
     var userDiets: [Int] = []
     var userAllergies: [Int] = []
     var userGoals: [Int] = []
-    var mainGoal: Int?
+    var mainGoal: Goal.ID?
     var userGender: Int?
     var userHeight: Double = Double(Constants.DEFAULT_HEIGHT)
     var userWeight: Double?
@@ -136,6 +136,7 @@ class OnboardingViewModel
                 vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
                 vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
                 vc.itemType = .SingleGoal
+                vc.hideBackground = true
                 return vc
             }
             else if onboardingViewModel!.curState == .FinalOnboarding
@@ -241,23 +242,18 @@ class OnboardingViewModel
         {
             case .Diet:
                 let dietID = Diet.ID.allCases[row]
-            return (Diets[dietID]!.name.capitalized, dietID.rawValue, image: nil)
+                return (Diets[dietID]!.name.capitalized, dietID.rawValue, image: nil)
             case .Allergy:
-                return (Allergies[row].name.capitalized, Allergies[row].id, image: nil)
+                let allergyID = Allergy.ID.allCases[row]
+                return (Allergies[allergyID]!.name.capitalized, allergyID.rawValue, image: nil)
             case .Goal:
-                return (Goals[row].name.capitalized, Goals[row].id, image: nil)
+                let goalID = Goal.ID.allCases[row]
+                return (Goals[goalID]!.name.capitalized, goalID.rawValue, image: nil)
             case .SingleGoal:
                 //search the 3 goals the user selected
-                for goal in Goals
-                {
-                    if goal.id == userGoals[row]
-                    {
-                        return (goal.name.capitalized, userGoals[row], image: UIImage.init(named: goal.imageName))
-                    }
-                }
+                let goalID = Goal.ID.allCases[userGoals[row]]
+                return (Goals[goalID]!.name.capitalized, goalID.rawValue, UIImage.init(named: Goals[goalID]!.imageName))
         }
-        //this will never get called
-        return (Goals[0].name.capitalized, Goals[0].id, image: nil)
     }
     
     func itemCount(_ type: ItemPreferencesType) -> Int
@@ -310,7 +306,7 @@ class OnboardingViewModel
             case .SingleGoal:
                 if mainGoal != nil
                 {
-                    if mainGoal! == id
+                    if mainGoal!.rawValue == id
                     {
                         return true
                     }
@@ -392,7 +388,8 @@ class OnboardingViewModel
         case .SingleGoal:
             if selected
             {
-                mainGoal = id
+                let goalID = Goal.ID.allCases[id]
+                mainGoal = goalID
             }
             else
             {
@@ -421,13 +418,10 @@ class OnboardingViewModel
     
     func finalScreenText() -> String
     {
-        for goal in Goals
+        if mainGoal != nil
         {
-            if goal.id == mainGoal
-            {
-                let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
-                return text
-            }
+            let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), Goals[mainGoal!]!.nameWithArticle)
+            return text
         }
         //should never get here
         return ""
@@ -471,7 +465,7 @@ class OnboardingViewModel
                 contact.diet_ids = userDiets
                 contact.allergy_ids = userAllergies
                 contact.goal_ids = userGoals
-                contact.main_goal_id = mainGoal
+                contact.main_goal_id = mainGoal?.rawValue
                 
                 ObjectStore.shared.ClientSave(contact)
             }
