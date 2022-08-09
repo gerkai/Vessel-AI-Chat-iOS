@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GenericAlertViewController" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="alertView" destination="Zpw-CR-ud5" id="Vf3-T9-qAg"/>
+                <outlet property="alertViewBottomSpacingConstraint" destination="D1Q-gx-572" id="vsE-7k-lR6"/>
+                <outlet property="alertViewCenterYConstraint" destination="kaC-II-AUz" id="ale-VP-uz3"/>
+                <outlet property="alertViewTopSpacingConstraint" destination="fJd-tG-ZKl" id="UuP-qi-eK4"/>
+                <outlet property="backgroundBlur" destination="3gf-z7-ROM" id="NzZ-y8-4hV"/>
+                <outlet property="closeButton" destination="4NE-53-Nrz" id="9dq-FZ-uct"/>
+                <outlet property="contentView" destination="gOd-Vd-cxs" id="4WO-gU-3Xx"/>
+                <outlet property="horizontalButtonsStackView" destination="ChY-c5-i11" id="tHR-Fi-t72"/>
+                <outlet property="imageView" destination="nb7-sA-JDX" id="EQr-Px-gcX"/>
+                <outlet property="stackView" destination="hYT-Az-Q5W" id="bJE-Ij-zpB"/>
+                <outlet property="subtitleLabel" destination="fFL-wh-8Gc" id="T4n-FQ-JK7"/>
+                <outlet property="titleLabel" destination="RmW-Y1-UPx" id="tdq-Rf-Hpv"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="buttons" destination="8mI-TX-PnD" collectionClass="NSMutableArray" id="mfO-KZ-aAA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOd-Vd-cxs">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gf-z7-ROM">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zpw-CR-ud5">
+                            <rect key="frame" x="20" y="84" width="374" height="540"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hYT-Az-Q5W">
+                                    <rect key="frame" x="20" y="20" width="334" height="500"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4NE-53-Nrz" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                            <rect key="frame" x="284" y="0.0" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="6fg-ry-1oy"/>
+                                                <constraint firstAttribute="width" constant="50" id="eRx-ee-omV"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="square_close_button" title=""/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onCloseButtonTapped" destination="-1" eventType="touchUpInside" id="4yx-2d-jXh"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="nb7-sA-JDX">
+                                            <rect key="frame" x="0.0" y="70" width="334" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label (DNT)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmW-Y1-UPx">
+                                            <rect key="frame" x="0.0" y="140" width="334" height="41"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
+                                            <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" verticalCompressionResistancePriority="900" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFL-wh-8Gc">
+                                            <rect key="frame" x="0.0" y="201" width="334" height="139"/>
+                                            <attributedString key="attributedText">
+                                                <fragment>
+                                                    <string key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="12" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ChY-c5-i11">
+                                            <rect key="frame" x="0.0" y="360" width="334" height="60"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukR-Ib-eX1" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="60"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="8xS-MW-dN2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                    <state key="normal" title="Button (DNT)">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8mI-TX-PnD" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="440" width="334" height="60"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="sxM-XU-NYp"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                            <state key="normal" title="Button (DNT)">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="22"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fFL-wh-8Gc" firstAttribute="width" secondItem="hYT-Az-Q5W" secondAttribute="width" id="7J9-JV-BAW"/>
+                                        <constraint firstItem="ChY-c5-i11" firstAttribute="width" secondItem="hYT-Az-Q5W" secondAttribute="width" id="MTy-Ny-M3q"/>
+                                        <constraint firstItem="nb7-sA-JDX" firstAttribute="width" secondItem="hYT-Az-Q5W" secondAttribute="width" id="MYX-1U-aDS"/>
+                                        <constraint firstItem="8mI-TX-PnD" firstAttribute="width" secondItem="hYT-Az-Q5W" secondAttribute="width" id="WdD-2p-cIq"/>
+                                        <constraint firstItem="RmW-Y1-UPx" firstAttribute="width" secondItem="hYT-Az-Q5W" secondAttribute="width" id="n4W-9L-qgS"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="hYT-Az-Q5W" firstAttribute="centerX" secondItem="Zpw-CR-ud5" secondAttribute="centerX" id="6gG-q7-6hy"/>
+                                <constraint firstAttribute="trailing" secondItem="hYT-Az-Q5W" secondAttribute="trailing" constant="20" id="GIC-4m-W1y"/>
+                                <constraint firstItem="hYT-Az-Q5W" firstAttribute="centerY" secondItem="Zpw-CR-ud5" secondAttribute="centerY" id="h5i-LN-5AA"/>
+                                <constraint firstAttribute="bottom" secondItem="hYT-Az-Q5W" secondAttribute="bottom" constant="20" id="hE5-bZ-IOf"/>
+                                <constraint firstItem="hYT-Az-Q5W" firstAttribute="leading" secondItem="Zpw-CR-ud5" secondAttribute="leading" constant="20" id="vlz-OC-Vz1"/>
+                                <constraint firstItem="hYT-Az-Q5W" firstAttribute="top" secondItem="Zpw-CR-ud5" secondAttribute="top" constant="20" id="yng-vj-ckr"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="3gf-z7-ROM" firstAttribute="top" secondItem="gOd-Vd-cxs" secondAttribute="top" id="4qI-UJ-sOz"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Zpw-CR-ud5" secondAttribute="bottom" id="D1Q-gx-572"/>
+                        <constraint firstAttribute="bottom" secondItem="3gf-z7-ROM" secondAttribute="bottom" id="Fm1-0M-YJe"/>
+                        <constraint firstItem="3gf-z7-ROM" firstAttribute="leading" secondItem="gOd-Vd-cxs" secondAttribute="leading" id="YIf-CS-KOT"/>
+                        <constraint firstItem="Zpw-CR-ud5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gOd-Vd-cxs" secondAttribute="top" id="fJd-tG-ZKl"/>
+                        <constraint firstAttribute="trailing" secondItem="3gf-z7-ROM" secondAttribute="trailing" id="hSW-V2-Ozv"/>
+                        <constraint firstItem="Zpw-CR-ud5" firstAttribute="centerY" secondItem="gOd-Vd-cxs" secondAttribute="centerY" id="kaC-II-AUz"/>
+                        <constraint firstAttribute="trailing" secondItem="Zpw-CR-ud5" secondAttribute="trailing" constant="20" id="nas-jy-Osv"/>
+                        <constraint firstItem="Zpw-CR-ud5" firstAttribute="leading" secondItem="gOd-Vd-cxs" secondAttribute="leading" constant="20" id="yXf-NO-Z3M"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gOd-Vd-cxs" secondAttribute="bottom" id="LlQ-Wu-OuO"/>
+                <constraint firstItem="gOd-Vd-cxs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ovj-s5-0r0"/>
+                <constraint firstItem="gOd-Vd-cxs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z9U-w4-vCF"/>
+                <constraint firstAttribute="trailing" secondItem="gOd-Vd-cxs" secondAttribute="trailing" id="xSv-m1-Ppn"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-75.362318840579718" y="128.57142857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="square_close_button" width="50" height="50"/>
+    </resources>
+</document>
