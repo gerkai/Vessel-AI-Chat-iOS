@@ -90,54 +90,52 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     
     private func uploadImage()
     {
-        //if let fileData = viewModel.photo?.fileDataRepresentation()
-        //{
-            if let contact = Contact.main()
-            {
-                sampleUUID = UUID().uuidString
-                let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
-                
-                //print("Parameters: \(parameters)")
-                Server.shared.associateTestUUID(parameters: parameters)
-                { cardAssociation in
-                    //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
-                    //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
-                    if let fileData = self.viewModel.photo?.fileDataRepresentation()
-                    {
-                        self.uploadToS3(
-                            fileData: fileData,
-                            orcaName: cardAssociation.orcaSheetName,
-                            uuid: parameters.uuid,
-                            contactID: String(contact.id),
-                            batchID: cardAssociation.cardBatchID,
-                            calibrationMode: cardAssociation.cardCalibrationMode
-                        )
-                    }
+
+        if let contact = Contact.main()
+        {
+            sampleUUID = UUID().uuidString
+            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
+            
+            //print("Parameters: \(parameters)")
+            Server.shared.associateTestUUID(parameters: parameters)
+            { cardAssociation in
+                //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
+                //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
+                if let fileData = self.viewModel.photo?.fileDataRepresentation()
+                {
+                    self.uploadToS3(
+                        fileData: fileData,
+                        orcaName: cardAssociation.orcaSheetName,
+                        uuid: parameters.uuid,
+                        contactID: String(contact.id),
+                        batchID: cardAssociation.cardBatchID,
+                        calibrationMode: cardAssociation.cardCalibrationMode
+                    )
                 }
-                onFailure:
-                { error in
-                    if error.code == 400
+            }
+            onFailure:
+            { error in
+                if error.code == 400
+                {
+                    if error.moreInfo == "Card already scanned successfully"
                     {
-                        if error.moreInfo == "Card already scanned successfully"
-                        {
-                            self.showAlreadyScannedPopup()
-                        }
-                        else
-                        {
-                            self.showOtherErrorPopup()
-                        }
+                        self.showAlreadyScannedPopup()
                     }
                     else
                     {
-                        self.showCalibrationError(statusCode: error.code)
+                        self.showOtherErrorPopup()
                     }
                 }
+                else
+                {
+                    self.showCalibrationError(statusCode: error.code)
+                }
             }
-            else
-            {
-                print("Contact not available")
-            }
-       // }
+        }
+        else
+        {
+            print("Contact not available")
+        }
     }
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
