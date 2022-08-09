@@ -15,7 +15,7 @@ enum PopupErrorButton
 
 protocol PopupErrorViewControllerDelegate
 {
-    func popupErrorDone(button: PopupErrorButton)
+    func popupErrorDone(vc: PopupErrorViewController, button: PopupErrorButton)
 }
 
 class PopupErrorViewController: UIViewController
@@ -34,6 +34,7 @@ class PopupErrorViewController: UIViewController
     var message: String!
     var topButtonTitle: String!
     var botButtonTitle: String!
+    var tag: Int = 0
     
     static func instantiate(title: String, message: String, topButtonTitle: String, botButtonTitle: String, delegate: PopupErrorViewControllerDelegate) -> PopupErrorViewController
     {
@@ -106,8 +107,8 @@ class PopupErrorViewController: UIViewController
         }
         completion:
         { _ in
+            self.delegate?.popupErrorDone(vc: self, button: button)
             self.dismiss(animated: false)
-            self.delegate?.popupErrorDone(button: button)
         }
     }
     
