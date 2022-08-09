@@ -120,4 +120,7 @@ struct Constants
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")
+    static let INTERNET_CONNECTION_STRING = NSLocalizedString("Please check your internet connection", comment: "")
+    static let ENTER_VALID_EMAIL_STRING = NSLocalizedString("Please enter a valid email", comment: "")
+    static let ENTER_PASSWORD_STRING = NSLocalizedString("Please enter your password", comment: "")
 }
