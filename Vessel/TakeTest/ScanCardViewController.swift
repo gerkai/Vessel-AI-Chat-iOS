@@ -24,6 +24,8 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     var captureResolution: CGSize = CGSize()
     var goodAlignmentFrameCounter = 0
     var processingPhoto = false
+    weak var clearTimer: Timer?
+    var clearTimerCount = 0
     
     override func viewDidLoad()
     {
@@ -98,6 +100,35 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     {
         previewLayer.frame = cameraView.bounds
         drawingView.validArea = cardView.frame
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        clearTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
+        {
+           _ in self.onTick()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        clearTimer?.invalidate()
+        clearTimer = nil
+    }
+    
+    func onTick()
+    {
+        if clearTimerCount > 0
+        {
+            clearTimerCount -= 1
+            if clearTimerCount == 0
+            {
+                noticeLabel.text = ""
+                noticeLabel.backgroundColor = .clear
+                drawingView.qrBox = nil
+                drawingView.setNeedsDisplay()
+            }
+        }
     }
     
     func failed()
@@ -210,6 +241,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
                 drawingView.qrBox = nil
             }
             drawingView.setNeedsDisplay()
+            clearTimerCount = 10 //1 second
         }
     }
 
@@ -227,32 +259,36 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     {
         if !processingPhoto
         {
+            noticeLabel.backgroundColor = .white
             if isCloseEnough > 0
             {
-                noticeLabel.text = "Move further away"
+                noticeLabel.text = NSLocalizedString("Move further away", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
                 goodAlignmentFrameCounter = 0
             }
             else if isCloseEnough < 0
             {
-                noticeLabel.text = "Move closer"
+                noticeLabel.text = NSLocalizedString("Move closer", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
                 goodAlignmentFrameCounter = 0
             }
             else if isOnScreen == false
             {
-                noticeLabel.text = "Make sure entire card is in rectangle"
+                noticeLabel.text = NSLocalizedString("Make sure entire card is in rectangle", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
                 goodAlignmentFrameCounter = 0
             }
             else
             {
                 noticeLabel.text = ""
+                noticeLabel.backgroundColor = .clear
                 cameraView.backgroundColor = .green
+                
                 goodAlignmentFrameCounter += 1
                 if goodAlignmentFrameCounter > 30 //subjective
                 {
-                    noticeLabel.text = "Hold Still"
+                    noticeLabel.text = NSLocalizedString("Hold Still", comment: "Card placement instructions for user")
+                    noticeLabel.backgroundColor = Constants.vesselGreat
                     if goodAlignmentFrameCounter > 75 //subjective
                     {
                         noticeLabel.text = ""

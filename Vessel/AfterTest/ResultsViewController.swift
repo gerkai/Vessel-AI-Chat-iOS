@@ -409,7 +409,6 @@ class ResultsViewController: UIViewController
             let result = viewModel.nextViewControllerData()
             if result.transition == .dismiss
             {
-
                 dismiss(animated: true)
             }
             else

@@ -43,9 +43,40 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
-        UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+        
+        if Server.shared.isLoggedIn()
         {
-            self.splashView.alpha = 0.0
+            Server.shared.getContact
+            { contact in
+                Contact.MainID = contact.id
+                ObjectStore.shared.serverSave(contact)
+                print("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                let vc = OnboardingViewModel.NextViewController()
+                self.navigationController?.fadeTo(vc)
+                //just clear the splashView after enough time for above fade to complete.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
+                {
+                    self.splashView.alpha = 0.0
+                }
+            }
+            onFailure:
+            { error in
+                print("Unsuccessful at re-logging in. Making user sign-in again")
+                //fade splash screen in right away since we already spent time trying to load contact from back end
+                UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
+                {
+                    self.splashView.alpha = 0.0
+                }
+            }
+        }
+        else
+        {
+            //fade splash screen in after 1 second. (Normal login flow)
+            print("Normal sign-in flow. Not re-logging in.")
+            UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+            {
+                self.splashView.alpha = 0.0
+            }
         }
     }
     
