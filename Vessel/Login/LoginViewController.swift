@@ -52,12 +52,26 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     
     @IBAction func googleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(loginType: .google)
+        if Reachability.isConnectedToNetwork()
+        {
+            launchSocialAuth(loginType: .google)
+        }
+        else
+        {
+            UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
+        }
     }
     
     @IBAction func appleAuthAction(_ sender: Any)
     {
-        launchSocialAuth(loginType: .apple)
+        if Reachability.isConnectedToNetwork()
+        {
+            launchSocialAuth(loginType: .apple)
+        }
+        else
+        {
+            UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
+        }
     }
     
     func launchSocialAuth(loginType: LoginType)
@@ -83,7 +97,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         self.navigationController?.fadeOut()
     }
     
-    @IBAction func onContinueButtonPressed()
+    @IBAction func onNextButtonPressed()
     {
         self.view.endEditing(true)
         if let email = emailTextField.text, let password = passwordTextField.text
@@ -92,42 +106,49 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 if password.isValidPassword()
                 {
-                    nextButton.showLoading()
-                    Server.shared.login(email: email, password: password)
+                    if Reachability.isConnectedToNetwork()
                     {
-                        Server.shared.getContact
-                        { [weak self] contact in
-                            guard let self = self else { return }
-                            self.nextButton.hideLoading()
-                            self.analytics.log(event: .logIn(loginType: .email))
-                            Contact.MainID = contact.id
-                            ObjectStore.shared.serverSave(contact)
-                            let vc = OnboardingViewModel.NextViewController()
-                            self.navigationController?.fadeTo(vc)
+                        nextButton.showLoading()
+                        Server.shared.login(email: email, password: password)
+                        {
+                            Server.shared.getContact
+                            { [weak self] contact in
+                                guard let self = self else { return }
+                                self.nextButton.hideLoading()
+                                self.analytics.log(event: .logIn(loginType: .email))
+                                Contact.MainID = contact.id
+                                ObjectStore.shared.serverSave(contact)
+                                let vc = OnboardingViewModel.NextViewController()
+                                self.navigationController?.fadeTo(vc)
+                            }
+                            onFailure:
+                            { [weak self] error in
+                                guard let self = self else { return }
+                                self.nextButton.hideLoading()
+                                let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+                                UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
+                            }
                         }
                         onFailure:
-                        { [weak self] error in
+                        { [weak self] string in
                             guard let self = self else { return }
                             self.nextButton.hideLoading()
-                            let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
-                            UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
+                            UIView.showError(text: "", detailText: string, image: nil)
                         }
                     }
-                    onFailure:
-                    { [weak self] string in
-                        guard let self = self else { return }
-                        self.nextButton.hideLoading()
-                        UIView.showError(text: "", detailText: string, image: nil)
+                    else
+                    {
+                        UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
                     }
                 }
                 else
                 {
-                    UIView.showError(text: "", detailText: NSLocalizedString("Please enter your password", comment: ""), image: nil)
+                    UIView.showError(text: "", detailText: Constants.ENTER_PASSWORD_STRING, image: nil)
                 }
             }
             else
             {
-                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid email", comment: ""), image: nil)
+                UIView.showError(text: "", detailText: Constants.ENTER_VALID_EMAIL_STRING, image: nil)
             }
         }
     }
@@ -184,7 +205,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
         else
         {
-            onContinueButtonPressed()
+            onNextButtonPressed()
         }
         return true
     }

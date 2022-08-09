@@ -20,11 +20,11 @@ struct BoughtCardLoginValidator
     {
         guard let email = form.email?.trimmingCharacters(in: .whitespacesAndNewlines), email.count > 0, email.isValidEmail() else
         {
-            return  (isValid: false, error: "Please enter a valid email")
+            return  (isValid: false, error: Constants.ENTER_VALID_EMAIL_STRING)
         }
         guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
         {
-            return  (isValid: false, error: "Please enter your password")
+            return  (isValid: false, error: Constants.ENTER_PASSWORD_STRING)
         }
         return (isValid: true, error: nil)
     }
