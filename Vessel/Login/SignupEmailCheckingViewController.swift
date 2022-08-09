@@ -108,6 +108,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
                 }
                 onFailure:
                 { string in
+                    //TODO: log this error into the debug log
                 }
             }
             else
