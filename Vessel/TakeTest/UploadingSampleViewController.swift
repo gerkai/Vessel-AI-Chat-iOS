@@ -29,6 +29,14 @@ protocol UploadingSampleViewControllerDelegate
     func retryScan()
 }
 
+enum PopupErrorType: Int
+{
+    case cropFailure
+    case alreadyScanned
+    case calibrationError
+    case otherError
+}
+
 class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewControllerDelegate
 {
     @IBOutlet weak var loadingView: UIView!
@@ -82,40 +90,52 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     
     private func uploadImage()
     {
-        //if let fileData = viewModel.photo?.fileDataRepresentation()
-        //{
-            if let contact = Contact.main()
-            {
-                sampleUUID = UUID().uuidString
-                let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
-                
-                //print("Parameters: \(parameters)")
-                Server.shared.associateTestUUID(parameters: parameters)
-                { cardAssociation in
-                    //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
-                    //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
-                    if let fileData = self.viewModel.photo?.fileDataRepresentation()
+
+        if let contact = Contact.main()
+        {
+            sampleUUID = UUID().uuidString
+            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
+            
+            //print("Parameters: \(parameters)")
+            Server.shared.associateTestUUID(parameters: parameters)
+            { cardAssociation in
+                //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
+                //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
+                if let fileData = self.viewModel.photo?.fileDataRepresentation()
+                {
+                    self.uploadToS3(
+                        fileData: fileData,
+                        orcaName: cardAssociation.orcaSheetName,
+                        uuid: parameters.uuid,
+                        contactID: String(contact.id),
+                        batchID: cardAssociation.cardBatchID,
+                        calibrationMode: cardAssociation.cardCalibrationMode
+                    )
+                }
+            }
+            onFailure:
+            { error in
+                if error.code == 400
+                {
+                    if error.moreInfo == "Card already scanned successfully"
                     {
-                        self.uploadToS3(
-                            fileData: fileData,
-                            orcaName: cardAssociation.orcaSheetName,
-                            uuid: parameters.uuid,
-                            contactID: String(contact.id),
-                            batchID: cardAssociation.cardBatchID,
-                            calibrationMode: cardAssociation.cardCalibrationMode
-                        )
+                        self.showAlreadyScannedPopup()
+                    }
+                    else
+                    {
+                        self.showOtherErrorPopup()
                     }
                 }
-                onFailure:
-                { error in
-                    print("\(error)")
+                else
+                {
+                    self.showCalibrationError(statusCode: error.code)
                 }
             }
-            else
-            {
-                print("Contact not available")
-            }
-       // }
+        }
+        else
+        {
+            print("Contact not available")
+        }
     }
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
@@ -162,7 +182,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
         self.percentLabel.text = ""
         if retryCount >= maxRetryCount
         {
-            showProcessingError(testUUID: sampleUUID)
+            showOtherErrorPopup()
             retryCount = 0
             return
         }
@@ -190,6 +210,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
         }
         onFailure:
         { error in
+            //print("The error is: \(error)")
             if let error = error as? NSError
             {
                 if error.code == 404
@@ -210,7 +231,6 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
                         else
                         {
                             self.showOtherErrorPopup()
-                            print("The error is: \(error)")
                         }
                     }
                 }
@@ -233,24 +253,25 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
         alert.showOverTopViewController()
     }
     
-    private func showProcessingError(testUUID: String)
-    {
-        let alert = UIAlertController(title: "Error", message: NSLocalizedString("Failed to process. Tap OK to retry.", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Retry action"), style: .default, handler:
-        { _ in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler:
-        { [weak self] _ in
-            guard let self = self else { return }
-            self.navigationController?.popViewController(animated: true)
-        }))
-        alert.showOverTopViewController()
-    }
-    
     private func showCropFailurePopup()
     {
         let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Apologies, we had a hard time reading your card", comment: ""), message: NSLocalizedString("This could be due to shadow, glare or droplets. Simply check your card, your lighting, and let's give it another shot.", comment: ""), topButtonTitle: "", botButtonTitle: "Try Again", delegate: self)
+        vc.tag = PopupErrorType.cropFailure.rawValue
+        present(vc, animated: false)
+    }
+    
+    private func showAlreadyScannedPopup()
+    {
+        let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Looks like this card has already been scanned.", comment: ""), message: NSLocalizedString("We recognize this card! You can view the results we have on file for this card or scan a new one.", comment: ""), topButtonTitle: NSLocalizedString("View this card's results", comment: ""), botButtonTitle: NSLocalizedString("Scan a new card", comment: ""), delegate: self)
+        vc.tag = PopupErrorType.alreadyScanned.rawValue
+        present(vc, animated: false)
+    }
+    
+    private func showCalibrationError(statusCode: Int)
+    {
+        let message = statusCode == 404 ? NSLocalizedString("Invalid QR code. Did you scan the correct the QR code?", comment: ""): String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact Customer Support.", comment: ""), statusCode)
+        let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Scan Error", comment: ""), message: message, topButtonTitle: "", botButtonTitle: NSLocalizedString("Retry", comment: ""), delegate: self)
+        vc.tag = PopupErrorType.calibrationError.rawValue
         present(vc, animated: false)
     }
     
@@ -261,7 +282,34 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     }
     
     //MARK: - PopupErrorViewController delegates
-    func popupErrorDone(button: PopupErrorButton)
+    func popupErrorDone(vc: PopupErrorViewController, button: PopupErrorButton)
+    {
+        if vc.tag == PopupErrorType.cropFailure.rawValue
+        {
+            self.retryScan()
+        }
+        else if vc.tag == PopupErrorType.alreadyScanned.rawValue
+        {
+            if button == .Top
+            {
+                //TODO: Navigate to view results
+            }
+            else
+            {
+                self.retryScan()
+            }
+        }
+        else if vc.tag == PopupErrorType.calibrationError.rawValue
+        {
+            self.retryScan()
+        }
+        else
+        {
+            self.retryScan()
+        }
+    }
+    
+    func retryScan()
     {
         delegate?.retryScan()
         viewModel.uploadingFinished()

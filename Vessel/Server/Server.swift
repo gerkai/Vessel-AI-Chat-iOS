@@ -64,6 +64,13 @@ struct CardAssociation
     var orcaSheetName: String?
 }
 
+struct ServerError
+{
+    var code: Int
+    var description: String
+    var moreInfo: String?
+}
+
 class Server: NSObject
 {
     static let shared = Server()
@@ -177,17 +184,17 @@ class Server: NSObject
         }.resume()
     }
     
-    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         serverWrite(request: request, requestType: "POST", onSuccess: success, onFailure: failure)
     }
     
-    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
     }
     
-    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         var mutableRequest = request
         mutableRequest.httpMethod = requestType
@@ -217,14 +224,19 @@ class Server: NSObject
                     }
                     else
                     {
-                        failure("Unable to parse response from server")
+                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server", comment: "Server error message"))
+                        failure(error)
                     }
                 }
                 catch
                 {
+                    var errorCode = 0
+                    let err = error as NSError
+                    errorCode = err.code
                     let string = String.init(data: data, encoding: .utf8)
-                    print("ERROR: \(string ?? "Unknown")")
-                    failure(error.localizedDescription)
+                    let result = ServerError(code: errorCode, description: error.localizedDescription, moreInfo: string)
+                    //print("ERROR: \(string ?? "Unknown")")
+                    failure(result)
                 }
             }
         }.resume()
@@ -726,7 +738,7 @@ class Server: NSObject
     }
     
     //MARK:  Sample
-    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -749,10 +761,10 @@ class Server: NSObject
             }
         },
         onFailure:
-        { (string) in
+        { (error) in
             DispatchQueue.main.async()
             {
-                failure(NSLocalizedString("Server Error: \(string)", comment: ""))
+                failure(error)
             }
         })
     }
