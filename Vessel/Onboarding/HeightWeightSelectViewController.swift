@@ -28,24 +28,16 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         
         print("📗 did load \(self)")
         
+        let height_cm = viewModel.userHeight
         if isMetric
         {
             weightUnitsLabel.text = NSLocalizedString("Kg", comment: "Abbreviation for Kilograms")
-            let height_cm = viewModel.userHeight
             self.setHeightForPickerView(centimeters: Int(height_cm))
         }
         else
         {
-            let height_cm = viewModel.userHeight
-            
             let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: height_cm)
             self.setHeightForPickerView(feet: feet, inches: inches)
-            
-            /*else
-            {
-                let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.DEFAULT_HEIGHT))
-                setHeightForPickerView(feet: feet, inches: inches)
-            }*/
         }
         
         if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
@@ -71,7 +63,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
             if isMetric
             {
                 let weightKG = weight * 0.45359237 // pounds to kilograms conversion
-                weightTextField.text = "\(weightKG)" 
+                weightTextField.text = String(format: "%.1f", weightKG)
             }
             else
             {
