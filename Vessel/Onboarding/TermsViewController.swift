@@ -40,7 +40,7 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
     
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
-        viewModel?.backup()
+        viewModel.backup()
         self.navigationController?.fadeOut()
     }
     
@@ -48,7 +48,7 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
     {
         if allowNextButton
         {
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = viewModel.nextViewController()
             navigationController?.fadeTo(vc)
         }
         else

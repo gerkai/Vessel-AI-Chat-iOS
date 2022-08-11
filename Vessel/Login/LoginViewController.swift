@@ -118,7 +118,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 Contact.MainID = contact.id
                                 ObjectStore.shared.serverSave(contact)
-                                let vc = OnboardingViewModel.NextViewController()
+                                let vc = OnboardingViewModel.InitialViewController()
                                 self.navigationController?.fadeTo(vc)
                             }
                             onFailure:
@@ -181,7 +181,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = OnboardingViewModel.InitialViewController()
             self.navigationController?.fadeTo(vc)
         }
     }

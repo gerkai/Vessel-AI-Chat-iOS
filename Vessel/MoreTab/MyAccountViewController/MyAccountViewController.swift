@@ -39,7 +39,13 @@ class MyAccountViewController: UIViewController
     @IBAction func logOut(_ sender: Any)
     {
         Server.shared.logOut()
-        mainViewController?.navigationController?.popToRootViewController(animated: true)
+        Contact.reset()
+        let story = UIStoryboard(name: "Login", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "Welcome")
+        
+        //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
+        UIApplication.shared.windows.first?.rootViewController = vc
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
 }
 
