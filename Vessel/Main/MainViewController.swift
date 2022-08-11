@@ -41,7 +41,10 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
         tabBar.standardAppearance = appearance
+        
         if #available(iOS 15.0, *)
         {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance

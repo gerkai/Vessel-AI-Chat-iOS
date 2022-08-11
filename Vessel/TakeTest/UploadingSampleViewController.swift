@@ -90,7 +90,6 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     
     private func uploadImage()
     {
-
         if let contact = Contact.main()
         {
             sampleUUID = UUID().uuidString
