@@ -27,12 +27,12 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
         setDatePickerMinMaxValues()
         setDatePickerInitialValue()
         checkmarkView.defaultText = NSLocalizedString("I prefer not to say", comment: "")
-        checkmarkView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        checkmarkView.delegate = self
         // TODO: Add analytics for viewed page
     }
     
@@ -79,6 +79,7 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
     {
         viewModel?.setBirthDate(birthDate: datePicker.date, preferNotToSay: checkmarkView.isChecked)
         viewModel?.backup()
+        checkmarkView.delegate = nil
         navigationController?.fadeOut()
     }
     
@@ -89,9 +90,10 @@ class BirthdaySelectViewController: OnboardingMVVMViewController, SelectionCheck
     
     @IBAction func next()
     {
+        checkmarkView.delegate = nil
         viewModel?.setBirthDate(birthDate: datePicker.date, preferNotToSay: checkmarkView.isChecked)
         
-        let vc = OnboardingViewModel.NextViewController()
+        let vc = viewModel.nextViewController()
         navigationController?.fadeTo(vc)
     }
     

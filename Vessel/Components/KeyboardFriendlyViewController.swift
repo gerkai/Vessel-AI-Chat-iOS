@@ -22,6 +22,11 @@ class KeyboardFriendlyViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    deinit
+    {
+        print("📘 deinit \(self)")
+    }
+    
     //MARK: - Handle sliding view up/down so textfield isn't blocked by keyboard
     @objc func keyboardWillShow(notification: NSNotification)
     {

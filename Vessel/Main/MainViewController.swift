@@ -18,6 +18,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         super.viewDidLoad()
         
+        print("MainViewController did load")
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
@@ -49,6 +50,19 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         }
+        
+        //make this the root viewController which will cause previous login and onboarding viewControllers
+        //to be deallocated.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) //provide enough time for push/fade to complete
+        {
+            UIApplication.shared.windows.first?.rootViewController = self
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        }
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     override func viewWillLayoutSubviews()

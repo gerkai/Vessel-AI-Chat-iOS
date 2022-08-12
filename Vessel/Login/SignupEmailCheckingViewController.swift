@@ -153,7 +153,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = OnboardingViewModel.InitialViewController()
             self.navigationController?.fadeTo(vc)
         }
     }

@@ -79,7 +79,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
                         }
                     }
                     //createContact()
-                    let vc = OnboardingViewModel.NextViewController()
+                    let vc = OnboardingViewModel.InitialViewController()
                     self.navigationController?.fadeTo(vc)
                 }
                 else
@@ -128,7 +128,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
                 Contact.MainID = contact.id
                 ObjectStore.shared.serverSave(contact)
                 //begin onboarding flow
-                let vc = OnboardingViewModel.NextViewController()
+                let vc = OnboardingViewModel.InitialViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             onFailure:
