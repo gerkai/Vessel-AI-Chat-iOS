@@ -14,7 +14,7 @@ class GenderSelectViewController: OnboardingMVVMViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let gender = viewModel?.userGender
+        if let gender = viewModel.userGender
         {
             segmentedControl.selectedSegmentIndex = gender
         }
@@ -35,7 +35,7 @@ class GenderSelectViewController: OnboardingMVVMViewController
     {
         viewModel?.setGender(gender: segmentedControl.selectedSegmentIndex)
         
-        let vc = OnboardingViewModel.NextViewController()
+        let vc = viewModel.nextViewController()
         navigationController?.fadeTo(vc)
     }
     

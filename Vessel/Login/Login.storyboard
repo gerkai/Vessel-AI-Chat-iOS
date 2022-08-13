@@ -93,7 +93,7 @@
         <!--Navigation Controller-->
         <scene sceneID="heR-5z-iDe">
             <objects>
-                <navigationController navigationBarHidden="YES" id="LVj-Xu-UJn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Welcome" navigationBarHidden="YES" id="LVj-Xu-UJn" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FaH-nb-Oa8">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

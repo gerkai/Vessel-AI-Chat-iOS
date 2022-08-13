@@ -51,7 +51,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                 Contact.MainID = contact.id
                 ObjectStore.shared.serverSave(contact)
                 print("Successfully loaded contact during auto-login. Jumping to Onboarding")
-                let vc = OnboardingViewModel.NextViewController()
+                let vc = OnboardingViewModel.InitialViewController()
                 self.navigationController?.fadeTo(vc)
                 //just clear the splashView after enough time for above fade to complete.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
