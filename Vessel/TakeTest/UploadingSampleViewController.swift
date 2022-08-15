@@ -268,7 +268,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, PopupErrorViewC
     
     private func showCalibrationError(statusCode: Int)
     {
-        let message = statusCode == 404 ? NSLocalizedString("Invalid QR code. Did you scan the correct the QR code?", comment: ""): String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact Customer Support.", comment: ""), statusCode)
+        let message = statusCode == 404 ? NSLocalizedString("Invalid QR code. Did you scan the correct QR code?", comment: ""): String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact Customer Support.", comment: ""), statusCode)
         let vc = PopupErrorViewController.instantiate(title: NSLocalizedString("Scan Error", comment: ""), message: message, topButtonTitle: "", botButtonTitle: NSLocalizedString("Retry", comment: ""), delegate: self)
         vc.tag = PopupErrorType.calibrationError.rawValue
         present(vc, animated: false)

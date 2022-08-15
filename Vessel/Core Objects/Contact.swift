@@ -12,7 +12,17 @@ class Contact: CoreObjectProtocol
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
     
     var id: Int
-    var last_updated: Int = 0
+    var last_updated: Int //object is not returned from server yet so we mock it with a private var _last_updated
+    {
+        get
+        {
+            _last_updated ?? 0
+        }
+        set
+        {
+            _last_updated = newValue
+        }
+    }
     var first_name: String
     var last_name: String
     var gender: String?
@@ -21,24 +31,24 @@ class Contact: CoreObjectProtocol
     var birth_date: String?     //in yyyy-mm-dd format
     var email: String?          //can be nil if they signed in with social and didn't share e-mail
     var flags: Int
-    /*_flags
+    var enrolled_program_ids: [Int] //object is not returned from server yet so we mock it with a private var
     {
         get
         {
-            _flags ?? 0
+            _enrolled_program_ids ?? []
         }
         set
         {
-            _flags = newValue
+            _enrolled_program_ids = newValue
         }
-    }*/
-    var enrolled_program_ids: [Int]
+    }
     var diet_ids: [Int]
     var allergy_ids: [Int]
     var goal_ids: [Int]
     var main_goal_id: Int?
     var expert_id: Int?
-    //private var _flags: Int?
+    private var _last_updated: Int?
+    private var _enrolled_program_ids: [Int]?
     
     static func main() -> Contact?
     {
@@ -90,7 +100,7 @@ class Contact: CoreObjectProtocol
          expert_id: Int? = nil)
     {
         self.id = id
-        self.last_updated = lastUpdated
+        _last_updated = lastUpdated
         self.first_name = firstName
         self.last_name = lastName
         self.gender = gender
@@ -99,7 +109,7 @@ class Contact: CoreObjectProtocol
         self.birth_date = birthDate
         self.email = email
         self.flags = flags
-        self.enrolled_program_ids = enrolled_program_ids
+        _enrolled_program_ids = enrolled_program_ids
         self.diet_ids = diet_ids
         self.allergy_ids = allergy_ids
         self.goal_ids = goal_ids
@@ -137,7 +147,7 @@ class Contact: CoreObjectProtocol
     enum CodingKeys: String, CodingKey
     {
         case id
-        case last_updated
+        case _last_updated = "last_updated"
         case first_name
         case last_name
         case gender
@@ -146,7 +156,7 @@ class Contact: CoreObjectProtocol
         case birth_date
         case email
         case flags = "app_flags"
-        case enrolled_program_ids
+        case _enrolled_program_ids = "enrolled_program_ids"
         case diet_ids
         case allergy_ids
         case goal_ids
