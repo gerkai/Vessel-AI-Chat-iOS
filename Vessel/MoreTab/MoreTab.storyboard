@@ -627,7 +627,125 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AO2-wd-6dn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2554" y="401"/>
+            <point key="canvasLocation" x="2505" y="435"/>
+        </scene>
+        <!--Food Preferences View Controller-->
+        <scene sceneID="Z5L-45-sIh">
+            <objects>
+                <viewController storyboardIdentifier="FoodPreferencesViewController" id="sVq-2R-Id2" customClass="FoodPreferencesViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5e6-UL-kn5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85N-zX-QyI" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="XCa-Ho-duk"/>
+                                    <constraint firstAttribute="height" constant="50" id="bxr-eo-VBq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" image="square_back_button">
+                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="yZo-eU-bGo" eventType="touchUpInside" id="XbX-J1-N8V"/>
+                                    <action selector="onBackButtonPressed:" destination="ShQ-ux-mr3" eventType="touchUpInside" id="pMq-4Y-cax"/>
+                                    <action selector="onBackTapped" destination="sVq-2R-Id2" eventType="touchUpInside" id="vxt-Sg-aJ3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c46-DZ-PjC">
+                                <rect key="frame" x="20" y="78" width="284" height="40"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kyn-BG-jPe" customClass="VesselSegmentedControl" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="146" width="335" height="61"/>
+                                <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6Fc-22-1Xq"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Diet"/>
+                                    <segment title="Allergies"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="onGenderControlChanged" destination="ShQ-ux-mr3" eventType="valueChanged" id="gux-m8-qsM"/>
+                                    <action selector="segmentedControlTapped" destination="sVq-2R-Id2" eventType="valueChanged" id="6YJ-u7-imk"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3r-Wt-1Cl" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="573" width="335" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="YUt-70-aOW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="Bzp-8o-yMV"/>
+                                    <action selector="onSaveTapped" destination="sVq-2R-Id2" eventType="touchUpInside" id="FNq-oj-Txb"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FYD-cJ-sd0">
+                                <rect key="frame" x="20" y="226" width="335" height="347"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="200" id="ucA-24-l9x"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="8" sectionInsetReference="safeArea" id="mbu-R0-St3">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="sVq-2R-Id2" id="1sC-yi-K1c"/>
+                                    <outlet property="delegate" destination="sVq-2R-Id2" id="Aij-rK-6iN"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="frL-Af-fOU"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="l3r-Wt-1Cl" firstAttribute="top" secondItem="FYD-cJ-sd0" secondAttribute="bottom" id="0Cz-Gb-3N0"/>
+                            <constraint firstItem="FYD-cJ-sd0" firstAttribute="top" secondItem="kyn-BG-jPe" secondAttribute="bottom" constant="20" id="5cH-mJ-GQy"/>
+                            <constraint firstItem="85N-zX-QyI" firstAttribute="leading" secondItem="frL-Af-fOU" secondAttribute="leading" constant="20" id="BNk-mf-CME"/>
+                            <constraint firstItem="frL-Af-fOU" firstAttribute="trailing" secondItem="l3r-Wt-1Cl" secondAttribute="trailing" constant="20" id="DIA-d9-Duq"/>
+                            <constraint firstItem="c46-DZ-PjC" firstAttribute="top" secondItem="85N-zX-QyI" secondAttribute="bottom" constant="28" id="Qio-eC-w1a"/>
+                            <constraint firstItem="l3r-Wt-1Cl" firstAttribute="leading" secondItem="frL-Af-fOU" secondAttribute="leading" constant="20" id="QuE-KE-P7R"/>
+                            <constraint firstItem="frL-Af-fOU" firstAttribute="trailing" secondItem="kyn-BG-jPe" secondAttribute="trailing" constant="20" id="Rsx-eg-w81"/>
+                            <constraint firstItem="85N-zX-QyI" firstAttribute="top" secondItem="frL-Af-fOU" secondAttribute="top" id="RzN-tx-kno"/>
+                            <constraint firstItem="frL-Af-fOU" firstAttribute="trailing" secondItem="FYD-cJ-sd0" secondAttribute="trailing" constant="20" id="ebb-XH-Ok8"/>
+                            <constraint firstItem="kyn-BG-jPe" firstAttribute="leading" secondItem="frL-Af-fOU" secondAttribute="leading" constant="20" id="iff-8i-q4o"/>
+                            <constraint firstItem="frL-Af-fOU" firstAttribute="bottom" secondItem="l3r-Wt-1Cl" secondAttribute="bottom" constant="34" id="qzT-aD-zqW"/>
+                            <constraint firstItem="FYD-cJ-sd0" firstAttribute="leading" secondItem="frL-Af-fOU" secondAttribute="leading" constant="20" id="sds-jw-k3h"/>
+                            <constraint firstItem="c46-DZ-PjC" firstAttribute="leading" secondItem="frL-Af-fOU" secondAttribute="leading" constant="20" id="uNg-uI-OdU"/>
+                            <constraint firstItem="kyn-BG-jPe" firstAttribute="top" secondItem="c46-DZ-PjC" secondAttribute="bottom" constant="28" id="zX9-HB-ugm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="FYD-cJ-sd0" id="KGn-BO-DFg"/>
+                        <outlet property="segmentedControl" destination="kyn-BG-jPe" id="A6h-GQ-Ulc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hY3-dr-aWW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4029.5999999999999" y="127.28635682158921"/>
         </scene>
         <!--More-->
         <scene sceneID="jYO-7R-Fig">

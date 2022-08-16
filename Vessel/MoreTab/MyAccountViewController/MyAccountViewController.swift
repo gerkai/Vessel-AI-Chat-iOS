@@ -100,8 +100,9 @@ extension MyAccountViewController: UITableViewDelegate
             // TODO: Route to Manage my Goals
             break
         case .manageMyDietOrAllergies:
-            // TODO: Route to Manage My Diet/Allergies
-            break
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "FoodPreferencesViewController") as! FoodPreferencesViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .manageMembership:
             openInSafari(url: "https://vesselhealth.com/account")
         }

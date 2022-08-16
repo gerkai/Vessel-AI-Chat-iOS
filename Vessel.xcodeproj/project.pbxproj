@@ -141,6 +141,8 @@
 		72DF48002890EE4A00DF33BE /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */; };
 		72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */; };
 		72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */; };
+		72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */; };
+		72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */; };
 		72F41EDE289115EE005136B3 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* MyAccountCell.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
@@ -305,6 +307,8 @@
 		72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Injection.swift"; sourceTree = "<group>"; };
+		72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewController.swift; sourceTree = "<group>"; };
+		72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72F41EDD289115EE005136B3 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
@@ -664,6 +668,7 @@
 		7282D413288F7C8200B4E26D /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				72F2484828A6064800B0BE02 /* FoodPreferencesViewController */,
 				728B593428920A9E001C4B2A /* EditProfileViewController */,
 				7282D414288F7CA400B4E26D /* MoreTab.storyboard */,
 				7282D41C288FB78200B4E26D /* MoreViewController */,
@@ -718,6 +723,15 @@
 				72F41EDD289115EE005136B3 /* MyAccountCell.swift */,
 			);
 			path = MyAccountViewController;
+			sourceTree = "<group>";
+		};
+		72F2484828A6064800B0BE02 /* FoodPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */,
+				72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */,
+			);
+			path = FoodPreferencesViewController;
 			sourceTree = "<group>";
 		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
@@ -992,6 +1006,7 @@
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
+				72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				7282D417288F7CBA00B4E26D /* MoreViewController.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
@@ -1039,6 +1054,7 @@
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
+				72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
