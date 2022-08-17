@@ -80,18 +80,16 @@ extension MyAccountViewController: UITableViewDelegate
             assertionFailure("MyAccountCell dequed in a bad state in MyAccountViewController didSelectRowAt indexPath")
             return
         }
-        
+        let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
         switch option
         {
         case .profile:
-            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
             navigationController?.pushViewController(vc, animated: true)
         case .manageMyGoals:
-            // TODO: Route to Manage my Goals
-            break
+            let vc = storyboard.instantiateViewController(identifier: "GoalsPreferencesViewController") as! GoalsPreferencesViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .manageMyDietOrAllergies:
-            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "FoodPreferencesViewController") as! FoodPreferencesViewController
             navigationController?.pushViewController(vc, animated: true)
         case .manageMembership:

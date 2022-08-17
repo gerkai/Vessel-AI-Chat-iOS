@@ -163,8 +163,6 @@ class FoodPreferencesViewModel
     func save()
     {
         guard let contact = Contact.main() else { return }
-        
-        //diets, allergies, goals
         contact.diet_ids = userDiets
         contact.allergy_ids = userAllergies
         
