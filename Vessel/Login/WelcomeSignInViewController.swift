@@ -18,6 +18,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var environmentLabel: UILabel!
     @IBOutlet private weak var buttonStackView: UIStackView!
     @IBOutlet private weak var splashView: UIView!
+    var timer: Timer!
     
     @Resolved private var analytics: Analytics
     let labelRefreshInterval = 2.0 //Seconds
@@ -39,11 +40,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+        
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
-        
+        print("WelcomeSignIn did load")
         if Server.shared.isLoggedIn()
         {
             Server.shared.getContact
@@ -80,6 +81,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
     }
     
+    deinit
+    {
+        print("WelcomeSignIn deinit")
+    }
+    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -90,6 +96,14 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     {
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         updateEnvironmentLabel(env: savedEnvironment)
+        timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+        print("Starting welcome timer")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        print("Disabling welcome timer")
+        timer.invalidate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

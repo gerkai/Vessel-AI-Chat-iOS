@@ -25,16 +25,16 @@ extension UIViewController
         }
     }
     
-    var mainViewController: MainViewController?
+    var mainTabBarController: MainTabBarController?
     {
-        if let mainViewController = UIApplication.shared.windows.first?.rootViewController as? MainViewController
+        if let mainTabBarController = UIApplication.shared.windows.first?.rootViewController as? MainTabBarController
         {
-            return mainViewController
+            return mainTabBarController
         }
         else if let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController,
-              let mainViewController = navigationController.topViewController as? MainViewController
+              let mainTabBarController = navigationController.topViewController as? MainTabBarController
         {
-            return mainViewController
+            return mainTabBarController
         }
         return nil
     }

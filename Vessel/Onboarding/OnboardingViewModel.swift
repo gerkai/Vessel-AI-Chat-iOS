@@ -61,9 +61,9 @@ class OnboardingViewModel
     static func InitialViewController() -> UIViewController
     {
         //uncomment to skip onboarding
-        //let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        //return vc
+        /*let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+        return vc*/
         
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
@@ -157,7 +157,7 @@ class OnboardingViewModel
             }
         }
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
         
         //save the data collected during onboarding
         saveDemographics()
