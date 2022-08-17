@@ -141,6 +141,8 @@
 		72DF48002890EE4A00DF33BE /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */; };
 		72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */; };
 		72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */; };
+		72E7958828ACC93A00F01D07 /* GoalsPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */; };
+		72E7958A28ACC94200F01D07 /* GoalsPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */; };
 		72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */; };
 		72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */; };
 		72F41EDE289115EE005136B3 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* MyAccountCell.swift */; };
@@ -307,6 +309,8 @@
 		72DF47FF2890EE4A00DF33BE /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Injection.swift"; sourceTree = "<group>"; };
+		72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPreferencesViewController.swift; sourceTree = "<group>"; };
+		72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewController.swift; sourceTree = "<group>"; };
 		72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72F41EDD289115EE005136B3 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
@@ -668,6 +672,7 @@
 		7282D413288F7C8200B4E26D /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				72E7958528ACC38C00F01D07 /* GoalsPreferencesViewController */,
 				72F2484828A6064800B0BE02 /* FoodPreferencesViewController */,
 				728B593428920A9E001C4B2A /* EditProfileViewController */,
 				7282D414288F7CA400B4E26D /* MoreTab.storyboard */,
@@ -723,6 +728,15 @@
 				72F41EDD289115EE005136B3 /* MyAccountCell.swift */,
 			);
 			path = MyAccountViewController;
+			sourceTree = "<group>";
+		};
+		72E7958528ACC38C00F01D07 /* GoalsPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */,
+				72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */,
+			);
+			path = GoalsPreferencesViewController;
 			sourceTree = "<group>";
 		};
 		72F2484828A6064800B0BE02 /* FoodPreferencesViewController */ = {
@@ -1005,6 +1019,7 @@
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
+				72E7958A28ACC94200F01D07 /* GoalsPreferencesViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
 				72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
@@ -1065,6 +1080,7 @@
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */,
+				72E7958828ACC93A00F01D07 /* GoalsPreferencesViewModel.swift in Sources */,
 				3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F1A24932893479500BC539F /* ReagentInfoViewController.swift in Sources */,
