@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MainTabBarController.swift
 //  Vessel
 //
 //  Created by Carson Whitsett on 7/11/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDelegate
+class MainTabBarController: UITabBarController, TestAfterWakingUpViewControllerDelegate
 {
     var didLayout = false
     let vesselButtonIndex = 2
@@ -18,13 +18,14 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         super.viewDidLoad()
         
-        print("MainViewController did load")
+        print("MainTabBarController did load")
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
         
         //On devices with a safe area below (no home button), the tab bar icons are too close to the top of the tab bar.
         //this will move them down. Skip this for devices with home button (iPhone SE for example)
+        /*
         if let window = UIApplication.shared.windows.first
         {
             let bottomPadding = window.safeAreaInsets.bottom
@@ -35,9 +36,12 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
                 {
                     vc.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
                 }
-                tabBar.items?.forEach({ $0.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: 7.0) })
+                tabBar.items?.forEach(
+                    { $0.titlePositionAdjustment = UIOffset(horizontal: 10.0, vertical: 12.0)
+                        print("Set tab bar item position")
+                    })
             }
-        }
+        }*/
         
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -51,12 +55,19 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         }
         
-        //make this the root viewController which will cause previous login and onboarding viewControllers
-        //to be deallocated.
+        //remove all prior viewControllers from the navigation stack which will cause them to be deallocated.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) //provide enough time for push/fade to complete
         {
-            UIApplication.shared.windows.first?.rootViewController = self
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            if let viewControllers = self.navigationController?.viewControllers
+            {
+                for vc in viewControllers
+                {
+                    if vc != self
+                    {
+                        vc.removeFromParent()
+                    }
+                }
+            }
         }
     }
     
@@ -67,6 +78,7 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     
     override func viewWillLayoutSubviews()
     {
+        super.viewWillLayoutSubviews()
         if didLayout == false
         {
             //only want to do this once
@@ -190,19 +202,6 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
                 let rootVC = dest.viewControllers.first as! TakeTestMVVMViewController
                 rootVC.viewModel = takeTestViewModel
             }
-        }
-    }
-    
-    func hideVesselButton(_ hide: Bool)
-    {
-        if hide
-        {
-            vesselButton?.removeFromSuperview()
-            vesselButton = nil
-        }
-        else
-        {
-            didLayout = false
         }
     }
     

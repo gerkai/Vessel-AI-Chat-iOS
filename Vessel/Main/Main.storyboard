@@ -36,7 +36,9 @@
                         <viewLayoutGuide key="safeArea" id="eZe-f0-71K"/>
                         <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" id="OED-Xy-1RK"/>
+                    <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" id="OED-Xy-1RK">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jU-Mt-8UZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -51,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COACH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTn-ZU-LEb">
-                                <rect key="frame" x="184" y="438" width="59" height="21"/>
+                                <rect key="frame" x="183" y="438" width="59" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -77,7 +79,9 @@
                             <constraint firstItem="y6y-Dt-fTK" firstAttribute="centerX" secondItem="dVU-0E-yXU" secondAttribute="centerX" id="yQK-Lu-4Qg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="bkk-Po-fvx"/>
+                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="bkk-Po-fvx">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Um5-Cg-1be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -245,7 +249,9 @@
                         <viewLayoutGuide key="safeArea" id="9IQ-TA-VWQ"/>
                         <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="Xst-F5-x7s"/>
+                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="Xst-F5-x7s">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVM-lX-cc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -292,10 +298,11 @@
             </objects>
             <point key="canvasLocation" x="572" y="-824"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="iA0-jZ-Ze0">
             <objects>
-                <tabBarController storyboardIdentifier="MainViewController" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="tAG-L0-bIv" customClass="MainViewController" customModule="Vessel" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="tAG-L0-bIv" customClass="MainTabBarController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="bcb-Ru-hS1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7Fa-Tt-0bB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

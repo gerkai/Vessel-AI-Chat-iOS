@@ -64,10 +64,9 @@ extension MoreViewController: UITableViewDelegate
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "MyAccountViewController") as! MyAccountViewController
             vc.hidesBottomBarWhenPushed = true
-            mainViewController?.hideVesselButton(true)
             navigationController?.pushViewController(vc, animated: true)
         case .takeATest:
-            mainViewController?.vesselButtonPressed()
+            mainTabBarController?.vesselButtonPressed()
         case .orderCards:
             // TODO: Route to Order Cards (URL not available yet)
             break
