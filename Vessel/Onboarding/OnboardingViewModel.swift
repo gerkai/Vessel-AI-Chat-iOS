@@ -61,103 +61,107 @@ class OnboardingViewModel
     static func InitialViewController() -> UIViewController
     {
         //uncomment to skip onboarding
-        //let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        //return vc
+        /*let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+        return vc*/
         
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
-        vc.viewModel = OnboardingViewModel()
-        return vc
+        //MainContact is guaranteed
+        let contact = Contact.main()!
+        if contact.gender == nil
+        {
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+            vc.viewModel = OnboardingViewModel()
+            return vc
+        }
+        else
+        {
+            //if gender was chosen then we can assume all demographics were populated so skip onboarding
+            //and go directly to MainTabBarController
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+            return vc
+        }
     }
     
     func nextViewController() -> UIViewController
     {
-        //MainContact is guaranteed
-        let contact = Contact.main()!
-        
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        /*if onboardingViewModel == nil
-        {
-            onboardingViewModel = OnboardingViewModel()
-        }*/
         
-        if contact.gender == nil
+        //increment to next state
+        curState.next()
+    
+        if curState == .WelcomeGender
         {
-            //increment to next state
-            curState.next()
-        
-            if curState == .WelcomeGender
-            {
-                //show gender selector flow
-                let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
-                vc.viewModel = self
-                return vc
-            }
-            else if curState == .HeightWeight
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
-                vc.viewModel = self
-                return vc
-            }
-            else if curState == .BirthdaySelect
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
-                vc.viewModel = self
-                return vc
-            }
-            else if curState == .DietSelect
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-                vc.viewModel = self
-                vc.titleText = NSLocalizedString("Diet", comment: "Title of Diet Preferences screen")
-                vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment: "Subtext of Diet Preferences screen")
-                vc.itemType = .Diet
-                return vc
-            }
-            else if curState == .AllergySelect
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-                vc.viewModel = self
-                vc.titleText = NSLocalizedString("Allergies", comment: "Title of Allergy Preferences screen")
-                vc.subtext = NSLocalizedString("Do you have any food allergies?", comment: "Subtext of Allergy Preferences screen")
-                vc.itemType = .Allergy
-                return vc
-            }
-            else if curState == .ViewTerms
-            {    
-                let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
-                vc.viewModel = self
-                return vc
-            }
-            else if curState == .GoalsSelect
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-                vc.viewModel = self
-                vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-                vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment: "Subtext of Goal Preferences screen")
-                vc.itemType = .Goal
-                return vc
-            }
-            else if curState == .SingleGoalSelect
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-                vc.viewModel = self
-                vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-                vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
-                vc.itemType = .SingleGoal
-                vc.hideBackground = true
-                return vc
-            }
-            else if curState == .FinalOnboarding
-            {
-                let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
-                vc.viewModel = self
-                return vc
-            }
+            //show gender selector flow
+            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
+            vc.viewModel = self
+            return vc
         }
+        else if curState == .HeightWeight
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "HeightWeightSelectViewController") as! HeightWeightSelectViewController
+            vc.viewModel = self
+            return vc
+        }
+        else if curState == .BirthdaySelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySelectViewController") as! BirthdaySelectViewController
+            vc.viewModel = self
+            return vc
+        }
+        else if curState == .DietSelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+            vc.viewModel = self
+            vc.titleText = NSLocalizedString("Diet", comment: "Title of Diet Preferences screen")
+            vc.subtext = NSLocalizedString("Do you follow any diets right now?", comment: "Subtext of Diet Preferences screen")
+            vc.itemType = .Diet
+            return vc
+        }
+        else if curState == .AllergySelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+            vc.viewModel = self
+            vc.titleText = NSLocalizedString("Allergies", comment: "Title of Allergy Preferences screen")
+            vc.subtext = NSLocalizedString("Do you have any food allergies?", comment: "Subtext of Allergy Preferences screen")
+            vc.itemType = .Allergy
+            return vc
+        }
+        else if curState == .ViewTerms
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
+            vc.viewModel = self
+            return vc
+        }
+        else if curState == .GoalsSelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+            vc.viewModel = self
+            vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
+            vc.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment: "Subtext of Goal Preferences screen")
+            vc.itemType = .Goal
+            return vc
+        }
+        else if curState == .SingleGoalSelect
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
+            vc.viewModel = self
+            vc.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
+            vc.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
+            vc.itemType = .SingleGoal
+            vc.hideBackground = true
+            return vc
+        }
+        else if curState == .FinalOnboarding
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
+            vc.viewModel = self
+            return vc
+        }
+
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
         
         //save the data collected during onboarding
         saveDemographics()

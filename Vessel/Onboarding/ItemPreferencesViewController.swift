@@ -121,11 +121,7 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
             //show regular checkmark cell
             let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
             let info = viewModel.infoForItemAt(indexPath: indexPath, type: itemType)
-            cell.titleLabel.text = info.name
-            //we'll use the tag to hold the diet/allergy/goal ID
-            cell.tag = info.id
-            cell.delegate = self
-            cell.isChecked = viewModel.itemIsChecked(type: itemType, id: info.id)
+            cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(type: itemType, id: info.id))
             return cell
         }
     }

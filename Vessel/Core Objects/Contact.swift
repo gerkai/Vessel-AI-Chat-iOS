@@ -12,8 +12,8 @@ class Contact: CoreObjectProtocol
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
     
     var id: Int
-    var last_updated: Int //object is not returned from server yet so we mock it with a private var _last_updated
-    {
+    var last_updated: Int = 0 //object is not returned from server yet so we mock it with a private var _last_updated
+    /*{
         get
         {
             _last_updated ?? 0
@@ -22,7 +22,7 @@ class Contact: CoreObjectProtocol
         {
             _last_updated = newValue
         }
-    }
+    }*/
     var first_name: String
     var last_name: String
     var gender: String?
@@ -47,7 +47,7 @@ class Contact: CoreObjectProtocol
     var goal_ids: [Int]
     var main_goal_id: Int?
     var expert_id: Int?
-    private var _last_updated: Int?
+    //private var _last_updated: Int?
     private var _enrolled_program_ids: [Int]?
     
     static func main() -> Contact?
@@ -100,7 +100,8 @@ class Contact: CoreObjectProtocol
          expert_id: Int? = nil)
     {
         self.id = id
-        _last_updated = lastUpdated
+        //_last_updated = lastUpdated
+        last_updated = lastUpdated
         self.first_name = firstName
         self.last_name = lastName
         self.gender = gender
@@ -147,7 +148,8 @@ class Contact: CoreObjectProtocol
     enum CodingKeys: String, CodingKey
     {
         case id
-        case _last_updated = "last_updated"
+        //case _last_updated = "last_updated"
+        //case last_updated
         case first_name
         case last_name
         case gender

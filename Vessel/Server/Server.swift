@@ -6,7 +6,6 @@
 //
 //  All back end communication goes through here.
 //  All callbacks are dispatched on MainQueue
-//  TODO: Handle refresh tokens
 
 import Foundation
 import Security
@@ -56,6 +55,7 @@ let CONTACT_PATH = "contact"
 let CONTACT_EXISTS_PATH = "contact/exists"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
+let OBJECT_SAVE_PATH = "objects/save"
 
 struct CardAssociation
 {
@@ -207,8 +207,7 @@ class Server: NSObject
         /*if let url = request.url
         {
             print("POST: \(url)")
-        }
-        print("POST Mutable Request\(mutableRequest)")*/
+        }*/
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -705,6 +704,40 @@ class Server: NSObject
         }
     }
     
+    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    {
+        let url = "\(API())\(OBJECT_SAVE_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objects)
+        let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            print("Saved contact. Response: \(object)")
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    /*
     func updateContact(contact: Contact, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CONTACT_PATH)"
@@ -712,8 +745,8 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(contact)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
+        let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)
         
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
@@ -736,7 +769,7 @@ class Server: NSObject
                 failure(NSLocalizedString("Server Error", comment: ""))
             }
         })
-    }
+    }*/
     
     //MARK:  Sample
     func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)

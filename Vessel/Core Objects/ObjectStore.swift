@@ -52,9 +52,12 @@ class ObjectStore: NSObject
         saveObject(object)
         if String(describing: type(of: object)) == "Contact"
         {
-            Server.shared.updateContact(contact: object as! Contact)
+            let objectArray = [object]
+            let dict = ["contact": objectArray]
+            
+            //note: server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+            Server.shared.saveObjects(objects: dict)
             {
-                //Navigate to next screen in onboard
                 print("Saved Contact")
             }
             onFailure:
