@@ -87,9 +87,12 @@ class ChangePasswordViewModel
                 }
                 else if message == "Shorter than minimum length 6."
                 {
-                    if newPassword.count < Constants.MinimumPasswordLength {
+                    if newPassword.count < Constants.MinimumPasswordLength
+                    {
                         errorCompletion?(ChangePasswordError.newPasswordTooShort)
-                    } else if oldPassword.count < Constants.MinimumPasswordLength {
+                    }
+                    else if oldPassword.count < Constants.MinimumPasswordLength
+                    {
                         errorCompletion?(ChangePasswordError.oldPasswordTooShort)
                     }
                 }

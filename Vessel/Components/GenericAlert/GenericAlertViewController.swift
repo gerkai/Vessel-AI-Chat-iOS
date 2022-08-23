@@ -181,7 +181,7 @@ class GenericAlertViewController: UIViewController
     
     // MARK: - Actions
     @objc
-    func onBackgroundTapped()
+    func onBackgroundTapped(alertButtonIndexTapped: Int = -1)
     {
         if viewModel.animation == .popUp
         {
@@ -197,9 +197,14 @@ class GenericAlertViewController: UIViewController
                     self?.contentView.alpha = 0.0
                 }
                 completion:
-                { _ in
-                    self?.delegate?.onAlertDismissed?()
-                    self?.dismiss(animated: false)
+                { [weak self] _ in
+                    guard let self = self else { return }
+                    if alertButtonIndexTapped != -1 && self.viewModel.shouldCloseWhenButtonTapped
+                    {
+                        self.delegate?.onAlertButtonTapped?(index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
+                    }
+                    self.delegate?.onAlertDismissed?()
+                    self.dismiss(animated: false)
                 }
             }
         }
@@ -234,22 +239,28 @@ class GenericAlertViewController: UIViewController
     {
         if let index = buttons.firstIndex(of: sender)
         {
-            delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             if viewModel.shouldCloseWhenButtonTapped
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + buttonCloseAnimationDelay, execute: { [weak self] in
-                    self?.onBackgroundTapped()
+                    self?.onBackgroundTapped(alertButtonIndexTapped: index)
                 })
+            }
+            else
+            {
+                delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             }
         }
         else if let index = horizontalButtonsStackView.arrangedSubviews.firstIndex(of: sender)
         {
-            delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             if viewModel.shouldCloseWhenButtonTapped
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + buttonCloseAnimationDelay, execute: { [weak self] in
-                    self?.onBackgroundTapped()
+                    self?.onBackgroundTapped(alertButtonIndexTapped: index)
                 })
+            }
+            else
+            {
+                delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             }
         }
     }
