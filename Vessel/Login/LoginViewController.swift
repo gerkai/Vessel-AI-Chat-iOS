@@ -114,6 +114,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                             Server.shared.getContact
                             { [weak self] contact in
                                 guard let self = self else { return }
+                                contact.loginType = .email
                                 self.nextButton.hideLoading()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 Contact.MainID = contact.id

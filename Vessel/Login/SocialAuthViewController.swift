@@ -13,6 +13,7 @@ enum LoginType: String
 {
     case google = "Google"
     case apple = "Apple"
+    case email = "Email"
 }
 
 protocol SocialAuthViewDelegate
@@ -75,7 +76,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         { contact in
             //store the main contactID for use whenever we need to reference the main contact later in the app.
             Contact.MainID = contact.id
-            
+            contact.loginType = self.loginType
             //save this contact into the object store
             ObjectStore.shared.serverSave(contact)
             if contact.isBrandNew()

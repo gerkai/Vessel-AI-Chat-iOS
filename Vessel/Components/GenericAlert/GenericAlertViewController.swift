@@ -11,17 +11,21 @@ class GenericAlertViewController: UIViewController
 {
     static func presentAlert(in viewController: UIViewController,
                              type: GenericAlertType,
+                             description: String = "",
                              background: GenericAlertBackground = .cream,
                              showCloseButton: Bool = false,
                              alignment: GenericAlertAlignment = .center,
+                             animation: GenericAlertAnimation = .popUp,
                              shouldCloseWhenButtonTapped: Bool = true,
                              shouldCloseWhenTappedOutside: Bool = true,
                              delegate: GenericAlertDelegate? = nil)
     {
         let viewModel = GenericAlertViewModel(type: type,
+                                              description: description,
                                               background: background,
                                               showCloseButton: showCloseButton,
                                               alignment: alignment,
+                                              animation: animation,
                                               shouldCloseWhenButtonTapped: shouldCloseWhenButtonTapped,
                                               shouldCloseWhenTappedOutside: shouldCloseWhenTappedOutside)
         let alert = GenericAlertViewController(viewModel: viewModel)
@@ -47,8 +51,8 @@ class GenericAlertViewController: UIViewController
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var alertViewCenterYConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var alertViewTopSpacingConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var alertViewBottomSpacingConstraint: NSLayoutConstraint!
+    @IBOutlet private var alertViewTopSpacingConstraint: NSLayoutConstraint!
+    @IBOutlet private var alertViewBottomSpacingConstraint: NSLayoutConstraint!
     @IBOutlet private var buttons: [BounceButton]!
     @IBOutlet private weak var horizontalButtonsStackView: UIStackView!
     
@@ -56,6 +60,10 @@ class GenericAlertViewController: UIViewController
     private var viewModel: GenericAlertViewModel!
     private weak var delegate: GenericAlertDelegate?
     private let buttonCloseAnimationDelay = 0.3
+    private var screenHeight: CGFloat
+    {
+        return UIScreen.main.bounds.height
+    }
     
     // MARK: Flags
     private var alertSetup = false
@@ -91,7 +99,15 @@ class GenericAlertViewController: UIViewController
         super.viewDidLoad()
         setupView()
         contentView.alpha = 0.0
-        alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        switch viewModel.animation
+        {
+        case .popUp:
+            alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        case .modal:
+            alertViewCenterYConstraint.constant = screenHeight
+            alertViewTopSpacingConstraint.isActive = false
+            alertViewBottomSpacingConstraint.isActive = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -104,23 +120,60 @@ class GenericAlertViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
         if !alertPresented
         {
             alertPresented = true
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
-            { [weak self] in
-                self?.contentView.alpha = 1.0
-                self?.alertView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            }
-            completion:
-            { [weak self] _ in
+            switch viewModel.animation
+            {
+            case .popUp:
                 UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
-                {
-                    self?.alertView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                { [weak self] in
+                    self?.contentView.alpha = 1.0
+                    self?.alertView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 }
                 completion:
-                { _ in
-                    self?.delegate?.onAlertPresented()
+                { [weak self] _ in
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
+                    {
+                        self?.alertView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    }
+                    completion:
+                    { _ in
+                        self?.delegate?.onAlertPresented?()
+                    }
+                }
+            case .modal:
+                alertViewCenterYConstraint.constant = 0
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut)
+                { [weak self] in
+                    guard let self = self else { return }
+                    self.contentView.alpha = 1.0
+                    self.view.layoutIfNeeded()
+                }
+                completion:
+                { [weak self] _ in
+                    guard let self = self else { return }
+                    self.alertViewTopSpacingConstraint = NSLayoutConstraint(item: self.view!,
+                                                                            attribute: .top,
+                                                                            relatedBy: .greaterThanOrEqual,
+                                                                            toItem: self.alertView,
+                                                                            attribute: .top,
+                                                                            multiplier: 1.0,
+                                                                            constant: 0.0)
+                    self.alertViewTopSpacingConstraint.isActive = true
+                    self.alertViewTopSpacingConstraint.priority = .init(rawValue: 900)
+
+                    self.alertViewBottomSpacingConstraint = NSLayoutConstraint(item: self.view!,
+                                                                            attribute: .bottom,
+                                                                            relatedBy: .greaterThanOrEqual,
+                                                                            toItem: self.alertView,
+                                                                            attribute: .bottom,
+                                                                            multiplier: 1.0,
+                                                                            constant: 0.0)
+                    self.alertViewBottomSpacingConstraint.isActive = true
+                    self.alertViewBottomSpacingConstraint.priority = .init(rawValue: 900)
+                    self.delegate?.onAlertPresented?()
                 }
             }
         }
@@ -130,20 +183,40 @@ class GenericAlertViewController: UIViewController
     @objc
     func onBackgroundTapped()
     {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
-        { [weak self] in
-            self?.alertView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }
-        completion:
-        { [weak self] _ in
+        if viewModel.animation == .popUp
+        {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
-            {
-                self?.alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            { [weak self] in
+                self?.alertView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+            completion:
+            { [weak self] _ in
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
+                {
+                    self?.alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                    self?.contentView.alpha = 0.0
+                }
+                completion:
+                { _ in
+                    self?.delegate?.onAlertDismissed?()
+                    self?.dismiss(animated: false)
+                }
+            }
+        }
+        else
+        {
+            self.alertViewCenterYConstraint.constant = screenHeight
+            alertViewTopSpacingConstraint.isActive = false
+            alertViewBottomSpacingConstraint.isActive = false
+
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseIn)
+            { [weak self] in
+                self?.view.layoutIfNeeded()
                 self?.contentView.alpha = 0.0
             }
             completion:
-            { _ in
-                self?.delegate?.onAlertDismissed()
+            { [weak self] _ in
+                self?.delegate?.onAlertDismissed?()
                 self?.dismiss(animated: false)
             }
         }
@@ -161,7 +234,7 @@ class GenericAlertViewController: UIViewController
     {
         if let index = buttons.firstIndex(of: sender)
         {
-            delegate?.onAlertButtonTapped(index: index)
+            delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             if viewModel.shouldCloseWhenButtonTapped
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + buttonCloseAnimationDelay, execute: { [weak self] in
@@ -171,7 +244,7 @@ class GenericAlertViewController: UIViewController
         }
         else if let index = horizontalButtonsStackView.arrangedSubviews.firstIndex(of: sender)
         {
-            delegate?.onAlertButtonTapped(index: index)
+            delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
             if viewModel.shouldCloseWhenButtonTapped
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + buttonCloseAnimationDelay, execute: { [weak self] in
@@ -377,6 +450,12 @@ private extension GenericAlertViewController
                 setupLabel(subtitleLabel, withInfo: subtitleInfo)
                 imageView.image = image
                 setupHorizontalButtons(buttonsInfo: buttonsInfo)
+            case .imageTitleButton(let image, let titleInfo, let buttonInfo):
+                setupLabel(titleLabel, withInfo: titleInfo)
+                setupButton(buttons.first, withInfo: buttonInfo)
+                subtitleLabel.isHidden = true
+                imageView.image = image
+                horizontalButtonsStackView.isHidden = true
             case .imageSubtitleButton(let image, let subtitleInfo, let buttonInfo):
                 titleLabel.isHidden = true
                 setupButton(buttons.first, withInfo: buttonInfo)

@@ -54,6 +54,7 @@ class Contact: CoreObjectProtocol
     var time_zone: String?
     //var programs: [Program]?
     var has_samples: Bool?
+    var loginType: LoginType?
     
     private var _flags: Int?
     
@@ -127,7 +128,8 @@ class Contact: CoreObjectProtocol
          description: String? = nil,
          time_zone: String? = nil,
          //programs: [Program]? = nil,
-         has_samples: Bool? = nil)
+         has_samples: Bool? = nil,
+         loginType: LoginType? = nil)
     {
         self.id = id
         self.lastUpdated = lastUpdated
@@ -158,6 +160,7 @@ class Contact: CoreObjectProtocol
         //self.programs = programs
         self.main_goal_id = main_goal_id
         self.has_samples = has_samples
+        self.loginType = loginType
     }
     
     var fullName: String
