@@ -13,26 +13,95 @@ protocol CoreObjectProtocol: Codable
     var id: Int {get}
 }
 
+enum ObjectType: String
+{
+    case CONTACT
+}
+
+struct ObjectSpec: Codable
+{
+    var id: Int
+    var last_updated: Int
+}
+
 class ObjectStore: NSObject
 {
     static let shared = ObjectStore()
-    var repo: [String: [Int: CoreObjectProtocol]] = [:]
+    var cache: [String: [Int: CoreObjectProtocol]] = [:]
     
     private func saveObject<T: CoreObjectProtocol>(_ object: T)
     {
         let objectName = String(describing: type(of: object))
-        if repo[objectName] != nil
+        if cache[objectName] != nil
         {
-            repo[objectName]![object.id] = object
+            cache[objectName]![object.id] = object
         }
         else
         {
-            //create the collection dictionary and add to repo
-            repo[objectName] = [object.id: object]
+            //create the collection dictionary and add to cache
+            cache[objectName] = [object.id: object]
         }
     }
     
     //MARK: - Public functions
+    
+    func loadMainContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    {
+        let contactID = Contact.MainID
+        let type = ObjectType.CONTACT
+        get(type: type, id: contactID)
+        { contact in
+            let con = contact as! Contact
+            self.saveObject(con)
+            success()
+        }
+        onFailure:
+        {
+            failure()
+        }
+    }
+    
+    func get(type: ObjectType, id: Int, onSuccess success: @escaping (_ object: CoreObjectProtocol) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        if type == .CONTACT
+        {
+            let contactName = "\(Contact.self)"
+            if let contact = cache[contactName]?[id] as? Contact
+            {
+                success(contact)
+            }
+            else
+            {
+                //load it from the backend
+                Server.shared.getObjects(objects: ["contact": [ObjectSpec(id: id, last_updated: 0)]])
+                { objects in
+                    if let contactArray = objects["contact"] as? NSArray
+                    {
+                        if let contactDict = contactArray.firstObject
+                        {
+                            do
+                            {
+                                let json = try JSONSerialization.data(withJSONObject: contactDict)
+                                let decoder = JSONDecoder()
+                                let contact = try decoder.decode(Contact.self, from: json)
+                                success(contact)
+                            }
+                            catch
+                            {
+                                print(error)
+                            }
+                        }
+                    }
+                    print("Malformed server response: \(objects)")
+                    failure()
+                }
+                onFailure:
+                { error in
+                    print("FAILURE: \(error)")
+                }
+            }
+        }
+    }
     
     //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T)
@@ -69,8 +138,8 @@ class ObjectStore: NSObject
     
     func getContact(id: Int) -> Contact?
     {
-        //get contact from local repo
+        //get contact from local cache
         let contactName = "\(Contact.self)"
-        return repo[contactName]?[id] as? Contact
+        return cache[contactName]?[id] as? Contact
     }
 }

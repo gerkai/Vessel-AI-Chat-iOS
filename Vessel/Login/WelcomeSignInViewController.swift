@@ -47,10 +47,8 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         print("WelcomeSignIn did load")
         if Server.shared.isLoggedIn()
         {
-            Server.shared.getContact
-            { contact in
-                Contact.MainID = contact.id
-                ObjectStore.shared.serverSave(contact)
+            ObjectStore.shared.loadMainContact
+            {
                 print("Successfully loaded contact during auto-login. Jumping to Onboarding")
                 let vc = OnboardingViewModel.InitialViewController()
                 self.navigationController?.fadeTo(vc)
@@ -61,7 +59,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                 }
             }
             onFailure:
-            { error in
+            {
                 print("Unsuccessful at re-logging in. Making user sign-in again")
                 //fade splash screen in right away since we already spent time trying to load contact from back end
                 UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)

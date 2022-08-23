@@ -39,6 +39,7 @@ let AUTH_PREFIX = "Bearer"
 let AUTH_KEY = "Authorization"
 let ACCESS_TOKEN_KEY = "access_token"
 let REFRESH_TOKEN_KEY = "refresh_token"
+let CONTACT_ID_KEY = "contact_id"
 let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
@@ -52,10 +53,12 @@ let GOOGLE_LOGIN_PATH = "auth/google/login"
 let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
 let REFRESH_TOKEN_PATH = "auth/refresh-token"
 let CONTACT_PATH = "contact"
+let CONTACT_SHOPIFY_PATH = "contact/shopify"
 let CONTACT_EXISTS_PATH = "contact/exists"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
 let OBJECT_SAVE_PATH = "objects/save"
+let OBJECT_GET_PATH = "objects/get"
 
 struct CardAssociation
 {
@@ -153,11 +156,14 @@ class Server: NSObject
         return SUPPORT_URL
     }
 
-    private func serverGet(url: String, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func GenerateRequest(urlString: String) -> URLRequest?
     {
-        guard let serviceUrl = URL(string: url) else { return }
-        let request = URLRequest(url: serviceUrl)
-        
+        guard let serviceUrl = URL(string: urlString) else { return nil}
+        return URLRequest(url: serviceUrl)
+    }
+    
+    private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
         var mutableRequest = request
         mutableRequest.httpMethod = "GET"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -219,11 +225,19 @@ class Server: NSObject
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
                     {
-                        success(object)
+                        if let schemaErrors = object["schema_errors"]
+                        {
+                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(schemaErrors)", comment: "Server error message"))
+                            failure(error)
+                        }
+                        else
+                        {
+                            success(object)
+                        }
                     }
                     else
                     {
-                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server", comment: "Server error message"))
+                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(json)", comment: "Server error message"))
                         failure(error)
                     }
                 }
@@ -275,6 +289,7 @@ class Server: NSObject
         }
     }
     
+    /* send the refresh token, get back a new access and refresh token */
     func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
@@ -372,8 +387,20 @@ class Server: NSObject
             {
                 refreshToken = String(data: data, encoding: .utf8)!
             }
+            if let data = KeychainHelper.standard.read(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+            {
+                let stringID = String(data: data, encoding: .utf8)!
+                if let id = Int(stringID)
+                {
+                    Contact.MainID = id
+                }
+                else
+                {
+                    print("Couldn't convert main ID: \(stringID)")
+                }
+            }
         }
-        return accessToken != nil
+        return (accessToken != nil) && (Contact.MainID != 0)
     }
     
     func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String: Any]) -> Void)
@@ -406,8 +433,12 @@ class Server: NSObject
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
         { object in
-            if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+            if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                let mainContactID = object[CONTACT_ID_KEY] as? Int
             {
+                Contact.MainID = mainContactID
+                
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
                 //save tokens to keychain
@@ -416,7 +447,9 @@ class Server: NSObject
                 KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                 let refreshData = Data(refreshToken.utf8)
                 KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-
+                let string = "\(mainContactID)"
+                KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+                
                 DispatchQueue.main.async()
                 {
                     success()
@@ -452,15 +485,20 @@ class Server: NSObject
     func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
-        serverGet(url: url)
+        let request = Server.shared.GenerateRequest(urlString: url)!
+        serverGet(request: request)
         { data in
             do
             {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
                     {
+                        Contact.MainID = mainContactID
+                        
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
                         print("getTokens() saving tokens to keychain")
@@ -468,6 +506,8 @@ class Server: NSObject
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                         let refreshData = Data(refreshToken.utf8)
                         KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
                         DispatchQueue.main.async()
                         {
                             success()
@@ -557,6 +597,7 @@ class Server: NSObject
         }
     }
     
+    /*
     //pass an ID to get a specific contact or leave nil to get the primary contact
     func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
@@ -567,7 +608,8 @@ class Server: NSObject
         {
             url = url + "/\(id!)"
         }
-        serverGet(url: url)
+        let request = Server.shared.GenerateRequest(urlString: url)!
+        serverGet(request: request)
         { data in
             //let str = String(decoding: data, as: UTF8.self)
             //print (str)
@@ -640,10 +682,11 @@ class Server: NSObject
             }
         }
     }
+    */
     
     func createContact(contact: Contact, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        let url = "\(API())\(CONTACT_PATH)"
+        let url = "\(API())\(CONTACT_SHOPIFY_PATH)"
         
         if var contactDict = contact.dictionary
         {
@@ -686,10 +729,10 @@ class Server: NSObject
                     }
                 },
                 onFailure:
-                { (string) in
+                { (serverError) in
                     DispatchQueue.main.async()
                     {
-                        failure(NSLocalizedString("Server Error", comment: ""))
+                        failure(serverError.description)
                     }
                 })
             }
@@ -702,6 +745,36 @@ class Server: NSObject
                 }
             }
         }
+    }
+    //MARK: - Object get / save
+    func getObjects(objects: [String: [ObjectSpec]], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(OBJECT_GET_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objects)
+        let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (objects) in
+            DispatchQueue.main.async()
+            {
+                success(objects)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
     }
     
     func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
@@ -736,40 +809,6 @@ class Server: NSObject
             }
         })
     }
-    
-    /*
-    func updateContact(contact: Contact, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(CONTACT_PATH)"
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(contact)
-        let jsonString = String(data: data, encoding: .utf8)!
-        print(jsonString)
-        
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpBody = data
-        
-        //send it to server
-        serverPut(request: request, onSuccess:
-        { (object) in
-            print("Saved contact. Response: \(object)")
-            DispatchQueue.main.async()
-            {
-                success()
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }*/
     
     //MARK:  Sample
     func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
@@ -807,7 +846,8 @@ class Server: NSObject
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
-        serverGet(url: finalUrlString)
+        let request = Server.shared.GenerateRequest(urlString: finalUrlString)!
+        serverGet(request: request)
         { data in
             do
             {

@@ -71,13 +71,9 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
 
     func loadContact()
     {
-        Server.shared.getContact
-        { contact in
-            //store the main contactID for use whenever we need to reference the main contact later in the app.
-            Contact.MainID = contact.id
-            
-            //save this contact into the object store
-            ObjectStore.shared.serverSave(contact)
+        ObjectStore.shared.loadMainContact
+        {
+            let contact = Contact.main()!
             if contact.isBrandNew()
             {
                 self.delegate?.gotSocialAuthToken(isBrandNewAccount: true, loginType: self.loginType)
@@ -88,8 +84,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
             }
         }
         onFailure:
-        { error in
-            let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+        {
+            let errorString = NSLocalizedString("Couldn't get contact", comment: "")
             UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
         }
     }

@@ -123,23 +123,19 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         let contact = Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "")
         Server.shared.createContact(contact: contact)
         {
-            Server.shared.getContact
-            { contact in
-                Contact.MainID = contact.id
-                ObjectStore.shared.serverSave(contact)
-                //begin onboarding flow
+            ObjectStore.shared.loadMainContact
+            {
                 let vc = OnboardingViewModel.InitialViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             onFailure:
-            { error in
-                let errorString = error?.localizedDescription ?? "Couldn't get contact"
-                UIView.showError(text: NSLocalizedString("Server Error", comment: "Server error"), detailText: errorString, image: nil)
+            {
+                let errorString = NSLocalizedString("Couldn't get contact", comment: "")
+                UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
             }
         }
         onFailure:
         { error in
-            #warning("Create contact currently fails. Email/Password combination incorrect. Probably because password was removed from contact data structure")
             UIView.showError(text: NSLocalizedString("Sign Up", comment: ""), detailText: error, image: nil)
         }
     }
