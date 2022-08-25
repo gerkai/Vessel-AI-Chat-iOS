@@ -15,7 +15,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var heightPickerView: UIPickerView!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var weightUnitsLabel: UILabel!
-    var viewModel: OnboardingViewModel?
+    var viewModel: OnboardingViewModel!
     var isMetric: Bool
     {
         //determine if we are using imperial or metric units
@@ -26,30 +26,18 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     {
         super.viewDidLoad()
         
+        print("📗 did load \(self)")
+        
+        let height_cm = viewModel.userHeight
         if isMetric
         {
             weightUnitsLabel.text = NSLocalizedString("Kg", comment: "Abbreviation for Kilograms")
-            if let height_cm = viewModel?.userHeight
-            {
-                self.setHeightForPickerView(centimeters: Int(height_cm))
-            }
-            else
-            {
-                setHeightForPickerView(centimeters: Constants.DEFAULT_HEIGHT)
-            }
+            self.setHeightForPickerView(centimeters: Int(height_cm))
         }
         else
         {
-            if let height_cm = viewModel?.userHeight
-            {
-                let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: height_cm)
-                self.setHeightForPickerView(feet: feet, inches: inches)
-            }
-            else
-            {
-                let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.DEFAULT_HEIGHT))
-                setHeightForPickerView(feet: feet, inches: inches)
-            }
+            let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: height_cm)
+            self.setHeightForPickerView(feet: feet, inches: inches)
         }
         
         if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
@@ -70,12 +58,12 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
         
         //if we had previously chosen a weight on this screen then use that value instead
-        if let weight = viewModel?.userWeight
+        if let weight = viewModel.userWeight
         {
             if isMetric
             {
                 let weightKG = weight * 0.45359237 // pounds to kilograms conversion
-                weightTextField.text = "\(weightKG)" 
+                weightTextField.text = String(format: "%.1f", weightKG)
             }
             else
             {
@@ -149,9 +137,9 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     {
         if let weight = weightTextField.text, weight.count != 0
         {
-            viewModel?.setHeightWeight(height: getSelections(), weight: Double(weight)!)
+            viewModel.setHeightWeight(height: getSelections(), weight: Double(weight)!)
         }
-        viewModel?.backup()
+        viewModel.backup()
         navigationController?.fadeOut()
     }
     
@@ -159,9 +147,9 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     {
         if let weight = weightTextField.text, weight.count != 0
         {
-            viewModel?.setHeightWeight(height: getSelections(), weight: Double(weight)!)
+            viewModel.setHeightWeight(height: getSelections(), weight: Double(weight)!)
             
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = viewModel.nextViewController()
             navigationController?.fadeTo(vc)
         }
         else

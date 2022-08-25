@@ -16,13 +16,13 @@ protocol CheckmarkCollectionViewCellDelegate: AnyObject
 
 class CheckmarkCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var checkImage: UIImageView!
-    @IBOutlet weak var rootView: UIView!
-    weak var delegate: CheckmarkCollectionViewCellDelegate?
-    var originalColor: UIColor!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var checkImage: UIImageView!
+    @IBOutlet private weak var rootView: UIView!
+    private weak var delegate: CheckmarkCollectionViewCellDelegate?
+    private var originalColor: UIColor!
     
-    var isChecked = false
+    private var isChecked = false
     {
         didSet
         {
@@ -43,6 +43,15 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         originalColor = rootView.backgroundColor
+    }
+    
+    func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool)
+    {
+        titleLabel.text = name
+        //we'll use the tag to hold the diet/allergy/goal ID
+        tag = id
+        self.delegate = delegate
+        self.isChecked = isChecked
     }
     
     @IBAction func onTapped(_ sender: UIButton)

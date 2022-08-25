@@ -51,27 +51,27 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
     
     @IBAction func back()
     {
-        viewModel?.backup()
+        viewModel.backup()
         self.navigationController?.fadeOut()
     }
     
     @IBAction func next()
     {
-        if viewModel?.anyItemChecked(itemType) == true
+        if viewModel.anyItemChecked(itemType) == true
         {
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = viewModel.nextViewController()
             navigationController?.fadeTo(vc)
         }
         else
         {
-            let text = viewModel!.tooFewItemsSelectedText(type: itemType)
+            let text = viewModel.tooFewItemsSelectedText(type: itemType)
             UIView.showError(text: "", detailText: text, image: nil)
         }
     }
     
     func updateNextButton()
     {
-        if viewModel?.anyItemChecked(itemType) == true
+        if viewModel.anyItemChecked(itemType) == true
         {
             nextButton.backgroundColor = Constants.vesselBlack
         }
@@ -98,7 +98,7 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return viewModel!.itemCount(itemType)
+        return viewModel.itemCount(itemType)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -107,25 +107,21 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
         {
             //show image checkmark cell
             let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
+            let info = viewModel.infoForItemAt(indexPath: indexPath, type: itemType)
             cell.titleLabel.text = info.name
             cell.backgroundImage.image = info.image
             //we'll use the tag to hold the goal ID
             cell.tag = info.id
             cell.delegate = self
-            cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
+            cell.isChecked = viewModel.itemIsChecked(type: itemType, id: info.id)
             return cell
         }
         else
         {
             //show regular checkmark cell
             let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel!.infoForItemAt(indexPath: indexPath, type: itemType)
-            cell.titleLabel.text = info.name
-            //we'll use the tag to hold the diet/allergy/goal ID
-            cell.tag = info.id
-            cell.delegate = self
-            cell.isChecked = viewModel!.itemIsChecked(type: itemType, id: info.id)
+            let info = viewModel.infoForItemAt(indexPath: indexPath, type: itemType)
+            cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(type: itemType, id: info.id))
             return cell
         }
     }
@@ -133,7 +129,7 @@ class ItemPreferencesViewController: OnboardingMVVMViewController, UICollectionV
     //MARK: - CheckmarkCollectionViewCell delegates
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     {
-        viewModel!.selectItem(type: itemType, id: cell.tag, selected: checked)
+        viewModel.selectItem(type: itemType, id: cell.tag, selected: checked)
         collectionView.reloadData()
         updateNextButton()
     }

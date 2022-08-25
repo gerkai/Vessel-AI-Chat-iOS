@@ -6,7 +6,6 @@
 //
 //  All back end communication goes through here.
 //  All callbacks are dispatched on MainQueue
-//  TODO: Handle refresh tokens
 
 import Foundation
 import Security
@@ -40,6 +39,7 @@ let AUTH_PREFIX = "Bearer"
 let AUTH_KEY = "Authorization"
 let ACCESS_TOKEN_KEY = "access_token"
 let REFRESH_TOKEN_KEY = "refresh_token"
+let CONTACT_ID_KEY = "contact_id"
 let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
@@ -53,15 +53,26 @@ let GOOGLE_LOGIN_PATH = "auth/google/login"
 let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
 let REFRESH_TOKEN_PATH = "auth/refresh-token"
 let CONTACT_PATH = "contact"
+let CONTACT_CREATE_PATH = "contact/create"
 let CONTACT_EXISTS_PATH = "contact/exists"
+let CHANGE_PASSWORD_PATH = "contact/change-password"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
+let OBJECT_SAVE_PATH = "objects/save"
+let OBJECT_GET_PATH = "objects/get"
 
 struct CardAssociation
 {
     var cardBatchID: String?
     var cardCalibrationMode: String?
     var orcaSheetName: String?
+}
+
+struct ServerError
+{
+    var code: Int
+    var description: String
+    var moreInfo: String?
 }
 
 class Server: NSObject
@@ -146,11 +157,14 @@ class Server: NSObject
         return SUPPORT_URL
     }
 
-    private func serverGet(url: String, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func GenerateRequest(urlString: String) -> URLRequest?
     {
-        guard let serviceUrl = URL(string: url) else { return }
-        let request = URLRequest(url: serviceUrl)
-        
+        guard let serviceUrl = URL(string: urlString) else { return nil}
+        return URLRequest(url: serviceUrl)
+    }
+    
+    private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
         var mutableRequest = request
         mutableRequest.httpMethod = "GET"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -177,17 +191,17 @@ class Server: NSObject
         }.resume()
     }
     
-    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         serverWrite(request: request, requestType: "POST", onSuccess: success, onFailure: failure)
     }
     
-    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
     }
     
-    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         var mutableRequest = request
         mutableRequest.httpMethod = requestType
@@ -200,8 +214,7 @@ class Server: NSObject
         /*if let url = request.url
         {
             print("POST: \(url)")
-        }
-        print("POST Mutable Request\(mutableRequest)")*/
+        }*/
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -210,21 +223,35 @@ class Server: NSObject
                 do
                 {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Server Write Response:\n\(json)\n")
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
                     {
-                        success(object)
+                        if let schemaErrors = object["schema_errors"]
+                        {
+                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(schemaErrors)", comment: "Server error message"))
+                            failure(error)
+                        }
+                        else
+                        {
+                            success(object)
+                        }
                     }
                     else
                     {
-                        failure("Unable to parse response from server")
+                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(json)", comment: "Server error message"))
+                        failure(error)
                     }
                 }
                 catch
                 {
+                    var errorCode = 0
+                    let err = error as NSError
+                    errorCode = err.code
                     let string = String.init(data: data, encoding: .utf8)
-                    print("ERROR: \(string ?? "Unknown")")
-                    failure(error.localizedDescription)
+                    let result = ServerError(code: errorCode, description: error.localizedDescription, moreInfo: string)
+                    //print("ERROR: \(string ?? "Unknown")")
+                    failure(result)
                 }
             }
         }.resume()
@@ -264,6 +291,7 @@ class Server: NSObject
         }
     }
     
+    /* send the refresh token, get back a new access and refresh token */
     func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
@@ -361,8 +389,20 @@ class Server: NSObject
             {
                 refreshToken = String(data: data, encoding: .utf8)!
             }
+            if let stringID = KeychainHelper.standard.read(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT, type: String.self)
+            {
+                //let stringID = String(data: data, encoding: .utf8)!
+                if let id = Int(stringID)
+                {
+                    Contact.MainID = id
+                }
+                else
+                {
+                    print("Couldn't convert main ID: \(stringID)")
+                }
+            }
         }
-        return accessToken != nil
+        return (accessToken != nil) && (Contact.MainID != 0)
     }
     
     func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String: Any]) -> Void)
@@ -395,8 +435,12 @@ class Server: NSObject
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
         { object in
-            if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+            if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                let mainContactID = object[CONTACT_ID_KEY] as? Int
             {
+                Contact.MainID = mainContactID
+                
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
                 //save tokens to keychain
@@ -405,7 +449,9 @@ class Server: NSObject
                 KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                 let refreshData = Data(refreshToken.utf8)
                 KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-
+                let string = "\(mainContactID)"
+                KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+                
                 DispatchQueue.main.async()
                 {
                     success()
@@ -441,15 +487,20 @@ class Server: NSObject
     func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
-        serverGet(url: url)
+        let request = Server.shared.GenerateRequest(urlString: url)!
+        serverGet(request: request)
         { data in
             do
             {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
                     {
+                        Contact.MainID = mainContactID
+                        
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
                         print("getTokens() saving tokens to keychain")
@@ -457,6 +508,8 @@ class Server: NSObject
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                         let refreshData = Data(refreshToken.utf8)
                         KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
                         DispatchQueue.main.async()
                         {
                             success()
@@ -546,6 +599,7 @@ class Server: NSObject
         }
     }
     
+    /*
     //pass an ID to get a specific contact or leave nil to get the primary contact
     func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
@@ -556,7 +610,8 @@ class Server: NSObject
         {
             url = url + "/\(id!)"
         }
-        serverGet(url: url)
+        let request = Server.shared.GenerateRequest(urlString: url)!
+        serverGet(request: request)
         { data in
             //let str = String(decoding: data, as: UTF8.self)
             //print (str)
@@ -629,19 +684,21 @@ class Server: NSObject
             }
         }
     }
+    */
     
-    func createContact(contact: Contact, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func createContact(contact: Contact, password: String, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        let url = "\(API())\(CONTACT_PATH)"
+        let url = "\(API())\(CONTACT_CREATE_PATH)"
         
         if var contactDict = contact.dictionary
         {
             contactDict.removeValue(forKey: "id")
+            contactDict["password"] = password
             do
             {
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
-                //let jsonString = String(data: jsonData, encoding: .utf8)!
-                //print(jsonString)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                print(jsonString)
                 
                 let Url = String(format: url)
                 guard let serviceUrl = URL(string: Url) else { return }
@@ -651,15 +708,20 @@ class Server: NSObject
                 //send it to server
                 serverPost(request: request, onSuccess:
                 { (object) in
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
                     {
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
+                        Contact.MainID = mainContactID
                         print("createContact() saving tokens to keychain")
                         let accessData = Data(accessToken.utf8)
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
                         let refreshData = Data(refreshToken.utf8)
                         KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
 
                         DispatchQueue.main.async()
                         {
@@ -670,15 +732,15 @@ class Server: NSObject
                     {
                         DispatchQueue.main.async()
                         {
-                            failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
+                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
                         }
                     }
                 },
                 onFailure:
-                { (string) in
+                { (serverError) in
                     DispatchQueue.main.async()
                     {
-                        failure(NSLocalizedString("Server Error", comment: ""))
+                        failure(serverError.description)
                     }
                 })
             }
@@ -692,16 +754,61 @@ class Server: NSObject
             }
         }
     }
+    //MARK: - Object get / save
     
-    func updateContact(contact: Contact, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getObjects(objects: [SpecificObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        let url = "\(API())\(CONTACT_PATH)"
+        var objectDict: [String: [ObjectReq]] = [:]
+        for req in objects
+        {
+            if var array = objectDict[req.type.rawValue]
+            {
+                array.append(ObjectReq(id: req.id, last_updated: req.last_updated))
+            }
+            else
+            {
+                objectDict[req.type.rawValue] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
+            }
+        }
+        
+        let url = "\(API())\(OBJECT_GET_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objectDict)
+        let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (dict) in
+            DispatchQueue.main.async()
+            {
+                success(dict)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                print("SERVER ERROR: \(string)")
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    {
+        let url = "\(API())\(OBJECT_SAVE_PATH)"
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(contact)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
+        let data = try! encoder.encode(objects)
+        let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)
         
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
@@ -709,8 +816,9 @@ class Server: NSObject
         request.httpBody = data
         
         //send it to server
-        serverPut(request: request, onSuccess:
+        serverPost(request: request, onSuccess:
         { (object) in
+            print("Saved contact. Response: \(object)")
             DispatchQueue.main.async()
             {
                 success()
@@ -725,8 +833,68 @@ class Server: NSObject
         })
     }
     
+    func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CHANGE_PASSWORD_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let params = [
+            "current_password": oldPassword,
+            "new_password": newPassword
+        ]
+        let data = try! encoder.encode(params)
+        /*let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)*/
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            if let message = ((object["schema_errors"] as? [String: Any])?["new_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            if let message = ((object["schema_errors"] as? [String: Any])?["current_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            guard let message = object["message"] as? String else { return }
+            if message == "Updated."
+            {
+                DispatchQueue.main.async()
+                {
+                    success()
+                }
+            }
+            else
+            {   DispatchQueue.main.async()
+                {
+                    failure(message)
+                }
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
     //MARK:  Sample
-    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -749,10 +917,10 @@ class Server: NSObject
             }
         },
         onFailure:
-        { (string) in
+        { (error) in
             DispatchQueue.main.async()
             {
-                failure(NSLocalizedString("Server Error: \(string)", comment: ""))
+                failure(error)
             }
         })
     }
@@ -761,7 +929,8 @@ class Server: NSObject
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
-        serverGet(url: finalUrlString)
+        let request = Server.shared.GenerateRequest(urlString: finalUrlString)!
+        serverGet(request: request)
         { data in
             do
             {

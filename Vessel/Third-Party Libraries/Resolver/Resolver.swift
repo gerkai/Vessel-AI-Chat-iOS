@@ -440,7 +440,8 @@ public final class ResolverScopeGraph: ResolverScope
         resolutionDepth += 1
         let service = registration.resolve(resolver: resolver, args: args)
         resolutionDepth -= 1
-        if resolutionDepth == 0 {
+        if resolutionDepth == 0
+        {
             graph.removeAll()
         } else if let service = service, type(of: service as Any) is AnyClass
         {

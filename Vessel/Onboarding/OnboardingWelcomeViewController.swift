@@ -35,16 +35,9 @@ class OnboardingWelcomeViewController: OnboardingMVVMViewController
     @IBAction func onContinue()
     {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as? GenderSelectViewController
-        {
-            vc.viewModel = viewModel
-            //navigationController?.pushViewController(vc, animated: true)
-            navigationController?.fadeTo(vc)
-        }
-        else
-        {
-            self.navigationController?.popToRootViewController(animated: true)
-            Server.shared.logOut()
-        }
+        let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as! GenderSelectViewController
+        
+        vc.viewModel = viewModel
+        navigationController?.fadeTo(vc)
     }
 }

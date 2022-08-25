@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 3/4/22.
 //  Manages storage of all core objects and synchronization with back end
+//  Reference ObjectStore flow here: https://www.notion.so/vesselhealth/Object-Store-640d210ea53e42ebbadd7be362ce39b2
 
 import UIKit
 
@@ -11,29 +12,105 @@ import UIKit
 protocol CoreObjectProtocol: Codable
 {
     var id: Int {get}
-    var lastUpdated: Int {get set}
+    var last_updated: Int {get set}
+}
+
+enum ObjectType: String, Codable
+{
+    case contact
+}
+
+struct SpecificObjectReq: Codable
+{
+    var type: ObjectType
+    var id: Int
+    var last_updated: Int
+}
+
+struct ObjectReq: Codable
+{
+    var id: Int
+    var last_updated: Int
 }
 
 class ObjectStore: NSObject
 {
     static let shared = ObjectStore()
-    var repo: [String: [Int: CoreObjectProtocol]] = [:]
+    var cache: [String: [Int: CoreObjectProtocol]] = [:]
     
     private func saveObject<T: CoreObjectProtocol>(_ object: T)
     {
         let objectName = String(describing: type(of: object))
-        if repo[objectName] != nil
+        if cache[objectName] != nil
         {
-            repo[objectName]![object.id] = object
+            cache[objectName]![object.id] = object
         }
         else
         {
-            //create the collection dictionary and add to repo
-            repo[objectName] = [object.id: object]
+            //create the collection dictionary and add to cache
+            cache[objectName] = [object.id: object]
         }
     }
     
     //MARK: - Public functions
+    
+    func loadMainContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    {
+        let contactID = Contact.MainID
+        let type = ObjectType.contact
+        get(type: type, id: contactID)
+        { contact in
+            let con = contact as! Contact
+            self.saveObject(con)
+            success()
+        }
+        onFailure:
+        {
+            failure()
+        }
+    }
+    
+    func get(type: ObjectType, id: Int, onSuccess success: @escaping (_ object: CoreObjectProtocol) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        if let object = cache[type.rawValue]?[id]
+        {
+            success(object)
+        }
+        else
+        {
+            Server.shared.getObjects(objects: [SpecificObjectReq(type: type, id: id, last_updated: 0)])
+            { objectDict in
+                if let values = objectDict[type.rawValue] as? [[String: Any]]
+                {
+                    do
+                    {
+                        let json = try JSONSerialization.data(withJSONObject: values.first!)
+                        let decoder = JSONDecoder()
+                        if type == .contact
+                        {
+                            let contact = try decoder.decode(Contact.self, from: json)
+                            self.saveObject(contact)
+                            success(contact)
+                        }
+                        else
+                        {
+                            failure()
+                        }
+                    }
+                    catch
+                    {
+                        print(error)
+                        failure()
+                    }
+                }
+            }
+            onFailure:
+            { error in
+                print(error)
+                failure()
+            }
+        }
+    }
     
     //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T)
@@ -53,9 +130,13 @@ class ObjectStore: NSObject
         saveObject(object)
         if String(describing: type(of: object)) == "Contact"
         {
-            Server.shared.updateContact(contact: object as! Contact)
+            let objectArray = [object]
+            let dict = ["contact": objectArray]
+            
+            //note: server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+            Server.shared.saveObjects(objects: dict)
             {
-                //Navigate to next screen in onboard
+                print("Saved Contact")
             }
             onFailure:
             { result in
@@ -66,8 +147,8 @@ class ObjectStore: NSObject
     
     func getContact(id: Int) -> Contact?
     {
-        //get contact from local repo
+        //get contact from local cache
         let contactName = "\(Contact.self)"
-        return repo[contactName]?[id] as? Contact
+        return cache[contactName]?[id] as? Contact
     }
 }

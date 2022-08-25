@@ -21,15 +21,6 @@ class MyAccountViewController: UIViewController
         tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
     }
     
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        if isMovingFromParent
-        {
-            mainViewController?.hideVesselButton(false)
-        }
-    }
-    
     // MARK: - Actions
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
@@ -39,7 +30,13 @@ class MyAccountViewController: UIViewController
     @IBAction func logOut(_ sender: Any)
     {
         Server.shared.logOut()
-        mainViewController?.navigationController?.popToRootViewController(animated: true)
+        Contact.reset()
+        let story = UIStoryboard(name: "Login", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "Welcome")
+        
+        //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
+        UIApplication.shared.windows.first?.rootViewController = vc
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
 }
 
@@ -83,19 +80,18 @@ extension MyAccountViewController: UITableViewDelegate
             assertionFailure("MyAccountCell dequed in a bad state in MyAccountViewController didSelectRowAt indexPath")
             return
         }
-        
+        let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
         switch option
         {
         case .profile:
-            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
             navigationController?.pushViewController(vc, animated: true)
         case .manageMyGoals:
-            // TODO: Route to Manage my Goals
-            break
+            let vc = storyboard.instantiateViewController(identifier: "GoalsPreferencesViewController") as! GoalsPreferencesViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .manageMyDietOrAllergies:
-            // TODO: Route to Manage My Diet/Allergies
-            break
+            let vc = storyboard.instantiateViewController(identifier: "FoodPreferencesViewController") as! FoodPreferencesViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .manageMembership:
             openInSafari(url: "https://vesselhealth.com/account")
         }

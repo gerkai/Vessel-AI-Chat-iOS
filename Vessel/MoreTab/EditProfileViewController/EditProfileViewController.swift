@@ -38,6 +38,9 @@ class EditProfileViewController: KeyboardFriendlyViewController
     @IBOutlet private weak var weightTextField: VesselTextField!
     @IBOutlet private weak var birthDateTextField: VesselTextField!
     @IBOutlet private weak var profileImageButton: UIButton!
+    @IBOutlet private weak var changePasswordTitle: UILabel!
+    @IBOutlet private weak var changePasswordButton: BounceButton!
+    @IBOutlet private weak var stackViewHeightConstraint: NSLayoutConstraint!
     private var profileImageView = UIImageView()
     
     private lazy var heightPickerView: UIPickerView =
@@ -79,6 +82,7 @@ class EditProfileViewController: KeyboardFriendlyViewController
         setDatePickerMinMaxValues()
         setDatePickerInitialValue()
         setupImageView()
+        hideChangePasswordIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -210,6 +214,16 @@ private extension EditProfileViewController
         profileImageButton.layer.masksToBounds = false
     }
     
+    func hideChangePasswordIfNeeded()
+    {
+        if viewModel.shouldHidePassword
+        {
+            changePasswordTitle.isHidden = true
+            changePasswordButton.isHidden = true
+            stackViewHeightConstraint.constant = 1107
+        }
+    }
+    
     func createInfoButton(text: String, parentFrame: CGRect) -> UIButton
     {
         let infoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 33))
@@ -231,8 +245,9 @@ private extension EditProfileViewController
             // TODO: Route to Change Profile Photo
             break
         case .changePassword:
-            // TODO: Route to Change Password
-            break
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "ChangePasswordViewController") as! ChangePasswordViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .requestDeleteAccount:
             // TODO: Route to Delete Account
             break

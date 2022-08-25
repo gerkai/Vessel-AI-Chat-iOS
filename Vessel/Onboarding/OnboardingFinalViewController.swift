@@ -30,7 +30,7 @@ class OnboardingFinalViewController: OnboardingMVVMViewController
     
     @IBAction func onNextButtonPressed()
     {
-        let vc = OnboardingViewModel.NextViewController()
+        let vc = viewModel.nextViewController()
         navigationController?.fadeTo(vc)
     }
 }

@@ -20,11 +20,18 @@ enum GenericAlertAlignment
     case center
 }
 
+enum GenericAlertAnimation
+{
+    case modal
+    case popUp
+}
+
+@objc
 protocol GenericAlertDelegate: AnyObject
 {
-    func onAlertPresented()
-    func onAlertButtonTapped(index: Int)
-    func onAlertDismissed()
+    @objc optional func onAlertPresented()
+    @objc optional func onAlertButtonTapped(index: Int, alertDescription: String)
+    @objc optional func onAlertDismissed()
 }
 
 enum GenericAlertButtonType
@@ -86,6 +93,7 @@ enum GenericAlertType
     case imageTitleSubtitleButton(image: UIImage, title: GenericAlertLabelInfo, subtitle: GenericAlertLabelInfo, button: GenericAlertButtonInfo)
     case imageTitleSubtitleButtons(image: UIImage, title: GenericAlertLabelInfo, subtitle: GenericAlertLabelInfo, buttons: [GenericAlertButtonInfo])
     case imageTitleSubtitleHorizontalButtons(image: UIImage, title: GenericAlertLabelInfo, subtitle: GenericAlertLabelInfo, buttons: [GenericAlertButtonInfo])
+    case imageTitleButton(image: UIImage, title: GenericAlertLabelInfo, button: GenericAlertButtonInfo)
     case imageSubtitleButton(image: UIImage, subtitle: GenericAlertLabelInfo, button: GenericAlertButtonInfo)
     case titleCustomView(title: GenericAlertLabelInfo, view: UIView)
     case titleCustomViewButton(title: GenericAlertLabelInfo, view: UIView, button: GenericAlertButtonInfo)
@@ -96,23 +104,29 @@ enum GenericAlertType
 class GenericAlertViewModel
 {
     var type: GenericAlertType
+    var description: String
     var background: GenericAlertBackground
     var showCloseButton: Bool
     var alignment: GenericAlertAlignment
+    var animation: GenericAlertAnimation
     var shouldCloseWhenButtonTapped: Bool
     var shouldCloseWhenTappedOutside: Bool
     
     init(type: GenericAlertType,
+         description: String = "",
          background: GenericAlertBackground = .cream,
          showCloseButton: Bool = false,
          alignment: GenericAlertAlignment = .center,
+         animation: GenericAlertAnimation = .popUp,
          shouldCloseWhenButtonTapped: Bool = true,
          shouldCloseWhenTappedOutside: Bool = true)
     {
         self.type = type
+        self.description = description
         self.background = background
         self.showCloseButton = showCloseButton
         self.alignment = alignment
+        self.animation = animation 
         self.shouldCloseWhenButtonTapped = shouldCloseWhenButtonTapped
         self.shouldCloseWhenTappedOutside = shouldCloseWhenTappedOutside
     }

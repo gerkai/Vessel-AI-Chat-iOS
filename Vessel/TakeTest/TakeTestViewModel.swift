@@ -134,16 +134,32 @@ class TakeTestViewModel
         return false
     }
     
-    func hideTips()
+    func hideTips(shouldHide: Bool)
     {
         let contact = Contact.main()!
-        contact.flags |= Constants.HIDE_PEE_TIPS
+        if shouldHide
+        {
+            contact.flags |= Constants.HIDE_PEE_TIPS
+        }
+        else
+        {
+            contact.flags &= ~Constants.HIDE_PEE_TIPS
+        }
+        ObjectStore.shared.ClientSave(contact)
     }
     
-    func hideDropletTips()
+    func hideDropletTips(shouldHide: Bool)
     {
         let contact = Contact.main()!
-        contact.flags |= Constants.HIDE_DROPLET_TIPS
+        if shouldHide
+        {
+            contact.flags |= Constants.HIDE_DROPLET_TIPS
+        }
+        else
+        {
+            contact.flags &= ~Constants.HIDE_DROPLET_TIPS
+        }
+        ObjectStore.shared.ClientSave(contact)
     }
     
     func startTimer()

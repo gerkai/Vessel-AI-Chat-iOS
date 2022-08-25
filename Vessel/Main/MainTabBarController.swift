@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MainTabBarController.swift
 //  Vessel
 //
 //  Created by Carson Whitsett on 7/11/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDelegate
+class MainTabBarController: UITabBarController
 {
     var didLayout = false
     let vesselButtonIndex = 2
@@ -18,12 +18,14 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
     {
         super.viewDidLoad()
         
+        print("MainTabBarController did load")
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
         
         //On devices with a safe area below (no home button), the tab bar icons are too close to the top of the tab bar.
         //this will move them down. Skip this for devices with home button (iPhone SE for example)
+        /*
         if let window = UIApplication.shared.windows.first
         {
             let bottomPadding = window.safeAreaInsets.bottom
@@ -34,22 +36,49 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
                 {
                     vc.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
                 }
-                tabBar.items?.forEach({ $0.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: 7.0) })
+                tabBar.items?.forEach(
+                    { $0.titlePositionAdjustment = UIOffset(horizontal: 10.0, vertical: 12.0)
+                        print("Set tab bar item position")
+                    })
             }
-        }
+        }*/
         
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
         tabBar.standardAppearance = appearance
+        
         if #available(iOS 15.0, *)
         {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         }
+        
+        //remove all prior viewControllers from the navigation stack which will cause them to be deallocated.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) //provide enough time for push/fade to complete
+        {
+            if let viewControllers = self.navigationController?.viewControllers
+            {
+                for vc in viewControllers
+                {
+                    if vc != self
+                    {
+                        vc.removeFromParent()
+                    }
+                }
+            }
+        }
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     override func viewWillLayoutSubviews()
     {
+        super.viewWillLayoutSubviews()
         if didLayout == false
         {
             //only want to do this once
@@ -105,10 +134,18 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
         }
         else
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TestAfterWakingUpViewController") as! TestAfterWakingUpViewController
-            vc.delegate = self
-            self.present(vc, animated: false)
+            GenericAlertViewController.presentAlert(in: self,
+                                                    type: .imageTitleSubtitleHorizontalButtons(image: UIImage(named: "VesselButton")!,
+                                                                                               title: GenericAlertLabelInfo(title: NSLocalizedString("Don't forget, test right after waking up.", comment: "")),
+                                                                                               subtitle: GenericAlertLabelInfo(title: NSLocalizedString("For the most accurate results, test immediately after you wake up -- before you eat, drink, or exercise. If you've done any of these things, please test yourself tomorrow.", comment: ""),
+                                                                                                                               alignment: .center,
+                                                                                                                               height: 250),
+                                                                                               buttons: [
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Cancel", comment: "")), type: .dark),
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Test Now", comment: "")), type: .clear)
+                                                                                               ]),
+                                                    background: .green,
+                                                    delegate: self)
         }
     }
     
@@ -175,26 +212,18 @@ class MainViewController: UITabBarController, TestAfterWakingUpViewControllerDel
             }
         }
     }
-    
-    func hideVesselButton(_ hide: Bool)
+}
+
+extension MainTabBarController: GenericAlertDelegate
+{
+    func onAlertButtonTapped(index: Int, alertDescription: String)
     {
-        if hide
+        if index == 1
         {
-            vesselButton?.removeFromSuperview()
-            vesselButton = nil
-        }
-        else
-        {
-            didLayout = false
-        }
-    }
-    
-    //MARK: - TestAfterWakingUpViewController delegates
-    func didAnswerTestAfterWakingUp(result: TestAfterWakingUpResult)
-    {
-        if result == .TestNow
-        {
-            self.segueToNextVC()
+            DispatchQueue.main.async
+            {
+                self.segueToNextVC()
+            }
         }
     }
 }

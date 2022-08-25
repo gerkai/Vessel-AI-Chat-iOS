@@ -111,21 +111,17 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         nextButton.showLoading()
                         Server.shared.login(email: email, password: password)
                         {
-                            Server.shared.getContact
-                            { [weak self] contact in
-                                guard let self = self else { return }
+                            ObjectStore.shared.loadMainContact
+                            {
                                 self.nextButton.hideLoading()
                                 self.analytics.log(event: .logIn(loginType: .email))
-                                Contact.MainID = contact.id
-                                ObjectStore.shared.serverSave(contact)
-                                let vc = OnboardingViewModel.NextViewController()
+                                let vc = OnboardingViewModel.InitialViewController()
                                 self.navigationController?.fadeTo(vc)
                             }
                             onFailure:
-                            { [weak self] error in
-                                guard let self = self else { return }
+                            {
                                 self.nextButton.hideLoading()
-                                let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
+                                let errorString = NSLocalizedString("Couldn't get contact", comment: "")
                                 UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
                             }
                         }
@@ -181,7 +177,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            let vc = OnboardingViewModel.NextViewController()
+            let vc = OnboardingViewModel.InitialViewController()
             self.navigationController?.fadeTo(vc)
         }
     }
