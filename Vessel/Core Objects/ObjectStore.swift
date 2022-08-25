@@ -15,7 +15,7 @@ protocol CoreObjectProtocol: Codable
 
 enum ObjectType: String
 {
-    case CONTACT
+    case contact
 }
 
 struct ObjectSpec: Codable
@@ -48,7 +48,7 @@ class ObjectStore: NSObject
     func loadMainContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
     {
         let contactID = Contact.MainID
-        let type = ObjectType.CONTACT
+        let type = ObjectType.contact
         get(type: type, id: contactID)
         { contact in
             let con = contact as! Contact
@@ -63,7 +63,7 @@ class ObjectStore: NSObject
     
     func get(type: ObjectType, id: Int, onSuccess success: @escaping (_ object: CoreObjectProtocol) -> Void, onFailure failure: @escaping () -> Void)
     {
-        if type == .CONTACT
+        if type == .contact
         {
             let contactName = "\(Contact.self)"
             if let contact = cache[contactName]?[id] as? Contact
@@ -73,9 +73,9 @@ class ObjectStore: NSObject
             else
             {
                 //load it from the backend
-                Server.shared.getObjects(objects: ["contact": [ObjectSpec(id: id, last_updated: 0)]])
+                Server.shared.getObjects(objects: [type.rawValue: [ObjectSpec(id: id, last_updated: 0)]])
                 { objects in
-                    if let contactArray = objects["contact"] as? NSArray
+                    if let contactArray = objects[type.rawValue] as? NSArray
                     {
                         if let contactDict = contactArray.firstObject
                         {
@@ -92,8 +92,11 @@ class ObjectStore: NSObject
                             }
                         }
                     }
-                    print("Malformed server response: \(objects)")
-                    failure()
+                    else
+                    {
+                        print("Malformed server response: \(objects)")
+                        failure()
+                    }
                 }
                 onFailure:
                 { error in

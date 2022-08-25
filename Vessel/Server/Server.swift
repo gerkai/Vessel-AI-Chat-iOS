@@ -53,7 +53,7 @@ let GOOGLE_LOGIN_PATH = "auth/google/login"
 let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
 let REFRESH_TOKEN_PATH = "auth/refresh-token"
 let CONTACT_PATH = "contact"
-let CONTACT_SHOPIFY_PATH = "contact/shopify"
+let CONTACT_CREATE_PATH = "contact/create"
 let CONTACT_EXISTS_PATH = "contact/exists"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
@@ -222,6 +222,7 @@ class Server: NSObject
                 do
                 {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Server Write Response:\n\(json)\n")
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
                     {
@@ -686,16 +687,17 @@ class Server: NSObject
     
     func createContact(contact: Contact, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        let url = "\(API())\(CONTACT_SHOPIFY_PATH)"
+        let url = "\(API())\(CONTACT_CREATE_PATH)"
         
         if var contactDict = contact.dictionary
         {
             contactDict.removeValue(forKey: "id")
+            contactDict["password"] = "blather"
             do
             {
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
-                //let jsonString = String(data: jsonData, encoding: .utf8)!
-                //print(jsonString)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                print(jsonString)
                 
                 let Url = String(format: url)
                 guard let serviceUrl = URL(string: Url) else { return }
@@ -705,15 +707,20 @@ class Server: NSObject
                 //send it to server
                 serverPost(request: request, onSuccess:
                 { (object) in
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String, let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
                     {
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
+                        Contact.MainID = mainContactID
                         print("createContact() saving tokens to keychain")
                         let accessData = Data(accessToken.utf8)
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
                         let refreshData = Data(refreshToken.utf8)
                         KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
 
                         DispatchQueue.main.async()
                         {

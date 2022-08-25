@@ -67,7 +67,7 @@ class OnboardingViewModel
         
         //MainContact is guaranteed
         let contact = Contact.main()!
-        if contact.gender == nil
+        if contact.gender == nil || contact.gender?.count == 0
         {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
@@ -160,11 +160,11 @@ class OnboardingViewModel
             return vc
         }
 
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-        
         //save the data collected during onboarding
         saveDemographics()
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
         return vc
     }
     
