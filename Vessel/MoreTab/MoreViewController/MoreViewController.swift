@@ -21,6 +21,19 @@ class MoreViewController: UIViewController
         super.viewDidLoad()
         versionLabel.text = viewModel.versionString
     }
+    
+    // MARK: - Actions
+    @IBAction func onLeftButton()
+    {
+        viewModel.key.append(0)
+        viewModel.key.remove(at: 0)
+    }
+    
+    @IBAction func onRightButton()
+    {
+        viewModel.key.append(1)
+        viewModel.key.remove(at: 0)
+    }
 }
 
 extension MoreViewController: UITableViewDataSource
@@ -77,7 +90,21 @@ extension MoreViewController: UITableViewDelegate
         case .backedByScience:
             openInSafari(url: "https://vesselhealth.com/pages/backed-by-science")
         case .support:
-            openInSafari(url: "https://help.vesselhealth.com")
+            if viewModel.key == viewModel.lock && !viewModel.options.contains(.debug)
+            {
+                viewModel.addDebugMenu()
+                tableView.reloadData()
+            }
+            else
+            {
+                openInSafari(url: "https://help.vesselhealth.com")
+            }
+        case .debug:
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "DebugMenuViewController") as! DebugMenuViewController
+            vc.hidesBottomBarWhenPushed = false
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

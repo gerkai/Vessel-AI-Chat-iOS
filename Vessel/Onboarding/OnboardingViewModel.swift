@@ -60,11 +60,6 @@ class OnboardingViewModel
     //MARK: - navigation
     static func InitialViewController() -> UIViewController
     {
-        //uncomment to skip onboarding
-        /*let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-        return vc*/
-        
         //MainContact is guaranteed
         let contact = Contact.main()!
         if contact.gender == nil || contact.gender?.count == 0

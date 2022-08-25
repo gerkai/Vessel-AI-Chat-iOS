@@ -125,6 +125,9 @@
 		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
+		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
+		727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */; };
+		727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B528B74BA500039BE0 /* DebugMenuCell.swift */; };
 		7282D415288F7CA400B4E26D /* MoreTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7282D414288F7CA400B4E26D /* MoreTab.storyboard */; };
 		7282D417288F7CBA00B4E26D /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D416288F7CBA00B4E26D /* MoreViewController.swift */; };
 		7282D419288F7D4800B4E26D /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D418288F7D4800B4E26D /* MoreViewModel.swift */; };
@@ -139,14 +142,14 @@
 		72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FF2890EE4A00DF33BE /* ChangePasswordViewModel.swift */; };
 		72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */; };
 		72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */; };
-		72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDE028A361E100177898 /* MyAccountViewModel.swift */; };
-		72F3C69528A36788001E3323 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDE28A361E100177898 /* MyAccountCell.swift */; };
-		72F3C69628A36788001E3323 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDF28A361E100177898 /* MyAccountViewController.swift */; };
-		72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */; };
 		72E7958828ACC93A00F01D07 /* GoalsPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */; };
 		72E7958A28ACC94200F01D07 /* GoalsPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */; };
 		72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */; };
 		72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */; };
+		72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDE028A361E100177898 /* MyAccountViewModel.swift */; };
+		72F3C69528A36788001E3323 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDE28A361E100177898 /* MyAccountCell.swift */; };
+		72F3C69628A36788001E3323 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDF28A361E100177898 /* MyAccountViewController.swift */; };
+		72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
 /* End PBXBuildFile section */
@@ -297,6 +300,9 @@
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
+		727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewController.swift; sourceTree = "<group>"; };
+		727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewModel.swift; sourceTree = "<group>"; };
+		727C07B528B74BA500039BE0 /* DebugMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuCell.swift; sourceTree = "<group>"; };
 		7282D414288F7CA400B4E26D /* MoreTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreTab.storyboard; sourceTree = "<group>"; };
 		7282D416288F7CBA00B4E26D /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		7282D418288F7D4800B4E26D /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
@@ -311,11 +317,11 @@
 		72DF47FF2890EE4A00DF33BE /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Injection.swift"; sourceTree = "<group>"; };
-		72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCell.swift; sourceTree = "<group>"; };
 		72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPreferencesViewController.swift; sourceTree = "<group>"; };
 		72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewController.swift; sourceTree = "<group>"; };
 		72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewModel.swift; sourceTree = "<group>"; };
+		72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCell.swift; sourceTree = "<group>"; };
 		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.debug.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -679,9 +685,20 @@
 			path = ChangePasswordViewController;
 			sourceTree = "<group>";
 		};
+		727C07B028B742E900039BE0 /* DebugMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */,
+				727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */,
+				727C07B528B74BA500039BE0 /* DebugMenuCell.swift */,
+			);
+			path = DebugMenuViewController;
+			sourceTree = "<group>";
+		};
 		7282D413288F7C8200B4E26D /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				727C07B028B742E900039BE0 /* DebugMenuViewController */,
 				7270EDDD28A361CA00177898 /* ChangePasswordViewController */,
 				72E7958528ACC38C00F01D07 /* GoalsPreferencesViewController */,
 				72F2484828A6064800B0BE02 /* FoodPreferencesViewController */,
@@ -1008,6 +1025,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */,
 				3F1A248D2891E8B600BC539F /* TestResult.swift in Sources */,
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
@@ -1035,6 +1053,7 @@
 				7282D417288F7CBA00B4E26D /* MoreViewController.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */,
+				727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
@@ -1056,6 +1075,7 @@
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
+				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
 				3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,

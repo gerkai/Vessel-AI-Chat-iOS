@@ -19,6 +19,7 @@ enum MoreTabOptions
     case chatWithNutritionist
     case backedByScience
     case support
+    case debug
     
     var icon: String
     {
@@ -38,6 +39,8 @@ enum MoreTabOptions
             return "backedByScienceIcon"
         case .support:
             return "supportIcon"
+        case .debug:
+            return "InsightsIcon"
         }
     }
     
@@ -59,13 +62,15 @@ enum MoreTabOptions
             return NSLocalizedString("Backed by Science", comment: "")
         case .support:
             return NSLocalizedString("Support", comment: "")
+        case .debug:
+            return NSLocalizedString("Debug Menu", comment: "")
         }
     }
 }
 
 class MoreViewModel
 {
-    let options: [MoreTabOptions] =
+    var options: [MoreTabOptions] =
     [
         .myAccount,
         .takeATest,
@@ -76,9 +81,17 @@ class MoreViewModel
         .support
     ]
     
+    let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
+    var key = [0, 0, 0, 0, 0, 0]
+    
     let versionString: String =
     {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         return "Version \(appVersion)"
     }()
+    
+    func addDebugMenu()
+    {
+        options.append(.debug)
+    }
 }
