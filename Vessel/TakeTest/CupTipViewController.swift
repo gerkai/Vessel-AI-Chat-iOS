@@ -35,10 +35,7 @@ class CupTipViewController: TakeTestMVVMViewController
     
     @IBAction func next()
     {
-        if hideTipSelectorView.isChecked
-        {
-            viewModel.hideTips()
-        }
+        viewModel.hideTips(shouldHide: hideTipSelectorView.isChecked)
         let vc = viewModel.nextViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

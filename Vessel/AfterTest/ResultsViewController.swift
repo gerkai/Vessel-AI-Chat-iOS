@@ -409,14 +409,7 @@ class ResultsViewController: UIViewController
             let result = viewModel.nextViewControllerData()
             if result.transition == .dismiss
             {
-                if self.navigationController != nil
-                {
-                    navigationController?.popViewController(animated: true)
-                }
-                else
-                {
-                    dismiss(animated: true)
-                }
+                dismiss(animated: true)
             }
             else
             {

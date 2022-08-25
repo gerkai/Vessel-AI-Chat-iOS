@@ -29,7 +29,7 @@ extension String
     
     func isValidPassword() -> Bool
     {
-        if self.count > Constants.MinimumPasswordLength
+        if self.count >= Constants.MinimumPasswordLength
         {
             return true
         }

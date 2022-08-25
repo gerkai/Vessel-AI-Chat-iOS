@@ -79,20 +79,17 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
             {
                 Server.shared.login(email: email, password: password)
                 {
-                    Server.shared.getContact
-                    { contact in
-                        Contact.MainID = contact.id
-                        ObjectStore.shared.serverSave(contact)
-                        
+                    ObjectStore.shared.loadMainContact
+                    {
                         let storyboard = UIStoryboard(name: "Login", bundle: nil)
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         
                         self.navigationController?.fadeTo(vc)
                     }
                     onFailure:
-                    { error in
-                        let errorString = error?.localizedDescription ?? NSLocalizedString("Couldn't get contact", comment: "")
-                        UIView.showError(text: "The email and password combination is incorrect", detailText: errorString, image: nil)
+                    {
+                        let errorString = NSLocalizedString("Couldn't get contact", comment: "")
+                        UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
                     }
                 }
                 onFailure:

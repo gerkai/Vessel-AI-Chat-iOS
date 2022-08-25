@@ -6,7 +6,6 @@
 //
 //
 //  TODO: Some screens aren't iplemented yet. They're defined in the enums below but commented out
-//  TODO: After flow is completed, save contactFlags to Contact.main()!.flags
 
 import Foundation
 
@@ -441,6 +440,11 @@ class AfterTestViewModel
             }
         }
         currentScreen -= 1
+        
+        //update contact flags and save contact
+        Contact.main()!.flags |= contactFlags
+        ObjectStore.shared.ClientSave(Contact.main()!)
+        
         return ("", "", "", .dismiss)
     }
 }
