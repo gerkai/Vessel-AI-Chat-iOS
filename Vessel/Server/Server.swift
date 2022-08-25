@@ -391,7 +391,6 @@ class Server: NSObject
             }
             if let stringID = KeychainHelper.standard.read(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT, type: String.self)
             {
-                //let stringID = String(data: data, encoding: .utf8)!
                 if let id = Int(stringID)
                 {
                     Contact.MainID = id
