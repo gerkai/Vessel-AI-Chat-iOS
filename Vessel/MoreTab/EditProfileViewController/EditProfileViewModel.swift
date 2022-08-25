@@ -20,6 +20,11 @@ class EditProfileViewModel
         Locale.current.usesMetricSystem
     }
     
+    var shouldHidePassword: Bool
+    {
+        return contact?.loginType == .apple || contact?.loginType == .google
+    }
+    
     func heightForPickerView() -> (Int, Int)
     {
         if isMetric

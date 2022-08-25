@@ -55,6 +55,7 @@ let REFRESH_TOKEN_PATH = "auth/refresh-token"
 let CONTACT_PATH = "contact"
 let CONTACT_CREATE_PATH = "contact/create"
 let CONTACT_EXISTS_PATH = "contact/exists"
+let CHANGE_PASSWORD_PATH = "contact/change-password"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
 let OBJECT_SAVE_PATH = "objects/save"
@@ -821,6 +822,66 @@ class Server: NSObject
             DispatchQueue.main.async()
             {
                 success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CHANGE_PASSWORD_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let params = [
+            "current_password": oldPassword,
+            "new_password": newPassword
+        ]
+        let data = try! encoder.encode(params)
+        /*let jsonString = String(data: data, encoding: .utf8)!
+        print(jsonString)*/
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            if let message = ((object["schema_errors"] as? [String: Any])?["new_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            if let message = ((object["schema_errors"] as? [String: Any])?["current_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            guard let message = object["message"] as? String else { return }
+            if message == "Updated."
+            {
+                DispatchQueue.main.async()
+                {
+                    success()
+                }
+            }
+            else
+            {   DispatchQueue.main.async()
+                {
+                    failure(message)
+                }
             }
         },
         onFailure:

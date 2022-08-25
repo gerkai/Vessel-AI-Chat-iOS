@@ -8,14 +8,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="BananaGrotesk-Regular.otf">
-            <string>BananaGrotesk-Regular</string>
-        </array>
-        <array key="BananaGrotesk-Semibold.otf">
-            <string>BananaGrotesk-Semibold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Today-->
         <scene sceneID="tKm-zc-WL6">
@@ -96,139 +88,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="soJ-FN-3jp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1237" y="-250"/>
-        </scene>
-        <!--Test After Waking Up View Controller-->
-        <scene sceneID="7J7-Ck-GcT">
-            <objects>
-                <viewController storyboardIdentifier="TestAfterWakingUpViewController" modalPresentationStyle="overFullScreen" id="ysA-NQ-nNn" customClass="TestAfterWakingUpViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ccR-Rq-Tc2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWS-BR-vWt">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AL5-s2-D7l">
-                                <rect key="frame" x="20" y="90" width="374" height="717"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VesselButton" translatesAutoresizingMaskIntoConstraints="NO" id="ODV-gX-3QU">
-                                        <rect key="frame" x="147" y="39" width="80" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="C0b-3Q-0ve"/>
-                                            <constraint firstAttribute="width" constant="80" id="Rzb-Am-XBo"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget, test right after waking up." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6s-XI-k1t">
-                                        <rect key="frame" x="50" y="161" width="274" height="101"/>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5st-Dp-mK1">
-                                        <rect key="frame" x="30" y="282" width="314" height="101.5"/>
-                                        <attributedString key="attributedText">
-                                            <fragment>
-                                                <string key="content">For the most accurate results, test immediately after you wake up -- before you eat, drink, or exercise. If you've done any of these things, please test yourself tomorrow.</string>
-                                                <attributes>
-                                                    <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" metaFont="system" size="17"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="2Qu-OI-D85">
-                                        <rect key="frame" x="30" y="627" width="314" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMT-KD-kKV" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="60"/>
-                                                <color key="backgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="9Gt-kz-j5k"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="l85-b6-QXf"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.93188983199999997" green="0.96266549830000003" blue="0.92158359290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="cancel" destination="ysA-NQ-nNn" eventType="touchUpInside" id="ku2-aV-QFy"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRP-LJ-x1Y" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="162" y="0.0" width="152" height="60"/>
-                                                <color key="backgroundColor" red="0.93188983199999997" green="0.96266549830000003" blue="0.92158359290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Or8-h5-ZMR"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="o9z-5Z-mzH"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Test Now">
-                                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="16"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="testNow" destination="ysA-NQ-nNn" eventType="touchUpInside" id="Sj9-8x-sRp"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstItem="2Qu-OI-D85" firstAttribute="leading" secondItem="AL5-s2-D7l" secondAttribute="leading" constant="30" id="2DG-qx-5zR"/>
-                                    <constraint firstItem="2Qu-OI-D85" firstAttribute="trailing" secondItem="AL5-s2-D7l" secondAttribute="trailing" constant="-30" id="2n5-4f-KKp"/>
-                                    <constraint firstItem="ODV-gX-3QU" firstAttribute="centerX" secondItem="AL5-s2-D7l" secondAttribute="centerX" id="Dcy-11-xmg"/>
-                                    <constraint firstItem="5st-Dp-mK1" firstAttribute="leading" secondItem="AL5-s2-D7l" secondAttribute="leading" constant="30" id="DyT-e7-2FC"/>
-                                    <constraint firstItem="ODV-gX-3QU" firstAttribute="top" secondItem="AL5-s2-D7l" secondAttribute="top" constant="39" id="E1z-Ut-5Rf"/>
-                                    <constraint firstItem="B6s-XI-k1t" firstAttribute="top" secondItem="ODV-gX-3QU" secondAttribute="bottom" constant="42" id="Gt3-62-RLf"/>
-                                    <constraint firstItem="5st-Dp-mK1" firstAttribute="top" secondItem="B6s-XI-k1t" secondAttribute="bottom" constant="20" id="H6o-BM-pMR"/>
-                                    <constraint firstItem="2Qu-OI-D85" firstAttribute="bottom" secondItem="AL5-s2-D7l" secondAttribute="bottom" constant="-30" id="JRT-0R-Nw2"/>
-                                    <constraint firstItem="B6s-XI-k1t" firstAttribute="trailing" secondItem="AL5-s2-D7l" secondAttribute="trailing" constant="-50" id="aYX-ML-3bD"/>
-                                    <constraint firstItem="B6s-XI-k1t" firstAttribute="leading" secondItem="AL5-s2-D7l" secondAttribute="leading" constant="50" id="cd0-Vd-yRg"/>
-                                    <constraint firstItem="5st-Dp-mK1" firstAttribute="trailing" secondItem="AL5-s2-D7l" secondAttribute="trailing" constant="-30" id="sTV-C6-0mF"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="hzv-Zd-ita"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="AL5-s2-D7l" firstAttribute="leading" secondItem="ccR-Rq-Tc2" secondAttribute="leading" constant="20" id="CVu-i9-SOq"/>
-                            <constraint firstItem="AL5-s2-D7l" firstAttribute="top" secondItem="hzv-Zd-ita" secondAttribute="top" constant="46" id="I62-cI-r56"/>
-                            <constraint firstItem="GWS-BR-vWt" firstAttribute="leading" secondItem="ccR-Rq-Tc2" secondAttribute="leading" id="JnG-1L-qB9"/>
-                            <constraint firstItem="GWS-BR-vWt" firstAttribute="bottom" secondItem="ccR-Rq-Tc2" secondAttribute="bottom" id="auq-uc-8A7"/>
-                            <constraint firstItem="AL5-s2-D7l" firstAttribute="bottom" secondItem="hzv-Zd-ita" secondAttribute="bottom" constant="-55" id="g83-kN-zgR"/>
-                            <constraint firstItem="AL5-s2-D7l" firstAttribute="trailing" secondItem="ccR-Rq-Tc2" secondAttribute="trailing" constant="-20" id="g9F-8E-K10"/>
-                            <constraint firstItem="GWS-BR-vWt" firstAttribute="trailing" secondItem="ccR-Rq-Tc2" secondAttribute="trailing" id="p41-uq-1mw"/>
-                            <constraint firstItem="GWS-BR-vWt" firstAttribute="top" secondItem="ccR-Rq-Tc2" secondAttribute="top" id="twM-H7-nUz"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="darkenView" destination="GWS-BR-vWt" id="hEr-T8-hKI"/>
-                        <outlet property="popupView" destination="AL5-s2-D7l" id="SyR-cN-2NQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Az6-xn-9Xa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1762" y="-824"/>
         </scene>
         <!--Results-->
         <scene sceneID="416-RD-1IE">
@@ -329,7 +188,6 @@
         <image name="Coach-icon" width="28" height="16"/>
         <image name="Plan-Icon" width="18" height="18"/>
         <image name="Results-Icon" width="19" height="18"/>
-        <image name="VesselButton" width="58" height="58"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

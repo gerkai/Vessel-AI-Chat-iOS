@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController, TestAfterWakingUpViewControllerDelegate
+class MainTabBarController: UITabBarController
 {
     var didLayout = false
     let vesselButtonIndex = 2
@@ -134,10 +134,18 @@ class MainTabBarController: UITabBarController, TestAfterWakingUpViewControllerD
         }
         else
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TestAfterWakingUpViewController") as! TestAfterWakingUpViewController
-            vc.delegate = self
-            self.present(vc, animated: false)
+            GenericAlertViewController.presentAlert(in: self,
+                                                    type: .imageTitleSubtitleHorizontalButtons(image: UIImage(named: "VesselButton")!,
+                                                                                               title: GenericAlertLabelInfo(title: NSLocalizedString("Don't forget, test right after waking up.", comment: "")),
+                                                                                               subtitle: GenericAlertLabelInfo(title: NSLocalizedString("For the most accurate results, test immediately after you wake up -- before you eat, drink, or exercise. If you've done any of these things, please test yourself tomorrow.", comment: ""),
+                                                                                                                               alignment: .center,
+                                                                                                                               height: 250),
+                                                                                               buttons: [
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Cancel", comment: "")), type: .dark),
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Test Now", comment: "")), type: .clear)
+                                                                                               ]),
+                                                    background: .green,
+                                                    delegate: self)
         }
     }
     
@@ -204,13 +212,18 @@ class MainTabBarController: UITabBarController, TestAfterWakingUpViewControllerD
             }
         }
     }
-    
-    //MARK: - TestAfterWakingUpViewController delegates
-    func didAnswerTestAfterWakingUp(result: TestAfterWakingUpResult)
+}
+
+extension MainTabBarController: GenericAlertDelegate
+{
+    func onAlertButtonTapped(index: Int, alertDescription: String)
     {
-        if result == .TestNow
+        if index == 1
         {
-            self.segueToNextVC()
+            DispatchQueue.main.async
+            {
+                self.segueToNextVC()
+            }
         }
     }
 }

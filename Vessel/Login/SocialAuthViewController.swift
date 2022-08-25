@@ -13,6 +13,7 @@ enum LoginType: String
 {
     case google = "Google"
     case apple = "Apple"
+    case email = "Email"
 }
 
 protocol SocialAuthViewDelegate
@@ -74,6 +75,9 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         ObjectStore.shared.loadMainContact
         {
             let contact = Contact.main()!
+            contact.loginType = self.loginType
+            ObjectStore.shared.serverSave(contact)
+
             if contact.isBrandNew()
             {
                 self.delegate?.gotSocialAuthToken(isBrandNewAccount: true, loginType: self.loginType)

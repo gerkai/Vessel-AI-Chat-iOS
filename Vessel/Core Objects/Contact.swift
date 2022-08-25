@@ -47,8 +47,10 @@ class Contact: CoreObjectProtocol
     var goal_ids: [Int]
     var main_goal_id: Int?
     var expert_id: Int?
+    var loginType: LoginType?
     //private var _last_updated: Int?
     private var _enrolled_program_ids: [Int]?
+
     
     static func main() -> Contact?
     {
@@ -97,7 +99,8 @@ class Contact: CoreObjectProtocol
          allergy_ids: [Int] = [],
          goal_ids: [Int] = [],
          main_goal_id: Int? = nil,
-         expert_id: Int? = nil)
+         expert_id: Int? = nil,
+         loginType: LoginType? = nil)
     {
         self.id = id
         //_last_updated = lastUpdated
@@ -116,6 +119,7 @@ class Contact: CoreObjectProtocol
         self.goal_ids = goal_ids
         self.main_goal_id = main_goal_id
         self.expert_id = expert_id
+        self.loginType = loginType
     }
     
     var fullName: String
