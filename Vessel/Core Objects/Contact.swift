@@ -12,7 +12,7 @@ class Contact: CoreObjectProtocol
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
     
     var id: Int
-    var last_updated: Int = 0 //object is not returned from server yet so we mock it with a private var _last_updated
+    var last_updated: Int = 0
     var first_name: String
     var last_name: String
     var gender: String?
