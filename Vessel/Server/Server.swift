@@ -754,12 +754,26 @@ class Server: NSObject
         }
     }
     //MARK: - Object get / save
-    func getObjects(objects: [String: [ObjectSpec]], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    
+    func getObjects(objects: [ObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
+        var objectDict: [String: [SpecificObjectReq]] = [:]
+        for req in objects
+        {
+            if var array = objectDict[req.type.rawValue]
+            {
+                array.append(SpecificObjectReq(id: req.id, last_updated: req.last_updated))
+            }
+            else
+            {
+                objectDict[req.type.rawValue] = [SpecificObjectReq(id: req.id, last_updated: req.last_updated)]
+            }
+        }
+        
         let url = "\(API())\(OBJECT_GET_PATH)"
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(objects)
+        let data = try! encoder.encode(objectDict)
         let jsonString = String(data: data, encoding: .utf8)!
         print(jsonString)
         let Url = String(format: url)
@@ -769,16 +783,17 @@ class Server: NSObject
         
         //send it to server
         serverPost(request: request, onSuccess:
-        { (objects) in
+        { (dict) in
             DispatchQueue.main.async()
             {
-                success(objects)
+                success(dict)
             }
         },
         onFailure:
         { (string) in
             DispatchQueue.main.async()
             {
+                print("SERVER ERROR: \(string)")
                 failure(NSLocalizedString("Server Error", comment: ""))
             }
         })

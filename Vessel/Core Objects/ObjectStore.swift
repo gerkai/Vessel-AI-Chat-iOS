@@ -4,6 +4,7 @@
 //
 //  Created by Carson Whitsett on 3/4/22.
 //  Manages storage of all core objects and synchronization with back end
+//  Reference ObjectStore flow here: https://www.notion.so/vesselhealth/Object-Store-640d210ea53e42ebbadd7be362ce39b2
 
 import UIKit
 
@@ -13,12 +14,19 @@ protocol CoreObjectProtocol: Codable
     var id: Int {get}
 }
 
-enum ObjectType: String
+enum ObjectType: String, Codable
 {
     case contact
 }
 
-struct ObjectSpec: Codable
+struct ObjectReq: Codable
+{
+    var type: ObjectType
+    var id: Int
+    var last_updated: Int
+}
+
+struct SpecificObjectReq: Codable
 {
     var id: Int
     var last_updated: Int
@@ -63,45 +71,42 @@ class ObjectStore: NSObject
     
     func get(type: ObjectType, id: Int, onSuccess success: @escaping (_ object: CoreObjectProtocol) -> Void, onFailure failure: @escaping () -> Void)
     {
-        if type == .contact
+        if let object = cache[type.rawValue]?[id]
         {
-            let contactName = "\(Contact.self)"
-            if let contact = cache[contactName]?[id] as? Contact
-            {
-                success(contact)
-            }
-            else
-            {
-                //load it from the backend
-                Server.shared.getObjects(objects: [type.rawValue: [ObjectSpec(id: id, last_updated: 0)]])
-                { objects in
-                    if let contactArray = objects[type.rawValue] as? NSArray
+            success(object)
+        }
+        else
+        {
+            Server.shared.getObjects(objects: [ObjectReq(type: type, id: id, last_updated: 0)])
+            { objectDict in
+                if let values = objectDict[type.rawValue] as? [[String: Any]]
+                {
+                    do
                     {
-                        if let contactDict = contactArray.firstObject
+                        let json = try JSONSerialization.data(withJSONObject: values.first!)
+                        let decoder = JSONDecoder()
+                        if type == .contact
                         {
-                            do
-                            {
-                                let json = try JSONSerialization.data(withJSONObject: contactDict)
-                                let decoder = JSONDecoder()
-                                let contact = try decoder.decode(Contact.self, from: json)
-                                success(contact)
-                            }
-                            catch
-                            {
-                                print(error)
-                            }
+                            let contact = try decoder.decode(Contact.self, from: json)
+                            self.saveObject(contact)
+                            success(contact)
+                        }
+                        else
+                        {
+                            failure()
                         }
                     }
-                    else
+                    catch
                     {
-                        print("Malformed server response: \(objects)")
+                        print(error)
                         failure()
                     }
                 }
-                onFailure:
-                { error in
-                    print("FAILURE: \(error)")
-                }
+            }
+            onFailure:
+            { error in
+                print(error)
+                failure()
             }
         }
     }
