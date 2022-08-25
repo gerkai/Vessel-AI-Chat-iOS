@@ -732,7 +732,7 @@ class Server: NSObject
                     {
                         DispatchQueue.main.async()
                         {
-                            failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
+                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
                         }
                     }
                 },
