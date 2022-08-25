@@ -121,7 +121,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     private func createContact(firstName: String, lastName: String, password: String)
     {
         let contact = Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "")
-        Server.shared.createContact(contact: contact)
+        Server.shared.createContact(contact: contact, password: password)
         {
             ObjectStore.shared.loadMainContact
             {

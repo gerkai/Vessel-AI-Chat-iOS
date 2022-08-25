@@ -686,14 +686,14 @@ class Server: NSObject
     }
     */
     
-    func createContact(contact: Contact, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func createContact(contact: Contact, password: String, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CONTACT_CREATE_PATH)"
         
         if var contactDict = contact.dictionary
         {
             contactDict.removeValue(forKey: "id")
-            contactDict["password"] = "blather"
+            contactDict["password"] = password
             do
             {
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
