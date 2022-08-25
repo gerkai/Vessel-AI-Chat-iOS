@@ -19,14 +19,14 @@ enum ObjectType: String, Codable
     case contact
 }
 
-struct ObjectReq: Codable
+struct SpecificObjectReq: Codable
 {
     var type: ObjectType
     var id: Int
     var last_updated: Int
 }
 
-struct SpecificObjectReq: Codable
+struct ObjectReq: Codable
 {
     var id: Int
     var last_updated: Int
@@ -77,7 +77,7 @@ class ObjectStore: NSObject
         }
         else
         {
-            Server.shared.getObjects(objects: [ObjectReq(type: type, id: id, last_updated: 0)])
+            Server.shared.getObjects(objects: [SpecificObjectReq(type: type, id: id, last_updated: 0)])
             { objectDict in
                 if let values = objectDict[type.rawValue] as? [[String: Any]]
                 {

@@ -13,16 +13,6 @@ class Contact: CoreObjectProtocol
     
     var id: Int
     var last_updated: Int = 0 //object is not returned from server yet so we mock it with a private var _last_updated
-    /*{
-        get
-        {
-            _last_updated ?? 0
-        }
-        set
-        {
-            _last_updated = newValue
-        }
-    }*/
     var first_name: String
     var last_name: String
     var gender: String?
@@ -48,10 +38,8 @@ class Contact: CoreObjectProtocol
     var main_goal_id: Int?
     var expert_id: Int?
     var loginType: LoginType?
-    //private var _last_updated: Int?
     private var _enrolled_program_ids: [Int]?
 
-    
     static func main() -> Contact?
     {
         return ObjectStore.shared.getContact(id: Contact.MainID) 
@@ -103,7 +91,6 @@ class Contact: CoreObjectProtocol
          loginType: LoginType? = nil)
     {
         self.id = id
-        //_last_updated = lastUpdated
         last_updated = lastUpdated
         self.first_name = firstName
         self.last_name = lastName
@@ -152,7 +139,6 @@ class Contact: CoreObjectProtocol
     enum CodingKeys: String, CodingKey
     {
         case id
-        //case _last_updated = "last_updated"
         //case last_updated
         case first_name
         case last_name

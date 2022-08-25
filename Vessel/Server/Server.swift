@@ -756,18 +756,18 @@ class Server: NSObject
     }
     //MARK: - Object get / save
     
-    func getObjects(objects: [ObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getObjects(objects: [SpecificObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        var objectDict: [String: [SpecificObjectReq]] = [:]
+        var objectDict: [String: [ObjectReq]] = [:]
         for req in objects
         {
             if var array = objectDict[req.type.rawValue]
             {
-                array.append(SpecificObjectReq(id: req.id, last_updated: req.last_updated))
+                array.append(ObjectReq(id: req.id, last_updated: req.last_updated))
             }
             else
             {
-                objectDict[req.type.rawValue] = [SpecificObjectReq(id: req.id, last_updated: req.last_updated)]
+                objectDict[req.type.rawValue] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
             }
         }
         
