@@ -103,6 +103,10 @@ class ObjectStore: NSObject
                         failure()
                     }
                 }
+                else
+                {
+                    failure()
+                }
             }
             onFailure:
             { error in

@@ -20,20 +20,12 @@ extension String
     
     func isValidName() -> Bool
     {
-        if self.count > 0 && self.isLettersOnly
-        {
-            return true
-        }
-        return false
+        return count > 0 && self.isLettersOnly
     }
     
     func isValidPassword() -> Bool
     {
-        if self.count >= Constants.MinimumPasswordLength
-        {
-            return true
-        }
-        return false
+        count >= Constants.MinimumPasswordLength
     }
     
     var isLettersOnly: Bool

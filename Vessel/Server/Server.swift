@@ -55,6 +55,7 @@ let REFRESH_TOKEN_PATH = "auth/refresh-token"
 let CONTACT_PATH = "contact"
 let CONTACT_CREATE_PATH = "contact/create"
 let CONTACT_EXISTS_PATH = "contact/exists"
+let DELETE_ACCOUNT_PATH = "contact"
 let CHANGE_PASSWORD_PATH = "contact/change-password"
 let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
@@ -199,6 +200,38 @@ class Server: NSObject
     private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
+    }
+    
+    private func serverDelete(request: URLRequest, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: ServerError) -> Void)
+    {
+        var mutableRequest = request
+        mutableRequest.httpMethod = "DELETE"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if accessToken != nil
+        {
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
+        }
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        /*if let url = request.url
+        {
+            print("DELETE: \(url)")
+        }*/
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let response = response as? HTTPURLResponse //unwrap response
+            {
+                if response.statusCode == 204
+                {
+                    success()
+                }
+                else
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to delete object from server", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        }.resume()
     }
     
     private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
@@ -832,6 +865,32 @@ class Server: NSObject
         })
     }
     
+    // MARK: Delete Account
+    func deleteAccount(onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(DELETE_ACCOUNT_PATH)"
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        let request = URLRequest(url: serviceUrl)
+        
+        //send it to server
+        serverDelete(request: request, onSuccess:
+        {
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+
     func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CHANGE_PASSWORD_PATH)"

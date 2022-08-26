@@ -80,7 +80,7 @@ class GenericAlertViewController: UIViewController
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)
-        self.viewModel = GenericAlertViewModel(type: .title(text: GenericAlertLabelInfo(title: "")))
+        self.viewModel = GenericAlertViewModel(type: .title(text: GenericAlertLabelInfo(title: "")), description: "")
         commonInitializer()
     }
     

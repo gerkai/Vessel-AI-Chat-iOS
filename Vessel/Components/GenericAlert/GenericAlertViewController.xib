@@ -16,7 +16,7 @@
             <connections>
                 <outlet property="alertView" destination="Zpw-CR-ud5" id="Vf3-T9-qAg"/>
                 <outlet property="alertViewBottomSpacingConstraint" destination="D1Q-gx-572" id="vsE-7k-lR6"/>
-                <outlet property="alertViewCenterYConstraint" destination="kaC-II-AUz" id="lWX-Xb-bYG"/>
+                <outlet property="alertViewCenterYConstraint" destination="kaC-II-AUz" id="bYx-sL-fBP"/>
                 <outlet property="alertViewTopSpacingConstraint" destination="fJd-tG-ZKl" id="UuP-qi-eK4"/>
                 <outlet property="backgroundBlur" destination="3gf-z7-ROM" id="NzZ-y8-4hV"/>
                 <outlet property="closeButton" destination="4NE-53-Nrz" id="9dq-FZ-uct"/>

@@ -249,8 +249,14 @@ private extension EditProfileViewController
             let vc = storyboard.instantiateViewController(identifier: "ChangePasswordViewController") as! ChangePasswordViewController
             navigationController?.pushViewController(vc, animated: true)
         case .requestDeleteAccount:
-            // TODO: Route to Delete Account
-            break
+            GenericAlertViewController.presentAlert(in: self,
+                                                    type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: "Delete Account?", alignment: .left),
+                                                                               subtitle: GenericAlertLabelInfo(title: "Are you sure you would like to delete your Vessel account? If you delete your account you will permanently lose all of your past test results, activites and progress.This action cannot be reversed.", height: 130.0),
+                                                                               button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: "Delete Account"), type: .dark)),
+                                                    description: "DeleteAccountAlert",
+                                                    showCloseButton: true,
+                                                    alignment: .bottom,
+                                                    delegate: self)
         case .editContact(let type, let value):
             switch type
             {
@@ -471,6 +477,29 @@ extension EditProfileViewController: UIPickerViewDelegate
             let feet = Int(heightPickerView.selectedRow(inComponent: HeightComponentImperial.feet.rawValue))
             let inches = Int(heightPickerView.selectedRow(inComponent: HeightComponentImperial.inches.rawValue))
             heightTextField.text = "\(feet)'\(inches)\""
+        }
+    }
+}
+
+extension EditProfileViewController: GenericAlertDelegate
+{
+    func onAlertButtonTapped(index: Int, alertDescription: String)
+    {
+        if alertDescription == "DeleteAccountAlert"
+        {
+            Server.shared.deleteAccount()
+            {
+                Server.shared.logOut()
+                Contact.reset()
+                let story = UIStoryboard(name: "Login", bundle: nil)
+                let vc = story.instantiateViewController(withIdentifier: "Welcome")
+                
+                //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
+                UIApplication.shared.windows.first?.rootViewController = vc
+                UIApplication.shared.windows.first?.makeKeyAndVisible()
+            } onFailure: { error in
+                print(error)
+            }
         }
     }
 }

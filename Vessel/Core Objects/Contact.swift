@@ -146,13 +146,13 @@ class Contact: CoreObjectProtocol
         case height
         case weight
         case birth_date
-        case email
         case flags = "app_flags"
         case _enrolled_program_ids = "enrolled_program_ids"
         case diet_ids
         case allergy_ids
         case goal_ids
         case main_goal_id
+        case email
         case expert_id
     }
 }
