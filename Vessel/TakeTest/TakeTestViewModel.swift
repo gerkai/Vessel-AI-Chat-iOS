@@ -33,6 +33,15 @@ enum TakeTestState: Int
     mutating func back()
     {
         self = TakeTestState(rawValue: rawValue - 1) ?? .Initial
+        
+        if self == .TestTips
+        {
+            let contact = Contact.main()!
+            if contact.flags & Constants.HIDE_PEE_TIPS != 0
+            {
+                self = .Initial
+            }
+        }
         //print("Decrementing to state: \(self)")
     }
 }

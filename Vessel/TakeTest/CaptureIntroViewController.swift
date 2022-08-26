@@ -140,7 +140,14 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     @IBAction func backButtonSelected(_ sender: Any)
     {
         viewModel.curState.back()
-        navigationController?.popViewController(animated: true)
+        if viewModel.curState == .Initial
+        {
+            dismiss(animated: true)
+        }
+        else
+        {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func startTimerSelected(_ sender: Any)
