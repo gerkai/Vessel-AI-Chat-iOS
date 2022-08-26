@@ -8,10 +8,11 @@
 
 import UIKit
 
-//every object should be encodable and decodable and it must have an id
+//every object should be encodable and decodable and it must have an id and a last_updated field
 protocol CoreObjectProtocol: Codable
 {
     var id: Int {get}
+    var last_updated: Int {get set}
 }
 
 enum ObjectType: String, Codable
