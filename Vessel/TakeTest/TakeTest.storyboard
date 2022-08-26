@@ -109,9 +109,8 @@
         <!--Capture Intro Nav Controller-->
         <scene sceneID="zlx-yu-YGh">
             <objects>
-                <navigationController storyboardIdentifier="TakeTestCaptureIntro" id="rdr-7M-k8M" customClass="CaptureIntroNavController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TakeTestCaptureIntro" navigationBarHidden="YES" id="rdr-7M-k8M" customClass="CaptureIntroNavController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4XK-Tb-2Lo">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
