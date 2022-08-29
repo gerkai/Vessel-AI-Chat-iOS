@@ -284,12 +284,12 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     
     private func showCalibrationError(statusCode: Int)
     {
-        let message = statusCode == 404 ? NSLocalizedString("Invalid QR code. Did you scan the correct the QR code?", comment: ""): String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact Customer Support.", comment: ""), statusCode)
+        let message = String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact customer support.", comment: ""), statusCode)
         GenericAlertViewController.presentAlert(in: self,
                                                 type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Scan Error", comment: "")),
                                                                             subtitle: GenericAlertLabelInfo(title: message),
                                                                             buttons: [
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Retry", comment: "")),
+                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Chat with Customer Support", comment: "Button title")),
                                                                                                        type: .dark)
                                                                             ]),
                                                 description: "\(PopupErrorType.calibrationError.rawValue)",
