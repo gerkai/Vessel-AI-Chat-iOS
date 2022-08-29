@@ -11,29 +11,59 @@ class GoalsPreferencesViewController: UIViewController
 {
     // MARK: - Views
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var saveButton: UIButton!
     
     // MARK: Model
     private let viewModel = GoalsPreferencesViewModel()
+    var coordinator: OnboardingCoordinator?
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        print("📗 did load \(self)")
+        
         collectionView.registerFromNib(CheckmarkImageCollectionViewCell.self)
+        updateSaveButton()
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     // MARK: - Actions
     @IBAction func onBackTapped()
     {
-        viewModel.save()
-        navigationController?.popViewController(animated: true)
+        onSaveTapped()
     }
     
     @IBAction func onSaveTapped()
     {
-        viewModel.save()
-        navigationController?.popViewController(animated: true)
+        if viewModel.anyItemChecked() == true
+        {
+            viewModel.save()
+            navigationController?.popViewController(animated: true)
+        }
+        else
+        {
+            let text = viewModel.tooFewItemsSelectedText()
+            UIView.showError(text: "", detailText: text, image: nil)
+        }
+    }
+    
+    // MARK: UI
+    func updateSaveButton()
+    {
+        if viewModel.anyItemChecked() == true
+        {
+            saveButton.backgroundColor = Constants.vesselBlack
+        }
+        else
+        {
+            saveButton.backgroundColor = Constants.vesselGray
+        }
     }
 }
 
@@ -73,6 +103,7 @@ extension GoalsPreferencesViewController: CheckmarkImageCollectionViewCellDelega
     {
         viewModel.selectItem(id: cell.tag, selected: checked)
         collectionView.reloadData()
+        updateSaveButton()
     }
     
     func canCheckMoreButtons() -> Bool

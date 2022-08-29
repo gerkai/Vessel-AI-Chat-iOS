@@ -79,7 +79,7 @@
 		3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */; };
 		3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95E27D2C41C00D589F7 /* Storage.swift */; };
 		3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96627D4209F00D589F7 /* Encodable.swift */; };
-		3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */; };
+		3F87B96C27D429E000D589F7 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96927D429E000D589F7 /* OnboardingCoordinator.swift */; };
 		3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B96A27D429E000D589F7 /* Onboarding.storyboard */; };
 		3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */; };
 		3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */; };
@@ -93,7 +93,6 @@
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
-		3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */; };
 		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
@@ -135,6 +134,10 @@
 		7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D42E289050D800B4E26D /* MoreTabCell.swift */; };
 		728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593528921967001C4B2A /* EditProfileViewController.swift */; };
 		728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593728924A64001C4B2A /* EditProfileViewModel.swift */; };
+		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
+		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
+		72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */; };
+		72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
 		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
 		72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DEA1CB289E44AA00C92695 /* Blurable.swift */; };
@@ -245,7 +248,7 @@
 		3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		3F87B95E27D2C41C00D589F7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		3F87B96627D4209F00D589F7 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
-		3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		3F87B96927D429E000D589F7 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		3F87B96A27D429E000D589F7 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderSelectViewController.swift; sourceTree = "<group>"; };
 		3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +262,6 @@
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
-		3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMVVMViewController.swift; sourceTree = "<group>"; };
 		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -310,6 +312,10 @@
 		7282D42E289050D800B4E26D /* MoreTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTabCell.swift; sourceTree = "<group>"; };
 		728B593528921967001C4B2A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		728B593728924A64001C4B2A /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
+		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
+		72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewModel.swift; sourceTree = "<group>"; };
+		72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
 		72DEA1CB289E44AA00C92695 /* Blurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blurable.swift; sourceTree = "<group>"; };
@@ -463,20 +469,10 @@
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */,
-				3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */,
-				3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */,
-				3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */,
-				3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */,
-				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
-				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
-				3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */,
-				3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */,
-				3FA66845287FBAB30006166D /* OnboardingMVVMViewController.swift */,
-				3F87B96927D429E000D589F7 /* OnboardingViewModel.swift */,
 				3F87B96A27D429E000D589F7 /* Onboarding.storyboard */,
-				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
-				3F12F00C287B3C6900FCC52E /* TermsViewController.swift */,
+				3F87B96927D429E000D589F7 /* OnboardingCoordinator.swift */,
+				72B2E78828B88563005AA536 /* Views */,
+				72B2E78728B8854F005AA536 /* ViewControllers */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -700,9 +696,9 @@
 			children = (
 				727C07B028B742E900039BE0 /* DebugMenuViewController */,
 				7270EDDD28A361CA00177898 /* ChangePasswordViewController */,
-				72E7958528ACC38C00F01D07 /* GoalsPreferencesViewController */,
-				72F2484828A6064800B0BE02 /* FoodPreferencesViewController */,
 				728B593428920A9E001C4B2A /* EditProfileViewController */,
+				72B2E78328B884DC005AA536 /* FoodPreferencesViewController */,
+				72B2E78428B884F7005AA536 /* GoalsPreferencesViewController */,
 				7282D414288F7CA400B4E26D /* MoreTab.storyboard */,
 				7282D41C288FB78200B4E26D /* MoreViewController */,
 				72DF47FC2890ED9B00DF33BE /* MyAccountViewController */,
@@ -727,6 +723,125 @@
 				728B593728924A64001C4B2A /* EditProfileViewModel.swift */,
 			);
 			path = EditProfileViewController;
+			sourceTree = "<group>";
+		};
+		72B2E77F28B8847C005AA536 /* OnboardingWelcome */ = {
+			isa = PBXGroup;
+			children = (
+				3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */,
+			);
+			path = OnboardingWelcome;
+			sourceTree = "<group>";
+		};
+		72B2E78028B8849D005AA536 /* GenderSelect */ = {
+			isa = PBXGroup;
+			children = (
+				3F87B96B27D429E000D589F7 /* GenderSelectViewController.swift */,
+				72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */,
+			);
+			path = GenderSelect;
+			sourceTree = "<group>";
+		};
+		72B2E78128B884A4005AA536 /* HeightWeightSelect */ = {
+			isa = PBXGroup;
+			children = (
+				3F87B96F27D42BEB00D589F7 /* HeightWeightSelectViewController.swift */,
+				72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */,
+			);
+			path = HeightWeightSelect;
+			sourceTree = "<group>";
+		};
+		72B2E78228B884AF005AA536 /* BirthdaySelectViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */,
+				72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */,
+			);
+			path = BirthdaySelectViewController;
+			sourceTree = "<group>";
+		};
+		72B2E78328B884DC005AA536 /* FoodPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */,
+				72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */,
+			);
+			path = FoodPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		72B2E78428B884F7005AA536 /* GoalsPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */,
+				72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */,
+			);
+			path = GoalsPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		72B2E78528B88505005AA536 /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F00C287B3C6900FCC52E /* TermsViewController.swift */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
+		72B2E78628B8850C005AA536 /* OnboardingFinal */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F018287B896A00FCC52E /* OnboardingFinalViewController.swift */,
+			);
+			path = OnboardingFinal;
+			sourceTree = "<group>";
+		};
+		72B2E78728B8854F005AA536 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				72B2E77F28B8847C005AA536 /* OnboardingWelcome */,
+				72B2E78028B8849D005AA536 /* GenderSelect */,
+				72B2E78128B884A4005AA536 /* HeightWeightSelect */,
+				72B2E78228B884AF005AA536 /* BirthdaySelectViewController */,
+				72B2E79628B9B38A005AA536 /* ItemPreferences */,
+				72B2E78528B88505005AA536 /* Terms */,
+				72B2E78628B8850C005AA536 /* OnboardingFinal */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		72B2E78828B88563005AA536 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72B2E78928B8856D005AA536 /* CheckmarkCollectionViewCell */,
+				72B2E78A28B88579005AA536 /* CheckmarkImageCollectionViewCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72B2E78928B8856D005AA536 /* CheckmarkCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */,
+				3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */,
+			);
+			path = CheckmarkCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		72B2E78A28B88579005AA536 /* CheckmarkImageCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F014287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift */,
+				3F12F015287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib */,
+			);
+			path = CheckmarkImageCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		72B2E79628B9B38A005AA536 /* ItemPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F012287B4DCD00FCC52E /* ItemPreferencesViewController.swift */,
+				72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */,
+			);
+			path = ItemPreferences;
 			sourceTree = "<group>";
 		};
 		72D4FC0D287D2CD400EA2EA3 /* Analytics */ = {
@@ -756,24 +871,6 @@
 				7270EDDE28A361E100177898 /* MyAccountCell.swift */,
 			);
 			path = MyAccountViewController;
-			sourceTree = "<group>";
-		};
-		72E7958528ACC38C00F01D07 /* GoalsPreferencesViewController */ = {
-			isa = PBXGroup;
-			children = (
-				72E7958628ACC39D00F01D07 /* GoalsPreferencesViewController.swift */,
-				72E7958728ACC39D00F01D07 /* GoalsPreferencesViewModel.swift */,
-			);
-			path = GoalsPreferencesViewController;
-			sourceTree = "<group>";
-		};
-		72F2484828A6064800B0BE02 /* FoodPreferencesViewController */ = {
-			isa = PBXGroup;
-			children = (
-				72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */,
-				72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */,
-			);
-			path = FoodPreferencesViewController;
 			sourceTree = "<group>";
 		};
 		A7C6600644E9FB5D5E5D0471 /* Frameworks */ = {
@@ -1066,13 +1163,14 @@
 				3F15ACEE2888659D004716CA /* MediaManager.swift in Sources */,
 				7282D419288F7D4800B4E26D /* MoreViewModel.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
-				3FA66846287FBAB30006166D /* OnboardingMVVMViewController.swift in Sources */,
 				3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
+				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
@@ -1096,7 +1194,7 @@
 				72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
-				3F87B96C27D429E000D589F7 /* OnboardingViewModel.swift in Sources */,
+				3F87B96C27D429E000D589F7 /* OnboardingCoordinator.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
@@ -1123,10 +1221,12 @@
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */,
+				72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
+				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,

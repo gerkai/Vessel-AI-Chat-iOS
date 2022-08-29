@@ -7,53 +7,13 @@
 
 import Foundation
 
-class GoalsPreferencesViewModel
+class GoalsPreferencesViewModel: ItemPreferencesViewModel
 {
-    var mainGoal: Int? = Contact.main()?.main_goal_id
-    
-    func anyItemChecked() -> Bool
+    override init()
     {
-        if mainGoal == nil
-        {
-            return false
-        }
-        return true
-    }
-    func infoForItemAt(indexPath: IndexPath) -> (name: String, id: Int, imageName: String?)
-    {
-        let row = indexPath.row
-        let goalID = Goal.ID.allCases[row]
-        return (Goals[goalID]!.name.capitalized, goalID.rawValue, Goals[goalID]!.imageName)
-    }
-    
-    func itemCount() -> Int
-    {
-        return Goal.ID.allCases.count
-    }
-    
-    func itemIsChecked(id: Int) -> Bool
-    {
-        if mainGoal != nil
-        {
-            if mainGoal == id
-            {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func selectItem(id: Int, selected: Bool)
-    {
-        if selected
-        {
-            let goalID = Goal.ID.allCases[id]
-            mainGoal = goalID.rawValue
-        }
-        else
-        {
-            mainGoal = nil
-        }
+        super.init()
+        mainGoal = Contact.main()?.main_goal_id
+        type = .mainGoal
     }
     
     func save()

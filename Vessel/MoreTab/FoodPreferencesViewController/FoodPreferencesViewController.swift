@@ -12,6 +12,7 @@ class FoodPreferencesViewController: UIViewController
     // MARK: - Views
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var segmentedControl: VesselSegmentedControl!
+    @IBOutlet private weak var saveButton: UIButton!
     
     // MARK: Model
     private let viewModel = FoodPreferencesViewModel()
@@ -21,26 +22,54 @@ class FoodPreferencesViewController: UIViewController
     {
         super.viewDidLoad()
         
+        print("📗 did load \(self)")
+        
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
+        updateSaveButton()
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     // MARK: - Actions
     @IBAction func onBackTapped()
     {
-        viewModel.save()
-        navigationController?.popViewController(animated: true)
+        onSaveTapped()
     }
     
     @IBAction func onSaveTapped()
     {
-        viewModel.save()
-        navigationController?.popViewController(animated: true)
+        if viewModel.anyItemChecked() == true
+        {
+            viewModel.save()
+            navigationController?.popViewController(animated: true)
+        }
+        else
+        {
+            let text = viewModel.tooFewItemsSelectedText()
+            UIView.showError(text: "", detailText: text, image: nil)
+        }
     }
     
     @IBAction func segmentedControlTapped()
     {
         viewModel.selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         collectionView.reloadData()
+    }
+    
+    // MARK: UI
+    func updateSaveButton()
+    {
+        if viewModel.anyItemChecked() == true
+        {     
+            saveButton.backgroundColor = Constants.vesselBlack
+        }
+        else
+        {
+            saveButton.backgroundColor = Constants.vesselGray
+        }
     }
 }
 
@@ -54,7 +83,7 @@ extension FoodPreferencesViewController: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-        let info = viewModel.infoForItemAt(indexPath: indexPath, type: viewModel.itemType)
+        let info = viewModel.infoForItemAt(indexPath: indexPath)
         cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
         return cell
     }
@@ -79,6 +108,7 @@ extension FoodPreferencesViewController: CheckmarkCollectionViewCellDelegate
     {
         viewModel.selectItem(id: cell.tag, selected: checked)
         collectionView.reloadData()
+        updateSaveButton()
     }
     
     func canCheckMoreButtons() -> Bool
