@@ -30,7 +30,6 @@ class MyAccountViewController: UIViewController
     @IBAction func logOut(_ sender: Any)
     {
         Server.shared.logOut()
-        Contact.reset()
         let story = UIStoryboard(name: "Login", bundle: nil)
         let vc = story.instantiateViewController(withIdentifier: "Welcome")
         

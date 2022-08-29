@@ -410,7 +410,7 @@ class Server: NSObject
     
     func isLoggedIn() -> Bool
     {
-        //if we have an access token, then we're assumed to be logged in
+        //if we have a stored access token, then we're assumed to be logged in
         if accessToken == nil
         {
             //see if we have one stored in the keychain...
@@ -590,6 +590,8 @@ class Server: NSObject
             KeychainHelper.standard.delete(service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
             refreshToken = nil
         }
+        
+        Contact.reset()
     }
     
     func invalidateAccessToken()

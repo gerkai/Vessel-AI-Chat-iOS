@@ -88,7 +88,6 @@ extension ChangePasswordViewController: GenericAlertDelegate
     func onAlertDismissed()
     {
         Server.shared.logOut()
-        Contact.reset()
         let story = UIStoryboard(name: "Login", bundle: nil)
         let vc = story.instantiateViewController(withIdentifier: "Welcome")
         
