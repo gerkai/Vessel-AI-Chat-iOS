@@ -8,15 +8,27 @@
 
 import UIKit
 
-class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
+class TermsViewController: UIViewController
 {
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
+    // MARK: - Views
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
+    // MARK: - Logic
     var allowNextButton = false
+    var coordinator: OnboardingCoordinator?
+    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        print("📗 did load \(self)")
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -38,18 +50,17 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
         updateNextButton()
     }
     
-    @IBAction func onBackButtonPressed(_ sender: Any)
+    // MARK: - Actions
+    @IBAction func onBackTapped(_ sender: Any)
     {
-        viewModel.backup()
-        self.navigationController?.fadeOut()
+        coordinator?.backup()
     }
     
-    @IBAction func onNextButtonTapped()
+    @IBAction func onNextTapped()
     {
         if allowNextButton
         {
-            let vc = viewModel.nextViewController()
-            navigationController?.fadeTo(vc)
+            coordinator?.pushNextViewController()
         }
         else
         {
@@ -57,6 +68,7 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
         }
     }
     
+    // MARK: - UI
     func updateNextButton()
     {
         if allowNextButton == true
@@ -68,9 +80,13 @@ class TermsViewController: OnboardingMVVMViewController, UIScrollViewDelegate
             nextButton.backgroundColor = Constants.vesselGray
         }
     }
-    
+}
+
+// MARK: - ScrollViewDelegate
+extension TermsViewController: UIScrollViewDelegate
+{
     func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {    
+    {
         if scrollView.isAtBottom
         {
             if allowNextButton == false

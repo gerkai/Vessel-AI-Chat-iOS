@@ -115,8 +115,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                             {
                                 self.nextButton.hideLoading()
                                 self.analytics.log(event: .logIn(loginType: .email))
-                                let vc = OnboardingViewModel.InitialViewController()
-                                self.navigationController?.fadeTo(vc)
+                                OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
                             }
                             onFailure:
                             {
@@ -126,8 +125,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                             }
                         }
                         onFailure:
-                        { [weak self] string in
-                            guard let self = self else { return }
+                        { string in
                             self.nextButton.hideLoading()
                             UIView.showError(text: "", detailText: string, image: nil)
                         }
@@ -177,8 +175,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            let vc = OnboardingViewModel.InitialViewController()
-            self.navigationController?.fadeTo(vc)
+            OnboardingCoordinator.pushInitialViewController(to: navigationController)
         }
     }
     

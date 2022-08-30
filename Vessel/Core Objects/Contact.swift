@@ -68,6 +68,7 @@ class Contact: CoreObjectProtocol
     //call when logging out
     static func reset()
     {
+        KeychainHelper.standard.delete(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
         MainID = 0
         SavedEmail = nil
     }

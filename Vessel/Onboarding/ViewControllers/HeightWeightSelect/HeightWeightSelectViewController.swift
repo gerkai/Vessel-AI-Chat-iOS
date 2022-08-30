@@ -10,39 +10,62 @@
 
 import UIKit
 
-class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource
+class HeightWeightSelectViewController: KeyboardFriendlyViewController
 {
-    @IBOutlet weak var heightPickerView: UIPickerView!
-    @IBOutlet weak var weightTextField: UITextField!
-    @IBOutlet weak var weightUnitsLabel: UILabel!
-    var viewModel: OnboardingViewModel!
-    var isMetric: Bool
-    {
-        //determine if we are using imperial or metric units
-        Locale.current.usesMetricSystem
-    }
+    // MARK: - Views
+    @IBOutlet private weak var heightPickerView: UIPickerView!
+    @IBOutlet private weak var weightTextField: UITextField!
+    @IBOutlet private weak var weightUnitsLabel: UILabel!
+    
+    // MARK: - Logic
+    var viewModel = HeightWeightSelectViewModel()
+    var coordinator: OnboardingCoordinator?
 
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         print("📗 did load \(self)")
-        
+        setupUI()
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        // TODO: Add analytics for viewed page
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        //change default gray selection color to white
+        //if done in viewDidLoad, app could crash because subviews may not exist yet
+        heightPickerView.subviews[1].backgroundColor = UIColor.white.withAlphaComponent(0.5)
+    }
+    
+    // MARK: - UI
+    func setupUI()
+    {
         let height_cm = viewModel.userHeight
-        if isMetric
+        if viewModel.isMetric
         {
             weightUnitsLabel.text = NSLocalizedString("Kg", comment: "Abbreviation for Kilograms")
             self.setHeightForPickerView(centimeters: Int(height_cm))
         }
         else
         {
-            let (feet, inches) = self.convertCentimetersToFeetInches(centimeters: height_cm)
+            let (feet, inches) = viewModel.convertCentimetersToFeetInches(centimeters: height_cm)
             self.setHeightForPickerView(feet: feet, inches: inches)
         }
         
         if let weight = UserDefaults.standard.string(forKey: Constants.KEY_DEFAULT_WEIGHT_LBS)
         {
-            if isMetric
+            if viewModel.isMetric
             {
                 if let weightLbs = Double(weight)
                 {
@@ -60,7 +83,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         //if we had previously chosen a weight on this screen then use that value instead
         if let weight = viewModel.userWeight
         {
-            if isMetric
+            if viewModel.isMetric
             {
                 let weightKG = weight * 0.45359237 // pounds to kilograms conversion
                 weightTextField.text = String(format: "%.1f", weightKG)
@@ -72,22 +95,9 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
     }
     
-    override func viewDidAppear(_ animated: Bool)
+    private func getSelections() -> Double
     {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        //change default gray selection color to white
-        //if done in viewDidLoad, app could crash because subviews may not exist yet
-        heightPickerView.subviews[1].backgroundColor = UIColor.white.withAlphaComponent(0.5)
-    }
-    
-    func getSelections() -> Double
-    {
-        if isMetric
+        if viewModel.isMetric
         {
             let centimeters = Double(heightPickerView.selectedRow(inComponent: HeightComponentMetric.centimeters.rawValue) + Constants.MIN_HEIGHT_METRIC)
             return centimeters
@@ -103,18 +113,9 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
     }
     
-    private func convertCentimetersToFeetInches(centimeters: Double) -> (Int, Int)
-    {
-        let heightCentimeters = Measurement(value: centimeters, unit: UnitLength.centimeters)
-        let heightFeet = heightCentimeters.converted(to: UnitLength.feet)
-        let inches = Int((heightFeet.value - floor(heightFeet.value)) * 12)
-        let feet = Int(heightFeet.value)
-        return (feet, inches)
-    }
-    
     private func setHeightForPickerView(centimeters: Int)
     {
-        if isMetric
+        if viewModel.isMetric
         {
             if centimeters >= Constants.MIN_HEIGHT_METRIC &&
                 centimeters <= Constants.MAX_HEIGHT_METRIC
@@ -126,31 +127,30 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     
     private func setHeightForPickerView(feet: Int, inches: Int)
     {
-        if !isMetric
+        if !viewModel.isMetric
         {
             heightPickerView.selectRow(feet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
             heightPickerView.selectRow(inches, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
         }
     }
     
-    @IBAction func back()
+    // MARK: - Actions
+    @IBAction func onBackTapped()
     {
         if let weight = weightTextField.text, weight.count != 0
         {
             viewModel.setHeightWeight(height: getSelections(), weight: Double(weight)!)
         }
-        viewModel.backup()
-        navigationController?.fadeOut()
+        coordinator?.backup()
     }
     
-    @IBAction func next()
+    @IBAction func onNextTapped()
     {
         if let weight = weightTextField.text, weight.count != 0
         {
             viewModel.setHeightWeight(height: getSelections(), weight: Double(weight)!)
             
-            let vc = viewModel.nextViewController()
-            navigationController?.fadeTo(vc)
+            coordinator?.pushNextViewController()
         }
         else
         {
@@ -158,15 +158,18 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
         }
     }
     
-    @IBAction func privacyPolicyButton()
+    @IBAction func onPrivacyPolicyTapped()
     {
         openInSafari(url: Constants.privacyPolicyURL)
     }
-    
-    //MARK: - Picker delegates
+}
+
+//MARK: - Picker Delegate
+extension HeightWeightSelectViewController: UIPickerViewDelegate, UIPickerViewDataSource
+{
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        if isMetric
+        if viewModel.isMetric
         {
             return String(format: NSLocalizedString("%i cm", comment: "abbreviation for height in 'centimeters'"), row + Constants.MIN_HEIGHT_METRIC)
         }
@@ -187,7 +190,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
-        if isMetric
+        if viewModel.isMetric
         {
             return HeightComponentMetric.allCases.count
         }
@@ -199,7 +202,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
-        if isMetric
+        if viewModel.isMetric
         {
             return Constants.MAX_HEIGHT_METRIC - Constants.MIN_HEIGHT_METRIC
         }
@@ -221,15 +224,16 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController, UITextFi
             }
         }
     }
-    
-    //MARK: - textfield delegates
-    
+}
+
+//MARK: - TextField Delegate
+extension HeightWeightSelectViewController: UITextFieldDelegate
+{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    //MARK: - textfield delegates
     func textFieldDidBeginEditing(_ textField: UITextField)
     {
         self.activeTextField = textField

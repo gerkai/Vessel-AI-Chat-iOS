@@ -7,18 +7,31 @@
 
 import UIKit
 
-class OnboardingWelcomeViewController: OnboardingMVVMViewController
+class OnboardingWelcomeViewController: UIViewController
 {
-    @IBOutlet weak var nameLabel: UILabel!
+    // MARK: - Views
+    @IBOutlet private weak var nameLabel: UILabel!
     
+    // MARK: - Logic
+    var coordinator: OnboardingCoordinator?
+    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        print("📗 did load \(self)")
+        
         if let contact = Contact.main()
         {
             let localizedGreeting = String(format: NSLocalizedString("Hi %@", comment: "Greeting by first name"), contact.first_name)
             nameLabel.text = localizedGreeting
         }
+    }
+    
+    deinit
+    {
+        print("📘 deinit \(self)")
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -27,17 +40,14 @@ class OnboardingWelcomeViewController: OnboardingMVVMViewController
         // TODO: Add analytics for viewed page
     }
     
-    @IBAction func back()
+    // MARK: - Actions
+    @IBAction func onBackTapped()
     {
-        navigationController?.fadeOut()
+        coordinator?.fadeOut()
     }
     
-    @IBAction func onContinue()
+    @IBAction func onNextTapped()
     {
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GenderSelectViewController") as! GenderSelectViewController
-        
-        vc.viewModel = viewModel
-        navigationController?.fadeTo(vc)
+        coordinator?.pushNextViewController()
     }
 }
