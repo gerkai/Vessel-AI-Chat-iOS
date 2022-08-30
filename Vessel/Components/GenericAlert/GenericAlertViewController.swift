@@ -97,7 +97,6 @@ class GenericAlertViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setupView()
         contentView.alpha = 0.0
         switch viewModel.animation
         {
@@ -120,6 +119,7 @@ class GenericAlertViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        setupView()
         
         if !alertPresented
         {
@@ -144,7 +144,8 @@ class GenericAlertViewController: UIViewController
                     }
                 }
             case .modal:
-                alertViewCenterYConstraint.constant = 0
+                let constant = viewModel.alignment == .center ? 0 : ((screenHeight - (alertView.frame.height)) / 2.0) - 10
+                alertViewCenterYConstraint.constant = constant
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut)
                 { [weak self] in
                     guard let self = self else { return }
@@ -295,12 +296,9 @@ private extension GenericAlertViewController
         
         if viewModel.alignment == .bottom
         {
-            alertViewCenterYConstraint.isActive = false
             alertViewTopSpacingConstraint.isActive = false
             alertViewBottomSpacingConstraint.isActive = false
-            NSLayoutConstraint.activate([
-                contentView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 10.0)
-            ])
+            alertViewCenterYConstraint.constant = ((screenHeight - (alertView.frame.height * 100)) / 2.0) - 10
         }
         
         if viewModel.background == .green
