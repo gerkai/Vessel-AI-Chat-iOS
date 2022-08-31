@@ -701,7 +701,7 @@
                                                 <rect key="frame" x="0.0" y="138" width="354" height="363"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional.   By tapping next, I acknowledge I have read the disclaimer.</mutableString>
+                                                        <string key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional.   By tapping next, I acknowledge I have read the disclaimer.</string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
@@ -847,7 +847,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egO-5e-4OX">
-                                <rect key="frame" x="30" y="288" width="192" height="40.5"/>
+                                <rect key="frame" x="30" y="288" width="192" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="192" id="TB3-7b-APu"/>
                                 </constraints>
