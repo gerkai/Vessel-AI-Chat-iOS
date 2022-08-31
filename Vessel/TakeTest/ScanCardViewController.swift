@@ -36,6 +36,11 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         captureSession.sessionPreset = .photo //allows us to shoot in RAW. Camera rez changes to 3024 x 4032!
         captureSession.automaticallyConfiguresCaptureDeviceForWideColor = false
  
+        if UserDefaults.standard.bool(forKey: Constants.KEY_SHOW_DEBUG_DRAWING) == true
+        {
+            drawingView.showDebugDrawing = true
+        }
+        
         if let videoCaptureDevice = AVCaptureDevice.default(for: .video)
         {
             guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else{ return }

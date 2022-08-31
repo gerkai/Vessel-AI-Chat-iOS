@@ -52,6 +52,7 @@ class DrawingView: UIView
     var arrayG: [CGPoint] = []
     var arrayH: [CGPoint] = []
     var validArea: CGRect = CGRect()
+    var showDebugDrawing = false
     
     override func draw(_ rect: CGRect)
     {
@@ -132,26 +133,32 @@ class DrawingView: UIView
                 }
                 
                 //draw box around qr code
-                context.setStrokeColor(UIColor.yellow.cgColor)
-                context.move(to: pointA)
-                context.addLine(to: pointD)
-                context.addLine(to: pointC)
-                context.addLine(to: pointB)
-                context.strokePath()
-                //top of qr code is red
-                context.setStrokeColor(UIColor.red.cgColor)
-                context.move(to: pointB)
-                context.addLine(to: pointA)
-                context.strokePath()
+                if showDebugDrawing == true
+                {
+                    context.setStrokeColor(UIColor.yellow.cgColor)
+                    context.move(to: pointA)
+                    context.addLine(to: pointD)
+                    context.addLine(to: pointC)
+                    context.addLine(to: pointB)
+                    context.strokePath()
+                    //top of qr code is red
+                    context.setStrokeColor(UIColor.red.cgColor)
+                    context.move(to: pointB)
+                    context.addLine(to: pointA)
+                    context.strokePath()
+                }
                 
                 //draw fiducials
                 context.setStrokeColor(UIColor.green.cgColor)
                 var error = 0
-                error = error + drawFiducialAtPoint(pointE, context: context, validFrame: validArea)
-                error = error + drawFiducialAtPoint(pointF, context: context, validFrame: validArea)
-                error = error + drawFiducialAtPoint(averagePoint(points: arrayG), context: context, validFrame: validArea)
-                error = error + drawFiducialAtPoint(averagePoint(points: arrayH), context: context, validFrame: validArea)
-                context.strokePath()
+                error = error + calculateFiducialAtPoint(pointE, context: context, validFrame: validArea, drawToo: showDebugDrawing)
+                error = error + calculateFiducialAtPoint(pointF, context: context, validFrame: validArea, drawToo: showDebugDrawing)
+                error = error + calculateFiducialAtPoint(averagePoint(points: arrayG), context: context, validFrame: validArea, drawToo: showDebugDrawing)
+                error = error + calculateFiducialAtPoint(averagePoint(points: arrayH), context: context, validFrame: validArea, drawToo: showDebugDrawing)
+                if showDebugDrawing
+                {
+                    context.strokePath()
+                }
                 
                 var isOnScreen = true
                 var isCloseEnough = 0
@@ -222,13 +229,16 @@ class DrawingView: UIView
         return CGPoint(x: x, y: y)
     }
     
-    func drawFiducialAtPoint(_ point: CGPoint, context: CGContext, validFrame: CGRect) -> Int
+    func calculateFiducialAtPoint(_ point: CGPoint, context: CGContext, validFrame: CGRect, drawToo: Bool) -> Int
     {
         //returns 0 if all four fiducials are on screen otherwise returns number of fiducials off screen
         let fiducialSize = 30.0
         
         let pointERect = CGRect(x: point.x - fiducialSize / 2, y: point.y - fiducialSize / 2, width: fiducialSize, height: fiducialSize)
-        context.addRect(pointERect)
+        if drawToo
+        {
+            context.addRect(pointERect)
+        }
         var error = 0
         if point.x < validFrame.origin.x
         {
