@@ -153,6 +153,11 @@ class Server: NSObject
         }
     }
     
+    func allowDebugPrint() -> Bool
+    {
+        return UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_NETWORK_TRAFFIC)
+    }
+    
     func SupportURL() -> String
     {
         return SUPPORT_URL
@@ -167,6 +172,7 @@ class Server: NSObject
     private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         var mutableRequest = request
+        let allowPrint = allowDebugPrint()
         mutableRequest.httpMethod = "GET"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         if accessToken != nil
@@ -175,18 +181,27 @@ class Server: NSObject
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
         
-        //print("\(mutableRequest)")
+        if allowPrint
+        {
+            if let url = request.url
+            {
+                print("GET: \(url)")
+            }
+        }
+        
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
             if let data = data //unwrap data
             {
-                self.debugJSONResponse(data: data)
+                if allowPrint
+                {
+                    self.debugJSONResponse(data: data)
+                }
                 success(data)
             }
             else
             {
-                //print(error)
                 failure(error)
             }
         }.resume()
@@ -205,6 +220,7 @@ class Server: NSObject
     private func serverDelete(request: URLRequest, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: ServerError) -> Void)
     {
         var mutableRequest = request
+        let allowPrint = allowDebugPrint()
         mutableRequest.httpMethod = "DELETE"
         mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         if accessToken != nil
@@ -216,6 +232,13 @@ class Server: NSObject
         {
             print("DELETE: \(url)")
         }*/
+        if allowPrint
+        {
+            if let url = request.url
+            {
+                print("DELETE: \(url)")
+            }
+        }
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -223,11 +246,20 @@ class Server: NSObject
             {
                 if response.statusCode == 204
                 {
+                    if allowPrint
+                    {
+                        print("SUCCESS")
+                    }
                     success()
                 }
                 else
                 {
-                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to delete object from server", comment: "Server error message"))
+                    let string = "Unable to delete object from server"
+                    if allowPrint
+                    {
+                        print(string)
+                    }
+                    let error = ServerError(code: 400, description: NSLocalizedString(string, comment: "Server error message"))
                     failure(error)
                 }
             }
@@ -244,10 +276,21 @@ class Server: NSObject
             mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        /*if let url = request.url
+        if allowDebugPrint()
         {
-            print("POST: \(url)")
-        }*/
+            if let url = request.url
+            {
+                print("\(requestType): \(url)")
+                if request.httpBody != nil
+                {
+                    if let jsonData = request.httpBody
+                    {
+                        let jsonString = String(data: jsonData, encoding: .utf8)!
+                        print(jsonString)
+                    }
+                }
+            }
+        }
         let session = URLSession.shared
         session.dataTask(with: mutableRequest)
         { (data, response, error) in
@@ -256,7 +299,10 @@ class Server: NSObject
                 do
                 {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print("Server Write Response:\n\(json)\n")
+                    if self.allowDebugPrint()
+                    {
+                        print("Server Write Response:\n\(json)\n")
+                    }
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
                     {
@@ -295,8 +341,6 @@ class Server: NSObject
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-            //let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
 
             let Url = String(format: url)
             guard let serviceUrl = URL(string: Url) else { return }
@@ -476,7 +520,6 @@ class Server: NSObject
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
                 //save tokens to keychain
-                print("login(): Saving tokens to keychain")
                 let accessData = Data(accessToken.utf8)
                 KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                 let refreshData = Data(refreshToken.utf8)
@@ -535,7 +578,7 @@ class Server: NSObject
                         
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
-                        print("getTokens() saving tokens to keychain")
+                        
                         let accessData = Data(accessToken.utf8)
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                         let refreshData = Data(refreshToken.utf8)
@@ -633,93 +676,6 @@ class Server: NSObject
         }
     }
     
-    /*
-    //pass an ID to get a specific contact or leave nil to get the primary contact
-    func getContact(id: Int? = nil, onSuccess success: @escaping (_ contact: Contact) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        //print("GET CONTACT...")
-
-        var url = "\(API())\(CONTACT_PATH)"
-        if id != nil
-        {
-            url = url + "/\(id!)"
-        }
-        let request = Server.shared.GenerateRequest(urlString: url)!
-        serverGet(request: request)
-        { data in
-            //let str = String(decoding: data, as: UTF8.self)
-            //print (str)
-            
-            let decoder = JSONDecoder()
-            do
-            {
-                let contact = try decoder.decode(Contact.self, from: data)
-                //print(contact)
-                DispatchQueue.main.async()
-                {
-                    success(contact)
-                }
-            }
-            
-             //cw: good for debugging JSON responses
-             catch DecodingError.dataCorrupted(let context)
-            {
-                print(context)
-                 let error = NSError(domain: context.debugDescription, code: -1, userInfo: nil)
-                 DispatchQueue.main.async()
-                 {
-                     failure(error)
-                 }
-            }
-            catch DecodingError.keyNotFound(let key, let context)
-            {
-                print("Key '\(key)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-                let error = NSError(domain: context.debugDescription, code: -1, userInfo: nil)
-                DispatchQueue.main.async()
-                {
-                    failure(error)
-                }
-            }
-            catch DecodingError.valueNotFound(let value, let context)
-            {
-                print("Value '\(value)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-                let error = NSError(domain: context.debugDescription, code: -1, userInfo: nil)
-                DispatchQueue.main.async()
-                {
-                    failure(error)
-                }
-            }
-            catch DecodingError.typeMismatch(let type, let context)
-            {
-                print("Type '\(type)' mismatch:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-                let error = NSError(domain: context.debugDescription, code: -1, userInfo: nil)
-                DispatchQueue.main.async()
-                {
-                    failure(error)
-                }
-            }
-            catch
-            {
-                print("error: ", error)
-                DispatchQueue.main.async()
-                {
-                    failure(error)
-                }
-            }
-        }
-        onFailure:
-        { error in
-            DispatchQueue.main.async()
-            {
-                failure(error)
-            }
-        }
-    }
-    */
-    
     func createContact(contact: Contact, password: String, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CONTACT_CREATE_PATH)"
@@ -749,7 +705,7 @@ class Server: NSObject
                         self.accessToken = accessToken
                         self.refreshToken = refreshToken
                         Contact.MainID = mainContactID
-                        print("createContact() saving tokens to keychain")
+
                         let accessData = Data(accessToken.utf8)
                         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
                         let refreshData = Data(refreshToken.utf8)
@@ -809,8 +765,8 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(objectDict)
-        let jsonString = String(data: data, encoding: .utf8)!
-        print(jsonString)
+        //let jsonString = String(data: data, encoding: .utf8)!
+        //print(jsonString)
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
         var request = URLRequest(url: serviceUrl)
@@ -841,8 +797,8 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(objects)
-        let jsonString = String(data: data, encoding: .utf8)!
-        print(jsonString)
+        //let jsonString = String(data: data, encoding: .utf8)!
+        //print(jsonString)
         
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
