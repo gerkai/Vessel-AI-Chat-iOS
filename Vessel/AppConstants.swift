@@ -85,7 +85,7 @@ struct Constants
     static let ID_NO_DIETS = 17
     static let ID_NO_ALLERGIES = 20
     
-    //Contact Flags
+    //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001
     static let HIDE_PEE_TIPS                = 0x00000002
     static let HIDE_DROPLET_TIPS            = 0x00000004
