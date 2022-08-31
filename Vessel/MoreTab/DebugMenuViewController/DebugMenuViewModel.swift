@@ -37,8 +37,8 @@ enum DebugMenuOption: Int
         {
         case .resetUserFlags: return nil
         case .bypassScanning: return "BYPASS_SCANNING"
+        case .printNetworkTraffic: return Constants.KEY_PRINT_NETWORK_TRAFFIC
         case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
-        case .printNetworkTraffic: return "PRINT_NETWORK_TRAFFIC"
         }
     }
     
