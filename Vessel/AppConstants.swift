@@ -71,6 +71,8 @@ struct Constants
     static let GENDER_OTHER = "o"
     static let MAX_HEIGHT_METRIC = 302
     static let MIN_HEIGHT_METRIC = 61
+    static let MIN_WEIGHT_IMPERIAL: Double = 50.0
+    static let MAX_WEIGHT_IMPERIAL: Double = 500.0
     static let DEFAULT_HEIGHT = 168 /*cm (5' 6") */
     static let MIN_AGE = 18
     static let MAX_AGE = 100

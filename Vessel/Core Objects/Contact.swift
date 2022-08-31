@@ -6,6 +6,28 @@
 //
 import Foundation
 
+enum Gender: Int, CaseIterable
+{
+    case male
+    case female
+    case other
+    
+    init?(genderString: String)
+    {
+        switch genderString
+        {
+        case Constants.GENDER_MALE:
+            self.init(rawValue: 0)
+        case Constants.GENDER_FEMALE:
+            self.init(rawValue: 1)
+        case Constants.GENDER_OTHER:
+            self.init(rawValue: 2)
+        default:
+            return nil
+        }
+    }
+}
+
 class Contact: CoreObjectProtocol
 {
     static var MainID: Int = 0

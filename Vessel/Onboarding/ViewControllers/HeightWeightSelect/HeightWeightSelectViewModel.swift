@@ -9,7 +9,7 @@ import Foundation
 
 class HeightWeightSelectViewModel
 {
-    var userHeight: Double = Double(Constants.DEFAULT_HEIGHT)
+    lazy var userHeight: Double = Double(Constants.DEFAULT_HEIGHT - (isMetric ? 0 : Constants.MIN_HEIGHT_METRIC))
     var userWeight: Double?
     
     deinit
@@ -30,8 +30,8 @@ class HeightWeightSelectViewModel
     
     func setHeightWeight(height: Double, weight: Double)
     {
-        userHeight = height
-        userWeight = weight
+        userHeight = height + (isMetric ? 0 : Double(Constants.MIN_HEIGHT_METRIC))
+        userWeight = max(min(isMetric ? convertKgToLbs(kg: weight) : weight, Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
     }
     
     internal func convertCentimetersToFeetInches(centimeters: Double) -> (Int, Int)
@@ -41,5 +41,10 @@ class HeightWeightSelectViewModel
         let inches = Int((heightFeet.value - floor(heightFeet.value)) * 12)
         let feet = Int(heightFeet.value)
         return (feet, inches)
+    }
+    
+    private func convertKgToLbs(kg: Double) -> Double
+    {
+        return kg / 0.45359237
     }
 }

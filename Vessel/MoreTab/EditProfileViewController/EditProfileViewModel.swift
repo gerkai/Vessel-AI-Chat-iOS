@@ -127,37 +127,25 @@ class EditProfileViewModel
     {
         get
         {
-            if let gender = contact?.gender
+            if let genderString = contact?.gender,
+               let gender = Gender(genderString: genderString)
             {
-                if gender.lowercased() == Constants.GENDER_MALE
-                {
-                    return 0
-                }
-                else if gender.lowercased() == Constants.GENDER_FEMALE
-                {
-                    return 1
-                }
-                else if gender.lowercased() == Constants.GENDER_OTHER
-                {
-                    return 2
-                }
+                return gender.rawValue
             }
             return nil
         }
         set
         {
             guard let contact = contact,
-                  let newGender = newValue else { return }
-            if newGender == 0
+                  let newGender = newValue,
+                  let gender = Gender(rawValue: newGender) else { return }
+            switch gender
             {
+            case .male:
                 contact.gender = Constants.GENDER_MALE
-            }
-            else if newGender == 1
-            {
+            case .female:
                 contact.gender = Constants.GENDER_FEMALE
-            }
-            else if newGender == 2
-            {
+            case .other:
                 contact.gender = Constants.GENDER_OTHER
             }
             updateContact(contact: contact)
@@ -222,11 +210,11 @@ class EditProfileViewModel
                   let newWeight = Double(newWeightString) else { return }
             if isMetric
             {
-                contact.weight = convertKgToLbs(kg: newWeight)
+                contact.weight = max(min(convertKgToLbs(kg: newWeight), Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
             }
             else
             {
-                contact.weight = newWeight
+                contact.weight = max(min(newWeight, Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
             }
             updateContact(contact: contact)
         }
@@ -261,6 +249,16 @@ class EditProfileViewModel
             contact.birth_date = newBirthDateString
             updateContact(contact: contact)
         }
+    }
+    
+    func getMinHeightImperial() -> (Int, Int)
+    {
+        return convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
+    }
+    
+    func getMaxHeightImperial() -> (Int, Int)
+    {
+        return convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
     }
 }
 

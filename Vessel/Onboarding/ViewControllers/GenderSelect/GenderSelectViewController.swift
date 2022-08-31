@@ -53,6 +53,10 @@ class GenderSelectViewController: UIViewController
     
     @IBAction func onNextTapped()
     {
+        if viewModel.getGender() == nil
+        {
+            viewModel.setGender(gender: segmentedControl.selectedSegmentIndex)
+        }
         coordinator?.pushNextViewController()
     }
     
