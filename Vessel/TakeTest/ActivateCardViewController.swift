@@ -154,7 +154,18 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         viewModel.delegate = nil
         let vc = viewModel.nextViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if (viewModel.curState == .Capture) && (UserDefaults.standard.bool(forKey: Constants.KEY_BYPASS_SCANNING) == true)
+        {
+            let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ResultsNavController") as! UINavigationController
+            let root = vc.viewControllers[0] as! ResultsViewController
+            root.mockTestResult()
+            self.navigationController?.pushViewController(root, animated: true)
+        }
+        else
+        {
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func insightsText() -> String

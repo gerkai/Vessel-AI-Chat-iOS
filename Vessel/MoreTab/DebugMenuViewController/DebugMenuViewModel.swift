@@ -36,7 +36,7 @@ enum DebugMenuOption: Int
         switch self
         {
         case .resetUserFlags: return nil
-        case .bypassScanning: return "BYPASS_SCANNING"
+        case .bypassScanning: return Constants.KEY_BYPASS_SCANNING
         case .showDebugDrawing: return "SHOW_DEBUG_DRAWING"
         case .printNetworkTraffic: return "PRINT_NETWORK_TRAFFIC"
         }
