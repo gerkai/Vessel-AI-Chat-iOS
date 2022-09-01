@@ -20,7 +20,10 @@ class OnboardingWelcomeViewController: UIViewController
     {
         super.viewDidLoad()
         
-        print("📗 did load \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
         
         if let contact = Contact.main()
         {
@@ -31,7 +34,10 @@ class OnboardingWelcomeViewController: UIViewController
     
     deinit
     {
-        print("📘 deinit \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

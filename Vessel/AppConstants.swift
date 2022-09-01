@@ -85,6 +85,7 @@ struct Constants
     static let KEY_BYPASS_SCANNING = "KEY_BYPASS_SCANNING"
     static let KEY_PRINT_NETWORK_TRAFFIC = "KEY_PRINT_NETWORK_TRAFFIC"
     static let KEY_SHOW_DEBUG_DRAWING = "KEY_SHOW_DEBUG_DRAWING"
+    static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     
     //Database IDs
     static let ID_NO_DIETS = 17
