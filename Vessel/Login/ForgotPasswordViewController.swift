@@ -122,6 +122,7 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     func transitionToSecondScreen()
     {
         //transition to second screen
+        emailTextField.resignFirstResponder() //dismiss keyboard
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations:
         {
             self.titleLabel.alpha = 0
