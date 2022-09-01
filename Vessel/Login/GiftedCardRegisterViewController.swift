@@ -124,10 +124,10 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         nextButton.showLoading()
         Server.shared.createContact(contact: contact, password: password)
         {
-            self.nextButton.hideLoading()
             ObjectStore.shared.loadMainContact
             {
                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                self.nextButton.hideLoading()
             }
             onFailure:
             {
