@@ -21,18 +21,12 @@ class OnboardingFinalViewController: UIViewController
     {
         titleLabel.text = finalScreenText()
         
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📗 did load \(self)")
-        }
+        print("📗 did load \(self)")
     }
     
     deinit
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📘 deinit \(self)")
-        }
+        print("📘 deinit \(self)")
     }
     
     override func viewDidAppear(_ animated: Bool)

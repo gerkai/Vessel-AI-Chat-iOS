@@ -62,10 +62,7 @@ class ResultsViewController: UIViewController
     
     deinit
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("ResultsViewController deinit")
-        }
+        print("ResultsViewController deinit")
     }
     
     func showRanges()

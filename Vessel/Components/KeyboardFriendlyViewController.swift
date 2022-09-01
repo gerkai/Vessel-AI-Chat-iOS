@@ -24,10 +24,7 @@ class KeyboardFriendlyViewController: UIViewController
     
     deinit
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📘 deinit \(self)")
-        }
+        print("📘 deinit \(self)")
     }
     
     //MARK: - Handle sliding view up/down so textfield isn't blocked by keyboard

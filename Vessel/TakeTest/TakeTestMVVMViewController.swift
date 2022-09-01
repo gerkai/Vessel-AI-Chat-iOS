@@ -18,9 +18,6 @@ class TakeTestMVVMViewController: UIViewController
     
     deinit
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📘 deinit \(self)")
-        }
+        print("📘 deinit \(self)")
     }
 }

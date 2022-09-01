@@ -28,10 +28,7 @@ class ItemPreferencesViewController: UIViewController
     {
         super.viewDidLoad()
         
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📗 did load \(self)")
-        }
+        print("📗 did load \(self)")
 
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         collectionView.registerFromNib(CheckmarkImageCollectionViewCell.self)
@@ -46,10 +43,7 @@ class ItemPreferencesViewController: UIViewController
     
     deinit
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📘 deinit \(self)")
-        }
+        print("📘 deinit \(self)")
     }
     
     override func viewDidAppear(_ animated: Bool)
