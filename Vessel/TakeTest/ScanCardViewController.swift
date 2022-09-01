@@ -103,7 +103,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     override func viewDidLayoutSubviews()
     {
-        previewLayer.frame = cameraView.bounds
+        previewLayer?.frame = cameraView.bounds
         drawingView.validArea = cardView.frame
     }
     

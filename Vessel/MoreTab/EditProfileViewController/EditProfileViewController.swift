@@ -307,8 +307,15 @@ private extension EditProfileViewController
     {
         if viewModel.isMetric
         {
-            if centimeters >= Constants.MIN_HEIGHT_METRIC &&
-                centimeters <= Constants.MAX_HEIGHT_METRIC
+            if centimeters > Constants.MAX_HEIGHT_METRIC
+            {
+                heightPickerView.selectRow(Constants.MAX_HEIGHT_METRIC - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
+            }
+            else if centimeters < Constants.MIN_HEIGHT_METRIC
+            {
+                heightPickerView.selectRow(Constants.MIN_HEIGHT_METRIC - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
+            }
+            else
             {
                 heightPickerView.selectRow(centimeters - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
             }
@@ -319,7 +326,9 @@ private extension EditProfileViewController
     {
         if !viewModel.isMetric
         {
-            heightPickerView.selectRow(feet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
+            let (minFeet, _) = viewModel.getMinHeightImperial()
+            
+            heightPickerView.selectRow(feet - minFeet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
             heightPickerView.selectRow(inches, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
         }
     }
@@ -429,10 +438,13 @@ extension EditProfileViewController: UIPickerViewDataSource
         else
         {
             let heightComponent = HeightComponentImperial(rawValue: component)
+            let (minFeet, _) = viewModel.getMinHeightImperial()
+            let (maxFeet, _) = viewModel.getMaxHeightImperial()
+            
             switch heightComponent
             {
                 case .feet:
-                    return 10
+                    return maxFeet - minFeet + 1
                 case .inches:
                     return 12
                 default:
@@ -453,12 +465,14 @@ extension EditProfileViewController: UIPickerViewDelegate
         else
         {
             let heightComponent = HeightComponentImperial(rawValue: component)
+            let (minFeet, minInches) = viewModel.getMinHeightImperial()
+            
             switch heightComponent
             {
                 case .feet:
-                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row)
+                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row + minFeet)
                 case .inches:
-                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row)
+                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row + minInches)
                 default:
                     return ""
             }
@@ -474,7 +488,9 @@ extension EditProfileViewController: UIPickerViewDelegate
         }
         else
         {
-            let feet = Int(heightPickerView.selectedRow(inComponent: HeightComponentImperial.feet.rawValue))
+            let (minFeet, _) = viewModel.getMinHeightImperial()
+            
+            let feet = Int(heightPickerView.selectedRow(inComponent: HeightComponentImperial.feet.rawValue)) + minFeet
             let inches = Int(heightPickerView.selectedRow(inComponent: HeightComponentImperial.inches.rawValue))
             heightTextField.text = "\(feet)'\(inches)\""
         }

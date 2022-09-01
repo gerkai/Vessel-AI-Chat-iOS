@@ -216,10 +216,10 @@ class OnboardingCoordinator
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
             navigationController?.fadeTo(vc)
+            
+            //save the data collected during onboarding
+            saveDemographics()
         }
-
-        //save the data collected during onboarding
-        saveDemographics()
     }
     
     init()
