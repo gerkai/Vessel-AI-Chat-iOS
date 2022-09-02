@@ -26,13 +26,24 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     {
         super.viewDidLoad()
         
-        print("📗 did load \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
         setupUI()
     }
     
     deinit
     {
-        print("📘 deinit \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -117,8 +128,15 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     {
         if viewModel.isMetric
         {
-            if centimeters >= Constants.MIN_HEIGHT_METRIC &&
-                centimeters <= Constants.MAX_HEIGHT_METRIC
+            if centimeters < Constants.MIN_HEIGHT_METRIC
+            {
+                heightPickerView.selectRow(Constants.MIN_HEIGHT_METRIC - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
+            }
+            else if centimeters > Constants.MAX_HEIGHT_METRIC
+            {
+                heightPickerView.selectRow(Constants.MAX_HEIGHT_METRIC - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
+            }
+            else
             {
                 heightPickerView.selectRow(centimeters - Constants.MIN_HEIGHT_METRIC, inComponent: HeightComponentMetric.centimeters.rawValue, animated: false)
             }
@@ -127,7 +145,20 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     
     private func setHeightForPickerView(feet: Int, inches: Int)
     {
-        if !viewModel.isMetric
+        let (maxFeet, maxInches) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
+        let (minFeet, minInches) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
+        
+        if feet <= minFeet && inches < minInches
+        {
+            heightPickerView.selectRow(2, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
+            heightPickerView.selectRow(0, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
+        }
+        else if feet >= maxFeet && inches > maxInches
+        {
+            heightPickerView.selectRow(9, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
+            heightPickerView.selectRow(11, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
+        }
+        else if !viewModel.isMetric
         {
             heightPickerView.selectRow(feet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
             heightPickerView.selectRow(inches, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
@@ -176,12 +207,14 @@ extension HeightWeightSelectViewController: UIPickerViewDelegate, UIPickerViewDa
         else
         {
             let heightComponent = HeightComponentImperial(rawValue: component)
+            let (minFeet, minInches) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
+
             switch heightComponent
             {
                 case .feet:
-                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row)
+                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row + minFeet)
                 case .inches:
-                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row)
+                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row + minInches)
                 default:
                     return ""
             }
@@ -208,15 +241,13 @@ extension HeightWeightSelectViewController: UIPickerViewDelegate, UIPickerViewDa
         }
         else
         {
-            //let (maxFeet, maxInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
-            //let (minFeet, minInches) = self.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
-            //print("MAX: \(maxFeet), \(maxInches)")
-            //print("MIN: \(minFeet), \(minInches)")
+            let (maxFeet, _) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MAX_HEIGHT_METRIC))
+            let (minFeet, _) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
             let heightComponent = HeightComponentImperial(rawValue: component)
             switch heightComponent
             {
                 case .feet:
-                    return 10
+                    return maxFeet - minFeet + 1
                 case .inches:
                     return 12
                 default:
@@ -236,7 +267,7 @@ extension HeightWeightSelectViewController: UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        self.activeTextField = textField
+        activeTextField = textField
     }
     
     func textFieldDidEndEditing(_ textField: UITextField)

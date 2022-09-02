@@ -18,7 +18,10 @@ class MainTabBarController: UITabBarController
     {
         super.viewDidLoad()
         
-        print("MainTabBarController did load")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("MainTabBarController did load")
+        }
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
@@ -73,7 +76,10 @@ class MainTabBarController: UITabBarController
     
     deinit
     {
-        print("📘 deinit \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
     }
     
     override func viewWillLayoutSubviews()

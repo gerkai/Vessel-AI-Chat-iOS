@@ -71,6 +71,8 @@ struct Constants
     static let GENDER_OTHER = "o"
     static let MAX_HEIGHT_METRIC = 302
     static let MIN_HEIGHT_METRIC = 61
+    static let MIN_WEIGHT_IMPERIAL: Double = 50.0
+    static let MAX_WEIGHT_IMPERIAL: Double = 500.0
     static let DEFAULT_HEIGHT = 168 /*cm (5' 6") */
     static let MIN_AGE = 18
     static let MAX_AGE = 100
@@ -80,6 +82,10 @@ struct Constants
     static let KEY_DEFAULT_LOGIN_EMAIL = "KEY_DEFAULT_LOGIN_EMAIL"
     static let KEY_DEFAULT_LOGIN_PASSWORD = "KEY_DEFAULT_LOGIN_PASSWORD"
     static let KEY_DEFAULT_WEIGHT_LBS = "KEY_DEFAULT_WEIGHT_LBS"
+    static let KEY_BYPASS_SCANNING = "KEY_BYPASS_SCANNING"
+    static let KEY_PRINT_NETWORK_TRAFFIC = "KEY_PRINT_NETWORK_TRAFFIC"
+    static let KEY_SHOW_DEBUG_DRAWING = "KEY_SHOW_DEBUG_DRAWING"
+    static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     
     //Database IDs
     static let ID_NO_DIETS = 17

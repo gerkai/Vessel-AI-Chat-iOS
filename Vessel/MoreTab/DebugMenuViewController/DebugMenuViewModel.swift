@@ -13,6 +13,7 @@ enum DebugMenuOption: Int
     case bypassScanning
     case showDebugDrawing
     case printNetworkTraffic
+    case printInitAndDeinit
     
     var title: String
     {
@@ -22,6 +23,7 @@ enum DebugMenuOption: Int
         case .bypassScanning: return "Bypass Scanning"
         case .showDebugDrawing: return "Show Debug Drawing"
         case .printNetworkTraffic: return "Print Network Traffic"
+        case .printInitAndDeinit: return "Print intialization and deinitialization"
         }
     }
     
@@ -36,9 +38,10 @@ enum DebugMenuOption: Int
         switch self
         {
         case .resetUserFlags: return nil
-        case .bypassScanning: return "BYPASS_SCANNING"
-        case .showDebugDrawing: return "SHOW_DEBUG_DRAWING"
-        case .printNetworkTraffic: return "PRINT_NETWORK_TRAFFIC"
+        case .bypassScanning: return Constants.KEY_BYPASS_SCANNING
+        case .printNetworkTraffic: return Constants.KEY_PRINT_NETWORK_TRAFFIC
+        case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
+        case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
         }
     }
     
@@ -72,6 +75,7 @@ class DebugMenuViewModel
         .resetUserFlags,
         .bypassScanning,
         .showDebugDrawing,
-        .printNetworkTraffic
+        .printNetworkTraffic,
+        .printInitAndDeinit
     ]
 }

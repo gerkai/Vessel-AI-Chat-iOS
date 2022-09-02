@@ -216,20 +216,26 @@ class OnboardingCoordinator
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
             navigationController?.fadeTo(vc)
+            
+            //save the data collected during onboarding
+            saveDemographics()
         }
-
-        //save the data collected during onboarding
-        saveDemographics()
     }
     
     init()
     {
-        print("Init Onboarding Coordinator")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("Init Onboarding Coordinator")
+        }
     }
     
     deinit
     {
-        print("Dealloc Onboarding Coordinator")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("Dealloc Onboarding Coordinator")
+        }
     }
     
     func backup()
@@ -273,14 +279,16 @@ class OnboardingCoordinator
                 //birthday
                 if let birthdayViewModel = birthdayViewModel
                 {
-                    let formatter = DateFormatter()
-                    formatter.dateFormat = Constants.SERVER_DATE_FORMAT
-                    let strDate = formatter.string(from: birthdayViewModel.userBirthdate)
-                    contact.birth_date = strDate
-                
                     if birthdayViewModel.preferNotToShareBirthdate
                     {
                         contact.flags |= Constants.DECLINED_BIRTH_DATE
+                    }
+                    else
+                    {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = Constants.SERVER_DATE_FORMAT
+                        let strDate = formatter.string(from: birthdayViewModel.userBirthdate)
+                        contact.birth_date = strDate
                     }
                 }
                     

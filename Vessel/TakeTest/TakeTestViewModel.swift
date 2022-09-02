@@ -125,7 +125,10 @@ class TakeTestViewModel
     
     deinit
     {
-        print("📕: Take Test View Model deinit")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📕: Take Test View Model deinit")
+        }
     }
     
     func nextViewController() -> TakeTestMVVMViewController
