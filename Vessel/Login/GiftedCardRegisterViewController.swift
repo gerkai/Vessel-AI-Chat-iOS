@@ -18,6 +18,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var lastNameTextField: VesselTextField!
     @IBOutlet weak var passwordTextField: VesselTextField!
     @IBOutlet weak var confirmPasswordTextField: VesselTextField!
+    @IBOutlet weak var nextButton: LoadingButton!
     
     @Resolved private var analytics: Analytics
     var initialFirstName: String = ""
@@ -59,7 +60,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         self.view.endEditing(true)
     }
     
-    @IBAction func onContinueButtonTapped(_ sender: Any)
+    @IBAction func onNextButtonTapped(_ sender: Any)
     {
         if let firstName = firstNameTextField.text, firstName.isValidName()
         {
@@ -120,20 +121,24 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     private func createContact(firstName: String, lastName: String, password: String)
     {
         let contact = Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "")
+        nextButton.showLoading()
         Server.shared.createContact(contact: contact, password: password)
         {
             ObjectStore.shared.loadMainContact
             {
                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                self.nextButton.hideLoading()
             }
             onFailure:
             {
+                self.nextButton.hideLoading()
                 let errorString = NSLocalizedString("Couldn't get contact", comment: "")
                 UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error Message"), detailText: errorString, image: nil)
             }
         }
         onFailure:
         { error in
+            self.nextButton.hideLoading()
             UIView.showError(text: NSLocalizedString("Sign Up", comment: ""), detailText: error, image: nil)
         }
     }

@@ -2011,7 +2011,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="onContinueButtonTapped:" destination="8Rm-9i-XrW" eventType="touchUpInside" id="mS5-93-KDf"/>
+                                                            <action selector="onNextButtonTapped:" destination="8Rm-9i-XrW" eventType="touchUpInside" id="qfd-gp-hG3"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2056,6 +2056,7 @@
                         <outlet property="confirmPasswordTextField" destination="HLB-S4-Juz" id="Wv0-L8-dcm"/>
                         <outlet property="firstNameTextField" destination="7qJ-UT-3cD" id="hBU-lb-slY"/>
                         <outlet property="lastNameTextField" destination="D1r-u9-u1Q" id="AXm-6K-22t"/>
+                        <outlet property="nextButton" destination="MY1-Tm-vad" id="kWw-er-BGb"/>
                         <outlet property="passwordFieldContraint" destination="vS0-Kh-kcp" id="1PC-vu-3zh"/>
                         <outlet property="passwordTextField" destination="ewA-SR-X4F" id="8R5-5V-MIA"/>
                     </connections>
