@@ -224,12 +224,18 @@ class OnboardingCoordinator
     
     init()
     {
-        print("Init Onboarding Coordinator")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("Init Onboarding Coordinator")
+        }
     }
     
     deinit
     {
-        print("Dealloc Onboarding Coordinator")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("Dealloc Onboarding Coordinator")
+        }
     }
     
     func backup()

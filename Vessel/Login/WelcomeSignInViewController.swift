@@ -44,7 +44,10 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
-        print("WelcomeSignIn did load")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("WelcomeSignIn did load")
+        }
         if Server.shared.isLoggedIn()
         {
             ObjectStore.shared.loadMainContact
@@ -81,7 +84,10 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     deinit
     {
-        print("WelcomeSignIn deinit")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("WelcomeSignIn deinit")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

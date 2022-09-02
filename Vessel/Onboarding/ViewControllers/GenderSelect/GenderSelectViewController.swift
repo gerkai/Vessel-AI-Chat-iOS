@@ -21,7 +21,10 @@ class GenderSelectViewController: UIViewController
     {
         super.viewDidLoad()
         
-        print("📗 did load \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
         setupUI()
     }
     
