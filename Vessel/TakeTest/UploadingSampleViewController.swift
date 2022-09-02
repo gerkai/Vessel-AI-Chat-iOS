@@ -127,7 +127,14 @@ class UploadingSampleViewController: TakeTestMVVMViewController
                 }
                 else
                 {
-                    self.showCalibrationError(statusCode: error.code)
+                    if error.code == 404
+                    {
+                        self.showInvalidQRCodePopup()
+                    }
+                    else
+                    {
+                        self.showCalibrationError(statusCode: error.code)
+                    }
                 }
             }
         }
@@ -293,6 +300,19 @@ class UploadingSampleViewController: TakeTestMVVMViewController
                                                                                                        type: .dark)
                                                                             ]),
                                                 description: "\(PopupErrorType.calibrationError.rawValue)",
+                                                animation: .modal,
+                                                delegate: self)
+    }
+    
+    private func showInvalidQRCodePopup()
+    {
+        GenericAlertViewController.presentAlert(in: self,
+                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Scan Error", comment: "")),
+                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("We did not recognize this QR code. Did you scan the correct QR code?", comment: "")),
+                                                                            buttons: [
+                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Try Again", comment: "")),
+                                                                                                       type: .dark)
+                                                                            ]),
                                                 animation: .modal,
                                                 delegate: self)
     }
