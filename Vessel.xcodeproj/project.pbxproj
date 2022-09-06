@@ -53,7 +53,6 @@
 		3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */; };
 		3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7912877BEA200C74FB9 /* Diet.swift */; };
 		3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */; };
-		3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */; };
 		3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */; };
 		3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACE92887759C004716CA /* UIImageExtensions.swift */; };
 		3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15ACEB288863C6004716CA /* FileDownloader.swift */; };
@@ -89,6 +88,14 @@
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
+		3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */; };
+		3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */; };
+		3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */; };
+		3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B028C7F7410093228E /* InvalidQRSlideupViewController.swift */; };
+		3F9CB7B828C7F7410093228E /* CropFailureSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B128C7F7410093228E /* CropFailureSlideupViewController.swift */; };
+		3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B228C7F7410093228E /* PopupViewController.swift */; };
+		3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B328C7F7410093228E /* SlideupViewController.swift */; };
+		3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
@@ -221,7 +228,6 @@
 		3F13A7912877BEA200C74FB9 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		3F13A7952877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckmarkCollectionViewCell.xib; sourceTree = "<group>"; };
-		3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipTimerPopupViewController.swift; sourceTree = "<group>"; };
 		3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningDropletsTipViewController.swift; sourceTree = "<group>"; };
 		3F15ACE92887759C004716CA /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		3F15ACEB288863C6004716CA /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
@@ -258,6 +264,14 @@
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
+		3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlreadyScannedSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalibrationErrorSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadErrorSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7B028C7F7410093228E /* InvalidQRSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidQRSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7B128C7F7410093228E /* CropFailureSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropFailureSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7B228C7F7410093228E /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7B328C7F7410093228E /* SlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideupViewController.swift; sourceTree = "<group>"; };
+		3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipTimerSlideupViewController.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
@@ -431,10 +445,10 @@
 				3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */,
 				3F12F04A287DCE2200FCC52E /* CupTipViewController.swift */,
 				3F15ACF0288A50CF004716CA /* DrawingView.swift */,
+				3F9CB7AC28C7F7410093228E /* Error Popups */,
 				3F12F048287DCE1400FCC52E /* PeeTipViewController.swift */,
 				3F15ACE3288734F5004716CA /* ScanningDropletsTipViewController.swift */,
 				3F15ACEF288A50CF004716CA /* ScanCardViewController.swift */,
-				3F15ACE128861BFE004716CA /* SkipTimerPopupViewController.swift */,
 				3F12F046287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift */,
 				3F12F044287DCC6900FCC52E /* TakeTest.storyboard */,
 				3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */,
@@ -483,6 +497,21 @@
 				3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		3F9CB7AC28C7F7410093228E /* Error Popups */ = {
+			isa = PBXGroup;
+			children = (
+				3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */,
+				3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */,
+				3F9CB7B128C7F7410093228E /* CropFailureSlideupViewController.swift */,
+				3F9CB7B028C7F7410093228E /* InvalidQRSlideupViewController.swift */,
+				3F9CB7B228C7F7410093228E /* PopupViewController.swift */,
+				3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */,
+				3F9CB7B328C7F7410093228E /* SlideupViewController.swift */,
+				3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */,
+			);
+			path = "Error Popups";
 			sourceTree = "<group>";
 		};
 		3FE3699327C9A07E00231D42 = {
@@ -1128,6 +1157,7 @@
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
+				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
@@ -1137,10 +1167,14 @@
 				3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
+				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
 				728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */,
+				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
+				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
+				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				72E7958A28ACC94200F01D07 /* GoalsPreferencesViewController.swift in Sources */,
@@ -1207,6 +1241,7 @@
 				7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
+				3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */,
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */,
 				72E7958828ACC93A00F01D07 /* GoalsPreferencesViewModel.swift in Sources */,
@@ -1216,6 +1251,7 @@
 				3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */,
+				3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
@@ -1225,6 +1261,7 @@
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
+				3F9CB7B828C7F7410093228E /* CropFailureSlideupViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
@@ -1234,7 +1271,6 @@
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
-				3F15ACE228861BFE004716CA /* SkipTimerPopupViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,

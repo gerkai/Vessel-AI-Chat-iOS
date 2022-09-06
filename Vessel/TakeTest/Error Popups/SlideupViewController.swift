@@ -1,25 +1,18 @@
 //
-//  SkipTimerPopupViewController.swift
+//  PopupViewController.swift
 //  Vessel
 //
-//  Created by Carson Whitsett on 7/18/22.
+//  Created by Carson Whitsett on 9/6/22.
 //
 
 import UIKit
 
-protocol SkipTimerPopupViewControllerDelegate
-{
-    func skipTimerPopupDone(proceedToSkip: Bool)
-}
-
-class SkipTimerPopupViewController: UIViewController
+class SlideupViewController: UIViewController
 {
     @IBOutlet weak var darkenView: UIView!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var popupBottom: NSLayoutConstraint!
-    var canceling = false
     var originalBottom: CGFloat!
-    var delegate: SkipTimerPopupViewControllerDelegate?
     
     override func viewDidLoad()
     {
@@ -50,7 +43,7 @@ class SkipTimerPopupViewController: UIViewController
         }
     }
     
-    func dismissAnimation() -> Void
+    func dismissAnimation(done: @escaping () -> Void)
     {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseIn)
         {
@@ -61,18 +54,7 @@ class SkipTimerPopupViewController: UIViewController
         completion:
         { _ in
             self.dismiss(animated: false)
-            self.delegate?.skipTimerPopupDone(proceedToSkip: self.canceling)
+            done()
         }
-    }
-    
-    @IBAction func onContinue()
-    {
-        canceling = true
-        dismissAnimation()
-    }
-    
-    @IBAction func onCancel()
-    {
-        dismissAnimation()
     }
 }
