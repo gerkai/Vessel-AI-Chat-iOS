@@ -129,4 +129,8 @@ struct Constants
     static let INTERNET_CONNECTION_STRING = NSLocalizedString("Please check your internet connection", comment: "")
     static let ENTER_VALID_EMAIL_STRING = NSLocalizedString("Please enter a valid email", comment: "")
     static let ENTER_PASSWORD_STRING = NSLocalizedString("Please enter your password", comment: "")
+    
+    //Fonts
+    static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
+    static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
 }

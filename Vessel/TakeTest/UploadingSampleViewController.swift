@@ -37,7 +37,7 @@ enum PopupErrorType: Int
     case otherError
 }
 
-class UploadingSampleViewController: TakeTestMVVMViewController
+class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedSlideupViewControllerDelegate, CalibrationErrorSlideupViewControllerDelegate, InvalidQRSlideupViewControllerDelegate, UploadErrorSlideupViewControllerDelegate, CropFailureSlideupViewControllerDelegate
 {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -100,6 +100,9 @@ class UploadingSampleViewController: TakeTestMVVMViewController
             { cardAssociation in
                 //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
                 //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
+                //self.showCropFailurePopup()
+                //return
+                
                 if let fileData = self.viewModel.photo?.fileDataRepresentation()
                 {
                     self.uploadToS3(
@@ -127,7 +130,14 @@ class UploadingSampleViewController: TakeTestMVVMViewController
                 }
                 else
                 {
-                    self.showCalibrationError(statusCode: error.code)
+                    if error.code == 404
+                    {
+                        self.showInvalidQRCodePopup()
+                    }
+                    else
+                    {
+                        self.showCalibrationError(statusCode: error.code)
+                    }
                 }
             }
         }
@@ -160,7 +170,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController
 
                 DispatchQueue.main.async(execute:
                 {
-                    self.showUploadingError()
+                    self.showOtherErrorPopup()
                 })
             }
             else
@@ -237,107 +247,67 @@ class UploadingSampleViewController: TakeTestMVVMViewController
         }
     }
     
-    private func showUploadingError()
-    {
-        //analyticManager.trackEvent(eventName: "image_capture_error_upload_fail", properties: nil)
-        let alert = UIAlertController(title: "Error", message: "Upload failed. Tap OK to retry.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Retry action"), style: .default, handler:
-        { _ in
-            self.uploadImage()
-        }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.navigationController?.popViewController(animated: true)
-        }))
-        alert.showOverTopViewController()
-    }
-    
     private func showCropFailurePopup()
     {
-        GenericAlertViewController.presentAlert(in: self,
-                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Apologies, we had a hard time reading your card", comment: "")),
-                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("This could be due to shadow, glare or droplets. Simply check your card, your lighting, and let's give it another shot.", comment: "")),
-                                                                            buttons: [
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Try Again", comment: "")),
-                                                                                                       type: .dark)
-                                                                            ]),
-                                                description: "\(PopupErrorType.cropFailure.rawValue)",
-                                                animation: .modal,
-                                                delegate: self)
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CropFailureSlideupViewController") as! CropFailureSlideupViewController
+        vc.delegate = self
+        self.present(vc, animated: false)
     }
     
     private func showAlreadyScannedPopup()
     {
-        GenericAlertViewController.presentAlert(in: self,
-                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Looks like this card has already been scanned.", comment: "")),
-                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("We recognize this card! You can view the results we have on file for this card or scan a new one.", comment: "")),
-                                                                            buttons: [
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("View this card's results", comment: "")),
-                                                                                                       type: .clear),
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Scan a new card", comment: "")),
-                                                                                                       type: .dark)
-                                                                            ]),
-                                                description: "\(PopupErrorType.alreadyScanned.rawValue)",
-                                                animation: .modal,
-                                                delegate: self)
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AlreadyScannedSlideupViewController") as! AlreadyScannedSlideupViewController
+        vc.delegate = self
+        self.present(vc, animated: false)
     }
     
     private func showCalibrationError(statusCode: Int)
     {
-        let message = statusCode == 404 ? NSLocalizedString("Invalid QR code. Did you scan the correct the QR code?", comment: ""): String(format: NSLocalizedString("Failed to acquire card calibration (code: %i). Please contact Customer Support.", comment: ""), statusCode)
-        GenericAlertViewController.presentAlert(in: self,
-                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Scan Error", comment: "")),
-                                                                            subtitle: GenericAlertLabelInfo(title: message),
-                                                                            buttons: [
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Retry", comment: "")),
-                                                                                                       type: .dark)
-                                                                            ]),
-                                                description: "\(PopupErrorType.calibrationError.rawValue)",
-                                                animation: .modal,
-                                                delegate: self)
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CalibrationErrorSlideupViewController") as! CalibrationErrorSlideupViewController
+        vc.delegate = self
+        self.present(vc, animated: false)
+    }
+    
+    private func showInvalidQRCodePopup()
+    {
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "InvalidQRSlideupViewController") as! InvalidQRSlideupViewController
+        vc.delegate = self
+        self.present(vc, animated: false)
     }
     
     private func showOtherErrorPopup()
     {
-        GenericAlertViewController.presentAlert(in: self,
-                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Apologies, we had a hard time uploading your card", comment: "")),
-                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("Please try again.", comment: "")),
-                                                                            buttons: [
-                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Try Again", comment: "")),
-                                                                                                       type: .dark)
-                                                                            ]),
-                                                animation: .modal,
-                                                delegate: self)
+        let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UploadErrorSlideupViewController") as! UploadErrorSlideupViewController
+        vc.delegate = self
+        self.present(vc, animated: false)
     }
-}
-
-extension UploadingSampleViewController: GenericAlertDelegate
-{
-    func onAlertButtonTapped(index: Int, alertDescription: String)
+    
+    //MARK: - AlreadyScanedSlideupViewController delegates
+    func alreadyScannedViewResults()
     {
-        if alertDescription == "\(PopupErrorType.cropFailure.rawValue)"
-        {
-            self.retryScan()
-        }
-        else if alertDescription == "\(PopupErrorType.alreadyScanned.rawValue)"
-        {
-            if index == 0
-            {
-                //TODO: Navigate to view results
-            }
-            else
-            {
-                self.retryScan()
-            }
-        }
-        else if alertDescription == "\(PopupErrorType.calibrationError.rawValue)"
-        {
-            self.retryScan()
-        }
-        else
-        {
-            self.retryScan()
-        }
+        //TODO: navigate to this specific card in results tab
+    }
+    
+    func alreadyScannedScanNewCard()
+    {
+        self.retryScan()
+    }
+    
+    //MARK: - CalibrationErrorSlideupViewController delegates
+    func calibrationErrorCustomerSupport()
+    {
+        //TODO: Navigate to customer support
+    }
+    
+    //MARK: - InvalidQRSlideupViewController delegates
+    func invalidQRTryAgain()
+    {
+        self.retryScan()
     }
     
     private func retryScan()
