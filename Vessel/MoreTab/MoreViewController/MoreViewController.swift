@@ -81,8 +81,7 @@ extension MoreViewController: UITableViewDelegate
         case .takeATest:
             mainTabBarController?.vesselButtonPressed()
         case .orderCards:
-            // TODO: Route to Order Cards (URL not available yet)
-            break
+            openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
             openInSafari(url: "https://vesselhealth.com/pages/new-quiz")
         case .chatWithNutritionist:
