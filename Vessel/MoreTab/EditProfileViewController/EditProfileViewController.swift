@@ -149,7 +149,7 @@ class EditProfileViewController: KeyboardFriendlyViewController
         genderSegmentedControl.selectedSegmentIndex = viewModel.gender ?? 0
         heightTextField.text = viewModel.height
         weightTextField.text = viewModel.weight
-        birthDateTextField.text = viewModel.birthDateString
+        birthDateTextField.text = (viewModel.contactFlags & Constants.DECLINED_BIRTH_DATE == 1) ? nil : viewModel.birthDateString
     }
 }
 

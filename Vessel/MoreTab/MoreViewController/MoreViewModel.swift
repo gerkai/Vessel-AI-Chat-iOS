@@ -86,8 +86,9 @@ class MoreViewModel
     
     let versionString: String =
     {
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        return "Version \(appVersion)"
+        return "Version: \(appVersion) - Build: \(buildNumber)"
     }()
     
     func addDebugMenu()

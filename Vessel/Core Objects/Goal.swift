@@ -24,8 +24,7 @@ struct Goal
         case BEAUTY
         case IMMUNITY
         case DIGESTION
-        case ENDURANCE
-        case WELLNESS
+        case FITNESS
     }
 }
 
@@ -40,6 +39,5 @@ let Goals: [Goal.ID: Goal] = [Goal.ID.MOOD: Goal(name: NSLocalizedString("mood",
     Goal.ID.BEAUTY: Goal(name: NSLocalizedString("beauty", comment: "Type of goal"), nameWithArticle: NSLocalizedString("a beauty", comment: "Type of goal"), imageName: "Beauty"),
     Goal.ID.IMMUNITY: Goal(name: NSLocalizedString("immunity", comment: "Type of goal"), nameWithArticle: NSLocalizedString("an immunity", comment: "Type of goal"), imageName: "Immunity"),
     Goal.ID.DIGESTION: Goal(name: NSLocalizedString("digestion", comment: "Type of goal"), nameWithArticle: NSLocalizedString("a digestion", comment: "Type of goal"), imageName: "Digestion"),
-    Goal.ID.ENDURANCE: Goal(name: NSLocalizedString("endurance", comment: "Type of goal"), nameWithArticle: NSLocalizedString("an endurance", comment: "Type of goal"), imageName: "Fitness"),
-    Goal.ID.WELLNESS: Goal(name: NSLocalizedString("wellness", comment: "Type of goal"), nameWithArticle: NSLocalizedString("a wellness", comment: "Type of goal"), imageName: "Focus")
+    Goal.ID.FITNESS: Goal(name: NSLocalizedString("fitness", comment: "Type of goal"), nameWithArticle: NSLocalizedString("a fitness", comment: "Type of goal"), imageName: "Fitness"),
 ]

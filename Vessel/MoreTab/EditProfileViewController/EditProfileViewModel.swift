@@ -53,6 +53,11 @@ class EditProfileViewModel
         }
     }
     
+    var contactFlags: Int
+    {
+        contact?.flags ?? 0
+    }
+    
     // MARK: - Birthday PickerView
     let minAge = Constants.MIN_AGE
     let maxAge = Constants.MAX_AGE
@@ -175,7 +180,7 @@ class EditProfileViewModel
             if isMetric
             {
                 guard let newHeight = Double(newHeightString) else { return }
-                contact.height = newHeight
+                contact.height = max(min(newHeight, Double(Constants.MAX_HEIGHT_METRIC)), Double(Constants.MIN_HEIGHT_METRIC))
             }
             else
             {
@@ -245,6 +250,7 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newBirthDate = newValue else { return }
+            contact.flags &= ~Constants.DECLINED_BIRTH_DATE
             let newBirthDateString = serverDateFormatter.string(from: newBirthDate)
             contact.birth_date = newBirthDateString
             updateContact(contact: contact)

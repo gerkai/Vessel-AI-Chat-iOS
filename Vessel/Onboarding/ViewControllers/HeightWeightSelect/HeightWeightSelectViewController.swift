@@ -26,7 +26,10 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     {
         super.viewDidLoad()
         
-        print("📗 did load \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -37,7 +40,10 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     
     deinit
     {
-        print("📘 deinit \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

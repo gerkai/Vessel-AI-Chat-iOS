@@ -22,7 +22,10 @@ class FoodPreferencesViewController: UIViewController
     {
         super.viewDidLoad()
         
-        print("📗 did load \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
         
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         updateSaveButton()
@@ -30,7 +33,10 @@ class FoodPreferencesViewController: UIViewController
     
     deinit
     {
-        print("📘 deinit \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
     }
     
     // MARK: - Actions

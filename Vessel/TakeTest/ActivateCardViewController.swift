@@ -11,7 +11,7 @@
 import UIKit
 import AVKit
 
-class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerPopupViewControllerDelegate
+class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate
 {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var preTimerView: UIView!
@@ -34,7 +34,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
-    var skipTimerPopupVC: SkipTimerPopupViewController?
+    var skipTimerSlideupVC: SkipTimerSlideupViewController?
     
     //segmented control indices
     let IntroIndex = 0
@@ -144,10 +144,10 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBAction func onSkipButton()
     {
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SkipTimerPopupViewController") as! SkipTimerPopupViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "SkipTimerSlideupViewController") as! SkipTimerSlideupViewController
         vc.delegate = self
         self.present(vc, animated: false)
-        skipTimerPopupVC = vc
+        skipTimerSlideupVC = vc
     }
     
     @IBAction func onScanButton()
@@ -224,7 +224,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         
         if timeUp
         {
-            skipTimerPopupVC?.onCancel()
+            skipTimerSlideupVC?.onCancel()
             titleLabel.text = NSLocalizedString("It's time to scan your card", comment: "")
             UIView.animate(withDuration: 0.25, delay: 0.0)
             {
@@ -235,10 +235,10 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
-    //MARK: - SkipTimePopup delegates
-    func skipTimerPopupDone(proceedToSkip: Bool)
+    //MARK: - SkipTimeSlideup delegates
+    func skipTimerSlideupDone(proceedToSkip: Bool)
     {
-        skipTimerPopupVC = nil
+        skipTimerSlideupVC = nil
         if proceedToSkip
         {
             viewModel.skipTimer()
