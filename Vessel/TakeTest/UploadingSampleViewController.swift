@@ -100,6 +100,9 @@ class UploadingSampleViewController: TakeTestMVVMViewController
             { cardAssociation in
                 //print("ASSOCIATION BATCH ID: \(String(describing: cardAssociation.cardBatchID))")
                 //print("calibrationMode: \(String(describing: cardAssociation.cardCalibrationMode))")
+                //self.showAlreadyScannedPopup()
+                //return
+                
                 if let fileData = self.viewModel.photo?.fileDataRepresentation()
                 {
                     self.uploadToS3(
@@ -276,16 +279,17 @@ class UploadingSampleViewController: TakeTestMVVMViewController
     private func showAlreadyScannedPopup()
     {
         GenericAlertViewController.presentAlert(in: self,
-                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Looks like this card has already been scanned.", comment: "")),
-                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("We recognize this card! You can view the results we have on file for this card or scan a new one.", comment: "")),
+                                                type: .titleSubtitleButtons(title: GenericAlertLabelInfo(title: NSLocalizedString("Looks like this card has already been scanned.", comment: ""), font: Constants.FontTitleMain24, alignment: .left),
+                                                                            subtitle: GenericAlertLabelInfo(title: NSLocalizedString("We recognize this card! You can view the results we have on file for this card or scan a new one.", comment: ""), height: 80),
                                                                             buttons: [
                                                                                 GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("View this card's results", comment: "")),
-                                                                                                       type: .clear),
+                                                                                                       type: .dark),
                                                                                 GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Scan a new card", comment: "")),
-                                                                                                       type: .dark)
+                                                                                                       type: .plain)
                                                                             ]),
                                                 description: "\(PopupErrorType.alreadyScanned.rawValue)",
-                                                animation: .modal,
+                                                alignment: .bottom,
+                                                animation: .popUp,
                                                 delegate: self)
     }
     
