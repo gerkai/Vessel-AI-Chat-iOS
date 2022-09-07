@@ -151,11 +151,10 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
 //MARK: - CheckmarkCollectionViewCell delegates
 extension ItemPreferencesViewController: CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
+        viewModel.itemTapped(id: id)
         NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
-       // collectionView.reloadData()
         
         updateNextButton()
     }
@@ -163,10 +162,5 @@ extension ItemPreferencesViewController: CheckmarkCollectionViewCellDelegate, Ch
     func isChecked(forID id: Int) -> Bool
     {
         return viewModel.itemIsChecked(id: id)
-    }
-    
-    func canCheckMoreButtons() -> Bool
-    {
-        return true
     }
 }

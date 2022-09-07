@@ -110,20 +110,14 @@ extension FoodPreferencesViewController: UICollectionViewDelegateFlowLayout
 
 extension FoodPreferencesViewController: CheckmarkCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
-        //collectionView.reloadData()
+        viewModel.itemTapped(id: id)
         updateSaveButton()
     }
     
     func isChecked(forID id: Int) -> Bool
     {
         return viewModel.itemIsChecked(id: id)
-    }
-    
-    func canCheckMoreButtons() -> Bool
-    {
-        return true
     }
 }

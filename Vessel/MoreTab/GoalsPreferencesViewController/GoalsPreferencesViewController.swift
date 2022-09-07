@@ -105,10 +105,9 @@ extension GoalsPreferencesViewController: UICollectionViewDelegateFlowLayout
 
 extension GoalsPreferencesViewController: CheckmarkImageCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
-        //collectionView.reloadData()
+        viewModel.itemTapped(id: id)
         NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
         updateSaveButton()
     }
@@ -116,10 +115,5 @@ extension GoalsPreferencesViewController: CheckmarkImageCollectionViewCellDelega
     func isChecked(forID id: Int) -> Bool
     {
         return viewModel.itemIsChecked(id: id)
-    }
-    
-    func canCheckMoreButtons() -> Bool
-    {
-        return true
     }
 }
