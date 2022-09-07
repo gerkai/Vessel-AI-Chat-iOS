@@ -12,6 +12,7 @@ protocol CheckmarkImageCollectionViewCellDelegate: AnyObject
 {
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     func canCheckMoreButtons() -> Bool
+    func isChecked(forID id: Int) -> Bool //returns true if checked, false if not.
 }
 
 class CheckmarkImageCollectionViewCell: UICollectionViewCell
@@ -23,6 +24,7 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
     
     weak var delegate: CheckmarkImageCollectionViewCellDelegate?
     var originalColor: UIColor!
+    var type: ItemPreferencesType!
     
     var isChecked = false
     {
@@ -45,9 +47,22 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         originalColor = rootView.backgroundColor
+        NotificationCenter.default.addObserver(self, selector: #selector(onRefreshCheckmarks), name: .updateCheckmarks, object: nil)
     }
     
-    @IBAction func onTapped(_ sender: UIButton)
+    @objc func onRefreshCheckmarks()
+    {
+        if let shouldBeChecked = delegate?.isChecked(forID: tag)
+        {
+            print("Image Should Be checked: \(tag), \(shouldBeChecked)")
+            if isChecked != shouldBeChecked
+            {
+                onTapped()
+            }
+        }
+    }
+    
+    @IBAction func onTapped()
     {
         if isChecked == false
         {
@@ -64,6 +79,7 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
         {
             isChecked = false
         }
+        self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
         UIView.animate(withDuration: 0.1)
         {
             self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -84,7 +100,7 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
             }
             completion:
             { _ in
-                self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
+               // self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
             }
         }
     }

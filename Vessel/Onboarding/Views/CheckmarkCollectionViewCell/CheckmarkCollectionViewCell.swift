@@ -12,6 +12,7 @@ protocol CheckmarkCollectionViewCellDelegate: AnyObject
 {
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     func canCheckMoreButtons() -> Bool
+    func isChecked(forID id: Int) -> Bool //returns true if checked, false if not.
 }
 
 class CheckmarkCollectionViewCell: UICollectionViewCell
@@ -21,6 +22,7 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
     @IBOutlet private weak var rootView: UIView!
     private weak var delegate: CheckmarkCollectionViewCellDelegate?
     private var originalColor: UIColor!
+    var type: ItemPreferencesType!
     
     private var isChecked = false
     {
@@ -43,18 +45,37 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         originalColor = rootView.backgroundColor
+        NotificationCenter.default.addObserver(self, selector: #selector(onRefreshCheckmarks), name: .updateCheckmarks, object: nil)
     }
     
-    func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool)
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func onRefreshCheckmarks()
+    {
+        if let shouldBeChecked = delegate?.isChecked(forID: tag)
+        {
+            //print("Should Be checked: \(tag), \(shouldBeChecked)")
+            if isChecked != shouldBeChecked
+            {
+                onTapped()
+            }
+        }
+    }
+    
+    func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool, type: ItemPreferencesType)
     {
         titleLabel.text = name
         //we'll use the tag to hold the diet/allergy/goal ID
         tag = id
         self.delegate = delegate
         self.isChecked = isChecked
+        self.type = type
     }
     
-    @IBAction func onTapped(_ sender: UIButton)
+    @IBAction func onTapped()
     {
         if isChecked == false
         {

@@ -108,8 +108,14 @@ extension GoalsPreferencesViewController: CheckmarkImageCollectionViewCellDelega
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     {
         viewModel.selectItem(id: cell.tag, selected: checked)
-        collectionView.reloadData()
+        //collectionView.reloadData()
+        NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
         updateSaveButton()
+    }
+    
+    func isChecked(forID id: Int) -> Bool
+    {
+        return viewModel.itemIsChecked(id: id)
     }
     
     func canCheckMoreButtons() -> Bool

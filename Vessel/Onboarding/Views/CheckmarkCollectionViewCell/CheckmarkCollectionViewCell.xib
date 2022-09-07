@@ -65,7 +65,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
                         <state key="selected" image="Checkbox_beige_selected"/>
                         <connections>
-                            <action selector="onTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fXT-mK-7oA"/>
+                            <action selector="onTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="dlX-mf-LtU"/>
                         </connections>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkbox_green_unselected" translatesAutoresizingMaskIntoConstraints="NO" id="WL8-hP-EQT">

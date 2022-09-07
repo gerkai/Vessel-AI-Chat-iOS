@@ -90,7 +90,7 @@ extension FoodPreferencesViewController: UICollectionViewDataSource
     {
         let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
         let info = viewModel.infoForItemAt(indexPath: indexPath)
-        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
+        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id), type: viewModel.type)
         return cell
     }
 }
@@ -113,8 +113,13 @@ extension FoodPreferencesViewController: CheckmarkCollectionViewCellDelegate
     func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
     {
         viewModel.selectItem(id: cell.tag, selected: checked)
-        collectionView.reloadData()
+        //collectionView.reloadData()
         updateSaveButton()
+    }
+    
+    func isChecked(forID id: Int) -> Bool
+    {
+        return viewModel.itemIsChecked(id: id)
     }
     
     func canCheckMoreButtons() -> Bool

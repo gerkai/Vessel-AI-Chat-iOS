@@ -33,13 +33,17 @@ class ItemPreferencesViewModel
         userGoals = []
         type = .diet
         hideBackground = false
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✅ init \(self)")
+        }
     }
     
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ deinit \(self)")
         }
     }
     
@@ -109,6 +113,7 @@ class ItemPreferencesViewModel
             return userGoals.count > 0 ? userGoals.count : Goal.ID.allCases.count
         }
     }
+    
     func itemIsChecked(id: Int) -> Bool
     {
         var result = false
@@ -210,13 +215,17 @@ class ItemPreferencesViewModel
         case .goals:
             if selected
             {
-                //only allow maximum selected amount. If user selects more, delete the oldest
-                if userGoals.count >= Constants.MAX_GOALS_AT_A_TIME
-                {
-                    userGoals.removeFirst()
-                }
                 //add id to chosenGoals
-                userGoals.append(id)
+                if !userGoals.contains(id)
+                {
+                    userGoals.append(id)
+                    
+                    //only allow maximum selected amount. If user selects more, delete the oldest
+                    if userGoals.count > Constants.MAX_GOALS_AT_A_TIME
+                    {
+                        userGoals.removeFirst()
+                    }
+                }
             }
             else
             {
