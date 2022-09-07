@@ -90,7 +90,7 @@ extension FoodPreferencesViewController: UICollectionViewDataSource
     {
         let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
         let info = viewModel.infoForItemAt(indexPath: indexPath)
-        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id), type: viewModel.type)
+        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
         return cell
     }
 }

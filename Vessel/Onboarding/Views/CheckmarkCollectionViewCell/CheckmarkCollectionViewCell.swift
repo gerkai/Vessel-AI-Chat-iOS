@@ -21,7 +21,6 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
     @IBOutlet private weak var rootView: UIView!
     private weak var delegate: CheckmarkCollectionViewCellDelegate?
     private var originalColor: UIColor!
-    var type: ItemPreferencesType!
     
     private var isChecked = false
     
@@ -72,14 +71,13 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
         }
     }
     
-    func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool, type: ItemPreferencesType)
+    func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool)
     {
         titleLabel.text = name
         //we'll use the tag to hold the diet/allergy/goal ID
         tag = id
         self.delegate = delegate
         self.isChecked = isChecked
-        self.type = type
     }
     
     @IBAction func onTapped()
