@@ -78,6 +78,10 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
         tag = id
         self.delegate = delegate
         self.isChecked = isChecked
+        if isChecked == true
+        {
+            self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+        }
     }
     
     @IBAction func onTapped()
