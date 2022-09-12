@@ -54,8 +54,7 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
                         self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                         if self.isChecked
                         {
-                            self.rootView.backgroundColor = UIColor.white
-                            self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+                            self.select()
                         }
                         else
                         {
@@ -71,6 +70,12 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
         }
     }
     
+    func select()
+    {
+        self.rootView.backgroundColor = UIColor.white
+        self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+    }
+    
     func setup(name: String, id: Int, delegate: CheckmarkCollectionViewCellDelegate, isChecked: Bool)
     {
         titleLabel.text = name
@@ -80,7 +85,7 @@ class CheckmarkCollectionViewCell: UICollectionViewCell
         self.isChecked = isChecked
         if isChecked == true
         {
-            self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+            select()
         }
     }
     

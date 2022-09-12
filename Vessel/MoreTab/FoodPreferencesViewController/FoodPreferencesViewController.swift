@@ -113,6 +113,7 @@ extension FoodPreferencesViewController: CheckmarkCollectionViewCellDelegate
     func checkButtonTapped(id: Int)
     {
         viewModel.itemTapped(id: id)
+        NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
         updateSaveButton()
     }
     
