@@ -256,6 +256,7 @@ private extension EditProfileViewController
                                                     description: "DeleteAccountAlert",
                                                     showCloseButton: true,
                                                     alignment: .bottom,
+                                                    animation: .modal,
                                                     delegate: self)
         case .editContact(let type, let value):
             switch type
@@ -499,7 +500,7 @@ extension EditProfileViewController: UIPickerViewDelegate
 
 extension EditProfileViewController: GenericAlertDelegate
 {
-    func onAlertButtonTapped(index: Int, alertDescription: String)
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
     {
         if alertDescription == "DeleteAccountAlert"
         {
