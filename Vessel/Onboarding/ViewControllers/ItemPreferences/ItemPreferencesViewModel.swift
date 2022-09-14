@@ -94,7 +94,7 @@ class ItemPreferencesViewModel
         case .mainGoal:
             //search the 3 goals the user selected if onboarding
             // if goalsPreferences should appear all cases
-            let goalID = userGoals.count > 0 ? Goal.ID.allCases[userGoals[row]] : Goal.ID.allCases[row]
+            let goalID = Goal.ID(rawValue: userGoals[row])!
             return (Goals[goalID]!.name.capitalized, goalID.rawValue, Goals[goalID]!.imageName)
         }
     }
