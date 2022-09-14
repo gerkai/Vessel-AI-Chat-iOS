@@ -57,13 +57,11 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
                         self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                         if self.isChecked
                         {
-                            self.rootView.backgroundColor = UIColor.white
-                            self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+                            self.select()
                         }
                         else
                         {
-                            self.rootView.backgroundColor = self.originalColor
-                            self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
+                            self.unselect()
                         }
                     }
                     completion:
@@ -71,6 +69,36 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
                     }
                 }
             }
+        }
+    }
+    
+    func select()
+    {
+        self.rootView.backgroundColor = UIColor.white
+        self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+    }
+    
+    func unselect()
+    {
+        self.rootView.backgroundColor = self.originalColor
+        self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
+    }
+    
+    func setup(name: String, id: Int, imageName: String, delegate: CheckmarkImageCollectionViewCellDelegate, isChecked: Bool)
+    {
+        titleLabel.text = name
+        //we'll use the tag to hold the diet/allergy/goal ID
+        tag = id
+        self.backgroundImage.image = UIImage(named: imageName)
+        self.delegate = delegate
+        self.isChecked = isChecked
+        if isChecked == true
+        {
+            select()
+        }
+        else
+        {
+            unselect()
         }
     }
     

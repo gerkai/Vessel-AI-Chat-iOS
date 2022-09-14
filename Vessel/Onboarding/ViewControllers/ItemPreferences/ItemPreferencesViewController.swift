@@ -129,12 +129,7 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
             let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
             let info = viewModel.infoForItemAt(indexPath: indexPath)
             cell.type = viewModel.type
-            cell.titleLabel.text = info.name
-            cell.backgroundImage.image = UIImage(named: info.imageName ?? "")
-            //we'll use the tag to hold the goal ID
-            cell.tag = info.id
-            cell.delegate = self
-            cell.isChecked = viewModel.itemIsChecked(id: info.id)
+            cell.setup(name: info.name, id: info.id, imageName: info.imageName ?? "", delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
             return cell
         }
         else
