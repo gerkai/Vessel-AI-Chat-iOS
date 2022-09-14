@@ -137,7 +137,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                 }
                 else
                 {
-                    UIView.showError(text: "", detailText: Constants.ENTER_PASSWORD_STRING, image: nil)
+                    UIView.showError(text: "", detailText: Constants.INCORRECT_PASSWORD_STRING, image: nil)
                 }
             }
             else
