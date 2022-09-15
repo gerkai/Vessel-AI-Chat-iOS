@@ -85,7 +85,7 @@ extension ChangePasswordViewController: UITableViewDataSource
 
 extension ChangePasswordViewController: GenericAlertDelegate
 {
-    func onAlertDismissed()
+    func onAlertDismissed(_ alert: GenericAlertViewController)
     {
         Server.shared.logOut()
         let story = UIStoryboard(name: "Login", bundle: nil)

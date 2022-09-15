@@ -85,9 +85,6 @@ extension MyAccountViewController: UITableViewDelegate
         case .profile:
             let vc = storyboard.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
             navigationController?.pushViewController(vc, animated: true)
-        case .manageMyGoals:
-            let vc = storyboard.instantiateViewController(identifier: "GoalsPreferencesViewController") as! GoalsPreferencesViewController
-            navigationController?.pushViewController(vc, animated: true)
         case .manageMyDietOrAllergies:
             let vc = storyboard.instantiateViewController(identifier: "FoodPreferencesViewController") as! FoodPreferencesViewController
             navigationController?.pushViewController(vc, animated: true)

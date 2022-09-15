@@ -170,17 +170,19 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     func insightsText() -> String
     {
-        let contact = Contact.main()!
-        if contact.main_goal_id != nil
-        {
-            if let key = Goal.ID(rawValue: contact.main_goal_id!)
+        guard let contact = Contact.main() else { return "" }
+        
+        var goalsString = ""
+        contact.goal_ids.forEach { goalID in
+            if let key = Goal.ID(rawValue: goalID), let goalName = Goals[key]?.name
             {
-                let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), Goals[key]!.name)
-                return text
+                goalsString += goalID == contact.goal_ids.first ? "" : goalID == contact.goal_ids.last ? " and " : ", "
+                goalsString += goalName
             }
         }
-        //should never get here
-        return ""
+        
+        let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), goalsString)
+        return text
     }
     
     //MARK: - Segmented Control action

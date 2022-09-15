@@ -55,14 +55,7 @@ class OnboardingFinalViewController: UIViewController
     // MARK: - Logic
     private func finalScreenText() -> String
     {
-        if let mainGoalInt = mainGoal,
-           let mainGoal = Goal.ID(rawValue: mainGoalInt),
-           let goal = Goals[mainGoal]
-        {
-            let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
-            return text
-        }
-        //should never get here
-        return ""
+        let text = NSLocalizedString("We've designed a wellness plan personalized to your lifestyle.", comment: "")
+        return text
     }
 }

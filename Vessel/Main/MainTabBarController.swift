@@ -222,7 +222,7 @@ class MainTabBarController: UITabBarController
 
 extension MainTabBarController: GenericAlertDelegate
 {
-    func onAlertButtonTapped(index: Int, alertDescription: String)
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
     {
         if index == 1
         {
