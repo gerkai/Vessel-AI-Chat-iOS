@@ -22,7 +22,6 @@ enum OnboardingState: Int
     case allergySelect
     case viewTerms
     case goalsSelect
-    case mainGoalSelect
     case finalOnboarding
     case nextFlow
     
@@ -48,7 +47,6 @@ class OnboardingCoordinator
     private var dietViewModel: ItemPreferencesViewModel?
     private var allergiesViewModel: ItemPreferencesViewModel?
     private var goalsViewModel: ItemPreferencesViewModel?
-    private var mainGoalViewModel: ItemPreferencesViewModel?
     
     //MARK: - Navigation
     static func pushInitialViewController(to navigationController: UINavigationController?)
@@ -185,29 +183,9 @@ class OnboardingCoordinator
             vc.viewModel.type = .goals
             navigationController?.fadeTo(vc)
         }
-        else if curState == .mainGoalSelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-            if let mainGoalViewModel = mainGoalViewModel
-            {
-                vc.viewModel = mainGoalViewModel
-            }
-            else
-            {
-                mainGoalViewModel = vc.viewModel
-            }
-            vc.coordinator = self
-            vc.viewModel.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-            vc.viewModel.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
-            vc.viewModel.type = .mainGoal
-            vc.viewModel.hideBackground = true
-            vc.viewModel.userGoals = goalsViewModel?.userGoals ?? []
-            navigationController?.fadeTo(vc)
-        }
         else if curState == .finalOnboarding
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
-            vc.mainGoal = mainGoalViewModel?.mainGoal
             vc.coordinator = self
             navigationController?.fadeTo(vc)
         }
@@ -305,11 +283,6 @@ class OnboardingCoordinator
                 if let goalsViewModel = goalsViewModel
                 {
                     contact.goal_ids = goalsViewModel.userGoals
-                }
-                
-                if let mainGoalViewModel = mainGoalViewModel
-                {
-                    contact.main_goal_id = mainGoalViewModel.mainGoal
                 }
                 
                 ObjectStore.shared.ClientSave(contact)

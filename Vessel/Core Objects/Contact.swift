@@ -57,7 +57,6 @@ class Contact: CoreObjectProtocol
     var diet_ids: [Int]
     var allergy_ids: [Int]
     var goal_ids: [Int]
-    var main_goal_id: Int?
     var expert_id: Int?
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
@@ -83,7 +82,6 @@ class Contact: CoreObjectProtocol
                        diet_ids: [],
                        allergy_ids: [],
                        goal_ids: [],
-                       main_goal_id: 0,
                        expert_id: 0)
     }
     
@@ -109,7 +107,6 @@ class Contact: CoreObjectProtocol
          diet_ids: [Int] = [],
          allergy_ids: [Int] = [],
          goal_ids: [Int] = [],
-         main_goal_id: Int? = nil,
          expert_id: Int? = nil,
          loginType: LoginType? = nil)
     {
@@ -127,7 +124,6 @@ class Contact: CoreObjectProtocol
         self.diet_ids = diet_ids
         self.allergy_ids = allergy_ids
         self.goal_ids = goal_ids
-        self.main_goal_id = main_goal_id
         self.expert_id = expert_id
         self.loginType = loginType
     }
@@ -174,7 +170,6 @@ class Contact: CoreObjectProtocol
         case diet_ids
         case allergy_ids
         case goal_ids
-        case main_goal_id
         case email
         case expert_id
     }
