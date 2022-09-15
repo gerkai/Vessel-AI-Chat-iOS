@@ -388,6 +388,13 @@ extension EditProfileViewController: UITextFieldDelegate
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        guard !(textField.text ?? "").contains(".") || string != "." else { return false }
+        let characterSet = NSCharacterSet(charactersIn: "0123456789.").inverted
+        return string == string.components(separatedBy: characterSet).joined(separator: "")
+    }
+    
     private func getContactField(_ textField: UITextField) -> EditProfileContactField?
     {
         if textField == nameTextField

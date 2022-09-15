@@ -177,9 +177,14 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     
     @IBAction func onNextTapped()
     {
-        if let weight = weightTextField.text, weight.count != 0
+        if let weightString = weightTextField.text, !weightString.isEmpty
         {
-            viewModel.setHeightWeight(height: getSelections(), weight: Double(weight)!)
+            guard let weight = Double(weightString) else
+            {
+                UIView.showError(text: "", detailText: NSLocalizedString("Please enter a valid weight", comment: ""))
+                return
+            }
+            viewModel.setHeightWeight(height: getSelections(), weight: weight)
             
             coordinator?.pushNextViewController()
         }
@@ -273,5 +278,12 @@ extension HeightWeightSelectViewController: UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField)
     {
         self.activeTextField = nil
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        guard !(textField.text ?? "").contains(".") || string != "." else { return false }
+        let characterSet = NSCharacterSet(charactersIn: "0123456789.").inverted
+        return string == string.components(separatedBy: characterSet).joined(separator: "")
     }
 }
