@@ -15,16 +15,16 @@ struct Goal
     
     enum ID: Int, CaseIterable
     {
-        case BODY
-        case SLEEP
-        case ENERGY
-        case FITNESS
-        case CALM
-        case IMMUNITY
-        case FOCUS
-        case MOOD
-        case BEAUTY
-        case DIGESTION
+        case BODY = 6
+        case SLEEP = 4
+        case ENERGY = 5
+        case FITNESS = 10
+        case CALM = 3
+        case IMMUNITY = 8
+        case FOCUS = 2
+        case MOOD = 1
+        case BEAUTY = 7
+        case DIGESTION = 9
     }
 }
 

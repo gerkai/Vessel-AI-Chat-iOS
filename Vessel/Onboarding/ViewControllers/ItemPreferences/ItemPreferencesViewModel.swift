@@ -33,13 +33,17 @@ class ItemPreferencesViewModel
         userGoals = []
         type = .diet
         hideBackground = false
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✅ init \(self)")
+        }
     }
     
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ deinit \(self)")
         }
     }
     
@@ -90,7 +94,7 @@ class ItemPreferencesViewModel
         case .mainGoal:
             //search the 3 goals the user selected if onboarding
             // if goalsPreferences should appear all cases
-            let goalID = userGoals.count > 0 ? Goal.ID.allCases[userGoals[row]] : Goal.ID.allCases[row]
+            let goalID = Goal.ID(rawValue: userGoals[row])!
             return (Goals[goalID]!.name.capitalized, goalID.rawValue, Goals[goalID]!.imageName)
         }
     }
@@ -109,6 +113,7 @@ class ItemPreferencesViewModel
             return userGoals.count > 0 ? userGoals.count : Goal.ID.allCases.count
         }
     }
+    
     func itemIsChecked(id: Int) -> Bool
     {
         var result = false
@@ -155,91 +160,79 @@ class ItemPreferencesViewModel
         return result
     }
     
-    func selectItem(id: Int, selected: Bool)
+    func itemTapped(id: Int)
     {
         //this will add/remove selected items from the chosen[items] array based on selected parameter.
         //If user selects NONE then any previously selected items are erased.
         //If user selects any item while NONE is selected, then NONE will be cleared.
         switch type
         {
-        case .diet:
-            if selected
-            {
-                //add id to userDiets
-                if id == Constants.ID_NO_DIETS
+            case .diet:
+                if userDiets.contains(id)
                 {
-                    //clear any previously chosen diets
-                    userDiets = []
+                    //remove dietID from array
+                    userDiets = userDiets.filter(){$0 != id}
                 }
                 else
                 {
-                    //remove ID_NO_DIET from chosenDiets
-                    userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
+                    //add id to userDiets
+                    if id == Constants.ID_NO_DIETS
+                    {
+                        //clear any previously chosen diets
+                        userDiets = [Constants.ID_NO_DIETS]
+                    }
+                    else
+                    {
+                        //remove NO_DIETS item and append new item
+                        userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
+                        userDiets.append(id)
+                    }
                 }
-                userDiets.append(id)
-            }
-            else
-            {
-                //remove dietID from chosenDiets
-                userDiets = userDiets.filter(){$0 != id}
-            }
-            
-        case .allergy:
-            
-            if selected
-            {
-                //add id to chosenDiets
-                if id == Constants.ID_NO_ALLERGIES
+            case .allergy:
+                if userAllergies.contains(id)
                 {
-                    //clear any previously chosen ids
-                    userAllergies = []
+                    //remove allergy from array
+                    userAllergies = userAllergies.filter(){$0 != id}
                 }
                 else
                 {
-                    //remove ID_NO_ALLERGIES from userAllergies
-                    userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
+                    //add id to userAllergies
+                    if id == Constants.ID_NO_ALLERGIES
+                    {
+                        //clear any previously chosen allergies
+                        userAllergies = [Constants.ID_NO_ALLERGIES]
+                    }
+                    else
+                    {
+                        //remove NO_ALLERGIES item and append new item
+                        userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
+                        userAllergies.append(id)
+                    }
                 }
-                userAllergies.append(id)
-            }
-            else
-            {
-                //remove id from chosenDiets
-                userAllergies = userAllergies.filter(){$0 != id}
-            }
-            
-        case .goals:
-            if selected
-            {
-                //only allow maximum selected amount. If user selects more, delete the oldest
-                if userGoals.count >= Constants.MAX_GOALS_AT_A_TIME
+            case .goals:
+                if userGoals.contains(id)
                 {
-                    userGoals.removeFirst()
+                    //remove id from chosenGoals
+                    userGoals = userGoals.filter(){$0 != id}
                 }
-                //add id to chosenGoals
-                userGoals.append(id)
-            }
-            else
-            {
-                //remove id from chosenGoals
-                userGoals = userGoals.filter(){$0 != id}
-            }
-            
+                else
+                {
+                    userGoals.append(id)
+                    
+                    //only allow maximum selected amount. If user selects more, delete the oldest
+                    if userGoals.count > Constants.MAX_GOALS_AT_A_TIME
+                    {
+                        userGoals.removeFirst()
+                    }
+                }
         case .mainGoal:
-            if selected
-            {
-                if userGoals.count > 0
-                {
-                    mainGoal = id
-                }
-                else
-                {
-                    let goalID = Goal.ID.allCases[id]
-                    mainGoal = goalID.rawValue
-                }
-            }
-            else
+            if mainGoal == id
             {
                 mainGoal = nil
+            }
+            else
+            {
+                mainGoal = id
             }
         }
     }

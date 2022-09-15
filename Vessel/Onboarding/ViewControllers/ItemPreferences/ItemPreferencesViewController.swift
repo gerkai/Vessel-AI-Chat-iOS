@@ -128,12 +128,8 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
             //show image checkmark cell
             let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
             let info = viewModel.infoForItemAt(indexPath: indexPath)
-            cell.titleLabel.text = info.name
-            cell.backgroundImage.image = UIImage(named: info.imageName ?? "")
-            //we'll use the tag to hold the goal ID
-            cell.tag = info.id
-            cell.delegate = self
-            cell.isChecked = viewModel.itemIsChecked(id: info.id)
+            cell.type = viewModel.type
+            cell.setup(name: info.name, id: info.id, imageName: info.imageName ?? "", delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
             return cell
         }
         else
@@ -150,15 +146,16 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
 //MARK: - CheckmarkCollectionViewCell delegates
 extension ItemPreferencesViewController: CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
-        collectionView.reloadData()
+        viewModel.itemTapped(id: id)
+        NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
+        
         updateNextButton()
     }
     
-    func canCheckMoreButtons() -> Bool
+    func isChecked(forID id: Int) -> Bool
     {
-        return true
+        return viewModel.itemIsChecked(id: id)
     }
 }

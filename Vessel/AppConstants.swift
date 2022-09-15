@@ -7,6 +7,11 @@
 
 import UIKit
 
+extension Notification.Name
+{
+    static let updateCheckmarks = Notification.Name("UpdateCheckmarks")
+}
+
 struct Constants
 {
     //website links
