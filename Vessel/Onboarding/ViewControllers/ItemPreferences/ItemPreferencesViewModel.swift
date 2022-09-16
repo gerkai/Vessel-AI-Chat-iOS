@@ -12,7 +12,6 @@ enum ItemPreferencesType
     case diet
     case allergy
     case goals
-    case mainGoal
 }
 
 class ItemPreferencesViewModel
@@ -64,13 +63,7 @@ class ItemPreferencesViewModel
             }
             return true
         case .goals:
-            if userGoals.count < Constants.MAX_GOALS_AT_A_TIME
-            {
-                return false
-            }
-            return true
-        case .mainGoal:
-            if mainGoal == nil
+            if userGoals.count < Constants.MIN_GOALS_AT_A_TIME
             {
                 return false
             }
@@ -91,11 +84,6 @@ class ItemPreferencesViewModel
         case .goals:
             let goalID = Goal.ID.allCases[row]
             return (Goals[goalID]!.name.capitalized, goalID.rawValue, imageName: nil)
-        case .mainGoal:
-            //search the 3 goals the user selected if onboarding
-            // if goalsPreferences should appear all cases
-            let goalID = Goal.ID(rawValue: userGoals[row])!
-            return (Goals[goalID]!.name.capitalized, goalID.rawValue, Goals[goalID]!.imageName)
         }
     }
     
@@ -109,8 +97,6 @@ class ItemPreferencesViewModel
             return Allergies.count
         case .goals:
             return Goals.count
-        case .mainGoal:
-            return userGoals.count > 0 ? userGoals.count : Goal.ID.allCases.count
         }
     }
     
@@ -147,15 +133,6 @@ class ItemPreferencesViewModel
                     break
                 }
             }
-        case .mainGoal:
-            if mainGoal != nil
-            {
-                if mainGoal == id
-                {
-                    return true
-                }
-            }
-            return false
         }
         return result
     }
@@ -225,15 +202,6 @@ class ItemPreferencesViewModel
                         userGoals.removeFirst()
                     }
                 }
-        case .mainGoal:
-            if mainGoal == id
-            {
-                mainGoal = nil
-            }
-            else
-            {
-                mainGoal = id
-            }
         }
     }
     
@@ -248,8 +216,6 @@ class ItemPreferencesViewModel
             return defaultText
         case .goals:
             return NSLocalizedString("Please choose 3 goals", comment: "Error message when user hasn't chosen 3 goals")
-        case .mainGoal:
-            return defaultText
         }
     }
 }

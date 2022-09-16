@@ -179,7 +179,7 @@ class OnboardingCoordinator
                 goalsViewModel = vc.viewModel
             }
             vc.viewModel.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-            vc.viewModel.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment: "Subtext of Goal Preferences screen")
+            vc.viewModel.subtext = NSLocalizedString("Select up to 3 wellness goals to work on.", comment: "Subtext of Goal Preferences screen")
             vc.viewModel.type = .goals
             navigationController?.fadeTo(vc)
         }

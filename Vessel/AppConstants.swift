@@ -125,6 +125,7 @@ struct Constants
     static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
+    static let MIN_GOALS_AT_A_TIME = 1 /* min goals a user can select during onboarding */
     static let MORNING_TEST_TIME_START = 4 /* 4am */
     static let MORNING_TEST_TIME_END = 9 /* 9am */
     static let CARD_ACTIVATION_SECONDS = 180.0  /* defines how much time user has to wait for card to activate */

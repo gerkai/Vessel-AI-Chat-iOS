@@ -108,11 +108,6 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
         {
             height = Constants.SMALL_SCREEN_CHECK_BUTTON_HEIGHT
         }
-        //SingleGoal uses bigger cells
-        if viewModel.type == .mainGoal
-        {
-            height = collectionView.frame.width * 0.48
-        }
         return CGSize(width: collectionView.frame.width * 0.48, height: height)
     }
     
@@ -123,23 +118,11 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        if viewModel.type == .mainGoal
-        {
-            //show image checkmark cell
-            let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel.infoForItemAt(indexPath: indexPath)
-            cell.type = viewModel.type
-            cell.setup(name: info.name, id: info.id, imageName: info.imageName ?? "", delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
-            return cell
-        }
-        else
-        {
-            //show regular checkmark cell
-            let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel.infoForItemAt(indexPath: indexPath)
-            cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
-            return cell
-        }
+        //show regular checkmark cell
+        let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
+        let info = viewModel.infoForItemAt(indexPath: indexPath)
+        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
+        return cell
     }
 }
 
