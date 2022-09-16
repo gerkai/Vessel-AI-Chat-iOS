@@ -7,25 +7,25 @@
 
 import UIKit
 
-class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldDelegate
+final class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldDelegate
 {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var submitButton: LoadingButton!
-    @IBOutlet weak var emailTextField: VesselTextField!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var submitButton: LoadingButton!
+    @IBOutlet private weak var emailTextField: VesselTextField!
     
     @Resolved private var analytics: Analytics
     
-    enum mode
+    private enum ScreenMode
     {
         case firstScreen
-        case secondScreen
+        case successScreen
     }
     
-    var screenMode = mode.firstScreen
-    var initialTitle: String?
-    var initialDescription: String?
-    var initialSubmitTitle: String?
+    private var screenMode = ScreenMode.firstScreen
+    private var initialTitle: String?
+    private var initialDescription: String?
+    private var initialSubmitTitle: String?
     
     override func viewDidLoad()
     {
@@ -81,8 +81,23 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     {
         if screenMode == .firstScreen
         {
-            //Send request for password reset
-            requestPasswordReset()
+            guard let email = emailTextField.text else { return }
+            Server.shared.contactExists(email: email)
+            { exists in
+                if exists
+                {
+                    //Send request for password reset
+                    self.requestPasswordReset()
+                }
+                else
+                {
+                    UIView.showError(text: "", detailText: NSLocalizedString("We do not recognize this email.", comment: "Unrecognized email error"))
+                }
+            }
+            onFailure:
+            { string in
+                self.showErrorMessage()
+            }
         }
         else
         {
@@ -92,36 +107,22 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
     
     func requestPasswordReset()
     {
-        if let email = emailTextField.text
-        {
-            Server.shared.forgotPassword(email: email)
-            { [weak self] message in
-                guard let self = self else { return }
-                print("\(message)")
-                self.analytics.log(event: .forgotPassword)
-                self.transitionToSecondScreen()
-            }
-            onFailure:
-            { [weak self] object in
-                guard let self = self else { return }
-                print("\(object)")
-                let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're having trouble communicating with the server. Please try again later.", comment: ""), preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
-                { (action) in
-                    //print("You've pressed cancel");
-                    self.dismiss(animated: true, completion: nil)
-                }
-                
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true)
-            }
+        guard let email = emailTextField.text else { return }
+        Server.shared.forgotPassword(email: email)
+        { message in
+            print("\(message)")
+            self.analytics.log(event: .forgotPassword)
+            self.transitionToSuccessScreen()
+        }
+        onFailure:
+        { object in
+            self.showErrorMessage()
         }
     }
     
-    func transitionToSecondScreen()
+    private func transitionToSuccessScreen()
     {
-        //transition to second screen
+        //transition to success screen
         emailTextField.resignFirstResponder() //dismiss keyboard
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations:
         {
@@ -142,10 +143,24 @@ class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldD
             },
             completion:
             {_ in
-                self.screenMode = .secondScreen
+                self.screenMode = .successScreen
                 self.analytics.log(event: .viewedPage(screenName: .forgotPasswordSuccess))
             })
         })
+    }
+    
+    private func showErrorMessage()
+    {
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("We're having trouble communicating with the server. Please try again later.", comment: ""), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+        { (action) in
+            //print("You've pressed cancel");
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
     
     //MARK: - textfield delegates

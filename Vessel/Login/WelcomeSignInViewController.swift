@@ -32,7 +32,8 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                  NSLocalizedString("mood", comment: ""),
                  NSLocalizedString("digestion", comment: ""),
                  NSLocalizedString("beauty", comment: ""),
-                 NSLocalizedString("living", comment: "")]
+                 NSLocalizedString("calm", comment: ""),
+                 NSLocalizedString("fitness", comment: "")]
     var goalIndex = 0
     let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
     var key = [0, 0, 0, 0, 0, 0]
