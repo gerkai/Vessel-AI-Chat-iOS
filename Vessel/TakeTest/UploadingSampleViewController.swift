@@ -14,7 +14,6 @@ struct TestUUID: Encodable
     let wellnessCardUUID: String
     let autoScan: Bool
     let replacementParentUUID: String?
-    let qrBox: [CGPoint]
     
     enum CodingKeys: String, CodingKey
     {
@@ -22,7 +21,6 @@ struct TestUUID: Encodable
         case wellnessCardUUID = "wellness_card_uuid"
         case autoScan = "auto_scan"
         case replacementParentUUID = "replacement_parent_uuid"
-        case qrBox  //TODO: Uncomment to send parameter to server
     }
 }
 
@@ -95,7 +93,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         if let contact = Contact.main()
         {
             sampleUUID = UUID().uuidString
-            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil, qrBox: viewModel.cardQRCoordinates)
+            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
             
             //print("Parameters: \(parameters)")
             Server.shared.associateTestUUID(parameters: parameters)
@@ -151,7 +149,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
     {        
-        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, progressBlock:
+        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, qrBox: viewModel.cardQRCoordinates, progressBlock:
         { [weak self](task, progress) in
             DispatchQueue.main.async(execute:
             {[weak self] in
