@@ -96,7 +96,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             previewLayer.videoGravity = .resizeAspectFill
             cameraView.layer.addSublayer(previewLayer)
 
-            captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                self.captureSession.startRunning()
+            }
             UIApplication.shared.isIdleTimerDisabled = true
         }
     }
@@ -150,7 +153,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
         if (captureSession?.isRunning == false)
         {
-            captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                self.captureSession.startRunning()
+            }
         }
     }
 
@@ -206,7 +212,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onRetake()
     {
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .userInitiated).async
+        {
+            self.captureSession.startRunning()
+        }
         darkenView.alpha = 0.0
         darkenView.isHidden = false
         processingPhoto = false
@@ -315,6 +324,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             processingPhoto = true
             
+            viewModel.cardQRCoordinates = drawingView.qrBoxPercentages()
             drawingView.qrBox = nil
             drawingView.setNeedsDisplay()
             darkenView.isHidden = true

@@ -26,7 +26,7 @@ extension Bundle
     }
 
     @discardableResult
-    open func loadNib(_ name: NibName, owner: Any?, options: [UINib.OptionsKey: Any]? = nil) -> [Any]?
+    public func loadNib(_ name: NibName, owner: Any?, options: [UINib.OptionsKey: Any]? = nil) -> [Any]?
     {
         loadNibNamed(name.filename, owner: owner, options: options)
     }

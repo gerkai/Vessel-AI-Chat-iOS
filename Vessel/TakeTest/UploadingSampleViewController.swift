@@ -14,6 +14,7 @@ struct TestUUID: Encodable
     let wellnessCardUUID: String
     let autoScan: Bool
     let replacementParentUUID: String?
+    let qrBox: [CGPoint]
     
     enum CodingKeys: String, CodingKey
     {
@@ -21,6 +22,7 @@ struct TestUUID: Encodable
         case wellnessCardUUID = "wellness_card_uuid"
         case autoScan = "auto_scan"
         case replacementParentUUID = "replacement_parent_uuid"
+        case qrBox  //TODO: Uncomment to send parameter to server
     }
 }
 
@@ -93,7 +95,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         if let contact = Contact.main()
         {
             sampleUUID = UUID().uuidString
-            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil)
+            let parameters = TestUUID(uuid: sampleUUID, wellnessCardUUID: viewModel.cardQRCode, autoScan: true, replacementParentUUID: nil, qrBox: viewModel.cardQRCoordinates)
             
             //print("Parameters: \(parameters)")
             Server.shared.associateTestUUID(parameters: parameters)

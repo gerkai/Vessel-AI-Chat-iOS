@@ -14,6 +14,7 @@ enum DebugMenuOption: Int
     case showDebugDrawing
     case printNetworkTraffic
     case printInitAndDeinit
+    case relaxedScanningDistance
     
     var title: String
     {
@@ -24,6 +25,7 @@ enum DebugMenuOption: Int
         case .showDebugDrawing: return "Show Debug Drawing"
         case .printNetworkTraffic: return "Print Network Traffic"
         case .printInitAndDeinit: return "Print intialization and deinitialization"
+        case .relaxedScanningDistance: return "Relaxed Scanning Distance"
         }
     }
     
@@ -42,6 +44,7 @@ enum DebugMenuOption: Int
         case .printNetworkTraffic: return Constants.KEY_PRINT_NETWORK_TRAFFIC
         case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
         case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
+        case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
         }
     }
     
@@ -76,6 +79,7 @@ class DebugMenuViewModel
         .bypassScanning,
         .showDebugDrawing,
         .printNetworkTraffic,
-        .printInitAndDeinit
+        .printInitAndDeinit,
+        .relaxedScanningDistance
     ]
 }
