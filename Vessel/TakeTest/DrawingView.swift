@@ -53,7 +53,7 @@ class DrawingView: UIView
     var arrayH: [CGPoint] = []
     var validArea: CGRect = CGRect()
     var showDebugDrawing = false
-    
+    let debugRelaxScanningDistance = UserDefaults.standard.bool(forKey: Constants.KEY_RELAXED_SCANNING_DISTANCE)
     override func draw(_ rect: CGRect)
     {
         UIGraphicsGetCurrentContext()
@@ -173,15 +173,30 @@ class DrawingView: UIView
                 let widthEF = length(pointE, pointF)
                 //uncomment below to determine too-close / too-far values
                 //print("Distance: \(widthEF / validArea.size.width)")
+                
                 if widthEF < validArea.size.width * 0.72 //subjective
                 {
                     //too far away
-                    isCloseEnough = -1
+                    if debugRelaxScanningDistance == true
+                    {
+                        isCloseEnough = 0
+                    }
+                    else
+                    {
+                        isCloseEnough = -1
+                    }
                 }
                 else if widthEF > validArea.size.width * 0.82 //subjective
                 {
                     //too cloase
-                    isCloseEnough = 1
+                    if debugRelaxScanningDistance == true
+                    {
+                        isCloseEnough = 0
+                    }
+                    else
+                    {
+                        isCloseEnough = 1
+                    }
                 }
                 else
                 {
@@ -264,5 +279,19 @@ class DrawingView: UIView
         let x = pointB.x - pointA.x
         let y = pointB.y - pointA.y
         return sqrt((x * x) + (y * y))
+    }
+    
+    func qrBoxPercentages() -> [CGPoint]
+    {
+        if let box = qrBox
+        {
+            //x = 1.0 - qrBox[n].y
+            //y = qrBox[n].x
+            return [CGPoint(x: 1.0 - box[0].y, y: box[0].x), CGPoint(x: 1.0 - box[1].y, y: box[1].x), CGPoint(x: 1.0 - box[2].y, y: box[2].x), CGPoint(x: 1.0 - box[3].y, y: box[3].x)]
+        }
+        else
+        {
+            return [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 0)]
+        }
     }
 }

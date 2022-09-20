@@ -149,7 +149,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
     {        
-        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, progressBlock:
+        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, qrBox: viewModel.cardQRCoordinates, progressBlock:
         { [weak self](task, progress) in
             DispatchQueue.main.async(execute:
             {[weak self] in
