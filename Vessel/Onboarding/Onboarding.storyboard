@@ -686,7 +686,7 @@
                                 <rect key="frame" x="30" y="114" width="354" height="634"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qir-be-dK2" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="501"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="543"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preexisting Conditions Notification" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89s-kD-ZfB">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="118"/>
@@ -698,14 +698,27 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKy-lf-Jgf">
-                                                <rect key="frame" x="0.0" y="138" width="354" height="363"/>
+                                                <rect key="frame" x="0.0" y="138" width="354" height="405"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <string key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional.   By tapping next, I acknowledge I have read the disclaimer.</string>
+                                                        <string key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional. 
+
+</string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content">The more we know about your goals, the more personalized your plan will be!
+ By tapping Next, I acknowledge I have read the disclaimer.</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" metaFont="system" size="14"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -847,7 +860,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egO-5e-4OX">
-                                <rect key="frame" x="30" y="288" width="192" height="42"/>
+                                <rect key="frame" x="30" y="288" width="192" height="40.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="192" id="TB3-7b-APu"/>
                                 </constraints>

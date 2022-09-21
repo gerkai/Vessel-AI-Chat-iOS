@@ -215,7 +215,7 @@ class ItemPreferencesViewModel
         case .allergy:
             return defaultText
         case .goals:
-            return NSLocalizedString("Please choose 3 goals", comment: "Error message when user hasn't chosen 3 goals")
+            return NSLocalizedString("Please select at least 1 goal", comment: "Error message when user hasn't chosen 3 goals")
         }
     }
 }

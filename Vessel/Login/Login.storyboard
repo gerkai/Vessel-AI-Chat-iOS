@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVj-Xu-UJn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVj-Xu-UJn">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1378,137 +1378,6 @@
             </objects>
             <point key="canvasLocation" x="2762" y="98"/>
         </scene>
-        <!--Gifted Card Onboard View Controller-->
-        <scene sceneID="JEG-OS-5nq">
-            <objects>
-                <viewController storyboardIdentifier="GiftedCardOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BUq-u7-QJb" customClass="GiftedCardOnboardViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VLM-Xc-jOI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-sh-c7o">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2I-Ba-qNr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="633"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cg-4x-92w" userLabel="Back Button">
-                                        <rect key="frame" x="30" y="0.0" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="AHY-BS-czw"/>
-                                            <constraint firstAttribute="width" constant="50" id="bor-W1-bcN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                        <state key="normal" title="Back" image="square_back_button">
-                                            <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onBackButtonTapped:" destination="BUq-u7-QJb" eventType="touchUpInside" id="mRU-07-s8V"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqO-u8-N82">
-                                        <rect key="frame" x="30" y="86" width="200" height="129.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="au9-iH-qS8"/>
-                                        </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Welcome!  We’re glad you’re here.  ">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="35" name="BananaGrotesk-Semibold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pK0-ZY-Bki">
-                                        <rect key="frame" x="30" y="235.5" width="200" height="102.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="hGk-ql-0Xx"/>
-                                        </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Someone must really like you. :) We want to offer you a Free Trial. We hope you enjoy the experience.">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tPU-SX-lWs">
-                                        <rect key="frame" x="30" y="573" width="315" height="60"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Tx0-A8-rDj">
-                                                <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eJ-wF-Wwl" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="Hid-Yk-3je"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                                        <state key="normal" title="Next">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <integer key="value" value="22"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="onContinueButtonTapped:" destination="BUq-u7-QJb" eventType="touchUpInside" id="Au7-ju-Sfb"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Tx0-A8-rDj" firstAttribute="leading" secondItem="tPU-SX-lWs" secondAttribute="leading" id="HOx-Qn-EBv"/>
-                                            <constraint firstAttribute="trailing" secondItem="Tx0-A8-rDj" secondAttribute="trailing" id="hK7-10-cOd"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="pK0-ZY-Bki" firstAttribute="leading" secondItem="OqO-u8-N82" secondAttribute="leading" id="0co-le-2kZ"/>
-                                    <constraint firstItem="pK0-ZY-Bki" firstAttribute="top" secondItem="OqO-u8-N82" secondAttribute="bottom" constant="20" id="8yW-uy-XWP"/>
-                                    <constraint firstItem="tPU-SX-lWs" firstAttribute="leading" secondItem="j2I-Ba-qNr" secondAttribute="leading" constant="30" id="B5X-d3-2fY"/>
-                                    <constraint firstAttribute="bottom" secondItem="tPU-SX-lWs" secondAttribute="bottomMargin" id="Kfi-de-NVv"/>
-                                    <constraint firstItem="OqO-u8-N82" firstAttribute="top" secondItem="7cg-4x-92w" secondAttribute="bottom" constant="36" id="KsE-2A-oct"/>
-                                    <constraint firstItem="7cg-4x-92w" firstAttribute="leading" secondItem="j2I-Ba-qNr" secondAttribute="leading" constant="30" id="aX5-Xm-F5S"/>
-                                    <constraint firstItem="7cg-4x-92w" firstAttribute="top" secondItem="j2I-Ba-qNr" secondAttribute="top" id="h8s-v8-gXH"/>
-                                    <constraint firstAttribute="trailing" secondItem="tPU-SX-lWs" secondAttribute="trailing" constant="30" id="m9p-xD-Jqv"/>
-                                    <constraint firstItem="OqO-u8-N82" firstAttribute="leading" secondItem="j2I-Ba-qNr" secondAttribute="leading" constant="30" id="uq6-mP-VGz"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Jy5-6p-CFn"/>
-                        <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="S4z-sh-c7o" firstAttribute="top" secondItem="VLM-Xc-jOI" secondAttribute="top" id="9lY-sl-Kue"/>
-                            <constraint firstItem="j2I-Ba-qNr" firstAttribute="top" secondItem="Jy5-6p-CFn" secondAttribute="top" id="S52-aD-Up7"/>
-                            <constraint firstItem="j2I-Ba-qNr" firstAttribute="leading" secondItem="Jy5-6p-CFn" secondAttribute="leading" id="SUH-oS-hPK"/>
-                            <constraint firstAttribute="trailing" secondItem="S4z-sh-c7o" secondAttribute="trailing" id="Vgw-Vn-15t"/>
-                            <constraint firstItem="Jy5-6p-CFn" firstAttribute="trailing" secondItem="j2I-Ba-qNr" secondAttribute="trailing" id="btT-V7-3tq"/>
-                            <constraint firstItem="S4z-sh-c7o" firstAttribute="leading" secondItem="VLM-Xc-jOI" secondAttribute="leading" id="rfx-zK-B64"/>
-                            <constraint firstAttribute="bottom" secondItem="S4z-sh-c7o" secondAttribute="bottom" id="sm8-j4-uWr"/>
-                            <constraint firstItem="Jy5-6p-CFn" firstAttribute="bottom" secondItem="j2I-Ba-qNr" secondAttribute="bottom" constant="34" id="zHG-io-kNt"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bFN-ap-dr9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3676" y="98"/>
-        </scene>
         <!--Bought Card Login View Controller-->
         <scene sceneID="gca-zl-Yew">
             <objects>
@@ -1543,7 +1412,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you remember what email you used? " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUJ-SB-X2U">
-                                        <rect key="frame" x="30" y="86" width="200" height="163.5"/>
+                                        <rect key="frame" x="30" y="86" width="200" height="157"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="fqS-NO-P6X"/>
                                         </constraints>
@@ -1552,7 +1421,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdb-Hj-WYW">
-                                        <rect key="frame" x="30" y="261.5" width="200" height="119.5"/>
+                                        <rect key="frame" x="30" y="255" width="200" height="102.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="sjD-yD-5G2"/>
                                         </constraints>
@@ -1568,7 +1437,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-eP-KEk" userLabel="callCustomerSupport">
-                                        <rect key="frame" x="30" y="385" width="130" height="31"/>
+                                        <rect key="frame" x="30" y="361.5" width="130" height="31"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Chat with support">
@@ -1762,12 +1631,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-QY-Mgd">
-                                        <rect key="frame" x="30" y="235.5" width="200" height="128"/>
+                                        <rect key="frame" x="30" y="235.5" width="200" height="51.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6yQ-DB-0lO"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Vessel offers a free 14-day trial. We'll ship you out a free test card and build a personalized program just for you.">
+                                            <fragment content="Vessel offers several membership options">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="16" name="NoeText-Book"/>
