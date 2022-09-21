@@ -60,6 +60,8 @@ class Contact: CoreObjectProtocol
     var expert_id: Int?
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
+    
+    @Resolved private var analytics: Analytics
 
     static func main() -> Contact?
     {
@@ -172,6 +174,44 @@ class Contact: CoreObjectProtocol
         case goal_ids
         case email
         case expert_id
+    }
+    
+    // MARK: - Analytics
+    func identifyAnalytics()
+    {
+        guard let email = email else { return }
+        analytics.identify(id: "\(id)")
+        analytics.setUserProperties(properties: [
+            "$name": fullName,
+            "$email": email
+        ])
+    }
+    
+    func setDietsAnalytics()
+    {
+        let dietsString: [String] = diet_ids.compactMap({ id in
+            guard let dietID = Diet.ID(rawValue: id) else { return nil }
+            return Diets[dietID]?.name.capitalized
+        })
+        analytics.setUserProperty(property: "Diet", value: dietsString.joined(separator: ", "))
+    }
+    
+    func setAllergiesAnalytics()
+    {
+        let allergiesString: [String] = allergy_ids.compactMap({ id in
+            guard let allergyID = Allergy.ID(rawValue: id) else { return nil }
+            return Allergies[allergyID]?.name.capitalized
+        })
+        analytics.setUserProperty(property: "Allergies", value: allergiesString.joined(separator: ", "))
+    }
+    
+    func setGoalsAnalytics()
+    {
+        let goalsString: [String] = goal_ids.compactMap({ id in
+            guard let goalID = Goal.ID(rawValue: id) else { return nil }
+            return Goals[goalID]?.name.capitalized
+        })
+        analytics.setUserProperty(property: "Goals", value: goalsString.joined(separator: ", "))
     }
 }
 

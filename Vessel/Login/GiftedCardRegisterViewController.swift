@@ -126,6 +126,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         {
             ObjectStore.shared.loadMainContact
             {
+                Contact.main()?.identifyAnalytics()                
                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
                 self.nextButton.hideLoading()
             }

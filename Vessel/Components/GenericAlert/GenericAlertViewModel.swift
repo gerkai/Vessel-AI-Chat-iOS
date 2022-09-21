@@ -29,9 +29,9 @@ enum GenericAlertAnimation
 @objc
 protocol GenericAlertDelegate: AnyObject
 {
-    @objc optional func onAlertPresented(_ alert: GenericAlertViewController)
+    @objc optional func onAlertPresented(_ alert: GenericAlertViewController, alertDescription: String)
     @objc optional func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
-    @objc optional func onAlertDismissed(_ alert: GenericAlertViewController)
+    @objc optional func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
 }
 
 enum GenericAlertButtonType

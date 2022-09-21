@@ -13,6 +13,8 @@ class MoreViewController: UIViewController
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
     
+    @Resolved private var analytics: Analytics
+    
     // MARK: Model
     private let viewModel = MoreViewModel()
     
@@ -20,6 +22,12 @@ class MoreViewController: UIViewController
     {
         super.viewDidLoad()
         versionLabel.text = viewModel.versionString
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        analytics.log(event: .viewedPage(screenName: .moreTab))
     }
     
     // MARK: - Actions

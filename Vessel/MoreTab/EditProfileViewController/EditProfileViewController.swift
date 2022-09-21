@@ -70,6 +70,8 @@ class EditProfileViewController: KeyboardFriendlyViewController
         return viewModel
     }()
     
+    @Resolved private var analytics: Analytics
+    
     // MARK: - UIViewController Lifecycle
     
     override func viewDidLoad()
@@ -106,12 +108,14 @@ class EditProfileViewController: KeyboardFriendlyViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        analytics.log(event: .viewedPage(screenName: .profile))
         setupView()
     }
     
     // MARK: - Actions
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
+        analytics.log(event: .back(screenName: .profile))
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -243,6 +247,7 @@ private extension EditProfileViewController
         {
         case .changeProfilePhoto:
             // TODO: Route to Change Profile Photo
+            analytics.log(event: .viewedPage(screenName: .choosePhoto))
             break
         case .changePassword:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
@@ -253,7 +258,7 @@ private extension EditProfileViewController
                                                     type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: "Delete Account?", alignment: .left),
                                                                                subtitle: GenericAlertLabelInfo(title: "Are you sure you would like to delete your Vessel account? If you delete your account you will permanently lose all of your past test results, activites and progress.This action cannot be reversed.", height: 130.0),
                                                                                button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: "Delete Account"), type: .dark)),
-                                                    description: "DeleteAccountAlert",
+                                                    description: GenericAlertViewController.DELETE_ACCOUNT_ALERT,
                                                     showCloseButton: true,
                                                     alignment: .bottom,
                                                     animation: .modal,
@@ -390,9 +395,13 @@ extension EditProfileViewController: UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        guard !(textField.text ?? "").contains(".") || string != "." else { return false }
-        let characterSet = NSCharacterSet(charactersIn: "0123456789.").inverted
-        return string == string.components(separatedBy: characterSet).joined(separator: "")
+        if textField == heightTextField || textField == weightTextField
+        {
+            guard !(textField.text ?? "").contains(".") || string != "." else { return false }
+            let characterSet = NSCharacterSet(charactersIn: "0123456789.").inverted
+            return string == string.components(separatedBy: characterSet).joined(separator: "")
+        }
+        return true
     }
     
     private func getContactField(_ textField: UITextField) -> EditProfileContactField?
@@ -507,12 +516,21 @@ extension EditProfileViewController: UIPickerViewDelegate
 
 extension EditProfileViewController: GenericAlertDelegate
 {
+    func onAlertPresented(_ alert: GenericAlertViewController, alertDescription: String)
+    {
+        if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
+        {
+            analytics.log(event: .viewedPage(screenName: .deleteAccount))
+        }
+    }
+    
     func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
     {
-        if alertDescription == "DeleteAccountAlert"
+        if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
         {
             Server.shared.deleteAccount()
             {
+                self.analytics.log(event: .accountDeleted)
                 Server.shared.logOut()
                 let story = UIStoryboard(name: "Login", bundle: nil)
                 let vc = story.instantiateViewController(withIdentifier: "Welcome")
@@ -524,5 +542,10 @@ extension EditProfileViewController: GenericAlertDelegate
                 print(error)
             }
         }
+    }
+    
+    func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
+    {
+        analytics.log(event: .viewedPage(screenName: .profile))
     }
 }

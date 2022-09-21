@@ -37,6 +37,9 @@ class FoodPreferencesViewModel: ItemPreferencesViewModel
         contact.diet_ids = userDiets
         contact.allergy_ids = userAllergies
         
+        contact.setDietsAnalytics()
+        contact.setAllergiesAnalytics()
+        
         ObjectStore.shared.ClientSave(contact)
     }
 }

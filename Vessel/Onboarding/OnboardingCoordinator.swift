@@ -48,6 +48,8 @@ class OnboardingCoordinator
     private var allergiesViewModel: ItemPreferencesViewModel?
     private var goalsViewModel: ItemPreferencesViewModel?
     
+    @Resolved private var analytics: Analytics
+    
     //MARK: - Navigation
     static func pushInitialViewController(to navigationController: UINavigationController?)
     {
@@ -246,12 +248,17 @@ class OnboardingCoordinator
                 }
                 contact.gender = genderString
                 
+                analytics.setUserProperty(property: "Gender", value: genderString)
+                
                 //height / weight
                 if let userHeight = heightWeightViewModel?.userHeight,
                    let userWeight = heightWeightViewModel?.userWeight
                 {
                     contact.height = userHeight
                     contact.weight = userWeight
+                    
+                    analytics.setUserProperty(property: "Height", value: userHeight)
+                    analytics.setUserProperty(property: "Weight", value: userWeight)
                 }
                 
                 //birthday
@@ -267,6 +274,8 @@ class OnboardingCoordinator
                         formatter.dateFormat = Constants.SERVER_DATE_FORMAT
                         let strDate = formatter.string(from: birthdayViewModel.userBirthdate)
                         contact.birth_date = strDate
+                        
+                        analytics.setUserProperty(property: "DOB", value: strDate)
                     }
                 }
                     
@@ -274,15 +283,18 @@ class OnboardingCoordinator
                 if let dietViewModel = dietViewModel
                 {
                     contact.diet_ids = dietViewModel.userDiets
+                    contact.setDietsAnalytics()
                 }
                 if let allergiesViewModel = allergiesViewModel
                 {
                     contact.allergy_ids = allergiesViewModel.userAllergies
+                    contact.setAllergiesAnalytics()
                 }
                 
                 if let goalsViewModel = goalsViewModel
                 {
                     contact.goal_ids = goalsViewModel.userGoals
+                    contact.setGoalsAnalytics()
                 }
                 
                 ObjectStore.shared.ClientSave(contact)

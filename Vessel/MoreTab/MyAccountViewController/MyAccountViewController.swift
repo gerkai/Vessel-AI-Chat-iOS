@@ -15,15 +15,24 @@ class MyAccountViewController: UIViewController
     // MARK: Model
     private let viewModel = MyAccountViewModel()
     
+    @Resolved private var analytics: Analytics
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        analytics.log(event: .viewedPage(screenName: .myAccount))
+    }
+    
     // MARK: - Actions
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
+        analytics.log(event: .back(screenName: .myAccount))
         self.navigationController?.popViewController(animated: true)
     }
     

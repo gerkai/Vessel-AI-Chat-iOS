@@ -14,6 +14,8 @@ enum AnalyticsEvent
     case signUp(loginType: AnalyticsLoginType)
     case forgotPassword
     case identification(type: AnalyticsIdentificationType)
+    case back(screenName: AnalyticsScreenName)
+    case accountDeleted
     
     var name: String
     {
@@ -24,6 +26,8 @@ enum AnalyticsEvent
         case .signUp: return "Sign Up"
         case .forgotPassword: return "Forgot Password"
         case .identification: return "Identification"
+        case .back: return "Back"
+        case .accountDeleted: return "Account Deleted"
         }
     }
     
@@ -41,6 +45,10 @@ enum AnalyticsEvent
             return [:]
         case .identification(let identificationType):
             return ["Type": identificationType.rawValue]
+        case .back(let screenName):
+            return ["Screen Name": screenName.rawValue]
+        case .accountDeleted:
+            return [:]
         }
     }
 }
@@ -59,6 +67,14 @@ enum AnalyticsScreenName: String
     case create = "Create"
     case forgotPassword = "Forgot Password"
     case forgotPasswordSuccess = "Forgot Password Success"
+    case moreTab = "More Tab"
+    case myAccount = "My Account"
+    case profile = "Profile"
+    case changePassword = "Change Password"
+    case choosePhoto = "Choose Photo"
+    case deleteAccount = "Unsubscribe"
+    case foodPreferencesDiet = "Food Preferences Diet"
+    case foodPreferencesAllergies = "Food Preferences Allergies"
 }
 
 enum AnalyticsLoginType: String

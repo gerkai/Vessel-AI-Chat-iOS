@@ -9,6 +9,9 @@ import UIKit
 
 class GenericAlertViewController: UIViewController
 {
+    // MARK: - Alerts Constants
+    static let DELETE_ACCOUNT_ALERT = "DeleteAccountAlert"
+    
     private struct Constants
     {
         static let GENERIC_ALERT_BOTTOM_SPACING = 35.0
@@ -147,7 +150,7 @@ class GenericAlertViewController: UIViewController
                     completion:
                     { _ in
                         guard let self = self else { return }
-                        self.delegate?.onAlertPresented?(self)
+                        self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                     }
                 }
             case .modal:
@@ -181,7 +184,7 @@ class GenericAlertViewController: UIViewController
                                                                             constant: 0.0)
                     self.alertViewBottomSpacingConstraint.isActive = true
                     self.alertViewBottomSpacingConstraint.priority = .init(rawValue: 900)
-                    self.delegate?.onAlertPresented?(self)
+                    self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                 }
             }
         }
@@ -211,7 +214,7 @@ class GenericAlertViewController: UIViewController
                     {
                         self.delegate?.onAlertButtonTapped?(self, index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
                     }
-                    self.delegate?.onAlertDismissed?(self)
+                    self.delegate?.onAlertDismissed?(self, alertDescription: self.viewModel.description)
                     self.dismiss(animated: false)
                 }
             }
@@ -234,7 +237,7 @@ class GenericAlertViewController: UIViewController
                 {
                     self.delegate?.onAlertButtonTapped?(self, index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
                 }
-                self.delegate?.onAlertDismissed?(self)
+                self.delegate?.onAlertDismissed?(self, alertDescription: self.viewModel.description)
                 self.dismiss(animated: false)
             }
         }

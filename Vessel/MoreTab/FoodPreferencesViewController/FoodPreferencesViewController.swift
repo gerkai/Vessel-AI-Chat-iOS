@@ -17,6 +17,20 @@ class FoodPreferencesViewController: UIViewController
     // MARK: Model
     private let viewModel = FoodPreferencesViewModel()
     
+    @Resolved private var analytics: Analytics
+    
+    var screenName: AnalyticsScreenName
+    {
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            return .foodPreferencesDiet
+        }
+        else
+        {
+            return .foodPreferencesAllergies
+        }
+    }
+    
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
     {
@@ -39,9 +53,16 @@ class FoodPreferencesViewController: UIViewController
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        analytics.log(event: .viewedPage(screenName: .foodPreferencesDiet))
+    }
+    
     // MARK: - Actions
     @IBAction func onBackTapped()
     {
+        analytics.log(event: .back(screenName: screenName))
         onSaveTapped()
     }
     
@@ -63,6 +84,7 @@ class FoodPreferencesViewController: UIViewController
     {
         viewModel.selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         collectionView.reloadData()
+        analytics.log(event: .viewedPage(screenName: screenName))
     }
     
     // MARK: UI

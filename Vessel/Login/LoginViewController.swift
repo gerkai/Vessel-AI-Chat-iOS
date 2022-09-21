@@ -113,6 +113,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
+                                Contact.main()?.identifyAnalytics()                                
                                 self.nextButton.hideLoading()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)

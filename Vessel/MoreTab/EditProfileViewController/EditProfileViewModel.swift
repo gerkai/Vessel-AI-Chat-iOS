@@ -80,6 +80,8 @@ class EditProfileViewModel
         return formatter
     }()
     
+    @Resolved private var analytics: Analytics
+    
     // MARK: - Public interface
     var onModelChanged: (() -> ())?
     
@@ -95,6 +97,7 @@ class EditProfileViewModel
                   let newName = newValue else { return }
             contact.first_name = newName
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "$name", value: contact.fullName)
         }
     }
     
@@ -110,6 +113,7 @@ class EditProfileViewModel
                   let newLastName = newValue else { return }
             contact.last_name = newLastName
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "$name", value: contact.fullName)
         }
     }
     
@@ -154,6 +158,8 @@ class EditProfileViewModel
                 contact.gender = Constants.GENDER_OTHER
             }
             updateContact(contact: contact)
+            guard let gender = contact.gender else { return }
+            analytics.setUserProperty(property: "Gender", value: gender)
         }
     }
     
@@ -190,6 +196,8 @@ class EditProfileViewModel
                 contact.height = newHeight
             }
             updateContact(contact: contact)
+            guard let height = contact.height else { return }
+            analytics.setUserProperty(property: "Height", value: height)
         }
     }
     
@@ -222,6 +230,8 @@ class EditProfileViewModel
                 contact.weight = max(min(newWeight, Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
             }
             updateContact(contact: contact)
+            guard let weight = contact.weight else { return }
+            analytics.setUserProperty(property: "Weight", value: weight)
         }
     }
     
@@ -254,6 +264,7 @@ class EditProfileViewModel
             let newBirthDateString = serverDateFormatter.string(from: newBirthDate)
             contact.birth_date = newBirthDateString
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "DOB", value: newBirthDateString)
         }
     }
     
