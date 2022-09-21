@@ -28,7 +28,6 @@
 		3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547CF27CAEE3B006E3098 /* Contact.swift */; };
 		3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */; };
 		3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */; };
-		3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */; };
 		3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */; };
 		3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */; };
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
@@ -202,7 +201,6 @@
 		3F0547CF27CAEE3B006E3098 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCardExistCheckingViewController.swift; sourceTree = "<group>"; };
 		3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
-		3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtCardLoginViewController.swift; sourceTree = "<group>"; };
 		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
@@ -624,7 +622,6 @@
 				3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */,
 				3F0547B027C9DB8F006E3098 /* DebugViewController.swift */,
 				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
-				3F0547D527CAFF91006E3098 /* GiftedCardOnboardViewController.swift */,
 				3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */,
 				3FE369EC27C9A82A00231D42 /* Login.storyboard */,
 				3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */,
@@ -1149,7 +1146,6 @@
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
 				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
-				3F0547D627CAFF91006E3098 /* GiftedCardOnboardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,

@@ -73,8 +73,7 @@ class TestCardExistCheckingViewController: UIViewController
         }
         else if selectedOption == 2
         {
-            let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-            analytics.log(event: .identification(type: .gifted))
+            let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
             self.navigationController?.fadeTo(vc)
         }
         else
