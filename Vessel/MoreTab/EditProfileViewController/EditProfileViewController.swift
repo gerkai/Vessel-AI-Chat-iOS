@@ -355,7 +355,7 @@ private extension EditProfileViewController
         }
         if let year = viewModel.maxDateComponents.year
         {
-            viewModel.maxDateComponents.year = viewModel.maxAge - year
+            viewModel.maxDateComponents.year = abs(viewModel.maxAge - year)
             if let date = viewModel.calendar.date(from: viewModel.maxDateComponents)
             {
                 viewModel.minDate = date
