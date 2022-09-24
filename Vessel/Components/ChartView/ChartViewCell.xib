@@ -71,42 +71,56 @@
                         <rect key="frame" x="0.0" y="40" width="110" height="170"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bix-fG-HUf">
-                        <rect key="frame" x="31.333333333333332" y="187.33333333333334" width="47.333333333333343" height="22.666666666666657"/>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-XB-7eb">
+                        <rect key="frame" x="24" y="191.66666666666666" width="62" height="37"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-fF-25G">
-                                <rect key="frame" x="0.0" y="0.0" width="22.333333333333332" height="22.666666666666668"/>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-W8-2Jb">
-                                <rect key="frame" x="28.333333333333329" y="0.0" width="19" height="22.666666666666668"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bix-fG-HUf">
+                                <rect key="frame" x="7.3333333333333321" y="0.0" width="47.333333333333343" height="37"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-fF-25G">
+                                        <rect key="frame" x="0.0" y="0.0" width="22.333333333333332" height="37"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-W8-2Jb">
+                                        <rect key="frame" x="28.333333333333329" y="0.0" width="19" height="37"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zk9-kn-DTa">
+                                <rect key="frame" x="0.0" y="0.0" width="62" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="f0x-vw-pjE"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="infoTap" destination="KSd-38-tea" eventType="touchUpInside" id="NAn-Q4-BG7"/>
+                                </connections>
+                            </button>
                         </subviews>
-                    </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zk9-kn-DTa">
-                        <rect key="frame" x="24" y="180.33333333333334" width="62" height="37"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="37" id="f0x-vw-pjE"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="top" secondItem="Mol-XB-7eb" secondAttribute="top" id="MWQ-sF-uia"/>
+                            <constraint firstAttribute="bottom" secondItem="bix-fG-HUf" secondAttribute="bottom" id="Niv-dm-zGj"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="trailing" secondItem="Mol-XB-7eb" secondAttribute="trailing" id="OQ9-R9-RuN"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="leading" secondItem="Mol-XB-7eb" secondAttribute="leading" id="dcQ-fz-cUf"/>
+                            <constraint firstItem="bix-fG-HUf" firstAttribute="centerX" secondItem="Mol-XB-7eb" secondAttribute="centerX" id="nfL-yM-ykG"/>
+                            <constraint firstItem="bix-fG-HUf" firstAttribute="centerY" secondItem="Mol-XB-7eb" secondAttribute="centerY" id="qKa-U4-L4G"/>
+                            <constraint firstAttribute="height" constant="37" id="txn-o9-QIN"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="bottom" secondItem="Mol-XB-7eb" secondAttribute="bottom" id="zb9-WU-Rh9"/>
                         </constraints>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <connections>
-                            <action selector="infoTap" destination="KSd-38-tea" eventType="touchUpInside" id="NAn-Q4-BG7"/>
-                        </connections>
-                    </button>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Zk9-kn-DTa" firstAttribute="centerY" secondItem="bix-fG-HUf" secondAttribute="centerY" id="1yL-GK-g4v"/>
-                    <constraint firstItem="bix-fG-HUf" firstAttribute="centerX" secondItem="C6r-rE-ym7" secondAttribute="centerX" id="3gm-Fr-wQm"/>
                     <constraint firstItem="s8e-4u-I1l" firstAttribute="trailing" secondItem="C6r-rE-ym7" secondAttribute="trailing" id="62c-pe-yjX"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" id="DjJ-Sv-IEc"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="centerY" secondItem="s8e-4u-I1l" secondAttribute="bottom" id="KlR-78-4iH"/>
                     <constraint firstItem="m7o-ox-OaE" firstAttribute="bottom" secondItem="C6r-rE-ym7" secondAttribute="bottom" id="LLv-1O-M97"/>
-                    <constraint firstItem="Zk9-kn-DTa" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" id="Mvv-j0-AIY"/>
-                    <constraint firstItem="Zk9-kn-DTa" firstAttribute="trailing" secondItem="m7o-ox-OaE" secondAttribute="trailing" id="PmS-Jt-P7q"/>
                     <constraint firstItem="s8e-4u-I1l" firstAttribute="top" secondItem="C6r-rE-ym7" secondAttribute="top" constant="40" id="Ts2-X5-bYW"/>
-                    <constraint firstItem="bix-fG-HUf" firstAttribute="bottom" secondItem="s8e-4u-I1l" secondAttribute="bottom" id="WQP-N8-joQ"/>
                     <constraint firstItem="s8e-4u-I1l" firstAttribute="leading" secondItem="C6r-rE-ym7" secondAttribute="leading" id="cyd-yC-w0K"/>
                     <constraint firstItem="m7o-ox-OaE" firstAttribute="centerX" secondItem="C6r-rE-ym7" secondAttribute="centerX" id="dqO-uf-TmC"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="trailing" secondItem="m7o-ox-OaE" secondAttribute="trailing" id="gV3-Aj-QkC"/>
                     <constraint firstItem="s8e-4u-I1l" firstAttribute="bottom" secondItem="C6r-rE-ym7" secondAttribute="bottom" constant="-45" id="vS6-kD-7no"/>
                 </constraints>
             </collectionViewCellContentView>
@@ -116,10 +130,10 @@
                 <outlet property="frostedView" destination="m7o-ox-OaE" id="40V-Zb-c7u"/>
                 <outlet property="graphView" destination="s8e-4u-I1l" id="LdK-Zl-MCn"/>
                 <outlet property="infoHeight" destination="8U4-Jh-sD1" id="jg3-KQ-ejv"/>
+                <outlet property="infoView" destination="Mol-XB-7eb" id="gdu-pB-bFJ"/>
                 <outlet property="monthLabel" destination="cRu-WB-kcB" id="OY8-sP-HrI"/>
-                <outlet property="wellnessLabelYPosition" destination="WQP-N8-joQ" id="0Up-a8-MWH"/>
+                <outlet property="wellnessLabelYPosition" destination="KlR-78-4iH" id="Zow-EI-lL1"/>
                 <outlet property="wellnessScoreLabel" destination="jJf-fF-25G" id="lw1-z4-FZd"/>
-                <outlet property="wellnessScoreStackView" destination="bix-fG-HUf" id="5JG-vD-cKf"/>
             </connections>
             <point key="canvasLocation" x="76.92307692307692" y="60.78199052132701"/>
         </collectionViewCell>

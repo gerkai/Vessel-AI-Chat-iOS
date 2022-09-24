@@ -10,6 +10,8 @@ import UIKit
 class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate
 {
     @IBOutlet weak var chartView: ChartView!
+    var initialLoad = true
+    
     let dataPoints = [ChartViewDataPoint(score: 0.4, month: 04, day: 9, year: 2022),
                       ChartViewDataPoint(score: 0.7, month: 04, day: 16, year: 2022),
                       ChartViewDataPoint(score: 0.3, month: 04, day: 23, year: 2022),
@@ -45,7 +47,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewDidAppear(_ animated: Bool)
     {
-        chartView.selectLastCell()
+        if initialLoad
+        {
+            initialLoad = false
+            chartView.selectLastCell()
+        }
     }
     
     //Mark: - ChartViewDataSource

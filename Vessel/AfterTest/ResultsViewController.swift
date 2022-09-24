@@ -24,7 +24,7 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
     
-    var testResult: TestResult! //set by the caller during instantiation
+    var testResult: Result! //set by the caller during instantiation
     var timer: Timer!
     var iteration = 0
     let wellnessCardAnimationTime = 2.0
@@ -432,12 +432,13 @@ class ResultsViewController: UIViewController
     func mockTestResult()
     {
         //used for test/debug
-        testResult = TestResult(wellnessScore: 0.73, errors: [], reagents: [ReagentResult(id: 11, value: 30.0, score: 1.0),
-                                                                            ReagentResult(id: 8, value: 225.0, score: 0.4),
-                                                                            ReagentResult(id: 1, value: 7.5, score: 1.0),
-                                                                            ReagentResult(id: 3, value: 0.0, score: 0.0),
-                                                                            ReagentResult(id: 4, value: 150.0, score: 0.2),
-                                                                            ReagentResult(id: 2, value: 1.002, score: 0.8),
-                                                                            ReagentResult(id: 5, value: 450.0, score: 1.0)])
+        
+        testResult = Result(id: 1, lastUpdated: 0, cardUUID: "12345", wellnessScore: 0.73, dateString: "2022-09-24T15:22:14", reagents: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
+                                                                        ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
+                                                                        ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
+                                                                        ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),
+                                                                        ReagentResult(id: 4, score: 0.2, value: 150.0, errorCodes: []),
+                                                                        ReagentResult(id: 2, score: 0.8, value: 1.002, errorCodes: []),
+                                                                        ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: [])])
     }
 }

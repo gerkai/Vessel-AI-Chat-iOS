@@ -105,8 +105,6 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         let wellnessScore = Int((data[2].score + 0.005) * 100)
         cell.wellnessScoreLabel.text = "\(wellnessScore)"
         cell.wellnessScore = data[2].score
-        //cell.dateMonth = data[2].month
-        //cell.dateDay = data[2].day
         cell.monthLabel.text = Date.abbreviationFor(month: data[2].month)
         cell.dayLabel.text = String(format: "%02i", data[2].day)
         return cell

@@ -21,7 +21,7 @@ class ChartViewCell: UICollectionViewCell
     @IBOutlet weak var graphView: GraphView!
     @IBOutlet weak var wellnessScoreLabel: UILabel!
     @IBOutlet weak var wellnessLabelYPosition: NSLayoutConstraint!
-    @IBOutlet weak var wellnessScoreStackView: UIStackView!
+    @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
@@ -67,8 +67,8 @@ class ChartViewCell: UICollectionViewCell
                            if self.infoHeight.constant == selectedHeight
                            {
                                self.graphView.isSelected = true
-                               self.wellnessScoreStackView.isHidden = false
-                               self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 20.0
+                               self.infoView.isHidden = false
+                               self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
                            }
                         }
                     }
@@ -80,7 +80,7 @@ class ChartViewCell: UICollectionViewCell
                 if animatingUnselected == false
                 {
                     self.graphView.isSelected = false
-                    self.wellnessScoreStackView.isHidden = true
+                    self.infoView.isHidden = true
                     animatingUnselected = true
                     animatingSelected = false
                     UIView.animate(withDuration: 0.1, delay: 0.0 /*, options: .beginFromCurrentState*/)
