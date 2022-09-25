@@ -11,10 +11,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
 {
     @IBOutlet weak var chartView: ChartView!
     var initialLoad = true
+    @IBOutlet weak var lockoutView: UIView!
     
-    let dataPoints = [ChartViewDataPoint(score: 0.4, month: 04, day: 9, year: 2022),
+    let dataPoints: [ChartViewDataPoint] = [ChartViewDataPoint(score: 0.4, month: 04, day: 9, year: 2022),
                       ChartViewDataPoint(score: 0.7, month: 04, day: 16, year: 2022),
-                      ChartViewDataPoint(score: 0.3, month: 04, day: 23, year: 2022),
+                      /*ChartViewDataPoint(score: 0.3, month: 04, day: 23, year: 2022),
                       ChartViewDataPoint(score: 0.22, month: 04, day: 30, year: 2022),
                       ChartViewDataPoint(score: 0.37, month: 05, day: 7, year: 2022),
                       ChartViewDataPoint(score: 0.46, month: 05, day: 14, year: 2022),
@@ -36,13 +37,25 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                       ChartViewDataPoint(score: 0.3, month: 09, day: 3, year: 2022),
                       ChartViewDataPoint(score: 0.2, month: 09, day: 10, year: 2022),
                       ChartViewDataPoint(score: 0.1, month: 09, day: 17, year: 2022),
-                      ChartViewDataPoint(score: 0.0, month: 09, day: 24, year: 2022)]
+                      ChartViewDataPoint(score: 0.0, month: 09, day: 24, year: 2022)*/]
     
     override func viewDidLoad()
     {
         chartView.dataSource = self
         chartView.delegate = self
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        if dataPoints.isEmpty
+        {
+            lockoutView.isHidden = false
+        }
+        else
+        {
+            lockoutView.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -68,5 +81,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     func ChartViewInfoTapped()
     {
         print("INFO TAPPED")
+    }
+    
+    @IBAction func takeATest()
+    {
+        mainTabBarController?.vesselButtonPressed()
     }
 }
