@@ -81,6 +81,10 @@
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
 		3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */; };
+		3F59A15C28DFF24B005E5F46 /* ReagentScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */; };
+		3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */; };
+		3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */; };
+		3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */; };
 		3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */; };
 		3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95E27D2C41C00D589F7 /* Storage.swift */; };
 		3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96627D4209F00D589F7 /* Encodable.swift */; };
@@ -261,6 +265,10 @@
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		3F4C59492877CEC10088F03A /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessScoreViewController.swift; sourceTree = "<group>"; };
+		3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentScoreView.xib; sourceTree = "<group>"; };
+		3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentScoreView.swift; sourceTree = "<group>"; };
+		3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTabViewModel.swift; sourceTree = "<group>"; };
+		3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTabMVVMViewController.swift; sourceTree = "<group>"; };
 		3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		3F87B95E27D2C41C00D589F7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		3F87B96627D4209F00D589F7 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
@@ -502,8 +510,10 @@
 		3F426DBD28DFA2FF00927B68 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
 				3F426DC028DFA33200927B68 /* Results.storyboard */,
+				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
+				3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */,
+				3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */,
 				3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */,
 			);
 			path = Results;
@@ -681,6 +691,8 @@
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
 				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
+				3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */,
+				3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */,
 				3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */,
 				3F0405C92890A99100ADD5FC /* ReagentTileView.xib */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
@@ -1065,6 +1077,7 @@
 				3F15ACF8288C5421004716CA /* test_result_flow_p2.json in Resources */,
 				3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
+				3F59A15C28DFF24B005E5F46 /* ReagentScoreView.xib in Resources */,
 				3FE369DF27C9A74B00231D42 /* BananaGrotesk-Light.otf in Resources */,
 				3F87B96D27D429E000D589F7 /* Onboarding.storyboard in Resources */,
 				3F12F045287DCC6900FCC52E /* TakeTest.storyboard in Resources */,
@@ -1229,6 +1242,7 @@
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
@@ -1297,7 +1311,9 @@
 				721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
+				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
+				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

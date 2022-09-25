@@ -9,9 +9,9 @@ import UIKit
 
 struct Color
 {
-    var red: Float
-    var green: Float
-    var blue: Float
+    var red: CGFloat
+    var green: CGFloat
+    var blue: CGFloat
 }
 
 class ResultsViewController: UIViewController
@@ -38,12 +38,6 @@ class ResultsViewController: UIViewController
     var showingRanges = true
     var bouncyViews: [ReagentTileView] = []
     var originalStaggerConstraintConstant: CGFloat! //the right stackView is staggered for Results but not staggered for ranges.
-    
-    //will move these to constants if we start using them in more places
-    let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
-    let fairColor = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
-    let goodColor = Color(red: 0.8588, green: 0.9216, blue: 0.8353)
-    let greatColor = Color(red: 0.7569, green: 0.8706, blue: 0.7294)
     
     override func viewDidLoad()
     {
@@ -83,29 +77,29 @@ class ResultsViewController: UIViewController
             if i == 0
             {
                 reagentView.titleLabel.text = NSLocalizedString("0-25", comment: "range 0 - 25")
-                reagentView.subtextLabel.text = NSLocalizedString("Poor", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(poorColor.red), green: CGFloat(poorColor.green), blue: CGFloat(poorColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.POOR_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselPoor
                 leftStackView.addArrangedSubview(reagentView)
             }
             else if i == 1
             {
                 reagentView.titleLabel.text = NSLocalizedString("25-50", comment: "range 25 - 50")
-                reagentView.subtextLabel.text = NSLocalizedString("Fair", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(fairColor.red), green: CGFloat(fairColor.green), blue: CGFloat(fairColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.FAIR_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselFair
                 rightStackView.addArrangedSubview(reagentView)
             }
             else if i == 2
             {
                 reagentView.titleLabel.text = NSLocalizedString("50-75", comment: "range 50 - 75")
-                reagentView.subtextLabel.text = NSLocalizedString("Good", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(goodColor.red), green: CGFloat(goodColor.green), blue: CGFloat(goodColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.GOOD_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselGood
                 leftStackView.addArrangedSubview(reagentView)
             }
             else
             {
                 reagentView.titleLabel.text = NSLocalizedString("75-100", comment: "range 75 - 100")
-                reagentView.subtextLabel.text = NSLocalizedString("Great", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(greatColor.red), green: CGFloat(greatColor.green), blue: CGFloat(greatColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.GREAT_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselGreat
                 rightStackView.addArrangedSubview(reagentView)
             }
             reagentView.alpha = 0.0
@@ -140,7 +134,7 @@ class ResultsViewController: UIViewController
             //print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
             UIView.animate(withDuration: duration, delay: sectionTime, options: .curveLinear)
             {
-                self.setBackgroundColor(startColor: self.poorColor, endColor: self.fairColor, percentage: percentage)
+                self.setBackgroundColor(startColor: Constants.POOR_COLOR, endColor: Constants.FAIR_COLOR, percentage: percentage)
             }
             completion:
             { completed in
@@ -158,7 +152,7 @@ class ResultsViewController: UIViewController
                     percentage = duration / sectionTime
                     UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
                     {
-                        self.setBackgroundColor(startColor: self.fairColor, endColor: self.goodColor, percentage: percentage)
+                        self.setBackgroundColor(startColor: Constants.FAIR_COLOR, endColor: Constants.GOOD_COLOR, percentage: percentage)
                     }
                     completion:
                     { _ in
@@ -175,7 +169,7 @@ class ResultsViewController: UIViewController
                             percentage = duration / sectionTime
                             UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
                             {
-                                self.setBackgroundColor(startColor: self.goodColor, endColor: self.greatColor, percentage: percentage)
+                                self.setBackgroundColor(startColor: Constants.GOOD_COLOR, endColor: Constants.GREAT_COLOR, percentage: percentage)
                             }
                             completion:
                             { _ in
@@ -344,22 +338,22 @@ class ResultsViewController: UIViewController
     {
         if score <= 25
         {
-            return NSLocalizedString("Poor", comment: "Health quality")
+            return Constants.POOR_STRING
         }
         if score <= 50
         {
-            return NSLocalizedString("Fair", comment: "Health quality")
+            return Constants.FAIR_STRING
         }
         if score < 75
         {
-            return NSLocalizedString("Good", comment: "Health quality")
+            return Constants.GOOD_STRING
         }
-        return NSLocalizedString("Great", comment: "Health quality")
+        return Constants.GREAT_STRING
     }
     
     func setBackgroundColor(startColor: Color, endColor: Color, percentage: Double)
     {
-        var percent = Float(percentage)
+        var percent = CGFloat(percentage)
         if percent > 1.0
         {
             percent = 1.0
