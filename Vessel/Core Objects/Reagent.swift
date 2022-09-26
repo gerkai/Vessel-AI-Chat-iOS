@@ -94,9 +94,15 @@ struct Bucket
     let evaluation: Evaluation
 }
 
+struct GoalImpact
+{
+    let goalID: Int
+    let impact: Int
+}
+
 struct Reagent
 {
-    enum ID: Int
+    enum ID: Int, CaseIterable
     {
         case PH = 1
         case HYDRATION = 2
@@ -118,6 +124,7 @@ struct Reagent
     var recommendedDailyAllowance: Int?
     var imageName: String
     var buckets: [Bucket]
+    var goalImpacts: [GoalImpact]
     
     //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
     //returns .notAvailable if invalid parameter given
@@ -212,7 +219,11 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 7.78,
                              high: 8.0,
                              score: 30.0,
-                             evaluation: .high)]),
+                             evaluation: .high)],
+                       goalImpacts: [GoalImpact(goalID: 5, impact: 1),
+                                     GoalImpact(goalID: 6, impact: 1),
+                                     GoalImpact(goalID: 10, impact: 2),
+                                    ]),
 
  //HYDRATION
  Reagent.ID.HYDRATION: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
@@ -236,7 +247,17 @@ let Reagents: [Reagent.ID: Reagent] =
                         Bucket(low: 1.015,
                                  high: 1.03,
                                  score: 20.0,
-                                 evaluation: .veryLow)]),
+                                 evaluation: .veryLow)],
+                       goalImpacts: [GoalImpact(goalID: 1, impact: 1),
+                                     GoalImpact(goalID: 2, impact: 3),
+                                     GoalImpact(goalID: 3, impact: 1),
+                                     GoalImpact(goalID: 4, impact: 1),
+                                     GoalImpact(goalID: 5, impact: 3),
+                                     GoalImpact(goalID: 6, impact: 2),
+                                     GoalImpact(goalID: 7, impact: 1),
+                                     GoalImpact(goalID: 9, impact: 3),
+                                     GoalImpact(goalID: 10, impact: 3)
+                                    ]),
 
  //KETONES
  Reagent.ID.KETONES_A: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
@@ -252,7 +273,13 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 2.21,
                              high: 8.81,
                               score: 0,
-                              evaluation: .high)]),
+                              evaluation: .high)],
+            goalImpacts: [GoalImpact(goalID: 1, impact: 1),
+                          GoalImpact(goalID: 2, impact: 1),
+                          GoalImpact(goalID: 3, impact: 1),
+                          GoalImpact(goalID: 5, impact: 2),
+                          GoalImpact(goalID: 6, impact: 3)
+                         ]),
 
  //VITAMIN C
  Reagent.ID.VITAMIN_C: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
@@ -268,7 +295,17 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 350,
                              high: 1000,
                              score: 100.0,
-                              evaluation: .good)]),
+                              evaluation: .good)],
+            goalImpacts: [GoalImpact(goalID: 1, impact: 3),
+                          GoalImpact(goalID: 2, impact: 2),
+                          GoalImpact(goalID: 3, impact: 1),
+                          GoalImpact(goalID: 4, impact: 1),
+                          GoalImpact(goalID: 5, impact: 2),
+                          GoalImpact(goalID: 6, impact: 1),
+                          GoalImpact(goalID: 7, impact: 1),
+                          GoalImpact(goalID: 8, impact: 3),
+                          GoalImpact(goalID: 10, impact: 1)
+                        ]),
 
  //MAGNESIUM
  Reagent.ID.MAGNESIUM: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
@@ -288,7 +325,18 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 300.0,
                              high: 1000.0,
                              score: 100.0,
-                            evaluation: .excellent)]),
+                            evaluation: .excellent)],
+            goalImpacts: [GoalImpact(goalID: 1, impact: 3),
+                        GoalImpact(goalID: 2, impact: 1),
+                        GoalImpact(goalID: 3, impact: 2),
+                        GoalImpact(goalID: 4, impact: 3),
+                        GoalImpact(goalID: 5, impact: 3),
+                        GoalImpact(goalID: 6, impact: 3),
+                        GoalImpact(goalID: 7, impact: 1),
+                        GoalImpact(goalID: 8, impact: 1),
+                        GoalImpact(goalID: 9, impact: 2),
+                        GoalImpact(goalID: 10, impact: 3)
+                        ]),
 
  //CORTISOL
  Reagent.ID.CORTISOL: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
@@ -308,7 +356,18 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 150.0,
                              high: 405.0,
                                  score: 50.0,
-                                 evaluation: .high)]),
+                                 evaluation: .high)],
+              goalImpacts: [GoalImpact(goalID: 1, impact: 3),
+                            GoalImpact(goalID: 2, impact: 2),
+                            GoalImpact(goalID: 3, impact: 3),
+                            GoalImpact(goalID: 4, impact: 3),
+                            GoalImpact(goalID: 5, impact: 3),
+                            GoalImpact(goalID: 6, impact: 3),
+                            GoalImpact(goalID: 7, impact: 1),
+                            GoalImpact(goalID: 8, impact: 2),
+                            GoalImpact(goalID: 9, impact: 1),
+                            GoalImpact(goalID: 10, impact: 1)
+                            ]),
 
  //VITAMIN B7
  Reagent.ID.VITAMIN_B7: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
@@ -324,7 +383,13 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 10.0,
                              high: 20.0,
                              score: 100.0,
-                              evaluation: .good)]),
+                              evaluation: .good)],
+            goalImpacts: [GoalImpact(goalID: 1, impact: 2),
+                          GoalImpact(goalID: 5, impact: 2),
+                          GoalImpact(goalID: 6, impact: 3),
+                          GoalImpact(goalID: 7, impact: 3),
+                          GoalImpact(goalID: 8, impact: 1)
+                          ]),
 
  //CALCIUM
  Reagent.ID.CALCIUM: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
@@ -344,7 +409,17 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 110.0,
                              high: 160.0,
                                  score: 70.0,
-                                 evaluation: .high)]),
+                                 evaluation: .high)],
+             goalImpacts: [GoalImpact(goalID: 1, impact: 1),
+                           GoalImpact(goalID: 2, impact: 1),
+                           GoalImpact(goalID: 3, impact: 1),
+                           GoalImpact(goalID: 4, impact: 2),
+                           GoalImpact(goalID: 6, impact: 3),
+                           GoalImpact(goalID: 7, impact: 2),
+                           GoalImpact(goalID: 8, impact: 1),
+                           GoalImpact(goalID: 9, impact: 1),
+                           GoalImpact(goalID: 10, impact: 3)
+                           ]),
 
  //NITRITES
  Reagent.ID.NITRITE: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
@@ -364,7 +439,8 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 3.0,
                              high: 8.0,
                                  score: 0.0,
-                                 evaluation: .high)]),
+                                 evaluation: .high)],
+             goalImpacts: []),
 
  //LEUKOCYTE
  Reagent.ID.LEUKOCYTE: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
@@ -380,7 +456,8 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 60.0,
                              high: 120.0,
                              score: 0.0,
-                              evaluation: .detected)]),
+                              evaluation: .detected)],
+           goalImpacts: []),
 
  //SODIUM CHLORIDE
  Reagent.ID.SODIUM: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
@@ -396,5 +473,13 @@ let Reagents: [Reagent.ID: Reagent] =
                       Bucket(low: 50.0,
                              high: 120.0,
                              score: 50.0,
-                              evaluation: .high)]),
+                              evaluation: .high)],
+            goalImpacts: [GoalImpact(goalID: 1, impact: 2),
+                          GoalImpact(goalID: 2, impact: 2),
+                          GoalImpact(goalID: 3, impact: 2),
+                          GoalImpact(goalID: 4, impact: 1),
+                          GoalImpact(goalID: 6, impact: 3),
+                          GoalImpact(goalID: 8, impact: 1),
+                          GoalImpact(goalID: 10, impact: 3)
+                          ]),
 ]
