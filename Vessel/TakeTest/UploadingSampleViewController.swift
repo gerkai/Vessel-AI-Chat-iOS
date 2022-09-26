@@ -204,18 +204,12 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { testResult in
-            //if testResult.errors.count == 0
-            //{
-                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
-                vc.testResult = testResult
-                self.viewModel.uploadingFinished()
-                self.navigationController?.pushViewController(vc, animated: true)
-            /*}
-            else
-            {
-                print("Error in object response: \(testResult)")
-            }*/
+
+            let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+            vc.testResult = testResult
+            self.viewModel.uploadingFinished()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         onFailure:
         { error in
