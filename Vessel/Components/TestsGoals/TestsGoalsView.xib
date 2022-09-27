@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,9 +14,10 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestsGoalsView" customModule="ChartView" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestsGoalsView" customModule="Vessel" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="hvD-wY-wQ3"/>
+                <outlet property="curvyLineView" destination="VEN-Bh-YVI" id="At7-si-3lj"/>
                 <outlet property="goalsStackView" destination="6nl-ru-iJv" id="EbS-zk-jBA"/>
                 <outlet property="testsStackView" destination="z8O-hD-SzO" id="ezH-cV-O9h"/>
             </connections>
@@ -25,6 +27,10 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="545"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VEN-Bh-YVI" customClass="CurvyLineView" customModule="Vessel" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="545"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfx-ze-VBd">
                     <rect key="frame" x="34" y="44" width="40" height="18"/>
                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
@@ -73,6 +79,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="VEN-Bh-YVI" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="2e4-jQ-rmd"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="top" secondItem="Jfx-ze-VBd" secondAttribute="bottom" constant="8" id="4vS-ah-GUj"/>
                 <constraint firstItem="iFh-vL-rGA" firstAttribute="leading" secondItem="6nl-ru-iJv" secondAttribute="leading" constant="14" id="6aR-c3-VsM"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6nl-ru-iJv" secondAttribute="bottom" priority="999" id="9e7-kI-37d"/>
@@ -82,8 +89,11 @@
                 <constraint firstItem="6nl-ru-iJv" firstAttribute="top" secondItem="z8O-hD-SzO" secondAttribute="top" id="XNL-ys-RFv"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Y4S-Mb-dwm"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="top" secondItem="Jfx-ze-VBd" secondAttribute="bottom" constant="8" id="YE1-Az-rCt"/>
+                <constraint firstItem="VEN-Bh-YVI" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="frK-Sz-fBD"/>
                 <constraint firstItem="Jfx-ze-VBd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="hOu-AJ-Hwk"/>
                 <constraint firstItem="iFh-vL-rGA" firstAttribute="centerY" secondItem="Jfx-ze-VBd" secondAttribute="centerY" id="iCY-p4-7ir"/>
+                <constraint firstItem="VEN-Bh-YVI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jSh-WH-RY8"/>
+                <constraint firstItem="VEN-Bh-YVI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rHu-c2-Drt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-218.46153846153845" y="-67.890995260663502"/>
