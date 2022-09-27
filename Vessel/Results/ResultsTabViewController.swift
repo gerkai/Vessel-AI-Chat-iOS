@@ -71,4 +71,14 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     {
         mainTabBarController?.vesselButtonPressed()
     }
+    
+    @IBAction func talkToANutritionist()
+    {
+        print("TALK TO A NUTRITIONIST")
+    }
+    
+    @IBAction func customerSupport()
+    {
+        print("CUSTOMER SUPPORT")
+    }
 }
