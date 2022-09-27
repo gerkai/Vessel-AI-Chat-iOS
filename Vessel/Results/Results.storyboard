@@ -34,51 +34,73 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GR-Ki-ce2" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-uX-dIf">
-                                                <rect key="frame" x="27" y="35.666666666666671" width="143.66666666666666" height="39.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy-girl" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-5g-Wbg">
-                                                <rect key="frame" x="95.333333333333343" y="0.0" width="294.66666666666663" height="444"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEa-kJ-Ktt" customClass="ChartView" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="133.33333333333334" width="390" height="266.33333333333326"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh2-Nz-tWS" userLabel="ChartContainer">
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="451"/>
                                                 <subviews>
-                                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Ab-bd-qeB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="390" height="266.33333333333331"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-uX-dIf">
+                                                        <rect key="frame" x="27" y="60" width="143.66666666666666" height="39.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy-girl" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-5g-Wbg">
+                                                        <rect key="frame" x="95.333333333333343" y="0.0" width="294.66666666666663" height="444"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEa-kJ-Ktt" customClass="ChartView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="173" width="390" height="239"/>
+                                                        <subviews>
+                                                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Ab-bd-qeB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="239"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="279" id="LJk-hs-wsG"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="jeW-Rf-agH">
+                                                                    <size key="itemSize" width="128" height="279"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <variation key="default">
+                                                                    <mask key="constraints">
+                                                                        <exclude reference="LJk-hs-wsG"/>
+                                                                    </mask>
+                                                                </variation>
+                                                            </collectionView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="279" id="LJk-hs-wsG"/>
+                                                            <constraint firstItem="2Ab-bd-qeB" firstAttribute="trailing" secondItem="MEa-kJ-Ktt" secondAttribute="trailing" id="Cdq-vP-G2C"/>
+                                                            <constraint firstItem="2Ab-bd-qeB" firstAttribute="top" secondItem="MEa-kJ-Ktt" secondAttribute="top" id="KI9-6A-ANC"/>
+                                                            <constraint firstItem="2Ab-bd-qeB" firstAttribute="bottom" secondItem="MEa-kJ-Ktt" secondAttribute="bottom" id="Llt-3h-Rbt"/>
+                                                            <constraint firstItem="2Ab-bd-qeB" firstAttribute="leading" secondItem="MEa-kJ-Ktt" secondAttribute="leading" id="ceq-wq-oyG"/>
                                                         </constraints>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="jeW-Rf-agH">
-                                                            <size key="itemSize" width="128" height="279"/>
-                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        </collectionViewFlowLayout>
-                                                        <cells/>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="LJk-hs-wsG"/>
-                                                            </mask>
-                                                        </variation>
-                                                    </collectionView>
+                                                        <connections>
+                                                            <outlet property="collectionView" destination="2Ab-bd-qeB" id="0ZK-pF-kHm"/>
+                                                        </connections>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.75686274509803919" green="0.87058823529411766" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstItem="2Ab-bd-qeB" firstAttribute="trailing" secondItem="MEa-kJ-Ktt" secondAttribute="trailing" id="Cdq-vP-G2C"/>
-                                                    <constraint firstItem="2Ab-bd-qeB" firstAttribute="top" secondItem="MEa-kJ-Ktt" secondAttribute="top" id="KI9-6A-ANC"/>
-                                                    <constraint firstItem="2Ab-bd-qeB" firstAttribute="bottom" secondItem="MEa-kJ-Ktt" secondAttribute="bottom" id="Llt-3h-Rbt"/>
-                                                    <constraint firstItem="2Ab-bd-qeB" firstAttribute="leading" secondItem="MEa-kJ-Ktt" secondAttribute="leading" id="ceq-wq-oyG"/>
+                                                    <constraint firstItem="MEa-kJ-Ktt" firstAttribute="leading" secondItem="lh2-Nz-tWS" secondAttribute="leading" id="8Ra-xy-zie"/>
+                                                    <constraint firstAttribute="bottom" secondItem="s4c-5g-Wbg" secondAttribute="bottom" id="BPh-G5-pcm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MEa-kJ-Ktt" secondAttribute="trailing" id="FfR-YO-Co6"/>
+                                                    <constraint firstItem="HuV-uX-dIf" firstAttribute="top" secondItem="lh2-Nz-tWS" secondAttribute="top" constant="60" id="K6b-4J-Hv8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="s4c-5g-Wbg" secondAttribute="trailing" id="VXW-mm-XNu"/>
+                                                    <constraint firstItem="MEa-kJ-Ktt" firstAttribute="height" secondItem="lh2-Nz-tWS" secondAttribute="height" multiplier="0.53" id="a02-re-7kP"/>
+                                                    <constraint firstItem="s4c-5g-Wbg" firstAttribute="top" secondItem="lh2-Nz-tWS" secondAttribute="top" id="cqw-CI-PG7"/>
+                                                    <constraint firstAttribute="bottom" secondItem="MEa-kJ-Ktt" secondAttribute="bottom" constant="39" id="dNH-cf-bAz"/>
+                                                    <constraint firstItem="HuV-uX-dIf" firstAttribute="leading" secondItem="lh2-Nz-tWS" secondAttribute="leading" constant="27" id="k4G-pn-Bxk"/>
                                                 </constraints>
-                                                <connections>
-                                                    <outlet property="collectionView" destination="2Ab-bd-qeB" id="0ZK-pF-kHm"/>
-                                                </connections>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="BPh-G5-pcm"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PC5-0Z-Qfh" customClass="TestsGoalsView" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="399.66666666666669" width="390" height="128.00000000000006"/>
+                                                <rect key="frame" x="0.0" y="451" width="390" height="76.666666666666629"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="250" constant="128" id="ezg-eg-BEd"/>
@@ -92,19 +114,14 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="PC5-0Z-Qfh" firstAttribute="top" secondItem="MEa-kJ-Ktt" secondAttribute="bottom" id="07M-hn-NHa"/>
-                                            <constraint firstItem="s4c-5g-Wbg" firstAttribute="top" secondItem="4GR-Ki-ce2" secondAttribute="top" id="71c-3g-tRU"/>
-                                            <constraint firstItem="MEa-kJ-Ktt" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="86D-19-sj4"/>
-                                            <constraint firstItem="HuV-uX-dIf" firstAttribute="top" secondItem="s4c-5g-Wbg" secondAttribute="bottom" multiplier="0.08" id="KtB-51-dfo"/>
+                                            <constraint firstItem="PC5-0Z-Qfh" firstAttribute="top" secondItem="lh2-Nz-tWS" secondAttribute="bottom" id="07M-hn-NHa"/>
+                                            <constraint firstItem="lh2-Nz-tWS" firstAttribute="top" secondItem="4GR-Ki-ce2" secondAttribute="top" id="8SD-A3-EDc"/>
+                                            <constraint firstAttribute="trailing" secondItem="lh2-Nz-tWS" secondAttribute="trailing" id="BPe-T8-R9j"/>
                                             <constraint firstAttribute="trailing" secondItem="PC5-0Z-Qfh" secondAttribute="trailing" id="Mrn-jZ-co8"/>
-                                            <constraint firstItem="MEa-kJ-Ktt" firstAttribute="height" secondItem="s4c-5g-Wbg" secondAttribute="height" multiplier="0.6" id="NNS-6h-VMZ"/>
-                                            <constraint firstItem="MEa-kJ-Ktt" firstAttribute="bottom" secondItem="s4c-5g-Wbg" secondAttribute="bottom" multiplier="0.9" id="RZ2-ZR-Z7h"/>
-                                            <constraint firstItem="HuV-uX-dIf" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" constant="27" id="avm-Mh-34m"/>
                                             <constraint firstAttribute="bottom" secondItem="PC5-0Z-Qfh" secondAttribute="bottom" constant="316.33333333333326" id="cyS-3b-wyU"/>
-                                            <constraint firstAttribute="trailing" secondItem="MEa-kJ-Ktt" secondAttribute="trailing" id="de2-tR-ECC"/>
                                             <constraint firstItem="PC5-0Z-Qfh" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="hpe-U0-wDC"/>
                                             <constraint firstAttribute="height" priority="250" constant="844" id="jWJ-mc-4zS"/>
-                                            <constraint firstItem="s4c-5g-Wbg" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" id="sIy-HF-TWQ"/>
+                                            <constraint firstItem="lh2-Nz-tWS" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="uow-es-Ehh"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -112,6 +129,7 @@
                                     <constraint firstItem="4GR-Ki-ce2" firstAttribute="bottom" secondItem="4Hu-Pb-OLD" secondAttribute="bottom" id="DZa-0z-oHl"/>
                                     <constraint firstItem="4GR-Ki-ce2" firstAttribute="centerX" secondItem="fAk-j2-qJ7" secondAttribute="centerX" id="Uvl-p5-66j"/>
                                     <constraint firstItem="4GR-Ki-ce2" firstAttribute="trailing" secondItem="4Hu-Pb-OLD" secondAttribute="trailing" id="YwI-XE-3O0"/>
+                                    <constraint firstItem="lh2-Nz-tWS" firstAttribute="height" secondItem="fAk-j2-qJ7" secondAttribute="height" multiplier="0.566" id="mgX-0i-lKq"/>
                                     <constraint firstItem="4GR-Ki-ce2" firstAttribute="leading" secondItem="4Hu-Pb-OLD" secondAttribute="leading" id="mgm-xH-03b"/>
                                     <constraint firstItem="4GR-Ki-ce2" firstAttribute="top" secondItem="4Hu-Pb-OLD" secondAttribute="top" id="tmU-7K-bf6"/>
                                 </constraints>
@@ -199,7 +217,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NWn-Sl-FwG"/>
-                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fAk-j2-qJ7" firstAttribute="top" secondItem="NWn-Sl-FwG" secondAttribute="top" id="D6N-CG-aYu"/>
                             <constraint firstItem="fAk-j2-qJ7" firstAttribute="trailing" secondItem="NWn-Sl-FwG" secondAttribute="trailing" id="UNb-L4-bpw"/>

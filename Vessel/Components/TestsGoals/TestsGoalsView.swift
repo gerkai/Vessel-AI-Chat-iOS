@@ -104,7 +104,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
         UIView.animate(withDuration: 0.1)
         {
-            self.superview?.layoutIfNeeded()
+            self.parentViewController?.view.layoutIfNeeded()
         }
     }
     
@@ -146,7 +146,10 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
         UIView.animate(withDuration: 0.1)
         {
-            self.superview?.layoutIfNeeded()
+            //we can't just tell the stackView to layout as it will cause superviews to jump around.
+            //If you ask the superview to layout, then the view above that jumps around.
+            //solution was to ask the parent viewController's view to layout. Now it's smooth as butter.
+            self.parentViewController?.view.layoutIfNeeded()
         }
     }
 }
