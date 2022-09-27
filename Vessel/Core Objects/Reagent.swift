@@ -197,6 +197,21 @@ struct Reagent
         }
         return Evaluation.notAvailable
     }
+    
+    //given a goalID, this will return the impact level for that goal. 0 if none, or not found.
+    func impactFor(goal: Int) -> Int
+    {
+        var impact = 0
+        for goalImpact in goalImpacts
+        {
+            if goalImpact.goalID == goal
+            {
+                impact = goalImpact.impact
+                break
+            }
+        }
+        return impact
+    }
 }
 
 //Here are the reagents used by the app

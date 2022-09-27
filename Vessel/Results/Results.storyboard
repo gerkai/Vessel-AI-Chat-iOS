@@ -34,6 +34,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GR-Ki-ce2" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-uX-dIf">
+                                                <rect key="frame" x="27" y="35.666666666666671" width="143.66666666666666" height="39.333333333333329"/>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy-girl" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-5g-Wbg">
                                                 <rect key="frame" x="95.333333333333343" y="0.0" width="294.66666666666663" height="444"/>
                                             </imageView>
@@ -71,22 +77,32 @@
                                                     <outlet property="collectionView" destination="2Ab-bd-qeB" id="0ZK-pF-kHm"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-uX-dIf">
-                                                <rect key="frame" x="27" y="35.666666666666671" width="144" height="40"/>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PC5-0Z-Qfh" customClass="TestsGoalsView" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="399.66666666666669" width="390" height="128.00000000000006"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="250" constant="128" id="ezg-eg-BEd"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="ezg-eg-BEd"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="PC5-0Z-Qfh" firstAttribute="top" secondItem="MEa-kJ-Ktt" secondAttribute="bottom" id="07M-hn-NHa"/>
                                             <constraint firstItem="s4c-5g-Wbg" firstAttribute="top" secondItem="4GR-Ki-ce2" secondAttribute="top" id="71c-3g-tRU"/>
                                             <constraint firstItem="MEa-kJ-Ktt" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="86D-19-sj4"/>
                                             <constraint firstItem="HuV-uX-dIf" firstAttribute="top" secondItem="s4c-5g-Wbg" secondAttribute="bottom" multiplier="0.08" id="KtB-51-dfo"/>
+                                            <constraint firstAttribute="trailing" secondItem="PC5-0Z-Qfh" secondAttribute="trailing" id="Mrn-jZ-co8"/>
                                             <constraint firstItem="MEa-kJ-Ktt" firstAttribute="height" secondItem="s4c-5g-Wbg" secondAttribute="height" multiplier="0.6" id="NNS-6h-VMZ"/>
                                             <constraint firstItem="MEa-kJ-Ktt" firstAttribute="bottom" secondItem="s4c-5g-Wbg" secondAttribute="bottom" multiplier="0.9" id="RZ2-ZR-Z7h"/>
                                             <constraint firstItem="HuV-uX-dIf" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" constant="27" id="avm-Mh-34m"/>
+                                            <constraint firstAttribute="bottom" secondItem="PC5-0Z-Qfh" secondAttribute="bottom" constant="316.33333333333326" id="cyS-3b-wyU"/>
                                             <constraint firstAttribute="trailing" secondItem="MEa-kJ-Ktt" secondAttribute="trailing" id="de2-tR-ECC"/>
+                                            <constraint firstItem="PC5-0Z-Qfh" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="hpe-U0-wDC"/>
                                             <constraint firstAttribute="height" priority="250" constant="844" id="jWJ-mc-4zS"/>
                                             <constraint firstItem="s4c-5g-Wbg" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" id="sIy-HF-TWQ"/>
                                         </constraints>
@@ -103,7 +119,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yEu-8U-DuO"/>
                             </scrollView>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IjY-Va-H26">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <rect key="frame" x="-1" y="-1" width="390" height="844"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view alpha="0.94999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-aO-ixe">
@@ -111,7 +127,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtT-3B-dkC">
-                                        <rect key="frame" x="0.0" y="296.66666666666669" width="390" height="215"/>
+                                        <rect key="frame" x="0.0" y="297" width="390" height="215"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="agn-ZS-RKk">
                                                 <rect key="frame" x="175" y="0.0" width="40" height="40"/>
@@ -198,6 +214,7 @@
                     <connections>
                         <outlet property="chartView" destination="MEa-kJ-Ktt" id="5WF-d8-x8C"/>
                         <outlet property="lockoutView" destination="IjY-Va-H26" id="fpP-K8-7VM"/>
+                        <outlet property="testsGoalsView" destination="PC5-0Z-Qfh" id="yNX-PD-nCl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -13,6 +13,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     var initialLoad = true
     var viewModel = ResultsTabViewModel()
     @IBOutlet weak var lockoutView: UIView!
+    @IBOutlet weak var testsGoalsView: TestsGoalsView!
     
     override func viewDidLoad()
     {
@@ -30,6 +31,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         else
         {
             lockoutView.isHidden = true
+            if initialLoad
+            {
+                testsGoalsView.setupReagents(forResult: viewModel.result)
+                testsGoalsView.setupGoals()
+            }
         }
     }
     

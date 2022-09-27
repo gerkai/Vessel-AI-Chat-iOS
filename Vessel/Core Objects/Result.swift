@@ -14,7 +14,6 @@ struct Result: Codable
     let cardUUID: String
     let wellnessScore: Double
     let dateString: String
-    //let errors: [TestError]
     let reagents: [ReagentResult]
     
     enum CodingKeys: String, CodingKey
@@ -24,7 +23,6 @@ struct Result: Codable
         case cardUUID = "card_uuid"
         case wellnessScore = "wellness_score"
         case dateString = "insert_date"
-        //case errors
         case reagents
     }
     
@@ -73,6 +71,3 @@ struct ReagentResult: Codable
     }
 }
 
-struct TestError: Codable
-{
-}
