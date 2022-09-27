@@ -12,7 +12,7 @@ import Foundation
 class AfterTestViewModel
 {
     var reagentInfoFlags: Int = 0
-    var testResult: TestResult!
+    var testResult: Result!
     var currentScreen: Int = -1
     var contactFlags: Int = 0
     var screens: [AfterTestScreen] = []
@@ -66,7 +66,7 @@ class AfterTestViewModel
         case TEST_REMINDER
     }
     
-    init(testResult: TestResult)
+    init(testResult: Result)
     {
         self.testResult = testResult
         calculateTotalScreens()

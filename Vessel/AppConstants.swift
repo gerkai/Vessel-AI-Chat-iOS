@@ -65,6 +65,18 @@ struct Constants
     static let DARK_GRAY_TRANSLUCENT = UIColor.init(red: 0.0863, green: 0.0824, blue: 0.0784, alpha: 0.7)
     static let VESSEL_BLACK = UIColor.init(red: 22.0 / 255.0, green: 21.0 / 255.0, blue: 20.0 / 255.0, alpha: 1.0)
     static let SOLID_BLACK = UIColor.black
+    static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514
+    static let vesselGray   = #colorLiteral(red: 0.3289078772, green: 0.3246636391, blue: 0.3246636391, alpha: 1)     //#545353
+    static let vesselPoor = #colorLiteral(red: 0.9043522477, green: 0.7674039006, blue: 0.6951909661, alpha: 1)     //#E7C4B1
+    static let vesselFair = #colorLiteral(red: 0.9455940127, green: 0.8627095222, blue: 0.8065157533, alpha: 1)     //#F1DCCe
+    static let vesselGood = #colorLiteral(red: 0.8588235294, green: 0.9215686275, blue: 0.8352941176, alpha: 1)     //#DBEBD5
+    static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
+    
+    //color components
+    static let POOR_COLOR = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
+    static let FAIR_COLOR = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
+    static let GOOD_COLOR = Color(red: 0.8588, green: 0.9216, blue: 0.8353)
+    static let GREAT_COLOR = Color(red: 0.7569, green: 0.8706, blue: 0.7294)
     
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"
@@ -117,13 +129,6 @@ struct Constants
     static let SAW_CORTISOL_HIGH_INFO       = 0x00010000
     static let SAW_TESTING_REMINDER         = 0x00020000
     
-    //Colors
-    static let vesselBlack   = #colorLiteral(red: 0.0862745098, green: 0.08235294118, blue: 0.07843137255, alpha: 1)    //#161514
-    static let vesselGray   = #colorLiteral(red: 0.3289078772, green: 0.3246636391, blue: 0.3246636391, alpha: 1)     //#545353
-    static let vesselPoor = #colorLiteral(red: 0.9043522477, green: 0.7674039006, blue: 0.6951909661, alpha: 1)     //#E7C4B1
-    static let vesselFair = #colorLiteral(red: 0.9455940127, green: 0.8627095222, blue: 0.8065157533, alpha: 1)     //#F1DCCe
-    static let vesselGood = #colorLiteral(red: 0.8588235294, green: 0.9215686275, blue: 0.8352941176, alpha: 1)     //#DBEBD5
-    static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
     static let MIN_GOALS_AT_A_TIME = 1 /* min goals a user can select during onboarding */
@@ -137,8 +142,46 @@ struct Constants
     static let ENTER_VALID_EMAIL_STRING = NSLocalizedString("Please enter a valid email", comment: "")
     static let ENTER_PASSWORD_STRING = NSLocalizedString("Please enter your password", comment: "")
     static let INCORRECT_PASSWORD_STRING = NSLocalizedString("This email and password combination is incorrect", comment: "")
+    static let POOR_STRING = NSLocalizedString("Poor", comment: "")
+    static let FAIR_STRING = NSLocalizedString("Fair", comment: "")
+    static let GOOD_STRING = NSLocalizedString("Good", comment: "")
+    static let GREAT_STRING = NSLocalizedString("Great", comment: "")
     
     //Fonts
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
+    
+    static func stringForScore(score: Double) -> String
+    {
+        if score <= 0.25
+        {
+            return Constants.POOR_STRING
+        }
+        if score <= 0.5
+        {
+            return Constants.FAIR_STRING
+        }
+        if score < 0.75
+        {
+            return Constants.GOOD_STRING
+        }
+        return Constants.GREAT_STRING
+    }
+    
+    static func colorForScore(score: Double) -> UIColor
+    {
+        if score <= 0.25
+        {
+            return Constants.vesselPoor
+        }
+        if score <= 0.5
+        {
+            return Constants.vesselFair
+        }
+        if score < 0.75
+        {
+            return Constants.vesselGood
+        }
+        return Constants.vesselGreat
+    }
 }

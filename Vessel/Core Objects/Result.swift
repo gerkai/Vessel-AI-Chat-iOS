@@ -1,5 +1,5 @@
 //
-//  TestResult.swift
+//  Result.swift
 //  Vessel
 //
 //  Created by Carson Whitsett on 7/27/22.
@@ -7,16 +7,24 @@
 
 import Foundation
 
-struct TestResult: Codable
+struct Result: Codable
 {
+    let id: Int
+    let lastUpdated: Int
+    let cardUUID: String
     let wellnessScore: Double
-    let errors: [TestError]
+    let dateString: String
+    //let errors: [TestError]
     let reagents: [ReagentResult]
     
     enum CodingKeys: String, CodingKey
     {
+        case id
+        case lastUpdated = "last_updated"
+        case cardUUID = "card_uuid"
         case wellnessScore = "wellness_score"
-        case errors
+        case dateString = "insert_date"
+        //case errors
         case reagents
     }
     
@@ -52,14 +60,16 @@ struct TestResult: Codable
 struct ReagentResult: Codable
 {
     let id: Int
-    let value: Double
     let score: Double
+    let value: Double
+    let errorCodes: [Int]
     
     enum CodingKeys: String, CodingKey
     {
         case id = "reagent_id"
-        case value
         case score
+        case value
+        case errorCodes = "error_codes"
     }
 }
 

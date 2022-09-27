@@ -941,7 +941,7 @@ class Server: NSObject
         })
     }
     
-    func getScore(sampleID: String, onSuccess success: @escaping (_ result: TestResult) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getScore(sampleID: String, onSuccess success: @escaping (_ result: Result) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
@@ -954,7 +954,7 @@ class Server: NSObject
                 
                // print("JSON: \(json)")
                 
-                if let testResult = try? JSONDecoder().decode(TestResult.self, from: data)
+                if let testResult = try? JSONDecoder().decode(Result.self, from: data)
                 {
                     //print ("Test Result: \(testResult)")
                     DispatchQueue.main.async()
