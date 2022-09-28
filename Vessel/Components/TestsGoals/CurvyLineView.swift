@@ -25,14 +25,32 @@ class CurvyLineView: UIView
 {
     let pointRadius = 8.0
     var Lines: [CurvyLine] = []
+    var lineLayers = [CAShapeLayer]()
     
-    override func draw(_ rect: CGRect)
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        
+        self.layer.sublayers?.forEach(
+        { (layer: CALayer) -> () in
+            layer.removeFromSuperlayer()
+        })
+        lineLayers.removeAll()
+        
+        drawSmoothLines()
+        animateLayers()
+    }
+    
+    //override func draw(_ rect: CGRect)
+    func drawSmoothLines()
     {
         //draw chart line
-        let path = UIBezierPath()
+        let color = UIColor(hex: "B0D2A8") //green
         
         for line in Lines
         {
+            let path = UIBezierPath()
+            path.lineWidth = 1.5
             if line.startPoint.x < line.endPoint.x
             {
                 let cp1 = CGPoint(x: line.endPoint.x - line.intensity + line.offset, y: line.endPoint.y)
@@ -47,20 +65,30 @@ class CurvyLineView: UIView
                 path.move(to: line.startPoint)
                 path.addCurve(to: line.endPoint, controlPoint1: cp2, controlPoint2: cp1)
             }
+            let lineLayer = CAShapeLayer()
+            lineLayer.path = path.cgPath
+            lineLayer.fillColor = UIColor.clear.cgColor
+            lineLayer.strokeColor = color.cgColor
+            
+            self.layer.addSublayer(lineLayer)
+            lineLayers.append(lineLayer)
+            lineLayer.strokeEnd = 0
         }
-        let color = UIColor(hex: "B0D2A8") //green
-        color.setStroke()
-        path.lineWidth = 1.5
-        path.stroke()
-        
-        /* uncomment to draw dots used for debugging
-        if Lines.count != 0
+    }
+    
+    func animateLayers()
+    {
+        let strokeAnimationKey = "StrokeAnimationKey"
+        for lineLayer in lineLayers
         {
-            drawPoint(point: Lines[0].startPoint, color: .gray, radius: pointRadius)
-            drawPoint(point: Lines[0].endPoint, color: .green, radius: pointRadius)
-            //drawPoint(point: cp1, color: .red, radius: pointRadius)
-            //drawPoint(point: cp2, color: .blue, radius: pointRadius)
-        }*/
+            let growAnimation = CABasicAnimation(keyPath: "strokeEnd")
+            growAnimation.toValue = 1
+            growAnimation.duration = 0.5
+            growAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+            growAnimation.fillMode = CAMediaTimingFillMode.forwards
+            growAnimation.isRemovedOnCompletion = false
+            lineLayer.add(growAnimation, forKey: strokeAnimationKey)
+        }
     }
     
     func drawPoint(point: CGPoint, color: UIColor, radius: CGFloat)
