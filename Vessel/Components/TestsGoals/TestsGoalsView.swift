@@ -101,6 +101,8 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                 }
             }
             
+            let connectedReagentIDs = Reagent.reagentsFor(goal: id, withImpactAtLease: 1)
+            
             //unselect all other tests
             for view in testsStackView.arrangedSubviews
             {
@@ -108,28 +110,29 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                 {
                     testView.isSelected = false
                     
-                    //add curvy lines from goal to reagents that have an impact > 0
-                    if let reagentID = Reagent.ID(rawValue: testView.tag)
+                    if connectedReagentIDs.contains(testView.tag)
                     {
-                        let reagent = Reagents[reagentID]
-                        let impact = reagent!.impactFor(goal: id)
-                        if impact != 0
-                        {
-                            if let reagentView = reagentViewWithID(id: id), let goalView = selectedGoalView
-                            {
-                                //let startPoint = CGPoint(x: reagentView.frame.origin.x + reagentView.frame.width, y: reagentView.frame.origin.y + (reagentView.frame.height / 2))
-                                //let endPoint = CGPoint(x: goalView.frame.origin.x, y: goalView.frame.origin.y + (goalView.frame.height / 2))
-                                let startPoint = CGPoint(x: 0.0, y: goalView.frame.height / 2)
-                                let endPoint = CGPoint(x: reagentView.frame.width, y: reagentView.frame.height / 2)
-                                let convertedStartPoint = reagentView.convert(startPoint, to: curvyLineView)
-                                let convertedEndPoint = goalView.convert(endPoint, to: curvyLineView)
-                                
-                                print("Start: \(startPoint), End: \(endPoint)")
-                                print("ConvStart: \(convertedStartPoint), ConvEnd: \(convertedEndPoint)")
-                                let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
-                                curvyLineView.addCurvyLine(line: curvyLine)
-                            }
-                        }
+                        //add curvy lines from goal to reagents that have an impact > 0
+                        //if let reagentID = Reagent.ID(rawValue: testView.tag)
+                        //{
+                            //let reagent = Reagents[reagentID]
+                            //let impact = reagent!.impactFor(goal: id)
+                            //if impact != 0
+                            //{
+                                if let reagentView = reagentViewWithID(id: testView.tag), let goalView = selectedGoalView
+                                {
+                                    let startPoint = CGPoint(x: 0.0, y: goalView.frame.height / 2)
+                                    let endPoint = CGPoint(x: reagentView.frame.width, y: reagentView.frame.height / 2)
+                                    let convertedStartPoint = goalView.convert(startPoint, to: curvyLineView)
+                                    let convertedEndPoint = reagentView.convert(endPoint, to: curvyLineView)
+                                    
+                                    print("Start: \(startPoint), End: \(endPoint)")
+                                    print("ConvStart: \(convertedStartPoint), ConvEnd: \(convertedEndPoint)")
+                                    let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
+                                    curvyLineView.addCurvyLine(line: curvyLine)
+                                }
+                            //}
+                        //}
                     }
                 }
             }
@@ -179,8 +182,6 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                         {
                             if let reagentView = reagentViewWithID(id: id)
                             {
-                                //let startPoint = CGPoint(x: reagentView.frame.origin.x + reagentView.frame.width, y: reagentView.frame.origin.y + (reagentView.frame.height / 2))
-                                //let endPoint = CGPoint(x: goalView.frame.origin.x, y: goalView.frame.origin.y + (goalView.frame.height / 2))
                                 let startPoint = CGPoint(x: reagentView.frame.width, y: reagentView.frame.height / 2)
                                 let endPoint = CGPoint(x: 0.0, y: goalView.frame.height / 2)
                                 let convertedStartPoint = reagentView.convert(startPoint, to: curvyLineView)

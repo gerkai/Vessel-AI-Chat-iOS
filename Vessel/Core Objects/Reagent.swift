@@ -212,6 +212,25 @@ struct Reagent
         }
         return impact
     }
+    
+    static func reagentsFor(goal: Int, withImpactAtLease: Int) -> [Int]
+    {
+        var reagentIDs: [Int] = []
+        for id in Reagent.ID.allCases
+        {
+            if let reagent = Reagents[id]
+            {
+                for goalImpact in reagent.goalImpacts
+                {
+                    if (goalImpact.goalID == goal) && (goalImpact.impact >= withImpactAtLease)
+                    {
+                        reagentIDs.append(id.rawValue)
+                    }
+                }
+            }
+        }
+        return reagentIDs
+    }
 }
 
 //Here are the reagents used by the app
