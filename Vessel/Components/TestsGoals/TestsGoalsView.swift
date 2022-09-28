@@ -100,9 +100,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                     }
                 }
             }
-            
-            //let connectedReagentIDs = Reagent.reagentsFor(goal: id, withImpactAtLease: 1)
-            
+                        
             //unselect all other tests
             for view in testsStackView.arrangedSubviews
             {
