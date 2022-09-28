@@ -83,7 +83,7 @@ class CurvyLineView: UIView
         {
             let growAnimation = CABasicAnimation(keyPath: "strokeEnd")
             growAnimation.toValue = 1
-            growAnimation.duration = 0.5
+            growAnimation.duration = 0.4
             growAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             growAnimation.fillMode = CAMediaTimingFillMode.forwards
             growAnimation.isRemovedOnCompletion = false
