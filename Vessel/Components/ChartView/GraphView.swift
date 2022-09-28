@@ -29,7 +29,7 @@ class GraphView: UIView
         }
     }
     
-    var data: [ChartViewDataPoint]!
+    var data: [Result]!
     {
         didSet
         {
@@ -41,7 +41,7 @@ class GraphView: UIView
     {
         //shrink Y drawable area by pointRegionSize so that we don't clip selected dot
         let x = CGFloat(index - 2) * frame.width + (frame.width / 2)
-        let range = data[index].score * (bounds.height - pointRegionSize)
+        let range = data[index].wellnessScore * (bounds.height - pointRegionSize)
         let y = bounds.height - pointRegionSize / 2 - range
         return CGPoint(x: x, y: y)
     }
@@ -50,12 +50,12 @@ class GraphView: UIView
     {
         //draw chart line
         let path = UIBezierPath()
-        if data[0].score != -1
+        if data[0].wellnessScore != -1
         {
             //left side of point
             quadCurvedPath(path, side: .left)
         }
-        if data[4].score != -1
+        if data[4].wellnessScore != -1
         {
             //right side of point
             quadCurvedPath(path, side: .right)

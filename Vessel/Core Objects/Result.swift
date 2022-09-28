@@ -12,7 +12,7 @@ struct Result: Codable
     let id: Int
     let lastUpdated: Int
     let cardUUID: String
-    let wellnessScore: Double
+    var wellnessScore: Double
     let dateString: String
     let reagents: [ReagentResult]
     

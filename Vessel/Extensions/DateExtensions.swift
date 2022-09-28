@@ -72,4 +72,17 @@ extension Date
                 return ""
         }
     }
+    
+    //returns month, day and year Int from standard ISO 8601 date/time string
+    static func components(for ISO8601String: String) -> (month: Int, day: Int, year: Int)
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let localDate = formatter.date(from: ISO8601String)
+        let month = NSCalendar.current.component(.month, from: localDate!)
+        let day = NSCalendar.current.component(.day, from: localDate!)
+        let year = NSCalendar.current.component(.year, from: localDate!)
+        
+        return (month, day, year)
+    }
 }

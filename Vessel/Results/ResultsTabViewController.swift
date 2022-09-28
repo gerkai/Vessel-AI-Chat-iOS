@@ -24,7 +24,8 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewWillAppear(_ animated: Bool)
     {
-        if viewModel.dataPoints.isEmpty
+        let numResults = viewModel.numberOfResults()
+        if numResults == 0
         {
             lockoutView.isHidden = false
         }
@@ -33,7 +34,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             lockoutView.isHidden = true
             if initialLoad
             {
-                testsGoalsView.setupReagents(forResult: viewModel.result)
+                testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
                 testsGoalsView.setupGoals()
             }
         }
@@ -51,12 +52,12 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     //Mark: - ChartViewDataSource
     func chartViewNumDataPoints() -> Int
     {
-        return viewModel.dataPoints.count
+        return viewModel.numberOfResults()
     }
     
-    func chartViewData(forIndex index: Int) -> ChartViewDataPoint
+    func chartViewData(forIndex index: Int) -> Result
     {
-        return viewModel.dataPoints[index]
+        return viewModel.resultForIndex(i: index)
     }
     
     func ChartViewInfoTapped()
@@ -65,6 +66,12 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         let vc = storyboard.instantiateViewController(withIdentifier: "WellnessScoreViewController") as! WellnessScoreViewController
         vc.initWithViewModel(vm: viewModel)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func chartViewCellSelected(cellIndex: Int)
+    {
+        viewModel.selectResult(index: cellIndex)
+        testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex))
     }
     
     @IBAction func takeATest()

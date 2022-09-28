@@ -9,32 +9,9 @@ import Foundation
 
 class ResultsTabViewModel
 {
+    var selectedResultIndex: Int!
+    
     //mock data
-    let dataPoints: [ChartViewDataPoint] = [ChartViewDataPoint(score: 0.4, month: 04, day: 9, year: 2022),
-                      ChartViewDataPoint(score: 0.7, month: 04, day: 16, year: 2022),
-                      ChartViewDataPoint(score: 0.3, month: 04, day: 23, year: 2022),
-                      ChartViewDataPoint(score: 0.22, month: 04, day: 30, year: 2022),
-                      ChartViewDataPoint(score: 0.37, month: 05, day: 7, year: 2022),
-                      ChartViewDataPoint(score: 0.46, month: 05, day: 14, year: 2022),
-                      ChartViewDataPoint(score: 0.59, month: 05, day: 21, year: 2022),
-                      ChartViewDataPoint(score: 0.73, month: 05, day: 28, year: 2022),
-                      ChartViewDataPoint(score: 0.86, month: 06, day: 4, year: 2022),
-                      ChartViewDataPoint(score: 0.77, month: 06, day: 11, year: 2022),
-                      ChartViewDataPoint(score: 0.42, month: 06, day: 18, year: 2022),
-                      ChartViewDataPoint(score: 0.68, month: 06, day: 25, year: 2022),
-                      ChartViewDataPoint(score: 0.87, month: 07, day: 2, year: 2022),
-                      ChartViewDataPoint(score: 0.92, month: 07, day: 9, year: 2022),
-                      ChartViewDataPoint(score: 1.0, month: 07, day: 16, year: 2022),
-                      ChartViewDataPoint(score: 0.9, month: 07, day: 23, year: 2022),
-                      ChartViewDataPoint(score: 0.8, month: 07, day: 30, year: 2022),
-                      ChartViewDataPoint(score: 0.7, month: 08, day: 6, year: 2022),
-                      ChartViewDataPoint(score: 0.6, month: 08, day: 13, year: 2022),
-                      ChartViewDataPoint(score: 0.5, month: 08, day: 20, year: 2022),
-                      ChartViewDataPoint(score: 0.4, month: 08, day: 27, year: 2022),
-                      ChartViewDataPoint(score: 0.3, month: 09, day: 3, year: 2022),
-                      ChartViewDataPoint(score: 0.2, month: 09, day: 10, year: 2022),
-                      ChartViewDataPoint(score: 0.1, month: 09, day: 17, year: 2022),
-                      ChartViewDataPoint(score: 0.0, month: 09, day: 24, year: 2022)]
     /*
      case PH = 1
      case HYDRATION = 2
@@ -49,8 +26,33 @@ class ResultsTabViewModel
      case LEUKOCYTE = 22
      case SODIUM = 23
      */
-    let result = Result(id: 1, lastUpdated: 0, cardUUID: "12345", wellnessScore: 0.85, dateString: "2022-09-24T19:34:00", reagents: [
-        ReagentResult(id: 5, score: 0.85, value: 250.0, errorCodes: []),
+    init()
+    {
+        selectedResultIndex = numberOfResults() - 1
+    }
+    
+    func numberOfResults() -> Int
+    {
+        return results.count
+    }
+    
+    func resultForIndex(i: Int) -> Result
+    {
+        return results[i]
+    }
+    
+    func selectedResult() -> Result
+    {
+        return results[selectedResultIndex]
+    }
+    
+    func selectResult(index: Int)
+    {
+        selectedResultIndex = index
+    }
+    
+    let results = [Result(id: 1, lastUpdated: 2556, cardUUID: "12345", wellnessScore: 0.85, dateString: "2022-08-08T19:34:00", reagents: [
+        ReagentResult(id: 5, score: 0.70, value: 350.0, errorCodes: []),
         ReagentResult(id: 4, score: 0.74, value: 395.0, errorCodes: []),
         ReagentResult(id: 2, score: 0.67, value: 1.003, errorCodes: []),
         ReagentResult(id: 3, score: 0.99, value: 1.0, errorCodes: []),
@@ -58,5 +60,91 @@ class ResultsTabViewModel
         ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
         ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
         ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
-    ])
+    ]),
+       Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.85, dateString: "2022-08-17T19:34:00", reagents: [
+           ReagentResult(id: 5, score: 0.30, value: 400.0, errorCodes: []),
+           ReagentResult(id: 4, score: 0.74, value: 508.0, errorCodes: []),
+           ReagentResult(id: 2, score: 0.67, value: 1.0, errorCodes: []),
+           ReagentResult(id: 3, score: 0.99, value: 1.8, errorCodes: []),
+           ReagentResult(id: 1, score: 0.62, value: 6.72, errorCodes: []),
+           ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+           ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+           ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+       ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.22, dateString: "2022-08-28T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 450.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 225.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.0062, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 2.2, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 4.382, errorCodes: []),
+                          ReagentResult(id: 8, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.45, value: 25.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.37, dateString: "2022-09-03T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 408.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 195.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.015, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 1.3, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 7.67, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.73, dateString: "2022-09-10T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 300.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 82.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.02, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 3.85, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 6.08, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.49, dateString: "2022-09-16T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 180.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 0.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.06, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 3.0, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 5.17, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.73, dateString: "2022-09-21T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 98.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 47.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.001, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 2.35, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 5.22, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.86, dateString: "2022-09-23T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 50.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 277.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.0092, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 2.28, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 6.22, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 2.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 25.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 100.0, errorCodes: [])
+                      ]),
+                   
+                      Result(id: 1, lastUpdated: 3456, cardUUID: "12345", wellnessScore: 0.95, dateString: "2022-09-28T19:34:00", reagents: [
+                          ReagentResult(id: 5, score: 0.85, value: 250.0, errorCodes: []),
+                          ReagentResult(id: 4, score: 0.74, value: 989.0, errorCodes: []),
+                          ReagentResult(id: 2, score: 0.67, value: 1.005, errorCodes: []),
+                          ReagentResult(id: 3, score: 0.99, value: 3.0, errorCodes: []),
+                          ReagentResult(id: 1, score: 0.62, value: 7.20, errorCodes: []),
+                          ReagentResult(id: 11, score: 0.55, value: 12.3, errorCodes: []),
+                          ReagentResult(id: 18, score: 0.45, value: 67.0, errorCodes: []),
+                          ReagentResult(id: 23, score: 0.43, value: 30.0, errorCodes: [])
+                      ])]
 }

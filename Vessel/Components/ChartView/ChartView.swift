@@ -7,14 +7,6 @@
 
 import UIKit
 
-struct ChartViewDataPoint
-{
-    var score: Double
-    var month: Int
-    var day: Int
-    var year: Int
-}
-
 extension Notification.Name
 {
     static let selectChartViewCell = Notification.Name("SelectChartViewCell")
@@ -23,12 +15,13 @@ extension Notification.Name
 protocol ChartViewDataSource
 {
     func chartViewNumDataPoints() -> Int
-    func chartViewData(forIndex index: Int) -> ChartViewDataPoint
+    func chartViewData(forIndex index: Int) -> Result
 }
 
 protocol ChartViewDelegate
 {
     func ChartViewInfoTapped()
+    func chartViewCellSelected(cellIndex: Int)
 }
 
 class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ChartViewCellDelegate
@@ -48,12 +41,19 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         collectionView.dataSource = self
     }
     
+    func setSelectedCell(cellIndex: Int)
+    {
+        selectedCell = cellIndex
+        delegate?.chartViewCellSelected(cellIndex: cellIndex)
+    }
+    
     func selectLastCell()
     {
         if numCells == nil
         {
             numCells = dataSource.chartViewNumDataPoints()
         }
+        setSelectedCell(cellIndex: numCells - 1)
         NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": numCells - 1])
     }
     
@@ -78,6 +78,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         if selectedCell != cell
         {
             selectedCell = cell
+            setSelectedCell(cellIndex: cell)
             NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell])
         }
     }
@@ -102,20 +103,21 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         
         let data = fetchDataPointsFor(index: currentRow)
         cell.graphView.data = data
-        let wellnessScore = Int((data[2].score + 0.005) * 100)
+        let wellnessScore = Int((data[2].wellnessScore + 0.005) * 100)
         cell.wellnessScoreLabel.text = "\(wellnessScore)"
-        cell.wellnessScore = data[2].score
-        cell.monthLabel.text = Date.abbreviationFor(month: data[2].month)
-        cell.dayLabel.text = String(format: "%02i", data[2].day)
+        cell.wellnessScore = data[2].wellnessScore
+        let components = Date.components(for: data[2].dateString)
+        cell.monthLabel.text = Date.abbreviationFor(month: components.month)
+        cell.dayLabel.text = String(format: "%02i", components.day)
         return cell
     }
     
-    func fetchDataPointsFor(index: Int) -> [ChartViewDataPoint]
+    func fetchDataPointsFor(index: Int) -> [Result]
     {
         //create an array of 5 data points (2 before and 2 after this data point)
         //If we're indexing either end of the data set, mark it with -1. This signals the
         //graphView not to draw that line segment.
-        var data: [ChartViewDataPoint] = []
+        var data: [Result] = []
         
         //add two data points before current one
         if index < 2
@@ -168,11 +170,11 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         //don't draw far left segment or far right segment
         if index == 0
         {
-            data[0].score = -1
+            data[0].wellnessScore = -1
         }
         if index == numCells - 1
         {
-            data[4].score = -1
+            data[4].wellnessScore = -1
         }
         return data
     }
@@ -183,6 +185,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         if collectionView.contentSize.width < frame.width
         {
             selectedCell = id
+            setSelectedCell(cellIndex: id)
             NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": id])
         }
     }

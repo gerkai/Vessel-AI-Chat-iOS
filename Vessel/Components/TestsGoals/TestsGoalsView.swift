@@ -41,6 +41,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     
     func setupReagents(forResult result: Result)
     {
+        testsStackView.removeAllArrangedSubviews()
         for reagentResult in result.reagents
         {
             if let reagentID = Reagent.ID(rawValue: reagentResult.id)
@@ -60,6 +61,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     
     func setupGoals()
     {
+        goalsStackView.removeAllArrangedSubviews()
         for goalID in Goal.ID.allCases
         {
             let goal = Goals[goalID]
