@@ -29,17 +29,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKi-7V-y1x" userLabel="greenView">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="47"/>
+                                <rect key="frame" x="0.0" y="-309" width="390" height="300"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="47" id="T2Z-IX-pQw"/>
+                                    <constraint firstAttribute="height" constant="300" id="T2Z-IX-pQw"/>
                                 </constraints>
                             </view>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAk-j2-qJ7">
                                 <rect key="frame" x="0.0" y="47" width="390" height="797"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GR-Ki-ce2" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="873"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="1520"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh2-Nz-tWS" userLabel="ChartContainer">
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="451"/>
@@ -205,22 +205,31 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backed_by_science" translatesAutoresizingMaskIntoConstraints="NO" id="JwN-RG-S0F">
+                                                <rect key="frame" x="20" y="901" width="350" height="599"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="599" id="5vc-8y-Dld"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="PC5-0Z-Qfh" firstAttribute="top" secondItem="lh2-Nz-tWS" secondAttribute="bottom" id="07M-hn-NHa"/>
                                             <constraint firstItem="YWd-OK-Am4" firstAttribute="top" secondItem="pMi-tB-W9J" secondAttribute="bottom" constant="40" id="0fE-mv-dm9"/>
-                                            <constraint firstAttribute="bottom" secondItem="YWd-OK-Am4" secondAttribute="bottom" constant="20" id="6ju-VW-nCj"/>
+                                            <constraint firstItem="JwN-RG-S0F" firstAttribute="top" secondItem="YWd-OK-Am4" secondAttribute="bottom" constant="48" id="2EH-Gv-VVK"/>
                                             <constraint firstItem="lh2-Nz-tWS" firstAttribute="top" secondItem="4GR-Ki-ce2" secondAttribute="top" id="8SD-A3-EDc"/>
                                             <constraint firstItem="pMi-tB-W9J" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" constant="-30" id="956-VS-dqg"/>
                                             <constraint firstItem="lh2-Nz-tWS" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" id="BPe-T8-R9j"/>
+                                            <constraint firstAttribute="trailing" secondItem="JwN-RG-S0F" secondAttribute="trailing" constant="20" id="I86-Oc-v23"/>
                                             <constraint firstItem="pMi-tB-W9J" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" constant="30" id="IYw-oR-KGp"/>
                                             <constraint firstItem="PC5-0Z-Qfh" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" id="Mrn-jZ-co8"/>
+                                            <constraint firstAttribute="bottom" secondItem="JwN-RG-S0F" secondAttribute="bottom" constant="20" id="Nhb-eJ-Aly"/>
                                             <constraint firstItem="YWd-OK-Am4" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" constant="20" id="bH9-gO-KHU"/>
                                             <constraint firstAttribute="bottom" secondItem="PC5-0Z-Qfh" secondAttribute="bottom" id="cyS-3b-wyU"/>
                                             <constraint firstItem="pMi-tB-W9J" firstAttribute="top" secondItem="PC5-0Z-Qfh" secondAttribute="bottom" constant="40" id="fj1-8e-MSJ"/>
                                             <constraint firstItem="PC5-0Z-Qfh" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="hpe-U0-wDC"/>
                                             <constraint firstAttribute="height" priority="250" constant="844" id="jWJ-mc-4zS"/>
+                                            <constraint firstItem="JwN-RG-S0F" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" constant="20" id="k5K-dh-R5F"/>
                                             <constraint firstItem="YWd-OK-Am4" firstAttribute="trailing" secondItem="4GR-Ki-ce2" secondAttribute="trailing" constant="-20" id="k8U-Lh-GkF"/>
                                             <constraint firstItem="lh2-Nz-tWS" firstAttribute="leading" secondItem="4GR-Ki-ce2" secondAttribute="leading" id="uow-es-Ehh"/>
                                         </constraints>
@@ -243,37 +252,37 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yEu-8U-DuO"/>
                             </scrollView>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IjY-Va-H26">
-                                <rect key="frame" x="-1" y="-1" width="390" height="844"/>
+                                <rect key="frame" x="-1" y="-1" width="389" height="844"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view alpha="0.94999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-aO-ixe">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="389" height="844"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtT-3B-dkC">
-                                        <rect key="frame" x="0.0" y="297" width="390" height="215"/>
+                                        <rect key="frame" x="0.0" y="297" width="389" height="215"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="agn-ZS-RKk">
-                                                <rect key="frame" x="175" y="0.0" width="40" height="40"/>
+                                                <rect key="frame" x="174.66666666666666" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="5px-gk-GPU"/>
                                                     <constraint firstAttribute="height" constant="40" id="bwi-jn-mKn"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready to test?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o9-mL-qX2">
-                                                <rect key="frame" x="0.0" y="56" width="390" height="27"/>
+                                                <rect key="frame" x="0.0" y="56" width="389" height="27"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="24"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock your results and get personalized recommendations" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x23-a0-G9W">
-                                                <rect key="frame" x="0.0" y="95" width="390" height="32"/>
+                                                <rect key="frame" x="0.0" y="95" width="389" height="32"/>
                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAl-kz-k9Z" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="155" width="350" height="60"/>
+                                                <rect key="frame" x="20" y="155" width="349" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="w4K-CC-pAs"/>
@@ -329,11 +338,16 @@
                             <constraint firstItem="hKi-7V-y1x" firstAttribute="top" secondItem="h8Q-tq-NdM" secondAttribute="top" id="OMR-OD-TJ8"/>
                             <constraint firstItem="fAk-j2-qJ7" firstAttribute="trailing" secondItem="NWn-Sl-FwG" secondAttribute="trailing" id="UNb-L4-bpw"/>
                             <constraint firstItem="fAk-j2-qJ7" firstAttribute="leading" secondItem="NWn-Sl-FwG" secondAttribute="leading" id="WB7-gz-Ae7"/>
-                            <constraint firstItem="hKi-7V-y1x" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lh2-Nz-tWS" secondAttribute="top" id="XMe-oL-zEi"/>
+                            <constraint firstItem="hKi-7V-y1x" firstAttribute="bottom" secondItem="lh2-Nz-tWS" secondAttribute="top" id="XMe-oL-zEi"/>
                             <constraint firstItem="hKi-7V-y1x" firstAttribute="leading" secondItem="NWn-Sl-FwG" secondAttribute="leading" id="enK-Fm-kvx"/>
                             <constraint firstItem="NWn-Sl-FwG" firstAttribute="trailing" secondItem="hKi-7V-y1x" secondAttribute="trailing" id="vKF-HA-bHN"/>
                             <constraint firstItem="fAk-j2-qJ7" firstAttribute="bottom" secondItem="h8Q-tq-NdM" secondAttribute="bottom" id="yCi-Qd-StC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="OMR-OD-TJ8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" selectedImage="Results-Icon" id="L7P-9l-GVk">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
@@ -564,6 +578,7 @@
         <image name="HappyWoman" width="161" height="237"/>
         <image name="PeachGradient" width="1" height="435"/>
         <image name="Results-Icon" width="19" height="18"/>
+        <image name="backed_by_science" width="335" height="604"/>
         <image name="happy-girl" width="294.66665649414062" height="444"/>
         <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>
