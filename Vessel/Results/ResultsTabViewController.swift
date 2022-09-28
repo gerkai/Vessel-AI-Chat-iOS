@@ -46,6 +46,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         {
             initialLoad = false
             chartView.selectLastCell()
+            testsGoalsView.selectFirstReagent()
         }
     }
     
