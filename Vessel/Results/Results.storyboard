@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKi-7V-y1x" userLabel="greenView">
-                                <rect key="frame" x="0.0" y="-309" width="390" height="300"/>
+                                <rect key="frame" x="0.0" y="-956" width="390" height="300"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="T2Z-IX-pQw"/>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="47" width="390" height="797"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GR-Ki-ce2" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="1520"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="1502"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh2-Nz-tWS" userLabel="ChartContainer">
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="451"/>
@@ -206,9 +206,9 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backed_by_science" translatesAutoresizingMaskIntoConstraints="NO" id="JwN-RG-S0F">
-                                                <rect key="frame" x="20" y="901" width="350" height="599"/>
+                                                <rect key="frame" x="20" y="901" width="350" height="581"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="599" id="5vc-8y-Dld"/>
+                                                    <constraint firstAttribute="width" secondItem="JwN-RG-S0F" secondAttribute="height" multiplier="0.6025" id="qa9-Ot-GtT"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -578,7 +578,7 @@
         <image name="HappyWoman" width="161" height="237"/>
         <image name="PeachGradient" width="1" height="435"/>
         <image name="Results-Icon" width="19" height="18"/>
-        <image name="backed_by_science" width="335" height="604"/>
+        <image name="backed_by_science" width="335" height="556"/>
         <image name="happy-girl" width="294.66665649414062" height="444"/>
         <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>
