@@ -20,7 +20,7 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
     
     override func viewDidLoad()
     {
-        let result = viewModel.result
+        let result = viewModel.selectedResult()
         //stackView comes pre-populated with a single lineView. Remove it and add it back later.
         let lineView = stackView.arrangedSubviews[0]
         stackView.removeArrangedSubview(lineView)

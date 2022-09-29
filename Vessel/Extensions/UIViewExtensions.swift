@@ -147,4 +147,19 @@ extension UIView
         NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
     }
+    
+    var parentViewController: UIViewController?
+    {
+        // Starts from next (As we know self is not a UIViewController).
+        var parentResponder: UIResponder? = self.next
+        while parentResponder != nil
+        {
+            if let viewController = parentResponder as? UIViewController
+            {
+                return viewController
+            }
+            parentResponder = parentResponder?.next
+        }
+        return nil
+    }
 }

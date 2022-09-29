@@ -13,6 +13,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     var initialLoad = true
     var viewModel = ResultsTabViewModel()
     @IBOutlet weak var lockoutView: UIView!
+    @IBOutlet weak var testsGoalsView: TestsGoalsView!
     
     override func viewDidLoad()
     {
@@ -23,14 +24,20 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewWillAppear(_ animated: Bool)
     {
-        if viewModel.dataPoints.isEmpty
+        let numResults = viewModel.numberOfResults()
+        if numResults == 0
         {
             lockoutView.isHidden = false
         }
         else
         {
             lockoutView.isHidden = true
+            if initialLoad
+            {
+                testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
+            }
         }
+        testsGoalsView.setupGoals()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -39,18 +46,22 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         {
             initialLoad = false
             chartView.selectLastCell()
+            if viewModel.numberOfResults() != 0
+            {
+                testsGoalsView.selectFirstReagent()
+            }
         }
     }
     
     //Mark: - ChartViewDataSource
     func chartViewNumDataPoints() -> Int
     {
-        return viewModel.dataPoints.count
+        return viewModel.numberOfResults()
     }
     
-    func chartViewData(forIndex index: Int) -> ChartViewDataPoint
+    func chartViewData(forIndex index: Int) -> Result
     {
-        return viewModel.dataPoints[index]
+        return viewModel.resultForIndex(i: index)
     }
     
     func ChartViewInfoTapped()
@@ -61,8 +72,27 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func chartViewCellSelected(cellIndex: Int)
+    {
+        if viewModel.numberOfResults() != 0
+        {
+            viewModel.selectResult(index: cellIndex)
+            testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex))
+        }
+    }
+    
     @IBAction func takeATest()
     {
         mainTabBarController?.vesselButtonPressed()
+    }
+    
+    @IBAction func talkToANutritionist()
+    {
+        print("TALK TO A NUTRITIONIST")
+    }
+    
+    @IBAction func customerSupport()
+    {
+        print("CUSTOMER SUPPORT")
     }
 }

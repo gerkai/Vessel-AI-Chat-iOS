@@ -197,6 +197,40 @@ struct Reagent
         }
         return Evaluation.notAvailable
     }
+    
+    //given a goalID, this will return the impact level for that goal. 0 if none, or not found.
+    func impactFor(goal: Int) -> Int
+    {
+        var impact = 0
+        for goalImpact in goalImpacts
+        {
+            if goalImpact.goalID == goal
+            {
+                impact = goalImpact.impact
+                break
+            }
+        }
+        return impact
+    }
+    
+    static func reagentsFor(goal: Int, withImpactAtLease: Int) -> [Int]
+    {
+        var reagentIDs: [Int] = []
+        for id in Reagent.ID.allCases
+        {
+            if let reagent = Reagents[id]
+            {
+                for goalImpact in reagent.goalImpacts
+                {
+                    if (goalImpact.goalID == goal) && (goalImpact.impact >= withImpactAtLease)
+                    {
+                        reagentIDs.append(id.rawValue)
+                    }
+                }
+            }
+        }
+        return reagentIDs
+    }
 }
 
 //Here are the reagents used by the app

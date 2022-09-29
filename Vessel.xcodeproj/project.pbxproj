@@ -31,6 +31,10 @@
 		3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */; };
 		3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */; };
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
+		3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */; };
+		3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */; };
+		3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */; };
+		3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */; };
 		3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */; };
 		3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F006287A6B4800FCC52E /* DateExtensions.swift */; };
 		3F12F00B287A736600FCC52E /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00A287A736600FCC52E /* Allergy.swift */; };
@@ -85,6 +89,10 @@
 		3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */; };
 		3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */; };
 		3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */; };
+		3F59A18828E28715005E5F46 /* GoalLearnMoreTileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F59A18228E28715005E5F46 /* GoalLearnMoreTileView.xib */; };
+		3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F59A18328E28715005E5F46 /* ReagentLearnMoreTileView.xib */; };
+		3F59A18C28E28715005E5F46 /* ReagentLearnMoreTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A18628E28715005E5F46 /* ReagentLearnMoreTileView.swift */; };
+		3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A18728E28715005E5F46 /* GoalLearnMoreTileView.swift */; };
 		3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */; };
 		3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B95E27D2C41C00D589F7 /* Storage.swift */; };
 		3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B96627D4209F00D589F7 /* Encodable.swift */; };
@@ -215,6 +223,10 @@
 		3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtCardLoginViewController.swift; sourceTree = "<group>"; };
 		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
+		3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
+		3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestsGoalsView.xib; sourceTree = "<group>"; };
+		3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsGoalsView.swift; sourceTree = "<group>"; };
+		3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvyLineView.swift; sourceTree = "<group>"; };
 		3F12F006287A6B4800FCC52E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		3F12F00A287A736600FCC52E /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		3F12F00C287B3C6900FCC52E /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +281,10 @@
 		3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentScoreView.swift; sourceTree = "<group>"; };
 		3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTabViewModel.swift; sourceTree = "<group>"; };
 		3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTabMVVMViewController.swift; sourceTree = "<group>"; };
+		3F59A18228E28715005E5F46 /* GoalLearnMoreTileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalLearnMoreTileView.xib; sourceTree = "<group>"; };
+		3F59A18328E28715005E5F46 /* ReagentLearnMoreTileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentLearnMoreTileView.xib; sourceTree = "<group>"; };
+		3F59A18628E28715005E5F46 /* ReagentLearnMoreTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentLearnMoreTileView.swift; sourceTree = "<group>"; };
+		3F59A18728E28715005E5F46 /* GoalLearnMoreTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalLearnMoreTileView.swift; sourceTree = "<group>"; };
 		3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		3F87B95E27D2C41C00D589F7 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		3F87B96627D4209F00D589F7 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
@@ -416,6 +432,7 @@
 				3F15ACE92887759C004716CA /* UIImageExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
 				3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */,
+				3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
@@ -517,6 +534,20 @@
 				3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */,
 			);
 			path = Results;
+			sourceTree = "<group>";
+		};
+		3F59A18128E28715005E5F46 /* TestsGoals */ = {
+			isa = PBXGroup;
+			children = (
+				3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */,
+				3F59A18728E28715005E5F46 /* GoalLearnMoreTileView.swift */,
+				3F59A18228E28715005E5F46 /* GoalLearnMoreTileView.xib */,
+				3F59A18628E28715005E5F46 /* ReagentLearnMoreTileView.swift */,
+				3F59A18328E28715005E5F46 /* ReagentLearnMoreTileView.xib */,
+				3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */,
+				3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */,
+			);
+			path = TestsGoals;
 			sourceTree = "<group>";
 		};
 		3F87B96827D429E000D589F7 /* Onboarding */ = {
@@ -697,6 +728,7 @@
 				3F0405C92890A99100ADD5FC /* ReagentTileView.xib */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
+				3F59A18128E28715005E5F46 /* TestsGoals */,
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
@@ -1052,6 +1084,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
+				3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */,
 				3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */,
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3F426DBA28DFA1CA00927B68 /* ChartViewCell.xib in Resources */,
@@ -1070,8 +1103,10 @@
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
+				3F59A18828E28715005E5F46 /* GoalLearnMoreTileView.xib in Resources */,
 				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
+				3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */,
 				3F15ACF8288C5421004716CA /* test_result_flow_p2.json in Resources */,
@@ -1195,6 +1230,7 @@
 				3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */,
 				3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */,
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
+				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
@@ -1202,6 +1238,7 @@
 				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */,
+				3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
@@ -1215,6 +1252,7 @@
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
+				3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */,
 				72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				7282D417288F7CBA00B4E26D /* MoreViewController.swift in Sources */,
@@ -1263,6 +1301,7 @@
 				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
 				3F12F016287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.swift in Sources */,
 				72F3C69628A36788001E3323 /* MyAccountViewController.swift in Sources */,
+				3F59A18C28E28715005E5F46 /* ReagentLearnMoreTileView.swift in Sources */,
 				72F3C69528A36788001E3323 /* MyAccountCell.swift in Sources */,
 				7282D42B288FB92000B4E26D /* ArrayExtension.swift in Sources */,
 				72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */,
@@ -1307,6 +1346,7 @@
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */,
+				3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
