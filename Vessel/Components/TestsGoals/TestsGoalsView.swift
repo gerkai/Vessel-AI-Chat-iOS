@@ -41,8 +41,10 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     
     func selectFirstReagent()
     {
-        let reagentView = testsStackView.arrangedSubviews[0] as! ReagentLearnMoreTileView
-        reagentView.tapped()
+        if let reagentView = testsStackView.arrangedSubviews[0] as? ReagentLearnMoreTileView
+        {
+            reagentView.tapped()
+        }
     }
     
     func setupReagents(forResult result: Result)
