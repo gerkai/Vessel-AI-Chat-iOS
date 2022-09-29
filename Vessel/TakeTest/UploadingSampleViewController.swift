@@ -204,7 +204,6 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { testResult in
-
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
             vc.testResult = testResult

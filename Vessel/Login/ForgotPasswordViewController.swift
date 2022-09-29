@@ -36,6 +36,7 @@ final class ForgotPasswordViewController: KeyboardFriendlyViewController, UIText
         //titleLabel.lineBreakStrategy = []
         
         initialSubmitTitle = submitButton.title(for: .normal)
+        submitButton.backgroundColor = emailTextField.text?.isValidEmail() ?? false ? Constants.vesselBlack : Constants.vesselGray
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -179,10 +180,12 @@ final class ForgotPasswordViewController: KeyboardFriendlyViewController, UIText
         if textField.text?.isValidEmail() == true
         {
             submitButton.isEnabled = true
+            submitButton.backgroundColor = Constants.vesselBlack
         }
         else
         {
             submitButton.isEnabled = false
+            submitButton.backgroundColor = Constants.vesselGray
         }
     }
 }

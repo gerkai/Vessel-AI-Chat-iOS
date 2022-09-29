@@ -136,6 +136,10 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
                     }
                 }
+                else if password.isEmpty
+                {
+                    UIView.showError(text: "", detailText: Constants.ENTER_PASSWORD_STRING, image: nil)
+                }
                 else
                 {
                     UIView.showError(text: "", detailText: Constants.INCORRECT_PASSWORD_STRING, image: nil)

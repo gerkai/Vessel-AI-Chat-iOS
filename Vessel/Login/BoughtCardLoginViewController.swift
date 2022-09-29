@@ -24,7 +24,7 @@ struct BoughtCardLoginValidator
         }
         guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
         {
-            return  (isValid: false, error: Constants.ENTER_PASSWORD_STRING)
+            return  (isValid: false, error: Constants.INCORRECT_PASSWORD_STRING)
         }
         return (isValid: true, error: nil)
     }

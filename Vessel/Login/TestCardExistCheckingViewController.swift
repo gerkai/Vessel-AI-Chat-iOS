@@ -60,7 +60,7 @@ class TestCardExistCheckingViewController: UIViewController
     {
         guard let selectedOption = selectedOption else
         {
-            UIView.showError(text: "Error", detailText: "Please Select Answer", image: nil)
+            UIView.showError(text: "", detailText: "Please select answer", image: nil)
             return
         }
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
