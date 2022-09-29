@@ -15,7 +15,6 @@ enum MoreTabOptions
     case myAccount
     case takeATest
     case orderCards
-    case customSupplements
     case chatWithNutritionist
     case backedByScience
     case support
@@ -31,8 +30,6 @@ enum MoreTabOptions
             return "takeATestIcon"
         case .orderCards:
             return "orderCardsIcon"
-        case .customSupplements:
-            return "customSupplementsIcon"
         case .chatWithNutritionist:
             return "chatWithNutritionistIcon"
         case .backedByScience:
@@ -54,8 +51,6 @@ enum MoreTabOptions
             return NSLocalizedString("Take a Test", comment: "")
         case .orderCards:
             return NSLocalizedString("Order Cards", comment: "")
-        case .customSupplements:
-            return NSLocalizedString("Custom Supplements", comment: "")
         case .chatWithNutritionist:
             return NSLocalizedString("Chat with a Nutritionist", comment: "")
         case .backedByScience:
@@ -75,7 +70,6 @@ class MoreViewModel
         .myAccount,
         .takeATest,
         .orderCards,
-        .customSupplements,
         .chatWithNutritionist,
         .backedByScience,
         .support

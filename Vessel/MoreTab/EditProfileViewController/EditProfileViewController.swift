@@ -264,29 +264,36 @@ private extension EditProfileViewController
                                                     animation: .modal,
                                                     delegate: self)
         case .editContact(let type, let value):
-            switch type
+            if Reachability.isConnectedToNetwork()
             {
-            case .name:
-                guard let name = value as? String else { return }
-                viewModel.name = name
-            case .lastName:
-                guard let lastName = value as? String else { return }
-                viewModel.lastName = lastName
-            case .gender:
-                guard let gender = value as? Int else { return }
-                viewModel.gender = gender
-            case .height:
-                guard let height = value as? String else { return }
-                viewModel.height = height
-            case .weight:
-                guard let weight = value as? String else { return }
-                viewModel.weight = weight
-            case .birthDate:
-                guard let birthDate = value as? String else { return }
-                let strings = birthDate.split(separator: " ")
-                guard let dateString = strings[safe: 1] else { return }
-                let date = viewModel.localDateFormatter.date(from: String(dateString))
-                viewModel.birthDate = date
+                switch type
+                {
+                case .name:
+                    guard let name = value as? String else { return }
+                    viewModel.name = name
+                case .lastName:
+                    guard let lastName = value as? String else { return }
+                    viewModel.lastName = lastName
+                case .gender:
+                    guard let gender = value as? Int else { return }
+                    viewModel.gender = gender
+                case .height:
+                    guard let height = value as? String else { return }
+                    viewModel.height = height
+                case .weight:
+                    guard let weight = value as? String else { return }
+                    viewModel.weight = weight
+                case .birthDate:
+                    guard let birthDate = value as? String else { return }
+                    let strings = birthDate.split(separator: " ")
+                    guard let dateString = strings[safe: 1] else { return }
+                    let date = viewModel.localDateFormatter.date(from: String(dateString))
+                    viewModel.birthDate = date
+                }
+            }
+            else
+            {
+                UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
             }
         }
     }
@@ -528,18 +535,25 @@ extension EditProfileViewController: GenericAlertDelegate
     {
         if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
         {
-            Server.shared.deleteAccount()
+            if Reachability.isConnectedToNetwork()
             {
-                self.analytics.log(event: .accountDeleted)
-                Server.shared.logOut()
-                let story = UIStoryboard(name: "Login", bundle: nil)
-                let vc = story.instantiateViewController(withIdentifier: "Welcome")
-                
-                //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
-                UIApplication.shared.windows.first?.rootViewController = vc
-                UIApplication.shared.windows.first?.makeKeyAndVisible()
-            } onFailure: { error in
-                print(error)
+                Server.shared.deleteAccount()
+                {
+                    self.analytics.log(event: .accountDeleted)
+                    Server.shared.logOut()
+                    let story = UIStoryboard(name: "Login", bundle: nil)
+                    let vc = story.instantiateViewController(withIdentifier: "Welcome")
+                    
+                    //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
+                    UIApplication.shared.windows.first?.rootViewController = vc
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                } onFailure: { error in
+                    print(error)
+                }
+            }
+            else
+            {
+                UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
             }
         }
     }

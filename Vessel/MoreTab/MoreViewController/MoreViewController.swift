@@ -90,8 +90,6 @@ extension MoreViewController: UITableViewDelegate
             mainTabBarController?.vesselButtonPressed()
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
-        case .customSupplements:
-            openInSafari(url: "https://vesselhealth.com/pages/new-quiz")
         case .chatWithNutritionist:
             tabBarController?.selectedIndex = 3
         case .backedByScience:

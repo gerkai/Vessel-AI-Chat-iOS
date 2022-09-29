@@ -70,7 +70,7 @@ class ChangePasswordViewModel
     
     func onChangePasswordSaved(oldPassword: String, newPassword: String, newPasswordConfirmation: String, successCompletion: (() -> Void)?, errorCompletion: ((_ error: Error) -> Void)?)
     {
-        if newPassword == newPasswordConfirmation, !oldPassword.isEmpty && !newPassword.isEmpty && !newPasswordConfirmation.isEmpty, newPassword != oldPassword
+        if newPassword == newPasswordConfirmation, !oldPassword.isEmpty && !newPassword.isEmpty && !newPasswordConfirmation.isEmpty, newPassword != oldPassword, newPassword.count >= 6
         {
             Server.shared.changePassword(oldPassword: oldPassword, newPassword: newPassword)
             {
@@ -115,6 +115,10 @@ class ChangePasswordViewModel
             else if oldPassword.isEmpty || newPassword.isEmpty || newPasswordConfirmation.isEmpty
             {
                 errorCompletion?(ChangePasswordError.blankPassword)
+            }
+            else if newPassword.count < 6
+            {
+                errorCompletion?(ChangePasswordError.newPasswordTooShort)
             }
             else
             {
