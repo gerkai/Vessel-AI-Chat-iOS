@@ -51,6 +51,9 @@ class ResultsTabViewModel
         selectedResultIndex = index
     }
     
+    //uncomment to test lockout screen (and comment out below declaration)
+    //let results: [Result] = []
+    
     let results = [Result(id: 1, lastUpdated: 2556, cardUUID: "12345", wellnessScore: 0.85, dateString: "2022-08-08T19:34:00", reagents: [
         ReagentResult(id: 5, score: 0.70, value: 350.0, errorCodes: []),
         ReagentResult(id: 4, score: 0.74, value: 395.0, errorCodes: []),

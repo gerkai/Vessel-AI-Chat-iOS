@@ -35,9 +35,9 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             if initialLoad
             {
                 testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
-                testsGoalsView.setupGoals()
             }
         }
+        testsGoalsView.setupGoals()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -46,7 +46,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         {
             initialLoad = false
             chartView.selectLastCell()
-            testsGoalsView.selectFirstReagent()
+            if viewModel.numberOfResults() != 0
+            {
+                testsGoalsView.selectFirstReagent()
+            }
         }
     }
     
@@ -71,8 +74,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     func chartViewCellSelected(cellIndex: Int)
     {
-        viewModel.selectResult(index: cellIndex)
-        testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex))
+        if viewModel.numberOfResults() != 0
+        {
+            viewModel.selectResult(index: cellIndex)
+            testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex))
+        }
     }
     
     @IBAction func takeATest()
