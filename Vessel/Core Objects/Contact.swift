@@ -176,6 +176,34 @@ class Contact: CoreObjectProtocol
         case expert_id
     }
     
+    // MARK: - Strings
+    func getDietsListedString() -> String
+    {
+        let dietsString: [String] = diet_ids.compactMap({ id in
+            guard let dietID = Diet.ID(rawValue: id) else { return nil }
+            return Diets[dietID]?.name.capitalized
+        })
+        return dietsString.joined(separator: ", ")
+    }
+    
+    func getAllergiesListedString() -> String
+    {
+        let allergiesString: [String] = allergy_ids.compactMap({ id in
+            guard let allergyID = Allergy.ID(rawValue: id) else { return nil }
+            return Allergies[allergyID]?.name.capitalized
+        })
+        return allergiesString.joined(separator: ", ")
+    }
+    
+    func getGoalsListedString() -> String
+    {
+        let goalsString: [String] = goal_ids.compactMap({ id in
+            guard let goalID = Goal.ID(rawValue: id) else { return nil }
+            return Goals[goalID]?.name.capitalized
+        })
+        return goalsString.joined(separator: ", ")
+    }
+    
     // MARK: - Analytics
     func identifyAnalytics()
     {
@@ -189,29 +217,17 @@ class Contact: CoreObjectProtocol
     
     func setDietsAnalytics()
     {
-        let dietsString: [String] = diet_ids.compactMap({ id in
-            guard let dietID = Diet.ID(rawValue: id) else { return nil }
-            return Diets[dietID]?.name.capitalized
-        })
-        analytics.setUserProperty(property: "Diet", value: dietsString.joined(separator: ", "))
+        analytics.setUserProperty(property: "Diet", value: getDietsListedString())
     }
     
     func setAllergiesAnalytics()
     {
-        let allergiesString: [String] = allergy_ids.compactMap({ id in
-            guard let allergyID = Allergy.ID(rawValue: id) else { return nil }
-            return Allergies[allergyID]?.name.capitalized
-        })
-        analytics.setUserProperty(property: "Allergies", value: allergiesString.joined(separator: ", "))
+        analytics.setUserProperty(property: "Allergies", value: getAllergiesListedString())
     }
     
     func setGoalsAnalytics()
     {
-        let goalsString: [String] = goal_ids.compactMap({ id in
-            guard let goalID = Goal.ID(rawValue: id) else { return nil }
-            return Goals[goalID]?.name.capitalized
-        })
-        analytics.setUserProperty(property: "Goals", value: goalsString.joined(separator: ", "))
+        analytics.setUserProperty(property: "Goals", value: getGoalsListedString())
     }
 }
 
