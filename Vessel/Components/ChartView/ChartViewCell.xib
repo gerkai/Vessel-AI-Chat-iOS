@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BananaGrotesk-Regular.otf">
-            <string>BananaGrotesk-Regular</string>
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
         </array>
         <array key="NoeText.otf">
             <string>NoeText</string>
@@ -35,16 +35,16 @@
                                     <action selector="tap" destination="KSd-38-tea" eventType="touchUpInside" id="mxr-Mc-f1n"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lv8-yn-a6l">
-                                <rect key="frame" x="15.000000000000002" y="31" width="17.666666666666671" height="16"/>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRu-WB-kcB">
-                                <rect key="frame" x="16" y="20" width="22.666666666666671" height="11"/>
+                                <rect key="frame" x="16" y="16" width="22.666666666666671" height="11"/>
                                 <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="11"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lv8-yn-a6l">
+                                <rect key="frame" x="15.000000000000002" y="31" width="17.666666666666671" height="16"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -54,7 +54,7 @@
                             <constraint firstAttribute="height" constant="62" id="8U4-Jh-sD1"/>
                             <constraint firstItem="42v-nd-Mwh" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" id="BbP-U7-OlF"/>
                             <constraint firstItem="Lv8-yn-a6l" firstAttribute="bottom" secondItem="m7o-ox-OaE" secondAttribute="bottom" constant="-15" id="MAD-tN-WxJ"/>
-                            <constraint firstItem="cRu-WB-kcB" firstAttribute="bottom" secondItem="Lv8-yn-a6l" secondAttribute="top" id="UVV-Fg-g8g"/>
+                            <constraint firstItem="cRu-WB-kcB" firstAttribute="bottom" secondItem="Lv8-yn-a6l" secondAttribute="top" constant="-4" id="UVV-Fg-g8g"/>
                             <constraint firstItem="Lv8-yn-a6l" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" constant="15" id="XVD-bC-8BD"/>
                             <constraint firstItem="cRu-WB-kcB" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" constant="16" id="ckc-e2-po3"/>
                             <constraint firstItem="42v-nd-Mwh" firstAttribute="trailing" secondItem="m7o-ox-OaE" secondAttribute="trailing" id="nOc-FY-e8u"/>
@@ -75,16 +75,16 @@
                         <rect key="frame" x="24" y="191.66666666666666" width="62" height="37"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bix-fG-HUf">
-                                <rect key="frame" x="7.3333333333333321" y="0.0" width="47.333333333333343" height="37"/>
+                                <rect key="frame" x="7.3333333333333321" y="0.0" width="47.666666666666671" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-fF-25G">
-                                        <rect key="frame" x="0.0" y="0.0" width="22.333333333333332" height="37"/>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="22.666666666666668" height="37"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-W8-2Jb">
-                                        <rect key="frame" x="28.333333333333329" y="0.0" width="19" height="37"/>
+                                        <rect key="frame" x="28.666666666666671" y="0.0" width="19" height="37"/>
                                     </imageView>
                                 </subviews>
                             </stackView>

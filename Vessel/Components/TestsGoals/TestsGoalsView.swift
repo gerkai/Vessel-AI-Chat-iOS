@@ -14,6 +14,8 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     @IBOutlet weak var goalsStackView: UIStackView!
     @IBOutlet weak var curvyLineView: CurvyLineView!
     
+    let CURVY_LINE_TILE_SPACE = CGFloat(7.0) //space between curvy line and tile
+    
     override init(frame: CGRect)
     {
         super.init(frame: frame)
@@ -140,8 +142,8 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                             //add curvy lines from goal to reagents that have an impact > 0
                             if let reagentView = self.reagentViewWithID(id: testView.tag), let goalView = selectedGoalView
                             {
-                                let startPoint = CGPoint(x: 0.0, y: goalView.frame.height / 2)
-                                let endPoint = CGPoint(x: reagentView.frame.width, y: reagentView.frame.height / 2)
+                                let startPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: goalView.frame.height / 2)
+                                let endPoint = CGPoint(x: reagentView.frame.width + self.CURVY_LINE_TILE_SPACE, y: reagentView.frame.height / 2)
                                 let convertedStartPoint = goalView.convert(startPoint, to: self.curvyLineView)
                                 let convertedEndPoint = reagentView.convert(endPoint, to: self.curvyLineView)
                                 
@@ -220,8 +222,8 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
             {
                 for target in targetViews
                 {
-                    let startPoint = CGPoint(x: selectedView!.frame.width, y: selectedView!.frame.height / 2)
-                    let endPoint = CGPoint(x: 0.0, y: target.frame.height / 2)
+                    let startPoint = CGPoint(x: selectedView!.frame.width + self.CURVY_LINE_TILE_SPACE, y: selectedView!.frame.height / 2)
+                    let endPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: target.frame.height / 2)
                     let convertedStartPoint = selectedView!.convert(startPoint, to: self.curvyLineView)
                     let convertedEndPoint = target.convert(endPoint, to: self.curvyLineView)
                     

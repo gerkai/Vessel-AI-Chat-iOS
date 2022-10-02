@@ -15,6 +15,7 @@ enum DebugMenuOption: Int
     case printNetworkTraffic
     case printInitAndDeinit
     case relaxedScanningDistance
+    case clearResults
     
     var title: String
     {
@@ -26,6 +27,7 @@ enum DebugMenuOption: Int
         case .printNetworkTraffic: return "Print Network Traffic"
         case .printInitAndDeinit: return "Print intialization and deinitialization"
         case .relaxedScanningDistance: return "Relaxed Scanning Distance"
+        case .clearResults: return "Clear all test results"
         }
     }
     
@@ -45,12 +47,26 @@ enum DebugMenuOption: Int
         case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
         case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
         case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
+        case .clearResults: return Constants.KEY_CLEAR_RESULTS
         }
     }
     
     func toggle()
     {
-        if let flag = flag
+        if self == .resetUserFlags
+        {
+            if let main = Contact.main()
+            {
+                main.flags = 0
+                ObjectStore.shared.ClientSave(main)
+            }
+        }
+        else if self == .clearResults
+        {
+            //clear all results from storage
+            Storage.clear(objectType: Result.self)
+        }
+        else if let flag = flag
         {
             if isEnabled
             {
@@ -59,14 +75,6 @@ enum DebugMenuOption: Int
             else
             {
                 UserDefaults.standard.set(true, forKey: flag)
-            }
-        }
-        else if self == .resetUserFlags
-        {
-            if let main = Contact.main()
-            {
-                main.flags = 0
-                ObjectStore.shared.ClientSave(main)
             }
         }
     }
@@ -80,6 +88,7 @@ class DebugMenuViewModel
         .showDebugDrawing,
         .printNetworkTraffic,
         .printInitAndDeinit,
-        .relaxedScanningDistance
+        .relaxedScanningDistance,
+        .clearResults
     ]
 }
