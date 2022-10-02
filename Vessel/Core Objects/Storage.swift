@@ -153,6 +153,7 @@ public class Storage
             print(error)
         }
         
+        //the order of the files returned by FileManager is undefined. So let's sort them here
         let files = filesArray.sorted(by: { $0.id < $1.id })
         for file in files
         {
