@@ -164,7 +164,7 @@ class ObjectStore: NSObject
         let name = String(describing: type(of: object)).lowercased()
         let dict = [name: objectArray]
         
-        //note: server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+        //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
         Server.shared.saveObjects(objects: dict)
         {
             print("Saved \(name)")
