@@ -54,9 +54,9 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     
     override func viewDidLayoutSubviews()
     {
-        //change default gray selection color to white
+        //hide default gray selection color
         //if done in viewDidLoad, app could crash because subviews may not exist yet
-        heightPickerView.subviews[1].backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        heightPickerView.subviews[1].isHidden = true
     }
     
     // MARK: - UI
@@ -80,7 +80,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
             {
                 if let weightLbs = Double(weight)
                 {
-                    let weightKG = weightLbs * 0.45359237 // pounds to kilograms conversion
+                    let weightKG = viewModel.convertLbsToKg(lbs: weightLbs)
                     
                     weightTextField.text = String(format: "%.1f", weightKG)
                 }
@@ -96,7 +96,7 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
         {
             if viewModel.isMetric
             {
-                let weightKG = weight * 0.45359237 // pounds to kilograms conversion
+                let weightKG = viewModel.convertLbsToKg(lbs: weight)
                 weightTextField.text = String(format: "%.1f", weightKG)
             }
             else
@@ -205,25 +205,7 @@ extension HeightWeightSelectViewController: UIPickerViewDelegate, UIPickerViewDa
 {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        if viewModel.isMetric
-        {
-            return String(format: NSLocalizedString("%i cm", comment: "abbreviation for height in 'centimeters'"), row + Constants.MIN_HEIGHT_METRIC)
-        }
-        else
-        {
-            let heightComponent = HeightComponentImperial(rawValue: component)
-            let (minFeet, minInches) = viewModel.convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
-
-            switch heightComponent
-            {
-                case .feet:
-                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row + minFeet)
-                case .inches:
-                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row + minInches)
-                default:
-                    return ""
-            }
-        }
+        return viewModel.textFor(row: row, inComponent: component)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int
@@ -259,6 +241,12 @@ extension HeightWeightSelectViewController: UIPickerViewDelegate, UIPickerViewDa
                     return 0
             }
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString?
+    {
+        let string = viewModel.textFor(row: row, inComponent: component)
+        return NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
     }
 }
 
