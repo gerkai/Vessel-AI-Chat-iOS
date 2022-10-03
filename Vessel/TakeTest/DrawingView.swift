@@ -174,7 +174,7 @@ class DrawingView: UIView
                 //uncomment below to determine too-close / too-far values
                 //print("Distance: \(widthEF / validArea.size.width)")
                 
-                if widthEF < validArea.size.width * 0.72 //subjective
+                if widthEF < validArea.size.width * 0.70 //subjective
                 {
                     //too far away
                     if debugRelaxScanningDistance == true
