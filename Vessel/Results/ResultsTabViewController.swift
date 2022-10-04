@@ -20,6 +20,12 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         chartView.dataSource = self
         chartView.delegate = self
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataFromServer, object: nil)
+    }
+    
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -38,6 +44,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             }
         }
         testsGoalsView.setupGoals()
+        
+        //let result = viewModel.resultForIndex(i: 0)
+        //let dict = ["objectType": String(describing: type(of: result.self))]
+        //NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: dict)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -53,6 +63,20 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         }
     }
     
+    @objc func dataUpdated(_ notification: NSNotification)
+    {
+        if let type = notification.userInfo?["objectType"] as? String
+        {
+            //if the new data is a Result then refresh the chart and tests/goals
+            if type == String(describing: Result.self)
+            {
+                viewModel.refresh()
+                chartView.refresh()
+                let numResults = viewModel.numberOfResults()
+                testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
+            }
+        }
+    }
     //Mark: - ChartViewDataSource
     func chartViewNumDataPoints() -> Int
     {

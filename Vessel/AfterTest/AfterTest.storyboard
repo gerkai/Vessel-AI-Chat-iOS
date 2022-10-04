@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ResultsNavController" modalPresentationStyle="overFullScreen" id="dih-vh-vgS" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uR7-oQ-QSx">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -82,9 +82,6 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-6e-akf">
-                                                        <rect key="frame" x="198" y="24" width="19" height="19"/>
-                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-Sk-TYt">
                                                         <rect key="frame" x="20" y="174" width="139.5" height="28"/>
                                                         <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="28"/>
@@ -98,8 +95,6 @@
                                                     <constraint firstItem="cSq-Wx-YZb" firstAttribute="centerY" secondItem="XEk-N3-tyA" secondAttribute="centerY" id="7Nz-df-lTg"/>
                                                     <constraint firstItem="Dif-Sk-TYt" firstAttribute="leading" secondItem="Rp7-fy-VC0" secondAttribute="leading" id="ERt-YF-zE2"/>
                                                     <constraint firstItem="Rp7-fy-VC0" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="ICP-JX-vdR"/>
-                                                    <constraint firstItem="Bpk-6e-akf" firstAttribute="centerY" secondItem="Rp7-fy-VC0" secondAttribute="centerY" id="LRU-ze-KS1"/>
-                                                    <constraint firstItem="Bpk-6e-akf" firstAttribute="leading" secondItem="Rp7-fy-VC0" secondAttribute="trailing" constant="8" symbolic="YES" id="gXg-t9-rOd"/>
                                                     <constraint firstItem="EnJ-1F-lZi" firstAttribute="trailing" secondItem="XEk-N3-tyA" secondAttribute="trailing" id="hee-AJ-jZE"/>
                                                     <constraint firstAttribute="height" constant="272" id="qKN-Vi-f9p"/>
                                                     <constraint firstItem="cSq-Wx-YZb" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="rfN-U0-pvk"/>
@@ -312,7 +307,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Oo8-fG-bGa"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-6E-PaQ">
-                                <rect key="frame" x="30" y="44" width="50" height="50"/>
+                                <rect key="frame" x="30" y="48" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="7ro-uA-wLc"/>
                                     <constraint firstAttribute="height" constant="50" id="Cu7-hg-EWr"/>
@@ -414,7 +409,6 @@
     </scenes>
     <resources>
         <image name="HappyWoman" width="161" height="237"/>
-        <image name="info-icon" width="19" height="19"/>
         <image name="progressMark" width="6" height="6"/>
         <image name="square_back_button" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">

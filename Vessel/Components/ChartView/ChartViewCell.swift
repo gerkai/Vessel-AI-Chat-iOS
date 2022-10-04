@@ -38,6 +38,11 @@ class ChartViewCell: UICollectionViewCell
         NotificationCenter.default.addObserver(self, selector: #selector(self.selected(_:)), name: .selectChartViewCell, object: nil)
     }
     
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func setRandomBackground()
     {
         backgroundColor = UIColor(hue: CGFloat(drand48()), saturation: 1, brightness: 1, alpha: 1)

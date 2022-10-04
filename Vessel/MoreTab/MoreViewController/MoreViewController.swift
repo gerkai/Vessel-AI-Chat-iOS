@@ -91,7 +91,7 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .chatWithNutritionist:
-            tabBarController?.selectedIndex = 3
+            tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
         case .backedByScience:
             openInSafari(url: "https://vesselhealth.com/pages/backed-by-science")
         case .support:

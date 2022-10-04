@@ -89,13 +89,13 @@ public class Storage
     ///   - type: struct type (i.e. Contact.self)
     ///   - directory: directory where struct data is stored
     /// - Returns: decoded struct model(s) of data
-    static func retrieve<T: CoreObjectProtocol>(_ id: Int, as type: T.Type, from directory: Directory = .caches) -> T
+    static func retrieve<T: CoreObjectProtocol>(_ id: Int, as type: T.Type, from directory: Directory = .caches) -> T?
     {
         let url = getURL(for: directory, objectName: "\(type.self)").appendingPathComponent("\(id)", isDirectory: false)
         
         if !FileManager.default.fileExists(atPath: url.path)
         {
-            fatalError("File at path \(url.path) does not exist!")
+            return nil
         }
         
         if let data = FileManager.default.contents(atPath: url.path)
@@ -115,6 +115,54 @@ public class Storage
         {
             fatalError("No data at \(url.path)!")
         }
+    }
+    
+    /// Retrieve and convert structs from a all files of a given type in specified directory on disk
+    ///
+    /// - Parameters:
+    ///   - type: struct type (i.e. Contact.self)
+    ///   - directory: directory where struct data is stored
+    /// - Returns: decoded struct model(s) of data
+    static func retrieve<T: CoreObjectProtocol>(as type: T.Type, from directory: Directory = .caches) -> [T]
+    {
+        var filesArray: [T] = []
+        let url = getURL(for: directory, objectName: "\(type.self)") 
+        do
+        {
+            let files = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            for url in files
+            {
+                if let data = FileManager.default.contents(atPath: url.path)
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        let model = try decoder.decode(type, from: data)
+                        filesArray.append(model)
+                    }
+                    catch
+                    {
+                        //this file data is corrupt. Skip it.
+                    }
+                }
+            }
+            //print("FILES: \(files)")
+        }
+        catch
+        {
+            print(error)
+        }
+        
+        //the order of the files returned by FileManager is undefined. So let's sort them here
+        let files = filesArray.sorted(by: { $0.id < $1.id })
+        for file in files
+        {
+            if let result = file as? Result
+            {
+                print("ID: \(result.id), \(result.wellnessScore)")
+            }
+        }
+        return files
     }
     
     /// Remove all files of specified type at specified directory

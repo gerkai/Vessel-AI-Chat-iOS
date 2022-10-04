@@ -43,6 +43,8 @@ class AfterTestMVVMViewController: UIViewController
         let result = viewModel.nextViewControllerData()
         if result.transition == .dismiss
         {
+            //also called in ResultsViewController
+            NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
             dismiss(animated: true)
         }
         else

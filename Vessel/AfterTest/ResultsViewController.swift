@@ -231,7 +231,7 @@ class ResultsViewController: UIViewController
             reagentView.alpha = 0.0
             let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
             let value = testResult.reagents[i].value
-            let evaluation = reagent.getEvaluation(score: value)
+            let evaluation = reagent.getEvaluation(value: value)
             
             reagentView.titleLabel.text = reagent.name
             reagentView.subtextLabel.text = evaluation.title
@@ -406,6 +406,8 @@ class ResultsViewController: UIViewController
             let result = viewModel.nextViewControllerData()
             if result.transition == .dismiss
             {
+                //also called in AfterTestMVVMViewController
+                NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
                 dismiss(animated: true)
             }
             else
@@ -427,7 +429,7 @@ class ResultsViewController: UIViewController
     {
         //used for test/debug
         
-        testResult = Result(id: 1, lastUpdated: 0, cardUUID: "12345", wellnessScore: 0.73, dateString: "2022-09-24T15:22:14", reagents: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.73, insert_date: "2022-09-24T15:22:14", reagents: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
                                                                         ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
                                                                         ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
                                                                         ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),

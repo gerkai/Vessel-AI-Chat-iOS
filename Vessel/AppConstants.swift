@@ -9,7 +9,13 @@ import UIKit
 
 extension Notification.Name
 {
+    //when an item is checked on Food Preferences, this notification informs the other cells to update their checked/unchecked status.
     static let updateCheckmarks = Notification.Name("UpdateCheckmarks")
+    
+    //when new data arrives from back end, this notification gets sent with the CoreObject type. Interested parties
+    //can update themselves. Used for updating the results tab when a new Result arrives.
+    static let newDataFromServer = Notification.Name("NewDataFromServer")
+    static let selectTabNotification = Notification.Name("SelectTab")
 }
 
 struct Constants
@@ -104,6 +110,7 @@ struct Constants
     static let KEY_SHOW_DEBUG_DRAWING = "KEY_SHOW_DEBUG_DRAWING"
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
+    static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
     
     //Database IDs
     static let ID_NO_DIETS = 17
@@ -135,6 +142,10 @@ struct Constants
     static let MORNING_TEST_TIME_START = 4 /* 4am */
     static let MORNING_TEST_TIME_END = 9 /* 9am */
     static let CARD_ACTIVATION_SECONDS = 180.0  /* defines how much time user has to wait for card to activate */
+    static let TAB_BAR_TODAY_INDEX = 0
+    static let TAB_BAR_RESULTS_INDEX = 1
+    static let TAB_BAR_COACH_INDEX = 3
+    static let TAB_BAR_MORE_INDEX = 4
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")

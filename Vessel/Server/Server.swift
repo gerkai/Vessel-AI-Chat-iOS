@@ -58,7 +58,7 @@ let CONTACT_EXISTS_PATH = "contact/exists"
 let DELETE_ACCOUNT_PATH = "contact"
 let CHANGE_PASSWORD_PATH = "contact/change-password"
 let SAMPLE_PATH = "sample"
-let GET_SCORE_PATH = "sample/{sample_uuid}/super"
+let GET_SCORE_PATH = "sample/{sample_uuid}"
 let OBJECT_SAVE_PATH = "objects/save"
 let OBJECT_GET_PATH = "objects/get"
 
@@ -301,7 +301,7 @@ class Server: NSObject
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if self.allowDebugPrint()
                     {
-                        print("Server Write Response:\n\(json)\n")
+                        print("Server Response:\n\(json)\n")
                     }
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
@@ -751,13 +751,13 @@ class Server: NSObject
         var objectDict: [String: [ObjectReq]] = [:]
         for req in objects
         {
-            if var array = objectDict[req.type.rawValue]
+            if var array = objectDict[req.type]
             {
                 array.append(ObjectReq(id: req.id, last_updated: req.last_updated))
             }
             else
             {
-                objectDict[req.type.rawValue] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
+                objectDict[req.type] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
             }
         }
         
@@ -1004,6 +1004,7 @@ class Server: NSObject
             }
             catch
             {
+                print(error)
                 DispatchQueue.main.async()
                 {
                     let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get score response", comment: "Server error message")])
