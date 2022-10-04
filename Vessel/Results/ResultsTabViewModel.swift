@@ -29,15 +29,15 @@ class ResultsTabViewModel
      */
     init()
     {
-        results = mockResults
-        //results = Storage.retrieve(as: Result.self)
+        //results = mockResults
+        results = Storage.retrieve(as: Result.self)
         selectedResultIndex = numberOfResults() - 1
     }
     
     func refresh()
     {
-        results = mockResults
-        //results = Storage.retrieve(as: Result.self)
+        //results = mockResults
+        results = Storage.retrieve(as: Result.self)
     }
     
     func numberOfResults() -> Int
