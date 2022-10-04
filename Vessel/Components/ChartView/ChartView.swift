@@ -30,7 +30,6 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     var dataSource: ChartViewDataSource!
     
     let cellWidth = 74.0
-    var numCells: Int!
     var selectedCell = 0
     var delegate: ChartViewDelegate?
     
@@ -41,6 +40,15 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         collectionView.dataSource = self
     }
     
+    func refresh()
+    {
+        collectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
+        {
+            self.selectLastCell()
+        }
+    }
+    
     func setSelectedCell(cellIndex: Int)
     {
         selectedCell = cellIndex
@@ -49,37 +57,34 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func selectLastCell()
     {
-        if numCells == nil
-        {
-            numCells = dataSource.chartViewNumDataPoints()
-        }
+        let numCells = dataSource.chartViewNumDataPoints()
         setSelectedCell(cellIndex: numCells - 1)
         NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": numCells - 1])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        if numCells == nil
+        let numCells = dataSource.chartViewNumDataPoints()
+        if numCells != 0
         {
-            numCells = dataSource.chartViewNumDataPoints()
-        }
-        let selectionIncrement = (scrollView.contentSize.width - frame.width - 2.0) / Double(numCells - 2)
-        var cell = 0
-        if scrollView.contentOffset.x >= scrollView.contentSize.width - frame.width
-        {
-            cell = numCells - 1
-        }
-        else if scrollView.contentOffset.x > 0.0
-        {
-            cell = Int(1 + (scrollView.contentOffset.x - 1.0) / selectionIncrement)
-        }
-        
-        //print("\(scrollView.contentOffset.x), \(scrollView.contentSize.width), \(selectionIncrement), \(cell)")
-        if selectedCell != cell
-        {
-            selectedCell = cell
-            setSelectedCell(cellIndex: cell)
-            NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell])
+            let selectionIncrement = (scrollView.contentSize.width - frame.width - 2.0) / Double(numCells - 2)
+            var cell = 0
+            if scrollView.contentOffset.x >= scrollView.contentSize.width - frame.width
+            {
+                cell = numCells - 1
+            }
+            else if scrollView.contentOffset.x > 0.0
+            {
+                cell = Int(1 + (scrollView.contentOffset.x - 1.0) / selectionIncrement)
+            }
+            
+            //print("\(scrollView.contentOffset.x), \(scrollView.contentSize.width), \(selectionIncrement), \(cell)")
+            if selectedCell != cell
+            {
+                selectedCell = cell
+                setSelectedCell(cellIndex: cell)
+                NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell])
+            }
         }
     }
     
@@ -90,11 +95,12 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return numCells
+        return dataSource.chartViewNumDataPoints()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
+        let numCells = dataSource.chartViewNumDataPoints()
         let currentRow = numCells - indexPath.row - 1
 
         let cell: ChartViewCell = collectionView.dequeueCell(for: indexPath)
@@ -106,9 +112,12 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         let wellnessScore = Int((data[2].wellnessScore + 0.005) * 100)
         cell.wellnessScoreLabel.text = "\(wellnessScore)"
         cell.wellnessScore = data[2].wellnessScore
-        let components = Date.components(for: data[2].dateString)
-        cell.monthLabel.text = Date.abbreviationFor(month: components.month)
-        cell.dayLabel.text = String(format: "%02i", components.day)
+        if let date = Date.from(vesselTime: data[2].last_updated)
+        {
+            let components = Date.components(for: date)
+            cell.monthLabel.text = Date.abbreviationFor(month: components.month)
+            cell.dayLabel.text = String(format: "%02i", components.day)
+        }
         return cell
     }
     
@@ -118,7 +127,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         //If we're indexing either end of the data set, mark it with -1. This signals the
         //graphView not to draw that line segment.
         var data: [Result] = []
-        
+        let numCells = dataSource.chartViewNumDataPoints()
         //add two data points before current one
         if index < 2
         {

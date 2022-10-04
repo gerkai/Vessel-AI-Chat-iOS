@@ -35,6 +35,8 @@ class Contact: CoreObjectProtocol
     
     var id: Int
     var last_updated: Int = 0
+    var storage: StorageType = .cache
+    
     var first_name: String
     var last_name: String
     var gender: String?

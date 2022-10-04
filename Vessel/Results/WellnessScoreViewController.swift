@@ -33,7 +33,7 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
             let reagent = Reagents[Reagent.ID(rawValue: reagentResult.id)!]!
             scoreView.nameLabel.text = reagent.name
             scoreView.imageView.image = UIImage(named: reagent.imageName)
-            let evaluation = reagent.getEvaluation(score: reagentResult.value)
+            let evaluation = reagent.getEvaluation(value: reagentResult.value)
             scoreView.levelLabel.text = evaluation.title
             scoreView.contentView.backgroundColor = evaluation.color
             stackView.addArrangedSubview(scoreView)

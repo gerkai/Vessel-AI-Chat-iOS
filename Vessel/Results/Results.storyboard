@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKi-7V-y1x" userLabel="greenView">
-                                <rect key="frame" x="0.0" y="-956" width="390" height="300"/>
+                                <rect key="frame" x="0.0" y="-253" width="390" height="300"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="T2Z-IX-pQw"/>
@@ -45,8 +45,8 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="451"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-uX-dIf">
-                                                        <rect key="frame" x="27" y="60" width="143.66666666666666" height="39.333333333333343"/>
-                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="35"/>
+                                                        <rect key="frame" x="27" y="60" width="147.33333333333334" height="39.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -143,7 +143,7 @@
                                                 <rect key="frame" x="20" y="591" width="350" height="262"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dku-mP-g9y">
-                                                        <rect key="frame" x="28" y="40" width="127" height="27"/>
+                                                        <rect key="frame" x="27.999999999999993" y="40" width="126.33333333333331" height="27"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                         <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -252,11 +252,11 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yEu-8U-DuO"/>
                             </scrollView>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IjY-Va-H26">
-                                <rect key="frame" x="-1" y="-1" width="389" height="844"/>
+                                <rect key="frame" x="-1" y="-1" width="389" height="843"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view alpha="0.94999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-aO-ixe">
-                                        <rect key="frame" x="0.0" y="0.0" width="389" height="844"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="389" height="843"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtT-3B-dkC">

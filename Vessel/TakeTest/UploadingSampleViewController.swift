@@ -207,6 +207,10 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
             vc.testResult = testResult
+            
+            //save Result to objectStore
+            ObjectStore.shared.serverSave(testResult)
+            
             self.viewModel.uploadingFinished()
             self.navigationController?.pushViewController(vc, animated: true)
         }

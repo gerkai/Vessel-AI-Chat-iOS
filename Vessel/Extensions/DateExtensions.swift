@@ -85,4 +85,40 @@ extension Date
         
         return (month, day, year)
     }
+    
+    static func components(for date: Date) -> (month: Int, day: Int, year: Int)
+    {
+        let month = NSCalendar.current.component(.month, from: date)
+        let day = NSCalendar.current.component(.day, from: date)
+        let year = NSCalendar.current.component(.year, from: date)
+        
+        return (month, day, year)
+    }
+    
+    //given a vesselTime value (from a last_updated field), this returns a date
+    static func from(vesselTime: Int) -> Date?
+    {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let vesselDate = formatter.date(from: "2020/01/01 00:00")?.addingTimeInterval(Double(vesselTime))
+        if let vdate = vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
+        {
+            print("v_time: \(vesselTime), date:\(vesselDate), local: \(vdate)")
+        }
+        return vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
+    }
+    
+    func convertToLocalTime(fromTimeZone timeZoneAbbreviation: String) -> Date?
+    {
+        if let timeZone = TimeZone(abbreviation: timeZoneAbbreviation)
+        {
+            let targetOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
+            let localOffeset = TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self))
+
+            return self.addingTimeInterval(targetOffset - localOffeset)
+        }
+    
+        return nil
+    }
 }

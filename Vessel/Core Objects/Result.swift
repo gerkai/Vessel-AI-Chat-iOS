@@ -7,23 +7,52 @@
 
 import Foundation
 
-struct Result: Codable
+struct Result: CoreObjectProtocol, Codable
 {
-    let id: Int
-    let lastUpdated: Int
-    let cardUUID: String
+    var id: Int
+    var last_updated: Int //object is not returned from server yet so we mock it with a private var
+    var card_uuid: String
+    var insert_date: String
+    {
+        get
+        {
+            _insert_date ?? ""
+        }
+        set
+        {
+            _insert_date = newValue
+        }
+    }
+
+    private var _insert_date: String?
+    
+    var storage: StorageType = .disk
+    
     var wellnessScore: Double
-    let dateString: String
+    
     let reagents: [ReagentResult]
     
     enum CodingKeys: String, CodingKey
     {
         case id
-        case lastUpdated = "last_updated"
-        case cardUUID = "card_uuid"
+        case last_updated
+        case card_uuid
         case wellnessScore = "wellness_score"
-        case dateString = "insert_date"
+        //case insert_date
         case reagents
+    }
+    
+    init(id: Int = 0,
+         last_updated: Int = 0, storage: StorageType = .cache, card_uuid: String = "12345", wellnessScore: Double = 0.85, insert_date: String = "", reagents: [ReagentResult] = [])
+         
+    {
+        self.storage = storage
+        self.wellnessScore = wellnessScore
+        self.reagents = reagents
+        self.last_updated = last_updated
+        self.id = id
+        self.card_uuid = card_uuid
+        self.insert_date = insert_date
     }
     
     func isEvaluatedTo(id: Reagent.ID, evaluation: Evaluation) -> Bool
@@ -55,19 +84,41 @@ struct Result: Codable
     }
 }
 
+//These are what the reagents[] array in the Result holds
 struct ReagentResult: Codable
 {
     let id: Int
     let score: Double
     let value: Double
-    let errorCodes: [Int]
+    var errorCodes: [Int]
+    {
+        get
+        {
+            _error_codes ?? []
+        }
+        set
+        {
+            _error_codes = newValue
+        }
+    }
+    private var _error_codes: [Int]?
+    
+    init(id: Int = 0,
+         score: Double = 0.0, value: Double = 0.0, errorCodes: [Int] = [])
+         
+    {
+        self.id = id
+        self.score = score
+        self.value = value
+        self.errorCodes = errorCodes
+    }
     
     enum CodingKeys: String, CodingKey
     {
         case id = "reagent_id"
         case score
         case value
-        case errorCodes = "error_codes"
+        //case errorCodes = "error_codes"
     }
 }
 

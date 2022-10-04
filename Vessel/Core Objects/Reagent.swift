@@ -169,54 +169,14 @@ struct Reagent
         return eval
     }
     
-    func getEvaluation(score: Double) -> Evaluation
+    func getEvaluation(value: Double) -> Evaluation
     {
-        var highestBucket: Bucket?
-        var lowestBucket: Bucket?
-        
         //establish highest and lowest buckets. That way if a value is out of range, we can slam it to highest or lowest.
         for bucket in buckets
         {
-            if highestBucket != nil
-            {
-                if bucket.high > highestBucket!.high
-                {
-                    highestBucket = bucket
-                }
-            }
-            else
-            {
-                highestBucket = bucket
-            }
-            if lowestBucket != nil
-            {
-                if bucket.low < lowestBucket!.low
-                {
-                    lowestBucket = bucket
-                }
-            }
-            else
-            {
-                lowestBucket = bucket
-            }
-            
-            if (score >= bucket.low) && (score <= bucket.high)
+            if (value >= bucket.low) && (value < bucket.high)
             {
                 return bucket.evaluation
-            }
-        }
-        if let highBucket = highestBucket
-        {
-            if score > highBucket.high
-            {
-                return highBucket.evaluation
-            }
-        }
-        if let lowBucket = lowestBucket
-        {
-            if score < lowBucket.low
-            {
-                return lowBucket.evaluation
             }
         }
         return Evaluation.notAvailable

@@ -102,12 +102,10 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         updateEnvironmentLabel(env: savedEnvironment)
         timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
-        print("Starting welcome timer")
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
-        print("Disabling welcome timer")
         timer.invalidate()
     }
     
