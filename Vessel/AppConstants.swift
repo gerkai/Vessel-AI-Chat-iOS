@@ -161,6 +161,7 @@ struct Constants
     //Fonts
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
+    static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)
     
     static func stringForScore(score: Double) -> String
     {

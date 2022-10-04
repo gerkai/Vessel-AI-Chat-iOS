@@ -50,4 +50,32 @@ class HeightWeightSelectViewModel
     {
         return kg / 0.45359237
     }
+    
+    func convertLbsToKg(lbs: Double) -> Double
+    {
+        return lbs * 0.45359237
+    }
+    
+    func textFor(row: Int, inComponent component: Int) -> String
+    {
+        if isMetric
+        {
+            return String(format: NSLocalizedString("%i cm", comment: "abbreviation for height in 'centimeters'"), row + Constants.MIN_HEIGHT_METRIC)
+        }
+        else
+        {
+            let heightComponent = HeightComponentImperial(rawValue: component)
+            let (minFeet, minInches) = convertCentimetersToFeetInches(centimeters: Double(Constants.MIN_HEIGHT_METRIC))
+
+            switch heightComponent
+            {
+                case .feet:
+                    return String(format: NSLocalizedString("%i ft", comment: "abbreviation for height in 'feet'"), row + minFeet)
+                case .inches:
+                    return String(format: NSLocalizedString("%i in", comment: "abbreviation for height in 'inches'"), row + minInches)
+                default:
+                    return ""
+            }
+        }
+    }
 }
