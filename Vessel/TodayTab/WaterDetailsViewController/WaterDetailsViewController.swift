@@ -38,3 +38,18 @@ class WaterDetailsViewController: UIViewController
         navigationController?.popViewController(animated: true)
     }
 }
+
+extension WaterDetailsViewController: UIScrollViewDelegate
+{
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        if scrollView.contentOffset.y <= 0
+        {
+            view.backgroundColor = .backgroundGreen
+        }
+        else
+        {
+            view.backgroundColor = .codGray
+        }
+    }
+}

@@ -17,18 +17,28 @@ class TodayViewController: UIViewController
     
     // MARK: - UI
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var backgroundViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var emptyView: UIView!
     
     // MARK: - Model
     private var viewModel = TodayViewModel()
-    private var initialVerticalOffset: CGFloat?
+    private var didLayout = false
+    private var tableViewOffset: CGFloat?
     
     // MARK: - UIViewController Life Cycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
         emptyView.isHidden = !viewModel.isEmpty
+        view.bringSubviewToFront(emptyView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        didLayout = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.scrollViewDidScroll(self.tableView)
+        })
     }
     
     // MARK: - Actions
@@ -52,7 +62,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        viewModel.sections[indexPath.section].cells[indexPath.row].height + (viewModel.sections[indexPath.section] == viewModel.sections.last ? 0.0 : Constants.TABLE_VIEW_SPACING)
+        viewModel.sections[indexPath.section].cells[indexPath.row].height + (viewModel.sections[indexPath.section] == viewModel.sections.last ? tableViewOffset ?? 0.0 : Constants.TABLE_VIEW_SPACING)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -102,15 +112,21 @@ extension TodayViewController: UIScrollViewDelegate
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        if initialVerticalOffset == nil
+        guard didLayout == true else { return }
+        
+        if tableViewOffset == nil
         {
-            initialVerticalOffset = scrollView.contentOffset.y
+            tableViewOffset = tableView.frame.height - tableView.contentSize.height
+            tableView.reloadData()
         }
         
-        guard let initialVerticalOffset = initialVerticalOffset,
-              scrollView.contentOffset.y - initialVerticalOffset <= 0 else { return }
-        
-        backgroundViewHeightConstraint.constant = view.safeAreaInsets.top + abs(scrollView.contentOffset.y - initialVerticalOffset)
-        view.layoutIfNeeded()
+        if tableView.contentOffset.y <= 0
+        {
+            view.backgroundColor = .offwhite
+        }
+        else
+        {
+            view.backgroundColor = .codGray
+        }
     }
 }

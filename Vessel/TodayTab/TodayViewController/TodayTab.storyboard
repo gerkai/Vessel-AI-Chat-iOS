@@ -99,13 +99,6 @@
                                     <constraint firstAttribute="bottom" secondItem="c81-2x-maU" secondAttribute="bottom" id="oQD-JS-Aow"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpy-kf-6gb">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="0.0"/>
-                                <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="3oz-KU-tDz"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Wm7-rS-9QP">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -291,47 +284,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="173"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4H-oL-Agc">
-                                                    <rect key="frame" x="20" y="40" width="350" height="66"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment>
-                                                            <string key="content">Not intended for use in diagnosing diseases or other conditions, determining the state of health, or curing, mitigating, treating, or preventing illness or disease.</string>
-                                                            <attributes>
-                                                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <font key="NSFont" size="12" name="BananaGrotesk-Semibold"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="22" maximumLineHeight="22" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="6fV-LB-qPb">
-                                                    <rect key="frame" x="20" y="126" width="75" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="75" id="1nV-UL-ms6"/>
-                                                        <constraint firstAttribute="height" constant="27" id="PBW-So-fZv"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HIPAA" translatesAutoresizingMaskIntoConstraints="NO" id="mYJ-t6-siN">
-                                                    <rect key="frame" x="278" y="126" width="92" height="27"/>
-                                                </imageView>
+                                                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yin-6D-zak" customClass="VesselFooterView" customModule="Vessel" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="173"/>
+                                                    <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6fV-LB-qPb" firstAttribute="top" secondItem="i4H-oL-Agc" secondAttribute="bottom" constant="20" id="F27-L1-MId"/>
-                                                <constraint firstAttribute="trailing" secondItem="mYJ-t6-siN" secondAttribute="trailing" constant="20" id="Ggl-EV-ltD"/>
-                                                <constraint firstAttribute="bottom" secondItem="mYJ-t6-siN" secondAttribute="bottom" constant="20" id="HE9-hB-QIK"/>
-                                                <constraint firstItem="6fV-LB-qPb" firstAttribute="leading" secondItem="ASr-h0-WmU" secondAttribute="leading" constant="20" id="Px0-Wk-Rtb"/>
-                                                <constraint firstAttribute="bottom" secondItem="6fV-LB-qPb" secondAttribute="bottom" constant="20" id="QZO-et-s0Z"/>
-                                                <constraint firstItem="i4H-oL-Agc" firstAttribute="leading" secondItem="ASr-h0-WmU" secondAttribute="leading" constant="20" id="XuY-W1-Sqi"/>
-                                                <constraint firstItem="i4H-oL-Agc" firstAttribute="top" secondItem="ASr-h0-WmU" secondAttribute="top" constant="40" id="hmR-iA-m8y"/>
-                                                <constraint firstAttribute="trailing" secondItem="i4H-oL-Agc" secondAttribute="trailing" constant="20" id="iLX-Vj-UTF"/>
-                                                <constraint firstItem="mYJ-t6-siN" firstAttribute="top" secondItem="i4H-oL-Agc" secondAttribute="bottom" constant="20" id="rhT-Er-saP"/>
+                                                <constraint firstItem="yin-6D-zak" firstAttribute="leading" secondItem="ASr-h0-WmU" secondAttribute="leading" id="BDl-dd-pEl"/>
+                                                <constraint firstAttribute="trailing" secondItem="yin-6D-zak" secondAttribute="trailing" id="Daz-MI-l8M"/>
+                                                <constraint firstAttribute="bottom" secondItem="yin-6D-zak" secondAttribute="bottom" id="Xom-tE-jzI"/>
+                                                <constraint firstItem="yin-6D-zak" firstAttribute="top" secondItem="ASr-h0-WmU" secondAttribute="top" id="kMp-69-iab"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="vesselIcon" destination="6fV-LB-qPb" id="dDZ-df-4ra"/>
-                                        </connections>
+                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -341,14 +306,11 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ytY-I4-MlA" secondAttribute="trailing" id="2t7-iH-O3c"/>
-                            <constraint firstItem="Xpy-kf-6gb" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="8VW-z9-ZA7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ytY-I4-MlA" secondAttribute="bottom" id="E0m-X9-cSP"/>
                             <constraint firstItem="Wm7-rS-9QP" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="MOM-hS-pVd"/>
-                            <constraint firstItem="Xpy-kf-6gb" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="WS1-6h-uJS"/>
-                            <constraint firstItem="Xpy-kf-6gb" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Zzl-IN-aHb"/>
                             <constraint firstItem="ytY-I4-MlA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aNz-gY-P8Q"/>
                             <constraint firstItem="Wm7-rS-9QP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dBs-xI-BdB"/>
                             <constraint firstItem="ytY-I4-MlA" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="ec4-a1-tfq"/>
@@ -359,9 +321,8 @@
                     <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" selectedImage="Plan-Icon" id="DsO-Nq-qlg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="backgroundViewHeightConstraint" destination="3oz-KU-tDz" id="r83-e4-Hta"/>
                         <outlet property="emptyView" destination="ytY-I4-MlA" id="rkR-JW-CAT"/>
-                        <outlet property="tableView" destination="3oz-KU-tDz" id="PcX-EN-e91"/>
+                        <outlet property="tableView" destination="Wm7-rS-9QP" id="Wiz-z9-yee"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -373,14 +334,14 @@
             <objects>
                 <viewController storyboardIdentifier="WaterDetailsViewController" automaticallyAdjustsScrollViewInsets="NO" id="U5A-PO-iQh" customClass="WaterDetailsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qM2-gh-Pux">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="2015"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="2207"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwB-g8-3wi">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="2015"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="2207"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jpc-yV-bdv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2020"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2212"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbf-ux-pEH" userLabel="Header View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
@@ -433,6 +394,7 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="s6u-aA-O1j" secondAttribute="bottom" constant="36" id="CSQ-kN-6s5"/>
                                                     <constraint firstAttribute="height" constant="531" id="Ft9-gS-M25"/>
@@ -684,6 +646,13 @@ However, most people drink below what their body needs because it's hard to know
                                                     <constraint firstAttribute="bottom" secondItem="DIW-R4-5RI" secondAttribute="bottom" constant="40" id="y9e-oV-edZ"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOR-AW-jPN" customClass="VesselFooterView" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="2020" width="375" height="192"/>
+                                                <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="192" id="Oeh-m6-1cv"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -709,6 +678,9 @@ However, most people drink below what their body needs because it's hard to know
                                         <exclude reference="zWJ-tf-3x4"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="U5A-PO-iQh" id="fLd-K2-pRq"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8r-IB-jAr" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="20" y="47" width="50" height="50"/>
@@ -742,31 +714,32 @@ However, most people drink below what their body needs because it's hard to know
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="2015"/>
+                    <size key="freeformSize" width="375" height="2207"/>
                     <connections>
                         <outlet property="glassesStackView" destination="s6u-aA-O1j" id="1E9-CQ-L0d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEb-Jd-EbD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286.9230769230769" y="394.19431279620852"/>
+            <point key="canvasLocation" x="1293" y="444"/>
         </scene>
     </scenes>
     <resources>
         <image name="Checkbox_beige_unselected" width="48" height="48"/>
-        <image name="HIPAA" width="92" height="27"/>
         <image name="Plan-Icon" width="18" height="18"/>
         <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="todayInsightsIcon" width="23" height="31"/>
         <image name="todayLeaves" width="167" height="147"/>
-        <image name="vessel_logo_horizontal" width="124.33333587646484" height="44.666667938232422"/>
         <image name="water-details-background" width="204" height="548"/>
         <image name="water-glass-full" width="30" height="45"/>
         <image name="water-header" width="283" height="337"/>
         <image name="yogaImprovesSleep" width="314" height="203"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
