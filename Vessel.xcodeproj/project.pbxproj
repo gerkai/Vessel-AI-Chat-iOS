@@ -152,6 +152,7 @@
 		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
+		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
 		727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */; };
 		727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B528B74BA500039BE0 /* DebugMenuCell.swift */; };
@@ -359,6 +360,7 @@
 		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		72411CF6287E413C004A312E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		72411CF7287E413C004A312E /* Resolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolved.swift; sourceTree = "<group>"; };
+		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
@@ -795,6 +797,14 @@
 			path = Resolver;
 			sourceTree = "<group>";
 		};
+		72673C4F28E807B10056C701 /* WaterDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */,
+			);
+			path = WaterDetailsViewController;
+			sourceTree = "<group>";
+		};
 		7270EDDD28A361CA00177898 /* ChangePasswordViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1012,7 @@
 			isa = PBXGroup;
 			children = (
 				72F0DEDF28E2788B00034088 /* TodayViewController */,
+				72673C4F28E807B10056C701 /* WaterDetailsViewController */,
 			);
 			path = TodayTab;
 			sourceTree = "<group>";
@@ -1411,6 +1422,7 @@
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
+				72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,

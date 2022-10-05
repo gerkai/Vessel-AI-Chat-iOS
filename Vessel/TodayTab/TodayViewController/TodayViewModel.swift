@@ -14,7 +14,7 @@ enum TodayViewSection: Equatable
     //case insights(insights: [Insight])
     //case activities
     //case food
-    //case water
+    case water
     //case customize
     case footer
     
@@ -24,6 +24,7 @@ enum TodayViewSection: Equatable
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         //case .insights(let insights): return createInsightsSection(insights: insights)
+        case .water: return [.sectionTitle(icon: "water-icon", name: "64 oz Water")]
         case .footer: return [.footer]
         }
     }
@@ -47,6 +48,8 @@ enum TodayViewSection: Equatable
             return lhName == rhName && lhGoals == rhGoals
         /*case (.insights(let lhInsights), .insights(let rhInsights)):
             return lhInsights == rhInsights*/
+        case (.water, .water):
+            return true
         case (.footer, .footer):
             return true
         default:
@@ -93,12 +96,13 @@ class TodayViewModel
         return [Insight(id: 0, lastUpdated: 0, title: "How Yoga Improves Sleep", subtitle: "Mood and Sleep (2 mins)", description: "Legumes have been proven in various studies to reduce your cortisol levels and improve... more", backgroundImage: "yogaImprovesSleep", completedDate: nil)]
     }
     
-    var isEmpty: Bool = true
+    var isEmpty: Bool = false
     
     lazy var sections: [TodayViewSection] =
     [
         .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
         //.insights(insights: insights),
+        .water,
         .footer
     ]
 }

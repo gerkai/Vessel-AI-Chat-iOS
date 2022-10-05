@@ -76,9 +76,25 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: completed)
         case .footer:
-            return cell
+            break
         }
-        return UITableViewCell()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        guard let section = viewModel.sections[safe: indexPath.section] else { return }
+        switch section
+        {
+        case .water:
+            let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+            let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
+            waterDetailsVC.hidesBottomBarWhenPushed = true
+            waterDetailsVC.drinkedWaterGlasses = 2
+            navigationController?.pushViewController(waterDetailsVC, animated: true)
+        default:
+            break
+        }
     }
 }
 
