@@ -35,6 +35,7 @@
 		3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */; };
 		3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */; };
 		3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */; };
+		3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */; };
 		3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */; };
 		3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F006287A6B4800FCC52E /* DateExtensions.swift */; };
 		3F12F00B287A736600FCC52E /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00A287A736600FCC52E /* Allergy.swift */; };
@@ -235,6 +236,7 @@
 		3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestsGoalsView.xib; sourceTree = "<group>"; };
 		3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsGoalsView.swift; sourceTree = "<group>"; };
 		3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvyLineView.swift; sourceTree = "<group>"; };
+		3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
 		3F12F006287A6B4800FCC52E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		3F12F00A287A736600FCC52E /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		3F12F00C287B3C6900FCC52E /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 			children = (
 				72DEA1CA289E449200C92695 /* Blurable */,
 				72411CF5287E413C004A312E /* Resolver */,
+				3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */,
 			);
 			path = "Third-Party Libraries";
 			sourceTree = "<group>";
@@ -1381,6 +1384,7 @@
 				3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */,
+				3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */,
 				3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */,
 				72F0DEE128E278ED00034088 /* TodayViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,

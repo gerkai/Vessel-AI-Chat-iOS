@@ -29,6 +29,7 @@ class ResultsTabViewModel
      */
     init()
     {
+        //results = mockResults
         results = Storage.retrieve(as: Result.self)
         selectedResultIndex = numberOfResults() - 1
     }
