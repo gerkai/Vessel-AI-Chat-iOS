@@ -13,7 +13,7 @@ enum TodayViewSection: Equatable
     //case days
     //case insights(insights: [Insight])
     //case activities
-    //case food
+    case food
     case water
     //case customize
     case footer
@@ -24,6 +24,7 @@ enum TodayViewSection: Equatable
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         //case .insights(let insights): return createInsightsSection(insights: insights)
+        case .food: return [.sectionTitle(icon: "food-icon", name: "Food")]
         case .water: return [.sectionTitle(icon: "water-icon", name: "64 oz Water")]
         case .footer: return [.footer]
         }
@@ -48,6 +49,8 @@ enum TodayViewSection: Equatable
             return lhName == rhName && lhGoals == rhGoals
         /*case (.insights(let lhInsights), .insights(let rhInsights)):
             return lhInsights == rhInsights*/
+        case (.food, .food):
+            return true
         case (.water, .water):
             return true
         case (.footer, .footer):
@@ -102,6 +105,7 @@ class TodayViewModel
     [
         .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
         //.insights(insights: insights),
+        .food,
         .water,
         .footer
     ]

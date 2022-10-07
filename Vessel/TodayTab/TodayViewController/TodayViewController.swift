@@ -96,6 +96,27 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         guard let section = viewModel.sections[safe: indexPath.section] else { return }
         switch section
         {
+        case .food:
+            let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+            let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
+            activityDetailsVC.hidesBottomBarWhenPushed = true
+            activityDetailsVC.setup(food: Food(id: 0,
+                                               last_updated: 0,
+                                               title: "Grapefruit",
+                                               serving_quantity: 8.0,
+                                               serving_unit: "oz",
+                                               serving_grams: 226.796,
+                                               popularity: 0,
+                                               usda_ndb_number: 0,
+                                               categories: [],
+                                               image_url: "https://i.ibb.co/tq5kfzW/Grapefruit.png",
+                                               reagents: [
+                                                Reagents[Reagent.ID(rawValue: 11)!]!,
+                                                Reagents[Reagent.ID(rawValue: 5)!]!,
+                                                Reagents[Reagent.ID(rawValue: 4)!]!,
+                                               ]))
+            navigationController?.pushViewController(activityDetailsVC, animated: true)
+
         case .water:
             let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController

@@ -49,7 +49,7 @@ extension UIViewController
         }
     }
     
-    func showOverTopViewController(presentationStyle: UIModalPresentationStyle = .overCurrentContext, modalTransition: UIModalTransitionStyle  = .coverVertical)
+    func showOverTopViewController(presentationStyle: UIModalPresentationStyle = .overCurrentContext, modalTransition: UIModalTransitionStyle = .coverVertical)
     {
         let topWindow = UIApplication.shared.windows.last
         if topWindow?.rootViewController is OverTopViewController

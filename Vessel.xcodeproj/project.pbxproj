@@ -147,6 +147,9 @@
 		721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */; };
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
 		721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */; };
+		72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */; };
+		72332FB028EE8D94008CBA8C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAF28EE8D94008CBA8C /* Food.swift */; };
+		72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */; };
 		72384F3428E2D9230033C3FC /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72384F3328E2D9230033C3FC /* Insight.swift */; };
 		72384F3628E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */; };
 		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
@@ -356,6 +359,9 @@
 		721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewModel.swift; sourceTree = "<group>"; };
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
 		721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericAlertViewController.xib; sourceTree = "<group>"; };
+		72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
+		72332FAF28EE8D94008CBA8C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewModel.swift; sourceTree = "<group>"; };
 		72384F3328E2D9230033C3FC /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
 		72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCheckMarkCardTableViewCell.swift; sourceTree = "<group>"; };
 		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
@@ -490,6 +496,7 @@
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
+				72332FAF28EE8D94008CBA8C /* Food.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -782,6 +789,15 @@
 			path = GenericAlert;
 			sourceTree = "<group>";
 		};
+		72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */,
+				72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */,
+			);
+			path = ActivityDetailsViewController;
+			sourceTree = "<group>";
+		};
 		72411CF2287E4091004A312E /* Third-Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -1014,6 +1030,7 @@
 		72F0DEDE28E2786D00034088 /* TodayTab */ = {
 			isa = PBXGroup;
 			children = (
+				72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */,
 				72F0DEDF28E2788B00034088 /* TodayViewController */,
 				72673C4F28E807B10056C701 /* WaterDetailsViewController */,
 			);
@@ -1327,6 +1344,7 @@
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */,
 				727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */,
+				72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */,
 				3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
@@ -1356,6 +1374,7 @@
 				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
 				3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */,
 				3F426DBF28DFA2FF00927B68 /* ResultsTabViewController.swift in Sources */,
+				72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
@@ -1365,6 +1384,7 @@
 				3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
+				72332FB028EE8D94008CBA8C /* Food.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
 				3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */,
 				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
