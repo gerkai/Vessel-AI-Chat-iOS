@@ -26,7 +26,7 @@ enum EditProfileAction
     case editContact(type: EditProfileContactField, value: Any)
 }
 
-class EditProfileViewController: KeyboardFriendlyViewController
+class EditProfileViewController: KeyboardFriendlyViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -70,7 +70,8 @@ class EditProfileViewController: KeyboardFriendlyViewController
         return viewModel
     }()
     
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     // MARK: - UIViewController Lifecycle
     
@@ -108,14 +109,12 @@ class EditProfileViewController: KeyboardFriendlyViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .profile))
         setupView()
     }
     
     // MARK: - Actions
     @IBAction func onBackButtonPressed(_ sender: Any)
     {
-        analytics.log(event: .back(screenName: .profile))
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -246,8 +245,7 @@ private extension EditProfileViewController
         switch action
         {
         case .changeProfilePhoto:
-            // TODO: Route to Change Profile Photo
-            analytics.log(event: .viewedPage(screenName: .choosePhoto))
+            // TODO: Route to Change Profile Photo and add page viewed analytics
             break
         case .changePassword:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
@@ -527,7 +525,7 @@ extension EditProfileViewController: GenericAlertDelegate
     {
         if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
         {
-            analytics.log(event: .viewedPage(screenName: .deleteAccount))
+            analytics.log(event: .viewedPage(screenName: "DeleteAccountPopupViewController", flowName: self.flowName))
         }
     }
     
@@ -560,6 +558,6 @@ extension EditProfileViewController: GenericAlertDelegate
     
     func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
     {
-        analytics.log(event: .viewedPage(screenName: .profile))
+        analytics.log(event: .viewedPage(screenName: String(describing: type(of: self)), flowName: self.flowName))
     }
 }

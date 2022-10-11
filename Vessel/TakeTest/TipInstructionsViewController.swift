@@ -8,10 +8,25 @@
 
 import UIKit
 
-class TipInstructionsViewController: TakeTestMVVMViewController
+class TipInstructionsViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
 {
-    @IBOutlet weak var peeView: UIView!
-    @IBOutlet weak var cupView: UIView!
+    @IBOutlet private weak var peeView: UIView!
+    @IBOutlet private weak var cupView: UIView!
+    @IBOutlet private weak var segmentedControl: VesselSegmentedControl!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
+    var associatedValue: String?
+    {
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            return "Use A Cup"
+        }
+        else
+        {
+            return "Pee On The Card"
+        }
+    }
     
     override func viewDidLoad()
     {
@@ -21,7 +36,6 @@ class TipInstructionsViewController: TakeTestMVVMViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     @IBAction func onBackButton()
@@ -31,6 +45,7 @@ class TipInstructionsViewController: TakeTestMVVMViewController
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl)
     {
+        analytics.log(event: .viewedPage(screenName: String(describing: type(of: self)), flowName: flowName, associatedValue: associatedValue))
         if sender.selectedSegmentIndex == 0
         {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .beginFromCurrentState)

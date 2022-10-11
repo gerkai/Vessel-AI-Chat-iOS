@@ -10,7 +10,7 @@
 
 import UIKit
 
-class HeightWeightSelectViewController: KeyboardFriendlyViewController
+class HeightWeightSelectViewController: KeyboardFriendlyViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var heightPickerView: UIPickerView!
@@ -20,7 +20,10 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
     // MARK: - Logic
     var viewModel = HeightWeightSelectViewModel()
     var coordinator: OnboardingCoordinator?
-
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
+    
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
@@ -44,12 +47,6 @@ class HeightWeightSelectViewController: KeyboardFriendlyViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     override func viewDidLayoutSubviews()

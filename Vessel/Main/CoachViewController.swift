@@ -7,8 +7,11 @@
 
 import UIKit
 
-class CoachViewController: UIViewController
+class CoachViewController: UIViewController, VesselScreenIdentifiable
 {
+    var flowName: AnalyticsFlowName = .coachTabFlow
+    @Resolved internal var analytics: Analytics
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

@@ -11,7 +11,7 @@
 import UIKit
 import AVKit
 
-class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate
+class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var preTimerView: UIView!
@@ -24,6 +24,9 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var tabDetailsLabel: UILabel!
+    
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     private var playerViewController: AVPlayerViewController?
 #if LOOP_VIDEOS

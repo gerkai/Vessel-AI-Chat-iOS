@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TermsViewController: UIViewController
+class TermsViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var nextButton: UIButton!
@@ -17,6 +17,9 @@ class TermsViewController: UIViewController
     // MARK: - Logic
     var allowNextButton = false
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -35,12 +38,6 @@ class TermsViewController: UIViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     override func viewDidLayoutSubviews()

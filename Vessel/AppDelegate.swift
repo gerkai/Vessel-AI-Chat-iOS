@@ -4,8 +4,6 @@
 //
 //  Created by Carson Whitsett on 2/25/22.
 //
-// TODO: Add auto-login
-// TODO: Add server logs debug on/off toggle
 
 import UIKit
 import Firebase
@@ -21,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         analytics.setup()
         configureAppearance()
         MediaManager.shared.initMedia()
+        UIViewController.swizzle()
         return true
     }
 

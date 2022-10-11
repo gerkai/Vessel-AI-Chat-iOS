@@ -9,12 +9,11 @@ import Foundation
 
 enum AnalyticsEvent
 {
-    case viewedPage(screenName: AnalyticsScreenName)
+    case viewedPage(screenName: String, flowName: AnalyticsFlowName, associatedValue: String? = nil)
     case logIn(loginType: AnalyticsLoginType)
     case signUp(loginType: AnalyticsLoginType)
     case forgotPassword
     case identification(type: AnalyticsIdentificationType)
-    case back(screenName: AnalyticsScreenName)
     case accountDeleted
     
     var name: String
@@ -26,7 +25,6 @@ enum AnalyticsEvent
         case .signUp: return "Sign Up"
         case .forgotPassword: return "Forgot Password"
         case .identification: return "Identification"
-        case .back: return "Back"
         case .accountDeleted: return "Account Deleted"
         }
     }
@@ -35,8 +33,18 @@ enum AnalyticsEvent
     {
         switch self
         {
-        case .viewedPage(let screenName):
-            return ["Screen Name": screenName.rawValue]
+        case .viewedPage(let screenName, let flowName, let associatedValue):
+            if let associatedValue = associatedValue
+            {
+                return["Screen Name": screenName,
+                       "Flow Name": flowName.rawValue,
+                       "Associated Value": associatedValue]
+            }
+            else
+            {
+                return["Screen Name": screenName,
+                       "Flow Name": flowName.rawValue]
+            }
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
         case .signUp(let loginType):
@@ -45,36 +53,23 @@ enum AnalyticsEvent
             return [:]
         case .identification(let identificationType):
             return ["Type": identificationType.rawValue]
-        case .back(let screenName):
-            return ["Screen Name": screenName.rawValue]
         case .accountDeleted:
             return [:]
         }
     }
 }
 
-enum AnalyticsScreenName: String
+enum AnalyticsFlowName: String
 {
-    case main = "Main"
-    case welcomeBack = "Welcome Back"
-    case debugMenu = "Debug Menu"
-    case welcome = "Welcome"
-    case identification = "Identification"
-    case boughtOnWebsite = "Bought On Website"
-    case gifted = "Gifted"
-    case dontHaveYet = "Dont Have Yet"
-    case existing = "Existing"
-    case create = "Create"
-    case forgotPassword = "Forgot Password"
-    case forgotPasswordSuccess = "Forgot Password Success"
-    case moreTab = "More Tab"
-    case myAccount = "My Account"
-    case profile = "Profile"
-    case changePassword = "Change Password"
-    case choosePhoto = "Choose Photo"
-    case deleteAccount = "Unsubscribe"
-    case foodPreferencesDiet = "Food Preferences Diet"
-    case foodPreferencesAllergies = "Food Preferences Allergies"
+    case afterTestFlow = "After Test Flow"
+    case coachTabFlow = "Coach Tab Flow"
+    case lessonsFlow = "Lessons Flow"
+    case loginFlow = "Login Flow"
+    case moreTabFlow = "More Tab Flow"
+    case onboardingFlow = "Onboarding Flow"
+    case resultsTabFlow = "Results Tab Flow"
+    case takeTestFlow = "Take Test Flow"
+    case todayTabFlow = "Today Tab Flow"
 }
 
 enum AnalyticsLoginType: String

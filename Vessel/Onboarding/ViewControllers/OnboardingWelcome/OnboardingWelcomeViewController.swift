@@ -7,13 +7,16 @@
 
 import UIKit
 
-class OnboardingWelcomeViewController: UIViewController
+class OnboardingWelcomeViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var nameLabel: UILabel!
     
     // MARK: - Logic
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -38,12 +41,6 @@ class OnboardingWelcomeViewController: UIViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     // MARK: - Actions

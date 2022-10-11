@@ -7,13 +7,14 @@
 
 import UIKit
 
-class MoreViewController: UIViewController
+class MoreViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
     
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     // MARK: Model
     private let viewModel = MoreViewModel()
@@ -22,12 +23,6 @@ class MoreViewController: UIViewController
     {
         super.viewDidLoad()
         versionLabel.text = viewModel.versionString
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .moreTab))
     }
     
     // MARK: - Actions

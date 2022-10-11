@@ -1161,6 +1161,7 @@
                     <connections>
                         <outlet property="cupView" destination="sSO-9F-24b" id="P6P-NQ-Ebx"/>
                         <outlet property="peeView" destination="WUN-mZ-qme" id="fvN-3a-KCW"/>
+                        <outlet property="segmentedControl" destination="XGt-Ox-fze" id="3Kg-lc-GVd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Irn-cd-vKH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

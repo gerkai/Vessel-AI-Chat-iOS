@@ -143,6 +143,7 @@
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
 		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
+		720A23DB28DC114A00A11CF6 /* VesselScreenIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */; };
 		7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7215E9562893ADB100C22A24 /* HeightComponents.swift */; };
 		721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */; };
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
@@ -355,6 +356,7 @@
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
+		720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselScreenIdentifiable.swift; sourceTree = "<group>"; };
 		7215E9562893ADB100C22A24 /* HeightComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightComponents.swift; sourceTree = "<group>"; };
 		721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewModel.swift; sourceTree = "<group>"; };
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
+				720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */,
 				72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */,
 				72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */,
 			);
@@ -1449,6 +1452,7 @@
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,
+				720A23DB28DC114A00A11CF6 /* VesselScreenIdentifiable.swift in Sources */,
 				72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */,
 				72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */,
 			);

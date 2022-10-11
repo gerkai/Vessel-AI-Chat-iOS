@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ItemPreferencesViewController: UIViewController
+class ItemPreferencesViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - View
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -23,6 +23,21 @@ class ItemPreferencesViewController: UIViewController
     var viewModel = ItemPreferencesViewModel()
     var coordinator: OnboardingCoordinator?
     
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
+    var associatedValue: String?
+    {
+        switch viewModel.type
+        {
+        case .diet:
+            return "Diet"
+        case .allergy:
+            return "Allergies"
+        case .goals:
+            return "Goal Selection"
+        }
+    }
+
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
@@ -50,12 +65,6 @@ class ItemPreferencesViewController: UIViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     override func viewWillAppear(_ animated: Bool)

@@ -7,8 +7,11 @@
 
 import UIKit
 
-class DebugMenuViewController: UIViewController
+class DebugMenuViewController: UIViewController, VesselScreenIdentifiable
 {
+    var flowName: AnalyticsFlowName = .moreTabFlow
+    @Resolved internal var analytics: Analytics
+    
     // MARK: - View
     @IBOutlet private weak var tableView: UITableView!
     private let viewModel = DebugMenuViewModel()

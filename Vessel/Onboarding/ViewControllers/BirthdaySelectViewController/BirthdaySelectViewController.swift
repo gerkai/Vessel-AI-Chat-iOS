@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthdaySelectViewController: UIViewController
+class BirthdaySelectViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -17,6 +17,9 @@ class BirthdaySelectViewController: UIViewController
     // MARK: - Logic
     var viewModel = BirthdaySelectViewModel()
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -45,7 +48,6 @@ class BirthdaySelectViewController: UIViewController
     {
         super.viewDidAppear(animated)
         checkmarkView.delegate = self
-        // TODO: Add analytics for viewed page
     }
     
     // MARK: - Initialization
