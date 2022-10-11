@@ -67,7 +67,16 @@ class Contact: CoreObjectProtocol
 
     static func main() -> Contact?
     {
-        return ObjectStore.shared.getContact(id: Contact.MainID) 
+        guard let mainContact = ObjectStore.shared.getContact(id: Contact.MainID) else { return nil }
+        if mainContact.diet_ids.isEmpty
+        {
+            mainContact.diet_ids = [Diet.ID.NONE.rawValue]
+        }
+        if mainContact.allergy_ids.isEmpty
+        {
+            mainContact.allergy_ids = [Allergy.ID.NONE.rawValue]
+        }
+        return mainContact
     }
     
     static func mockContact() -> Contact

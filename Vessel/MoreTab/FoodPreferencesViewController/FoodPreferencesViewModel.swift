@@ -34,8 +34,24 @@ class FoodPreferencesViewModel: ItemPreferencesViewModel
     func save()
     {
         guard let contact = Contact.main() else { return }
-        contact.diet_ids = userDiets
-        contact.allergy_ids = userAllergies
+        
+        if userDiets.contains(Diet.ID.NONE.rawValue)
+        {
+            contact.diet_ids = []
+        }
+        else
+        {
+            contact.diet_ids = userDiets
+        }
+        
+        if userAllergies.contains(Allergy.ID.NONE.rawValue)
+        {
+            contact.allergy_ids = []
+        }
+        else
+        {
+            contact.allergy_ids = userAllergies
+        }
         
         contact.setDietsAnalytics()
         contact.setAllergiesAnalytics()
