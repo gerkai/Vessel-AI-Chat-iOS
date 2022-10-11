@@ -9,7 +9,7 @@ import UIKit
 
 protocol ReagentLearnMoreTileViewDelegate
 {
-    func didSelectReagent(id: Int, learnMore: Bool)
+    func userDidSelectReagent(id: Int, learnMore: Bool, animated: Bool)
 }
 
 class ReagentLearnMoreTileView: UIView
@@ -74,6 +74,6 @@ class ReagentLearnMoreTileView: UIView
         }
         let wasSelected = isSelected
         isSelected = true
-        delegate?.didSelectReagent(id: tag, learnMore: wasSelected)
+        delegate?.userDidSelectReagent(id: tag, learnMore: wasSelected, animated: true)
     }
 }

@@ -15,7 +15,8 @@ extension Notification.Name
 protocol ChartViewDataSource
 {
     func chartViewNumDataPoints() -> Int
-    func chartViewData(forIndex index: Int) -> Result
+    func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)
+    func chartViewWhichCellSelected(cellIndex: Int) -> Bool
 }
 
 protocol ChartViewDelegate
@@ -43,10 +44,9 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     func refresh()
     {
         collectionView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
-        {
-            self.selectLastCell()
-        }
+        collectionView.contentOffset = CGPoint(x: collectionView.contentSize.width - frame.width, y: 0)
+        let numCells = dataSource.chartViewNumDataPoints()
+        selectedCell = numCells - 1
     }
     
     func setSelectedCell(cellIndex: Int)
@@ -59,7 +59,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     {
         let numCells = dataSource.chartViewNumDataPoints()
         setSelectedCell(cellIndex: numCells - 1)
-        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": numCells - 1])
+        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": numCells - 1, "animated": false])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -81,9 +81,8 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
             //print("\(scrollView.contentOffset.x), \(scrollView.contentSize.width), \(selectionIncrement), \(cell)")
             if selectedCell != cell
             {
-                selectedCell = cell
                 setSelectedCell(cellIndex: cell)
-                NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell])
+                NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell, "animated": true])
             }
         }
     }
@@ -106,7 +105,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         let cell: ChartViewCell = collectionView.dequeueCell(for: indexPath)
         cell.tag = numCells - indexPath.row - 1
         cell.delegate = self
-        
+        cell.select(selectionIntent: dataSource.chartViewWhichCellSelected(cellIndex: cell.tag))
         let data = fetchDataPointsFor(index: currentRow)
         cell.graphView.data = data
         let wellnessScore = Int((data[2].wellnessScore + 0.005) * 100)
@@ -132,47 +131,47 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         if index < 2
         {
             let chartData = dataSource.chartViewData(forIndex: 0)
-            data.append(chartData)
+            data.append(chartData.result)
         }
         else
         {
             let chartData = dataSource.chartViewData(forIndex: index - 2)
-            data.append(chartData)
+            data.append(chartData.result)
         }
         if index < 1
         {
             let chartData = dataSource.chartViewData(forIndex: 0)
-            data.append(chartData)
+            data.append(chartData.result)
         }
         else
         {
             let chartData = dataSource.chartViewData(forIndex: index - 1)
-            data.append(chartData)
+            data.append(chartData.result)
         }
         
         //add current data point
         let currentData = dataSource.chartViewData(forIndex: index)
-        data.append(currentData)
+        data.append(currentData.result)
         
         //add two data points after current one
         if index >= numCells - 1
         {
-            data.append(dataSource.chartViewData(forIndex: numCells - 1))
-            data.append(dataSource.chartViewData(forIndex: numCells - 1))
+            data.append(dataSource.chartViewData(forIndex: numCells - 1).result)
+            data.append(dataSource.chartViewData(forIndex: numCells - 1).result)
         }
         else
         {
             let chartData = dataSource.chartViewData(forIndex: index + 1)
-            data.append(chartData)
+            data.append(chartData.result)
             
             if index >= numCells - 2
             {
-                data.append(dataSource.chartViewData(forIndex: numCells - 1))
+                data.append(dataSource.chartViewData(forIndex: numCells - 1).result)
             }
             else
             {
                 let chartData = dataSource.chartViewData(forIndex: index + 2)
-                data.append(chartData)
+                data.append(chartData.result)
             }
         }
         
@@ -193,9 +192,8 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     {
         if collectionView.contentSize.width < frame.width
         {
-            selectedCell = id
             setSelectedCell(cellIndex: id)
-            NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": id])
+            NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": id, "animated": true])
         }
     }
     

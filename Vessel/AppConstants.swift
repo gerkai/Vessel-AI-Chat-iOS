@@ -16,6 +16,7 @@ extension Notification.Name
     //can update themselves. Used for updating the results tab when a new Result arrives.
     static let newDataFromServer = Notification.Name("NewDataFromServer")
     static let selectTabNotification = Notification.Name("SelectTab")
+    static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
 }
 
 struct Constants

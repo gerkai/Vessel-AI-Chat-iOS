@@ -23,6 +23,7 @@ class GraphView: UIView
     
     var isSelected = false
     {
+        //if isSelected, we'll draw a circle selection dot and tick marks. Else draw solid dot and no tick marks
         didSet
         {
             setNeedsDisplay()

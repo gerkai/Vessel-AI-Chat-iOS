@@ -14,6 +14,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     var viewModel = ResultsTabViewModel()
     @IBOutlet weak var lockoutView: UIView!
     @IBOutlet weak var testsGoalsView: TestsGoalsView!
+    let defaultSelectedReagent = Reagent.ID.MAGNESIUM
     
     override func viewDidLoad()
     {
@@ -21,6 +22,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         chartView.delegate = self
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataFromServer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
     }
     
     deinit
@@ -30,6 +32,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewWillAppear(_ animated: Bool)
     {
+        //show lockout view if there are no test results to display
         let numResults = viewModel.numberOfResults()
         if numResults == 0
         {
@@ -38,13 +41,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         else
         {
             lockoutView.isHidden = true
-            if initialLoad
-            {
-                testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
-            }
         }
-        testsGoalsView.setupGoals()
-        
+        if initialLoad
+        {
+            testsGoalsView.setupGoals()
+        }
         //let result = viewModel.resultForIndex(i: 0)
         //let dict = ["objectType": String(describing: type(of: result.self))]
         //NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: dict)
@@ -52,15 +53,17 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewDidAppear(_ animated: Bool)
     {
+        viewModel.refresh()
+        chartView.refresh()
         if initialLoad
         {
             initialLoad = false
-            chartView.selectLastCell()
-            if viewModel.numberOfResults() != 0
-            {
-                testsGoalsView.selectFirstReagent()
-            }
         }
+    }
+    
+    @objc func foodPrefsChanged(_ notification: NSNotification)
+    {
+        refresh()
     }
     
     @objc func dataUpdated(_ notification: NSNotification)
@@ -70,20 +73,29 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             //if the new data is a Result then refresh the chart and tests/goals
             if type == String(describing: Result.self)
             {
-                viewModel.refresh()
-                chartView.refresh()
-                let numResults = viewModel.numberOfResults()
-                testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: numResults - 1))
+                refresh()
             }
         }
     }
+    
+    func refresh()
+    {
+        viewModel.refresh() //loads latest results
+        chartView.refresh() //reloads collectionView. Selects last cell.
+        let numResults = viewModel.numberOfResults()
+        if numResults != 0
+        {
+            testsGoalsView.refresh(result: viewModel.resultForIndex(i: numResults - 1).result, selectedReagentID: defaultSelectedReagent)
+        }
+    }
+    
     //Mark: - ChartViewDataSource
     func chartViewNumDataPoints() -> Int
     {
         return viewModel.numberOfResults()
     }
     
-    func chartViewData(forIndex index: Int) -> Result
+    func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)
     {
         return viewModel.resultForIndex(i: index)
     }
@@ -98,11 +110,13 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     func chartViewCellSelected(cellIndex: Int)
     {
-        if viewModel.numberOfResults() != 0
-        {
-            viewModel.selectResult(index: cellIndex)
-            testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex))
-        }
+        viewModel.selectResult(index: cellIndex)
+        testsGoalsView.setupReagents(forResult: viewModel.resultForIndex(i: cellIndex).result, selectedReagentID: defaultSelectedReagent)
+    }
+    
+    func chartViewWhichCellSelected(cellIndex: Int) -> Bool
+    {
+        return cellIndex == viewModel.selectedResultIndex
     }
     
     @IBAction func takeATest()

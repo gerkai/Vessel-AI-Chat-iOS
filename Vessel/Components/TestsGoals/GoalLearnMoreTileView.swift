@@ -10,7 +10,7 @@ import UIKit
 
 protocol GoalLearnMoreTileViewDelegate
 {
-    func didSelectGoal(id: Int, learnMore: Bool)
+    func didSelectGoal(id: Int, learnMore: Bool, animated: Bool)
 }
 
 class GoalLearnMoreTileView: UIView
@@ -101,7 +101,7 @@ class GoalLearnMoreTileView: UIView
         }
         let wasSelected = isSelected
         isSelected = true
-        delegate?.didSelectGoal(id: tag, learnMore: wasSelected)
+        delegate?.didSelectGoal(id: tag, learnMore: wasSelected, animated: true)
     }
     
     func hide(_ vu: UIView)

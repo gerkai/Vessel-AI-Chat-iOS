@@ -13,7 +13,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     @IBOutlet weak var testsStackView: UIStackView!
     @IBOutlet weak var goalsStackView: UIStackView!
     @IBOutlet weak var curvyLineView: CurvyLineView!
-    
+    var isAnimated = false
     let CURVY_LINE_TILE_SPACE = CGFloat(7.0) //space between curvy line and tile
     
     override init(frame: CGRect)
@@ -37,19 +37,31 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         contentView.fixInView(self)
         self.backgroundColor = .clear
         
+        //remove placeholder views put there by XIB file
         testsStackView.removeAllArrangedSubviews()
         goalsStackView.removeAllArrangedSubviews()
     }
     
-    func selectFirstReagent()
+    override func layoutSubviews()
     {
-        if let reagentView = testsStackView.arrangedSubviews[0] as? ReagentLearnMoreTileView
+        super.layoutSubviews()
+        contentView.layoutIfNeeded()
+        if isAnimated == false
         {
-            reagentView.tapped()
+            drawLines()
         }
     }
     
-    func setupReagents(forResult result: Result)
+    func refresh(result: Result, selectedReagentID: Reagent.ID)
+    {
+        setupReagents(forResult: result, selectedReagentID: selectedReagentID)
+        if let reagentView = testsStackView.arrangedSubviews[0] as? ReagentLearnMoreTileView
+        {
+            reagentView.isSelected = true
+        }
+    }
+    
+    func setupReagents(forResult result: Result, selectedReagentID: Reagent.ID)
     {
         testsStackView.removeAllArrangedSubviews()
         for reagentResult in result.reagents
@@ -64,8 +76,102 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                 reagentView.subtextLabel.text = evaluation.title.capitalized
                 reagentView.imageView.image = UIImage(named: Reagents[reagentID]!.imageName)
                 reagentView.delegate = self
+                if reagentID == selectedReagentID
+                {
+                    reagentView.isSelected = true
+                }
                 testsStackView.addArrangedSubview(reagentView)
             }
+        }
+        
+        //unselect all goals and set the impact dots for the goals associated with this reagent
+        let reagent = Reagents[selectedReagentID]
+        
+        for view in self.goalsStackView.arrangedSubviews
+        {
+            if let goalView = view as? GoalLearnMoreTileView
+            {
+                let impact = reagent!.impactFor(goal: goalView.tag)
+                goalView.numDots = impact
+                goalView.isSelected = false
+            }
+        }
+        //immediately draw curvy lines from selected reagent to goals
+        isAnimated = false
+        setNeedsLayout()
+    }
+    
+    func drawLines()
+    {
+        var selectedIsGoal = false
+        var selectedView: UIView?
+        var targetViews: [UIView] = []
+        
+        curvyLineView.clearCurvyLines()
+        
+        //find selected view
+        for view in testsStackView.arrangedSubviews
+        {
+            if let testView = view as? ReagentLearnMoreTileView
+            {
+                selectedView = testView
+                break
+            }
+        }
+        if selectedView == nil
+        {
+            for view in goalsStackView.arrangedSubviews
+            {
+                if let testView = view as? GoalLearnMoreTileView
+                {
+                    selectedView = testView
+                    selectedIsGoal = true
+                    break
+                }
+            }
+        }
+        
+        if selectedView != nil
+        {
+            //build target views
+            if selectedIsGoal
+            {
+                let connectedReagentIDs = Reagent.reagentsFor(goal: selectedView!.tag, withImpactAtLease: 1)
+                for view in self.testsStackView.arrangedSubviews
+                {
+                    if let testView = view as? ReagentLearnMoreTileView
+                    {
+                        if connectedReagentIDs.contains(testView.tag)
+                        {
+                            targetViews.append(testView)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if let reagentID = Reagent.ID(rawValue: selectedView!.tag)
+                {
+                    let reagent = Reagents[reagentID]
+                    
+                    for view in self.goalsStackView.arrangedSubviews
+                    {
+                        if let goalView = view as? GoalLearnMoreTileView
+                        {
+                            let impact = reagent!.impactFor(goal: goalView.tag)
+                            
+                            //add curvy lines from reagent to goals
+                            if impact != 0
+                            {
+                                targetViews.append(goalView)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //draw curvy lines
+            showSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: !selectedIsGoal)
         }
     }
     
@@ -85,9 +191,11 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
     }
     
-    func didSelectGoal(id: Int, learnMore: Bool)
+    func didSelectGoal(id: Int, learnMore: Bool, animated: Bool)
     {
+        isAnimated = animated
         var selectedGoalView: UIView?
+        var targetViews: [UIView] = []
         
         if learnMore
         {
@@ -96,6 +204,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         else
         {
             curvyLineView.clearCurvyLines()
+            curvyLineView.animated = animated
             //unselect all other goals
             for view in goalsStackView.arrangedSubviews
             {
@@ -139,30 +248,40 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                     {
                         if connectedReagentIDs.contains(testView.tag)
                         {
-                            //add curvy lines from goal to reagents that have an impact > 0
-                            if let reagentView = self.reagentViewWithID(id: testView.tag), let goalView = selectedGoalView
-                            {
-                                let startPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: goalView.frame.height / 2)
-                                let endPoint = CGPoint(x: reagentView.frame.width + self.CURVY_LINE_TILE_SPACE, y: reagentView.frame.height / 2)
-                                let convertedStartPoint = goalView.convert(startPoint, to: self.curvyLineView)
-                                let convertedEndPoint = reagentView.convert(endPoint, to: self.curvyLineView)
-                                
-                                let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
-                                self.curvyLineView.addCurvyLine(line: curvyLine)
-                            }
+                            targetViews.append(testView)
                         }
                     }
                 }
-                self.curvyLineView.layoutSubviews()
+                if animated
+                {
+                    self.animateSelectionAndCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
+                }
+                else
+                {
+                    self.showSelectionAndCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
+                }
             }
         }
     }
     
-    func didSelectReagent(id: Int, learnMore: Bool)
+    func reagentViewWithID(id: Int) -> UIView?
     {
+        for view in testsStackView.arrangedSubviews
+        {
+            if view.tag == id
+            {
+                return view
+            }
+        }
+        return nil
+    }
+    
+    //MARK: - ReagentLearnMoreTileView delegates
+    func userDidSelectReagent(id: Int, learnMore: Bool, animated: Bool)
+    {
+        isAnimated = animated
         var selectedView: UIView?
         var targetViews: [UIView] = []
-        
         if learnMore
         {
             print("LEARN MORE ABOUT REAGENT \(id)")
@@ -170,6 +289,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         else
         {
             curvyLineView.clearCurvyLines()
+            curvyLineView.animated = animated
             //unselect all other reagents
             for view in self.testsStackView.arrangedSubviews
             {
@@ -207,12 +327,24 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                     }
                 }
             }
+            if animated
+            {
+                animateSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
+            }
+            else
+            {
+                showSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
+            }
         }
+    }
+    
+    func animateSelectionAndCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
+    {
         UIView.animate(withDuration: 0.1)
         {
             //we can't just tell the stackView to layout as it will cause superviews to jump around.
             //If you ask the superview to layout, then the view above that jumps around.
-            //solution was to ask the parent viewController's view to layout. Now it's smooth as butter.
+            //solution was to ask the parent viewController's view to layout. Now it's smooth as butter. But if anything changes in any of the other subviews, those changes will also be animated.
             self.parentViewController?.view.layoutIfNeeded()
         }
         completion:
@@ -222,6 +354,42 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
             {
                 for target in targetViews
                 {
+                    if testSelected
+                    {
+                        let startPoint = CGPoint(x: selectedView!.frame.width + self.CURVY_LINE_TILE_SPACE, y: selectedView!.frame.height / 2)
+                        let endPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: target.frame.height / 2)
+                        let convertedStartPoint = selectedView!.convert(startPoint, to: self.curvyLineView)
+                        let convertedEndPoint = target.convert(endPoint, to: self.curvyLineView)
+                        
+                        let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
+                        self.curvyLineView.addCurvyLine(line: curvyLine)
+                    }
+                    else
+                    {
+                        let startPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: selectedView!.frame.height / 2)
+                        let endPoint = CGPoint(x: target.frame.width + self.CURVY_LINE_TILE_SPACE, y: target.frame.height / 2)
+                        let convertedStartPoint = selectedView!.convert(startPoint, to: self.curvyLineView)
+                        let convertedEndPoint = target.convert(endPoint, to: self.curvyLineView)
+                        
+                        let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
+                        self.curvyLineView.addCurvyLine(line: curvyLine)
+                    }
+                }
+                self.curvyLineView.animated = true
+                self.curvyLineView.layoutSubviews()
+            }
+        }
+    }
+    
+    func showSelectionAndCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
+    {
+        //add curvy lines from reagent to goals
+        if selectedView != nil
+        {
+            for target in targetViews
+            {
+                if testSelected
+                {
                     let startPoint = CGPoint(x: selectedView!.frame.width + self.CURVY_LINE_TILE_SPACE, y: selectedView!.frame.height / 2)
                     let endPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: target.frame.height / 2)
                     let convertedStartPoint = selectedView!.convert(startPoint, to: self.curvyLineView)
@@ -230,20 +398,19 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                     let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
                     self.curvyLineView.addCurvyLine(line: curvyLine)
                 }
-                self.curvyLineView.layoutSubviews()
+                else
+                {
+                    let startPoint = CGPoint(x: -self.CURVY_LINE_TILE_SPACE, y: selectedView!.frame.height / 2)
+                    let endPoint = CGPoint(x: target.frame.width + self.CURVY_LINE_TILE_SPACE, y: target.frame.height / 2)
+                    let convertedStartPoint = selectedView!.convert(startPoint, to: self.curvyLineView)
+                    let convertedEndPoint = target.convert(endPoint, to: self.curvyLineView)
+                    
+                    let curvyLine = CurvyLine(startPoint: convertedStartPoint, endPoint: convertedEndPoint, intensity: 50.0, offset: 0.0)
+                    self.curvyLineView.addCurvyLine(line: curvyLine)
+                }
             }
+            self.curvyLineView.animated = false
+            self.curvyLineView.setNeedsDisplay()
         }
-    }
-                                                      
-    func reagentViewWithID(id: Int) -> UIView?
-    {
-        for view in testsStackView.arrangedSubviews
-        {
-            if view.tag == id
-            {
-                return view
-            }
-        }
-        return nil
     }
 }
