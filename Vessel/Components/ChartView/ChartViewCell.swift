@@ -26,6 +26,13 @@ class ChartViewCell: UICollectionViewCell
     @IBOutlet weak var dayLabel: UILabel!
     
     var wellnessScore: CGFloat = 0.0
+    {
+        didSet
+        {
+            //print("Did set wellness score to \(wellnessScore)")
+            setWellnessLabelPosition()
+        }
+    }
     var delegate: ChartViewCellDelegate?
     var originalHeight: Double!
     var animatingSelected = false
@@ -50,17 +57,25 @@ class ChartViewCell: UICollectionViewCell
     
     func select(selectionIntent: Bool)
     {
+        graphView.isSelected = selectionIntent
+        graphView.layoutIfNeeded()
         if selectionIntent
         {
             infoHeight.constant = frame.height
-            //infoView.alpha = 1.0
+            infoView.alpha = 1.0
+            setWellnessLabelPosition()
         }
         else
         {
             infoHeight.constant = originalHeight
-            //infoView.alpha = 0.0
+            infoView.alpha = 0.0
         }
-        graphView.isSelected = selectionIntent
+    }
+    
+    func setWellnessLabelPosition()
+    {
+        //print("wellnessScore: \(wellnessScore), graphHeight: \(graphView.bounds.height), regionSize: \(graphView.pointRegionSize)")
+        wellnessLabelYPosition.constant = -wellnessScore * (graphView.bounds.height - graphView.pointRegionSize) - 30.0
     }
     
     @objc func selected(_ notification: NSNotification)
@@ -91,8 +106,7 @@ class ChartViewCell: UICollectionViewCell
                                 {
                                     self.graphView.isSelected = true
                                     self.infoView.alpha = 1.0
-                                    print("Showing infoView for \(self.monthLabel.text)/\(self.dayLabel.text)")
-                                    self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
+                                    self.setWellnessLabelPosition()
                                 }
                             }
                         }
@@ -103,9 +117,8 @@ class ChartViewCell: UICollectionViewCell
                     //print("Selecting cell \(tag) with wellness: \(wellnessScoreLabel.text)")
                     self.infoHeight.constant = selectedHeight
                     self.graphView.isSelected = true
-                    print(".Showing infoView for \(self.monthLabel.text)/\(self.dayLabel.text)")
                     self.infoView.alpha = 1.0
-                    self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
+                    self.setWellnessLabelPosition()
                     self.animatingSelected = false
                 }
             }

@@ -53,11 +53,14 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     override func viewDidAppear(_ animated: Bool)
     {
-        viewModel.refresh()
-        chartView.refresh()
         if initialLoad
         {
             initialLoad = false
+        }
+        else
+        {
+            viewModel.refresh()
+            chartView.refresh()
         }
     }
     

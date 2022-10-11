@@ -45,6 +45,8 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     override func layoutSubviews()
     {
         super.layoutSubviews()
+        testsStackView.layoutIfNeeded()
+        goalsStackView.layoutIfNeeded()
         contentView.layoutIfNeeded()
         if isAnimated == false
         {
@@ -114,8 +116,11 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         {
             if let testView = view as? ReagentLearnMoreTileView
             {
-                selectedView = testView
-                break
+                if testView.isSelected == true
+                {
+                    selectedView = testView
+                    break
+                }
             }
         }
         if selectedView == nil
@@ -171,7 +176,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
             }
             
             //draw curvy lines
-            showSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: !selectedIsGoal)
+            showCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: !selectedIsGoal)
         }
     }
     
@@ -191,6 +196,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
     }
     
+    //MARK: - GoalLearnMoreTileView delegates
     func didSelectGoal(id: Int, learnMore: Bool, animated: Bool)
     {
         isAnimated = animated
@@ -254,11 +260,11 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
                 }
                 if animated
                 {
-                    self.animateSelectionAndCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
+                    self.animateCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
                 }
                 else
                 {
-                    self.showSelectionAndCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
+                    self.showCurvyLines(selectedView: selectedGoalView, targetViews: targetViews, testSelected: false)
                 }
             }
         }
@@ -277,7 +283,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     }
     
     //MARK: - ReagentLearnMoreTileView delegates
-    func userDidSelectReagent(id: Int, learnMore: Bool, animated: Bool)
+    func didSelectReagent(id: Int, learnMore: Bool, animated: Bool)
     {
         isAnimated = animated
         var selectedView: UIView?
@@ -329,16 +335,16 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
             }
             if animated
             {
-                animateSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
+                animateCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
             }
             else
             {
-                showSelectionAndCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
+                showCurvyLines(selectedView: selectedView, targetViews: targetViews, testSelected: true)
             }
         }
     }
     
-    func animateSelectionAndCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
+    func animateCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
     {
         UIView.animate(withDuration: 0.1)
         {
@@ -381,7 +387,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
     }
     
-    func showSelectionAndCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
+    func showCurvyLines(selectedView: UIView?, targetViews: [UIView], testSelected: Bool)
     {
         //add curvy lines from reagent to goals
         if selectedView != nil
