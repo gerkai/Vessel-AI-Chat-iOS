@@ -53,10 +53,12 @@ class ChartViewCell: UICollectionViewCell
         if selectionIntent
         {
             infoHeight.constant = frame.height
+            //infoView.alpha = 1.0
         }
         else
         {
             infoHeight.constant = originalHeight
+            //infoView.alpha = 0.0
         }
         graphView.isSelected = selectionIntent
     }

@@ -47,19 +47,13 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         collectionView.contentOffset = CGPoint(x: collectionView.contentSize.width - frame.width, y: 0)
         let numCells = dataSource.chartViewNumDataPoints()
         selectedCell = numCells - 1
+        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": selectedCell, "animated": false])
     }
     
     func setSelectedCell(cellIndex: Int)
     {
         selectedCell = cellIndex
         delegate?.chartViewCellSelected(cellIndex: cellIndex)
-    }
-    
-    func selectLastCell()
-    {
-        let numCells = dataSource.chartViewNumDataPoints()
-        setSelectedCell(cellIndex: numCells - 1)
-        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": numCells - 1, "animated": false])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
