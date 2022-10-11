@@ -11,7 +11,7 @@
 
 import UIKit
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
@@ -20,7 +20,9 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var splashView: UIView!
     var timer: Timer!
     
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
+    
     let labelRefreshInterval = 2.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
@@ -89,12 +91,6 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             print("WelcomeSignIn deinit")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .main))
     }
     
     override func viewWillAppear(_ animated: Bool)

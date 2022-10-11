@@ -37,7 +37,7 @@ enum PopupErrorType: Int
     case otherError
 }
 
-class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedSlideupViewControllerDelegate, CalibrationErrorSlideupViewControllerDelegate, InvalidQRSlideupViewControllerDelegate, UploadErrorSlideupViewControllerDelegate, CropFailureSlideupViewControllerDelegate
+class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedSlideupViewControllerDelegate, CalibrationErrorSlideupViewControllerDelegate, InvalidQRSlideupViewControllerDelegate, UploadErrorSlideupViewControllerDelegate, CropFailureSlideupViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -48,6 +48,9 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     let maxRetryCount = 20
     var sampleUUID: String!
     var delegate: UploadingSampleViewControllerDelegate?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {

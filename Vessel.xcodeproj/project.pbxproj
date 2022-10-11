@@ -143,6 +143,7 @@
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
 		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
+		720A23DB28DC114A00A11CF6 /* VesselScreenIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */; };
 		7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7215E9562893ADB100C22A24 /* HeightComponents.swift */; };
 		721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */; };
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
@@ -175,6 +176,9 @@
 		72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */; };
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
+		72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */; };
+		72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */; };
+		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
 		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
 		72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DEA1CB289E44AA00C92695 /* Blurable.swift */; };
@@ -189,7 +193,10 @@
 		72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDE028A361E100177898 /* MyAccountViewModel.swift */; };
 		72F3C69528A36788001E3323 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDE28A361E100177898 /* MyAccountCell.swift */; };
 		72F3C69628A36788001E3323 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDF28A361E100177898 /* MyAccountViewController.swift */; };
+		72F3D62E28F15C54007ED9A8 /* FoodCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */; };
+		72F3D63028F15C60007ED9A8 /* FoodCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */; };
 		72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */; };
+		72FCD54928F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FCD54828F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
 /* End PBXBuildFile section */
@@ -355,6 +362,7 @@
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
+		720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselScreenIdentifiable.swift; sourceTree = "<group>"; };
 		7215E9562893ADB100C22A24 /* HeightComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightComponents.swift; sourceTree = "<group>"; };
 		721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewModel.swift; sourceTree = "<group>"; };
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +398,9 @@
 		72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VesselFooterView.xib; sourceTree = "<group>"; };
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
+		72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterIntakeView.xib; sourceTree = "<group>"; };
+		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
 		72DEA1CB289E44AA00C92695 /* Blurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blurable.swift; sourceTree = "<group>"; };
@@ -401,7 +412,10 @@
 		72F0DEE228E278FC00034088 /* TodayTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodayTab.storyboard; sourceTree = "<group>"; };
 		72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewController.swift; sourceTree = "<group>"; };
 		72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewModel.swift; sourceTree = "<group>"; };
+		72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCheckmarkView.swift; sourceTree = "<group>"; };
+		72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCheckmarkView.xib; sourceTree = "<group>"; };
 		72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCell.swift; sourceTree = "<group>"; };
+		72FCD54828F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayFoodDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
 		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.debug.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -748,6 +762,8 @@
 				3F426DB228DFA1CA00927B68 /* ChartView */,
 				721B6BAB2899FBBF0099BC4A /* GenericAlert */,
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
+				72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */,
+				72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */,
 				3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */,
 				3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */,
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
@@ -763,8 +779,11 @@
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
+				720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */,
 				72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */,
 				72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */,
+				72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */,
+				72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -994,6 +1013,8 @@
 				72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */,
 				7284205B28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift */,
 				72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */,
+				72FCD54828F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift */,
+				72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1030,6 +1051,7 @@
 		72F0DEDE28E2786D00034088 /* TodayTab */ = {
 			isa = PBXGroup;
 			children = (
+				72F0DEE228E278FC00034088 /* TodayTab.storyboard */,
 				72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */,
 				72F0DEDF28E2788B00034088 /* TodayViewController */,
 				72673C4F28E807B10056C701 /* WaterDetailsViewController */,
@@ -1042,7 +1064,6 @@
 			children = (
 				72C721DA28E2B809003FB61A /* Cells */,
 				72F0DEE028E278ED00034088 /* TodayViewController.swift */,
-				72F0DEE228E278FC00034088 /* TodayTab.storyboard */,
 				72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */,
 			);
 			path = TodayViewController;
@@ -1171,6 +1192,7 @@
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3F426DBA28DFA1CA00927B68 /* ChartViewCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
+				72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
 				3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */,
@@ -1179,6 +1201,7 @@
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
 				7282D415288F7CA400B4E26D /* MoreTab.storyboard in Resources */,
 				3F426DC128DFA33200927B68 /* Results.storyboard in Resources */,
+				72F3D63028F15C60007ED9A8 /* FoodCheckmarkView.xib in Resources */,
 				3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */,
 				3F15ACF9288C5421004716CA /* test_result_flow_p1.json in Resources */,
 				3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */,
@@ -1351,6 +1374,7 @@
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
+				72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */,
 				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
 				721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */,
 				7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */,
@@ -1396,6 +1420,7 @@
 				72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
+				72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingCoordinator.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
 				3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */,
@@ -1425,6 +1450,7 @@
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				72384F3428E2D9230033C3FC /* Insight.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
+				72F3D62E28F15C54007ED9A8 /* FoodCheckmarkView.swift in Sources */,
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */,
@@ -1432,6 +1458,7 @@
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
+				72FCD54928F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift in Sources */,
 				3F9CB7B828C7F7410093228E /* CropFailureSlideupViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
@@ -1449,6 +1476,7 @@
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,
+				720A23DB28DC114A00A11CF6 /* VesselScreenIdentifiable.swift in Sources */,
 				72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */,
 				72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */,
 			);

@@ -7,19 +7,14 @@
 
 import UIKit
 
-class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate
+class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var googleAuthButton: UIButton!
     @IBOutlet weak var appleAuthButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
-    @Resolved private var analytics: Analytics
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .welcome))
-    }
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     @IBAction func onBackButtonPressed(_ sender: Any)
     {

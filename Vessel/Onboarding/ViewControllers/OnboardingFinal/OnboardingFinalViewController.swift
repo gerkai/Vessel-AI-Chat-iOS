@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingFinalViewController: UIViewController
+class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet weak var titleLabel: UILabel!
@@ -15,6 +15,9 @@ class OnboardingFinalViewController: UIViewController
     // MARK: - Logic
     var mainGoal: Int?
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
         
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -33,12 +36,6 @@ class OnboardingFinalViewController: UIViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     // MARK: - Actions

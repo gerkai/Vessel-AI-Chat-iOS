@@ -7,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate
+class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
@@ -26,6 +26,9 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     var processingPhoto = false
     weak var clearTimer: Timer?
     var clearTimerCount = 0
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {

@@ -153,15 +153,16 @@ class ItemPreferencesViewModel
                 else
                 {
                     //add id to userDiets
-                    if id == Constants.ID_NO_DIETS
+                    let noDietID = Diet.ID.NONE.rawValue
+                    if id == noDietID
                     {
                         //clear any previously chosen diets
-                        userDiets = [Constants.ID_NO_DIETS]
+                        userDiets = [noDietID]
                     }
                     else
                     {
                         //remove NO_DIETS item and append new item
-                        userDiets = userDiets.filter(){$0 != Constants.ID_NO_DIETS}
+                        userDiets = userDiets.filter(){$0 != noDietID}
                         userDiets.append(id)
                     }
                 }
@@ -174,15 +175,16 @@ class ItemPreferencesViewModel
                 else
                 {
                     //add id to userAllergies
-                    if id == Constants.ID_NO_ALLERGIES
+                    let noAllergyID = Allergy.ID.NONE.rawValue
+                    if id == noAllergyID
                     {
                         //clear any previously chosen allergies
-                        userAllergies = [Constants.ID_NO_ALLERGIES]
+                        userAllergies = [noAllergyID]
                     }
                     else
                     {
                         //remove NO_ALLERGIES item and append new item
-                        userAllergies = userAllergies.filter(){$0 != Constants.ID_NO_ALLERGIES}
+                        userAllergies = userAllergies.filter(){$0 != noAllergyID}
                         userAllergies.append(id)
                     }
                 }

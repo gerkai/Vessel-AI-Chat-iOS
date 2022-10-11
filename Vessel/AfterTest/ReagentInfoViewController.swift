@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReagentInfoViewController: AfterTestMVVMViewController
+class ReagentInfoViewController: AfterTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var detailsLabel: UILabel!
@@ -19,6 +19,9 @@ class ReagentInfoViewController: AfterTestMVVMViewController
     var titleText: String!
     var details: String!
     var image: UIImage!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .resultsTabFlow
     
     override func viewDidLoad()
     {

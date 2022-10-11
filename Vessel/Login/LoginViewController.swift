@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate
+class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate, VesselScreenIdentifiable
 {
     // to store the current active textfield
     @IBOutlet weak var emailTextField: UITextField!
@@ -17,7 +17,9 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
-    @Resolved private var analytics: Analytics
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -42,12 +44,6 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         {
             instructionsLabel.isHidden = true
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .welcomeBack))
     }
     
     @IBAction func googleAuthAction(_ sender: Any)

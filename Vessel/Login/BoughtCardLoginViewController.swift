@@ -30,14 +30,16 @@ struct BoughtCardLoginValidator
     }
 }
 
-class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate
+class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, VesselScreenIdentifiable
 {
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
     
-    @Resolved private var analytics: Analytics
     private var validator = BoughtCardLoginValidator()
     var email = ""
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -46,12 +48,6 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
         {
             doYouRememberLabel.text = NSLocalizedString("Remember what email you used?", comment: "Short version of 'Do you remember what email you used?")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .boughtOnWebsite))
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)

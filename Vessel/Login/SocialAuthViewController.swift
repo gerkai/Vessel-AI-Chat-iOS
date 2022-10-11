@@ -21,7 +21,7 @@ protocol SocialAuthViewDelegate
     func gotSocialAuthToken(isBrandNewAccount: Bool, loginType: LoginType)
 }
 
-class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
+class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var webContentView: UIView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -33,6 +33,9 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     var strURL: String!
     var loginType: LoginType = .google
     var delegate: SocialAuthViewDelegate?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -57,12 +60,6 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         let url = URL(string: strURL)
         let request = URLRequest(url: url!)
         webView.load(request)
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     @IBAction func doneButtonAction(_ sender: Any)

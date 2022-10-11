@@ -7,14 +7,15 @@
 
 import UIKit
 
-final class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldDelegate
+final class ForgotPasswordViewController: KeyboardFriendlyViewController, UITextFieldDelegate, VesselScreenIdentifiable
 {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var submitButton: LoadingButton!
     @IBOutlet private weak var emailTextField: VesselTextField!
     
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     private enum ScreenMode
     {
@@ -37,12 +38,6 @@ final class ForgotPasswordViewController: KeyboardFriendlyViewController, UIText
         
         initialSubmitTitle = submitButton.title(for: .normal)
         submitButton.backgroundColor = emailTextField.text?.isValidEmail() ?? false ? Constants.vesselBlack : Constants.vesselGray
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .forgotPassword))
     }
     
     @IBAction func onBackButton()
@@ -145,7 +140,6 @@ final class ForgotPasswordViewController: KeyboardFriendlyViewController, UIText
             completion:
             {_ in
                 self.screenMode = .successScreen
-                self.analytics.log(event: .viewedPage(screenName: .forgotPasswordSuccess))
             })
         })
     }

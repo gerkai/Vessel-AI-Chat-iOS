@@ -11,14 +11,16 @@ protocol DebugViewControllerDelegate: AnyObject
     func didChangeEnvironment(env: Int)
 }
 
-class DebugViewController: UIViewController, UITextFieldDelegate
+class DebugViewController: UIViewController, UITextFieldDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var environmentControl: UISegmentedControl!
     @IBOutlet weak var defaultLoginNameTextField: UITextField!
     @IBOutlet weak var defaultLoginPasswordTextField: UITextField!
     @IBOutlet weak var defaultWeightTextField: UITextField!
     
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
+    
     var savedEnvironment: Int!
     var delegate: DebugViewControllerDelegate?
     let emailFieldTag = 0
@@ -48,12 +50,6 @@ class DebugViewController: UIViewController, UITextFieldDelegate
         {
             defaultWeightTextField.text = weight
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .debugMenu))
     }
     
     deinit

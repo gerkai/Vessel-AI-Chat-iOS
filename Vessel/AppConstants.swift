@@ -113,10 +113,6 @@ struct Constants
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
     
-    //Database IDs
-    static let ID_NO_DIETS = 17
-    static let ID_NO_ALLERGIES = 20
-    
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001
     static let HIDE_PEE_TIPS                = 0x00000002
@@ -147,6 +143,7 @@ struct Constants
     static let TAB_BAR_RESULTS_INDEX = 1
     static let TAB_BAR_COACH_INDEX = 3
     static let TAB_BAR_MORE_INDEX = 4
+    static let WATER_GLASSESS_PER_ROW = 9
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")

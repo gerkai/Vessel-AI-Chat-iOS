@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class ActivityDetailsViewController: UIViewController
+class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -18,6 +18,9 @@ class ActivityDetailsViewController: UIViewController
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var reagentsLabel: UILabel!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .todayTabFlow
     
     // MARK: - Model
     private var viewModel: ActivityDetailsViewModel?

@@ -14,7 +14,7 @@ struct Color
     var blue: CGFloat
 }
 
-class ResultsViewController: UIViewController
+class ResultsViewController: UIViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var wellnessScoreLabel: UILabel!
     @IBOutlet weak var wellnessCard: UIView!
@@ -23,6 +23,9 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .resultsTabFlow
     
     var testResult: Result! //set by the caller during instantiation
     var timer: Timer!
