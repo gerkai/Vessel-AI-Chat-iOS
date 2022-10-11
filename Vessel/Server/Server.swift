@@ -676,7 +676,7 @@ class Server: NSObject
         }
     }
     
-    func createContact(contact: Contact, password: String, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func createContact(contact: Contact, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CONTACT_CREATE_PATH)"
         
@@ -823,7 +823,7 @@ class Server: NSObject
     }
     
     // MARK: Delete Account
-    func deleteAccount(onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func deleteAccount(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(DELETE_ACCOUNT_PATH)"
         

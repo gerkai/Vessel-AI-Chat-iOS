@@ -38,48 +38,41 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFh-vL-rGA">
-                    <rect key="frame" x="270" y="44" width="42" height="18"/>
+                    <rect key="frame" x="267" y="44" width="42" height="18"/>
                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="z8O-hD-SzO" userLabel="Tests Stack View">
-                    <rect key="frame" x="20" y="70" width="114" height="128"/>
+                    <rect key="frame" x="20" y="70" width="117" height="128"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tj0-GE-LPh" userLabel="PlaceholderView">
-                            <rect key="frame" x="0.0" y="0.0" width="114" height="128"/>
+                            <rect key="frame" x="0.0" y="0.0" width="117" height="128"/>
                             <color key="backgroundColor" systemColor="systemOrangeColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="128" id="dhc-oD-8fF"/>
-                                <constraint firstAttribute="width" constant="114" id="oCY-Ya-zf5"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="114" id="KPy-mP-guh"/>
-                    </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="top" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="6nl-ru-iJv" userLabel="Goals Stack View">
-                    <rect key="frame" x="256" y="70" width="114" height="128"/>
+                    <rect key="frame" x="253" y="70" width="117" height="128"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUp-PY-DyR" userLabel="PlaceholderView">
-                            <rect key="frame" x="0.0" y="0.0" width="114" height="128"/>
+                            <rect key="frame" x="0.0" y="0.0" width="117" height="128"/>
                             <color key="backgroundColor" systemColor="systemOrangeColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="128" id="mJE-5z-I2r"/>
-                                <constraint firstAttribute="width" constant="114" id="oXl-gd-i3M"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="114" id="LRI-lT-bEF"/>
-                    </constraints>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="VEN-Bh-YVI" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="2e4-jQ-rmd"/>
+                <constraint firstItem="6nl-ru-iJv" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.3" id="3eI-fF-Kp5"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="top" secondItem="Jfx-ze-VBd" secondAttribute="bottom" constant="8" id="4vS-ah-GUj"/>
                 <constraint firstItem="iFh-vL-rGA" firstAttribute="leading" secondItem="6nl-ru-iJv" secondAttribute="leading" constant="14" id="6aR-c3-VsM"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6nl-ru-iJv" secondAttribute="bottom" priority="999" id="9e7-kI-37d"/>
@@ -89,6 +82,7 @@
                 <constraint firstItem="6nl-ru-iJv" firstAttribute="top" secondItem="z8O-hD-SzO" secondAttribute="top" id="XNL-ys-RFv"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Y4S-Mb-dwm"/>
                 <constraint firstItem="z8O-hD-SzO" firstAttribute="top" secondItem="Jfx-ze-VBd" secondAttribute="bottom" constant="8" id="YE1-Az-rCt"/>
+                <constraint firstItem="z8O-hD-SzO" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.3" id="eUO-rc-syk"/>
                 <constraint firstItem="VEN-Bh-YVI" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="frK-Sz-fBD"/>
                 <constraint firstItem="Jfx-ze-VBd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="hOu-AJ-Hwk"/>
                 <constraint firstItem="iFh-vL-rGA" firstAttribute="centerY" secondItem="Jfx-ze-VBd" secondAttribute="centerY" id="iCY-p4-7ir"/>

@@ -35,6 +35,7 @@
 		3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */; };
 		3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */; };
 		3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */; };
+		3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */; };
 		3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F13A7962877CB2D00C74FB9 /* CheckmarkCollectionViewCell.xib */; };
 		3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F006287A6B4800FCC52E /* DateExtensions.swift */; };
 		3F12F00B287A736600FCC52E /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F00A287A736600FCC52E /* Allergy.swift */; };
@@ -146,11 +147,15 @@
 		721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */; };
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
 		721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */; };
+		72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */; };
+		72332FB028EE8D94008CBA8C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAF28EE8D94008CBA8C /* Food.swift */; };
+		72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */; };
 		72384F3428E2D9230033C3FC /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72384F3328E2D9230033C3FC /* Insight.swift */; };
 		72384F3628E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */; };
 		72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF0287E0715004A312E /* AnalyticsEvent.swift */; };
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
+		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
 		727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */; };
 		727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B528B74BA500039BE0 /* DebugMenuCell.swift */; };
@@ -160,13 +165,14 @@
 		7282D42B288FB92000B4E26D /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D42A288FB92000B4E26D /* ArrayExtension.swift */; };
 		7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282D42E289050D800B4E26D /* MoreTabCell.swift */; };
 		7284205C28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284205B28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift */; };
-		7284205E28E2C89000EA61F3 /* TodayFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284205D28E2C89000EA61F3 /* TodayFooterTableViewCell.swift */; };
 		728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593528921967001C4B2A /* EditProfileViewController.swift */; };
 		728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593728924A64001C4B2A /* EditProfileViewModel.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
 		72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */; };
 		72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */; };
+		72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */; };
+		72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */; };
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
@@ -235,6 +241,7 @@
 		3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestsGoalsView.xib; sourceTree = "<group>"; };
 		3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsGoalsView.swift; sourceTree = "<group>"; };
 		3F0D387528E3533300D7C3A3 /* CurvyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvyLineView.swift; sourceTree = "<group>"; };
+		3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
 		3F12F006287A6B4800FCC52E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		3F12F00A287A736600FCC52E /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		3F12F00C287B3C6900FCC52E /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -352,11 +359,15 @@
 		721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewModel.swift; sourceTree = "<group>"; };
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
 		721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericAlertViewController.xib; sourceTree = "<group>"; };
+		72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
+		72332FAF28EE8D94008CBA8C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewModel.swift; sourceTree = "<group>"; };
 		72384F3328E2D9230033C3FC /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
 		72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCheckMarkCardTableViewCell.swift; sourceTree = "<group>"; };
 		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		72411CF6287E413C004A312E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		72411CF7287E413C004A312E /* Resolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolved.swift; sourceTree = "<group>"; };
+		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
@@ -369,13 +380,14 @@
 		7282D42A288FB92000B4E26D /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7282D42E289050D800B4E26D /* MoreTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTabCell.swift; sourceTree = "<group>"; };
 		7284205B28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySectionTitleTableViewCell.swift; sourceTree = "<group>"; };
-		7284205D28E2C89000EA61F3 /* TodayFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayFooterTableViewCell.swift; sourceTree = "<group>"; };
 		728B593528921967001C4B2A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		728B593728924A64001C4B2A /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewModel.swift; sourceTree = "<group>"; };
+		72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselFooterView.swift; sourceTree = "<group>"; };
+		72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VesselFooterView.xib; sourceTree = "<group>"; };
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
@@ -484,6 +496,7 @@
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
+				72332FAF28EE8D94008CBA8C /* Food.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -750,6 +763,8 @@
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
 				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
+				72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */,
+				72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -774,11 +789,21 @@
 			path = GenericAlert;
 			sourceTree = "<group>";
 		};
+		72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */,
+				72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */,
+			);
+			path = ActivityDetailsViewController;
+			sourceTree = "<group>";
+		};
 		72411CF2287E4091004A312E /* Third-Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				72DEA1CA289E449200C92695 /* Blurable */,
 				72411CF5287E413C004A312E /* Resolver */,
+				3F0D389928ECEB3F00D7C3A3 /* UIImageViewAligned.swift */,
 			);
 			path = "Third-Party Libraries";
 			sourceTree = "<group>";
@@ -790,6 +815,14 @@
 				72411CF7287E413C004A312E /* Resolved.swift */,
 			);
 			path = Resolver;
+			sourceTree = "<group>";
+		};
+		72673C4F28E807B10056C701 /* WaterDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */,
+			);
+			path = WaterDetailsViewController;
 			sourceTree = "<group>";
 		};
 		7270EDDD28A361CA00177898 /* ChangePasswordViewController */ = {
@@ -960,7 +993,6 @@
 			children = (
 				72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */,
 				7284205B28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift */,
-				7284205D28E2C89000EA61F3 /* TodayFooterTableViewCell.swift */,
 				72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */,
 			);
 			path = Cells;
@@ -998,7 +1030,9 @@
 		72F0DEDE28E2786D00034088 /* TodayTab */ = {
 			isa = PBXGroup;
 			children = (
+				72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */,
 				72F0DEDF28E2788B00034088 /* TodayViewController */,
+				72673C4F28E807B10056C701 /* WaterDetailsViewController */,
 			);
 			path = TodayTab;
 			sourceTree = "<group>";
@@ -1148,6 +1182,7 @@
 				3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */,
 				3F15ACF9288C5421004716CA /* test_result_flow_p1.json in Resources */,
 				3FE369E627C9A74B00231D42 /* BananaGrotesk-Extrabold.otf in Resources */,
+				72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */,
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
@@ -1309,6 +1344,7 @@
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
 				72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */,
 				727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */,
+				72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */,
 				3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
@@ -1338,6 +1374,7 @@
 				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
 				3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */,
 				3F426DBF28DFA2FF00927B68 /* ResultsTabViewController.swift in Sources */,
+				72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
@@ -1347,6 +1384,7 @@
 				3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
+				72332FB028EE8D94008CBA8C /* Food.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
 				3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */,
 				3F12F047287DCDFF00FCC52E /* SuccessfulTestTipsViewController.swift in Sources */,
@@ -1381,6 +1419,7 @@
 				3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
 				3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */,
+				3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */,
 				3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */,
 				72F0DEE128E278ED00034088 /* TodayViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
@@ -1392,7 +1431,6 @@
 				72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
-				7284205E28E2C89000EA61F3 /* TodayFooterTableViewCell.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				3F9CB7B828C7F7410093228E /* CropFailureSlideupViewController.swift in Sources */,
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
@@ -1407,9 +1445,11 @@
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
+				72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
 				3F0405C82890A97D00ADD5FC /* ReagentTileView.swift in Sources */,
+				72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */,
 				72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1581,7 +1621,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -1616,7 +1656,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

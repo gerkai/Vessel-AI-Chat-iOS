@@ -40,7 +40,7 @@ class MixpanelAnalytics: Analytics
     
     func setup()
     {
-        Mixpanel.initialize(token: analyticsToken)
+        Mixpanel.initialize(token: analyticsToken, trackAutomaticEvents: false)
     }
     
     func log(event: AnalyticsEvent)
