@@ -68,44 +68,44 @@ enum Evaluation: String
         {
             case .notAvailable:
                 return UIColor.gray
-        case .notDetected:
-            return UIColor.gray
-        case .veryLow:
-            return Constants.vesselPoor
-        case .low:
-            return Constants.vesselFair
-        case .ketoLow:
-            if Contact.main()!.isOnDiet(.KETO)
-            {
+            case .notDetected:
+                return UIColor.gray
+            case .veryLow:
+                return Constants.vesselPoor
+            case .low:
                 return Constants.vesselFair
-            }
-            else
-            {
+            case .ketoLow:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselFair
+                }
+                else
+                {
+                    return Constants.vesselGood
+                }
+            case .moderate:
                 return Constants.vesselGood
-            }
-        case .moderate:
-            return Constants.vesselGood
-        case .good:
-            return Constants.vesselGood
-        case .normal:
-            return Constants.vesselGreat
-        case .elevated:
-            return Constants.vesselFair
-        case .high:
-            return Constants.vesselPoor
-        case .ketoHigh:
-            if Contact.main()!.isOnDiet(.KETO)
-            {
+            case .good:
                 return Constants.vesselGood
-            }
-            else
-            {
+            case .normal:
+                return Constants.vesselGreat
+            case .elevated:
                 return Constants.vesselFair
-            }
-        case .excellent:
-            return Constants.vesselGreat
-        case .detected:
-            return Constants.vesselFair
+            case .high:
+                return Constants.vesselPoor
+            case .ketoHigh:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselGood
+                }
+                else
+                {
+                    return Constants.vesselFair
+                }
+            case .excellent:
+                return Constants.vesselGreat
+            case .detected:
+                return Constants.vesselFair
         }
     }
 }
