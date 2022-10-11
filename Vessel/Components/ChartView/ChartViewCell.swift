@@ -91,6 +91,7 @@ class ChartViewCell: UICollectionViewCell
                                 {
                                     self.graphView.isSelected = true
                                     self.infoView.alpha = 1.0
+                                    print("Showing infoView for \(self.monthLabel.text)/\(self.dayLabel.text)")
                                     self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
                                 }
                             }
@@ -102,6 +103,7 @@ class ChartViewCell: UICollectionViewCell
                     //print("Selecting cell \(tag) with wellness: \(wellnessScoreLabel.text)")
                     self.infoHeight.constant = selectedHeight
                     self.graphView.isSelected = true
+                    print(".Showing infoView for \(self.monthLabel.text)/\(self.dayLabel.text)")
                     self.infoView.alpha = 1.0
                     self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
                     self.animatingSelected = false

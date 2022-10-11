@@ -111,6 +111,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
             cell.monthLabel.text = Date.abbreviationFor(month: components.month)
             cell.dayLabel.text = String(format: "%02i", components.day)
         }
+        print("CELL: \(cell)")
         return cell
     }
     
