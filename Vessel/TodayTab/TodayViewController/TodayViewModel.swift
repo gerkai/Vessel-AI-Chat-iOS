@@ -13,8 +13,9 @@ enum TodayViewSection: Equatable
     //case days
     //case insights(insights: [Insight])
     //case activities
+    //case food
+    case water(glassesNumber: Int, checkedGlasses: Int)
     case food
-    case water
     //case customize
     case footer
     
@@ -25,7 +26,10 @@ enum TodayViewSection: Equatable
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         //case .insights(let insights): return createInsightsSection(insights: insights)
         case .food: return [.sectionTitle(icon: "food-icon", name: "Food")]
-        case .water: return [.sectionTitle(icon: "water-icon", name: "64 oz Water")]
+        case .water(let glassesNumber, let checkedGlasses): return [
+            .sectionTitle(icon: "water-icon", name: NSLocalizedString("\(glassesNumber * 8) oz Water", comment: "Water amount")),
+            .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
+        ]
         case .footer: return [.footer]
         }
     }
@@ -65,6 +69,7 @@ enum TodayViewCell: Equatable
 {
     case header(name: String, goals: String)
     case sectionTitle(icon: String, name: String)
+    case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, completed: Bool)
     case footer
     
@@ -73,7 +78,8 @@ enum TodayViewCell: Equatable
         switch self
         {
         case .header: return 177.0
-        case .sectionTitle: return 30.0
+        case .sectionTitle: return 16.0
+        case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
         case .checkMarkCard: return 203.0
         case .footer: return 173.0
         }
@@ -85,6 +91,7 @@ enum TodayViewCell: Equatable
         {
         case .header: return "TodayHeaderCell"
         case .sectionTitle: return "TodaySectionTitleCell"
+        case .waterDetails: return "TodayWaterDetailsSectionCell"
         case .checkMarkCard: return "CheckmarkCardCell"
         case .footer: return "TodayFooterCell"
         }
@@ -101,12 +108,30 @@ class TodayViewModel
     
     var isEmpty: Bool = false
     
-    lazy var sections: [TodayViewSection] =
-    [
-        .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
-        //.insights(insights: insights),
-        .food,
-        .water,
-        .footer
-    ]
+    var numberOfGlasses: Int?
+    {
+        contact?.dailyWaterIntake
+    }
+    
+    var drinkedWaterGlasses: Int?
+    {
+        contact?.drinkedWaterGlasses
+    }
+    
+    var sections: [TodayViewSection] {
+        return [
+            .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
+            //.insights(insights: insights),
+            .food,
+            .water(glassesNumber: contact?.dailyWaterIntake ?? 2, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),
+            .footer
+        ]
+    }
+    
+    func updateCheckedGlasses(_ glasses: Int)
+    {
+        contact?.drinkedWaterGlasses = glasses
+        guard let contact = contact else { return }
+        ObjectStore.shared.ClientSave(contact)
+    }
 }

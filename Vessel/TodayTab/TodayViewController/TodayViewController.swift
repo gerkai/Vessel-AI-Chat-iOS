@@ -41,6 +41,12 @@ class TodayViewController: UIViewController
         })
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     // MARK: - Actions
     @IBAction func onTakeATest()
     {
@@ -82,6 +88,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .sectionTitle(let icon, let name):
             guard let cell = cell as? TodaySectionTitleTableViewCell else { fatalError("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController") }
             cell.setup(iconName: icon, title: name)
+        case .waterDetails(let glassesNumber, let checkedGlasses):
+            guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
+            cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
         case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let completed):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: completed)
@@ -121,11 +130,21 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
             waterDetailsVC.hidesBottomBarWhenPushed = true
-            waterDetailsVC.drinkedWaterGlasses = 2
+            waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses ?? 2
+            waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? 0
+            waterDetailsVC.waterIntakeViewDelegate = self
             navigationController?.pushViewController(waterDetailsVC, animated: true)
         default:
             break
         }
+    }
+}
+
+extension TodayViewController: WaterIntakeViewDelegate
+{
+    func didCheckGlasses(_ glasses: Int)
+    {
+        viewModel.updateCheckedGlasses(glasses)
     }
 }
 

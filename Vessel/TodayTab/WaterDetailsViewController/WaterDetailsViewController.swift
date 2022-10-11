@@ -10,26 +10,22 @@ import UIKit
 class WaterDetailsViewController: UIViewController
 {
     // MARK: - Views
-    @IBOutlet private weak var glassesStackView: UIStackView!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var waterIntakeView: WaterIntakeView!
     
     // MARK: - Model
-    var drinkedWaterGlasses: Int?
+    var numberOfGlasses: Int = 2
+    var drinkedWaterGlasses: Int = 0
+    var waterIntakeViewDelegate: WaterIntakeViewDelegate?
     
+    // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        if let drinkedWaterGlasses = drinkedWaterGlasses
-        {
-            for (i, glassView) in glassesStackView.arrangedSubviews.enumerated()
-            {
-                if let glass = glassView as? UIImageView,
-                   i < drinkedWaterGlasses
-                {
-                    glass.image = UIImage(named: "water-glass-empty")
-                }
-            }
-        }
+        waterIntakeView.numberOfGlasses = numberOfGlasses
+        waterIntakeView.checkedGlasses = drinkedWaterGlasses
+        waterIntakeView.delegate = waterIntakeViewDelegate
+        subtitleLabel.text = NSLocalizedString("\(waterIntakeView.numberOfGlasses * 8) oz daily", comment: "Daily water intake")
     }
     
     // MARK: - Actions

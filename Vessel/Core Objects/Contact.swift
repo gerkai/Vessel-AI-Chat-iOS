@@ -62,6 +62,8 @@ class Contact: CoreObjectProtocol
     var expert_id: Int?
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
+    var dailyWaterIntake: Int?
+    var drinkedWaterGlasses: Int?
     
     @Resolved private var analytics: Analytics
 
@@ -121,7 +123,10 @@ class Contact: CoreObjectProtocol
          allergy_ids: [Int] = [],
          goal_ids: [Int] = [],
          expert_id: Int? = nil,
-         loginType: LoginType? = nil)
+         loginType: LoginType? = nil,
+         dailyWaterIntake: Int? = nil,
+         drinkedWaterGlasses: Int? = nil
+    )
     {
         self.id = id
         last_updated = lastUpdated
@@ -139,6 +144,8 @@ class Contact: CoreObjectProtocol
         self.goal_ids = goal_ids
         self.expert_id = expert_id
         self.loginType = loginType
+        self.dailyWaterIntake = dailyWaterIntake
+        self.drinkedWaterGlasses = drinkedWaterGlasses
     }
     
     var fullName: String
@@ -185,6 +192,9 @@ class Contact: CoreObjectProtocol
         case goal_ids
         case email
         case expert_id
+        // TODO: Uncomment when Hope adds this to the backend
+        //case dailyWaterIntake
+        //case drinkedWaterGlasses
     }
     
     // MARK: - Strings
