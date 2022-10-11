@@ -64,6 +64,67 @@ class Contact: CoreObjectProtocol
     private var _enrolled_program_ids: [Int]?
     var dailyWaterIntake: Int?
     var drinkedWaterGlasses: Int?
+    var suggestedFoods: [Food]? = [
+        Food(id: 0,
+             last_updated: 0,
+             title: "Avocado",
+             serving_quantity: 1.0,
+             serving_unit: "whole",
+             serving_grams: 226.796,
+             popularity: 0,
+             usda_ndb_number: 0,
+             categories: [],
+             image_url: "https://i0.wp.com/homesteadandchill.com/wp-content/uploads/2020/05/how-to-grow-avocado-trees-ripe-fruit-1.jpeg?w=2048",
+             reagents: [
+                Reagents[Reagent.ID(rawValue: 11)!]!,
+                Reagents[Reagent.ID(rawValue: 5)!]!,
+                Reagents[Reagent.ID(rawValue: 4)!]!,
+             ]),
+        Food(id: 1,
+             last_updated: 0,
+             title: "Grapefruit",
+             serving_quantity: 8.0,
+             serving_unit: "oz",
+             serving_grams: 226.796,
+             popularity: 0,
+             usda_ndb_number: 0,
+             categories: [],
+             image_url: "https://i.ibb.co/tq5kfzW/Grapefruit.png",
+             reagents: [
+                Reagents[Reagent.ID(rawValue: 3)!]!,
+                Reagents[Reagent.ID(rawValue: 21)!]!,
+                Reagents[Reagent.ID(rawValue: 2)!]!,
+             ]),
+        Food(id: 2,
+             last_updated: 0,
+             title: "Mushrooms",
+             serving_quantity: 6.0,
+             serving_unit: "oz",
+             serving_grams: 226.796,
+             popularity: 0,
+             usda_ndb_number: 0,
+             categories: [],
+             image_url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/stuffed-mushrooms-vertical-jpg-1525207616.jpg",
+             reagents: [
+                Reagents[Reagent.ID(rawValue: 1)!]!,
+                Reagents[Reagent.ID(rawValue: 8)!]!,
+                Reagents[Reagent.ID(rawValue: 22)!]!,
+             ]),
+        Food(id: 3,
+             last_updated: 0,
+             title: "Cabbage",
+             serving_quantity: 8.0,
+             serving_unit: "oz",
+             serving_grams: 226.796,
+             popularity: 0,
+             usda_ndb_number: 0,
+             categories: [],
+             image_url: "https://cdn.greatlifepublishing.net/wp-content/uploads/sites/2/2021/05/03121529/Israeli-Red-Cabbage-Salad-Vertical-1-678x1024.jpg",
+             reagents: [
+                Reagents[Reagent.ID(rawValue: 3)!]!,
+                Reagents[Reagent.ID(rawValue: 18)!]!,
+             ]),
+    ]
     
     @Resolved private var analytics: Analytics
 
@@ -195,6 +256,7 @@ class Contact: CoreObjectProtocol
         // TODO: Uncomment when Hope adds this to the backend
         //case dailyWaterIntake
         //case drinkedWaterGlasses
+        //case suggestedFoods
     }
     
     // MARK: - Strings

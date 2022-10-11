@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WaterDetailsViewController: UIViewController
+class WaterDetailsViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var subtitleLabel: UILabel!
@@ -17,6 +17,9 @@ class WaterDetailsViewController: UIViewController
     var numberOfGlasses: Int = 2
     var drinkedWaterGlasses: Int = 0
     var waterIntakeViewDelegate: WaterIntakeViewDelegate?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .todayTabFlow
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()

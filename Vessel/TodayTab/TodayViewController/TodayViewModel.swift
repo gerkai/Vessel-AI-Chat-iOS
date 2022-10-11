@@ -13,9 +13,8 @@ enum TodayViewSection: Equatable
     //case days
     //case insights(insights: [Insight])
     //case activities
-    //case food
+    case food(foods: [Food])
     case water(glassesNumber: Int, checkedGlasses: Int)
-    case food
     //case customize
     case footer
     
@@ -25,7 +24,10 @@ enum TodayViewSection: Equatable
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         //case .insights(let insights): return createInsightsSection(insights: insights)
-        case .food: return [.sectionTitle(icon: "food-icon", name: "Food")]
+        case .food(let foods): return [
+            .sectionTitle(icon: "food-icon", name: "Food"),
+            .foodDetails(foods: foods)
+        ]
         case .water(let glassesNumber, let checkedGlasses): return [
             .sectionTitle(icon: "water-icon", name: NSLocalizedString("\(glassesNumber * 8) oz Water", comment: "Water amount")),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
@@ -69,6 +71,7 @@ enum TodayViewCell: Equatable
 {
     case header(name: String, goals: String)
     case sectionTitle(icon: String, name: String)
+    case foodDetails(foods: [Food])
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, completed: Bool)
     case footer
@@ -79,6 +82,10 @@ enum TodayViewCell: Equatable
         {
         case .header: return 177.0
         case .sectionTitle: return 16.0
+        case .foodDetails(let foods):
+            let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
+            let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
+            return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
         case .checkMarkCard: return 203.0
         case .footer: return 173.0
@@ -91,6 +98,7 @@ enum TodayViewCell: Equatable
         {
         case .header: return "TodayHeaderCell"
         case .sectionTitle: return "TodaySectionTitleCell"
+        case .foodDetails: return "TodayFoodDetailsSectionCell"
         case .waterDetails: return "TodayWaterDetailsSectionCell"
         case .checkMarkCard: return "CheckmarkCardCell"
         case .footer: return "TodayFooterCell"
@@ -122,7 +130,7 @@ class TodayViewModel
         return [
             .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
             //.insights(insights: insights),
-            .food,
+            .food(foods: contact?.suggestedFoods ?? []),
             .water(glassesNumber: contact?.dailyWaterIntake ?? 2, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),
             .footer
         ]

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Food
+struct Food: Equatable
 {
     var id: Int
     var last_updated: Int
@@ -34,5 +34,19 @@ struct Food
         self.categories = categories
         self.image_url = image_url
         self.reagents = reagents
+    }
+    
+    static func == (lhs: Food, rhs: Food) -> Bool
+    {
+        return lhs.id == rhs.id &&
+        lhs.last_updated == rhs.last_updated &&
+        lhs.title == rhs.title &&
+        lhs.serving_quantity == rhs.serving_quantity &&
+        lhs.serving_unit == rhs.serving_unit &&
+        lhs.serving_grams == rhs.serving_grams &&
+        lhs.popularity == rhs.popularity &&
+        lhs.usda_ndb_number == rhs.usda_ndb_number &&
+        lhs.categories == rhs.categories &&
+        lhs.image_url == rhs.image_url
     }
 }
