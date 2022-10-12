@@ -16,6 +16,7 @@ extension Notification.Name
     //can update themselves. Used for updating the results tab when a new Result arrives.
     static let newDataFromServer = Notification.Name("NewDataFromServer")
     static let selectTabNotification = Notification.Name("SelectTab")
+    static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
 }
 
 struct Constants
@@ -111,10 +112,6 @@ struct Constants
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
-    
-    //Database IDs
-    static let ID_NO_DIETS = 17
-    static let ID_NO_ALLERGIES = 20
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001

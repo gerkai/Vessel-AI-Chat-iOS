@@ -19,11 +19,13 @@ enum Evaluation: String
     case notDetected
     case veryLow
     case low
+    case ketoLow
     case moderate
     case good
     case normal
     case elevated
     case high
+    case ketoHigh
     case excellent
     case detected
     
@@ -34,25 +36,29 @@ enum Evaluation: String
             case .notAvailable:
                 return NSLocalizedString("N/A", comment: "Abbreviation for Not Available")
             case .notDetected:
-                return "not detected"
+                return NSLocalizedString("not detected", comment: "Reagent evaluation label")
             case .veryLow:
-                return "very low"
+                return NSLocalizedString("very low", comment: "Reagent evaluation label")
             case .low:
-                return "low"
+                return NSLocalizedString("low", comment: "Reagent evaluation label")
+            case .ketoLow:
+                return NSLocalizedString("low", comment: "Reagent evaluation label")
             case .moderate:
-                return "moderate"
+                return NSLocalizedString("moderate", comment: "Reagent evaluation label")
             case .good:
-                return "good"
+                return NSLocalizedString("good", comment: "Reagent evaluation label")
             case .normal:
-                return "normal"
+                return NSLocalizedString("normal", comment: "Reagent evaluation label")
             case .elevated:
-                return "elevated"
+                return NSLocalizedString("elevated", comment: "Reagent evaluation label")
             case .high:
-                return "high"
+                return NSLocalizedString("high", comment: "Reagent evaluation label")
+            case .ketoHigh:
+                return NSLocalizedString("high", comment: "Reagent evaluation label")
             case .excellent:
-                return "excellent"
+                return NSLocalizedString("excellent", comment: "Reagent evaluation label")
             case .detected:
-                return "detected"
+                return NSLocalizedString("detected", comment: "Reagent evaluation label")
         }
     }
     
@@ -68,6 +74,15 @@ enum Evaluation: String
                 return Constants.vesselPoor
             case .low:
                 return Constants.vesselFair
+            case .ketoLow:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselFair
+                }
+                else
+                {
+                    return Constants.vesselGood
+                }
             case .moderate:
                 return Constants.vesselGood
             case .good:
@@ -78,6 +93,15 @@ enum Evaluation: String
                 return Constants.vesselFair
             case .high:
                 return Constants.vesselPoor
+            case .ketoHigh:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselGood
+                }
+                else
+                {
+                    return Constants.vesselFair
+                }
             case .excellent:
                 return Constants.vesselGreat
             case .detected:
@@ -263,11 +287,11 @@ let Reagents: [Reagent.ID: Reagent] =
             buckets: [Bucket(low: 0.0,
                              high: 2.21,
                              score: 0.0,
-                             evaluation: .low),
+                             evaluation: .ketoLow),
                       Bucket(low: 2.21,
                              high: 8.81,
                               score: 0,
-                              evaluation: .high)],
+                              evaluation: .ketoHigh)],
             goalImpacts: [GoalImpact(goalID: 1, impact: 1),
                           GoalImpact(goalID: 2, impact: 1),
                           GoalImpact(goalID: 3, impact: 1),

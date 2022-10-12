@@ -102,10 +102,11 @@ extension Date
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let vesselDate = formatter.date(from: "2020/01/01 00:00")?.addingTimeInterval(Double(vesselTime))
-        if let vdate = vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
+        /*if let vdate = vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
         {
-            print("v_time: \(vesselTime), date:\(vesselDate ?? Date()), local: \(vdate)")
-        }
+            print("v_time: \(vesselTime), date:\(vesselDate), local: \(vdate)")
+        }*/
+
         return vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
     }
     

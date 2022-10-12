@@ -57,5 +57,6 @@ class FoodPreferencesViewModel: ItemPreferencesViewModel
         contact.setAllergiesAnalytics()
         
         ObjectStore.shared.ClientSave(contact)
+        NotificationCenter.default.post(name: .foodPreferencesChangedNotification, object: nil)
     }
 }

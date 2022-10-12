@@ -71,7 +71,7 @@
                         <rect key="frame" x="0.0" y="40" width="110" height="170"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-XB-7eb">
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-XB-7eb">
                         <rect key="frame" x="24" y="191.66666666666666" width="62" height="37"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bix-fG-HUf">

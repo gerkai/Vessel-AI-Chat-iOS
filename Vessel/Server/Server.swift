@@ -808,7 +808,6 @@ class Server: NSObject
         //send it to server
         serverPost(request: request, onSuccess:
         { (object) in
-            print("Saved contact. Response: \(object)")
             DispatchQueue.main.async()
             {
                 success()

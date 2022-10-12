@@ -26,6 +26,13 @@ class ChartViewCell: UICollectionViewCell
     @IBOutlet weak var dayLabel: UILabel!
     
     var wellnessScore: CGFloat = 0.0
+    {
+        didSet
+        {
+            //print("Did set wellness score to \(wellnessScore)")
+            setWellnessLabelPosition()
+        }
+    }
     var delegate: ChartViewCellDelegate?
     var originalHeight: Double!
     var animatingSelected = false
@@ -48,6 +55,29 @@ class ChartViewCell: UICollectionViewCell
         backgroundColor = UIColor(hue: CGFloat(drand48()), saturation: 1, brightness: 1, alpha: 1)
     }
     
+    func select(selectionIntent: Bool)
+    {
+        graphView.isSelected = selectionIntent
+        graphView.layoutIfNeeded()
+        if selectionIntent
+        {
+            infoHeight.constant = frame.height
+            infoView.alpha = 1.0
+            setWellnessLabelPosition()
+        }
+        else
+        {
+            infoHeight.constant = originalHeight
+            infoView.alpha = 0.0
+        }
+    }
+    
+    func setWellnessLabelPosition()
+    {
+        //print("wellnessScore: \(wellnessScore), graphHeight: \(graphView.bounds.height), regionSize: \(graphView.pointRegionSize)")
+        wellnessLabelYPosition.constant = -wellnessScore * (graphView.bounds.height - graphView.pointRegionSize) - 30.0
+    }
+    
     @objc func selected(_ notification: NSNotification)
     {
         let selectedHeight = frame.height
@@ -56,47 +86,73 @@ class ChartViewCell: UICollectionViewCell
             if cell == tag
             {
                 //animate to selected state
-                if animatingSelected == false
+                if notification.userInfo?["animated"] as? Bool == true
                 {
-                    animatingSelected = true
-                    UIView.animate(withDuration: 0.1, delay: 0.0 /*, options: .beginFromCurrentState*/)
+                    //print("Selecting cell \(tag) ANIMATED with wellness: \(wellnessScoreLabel.text)")
+                    if animatingSelected == false
                     {
-                       self.infoHeight.constant = selectedHeight
-                       self.layoutIfNeeded()
-                    }
+                        animatingSelected = true
+                        UIView.animate(withDuration: 0.1, delay: 0.0 /*, options: .beginFromCurrentState*/)
+                        {
+                            self.infoHeight.constant = selectedHeight
+                            self.layoutIfNeeded()
+                        }
                     completion:
-                    { finished in
-                       if finished == true
-                       {
-                           self.animatingSelected = false
-                           if self.infoHeight.constant == selectedHeight
-                           {
-                               self.graphView.isSelected = true
-                               self.infoView.isHidden = false
-                               self.wellnessLabelYPosition.constant = -self.wellnessScore * (self.graphView.bounds.height - self.graphView.pointRegionSize) - 30.0
-                           }
+                        { finished in
+                            if finished == true
+                            {
+                                self.animatingSelected = false
+                                if self.infoHeight.constant == selectedHeight
+                                {
+                                    self.graphView.isSelected = true
+                                    self.infoView.alpha = 1.0
+                                    self.setWellnessLabelPosition()
+                                }
+                            }
                         }
                     }
+                }
+                else
+                {
+                    //print("Selecting cell \(tag) with wellness: \(wellnessScoreLabel.text)")
+                    self.infoHeight.constant = selectedHeight
+                    self.graphView.isSelected = true
+                    self.infoView.alpha = 1.0
+                    self.setWellnessLabelPosition()
+                    self.animatingSelected = false
                 }
             }
             else
             {
                 //animate to unselected state
-                if animatingUnselected == false
+                
+                if notification.userInfo?["animated"] as? Bool == true
                 {
-                    self.graphView.isSelected = false
-                    self.infoView.isHidden = true
-                    animatingUnselected = true
-                    animatingSelected = false
-                    UIView.animate(withDuration: 0.1, delay: 0.0 /*, options: .beginFromCurrentState*/)
+                    if animatingUnselected == false
                     {
-                       self.infoHeight.constant = self.originalHeight
-                       self.layoutIfNeeded()
-                    }
+                        //print("Unselecting cell ANIMATED \(tag)")
+                        self.graphView.isSelected = false
+                        self.infoView.alpha = 0.0
+                        animatingUnselected = true
+                        animatingSelected = false
+                        UIView.animate(withDuration: 0.1, delay: 0.0 /*, options: .beginFromCurrentState*/)
+                        {
+                            self.infoHeight.constant = self.originalHeight
+                            self.layoutIfNeeded()
+                        }
                     completion:
-                    { _ in
-                       self.animatingUnselected = false
+                        { _ in
+                            self.animatingUnselected = false
+                        }
                     }
+                }
+                else
+                {
+                    //print("Unselecting cell \(tag)")
+                    self.graphView.isSelected = false
+                    self.infoView.alpha = 0.0
+                    self.infoHeight.constant = self.originalHeight
+                    self.animatingUnselected = false
                 }
             }
         }
