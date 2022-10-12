@@ -1,0 +1,94 @@
+//
+//  HydroQuizViewController.swift
+//  Vessel
+//
+//  Created by Nicolas Medina on 10/11/22.
+//
+
+import UIKit
+
+class HydroQuizViewController: AfterTestMVVMViewController
+{
+    // MARK: - Views
+    @IBOutlet private var optionViews: [UIView]!
+    @IBOutlet private var checkmarkViews: [UIImageView]!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleStackViewVerticalSeparator: NSLayoutConstraint!
+    
+    // MARK: - Model
+    private var selectedOption: Int?
+    
+    // MARK: - UIViewController Lifecycle
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        for view in optionViews
+        {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onOptionTapped))
+            view.addGestureRecognizer(gestureRecognizer)
+        }
+        
+        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
+        {
+            titleLabel.font = Constants.FontTitleMain24
+            titleStackViewVerticalSeparator.constant = 10
+            view.layoutIfNeeded()
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func onBack()
+    {
+        back()
+    }
+    
+    @IBAction func onNext()
+    {
+        guard let selectedOption = selectedOption else { return }
+        switch selectedOption
+        {
+        case 0:
+            viewModel.setDailyWaterIntake(dailyDrinkedGlasses: 2)
+        case 1:
+            viewModel.setDailyWaterIntake(dailyDrinkedGlasses: 4)
+        case 2:
+            viewModel.setDailyWaterIntake(dailyDrinkedGlasses: 8)
+        case 3:
+            viewModel.setDailyWaterIntake(dailyDrinkedGlasses: 12)
+        default:
+            break
+        }
+        nextScreen()
+    }
+}
+
+private extension HydroQuizViewController
+{
+    func reloadUI()
+    {
+        for view in checkmarkViews
+        {
+            view.image = UIImage(named: "Checkbox_beige_unselected")
+        }
+        guard let selectedOption = selectedOption,
+              let checkmarkView = checkmarkViews[safe: selectedOption] else { return }
+        checkmarkView.image = UIImage(named: "Checkbox_beige_selected")
+    }
+    
+    @objc
+    func onOptionTapped(gestureRecognizer: UIGestureRecognizer)
+    {
+        guard let view = gestureRecognizer.view,
+              let index = optionViews.firstIndex(of: view) else { return }
+        if selectedOption == index
+        {
+            selectedOption = nil
+        }
+        else
+        {
+            selectedOption = index
+        }
+        reloadUI()
+    }
+}

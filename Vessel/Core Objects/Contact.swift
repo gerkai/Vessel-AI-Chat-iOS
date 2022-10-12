@@ -253,10 +253,8 @@ class Contact: CoreObjectProtocol
         case goal_ids
         case email
         case expert_id
-        // TODO: Uncomment when Hope adds this to the backend
-        //case dailyWaterIntake
-        //case drinkedWaterGlasses
-        //case suggestedFoods
+        case dailyWaterIntake = "daily_water_intake_glasses"
+        case drinkedWaterGlasses
     }
     
     // MARK: - Strings

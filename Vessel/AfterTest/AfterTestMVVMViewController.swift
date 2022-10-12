@@ -41,7 +41,24 @@ class AfterTestMVVMViewController: UIViewController
     func nextScreen()
     {
         let result = viewModel.nextViewControllerData()
-        if result.transition == .dismiss
+        if result.isHydroQuiz
+        {
+            let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HydroQuizViewController") as! HydroQuizViewController
+            vc.viewModel = viewModel
+            vc.transition = result.transition
+            vc.backTransition = self.transition
+            
+            if transition == .fade
+            {
+                navigationController?.fadeTo(vc)
+            }
+            else
+            {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        else if result.transition == .dismiss
         {
             //also called in ResultsViewController
             NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])

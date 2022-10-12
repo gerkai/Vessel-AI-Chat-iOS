@@ -123,8 +123,8 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
             waterDetailsVC.hidesBottomBarWhenPushed = true
-            waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses ?? 2
-            waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? 0
+            waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses ?? 0
+            waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? 2
             waterDetailsVC.waterIntakeViewDelegate = self
             navigationController?.pushViewController(waterDetailsVC, animated: true)
         default:

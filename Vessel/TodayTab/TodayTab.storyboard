@@ -158,9 +158,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Nlv-RI-aAJ">
+                                                    <rect key="frame" x="110.66666666666667" y="6" width="19.000000000000014" height="19"/>
+                                                </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="Nlv-RI-aAJ" firstAttribute="centerY" secondItem="qO9-9D-Y58" secondAttribute="centerY" id="0ej-sy-oRy"/>
                                                 <constraint firstItem="eaE-kl-6Zr" firstAttribute="leading" secondItem="cuQ-ma-QHG" secondAttribute="leading" constant="20" id="1EK-PG-rhN"/>
+                                                <constraint firstItem="Nlv-RI-aAJ" firstAttribute="leading" secondItem="qO9-9D-Y58" secondAttribute="trailing" constant="4" id="6vI-WU-TWE"/>
                                                 <constraint firstItem="qO9-9D-Y58" firstAttribute="centerY" secondItem="eaE-kl-6Zr" secondAttribute="centerY" id="BU4-II-XrB"/>
                                                 <constraint firstItem="eaE-kl-6Zr" firstAttribute="top" secondItem="cuQ-ma-QHG" secondAttribute="top" id="BhQ-15-jHi"/>
                                                 <constraint firstItem="qO9-9D-Y58" firstAttribute="leading" secondItem="eaE-kl-6Zr" secondAttribute="trailing" constant="14" id="LIl-6j-5rn"/>
@@ -426,10 +432,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="2207"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jpc-yV-bdv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2212"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2267.3333333333335"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbf-ux-pEH" userLabel="Header View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="586.33333333333337"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-header" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-T7-cxi">
                                                         <rect key="frame" x="92" y="0.0" width="283" height="337"/>
@@ -446,56 +452,27 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="s6u-aA-O1j">
-                                                        <rect key="frame" x="20" y="450" width="335" height="45"/>
-                                                        <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-xF-s1B">
-                                                                <rect key="frame" x="0.0" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="7gY-wc-ar1">
-                                                                <rect key="frame" x="43.333333333333336" y="0.0" width="31.000000000000007" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-te-yqu">
-                                                                <rect key="frame" x="87" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="rNE-0J-zwK">
-                                                                <rect key="frame" x="130.33333333333334" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="5b1-bi-H82">
-                                                                <rect key="frame" x="173.66666666666666" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="Yrh-rY-sOv">
-                                                                <rect key="frame" x="217" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="RNL-MX-uLR">
-                                                                <rect key="frame" x="260.66666666666669" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="water-glass-full" translatesAutoresizingMaskIntoConstraints="NO" id="5vG-PJ-dGc">
-                                                                <rect key="frame" x="304" y="0.0" width="31" height="45"/>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="51j-tQ-w1f"/>
-                                                        </constraints>
-                                                    </stackView>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="98" translatesAutoresizingMaskIntoConstraints="NO" id="VHq-mI-2wC" customClass="WaterIntakeView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="450" width="335" height="100.33333333333337"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="s6u-aA-O1j" secondAttribute="bottom" constant="36" id="CSQ-kN-6s5"/>
-                                                    <constraint firstAttribute="height" constant="531" id="Ft9-gS-M25"/>
+                                                    <constraint firstAttribute="bottom" secondItem="VHq-mI-2wC" secondAttribute="bottom" constant="36" id="FIg-kl-G7B"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VHq-mI-2wC" secondAttribute="trailing" constant="20" id="FaD-X1-Q1t"/>
                                                     <constraint firstItem="asy-Ld-Uzz" firstAttribute="leading" secondItem="jbf-ux-pEH" secondAttribute="leading" constant="20" id="GUD-fg-82K"/>
                                                     <constraint firstItem="Ow4-Lq-Jjl" firstAttribute="leading" secondItem="jbf-ux-pEH" secondAttribute="leading" constant="20" id="MCt-XN-B1l"/>
-                                                    <constraint firstItem="s6u-aA-O1j" firstAttribute="leading" secondItem="jbf-ux-pEH" secondAttribute="leading" constant="20" id="dZ5-zg-XFK"/>
-                                                    <constraint firstItem="s6u-aA-O1j" firstAttribute="top" secondItem="asy-Ld-Uzz" secondAttribute="bottom" constant="28" id="dsu-Vb-2CN"/>
                                                     <constraint firstItem="asy-Ld-Uzz" firstAttribute="top" secondItem="Ow4-Lq-Jjl" secondAttribute="bottom" constant="14" id="jzP-gM-pRc"/>
                                                     <constraint firstItem="Ow4-Lq-Jjl" firstAttribute="top" secondItem="jbf-ux-pEH" secondAttribute="top" constant="346" id="n2a-OA-KTu"/>
                                                     <constraint firstItem="2pA-T7-cxi" firstAttribute="top" secondItem="jbf-ux-pEH" secondAttribute="top" id="nad-9z-u9I"/>
+                                                    <constraint firstItem="VHq-mI-2wC" firstAttribute="top" secondItem="asy-Ld-Uzz" secondAttribute="bottom" constant="28" id="oCC-IP-DWw"/>
+                                                    <constraint firstItem="VHq-mI-2wC" firstAttribute="leading" secondItem="jbf-ux-pEH" secondAttribute="leading" constant="20" id="qVe-UG-Hn9"/>
                                                     <constraint firstAttribute="trailing" secondItem="2pA-T7-cxi" secondAttribute="trailing" id="rcb-cP-Osu"/>
-                                                    <constraint firstAttribute="trailing" secondItem="s6u-aA-O1j" secondAttribute="trailing" constant="20" id="wQT-MH-8SV"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ls-aO-FVX" userLabel="Static Info View">
-                                                <rect key="frame" x="0.0" y="531" width="375" height="1489"/>
+                                                <rect key="frame" x="0.0" y="586.33333333333348" width="375" height="1489"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water is essential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goO-4R-e4O">
                                                         <rect key="frame" x="20" y="60" width="194" height="30"/>
@@ -589,7 +566,7 @@ However, most people drink below what their body needs because it's hard to know
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMZ-g5-ZdL">
-                                                        <rect key="frame" x="20" y="581" width="335" height="548"/>
+                                                        <rect key="frame" x="20" y="580.99999999999989" width="335" height="548.00000000000011"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="250" image="water-details-background" translatesAutoresizingMaskIntoConstraints="NO" id="G3e-58-uju">
                                                                 <rect key="frame" x="131" y="0.0" width="204" height="548"/>
@@ -732,7 +709,7 @@ However, most people drink below what their body needs because it's hard to know
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOR-AW-jPN" customClass="VesselFooterView" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2020" width="375" height="192"/>
+                                                <rect key="frame" x="0.0" y="2075.3333333333335" width="375" height="192"/>
                                                 <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="192" id="Oeh-m6-1cv"/>
@@ -801,12 +778,13 @@ However, most people drink below what their body needs because it's hard to know
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="2207"/>
                     <connections>
-                        <outlet property="glassesStackView" destination="s6u-aA-O1j" id="1E9-CQ-L0d"/>
+                        <outlet property="subtitleLabel" destination="asy-Ld-Uzz" id="1eb-3G-gAC"/>
+                        <outlet property="waterIntakeView" destination="VHq-mI-2wC" id="sbq-db-9dC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEb-Jd-EbD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368" y="443"/>
+            <point key="canvasLocation" x="1291.5384615384614" y="443.95734597156394"/>
         </scene>
         <!--Activity Details View Controller-->
         <scene sceneID="1qH-JK-wUU">
@@ -975,23 +953,26 @@ However, most people drink below what their body needs because it's hard to know
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFe-Ff-jtI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2051.5384615384614" y="-55.45023696682464"/>
+            <point key="canvasLocation" x="1950" y="-55"/>
         </scene>
     </scenes>
     <designables>
         <designable name="5Bc-in-9Zd">
             <size key="intrinsicContentSize" width="335" height="98"/>
         </designable>
+        <designable name="VHq-mI-2wC">
+            <size key="intrinsicContentSize" width="335" height="98"/>
+        </designable>
     </designables>
     <resources>
         <image name="Checkbox_beige_unselected" width="48" height="48"/>
         <image name="Plan-Icon" width="18" height="18"/>
+        <image name="info-icon" width="19" height="19"/>
         <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="todayInsightsIcon" width="23" height="31"/>
         <image name="todayLeaves" width="167" height="147"/>
         <image name="water-details-background" width="204" height="548"/>
-        <image name="water-glass-full" width="31" height="45"/>
         <image name="water-header" width="283" height="337"/>
         <image name="yogaImprovesSleep" width="314" height="203"/>
         <systemColor name="opaqueSeparatorColor">
