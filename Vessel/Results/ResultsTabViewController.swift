@@ -41,11 +41,13 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         else
         {
             lockoutView.isHidden = true
+            if initialLoad
+            {
+                testsGoalsView.setupGoals()
+                testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
+            }
         }
-        if initialLoad
-        {
-            testsGoalsView.setupGoals()
-        }
+       
         //let result = viewModel.resultForIndex(i: 0)
         //let dict = ["objectType": String(describing: type(of: result.self))]
         //NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: dict)
