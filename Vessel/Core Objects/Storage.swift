@@ -63,7 +63,7 @@ public class Storage
             url.appendPathComponent("\(contactID)", isDirectory: true)
             url.appendPathComponent(environmentComponent(), isDirectory: true)
             url.appendPathComponent(objectName, isDirectory: true)
-            print("Storage URL: \(url)")
+            //print("Storage URL: \(url)")
             return url
         }
         else
