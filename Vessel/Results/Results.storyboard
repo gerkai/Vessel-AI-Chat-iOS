@@ -249,15 +249,15 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yEu-8U-DuO"/>
                             </scrollView>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IjY-Va-H26">
-                                <rect key="frame" x="-1" y="-1" width="389" height="842"/>
+                                <rect key="frame" x="-2" y="-3" width="389" height="843"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view alpha="0.94999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-aO-ixe">
-                                        <rect key="frame" x="0.0" y="0.0" width="389" height="842"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="389" height="843"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtT-3B-dkC">
-                                        <rect key="frame" x="0.0" y="297" width="389" height="215"/>
+                                        <rect key="frame" x="0.0" y="298" width="389" height="215"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="agn-ZS-RKk">
                                                 <rect key="frame" x="174.66666666666666" y="0.0" width="40" height="40"/>
@@ -570,7 +570,52 @@
             </objects>
             <point key="canvasLocation" x="876.92307692307691" y="-30.568720379146917"/>
         </scene>
+        <!--Reagent Details View Controller-->
+        <scene sceneID="Cev-Zf-JVI">
+            <objects>
+                <viewController storyboardIdentifier="ReagentDetailsViewController" id="9ai-CJ-iss" customClass="ReagentDetailsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dIt-50-OQi">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJB-LY-0nf" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="67" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CDB-uU-iUy"/>
+                                    <constraint firstAttribute="width" constant="50" id="wv2-22-5r1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" image="square_back_button">
+                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="back" destination="9ai-CJ-iss" eventType="touchUpInside" id="dwN-VA-caO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="90t-ih-bvS"/>
+                        <color key="backgroundColor" red="0.98431372549019602" green="0.96470588235294119" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lJB-LY-0nf" firstAttribute="leading" secondItem="90t-ih-bvS" secondAttribute="leading" constant="20" id="9oD-Qy-ng1"/>
+                            <constraint firstItem="lJB-LY-0nf" firstAttribute="top" secondItem="90t-ih-bvS" secondAttribute="top" constant="20" id="s14-pv-uWe"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1NO-pj-uod" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1831" y="-31"/>
+        </scene>
     </scenes>
+    <designables>
+        <designable name="s4c-5g-Wbg">
+            <size key="intrinsicContentSize" width="294.66666666666669" height="444"/>
+        </designable>
+    </designables>
     <resources>
         <image name="HappyWoman" width="161" height="237"/>
         <image name="PeachGradient" width="1" height="435"/>

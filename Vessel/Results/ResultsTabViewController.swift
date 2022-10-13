@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate
+class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate
 {
     @IBOutlet weak var chartView: ChartView!
     var initialLoad = true
@@ -20,6 +20,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     {
         chartView.dataSource = self
         chartView.delegate = self
+        testsGoalsView.delegate = self
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataFromServer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
@@ -135,5 +136,19 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     @IBAction func customerSupport()
     {
         print("CUSTOMER SUPPORT")
+    }
+    
+    //MARK: - TestsGoalsViewDelegates
+    func learnMoreAboutGoal(id: Int)
+    {
+        print("LEARN MORE ABOUT GOAL \(id)")
+    }
+    
+    func learnMoreAboutReagent(id: Int)
+    {
+        print("LEARN MORE ABOUT REAGENT \(id)")
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReagentDetailsViewController") as! ReagentDetailsViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -139,6 +139,7 @@
 		3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369DE27C9A74B00231D42 /* NoeText-Book.otf */; };
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
+		3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
@@ -359,6 +360,7 @@
 		3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSignInViewController.swift; sourceTree = "<group>"; };
 		3FE369F327C9B34A00231D42 /* BounceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
 		3FE369F527C9B39100231D42 /* VesselButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VesselButton.swift; sourceTree = "<group>"; };
+		3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentDetailsViewController.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 		3F426DBD28DFA2FF00927B68 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */,
 				3F426DC028DFA33200927B68 /* Results.storyboard */,
 				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
 				3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */,
@@ -1348,6 +1351,7 @@
 				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */,
+				3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */,
 				72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */,
 				3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
