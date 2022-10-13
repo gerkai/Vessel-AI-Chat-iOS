@@ -146,7 +146,6 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     func learnMoreAboutReagent(id: Int)
     {
-        print("LEARN MORE ABOUT REAGENT \(id)")
         let storyboard = UIStoryboard(name: "Results", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ReagentDetailsViewController") as! ReagentDetailsViewController
         navigationController?.pushViewController(vc, animated: true)
