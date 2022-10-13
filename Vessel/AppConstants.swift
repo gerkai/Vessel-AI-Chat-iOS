@@ -50,7 +50,8 @@ struct Constants
         static let accessKey = Server.shared.S3AccessKey()
         static let secretKey = Server.shared.S3SecretKey()
     }
-    
+    static let LiveChatLicenseID = "13081182"
+
     //analytics
     static let ProdMixpanelToken = "d3e262e686a9df32346c3825102b9f39"
     static let ProdMixpanelAPISecret = "f64ce29607e303927a7634ba44d5a6bb"

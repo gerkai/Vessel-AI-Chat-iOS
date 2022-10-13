@@ -9,48 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Coach-->
-        <scene sceneID="lfp-s1-Coc">
+        <!--CoachViewController-->
+        <scene sceneID="0lD-5A-0sQ">
             <objects>
-                <viewController id="hxb-kY-V2d" customClass="CoachViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ejf-Zd-Vbv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COACH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTn-ZU-LEb">
-                                <rect key="frame" x="181" y="437" width="59" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6y-Dt-fTK">
-                                <rect key="frame" x="104.5" y="312" width="205" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="XQ6-Wr-xbe"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemBrownColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Invalidate Access Token"/>
-                                <connections>
-                                    <action selector="invalidateToken" destination="hxb-kY-V2d" eventType="touchUpInside" id="tDm-Xu-Kci"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="dVU-0E-yXU"/>
-                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="y6y-Dt-fTK" firstAttribute="centerY" secondItem="dVU-0E-yXU" secondAttribute="centerY" constant="-100" id="U3H-JO-1Zg"/>
-                            <constraint firstItem="y6y-Dt-fTK" firstAttribute="centerX" secondItem="dVU-0E-yXU" secondAttribute="centerX" id="yQK-Lu-4Qg"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="bkk-Po-fvx">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Um5-Cg-1be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="CoachTab" referencedIdentifier="CoachViewController" id="zGf-tf-2vW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="qAg-wN-B8w"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QKw-W5-zQS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="64"/>
+            <point key="canvasLocation" x="551" y="-250"/>
         </scene>
         <!--MoreViewController-->
         <scene sceneID="dxm-Pt-jv1">
@@ -143,7 +110,7 @@
                         <segue destination="GhL-sL-soP" kind="relationship" relationship="viewControllers" id="DB0-XT-grW"/>
                         <segue destination="Jyb-1i-tB5" kind="relationship" relationship="viewControllers" id="rtF-QP-D7N"/>
                         <segue destination="Q43-6E-S0t" kind="relationship" relationship="viewControllers" id="nfB-PU-xfX"/>
-                        <segue destination="hxb-kY-V2d" kind="relationship" relationship="viewControllers" id="MYN-pK-gal"/>
+                        <segue destination="zGf-tf-2vW" kind="relationship" relationship="viewControllers" id="jYN-c1-ybZ"/>
                         <segue destination="M1N-ym-OHN" kind="relationship" relationship="viewControllers" id="uZk-0Y-JOl"/>
                     </connections>
                 </tabBarController>
@@ -153,14 +120,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Coach-icon" width="28" height="16"/>
         <image name="More-Icon" width="19" height="5"/>
         <image name="Results-Icon" width="19" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
