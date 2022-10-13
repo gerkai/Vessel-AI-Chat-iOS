@@ -141,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLE-qB-BDH" userLabel="mindLabel">
-                                <rect key="frame" x="30" y="276" width="86.5" height="35"/>
+                                <rect key="frame" x="30" y="276" width="78" height="41"/>
                                 <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -1632,7 +1632,7 @@
                                             <constraint firstAttribute="width" constant="200" id="6yQ-DB-0lO"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Vessel offers several membership options">
+                                            <fragment content="Vessel offers several membership options.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="16" name="NoeText-Book"/>

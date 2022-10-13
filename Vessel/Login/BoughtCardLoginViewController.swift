@@ -22,7 +22,11 @@ struct BoughtCardLoginValidator
         {
             return  (isValid: false, error: Constants.ENTER_VALID_EMAIL_STRING)
         }
-        guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
+        guard let password = form.password, !password.isEmpty else
+        {
+            return (isValid: false, error: Constants.ENTER_PASSWORD_STRING)
+        }
+        if password.count < Constants.MinimumPasswordLength
         {
             return  (isValid: false, error: Constants.INCORRECT_PASSWORD_STRING)
         }
@@ -77,7 +81,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
                 {
                     ObjectStore.shared.loadMainContact
                     {
-                        Contact.main()?.identifyAnalytics()                        
+                        Contact.main()?.identifyAnalytics()
                         let storyboard = UIStoryboard(name: "Login", bundle: nil)
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         

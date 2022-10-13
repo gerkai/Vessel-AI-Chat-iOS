@@ -87,6 +87,7 @@ PODS:
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.10)
   - Kingfisher (7.3.2)
+  - LiveChat (2.0.24)
   - lottie-ios (3.4.3)
   - Mixpanel-swift (4.0.2):
     - Mixpanel-swift/Complete (= 4.0.2)
@@ -108,6 +109,7 @@ DEPENDENCIES:
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
   - Kingfisher
+  - LiveChat
   - lottie-ios
   - Mixpanel-swift
   - SwiftEntryKit (= 1.2.3)
@@ -128,6 +130,7 @@ SPEC REPOS:
     - GoogleUtilities
     - IQKeyboardManagerSwift
     - Kingfisher
+    - LiveChat
     - lottie-ios
     - Mixpanel-swift
     - nanopb
@@ -150,6 +153,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   Kingfisher: 0086ad83719761ba9b2cdaf6ef4d5b4878cbae23
+  LiveChat: 63028afb59c57ae6771d59838b1097def6e560ed
   lottie-ios: 9ae750cdc7820fecbd3c2f0cfc493038208fcdc4
   Mixpanel-swift: 91fc28834402720682f4cce760e95571fbb388c3
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
@@ -158,6 +162,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLint: 32ee33ded0636d0905ef6911b2b67bbaeeedafa5
 
-PODFILE CHECKSUM: 16b4a64d31f4240fb6bf3aae14ac9c6384f4ce93
+PODFILE CHECKSUM: d0dea8fc881f94cd4daf9f68f3aa1accae0cac7b
 
 COCOAPODS: 1.11.2

@@ -53,25 +53,34 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
         if Server.shared.isLoggedIn()
         {
-            ObjectStore.shared.loadMainContact
-            { [weak self] in
-                guard let self = self else { return }
-                print("Successfully loaded contact during auto-login. Jumping to Onboarding")
-                OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
-                //just clear the splashView after enough time for above fade to complete.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
+            if Reachability.isConnectedToNetwork()
+            {
+                ObjectStore.shared.loadMainContact
+                { [weak self] in
+                    guard let self = self else { return }
+                    print("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                    OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                    //just clear the splashView after enough time for above fade to complete.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
+                    {
+                        self.splashView.alpha = 0.0
+                    }
+                }
+                onFailure:
                 {
-                    self.splashView.alpha = 0.0
+                    print("Unsuccessful at re-logging in. Making user sign-in again")
+                    //fade splash screen in right away since we already spent time trying to load contact from back end
+                    UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
+                    {
+                        self.splashView.alpha = 0.0
+                    }
                 }
             }
-            onFailure:
+            else
             {
-                print("Unsuccessful at re-logging in. Making user sign-in again")
-                //fade splash screen in right away since we already spent time trying to load contact from back end
-                UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
-                {
-                    self.splashView.alpha = 0.0
-                }
+                GenericAlertViewController.presentAlert(in: self, type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Internet Error", comment: "")),
+                                                                                             subtitle: GenericAlertLabelInfo(title: Constants.INTERNET_CONNECTION_STRING, alignment: .center, height: 40.0),
+                                                                                             button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("OK", comment: "")), type: .dark)))
             }
         }
         else
