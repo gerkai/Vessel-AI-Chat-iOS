@@ -973,7 +973,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRZ-ve-OmF" userLabel="Back Button">
-                                <rect key="frame" x="30" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="30" y="44" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="ARL-Ib-HGT"/>
                                     <constraint firstAttribute="height" constant="50" id="ZLC-jX-VkJ"/>
@@ -992,13 +992,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HJ-7f-ZYU">
-                                <rect key="frame" x="30" y="86" width="315" height="39.5"/>
+                                <rect key="frame" x="30" y="130" width="315" height="39.5"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbJ-Np-6pf">
-                                <rect key="frame" x="30" y="145.5" width="316" height="51.5"/>
+                                <rect key="frame" x="30" y="189.5" width="316" height="51.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Please enter your email address below and we'll send an email to reset your password.">
                                         <attributes>
@@ -1068,7 +1068,7 @@
                             <constraint firstItem="3HJ-7f-ZYU" firstAttribute="top" secondItem="jRZ-ve-OmF" secondAttribute="bottom" constant="36" id="SEc-dE-Iny"/>
                             <constraint firstItem="bbJ-Np-6pf" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="Wo9-GO-JUw"/>
                             <constraint firstItem="Bf6-tA-PTx" firstAttribute="trailing" secondItem="iRE-YX-3fa" secondAttribute="trailing" constant="-30" id="Ywm-D6-MyC"/>
-                            <constraint firstItem="jRZ-ve-OmF" firstAttribute="top" secondItem="iRE-YX-3fa" secondAttribute="top" id="hY1-BE-aV0"/>
+                            <constraint firstItem="jRZ-ve-OmF" firstAttribute="top" secondItem="vUf-h1-6SB" secondAttribute="top" constant="44" id="hY1-BE-aV0"/>
                             <constraint firstItem="3HJ-7f-ZYU" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="jmq-Vc-7nV"/>
                             <constraint firstItem="jRZ-ve-OmF" firstAttribute="leading" secondItem="iRE-YX-3fa" secondAttribute="leading" constant="30" id="mXr-AA-wC5"/>
                             <constraint firstItem="bbJ-Np-6pf" firstAttribute="top" secondItem="3HJ-7f-ZYU" secondAttribute="bottom" constant="20" id="nkT-hW-8T4"/>
