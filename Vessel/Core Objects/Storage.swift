@@ -7,6 +7,11 @@
 //  Handles storage and retrieval of core objects to/from disk.
 //  Objects can be saved to the documents directory (backed up by iCloud) or the caches directory
 //  defaults to caches directory if directory not specified by caller.
+//  Path from the caches or documents directory is built as follows:
+//      /[userID]/[environment]/[objectType]/objectID
+//      [environment] will be either /d, /s, or /p for development, staging or production.
+//  A typical path would look like:
+//  .../Caches/2441/d/Result/370316
 
 import Foundation
 
@@ -21,6 +26,20 @@ public class Storage
         
         // Data that can be downloaded again or regenerated should be stored in the <Application_Home>/Library/Caches directory. Examples of files you should put in the Caches directory include database cache files and downloadable content, such as that used by magazine, newspaper, and map applications.
         case caches
+    }
+    
+    static fileprivate func environmentComponent() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return "d"
+            case Constants.STAGING_INDEX:
+                return "s"
+            default:
+                return "p"
+        }
     }
     
     /// Returns URL constructed from specified directory
@@ -39,7 +58,12 @@ public class Storage
         if var url = FileManager.default.urls(for: searchPathDirectory, in: .userDomainMask).first
         {
             //return url
+            
+            let contactID = Contact.MainID
+            url.appendPathComponent("\(contactID)", isDirectory: true)
+            url.appendPathComponent(environmentComponent(), isDirectory: true)
             url.appendPathComponent(objectName, isDirectory: true)
+            print("Storage URL: \(url)")
             return url
         }
         else
@@ -64,7 +88,7 @@ public class Storage
             if !FileManager.default.fileExists(atPath: directoryUrl.path)
             {
                 //create directory
-                try FileManager.default.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: true, attributes: nil)
             }
             let encoder = JSONEncoder()
             
