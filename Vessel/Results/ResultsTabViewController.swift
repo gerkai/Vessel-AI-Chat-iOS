@@ -34,6 +34,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     override func viewWillAppear(_ animated: Bool)
     {
         //show lockout view if there are no test results to display
+        if initialLoad
+        {
+            testsGoalsView.setupGoals()
+        }
         let numResults = viewModel.numberOfResults()
         if numResults == 0
         {
@@ -44,7 +48,6 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             lockoutView.isHidden = true
             if initialLoad
             {
-                testsGoalsView.setupGoals()
                 testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
             }
         }

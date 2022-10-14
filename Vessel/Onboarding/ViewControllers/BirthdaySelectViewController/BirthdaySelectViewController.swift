@@ -124,6 +124,14 @@ extension BirthdaySelectViewController: SelectionCheckmarkViewDelegate
         }
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .beginFromCurrentState)
         {
+            if pickerAlpha == 1.0
+            {
+                self.pickerContainer.isHidden = false
+            }
+            else
+            {
+                self.pickerContainer.isHidden = true
+            }
             self.pickerContainer.alpha = pickerAlpha
         }
         completion:
