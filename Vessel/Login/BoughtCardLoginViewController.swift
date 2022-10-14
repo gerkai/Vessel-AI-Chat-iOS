@@ -48,10 +48,10 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
+        /*if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
         {
             doYouRememberLabel.text = NSLocalizedString("Remember what email you used?", comment: "Short version of 'Do you remember what email you used?")
-        }
+        }*/
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)
