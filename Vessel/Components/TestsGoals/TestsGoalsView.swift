@@ -58,7 +58,11 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         contentView.layoutIfNeeded()
         if isAnimated == false
         {
-            drawLines()
+            //allowing at least one display cycle for lines to be drawn correctly
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.02)
+            {
+                self.drawLines()
+            }
         }
     }
     

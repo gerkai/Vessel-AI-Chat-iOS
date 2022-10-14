@@ -158,6 +158,7 @@ class ResultsTabViewModel
           ReagentResult(id: 1, score: 0.62, value: 7.20, errorCodes: []),
           ReagentResult(id: 11, score: 0.55, value: 12.3, errorCodes: []),
           ReagentResult(id: 18, score: 0.45, value: 67.0, errorCodes: []),
+          ReagentResult(id: 21, score: 0.45, value: 0.90, errorCodes: []),
           ReagentResult(id: 23, score: 0.43, value: 30.0, errorCodes: [])
         ])]
 }

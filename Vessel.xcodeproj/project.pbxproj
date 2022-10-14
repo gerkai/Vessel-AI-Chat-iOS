@@ -140,6 +140,8 @@
 		3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */; };
 		3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369F327C9B34A00231D42 /* BounceButton.swift */; };
 		3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */; };
+		3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEACB1E28FA073600686D79 /* ChartZone.xib */; };
+		3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB2028FA075F00686D79 /* ChartZone.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
@@ -362,6 +364,8 @@
 		3FE369F327C9B34A00231D42 /* BounceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
 		3FE369F527C9B39100231D42 /* VesselButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VesselButton.swift; sourceTree = "<group>"; };
 		3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentDetailsViewController.swift; sourceTree = "<group>"; };
+		3FEACB1E28FA073600686D79 /* ChartZone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartZone.xib; sourceTree = "<group>"; };
+		3FEACB2028FA075F00686D79 /* ChartZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartZone.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -571,6 +575,8 @@
 				3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */,
 				3F426DB628DFA1CA00927B68 /* ChartViewCell.xib */,
 				3F426DB428DFA1CA00927B68 /* GraphView.swift */,
+				3FEACB1E28FA073600686D79 /* ChartZone.xib */,
+				3FEACB2028FA075F00686D79 /* ChartZone.swift */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -1231,6 +1237,7 @@
 				3F59A18828E28715005E5F46 /* GoalLearnMoreTileView.xib in Resources */,
 				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
+				3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */,
 				3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */,
@@ -1369,6 +1376,7 @@
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
+				3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */,
 				728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */,
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,

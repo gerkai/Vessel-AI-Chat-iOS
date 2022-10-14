@@ -153,6 +153,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     {
         let storyboard = UIStoryboard(name: "Results", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ReagentDetailsViewController") as! ReagentDetailsViewController
+        vc.reagentID = id
         navigationController?.pushViewController(vc, animated: true)
     }
 }
