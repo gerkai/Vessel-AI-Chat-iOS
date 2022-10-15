@@ -305,7 +305,7 @@ let Reagents: [Reagent.ID: Reagent] =
             consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
             type: .Colorimetric,
             recommendedDailyAllowance: 90,
-            imageName: "Vitamin C",
+            imageName: "VitaminC",
             buckets: [Bucket(low: 350,
                              high: 1000,
                              score: 100.0,

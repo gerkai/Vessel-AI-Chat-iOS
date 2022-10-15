@@ -34,6 +34,9 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     var selectedCell = 0
     var delegate: ChartViewDelegate?
     
+    //if true, this will draw the tick marks on the right side of the selected cell. Defaults to true.
+    var showScaleOnSelection = true
+    
     override func awakeFromNib()
     {
         collectionView.registerFromNib(ChartViewCell.self)
@@ -105,6 +108,10 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         let wellnessScore = Int((data[2].wellnessScore + 0.005) * 100)
         cell.wellnessScoreLabel.text = "\(wellnessScore)"
         cell.wellnessScore = data[2].wellnessScore
+        if showScaleOnSelection == false
+        {
+            cell.graphView.drawTickMarks = false
+        }
         if let date = Date.from(vesselTime: data[2].last_updated)
         {
             let components = Date.components(for: date)

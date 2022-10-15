@@ -20,6 +20,7 @@ class GraphView: UIView
     let pointRegionSize = 12.0
     let pointSize = 6.0
     let tickWidth = 4.0
+    var drawTickMarks = true
     
     var isSelected = false
     {
@@ -98,7 +99,7 @@ class GraphView: UIView
             }
         
             //draw the tick marks
-            if isSelected
+            if isSelected && drawTickMarks
             {
                 let lineWidth = 2.0
                 context.setLineWidth(lineWidth)

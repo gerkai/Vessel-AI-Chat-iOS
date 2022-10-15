@@ -578,17 +578,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cal-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="5iw-dT-qyA">
-                                <rect key="frame" x="231" y="0.0" width="159" height="99"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Calcium-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="5iw-dT-qyA">
+                                <rect key="frame" x="118" y="0.0" width="272" height="170"/>
                             </imageView>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="ctu-EM-4E5">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4w-zD-Lfo" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="636.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="551"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wellness Score" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-hp-rMm">
-                                                <rect key="frame" x="20" y="121" width="235" height="78.666666666666686"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title (DNT)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-hp-rMm">
+                                                <rect key="frame" x="20" y="120.99999999999999" width="235" height="39.333333333333329"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="235" id="5OM-St-miW"/>
                                                 </constraints>
@@ -597,36 +597,74 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlN-SF-VqG" userLabel="ChartContainer">
-                                                <rect key="frame" x="0.0" y="275.66666666666663" width="390" height="360.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="190.33333333333334" width="390" height="360.66666666666663"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bUY-9y-DWR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="390" height="360.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="390" height="280.66666666666669"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zU-2W-dzX" customClass="ChartZone" customModule="Vessel" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="90.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="70.333333333333329"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzG-u8-8zy" customClass="ChartZone" customModule="Vessel" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="90.333333333333314" width="390" height="90"/>
+                                                                <rect key="frame" x="0.0" y="70.333333333333343" width="390" height="70"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YH0-Ac-p7V" customClass="ChartZone" customModule="Vessel" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="180.33333333333331" width="390" height="90.333333333333314"/>
+                                                                <rect key="frame" x="0.0" y="140.33333333333334" width="390" height="70.333333333333343"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46o-7T-wmr" customClass="ChartZone" customModule="Vessel" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="270.66666666666669" width="390" height="90"/>
+                                                                <rect key="frame" x="0.0" y="210.66666666666666" width="390" height="69.999999999999972"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-fP-yhR" customClass="ChartView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="20" width="390" height="340.66666666666669"/>
+                                                        <subviews>
+                                                            <collectionView contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="scs-5g-T77">
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="340.66666666666669"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="279" id="pEV-ga-qry"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="ci2-eB-OCP">
+                                                                    <size key="itemSize" width="128" height="279"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <variation key="default">
+                                                                    <mask key="constraints">
+                                                                        <exclude reference="pEV-ga-qry"/>
+                                                                    </mask>
+                                                                </variation>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="scs-5g-T77" firstAttribute="leading" secondItem="IzB-fP-yhR" secondAttribute="leading" id="9QB-71-D9b"/>
+                                                            <constraint firstItem="scs-5g-T77" firstAttribute="bottom" secondItem="IzB-fP-yhR" secondAttribute="bottom" id="Drq-Jg-byb"/>
+                                                            <constraint firstItem="scs-5g-T77" firstAttribute="top" secondItem="IzB-fP-yhR" secondAttribute="top" id="eDX-2u-X0A"/>
+                                                            <constraint firstItem="scs-5g-T77" firstAttribute="trailing" secondItem="IzB-fP-yhR" secondAttribute="trailing" id="mOY-l5-sFg"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <outlet property="collectionView" destination="scs-5g-T77" id="iSB-EU-UMS"/>
+                                                        </connections>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="IzB-fP-yhR" firstAttribute="top" secondItem="hlN-SF-VqG" secondAttribute="top" constant="20" id="MSE-3l-f4h"/>
+                                                    <constraint firstItem="IzB-fP-yhR" firstAttribute="leading" secondItem="hlN-SF-VqG" secondAttribute="leading" id="Nio-6D-Ho4"/>
                                                     <constraint firstItem="bUY-9y-DWR" firstAttribute="leading" secondItem="hlN-SF-VqG" secondAttribute="leading" id="QKN-uP-aKn"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bUY-9y-DWR" secondAttribute="trailing" id="QkH-ym-je7"/>
+                                                    <constraint firstItem="bUY-9y-DWR" firstAttribute="trailing" secondItem="hlN-SF-VqG" secondAttribute="trailing" id="QkH-ym-je7"/>
+                                                    <constraint firstItem="IzB-fP-yhR" firstAttribute="trailing" secondItem="hlN-SF-VqG" secondAttribute="trailing" id="cqC-J4-eBz"/>
                                                     <constraint firstItem="bUY-9y-DWR" firstAttribute="top" secondItem="hlN-SF-VqG" secondAttribute="top" id="eiw-Vq-2oQ"/>
-                                                    <constraint firstAttribute="bottom" secondItem="bUY-9y-DWR" secondAttribute="bottom" id="vae-nS-DEQ"/>
+                                                    <constraint firstItem="bUY-9y-DWR" firstAttribute="bottom" secondItem="hlN-SF-VqG" secondAttribute="bottom" constant="-80" id="vae-nS-DEQ"/>
+                                                    <constraint firstItem="IzB-fP-yhR" firstAttribute="bottom" secondItem="hlN-SF-VqG" secondAttribute="bottom" id="zWe-fS-utq"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -636,7 +674,7 @@
                                             <constraint firstAttribute="bottom" secondItem="hlN-SF-VqG" secondAttribute="bottom" id="8J8-y4-SHN"/>
                                             <constraint firstItem="hlN-SF-VqG" firstAttribute="leading" secondItem="F4w-zD-Lfo" secondAttribute="leading" id="Aod-Vn-PmP"/>
                                             <constraint firstItem="bJO-hp-rMm" firstAttribute="top" secondItem="F4w-zD-Lfo" secondAttribute="top" constant="121" id="Xwt-14-hYn"/>
-                                            <constraint firstItem="hlN-SF-VqG" firstAttribute="top" secondItem="bJO-hp-rMm" secondAttribute="bottom" constant="76" id="YGn-4q-C8A"/>
+                                            <constraint firstItem="hlN-SF-VqG" firstAttribute="top" secondItem="bJO-hp-rMm" secondAttribute="bottom" constant="30" id="YGn-4q-C8A"/>
                                             <constraint firstAttribute="trailing" secondItem="hlN-SF-VqG" secondAttribute="trailing" id="lpT-8s-bZ8"/>
                                             <constraint firstItem="hlN-SF-VqG" firstAttribute="height" secondItem="F4w-zD-Lfo" secondAttribute="width" multiplier="0.925" id="xhh-te-96V"/>
                                         </constraints>
@@ -687,7 +725,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chartView" destination="IzB-fP-yhR" id="Fnd-VG-u1t"/>
                         <outlet property="chartZoneStackView" destination="bUY-9y-DWR" id="dib-86-vxW"/>
+                        <outlet property="reagentImageView" destination="5iw-dT-qyA" id="Ey5-JN-UCL"/>
                         <outlet property="scrollView" destination="ctu-EM-4E5" id="b99-PS-tcv"/>
                         <outlet property="titleLabel" destination="bJO-hp-rMm" id="EHZ-XR-rbh"/>
                     </connections>
@@ -703,11 +743,11 @@
         </designable>
     </designables>
     <resources>
+        <image name="Calcium-top-right" width="272" height="170"/>
         <image name="HappyWoman" width="161" height="237"/>
         <image name="PeachGradient" width="1" height="435"/>
         <image name="Results-Icon" width="19" height="18"/>
         <image name="backed_by_science" width="335" height="556"/>
-        <image name="cal-top-right" width="159" height="99"/>
         <image name="happy-girl" width="294.66665649414062" height="444"/>
         <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>

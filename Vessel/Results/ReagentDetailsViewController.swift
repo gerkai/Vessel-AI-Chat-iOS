@@ -7,18 +7,28 @@
 
 import UIKit
 
-class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate
+class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, ChartViewDataSource, ChartViewDelegate
 {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var chartZoneStackView: UIStackView!
+    @IBOutlet weak var chartView: ChartView!
+    @IBOutlet weak var reagentImageView: UIImageView!
+    
     var reagentID: Int!
+    var viewModel: ResultsTabViewModel!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         scrollView.delegate = self
+        chartView.delegate = self
+        chartView.dataSource = self
+        chartView.showScaleOnSelection = false
         configureChartZone()
+        let reagent = Reagents[Reagent.ID(rawValue: reagentID)!]!
+        titleLabel.text = reagent.name
+        reagentImageView.image = UIImage(named: reagent.imageName + "-top-right")
     }
     
     @IBAction func back()
@@ -54,5 +64,31 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate
             view.contentView.backgroundColor = evaluation.color
             view.titleLabel.text = evaluation.title.capitalized
         }
+    }
+    
+    //MARK: - ChartView datasource & delegates
+    func chartViewNumDataPoints() -> Int
+    {
+        return viewModel.numberOfResults()
+    }
+    
+    func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)
+    {
+        var result = viewModel.resultForIndex(i: index)
+        result.result.reagentID = reagentID //so chartView will plot this specific reagent insteae of wellness score
+        return result
+    }
+    
+    func chartViewWhichCellSelected(cellIndex: Int) -> Bool
+    {
+        return cellIndex == viewModel.selectedResultIndex
+    }
+    
+    func ChartViewInfoTapped()
+    {
+    }
+    
+    func chartViewCellSelected(cellIndex: Int)
+    {
     }
 }

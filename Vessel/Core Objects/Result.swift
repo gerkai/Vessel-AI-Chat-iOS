@@ -28,6 +28,9 @@ struct Result: CoreObjectProtocol, Codable
     
     var storage: StorageType = .disk
     
+    //wellness score is the default focus unless reagentID is set, then that reagent will be the focus when charting data
+    var reagentID: Int?
+    
     var wellnessScore: Double
     
     let reagents: [ReagentResult]
