@@ -80,9 +80,12 @@
 		3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */; };
 		3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB428DFA1CA00927B68 /* GraphView.swift */; };
 		3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB528DFA1CA00927B68 /* ChartView.swift */; };
-		3F426DBA28DFA1CA00927B68 /* ChartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F426DB628DFA1CA00927B68 /* ChartViewCell.xib */; };
+		3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F426DB628DFA1CA00927B68 /* ResultsChartCell.xib */; };
 		3F426DBF28DFA2FF00927B68 /* ResultsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */; };
 		3F426DC128DFA33200927B68 /* Results.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F426DC028DFA33200927B68 /* Results.storyboard */; };
+		3F47B48628FB1FAB00D35E97 /* ReagentDetailsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47B48428FB1FAB00D35E97 /* ReagentDetailsChartCell.swift */; };
+		3F47B48728FB1FAB00D35E97 /* ReagentDetailsChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */; };
+		3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
 		3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */; };
@@ -298,9 +301,12 @@
 		3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		3F426DB428DFA1CA00927B68 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		3F426DB528DFA1CA00927B68 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		3F426DB628DFA1CA00927B68 /* ChartViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartViewCell.xib; sourceTree = "<group>"; };
+		3F426DB628DFA1CA00927B68 /* ResultsChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsChartCell.xib; sourceTree = "<group>"; };
 		3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTabViewController.swift; sourceTree = "<group>"; };
 		3F426DC028DFA33200927B68 /* Results.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Results.storyboard; sourceTree = "<group>"; };
+		3F47B48428FB1FAB00D35E97 /* ReagentDetailsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentDetailsChartCell.swift; sourceTree = "<group>"; };
+		3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentDetailsChartCell.xib; sourceTree = "<group>"; };
+		3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsChartCell.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		3F4C59492877CEC10088F03A /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessScoreViewController.swift; sourceTree = "<group>"; };
@@ -573,10 +579,13 @@
 			children = (
 				3F426DB528DFA1CA00927B68 /* ChartView.swift */,
 				3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */,
-				3F426DB628DFA1CA00927B68 /* ChartViewCell.xib */,
-				3F426DB428DFA1CA00927B68 /* GraphView.swift */,
-				3FEACB1E28FA073600686D79 /* ChartZone.xib */,
 				3FEACB2028FA075F00686D79 /* ChartZone.swift */,
+				3FEACB1E28FA073600686D79 /* ChartZone.xib */,
+				3F426DB428DFA1CA00927B68 /* GraphView.swift */,
+				3F47B48428FB1FAB00D35E97 /* ReagentDetailsChartCell.swift */,
+				3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */,
+				3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */,
+				3F426DB628DFA1CA00927B68 /* ResultsChartCell.xib */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -774,11 +783,11 @@
 		3FE369F227C9B34A00231D42 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3F426DB228DFA1CA00927B68 /* ChartView */,
-				721B6BAB2899FBBF0099BC4A /* GenericAlert */,
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
+				3F426DB228DFA1CA00927B68 /* ChartView */,
 				72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */,
 				72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */,
+				721B6BAB2899FBBF0099BC4A /* GenericAlert */,
 				3F12F04C287DD61400FCC52E /* IconCheckmarkView.swift */,
 				3F12F04D287DD61400FCC52E /* IconCheckmarkView.xib */,
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
@@ -1213,12 +1222,13 @@
 				3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */,
 				3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */,
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
-				3F426DBA28DFA1CA00927B68 /* ChartViewCell.xib in Resources */,
+				3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
 				3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */,
+				3F47B48728FB1FAB00D35E97 /* ReagentDetailsChartCell.xib in Resources */,
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
@@ -1399,6 +1409,7 @@
 				3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
+				3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */,
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
@@ -1414,6 +1425,7 @@
 				3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				72384F3628E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift in Sources */,
+				3F47B48628FB1FAB00D35E97 /* ReagentDetailsChartCell.swift in Sources */,
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,

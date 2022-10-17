@@ -25,8 +25,10 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         chartView.delegate = self
         chartView.dataSource = self
         chartView.showScaleOnSelection = false
+        chartView.chartType = .reagentDetails
+        chartView.reagentID = reagentID
         configureChartZone()
-        let reagent = Reagents[Reagent.ID(rawValue: reagentID)!]!
+        let reagent = Reagent.fromID(id: reagentID)
         titleLabel.text = reagent.name
         reagentImageView.image = UIImage(named: reagent.imageName + "-top-right")
     }
@@ -45,7 +47,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     func configureChartZone()
     {
         //assumes stackView starts with the maximum number of ChartZone subviews
-        let reagent = Reagents[Reagent.ID(rawValue: reagentID)!]!
+        let reagent = Reagent.fromID(id: reagentID)
         let numBuckets = reagent.buckets.count
         let numViews = chartZoneStackView.arrangedSubviews.count
         
@@ -74,9 +76,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)
     {
-        var result = viewModel.resultForIndex(i: index)
-        result.result.reagentID = reagentID //so chartView will plot this specific reagent insteae of wellness score
-        return result
+        return viewModel.resultForIndex(i: index)
     }
     
     func chartViewWhichCellSelected(cellIndex: Int) -> Bool

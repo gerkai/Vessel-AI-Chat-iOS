@@ -27,25 +27,46 @@ protocol ChartViewDelegate
 
 class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ChartViewCellDelegate
 {
+    enum type
+    {
+        case wellnessScore
+        case reagentDetails
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var dataSource: ChartViewDataSource!
     
-    let cellWidth = 74.0
     var selectedCell = 0
     var delegate: ChartViewDelegate?
+    var reagentID: Int?
     
     //if true, this will draw the tick marks on the right side of the selected cell. Defaults to true.
     var showScaleOnSelection = true
+    var chartType = type.wellnessScore
     
     override func awakeFromNib()
     {
-        collectionView.registerFromNib(ChartViewCell.self)
+        collectionView.registerFromNib(ResultsChartCell.self)
+        collectionView.registerFromNib(ReagentDetailsChartCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
+    func cellWidth() -> CGFloat
+    {
+        if chartType == .wellnessScore
+        {
+            return 74.0
+        }
+        else
+        {
+            return 110.0
+        }
+    }
+    
     func refresh()
     {
+        //print("ChartView: refresh()")
         collectionView.reloadData()
         collectionView.contentOffset = CGPoint(x: collectionView.contentSize.width - frame.width, y: 0)
         let numCells = dataSource.chartViewNumDataPoints()
@@ -61,6 +82,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
+       // print("ScrollViewDidScroll: \(scrollView.contentOffset.x)")
         let numCells = dataSource.chartViewNumDataPoints()
         if numCells != 0
         {
@@ -86,7 +108,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: cellWidth, height: collectionView.frame.height)
+        return CGSize(width: cellWidth(), height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -96,18 +118,59 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
+        //print("cellForItemAt")
         let numCells = dataSource.chartViewNumDataPoints()
         let currentRow = numCells - indexPath.row - 1
 
-        let cell: ChartViewCell = collectionView.dequeueCell(for: indexPath)
+        var cell: ChartViewCell!
+        let data = fetchDataPointsFor(index: currentRow)
+        
+        if chartType == .wellnessScore
+        {
+            let resultsCell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ResultsChartCell", for: indexPath) as! ResultsChartCell)
+            cell = resultsCell
+            cell.score = data[2].wellnessScore
+        }
+        else
+        {
+            let reagentDetailsCell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ReagentDetailsChartCell", for: indexPath) as! ReagentDetailsChartCell)
+            cell = reagentDetailsCell
+            
+            let reagent = Reagent.fromID(id: reagentID!)
+            
+            //get number of buckets in this reagent
+            let numBuckets = reagent.buckets.count
+            
+            //determine which bucket this result falls into
+            var result: ReagentResult?
+            
+            for dataResult in data[2].reagentResults
+            {
+                if dataResult.id == reagentID
+                {
+                    result = dataResult
+                    break
+                }
+            }
+            if result != nil
+            {
+                if let index = reagent.getBucketIndex(value: result!.value)
+                {
+                    //y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
+                    //let y = CGFloat(index) / CGFloat(numBuckets)
+                    reagentDetailsCell.setTextUnitAndYPosition(text: reagent.rangeFor(value: result!.value), unit: reagent.unit, bucket: index, numBuckets: numBuckets)
+                }
+            }
+        }
         cell.tag = numCells - indexPath.row - 1
         cell.delegate = self
-        cell.select(selectionIntent: dataSource.chartViewWhichCellSelected(cellIndex: cell.tag))
-        let data = fetchDataPointsFor(index: currentRow)
         cell.graphView.data = data
-        let wellnessScore = Int((data[2].wellnessScore + 0.005) * 100)
-        cell.wellnessScoreLabel.text = "\(wellnessScore)"
-        cell.wellnessScore = data[2].wellnessScore
+        cell.graphView.reagentID = reagentID
+        //time delay of at least 1 display cycle ensures proper subview frame positioning of cell
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) //w/o this, infoLabel in wrong spot
+        {
+            cell.select(selectionIntent: self.dataSource.chartViewWhichCellSelected(cellIndex: cell.tag))
+        }
         if showScaleOnSelection == false
         {
             cell.graphView.drawTickMarks = false

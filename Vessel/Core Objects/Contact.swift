@@ -76,9 +76,9 @@ class Contact: CoreObjectProtocol
              categories: [],
              image_url: "https://i0.wp.com/homesteadandchill.com/wp-content/uploads/2020/05/how-to-grow-avocado-trees-ripe-fruit-1.jpeg?w=2048",
              reagents: [
-                Reagents[Reagent.ID(rawValue: 11)!]!,
-                Reagents[Reagent.ID(rawValue: 5)!]!,
-                Reagents[Reagent.ID(rawValue: 4)!]!,
+                Reagent.fromID(id: 11),
+                Reagent.fromID(id: 5),
+                Reagent.fromID(id: 4)
              ]),
         Food(id: 1,
              last_updated: 0,
@@ -91,9 +91,9 @@ class Contact: CoreObjectProtocol
              categories: [],
              image_url: "https://i.ibb.co/tq5kfzW/Grapefruit.png",
              reagents: [
-                Reagents[Reagent.ID(rawValue: 3)!]!,
-                Reagents[Reagent.ID(rawValue: 21)!]!,
-                Reagents[Reagent.ID(rawValue: 2)!]!,
+                Reagent.fromID(id: 3),
+                Reagent.fromID(id: 21),
+                Reagent.fromID(id: 2)
              ]),
         Food(id: 2,
              last_updated: 0,
@@ -106,9 +106,9 @@ class Contact: CoreObjectProtocol
              categories: [],
              image_url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/stuffed-mushrooms-vertical-jpg-1525207616.jpg",
              reagents: [
-                Reagents[Reagent.ID(rawValue: 1)!]!,
-                Reagents[Reagent.ID(rawValue: 8)!]!,
-                Reagents[Reagent.ID(rawValue: 22)!]!,
+                Reagent.fromID(id: 1),
+                Reagent.fromID(id: 8),
+                Reagent.fromID(id: 22)
              ]),
         Food(id: 3,
              last_updated: 0,
@@ -121,8 +121,8 @@ class Contact: CoreObjectProtocol
              categories: [],
              image_url: "https://cdn.greatlifepublishing.net/wp-content/uploads/sites/2/2021/05/03121529/Israeli-Red-Cabbage-Salad-Vertical-1-678x1024.jpg",
              reagents: [
-                Reagents[Reagent.ID(rawValue: 3)!]!,
-                Reagents[Reagent.ID(rawValue: 18)!]!,
+                Reagent.fromID(id: 3),
+                Reagent.fromID(id: 18)
              ]),
     ]
     

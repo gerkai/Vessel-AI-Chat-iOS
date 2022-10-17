@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+        <array key="NoeText.otf">
+            <string>NoeText</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="ReagentDetailsChartCell" id="KSd-38-tea" customClass="ReagentDetailsChartCell" customModule="Vessel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="110" height="255"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="C6r-rE-ym7">
+                <rect key="frame" x="0.0" y="0.0" width="110" height="255"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7o-ox-OaE">
+                        <rect key="frame" x="6" y="193" width="98" height="62"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="42v-nd-Mwh">
+                                <rect key="frame" x="0.0" y="0.0" width="98" height="62"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="tap" destination="KSd-38-tea" eventType="touchUpInside" id="mxr-Mc-f1n"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRu-WB-kcB">
+                                <rect key="frame" x="16" y="16" width="22.666666666666671" height="11"/>
+                                <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="11"/>
+                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lv8-yn-a6l">
+                                <rect key="frame" x="15.000000000000002" y="31" width="17.666666666666671" height="16"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.70153145695364238" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="62" id="6w3-35-xua"/>
+                            <constraint firstAttribute="height" constant="62" id="8U4-Jh-sD1"/>
+                            <constraint firstItem="42v-nd-Mwh" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" id="BbP-U7-OlF"/>
+                            <constraint firstItem="Lv8-yn-a6l" firstAttribute="bottom" secondItem="m7o-ox-OaE" secondAttribute="bottom" constant="-15" id="MAD-tN-WxJ"/>
+                            <constraint firstItem="cRu-WB-kcB" firstAttribute="bottom" secondItem="Lv8-yn-a6l" secondAttribute="top" constant="-4" id="UVV-Fg-g8g"/>
+                            <constraint firstItem="Lv8-yn-a6l" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" constant="15" id="XVD-bC-8BD"/>
+                            <constraint firstItem="cRu-WB-kcB" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" constant="16" id="ckc-e2-po3"/>
+                            <constraint firstItem="42v-nd-Mwh" firstAttribute="trailing" secondItem="m7o-ox-OaE" secondAttribute="trailing" id="nOc-FY-e8u"/>
+                            <constraint firstItem="42v-nd-Mwh" firstAttribute="top" secondItem="m7o-ox-OaE" secondAttribute="top" id="oQM-xY-8Eu"/>
+                            <constraint firstItem="42v-nd-Mwh" firstAttribute="bottom" secondItem="m7o-ox-OaE" secondAttribute="bottom" id="xhg-WW-4uC"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6w3-35-xua"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8e-4u-I1l" customClass="GraphView" customModule="Vessel" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="110" height="175"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-XB-7eb">
+                        <rect key="frame" x="6" y="63" width="98" height="37"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l51-bx-a82">
+                                <rect key="frame" x="16" y="-0.6666666666666643" width="66" height="38.666666666666664"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-fF-25G">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="22.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="20"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label (DNT)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xi1-Bg-aWw">
+                                        <rect key="frame" x="0.0" y="26.666666666666664" width="66" height="12"/>
+                                        <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="12"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zk9-kn-DTa">
+                                <rect key="frame" x="0.0" y="0.0" width="98" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="f0x-vw-pjE"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="infoTap" destination="KSd-38-tea" eventType="touchUpInside" id="NAn-Q4-BG7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.36444301770682863" green="0.99140563840481721" blue="1" alpha="0.15105028973509935" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="l51-bx-a82" firstAttribute="leading" secondItem="Mol-XB-7eb" secondAttribute="leading" constant="16" id="JCd-8F-Tag"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="top" secondItem="Mol-XB-7eb" secondAttribute="top" id="MWQ-sF-uia"/>
+                            <constraint firstItem="l51-bx-a82" firstAttribute="trailing" secondItem="Mol-XB-7eb" secondAttribute="trailing" constant="-16" id="NvG-kb-aBS"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="trailing" secondItem="Mol-XB-7eb" secondAttribute="trailing" id="OQ9-R9-RuN"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="leading" secondItem="Mol-XB-7eb" secondAttribute="leading" id="dcQ-fz-cUf"/>
+                            <constraint firstItem="l51-bx-a82" firstAttribute="centerY" secondItem="Mol-XB-7eb" secondAttribute="centerY" id="oJv-RH-Bjx"/>
+                            <constraint firstAttribute="height" constant="37" id="txn-o9-QIN"/>
+                            <constraint firstItem="Zk9-kn-DTa" firstAttribute="bottom" secondItem="Mol-XB-7eb" secondAttribute="bottom" id="zb9-WU-Rh9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="s8e-4u-I1l" firstAttribute="trailing" secondItem="C6r-rE-ym7" secondAttribute="trailing" id="62c-pe-yjX"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="leading" secondItem="m7o-ox-OaE" secondAttribute="leading" id="DjJ-Sv-IEc"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="bottom" secondItem="s8e-4u-I1l" secondAttribute="top" constant="100" id="KlR-78-4iH"/>
+                    <constraint firstItem="m7o-ox-OaE" firstAttribute="bottom" secondItem="C6r-rE-ym7" secondAttribute="bottom" id="LLv-1O-M97"/>
+                    <constraint firstItem="s8e-4u-I1l" firstAttribute="top" secondItem="C6r-rE-ym7" secondAttribute="top" id="Ts2-X5-bYW"/>
+                    <constraint firstItem="s8e-4u-I1l" firstAttribute="leading" secondItem="C6r-rE-ym7" secondAttribute="leading" id="cyd-yC-w0K"/>
+                    <constraint firstItem="m7o-ox-OaE" firstAttribute="centerX" secondItem="C6r-rE-ym7" secondAttribute="centerX" id="dqO-uf-TmC"/>
+                    <constraint firstItem="Mol-XB-7eb" firstAttribute="trailing" secondItem="m7o-ox-OaE" secondAttribute="trailing" id="gV3-Aj-QkC"/>
+                    <constraint firstItem="m7o-ox-OaE" firstAttribute="width" secondItem="C6r-rE-ym7" secondAttribute="width" constant="-12" id="jHR-BL-xix"/>
+                    <constraint firstItem="s8e-4u-I1l" firstAttribute="bottom" secondItem="C6r-rE-ym7" secondAttribute="bottom" constant="-80" id="vS6-kD-7no"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="110" height="255"/>
+            <connections>
+                <outlet property="dayLabel" destination="Lv8-yn-a6l" id="7gb-0R-O4A"/>
+                <outlet property="frostedView" destination="m7o-ox-OaE" id="40V-Zb-c7u"/>
+                <outlet property="graphView" destination="s8e-4u-I1l" id="LdK-Zl-MCn"/>
+                <outlet property="infoHeight" destination="8U4-Jh-sD1" id="jg3-KQ-ejv"/>
+                <outlet property="infoView" destination="Mol-XB-7eb" id="gdu-pB-bFJ"/>
+                <outlet property="monthLabel" destination="cRu-WB-kcB" id="OY8-sP-HrI"/>
+                <outlet property="reagentUnit" destination="xi1-Bg-aWw" id="qTy-ub-ixj"/>
+                <outlet property="scoreLabel" destination="jJf-fF-25G" id="T8m-T8-rMq"/>
+                <outlet property="scoreLabelYPosition" destination="KlR-78-4iH" id="zqM-lB-1ri"/>
+            </connections>
+            <point key="canvasLocation" x="76.92307692307692" y="60.78199052132701"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -78,7 +78,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     func setupReagents(forResult result: Result, selectedReagentID: Reagent.ID)
     {
         testsStackView.removeAllArrangedSubviews()
-        for reagentResult in result.reagents
+        for reagentResult in result.reagentResults
         {
             if let reagentID = Reagent.ID(rawValue: reagentResult.id)
             {

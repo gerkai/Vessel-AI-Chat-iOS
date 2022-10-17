@@ -22,7 +22,9 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         chartView.delegate = self
         testsGoalsView.delegate = self
         super.viewDidLoad()
+        //get notified when new result comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataFromServer, object: nil)
+        //get notified if food preferences changes (specifically ketones which changes color of ketone tile)
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
     }
     
@@ -51,10 +53,6 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
             }
         }
-       
-        //let result = viewModel.resultForIndex(i: 0)
-        //let dict = ["objectType": String(describing: type(of: result.self))]
-        //NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: dict)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -89,6 +87,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     func refresh()
     {
+        //print("ResultTabVC refresh()")
         viewModel.refresh() //loads latest results
         chartView.refresh() //reloads collectionView. Selects last cell.
         let numResults = viewModel.numberOfResults()

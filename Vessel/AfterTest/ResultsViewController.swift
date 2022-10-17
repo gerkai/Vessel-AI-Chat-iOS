@@ -226,14 +226,15 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //populate stackViews with new reagent tiles
         //set their alpha to 0 so they remain invisible while the layout engine places them in the correct location.
-        for i in 0 ..< testResult.reagents.count
+        for i in 0 ..< testResult.reagentResults.count
         {
             let reagentView = ReagentTileView()
             let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
             reagentView.addConstraints([heightConstraint])
             reagentView.alpha = 0.0
-            let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
-            let value = testResult.reagents[i].value
+            let reagent = Reagent.fromID(id: testResult.reagentResults[i].id)
+            //let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
+            let value = testResult.reagentResults[i].value
             let evaluation = reagent.getEvaluation(value: value)
             
             reagentView.titleLabel.text = reagent.name
@@ -432,7 +433,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //used for test/debug
         
-        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.73, insert_date: "2022-09-24T15:22:14", reagents: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.73, insert_date: "2022-09-24T15:22:14", reagentResults: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
                                                                         ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
                                                                         ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
                                                                         ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),

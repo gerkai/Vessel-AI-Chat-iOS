@@ -21,10 +21,12 @@ class GraphView: UIView
     let pointSize = 6.0
     let tickWidth = 4.0
     var drawTickMarks = true
+    var reagentID: Int?
+    var regionHeight: CGFloat = 0.0
     
     var isSelected = false
     {
-        //if isSelected, we'll draw a circle selection dot and tick marks. Else draw solid dot and no tick marks
+        //if isSelected, we'll draw a circle selection dot (and tick marks if drawTickMarks == true). Else draw solid dot and no tick marks
         didSet
         {
             setNeedsDisplay()
@@ -41,11 +43,50 @@ class GraphView: UIView
     
     func coordFor(index: Int) -> CGPoint
     {
-        //shrink Y drawable area by pointRegionSize so that we don't clip selected dot
         let x = CGFloat(index - 2) * frame.width + (frame.width / 2)
-        let range = data[index].wellnessScore * (bounds.height - pointRegionSize)
-        let y = bounds.height - pointRegionSize / 2 - range
-        return CGPoint(x: x, y: y)
+        var y = -1.0
+        
+        if let reagentID = reagentID
+        {
+            //put Y coordinate in center of zone
+            
+            //get the reagent associated with reagentID
+            let reagent = Reagent.fromID(id: reagentID)
+            
+            //get number of buckets in this reagent
+            let numBuckets = reagent.buckets.count
+            
+            //calculate zone height
+            let zoneHeight = frame.height / CGFloat(numBuckets)
+            
+            //determine which bucket this result falls into
+            var result: ReagentResult?
+            
+            for dataResult in data[index].reagentResults
+            {
+                if dataResult.id == reagentID
+                {
+                    result = dataResult
+                    break
+                }
+            }
+            if result != nil
+            {
+                if let index = reagent.getBucketIndex(value: result!.value)
+                {
+                    y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
+                }
+            }
+            
+            return CGPoint(x: x, y: y)
+        }
+        else
+        {
+            //shrink Y drawable area by pointRegionSize so that we don't clip selected dot
+            let range = data[index].wellnessScore * (bounds.height - pointRegionSize)
+            let y = bounds.height - pointRegionSize / 2 - range
+            return CGPoint(x: x, y: y)
+        }
     }
     
     override func draw(_ rect: CGRect)
@@ -137,7 +178,7 @@ class GraphView: UIView
         }
     }
     
-    func quadCurvedPath(_ path: UIBezierPath, side: GraphSide)// -> UIBezierPath
+    func quadCurvedPath(_ path: UIBezierPath, side: GraphSide)
     {
         //default to points for left side
         var p1 = coordFor(index: 0)

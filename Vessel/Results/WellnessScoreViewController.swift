@@ -24,13 +24,13 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
         //stackView comes pre-populated with a single lineView. Remove it and add it back later.
         let lineView = stackView.arrangedSubviews[0]
         stackView.removeArrangedSubview(lineView)
-        for reagentResult in result.reagents
+        for reagentResult in result.reagentResults
         {
             let scoreView = ReagentScoreView()
             let heightConstraint = NSLayoutConstraint(item: scoreView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: scoreViewHeight)
             scoreView.addConstraints([heightConstraint])
             scoreView.score = reagentResult.score
-            let reagent = Reagents[Reagent.ID(rawValue: reagentResult.id)!]!
+            let reagent = Reagent.fromID(id: reagentResult.id)
             scoreView.nameLabel.text = reagent.name
             scoreView.imageView.image = UIImage(named: reagent.imageName)
             let evaluation = reagent.getEvaluation(value: reagentResult.value)
