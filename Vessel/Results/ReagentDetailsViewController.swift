@@ -16,6 +16,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBOutlet weak var reagentImageView: UIImageView!
     @IBOutlet weak var resultTitleLabel: UILabel!
     @IBOutlet weak var resultTextLabel: UILabel!
+    @IBOutlet weak var scienceStackview: UIStackView!
     @IBOutlet weak var scienceLabel: UILabel!
     
     var reagentID: Int!
@@ -130,5 +131,28 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         let reagent = Reagent.fromID(id: reagentID)
         let string = String(format: NSLocalizedString("Below are peer-reviewed scientific studies on how %@ might affect you.", comment: ""), reagent.name.capitalized)
         scienceLabel.text = string
+        scienceStackview.removeAllArrangedSubviews() //remove placeholder
+        
+        for item in reagent.goalSources
+        {
+            let count = item.sources.count
+            var studiesView: ScienceStudiesView!
+            
+            if count == 1
+            {
+                studiesView = ScienceStudiesView(goalName: Goals[item.goalID]!.name.capitalized, studies: NSLocalizedString("1 study", comment: ""))
+            }
+            else
+            {
+                studiesView = ScienceStudiesView(goalName: Goals[item.goalID]!.name.capitalized, studies: String(format: NSLocalizedString("%i studies", comment: "number of studies"), count))
+            }
+            //let heightConstraint = NSLayoutConstraint(item: studiesView!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 60)
+                   // NSLayoutConstraint.activate([heightConstraint])
+            
+            let heightConstraint = NSLayoutConstraint(item: studiesView!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 60.0)
+            studiesView.addConstraints([heightConstraint])
+            
+            scienceStackview.addArrangedSubview(studiesView)
+        }
     }
 }
