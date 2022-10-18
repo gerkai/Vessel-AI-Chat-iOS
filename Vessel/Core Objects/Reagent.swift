@@ -116,10 +116,10 @@ struct Bucket
     let high: Double
     let score: Float
     let evaluation: Evaluation
-    let hint: BucketHint
+    let hint: TitleDescription
 }
 
-struct BucketHint
+struct TitleDescription
 {
     let title: String
     let description: String
@@ -163,6 +163,7 @@ struct Reagent
     var buckets: [Bucket]
     var goalImpacts: [GoalImpact]
     var goalSources: [GoalSources]
+    var moreInfo: [TitleDescription]
     
     //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
     //returns .notAvailable if invalid parameter given

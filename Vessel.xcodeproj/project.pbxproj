@@ -127,6 +127,8 @@
 		3F9C67B428FF011300BC44FA /* StudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B328FF011300BC44FA /* StudiesViewController.swift */; };
 		3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */; };
 		3F9C67B828FF1C4E00BC44FA /* SourceInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */; };
+		3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B928FF3E7E00BC44FA /* ExpandableContentView.swift */; };
+		3F9C67BC28FF3EC000BC44FA /* ExpandableContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C67BB28FF3EC000BC44FA /* ExpandableContentView.xib */; };
 		3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */; };
 		3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */; };
 		3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */; };
@@ -365,6 +367,8 @@
 		3F9C67B328FF011300BC44FA /* StudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiesViewController.swift; sourceTree = "<group>"; };
 		3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceInfoView.swift; sourceTree = "<group>"; };
 		3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceInfoView.xib; sourceTree = "<group>"; };
+		3F9C67B928FF3E7E00BC44FA /* ExpandableContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpandableContentView.swift; path = Vessel/Components/ExpandableContentView.swift; sourceTree = SOURCE_ROOT; };
+		3F9C67BB28FF3EC000BC44FA /* ExpandableContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpandableContentView.xib; sourceTree = "<group>"; };
 		3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlreadyScannedSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalibrationErrorSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadErrorSlideupViewController.swift; sourceTree = "<group>"; };
@@ -676,17 +680,17 @@
 		3F9C679C28FE5FE700BC44FA /* Reagents */ = {
 			isa = PBXGroup;
 			children = (
-				3F9C679D28FE5FE700BC44FA /* PH.swift */,
-				3F9C67A128FE60EE00BC44FA /* Ketones.swift */,
-				3F9C67A928FE61D000BC44FA /* VitaminB7.swift */,
-				3F9C67AF28FE625100BC44FA /* Leukocyte.swift */,
-				3F9C67B128FE627B00BC44FA /* Sodium.swift */,
-				3F9C67AD28FE622A00BC44FA /* Nitrite.swift */,
 				3F9C67AB28FE61FB00BC44FA /* Calcium.swift */,
 				3F9C67A728FE61A200BC44FA /* Cortisol.swift */,
-				3F9C67A528FE616700BC44FA /* Magnesium.swift */,
-				3F9C67A328FE613700BC44FA /* VitaminC.swift */,
+				3F9C67A128FE60EE00BC44FA /* Ketones.swift */,
 				3F9C679F28FE608A00BC44FA /* Hydration.swift */,
+				3F9C67AF28FE625100BC44FA /* Leukocyte.swift */,
+				3F9C67A528FE616700BC44FA /* Magnesium.swift */,
+				3F9C67AD28FE622A00BC44FA /* Nitrite.swift */,
+				3F9C679D28FE5FE700BC44FA /* PH.swift */,
+				3F9C67B128FE627B00BC44FA /* Sodium.swift */,
+				3F9C67A928FE61D000BC44FA /* VitaminB7.swift */,
+				3F9C67A328FE613700BC44FA /* VitaminC.swift */,
 			);
 			path = Reagents;
 			sourceTree = "<group>";
@@ -840,6 +844,8 @@
 			children = (
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
 				3F426DB228DFA1CA00927B68 /* ChartView */,
+				3F9C67B928FF3E7E00BC44FA /* ExpandableContentView.swift */,
+				3F9C67BB28FF3EC000BC44FA /* ExpandableContentView.xib */,
 				72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */,
 				72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */,
 				721B6BAB2899FBBF0099BC4A /* GenericAlert */,
@@ -1312,6 +1318,7 @@
 				3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
 				721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */,
+				3F9C67BC28FF3EC000BC44FA /* ExpandableContentView.xib in Resources */,
 				3F15ACF8288C5421004716CA /* test_result_flow_p2.json in Resources */,
 				3F12F04F287DD61400FCC52E /* IconCheckmarkView.xib in Resources */,
 				3FE369E027C9A74B00231D42 /* BananaGrotesk-Semibold.otf in Resources */,
@@ -1499,6 +1506,7 @@
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
+				3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
