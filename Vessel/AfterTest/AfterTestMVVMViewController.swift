@@ -25,6 +25,14 @@ class AfterTestMVVMViewController: UIViewController
         self.viewModel = vm
     }
     
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
+    }
+    
     func back()
     {
         viewModel.back()
@@ -46,6 +54,25 @@ class AfterTestMVVMViewController: UIViewController
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HydroQuizViewController") as! HydroQuizViewController
             vc.viewModel = viewModel
+            vc.transition = result.transition
+            vc.backTransition = self.transition
+            
+            if transition == .fade
+            {
+                navigationController?.fadeTo(vc)
+            }
+            else
+            {
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        else if result.isReagentFood
+        {
+            let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ReagentFoodViewController") as! ReagentFoodViewController
+            vc.viewModel = viewModel
+            vc.titleText = result.title
+            vc.reagentId = result.reagentId
             vc.transition = result.transition
             vc.backTransition = self.transition
             
@@ -86,11 +113,15 @@ class AfterTestMVVMViewController: UIViewController
         }
     }
     
-    deinit
+    func addFoodsToPlan(onComplete complete: @escaping () -> Void)
     {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("📘 deinit \(self)")
+        viewModel.addFoodsToPlan
+        { [weak self] in
+            self?.nextScreen()
+            complete()
+        } onFailure: { error in
+            UIView.showError(text: "", detailText: error)
+            complete()
         }
     }
 }

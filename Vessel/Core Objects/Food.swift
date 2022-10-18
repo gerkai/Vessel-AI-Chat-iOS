@@ -7,46 +7,82 @@
 
 import Foundation
 
-struct Food: Equatable
+struct Food: Equatable, Decodable
 {
     var id: Int
-    var last_updated: Int
+    var lastUpdated: Double?
     var title: String
-    var serving_quantity: Double
-    var serving_unit: String
-    var serving_grams: Double
-    var popularity: Int
-    var usda_ndb_number: Int
-    var categories: [String]
-    var image_url: String
-    var reagents: [Reagent]
+    var servingQuantity: Double?
+    var servingUnit: String?
+    var servingGrams: Double?
+    var popularity: Int?
+    var usda_ndb_number: Int?
+    var categories: [String]?
+    var imageUrl: String?
+    var nutrients: [Nutrient]?
+    var allergyIds: [Int]?
     
-    internal init(id: Int, last_updated: Int, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String, reagents: [Reagent])
+    internal init(id: Int, last_updated: Double, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String)
     {
         self.id = id
-        self.last_updated = last_updated
+        self.lastUpdated = last_updated
         self.title = title
-        self.serving_quantity = serving_quantity
-        self.serving_unit = serving_unit
-        self.serving_grams = serving_grams
+        self.servingQuantity = serving_quantity
+        self.servingUnit = serving_unit
+        self.servingGrams = serving_grams
         self.popularity = popularity
         self.usda_ndb_number = usda_ndb_number
         self.categories = categories
-        self.image_url = image_url
-        self.reagents = reagents
+        self.imageUrl = image_url
     }
     
     static func == (lhs: Food, rhs: Food) -> Bool
     {
         return lhs.id == rhs.id &&
-        lhs.last_updated == rhs.last_updated &&
+        lhs.lastUpdated == rhs.lastUpdated &&
         lhs.title == rhs.title &&
-        lhs.serving_quantity == rhs.serving_quantity &&
-        lhs.serving_unit == rhs.serving_unit &&
-        lhs.serving_grams == rhs.serving_grams &&
+        lhs.servingQuantity == rhs.servingQuantity &&
+        lhs.servingUnit == rhs.servingUnit &&
+        lhs.servingGrams == rhs.servingGrams &&
         lhs.popularity == rhs.popularity &&
         lhs.usda_ndb_number == rhs.usda_ndb_number &&
         lhs.categories == rhs.categories &&
-        lhs.image_url == rhs.image_url
+        lhs.imageUrl == rhs.imageUrl
+    }
+    
+    enum CodingKeys: CodingKey
+    {
+        case id
+        case lastUpdated
+        case title
+        case servingQuantity
+        case servingUnit
+        case servingGrams
+        case popularity
+        case usda_ndb_number
+        case categories
+        case imageUrl
+        case nutrients
+        case allergyIds
+    }
+}
+
+struct Nutrient: Decodable, Equatable
+{
+    var id: Int
+    var name: String
+    var foodId: Int
+    var quantity: Double
+    var reagentId: Int?
+    var servingGrams: Int
+    
+    enum CodingKeys: CodingKey
+    {
+        case id
+        case name
+        case foodId
+        case quantity
+        case reagentId
+        case servingGrams
     }
 }

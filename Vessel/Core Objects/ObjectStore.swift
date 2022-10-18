@@ -36,6 +36,12 @@ struct ObjectReq: Codable
     var last_updated: Int
 }
 
+struct AllObjectReq: Codable
+{
+    var type: String
+    var last_updated: Int
+}
+
 class ObjectStore: NSObject
 {
     static let shared = ObjectStore()
@@ -85,6 +91,11 @@ class ObjectStore: NSObject
         }
     }
     
+    /*func loadAllFoods(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    {
+        
+    }*/
+    
     func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
     {
         if let object = objectFromCache(of: type, id: id)
@@ -127,6 +138,50 @@ class ObjectStore: NSObject
                 print(error)
                 failure()
             }
+        }
+    }
+    
+    func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        /*if let object = objectFromCache(of: type, id: id)
+        {
+            success(object)
+        }
+        else if let object = Storage.retrieve(id, as: type )
+        {
+            success(object)
+        }
+        else
+        {*/
+        let name = String(describing: T.self).lowercased()
+        
+        Server.shared.getAllObjects(objects: AllObjectReq(type: name, last_updated: 0))
+        { objectDict in
+            if let values = objectDict[name] as? [[String: Any]]
+            {
+                do
+                {
+                    let json = try JSONSerialization.data(withJSONObject: values)
+                    let decoder = JSONDecoder()
+                    
+                    let objects = try decoder.decode([T].self, from: json)
+                    success(objects)
+                }
+                catch
+                {
+                    print(error)
+                    failure()
+                }
+            }
+            else
+            {
+                failure()
+            }
+        }
+        onFailure:
+        { error in
+            print(error)
+            failure()
         }
     }
     

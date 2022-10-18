@@ -10,6 +10,7 @@
 import Foundation
 import Security
 
+// MARK: - PATHS
 let ENDPOINT_ROOT = "v3/"
 
 //Environment Constants
@@ -61,7 +62,14 @@ let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}"
 let OBJECT_SAVE_PATH = "objects/save"
 let OBJECT_GET_PATH = "objects/get"
+let OBJECT_ALL_PATH = "objects/all"
+let REAGENT_FOOD_RECOMMENDATIONS_PATH = "recommendations/food/reagent"
+let GET_PLANS_PATH = "plan"
+let ADD_NEW_SINGLE_PLAN_PATH = "plan"
+let ADD_NEW_MULTIPLE_PLAN_PATH = "plan/build"
+let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
 
+// MARK: - Structs
 struct CardAssociation
 {
     var cardBatchID: String?
@@ -76,6 +84,7 @@ struct ServerError
     var moreInfo: String?
 }
 
+// MARK: - Server Class
 class Server: NSObject
 {
     static let shared = Server()
@@ -83,6 +92,7 @@ class Server: NSObject
     var accessToken: String?
     var refreshToken: String?
     
+    // MARK: - URLs and Keys
     func API() -> String
     {
         let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
@@ -153,20 +163,921 @@ class Server: NSObject
         }
     }
     
+    func SupportURL() -> String
+    {
+        return SUPPORT_URL
+    }
+    
+    func appleLoginURL() -> String
+    {
+        return "\(API())\(APPLE_LOGIN_PATH)"
+    }
+    
+    func appleRetrieveURL() -> String
+    {
+        return "\(API())\(APPLE_RETRIEVE_PATH)"
+    }
+    
+    func googleLoginURL() -> String
+    {
+        return "\(API())\(GOOGLE_LOGIN_PATH)"
+    }
+    
+    func googleRetrieveURL() -> String
+    {
+        return "\(API())\(GOOGLE_RETRIEVE_PATH)"
+    }
+    
+    //MARK: - Authentication
+    func isLoggedIn() -> Bool
+    {
+        //if we have a stored access token, then we're assumed to be logged in
+        if accessToken == nil
+        {
+            //see if we have one stored in the keychain...
+            if let data = KeychainHelper.standard.read(service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+            {
+                accessToken = String(data: data, encoding: .utf8)!
+            }
+            if let data = KeychainHelper.standard.read(service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+            {
+                refreshToken = String(data: data, encoding: .utf8)!
+            }
+            if let stringID = KeychainHelper.standard.read(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT, type: String.self)
+            {
+                if let id = Int(stringID)
+                {
+                    Contact.MainID = id
+                }
+                else
+                {
+                    print("Couldn't convert main ID: \(stringID)")
+                }
+            }
+        }
+        return (accessToken != nil) && (Contact.MainID != 0)
+    }
+    
+    func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String: Any]) -> Void)
+    {
+        var dictPostBody = [String: String]()
+        dictPostBody["email"] = email
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_FORGOT_PASSWORD_PATH)")
+        { object in
+            if let message = object["message"] as? String
+            {
+                success(message)
+            }
+            else
+            {
+                success("")
+            }
+        }
+        onFailure:
+        { message in
+            failure(["Failure": NSLocalizedString("Server Error", comment: "")])
+        }
+    }
+    
+    func login(email: String, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    {
+        var dictPostBody = [String: String]()
+        dictPostBody["email"] = email
+        dictPostBody["password"] = password
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
+        { object in
+            if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                let mainContactID = object[CONTACT_ID_KEY] as? Int
+            {
+                Contact.MainID = mainContactID
+                
+                self.accessToken = accessToken
+                self.refreshToken = refreshToken
+                //save tokens to keychain
+                let accessData = Data(accessToken.utf8)
+                KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                let refreshData = Data(refreshToken.utf8)
+                KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                let string = "\(mainContactID)"
+                KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+                
+                DispatchQueue.main.async()
+                {
+                    success()
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async()
+                {
+                    failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
+                }
+            }
+        }
+        onFailure:
+        { string in
+            DispatchQueue.main.async()
+            {
+                failure(string)
+            }
+        }
+    }
+    
+    //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
+    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
+        let request = Server.shared.GenerateRequest(urlString: url)!
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Any]
+                {
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
+                    {
+                        Contact.MainID = mainContactID
+                        
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
+                        
+                        let accessData = Data(accessToken.utf8)
+                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                        let refreshData = Data(refreshToken.utf8)
+                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+                        DispatchQueue.main.async()
+                        {
+                            success()
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
+                        //let error = Error(domain: "", code: 400, userInfo: nil)
+                        failure(error)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
+                    failure(error)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        }
+    }
+    
+    /* send the refresh token, get back a new access and refresh token */
+    func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
+        let request = URLRequest(url: url)
+        
+        var mutableRequest = request
+        mutableRequest.httpMethod = "POST"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        mutableRequest.setValue("\(AUTH_PREFIX) \(refreshToken!)", forHTTPHeaderField: AUTH_KEY)
+        
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let data = data //unwrap data
+            {
+                do
+                {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let object = json as? [String: Any]
+                    {
+                        if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                        {
+                            self.accessToken = accessToken
+                            let accessData = Data(accessToken.utf8)
+                            KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                            success()
+                        }
+                    }
+                }
+                catch
+                {
+                    failure(error)
+                }
+            }
+            /*if let data = data //unwrap data
+            {
+               
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+//CW: Put a breakpoint here to see json response from server
+                if let object = json as? [String: Any]
+                {
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                    {
+                        
+                    }
+                }
+                print("Need to handle new tokens here")
+                self.debugJSONResponse(data: data)
+                success(data)
+            }
+            else
+            {
+                failure(error)
+            }*/
+        }.resume()
+    }
+    
+    func invalidateAccessToken()
+    {
+        accessToken = "Bogus Token"
+        let accessData = Data(accessToken!.utf8)
+        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+        print("Invalidated access token")
+    }
+    
+    func logOut()
+    {
+        print("logout() deleting keychain tokens")
+        if accessToken != nil
+        {
+            //let accessData = Data(accessToken!.utf8)
+            KeychainHelper.standard.delete(service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+            accessToken = nil
+        }
+        if refreshToken != nil
+        {
+            KeychainHelper.standard.delete(service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+            refreshToken = nil
+        }
+        
+        Contact.reset()
+    }
+    
+    func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CHANGE_PASSWORD_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let params = [
+            "current_password": oldPassword,
+            "new_password": newPassword
+        ]
+        let data = try! encoder.encode(params)
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            if let message = ((object["schema_errors"] as? [String: Any])?["new_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            if let message = ((object["schema_errors"] as? [String: Any])?["current_password"] as? [String])?[safe: 0]
+            {
+                DispatchQueue.main.async()
+                    {
+                        failure(message)
+                    }
+            }
+            guard let message = object["message"] as? String else { return }
+            if message == "Updated."
+            {
+                DispatchQueue.main.async()
+                {
+                    success()
+                }
+            }
+            else
+            {   DispatchQueue.main.async()
+                {
+                    failure(message)
+                }
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    //MARK: Contact
+    ///will return true if contact e-mail exists on back end
+    func contactExists(email: String, onSuccess success: @escaping (_ exists: Bool) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    {
+        var dictPostBody = [String: String]()
+        dictPostBody["email"] = email
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(CONTACT_EXISTS_PATH)")
+        { object in
+            if let exists = object["exists"] as? Bool
+            {
+                DispatchQueue.main.async()
+                {
+                    success(exists)
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async()
+                {
+                    failure("ContactExists: Unexpected Server Response")
+                }
+            }
+        }
+        onFailure:
+        { message in
+            failure(NSLocalizedString("Server Error", comment: ""))
+        }
+    }
+    
+    func createContact(contact: Contact, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CONTACT_CREATE_PATH)"
+        
+        if var contactDict = contact.dictionary
+        {
+            contactDict.removeValue(forKey: "id")
+            contactDict["password"] = password
+            do
+            {
+                let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
+                
+                let Url = String(format: url)
+                guard let serviceUrl = URL(string: Url) else { return }
+                var request = URLRequest(url: serviceUrl)
+                request.httpBody = jsonData
+                
+                //send it to server
+                serverPost(request: request, onSuccess:
+                { (object) in
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
+                    {
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
+                        Contact.MainID = mainContactID
+
+                        let accessData = Data(accessToken.utf8)
+                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
+                        let refreshData = Data(refreshToken.utf8)
+                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+
+                        DispatchQueue.main.async()
+                        {
+                            success()
+                        }
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
+                        }
+                    }
+                },
+                onFailure:
+                { (serverError) in
+                    DispatchQueue.main.async()
+                    {
+                        failure(serverError.description)
+                    }
+                })
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func deleteAccount(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(DELETE_ACCOUNT_PATH)"
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        let request = URLRequest(url: serviceUrl)
+        
+        //send it to server
+        serverDelete(request: request, onSuccess:
+        {
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    //MARK: Foods
+    func getAllFoods(onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        getAllObjects(objects: AllObjectReq(type: "food", last_updated: 1))
+        { dict in
+            do
+            {
+                guard let foodDict = dict["food"] as? [[String: Any]] else { return }
+                let json = try JSONSerialization.data(withJSONObject: foodDict)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let decodedFoods = try decoder.decode([Food].self, from: json)
+                DispatchQueue.main.async()
+                {
+                    success(decodedFoods)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get all foods response", comment: "Server error message")])
+                    failure(error.localizedDescription)
+                }
+            }
+        } onFailure: { error in
+            failure(error)
+        }
+    }
+    
+    func getFoodsForReagent(reagentId: Int, onSuccess success: @escaping ([ReagentFood]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let urlString = "\(API())\(REAGENT_FOOD_RECOMMENDATIONS_PATH)"
+        guard let request = Server.shared.GenerateRequest(urlString: urlString, withParams: ["reagent_id": "\(reagentId)"]) else
+        {
+            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+            failure(error.localizedDescription)
+            return
+        }
+        
+        serverGet(request: request) { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let foodResult = try? decoder.decode(ReagentFoodResponse.self, from: data)
+                {
+                    DispatchQueue.main.async()
+                    {
+                        success(foodResult.foodResponse)
+                    }
+                }
+                else if let object = json as? [String: Any]
+                {
+                    DispatchQueue.main.async()
+                    {
+                        if let message = object["message"] as? String
+                        {
+                            if let errorArray = object["errors"] as? [[String: Any]]
+                            {
+                                if let firstErrorArray = errorArray.first
+                                {
+                                    let code = firstErrorArray["code"] as? Int
+                                    let label = firstErrorArray["label"] as? String
+                                    let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                    failure(error.localizedDescription)
+                                }
+                            }
+                            else
+                            {
+                                let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                                failure(error.localizedDescription)
+                            }
+                        }
+                        else
+                        {
+                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                            failure(error.localizedDescription)
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                        failure(error.localizedDescription)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+                    failure(error.localizedDescription)
+                }
+            }
+        } onFailure: { error in
+            failure(error?.localizedDescription ?? "")
+        }
+    }
+    
+    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    {
+        let url = "\(API())\(OBJECT_SAVE_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objects)
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    // MARK: Plan
+    func getPlans(onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let urlString = "\(API())\(GET_PLANS_PATH)"
+        guard let request = Server.shared.GenerateRequest(urlString: urlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to get plans response", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        serverGet(request: request) { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let plansResult = try? decoder.decode(PlanResponse.self, from: data)
+                {
+                    DispatchQueue.main.async()
+                    {
+                        success(plansResult.plans)
+                    }
+                }
+                else if let object = json as? [String: Any]
+                {
+                    DispatchQueue.main.async()
+                    {
+                        if let message = object["message"] as? String
+                        {
+                            if let errorArray = object["errors"] as? [[String: Any]]
+                            {
+                                if let firstErrorArray = errorArray.first
+                                {
+                                    let code = firstErrorArray["code"] as? Int
+                                    let label = firstErrorArray["label"] as? String
+                                    let error = ServerError(code: code ?? 0, description: label ?? "unknown")
+                                    failure(error)
+                                }
+                            }
+                            else
+                            {
+                                let error = ServerError(code: 404, description: message)
+                                failure(error)
+                            }
+                        }
+                        else
+                        {
+                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                            failure(error)
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                        failure(error)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        } onFailure: { error in
+            let error = ServerError(code: 400, description: error?.localizedDescription ?? "")
+            failure(error)
+        }
+    }
+    
+    func addSinglePlan(plan: Plan, onSuccess success: @escaping (_ plan: Plan) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(plan)
+        
+        let urlString = "\(API())\(ADD_NEW_SINGLE_PLAN_PATH)"
+        
+        guard let url = URL(string: urlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to add new plan to contact", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (planDict) in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: planDict)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let decodedPlan = try decoder.decode(Plan.self, from: json)
+                DispatchQueue.main.async()
+                {
+                    success(decodedPlan)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    func addMultiplePlans(plans: MultiplePlans, onSuccess success: @escaping (_ plans: [Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(plans)
+        
+        let urlString = "\(API())\(ADD_NEW_MULTIPLE_PLAN_PATH)"
+        
+        guard let url = URL(string: urlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to add new plan to contact", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (plansDict) in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: plansDict)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let multiplePlansResponse = try decoder.decode(PlanResponse.self, from: json)
+                
+                DispatchQueue.main.async()
+                {
+                    success(multiplePlansResponse.plans)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    func completePlan(planId: Int, toggleData: TogglePlanData, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let urlString = "\(API())\(TOGGLE_PLAN_PATH)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(toggleData)
+        let Url = String(format: finalUrlString)
+        
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        serverPost(request: request, onSuccess:
+        { (object) in
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    //MARK:  Sample
+    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(parameters)
+        
+        let urlString = "\(API())\(SAMPLE_PATH)"
+        
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            DispatchQueue.main.async()
+            {
+                let cardAssociation = CardAssociation(cardBatchID: object["wellness_card_batch_id"] as? String, cardCalibrationMode: object["wellness_card_calibration_mode"] as? String, orcaSheetName: object["orca_sheet_name"] as? String)
+                success(cardAssociation)
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    func getScore(sampleID: String, onSuccess success: @escaping (_ result: Result) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        let urlString = "\(API())\(GET_SCORE_PATH)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
+        let request = Server.shared.GenerateRequest(urlString: finalUrlString)!
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                
+                if let testResult = try? JSONDecoder().decode(Result.self, from: data)
+                {
+                    DispatchQueue.main.async()
+                    {
+                        success(testResult)
+                    }
+                }
+                else
+                if let object = json as? [String: Any]
+                {
+                    DispatchQueue.main.async()
+                    {
+                        if let message = object["message"] as? String
+                        {
+                            if let errorArray = object["errors"] as? [[String: Any]]
+                            {
+                                if let firstErrorArray = errorArray.first
+                                {
+                                    let code = firstErrorArray["code"] as? Int
+                                    let label = firstErrorArray["label"] as? String
+                                    let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                    failure(error)
+                                }
+                            }
+                            else
+                            {
+                                let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                                failure(error)
+                            }
+                        }
+                        else
+                        {
+                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
+                            failure(error)
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
+                        failure(error)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get score response", comment: "Server error message")])
+                    failure(error)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        }
+    }
+    
+    // MARK: - Utils
     func allowDebugPrint() -> Bool
     {
         return UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_NETWORK_TRAFFIC)
     }
     
-    func SupportURL() -> String
-    {
-        return SUPPORT_URL
-    }
-
     func GenerateRequest(urlString: String) -> URLRequest?
     {
-        guard let serviceUrl = URL(string: urlString) else { return nil}
+        guard let serviceUrl = URL(string: urlString) else { return nil }
         return URLRequest(url: serviceUrl)
+    }
+    
+    func GenerateRequest(urlString: String, withParams params: [String: String]) -> URLRequest?
+    {
+        guard var components = URLComponents(string: urlString) else { return nil }
+        components.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        guard let url = components.url else { return nil }
+        return URLRequest(url: url)
     }
     
     private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
@@ -228,10 +1139,7 @@ class Server: NSObject
             mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
         }
         mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        /*if let url = request.url
-        {
-            print("DELETE: \(url)")
-        }*/
+        
         if allowPrint
         {
             if let url = request.url
@@ -368,187 +1276,6 @@ class Server: NSObject
         }
     }
     
-    /* send the refresh token, get back a new access and refresh token */
-    func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
-        let request = URLRequest(url: url)
-        
-        var mutableRequest = request
-        mutableRequest.httpMethod = "POST"
-        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        mutableRequest.setValue("\(AUTH_PREFIX) \(refreshToken!)", forHTTPHeaderField: AUTH_KEY)
-        
-        //print("\(mutableRequest)")
-        let session = URLSession.shared
-        session.dataTask(with: mutableRequest)
-        { (data, response, error) in
-            if let data = data //unwrap data
-            {
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let object = json as? [String: Any]
-                    {
-                        if let accessToken = object[ACCESS_TOKEN_KEY] as? String
-                        {
-                            self.accessToken = accessToken
-                            let accessData = Data(accessToken.utf8)
-                            KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                            success()
-                        }
-                    }
-                }
-                catch
-                {
-                    let string = String.init(data: data, encoding: .utf8)
-                    print("ERROR: \(string ?? "Unknown")")
-                    failure(error)
-                }
-            }
-            /*if let data = data //unwrap data
-            {
-               
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-//CW: Put a breakpoint here to see json response from server
-                if let object = json as? [String: Any]
-                {
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String
-                    {
-                        
-                    }
-                }
-                print("Need to handle new tokens here")
-                self.debugJSONResponse(data: data)
-                success(data)
-            }
-            else
-            {
-                failure(error)
-            }*/
-        }.resume()
-    }
-    
-    func appleLoginURL() -> String
-    {
-        return "\(API())\(APPLE_LOGIN_PATH)"
-    }
-    
-    func appleRetrieveURL() -> String
-    {
-        return "\(API())\(APPLE_RETRIEVE_PATH)"
-    }
-    
-    func googleLoginURL() -> String
-    {
-        return "\(API())\(GOOGLE_LOGIN_PATH)"
-    }
-    
-    func googleRetrieveURL() -> String
-    {
-        return "\(API())\(GOOGLE_RETRIEVE_PATH)"
-    }
-    
-    //MARK: - Public functions
-    
-    func isLoggedIn() -> Bool
-    {
-        //if we have a stored access token, then we're assumed to be logged in
-        if accessToken == nil
-        {
-            //see if we have one stored in the keychain...
-            if let data = KeychainHelper.standard.read(service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-            {
-                accessToken = String(data: data, encoding: .utf8)!
-            }
-            if let data = KeychainHelper.standard.read(service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-            {
-                refreshToken = String(data: data, encoding: .utf8)!
-            }
-            if let stringID = KeychainHelper.standard.read(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT, type: String.self)
-            {
-                if let id = Int(stringID)
-                {
-                    Contact.MainID = id
-                }
-                else
-                {
-                    print("Couldn't convert main ID: \(stringID)")
-                }
-            }
-        }
-        return (accessToken != nil) && (Contact.MainID != 0)
-    }
-    
-    func forgotPassword(email: String, onSuccess success: @escaping (_ message: String) -> Void, onFailure failure: @escaping (_ object: [String: Any]) -> Void)
-    {
-        var dictPostBody = [String: String]()
-        dictPostBody["email"] = email
-        
-        postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_FORGOT_PASSWORD_PATH)")
-        { object in
-            if let message = object["message"] as? String
-            {
-                success(message)
-            }
-            else
-            {
-                success("")
-            }
-        }
-        onFailure:
-        { message in
-            failure(["Failure": NSLocalizedString("Server Error", comment: "")])
-        }
-    }
-    
-    func login(email: String, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
-    {
-        var dictPostBody = [String: String]()
-        dictPostBody["email"] = email
-        dictPostBody["password"] = password
-        
-        postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
-        { object in
-            if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
-                let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
-                let mainContactID = object[CONTACT_ID_KEY] as? Int
-            {
-                Contact.MainID = mainContactID
-                
-                self.accessToken = accessToken
-                self.refreshToken = refreshToken
-                //save tokens to keychain
-                let accessData = Data(accessToken.utf8)
-                KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                let refreshData = Data(refreshToken.utf8)
-                KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                let string = "\(mainContactID)"
-                KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
-                
-                DispatchQueue.main.async()
-                {
-                    success()
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async()
-                {
-                    failure(NSLocalizedString("This email and password combination is incorrect", comment: ""))
-                }
-            }
-        }
-        onFailure:
-        { string in
-            DispatchQueue.main.async()
-            {
-                failure(string)
-            }
-        }
-    }
-    
     private func debugJSONResponse(data: Data)
     {
         do
@@ -558,194 +1285,7 @@ class Server: NSObject
         }
     }
     
-    //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
-    func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        let url = isGoogle ? googleRetrieveURL() : appleRetrieveURL()
-        let request = Server.shared.GenerateRequest(urlString: url)!
-        serverGet(request: request)
-        { data in
-            do
-            {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                if let object = json as? [String: Any]
-                {
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
-                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
-                       let mainContactID = object[CONTACT_ID_KEY] as? Int
-                    {
-                        Contact.MainID = mainContactID
-                        
-                        self.accessToken = accessToken
-                        self.refreshToken = refreshToken
-                        
-                        let accessData = Data(accessToken.utf8)
-                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                        let refreshData = Data(refreshToken.utf8)
-                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                        let string = "\(mainContactID)"
-                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
-                        DispatchQueue.main.async()
-                        {
-                            success()
-                        }
-                    }
-                }
-                else
-                {
-                    DispatchQueue.main.async()
-                    {
-                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
-                        //let error = Error(domain: "", code: 400, userInfo: nil)
-                        failure(error)
-                    }
-                }
-            }
-            catch
-            {
-                DispatchQueue.main.async()
-                {
-                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode access token", comment: "Server error message")])
-                    failure(error)
-                }
-            }
-        }
-        onFailure:
-        { error in
-            DispatchQueue.main.async()
-            {
-                failure(error)
-            }
-        }
-    }
-    
-    func logOut()
-    {
-        print("logout() deleting keychain tokens")
-        if accessToken != nil
-        {
-            //let accessData = Data(accessToken!.utf8)
-            KeychainHelper.standard.delete(service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-            accessToken = nil
-        }
-        if refreshToken != nil
-        {
-            KeychainHelper.standard.delete(service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-            refreshToken = nil
-        }
-        
-        Contact.reset()
-    }
-    
-    func invalidateAccessToken()
-    {
-        accessToken = "Bogus Token"
-        let accessData = Data(accessToken!.utf8)
-        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-        print("Invalidated access token")
-    }
-    
-    //MARK:  Contact
-    
-    ///will return true if contact e-mail exists on back end
-    func contactExists(email: String, onSuccess success: @escaping (_ exists: Bool) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
-    {
-        var dictPostBody = [String: String]()
-        dictPostBody["email"] = email
-        
-        postToServer(dictBody: dictPostBody, url: "\(API())\(CONTACT_EXISTS_PATH)")
-        { object in
-            if let exists = object["exists"] as? Bool
-            {
-                DispatchQueue.main.async()
-                {
-                    success(exists)
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async()
-                {
-                    failure("ContactExists: Unexpected Server Response")
-                }
-            }
-        }
-        onFailure:
-        { message in
-            failure(NSLocalizedString("Server Error", comment: ""))
-        }
-    }
-    
-    func createContact(contact: Contact, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(CONTACT_CREATE_PATH)"
-        
-        if var contactDict = contact.dictionary
-        {
-            contactDict.removeValue(forKey: "id")
-            contactDict["password"] = password
-            do
-            {
-                let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
-                let jsonString = String(data: jsonData, encoding: .utf8)!
-                print(jsonString)
-                
-                let Url = String(format: url)
-                guard let serviceUrl = URL(string: Url) else { return }
-                var request = URLRequest(url: serviceUrl)
-                request.httpBody = jsonData
-                
-                //send it to server
-                serverPost(request: request, onSuccess:
-                { (object) in
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
-                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
-                       let mainContactID = object[CONTACT_ID_KEY] as? Int
-                    {
-                        self.accessToken = accessToken
-                        self.refreshToken = refreshToken
-                        Contact.MainID = mainContactID
-
-                        let accessData = Data(accessToken.utf8)
-                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
-                        let refreshData = Data(refreshToken.utf8)
-                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
-                        let string = "\(mainContactID)"
-                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
-
-                        DispatchQueue.main.async()
-                        {
-                            success()
-                        }
-                    }
-                    else
-                    {
-                        DispatchQueue.main.async()
-                        {
-                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
-                        }
-                    }
-                },
-                onFailure:
-                { (serverError) in
-                    DispatchQueue.main.async()
-                    {
-                        failure(serverError.description)
-                    }
-                })
-            }
-            catch
-            {
-                print(error.localizedDescription)
-                DispatchQueue.main.async()
-                {
-                    failure(error.localizedDescription)
-                }
-            }
-        }
-    }
-    //MARK: - Object get / save
-    
+    //MARK: Object get / save
     func getObjects(objects: [SpecificObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         var objectDict: [String: [ObjectReq]] = [:]
@@ -765,8 +1305,6 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(objectDict)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
         var request = URLRequest(url: serviceUrl)
@@ -784,22 +1322,20 @@ class Server: NSObject
         { (string) in
             DispatchQueue.main.async()
             {
-                print("SERVER ERROR: \(string)")
                 failure(NSLocalizedString("Server Error", comment: ""))
             }
         })
     }
     
-    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    func getAllObjects(objects: AllObjectReq, onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        let url = "\(API())\(OBJECT_SAVE_PATH)"
-
+        var objectDict: [String: [String: Int]] = [:]
+        objectDict[objects.type] = ["last_updated": objects.last_updated]
+        
+        let url = "\(API())\(OBJECT_ALL_PATH)"
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(objects)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
-        
+        let data = try! encoder.encode(objectDict)
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
         var request = URLRequest(url: serviceUrl)
@@ -807,10 +1343,10 @@ class Server: NSObject
         
         //send it to server
         serverPost(request: request, onSuccess:
-        { (object) in
+        { (data) in
             DispatchQueue.main.async()
             {
-                success()
+                success(data)
             }
         },
         onFailure:
@@ -820,204 +1356,6 @@ class Server: NSObject
                 failure(NSLocalizedString("Server Error", comment: ""))
             }
         })
-    }
-    
-    // MARK: Delete Account
-    func deleteAccount(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(DELETE_ACCOUNT_PATH)"
-        
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        let request = URLRequest(url: serviceUrl)
-        
-        //send it to server
-        serverDelete(request: request, onSuccess:
-        {
-            DispatchQueue.main.async()
-            {
-                success()
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }
-
-    func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(CHANGE_PASSWORD_PATH)"
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let params = [
-            "current_password": oldPassword,
-            "new_password": newPassword
-        ]
-        let data = try! encoder.encode(params)
-        /*let jsonString = String(data: data, encoding: .utf8)!
-        print(jsonString)*/
-        
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpBody = data
-        
-        //send it to server
-        serverPost(request: request, onSuccess:
-        { (object) in
-            if let message = ((object["schema_errors"] as? [String: Any])?["new_password"] as? [String])?[safe: 0]
-            {
-                DispatchQueue.main.async()
-                    {
-                        failure(message)
-                    }
-            }
-            if let message = ((object["schema_errors"] as? [String: Any])?["current_password"] as? [String])?[safe: 0]
-            {
-                DispatchQueue.main.async()
-                    {
-                        failure(message)
-                    }
-            }
-            guard let message = object["message"] as? String else { return }
-            if message == "Updated."
-            {
-                DispatchQueue.main.async()
-                {
-                    success()
-                }
-            }
-            else
-            {   DispatchQueue.main.async()
-                {
-                    failure(message)
-                }
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }
-    
-    //MARK:  Sample
-    func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(parameters)
-        
-        let urlString = "\(API())\(SAMPLE_PATH)"
-        
-        let url = URL(string: urlString)!
-        
-        var request = URLRequest(url: url)
-        request.httpBody = data
-        //send it to server
-        serverPost(request: request, onSuccess:
-        { (object) in
-            //print("SUCCESS: \(object)")
-            DispatchQueue.main.async()
-            {
-                let cardAssociation = CardAssociation(cardBatchID: object["wellness_card_batch_id"] as? String, cardCalibrationMode: object["wellness_card_calibration_mode"] as? String, orcaSheetName: object["orca_sheet_name"] as? String)
-                success(cardAssociation)
-            }
-        },
-        onFailure:
-        { (error) in
-            DispatchQueue.main.async()
-            {
-                failure(error)
-            }
-        })
-    }
-    
-    func getScore(sampleID: String, onSuccess success: @escaping (_ result: Result) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        let urlString = "\(API())\(GET_SCORE_PATH)"
-        let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
-        let request = Server.shared.GenerateRequest(urlString: finalUrlString)!
-        serverGet(request: request)
-        { data in
-            do
-            {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                
-               // print("JSON: \(json)")
-                
-                if let testResult = try? JSONDecoder().decode(Result.self, from: data)
-                {
-                    //print ("Test Result: \(testResult)")
-                    DispatchQueue.main.async()
-                    {
-                        success(testResult)
-                    }
-                }
-                else
-                if let object = json as? [String: Any]
-                {
-                    DispatchQueue.main.async()
-                    {
-                        if let message = object["message"] as? String
-                        {
-                            if let errorArray = object["errors"] as? [[String: Any]]
-                            {
-                                if let firstErrorArray = errorArray.first
-                                {
-                                    //print("First Error Array: \(firstErrorArray)")
-                                    let code = firstErrorArray["code"] as? Int
-                                    let label = firstErrorArray["label"] as? String
-                                    let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
-                                    failure(error)
-                                }
-                            }
-                            else
-                            {
-                                let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
-                                failure(error)
-                            }
-                        }
-                        else
-                        {
-                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
-                            failure(error)
-                        }
-                    }
-                }
-                else
-                {
-                    DispatchQueue.main.async()
-                    {
-                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode score response", comment: "Server error message")])
-                        failure(error)
-                    }
-                }
-            }
-            catch
-            {
-                print(error)
-                DispatchQueue.main.async()
-                {
-                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get score response", comment: "Server error message")])
-                    failure(error)
-                }
-            }
-        }
-        onFailure:
-        { error in
-            DispatchQueue.main.async()
-            {
-                failure(error)
-            }
-        }
     }
 }
 

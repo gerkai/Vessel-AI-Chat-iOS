@@ -64,8 +64,14 @@ class Contact: CoreObjectProtocol
     private var _enrolled_program_ids: [Int]?
     var dailyWaterIntake: Int?
     var drinkedWaterGlasses: Int?
-    var suggestedFoods: [Food]? = [
-        Food(id: 0,
+    
+    var suggestedFoods: [Food]
+    {
+        let foodIds = PlansManager.shared.plans.compactMap { $0.foodId }
+        let foods = FoodManager.shared.foods.filter { foodIds.contains($0.id) }
+        return foods
+    }
+        /*Food(id: 0,
              last_updated: 0,
              title: "Avocado",
              serving_quantity: 1.0,
@@ -124,7 +130,7 @@ class Contact: CoreObjectProtocol
                 Reagents[Reagent.ID(rawValue: 3)!]!,
                 Reagents[Reagent.ID(rawValue: 18)!]!,
              ]),
-    ]
+    ]*/
     
     @Resolved private var analytics: Analytics
 
