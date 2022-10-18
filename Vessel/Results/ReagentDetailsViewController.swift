@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, ChartViewDataSource, ChartViewDelegate
+class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, ChartViewDataSource, ChartViewDelegate, ScienceStudiesViewDelegate
 {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -140,19 +140,23 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
             
             if count == 1
             {
-                studiesView = ScienceStudiesView(goalName: Goals[item.goalID]!.name.capitalized, studies: NSLocalizedString("1 study", comment: ""))
+                studiesView = ScienceStudiesView(goalID: item.goalID, studies: NSLocalizedString("1 study", comment: ""))
             }
             else
             {
-                studiesView = ScienceStudiesView(goalName: Goals[item.goalID]!.name.capitalized, studies: String(format: NSLocalizedString("%i studies", comment: "number of studies"), count))
+                studiesView = ScienceStudiesView(goalID: item.goalID, studies: String(format: NSLocalizedString("%i studies", comment: "number of studies"), count))
             }
-            //let heightConstraint = NSLayoutConstraint(item: studiesView!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 60)
-                   // NSLayoutConstraint.activate([heightConstraint])
             
             let heightConstraint = NSLayoutConstraint(item: studiesView!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 60.0)
             studiesView.addConstraints([heightConstraint])
-            
+            studiesView.delegate = self
             scienceStackview.addArrangedSubview(studiesView)
         }
+    }
+    
+    //MARK: - ScienceStudiesViewDelegates
+    func didSelectStudy(buttonID: Int)
+    {
+        print("Selected study: \(buttonID)")
     }
 }

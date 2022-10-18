@@ -54,11 +54,20 @@
                         <constraint firstAttribute="width" constant="9" id="QSV-HI-grc"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUY-Rp-TgJ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="buttonPressed" destination="-1" eventType="touchUpInside" id="k1r-ZC-PqF"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.98306709530000003" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="f7L-2c-Nhs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3MA-E5-CqK"/>
+                <constraint firstItem="pUY-Rp-TgJ" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="5EW-uO-PS0"/>
+                <constraint firstItem="pUY-Rp-TgJ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Bhq-a5-EKl"/>
                 <constraint firstItem="mxC-gr-hns" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="28" id="KJU-5F-8M7"/>
                 <constraint firstItem="IsE-Xp-9sr" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="PKN-kB-Y2b"/>
                 <constraint firstItem="DMz-fw-gM7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RjM-bk-yJS"/>
@@ -66,7 +75,9 @@
                 <constraint firstItem="f7L-2c-Nhs" firstAttribute="leading" secondItem="mxC-gr-hns" secondAttribute="trailing" constant="16" id="WRR-1o-t7D"/>
                 <constraint firstItem="DMz-fw-gM7" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-24" id="beP-4S-4sp"/>
                 <constraint firstAttribute="bottom" secondItem="mxC-gr-hns" secondAttribute="bottom" constant="18" id="guN-0K-4pd"/>
+                <constraint firstItem="pUY-Rp-TgJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hhd-gc-LZK"/>
                 <constraint firstItem="DMz-fw-gM7" firstAttribute="leading" secondItem="IsE-Xp-9sr" secondAttribute="trailing" constant="20" id="nmy-zm-YMo"/>
+                <constraint firstItem="pUY-Rp-TgJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vhO-Vx-blm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
@@ -74,7 +85,7 @@
                     <integer key="value" value="22"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="8.4615384615384617" y="328.79146919431275"/>
+            <point key="canvasLocation" x="8.4615384615384617" y="328.43601895734594"/>
         </view>
     </objects>
     <resources>

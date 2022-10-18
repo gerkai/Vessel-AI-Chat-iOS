@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ScienceStudiesViewDelegate
+{
+    func didSelectStudy(buttonID: Int)
+}
+
 class ScienceStudiesView: UIView
 {
     @IBOutlet weak var contentView: UIView!
@@ -15,13 +20,15 @@ class ScienceStudiesView: UIView
     
     var goal: String
     var numStudies: String
+    var delegate: ScienceStudiesViewDelegate?
     
-    init(goalName: String, studies: String)
+    init(goalID: Goal.ID, studies: String)
     {
-        goal = goalName
+        goal = Goals[goalID]!.name.capitalized
         numStudies = studies
         let frame = CGRect(x: 0, y: 0, width: 120, height: 60)
         super.init(frame: frame)
+        tag = goalID.rawValue
         commonInit()
     }
     
@@ -39,5 +46,10 @@ class ScienceStudiesView: UIView
         self.backgroundColor = .clear
         goalLabel.text = goal
         studiesLabel.text = numStudies
+    }
+    
+    @IBAction func buttonPressed()
+    {
+        delegate?.didSelectStudy(buttonID: tag)
     }
 }
