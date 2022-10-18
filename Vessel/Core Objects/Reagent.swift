@@ -245,6 +245,18 @@ struct Reagent
         return impact
     }
     
+    func sources(for goal: Goal.ID) -> [Source]
+    {
+        for source in goalSources
+        {
+            if source.goalID == goal
+            {
+                return source.sources
+            }
+        }
+        return []
+    }
+    
     static func reagentsFor(goal: Int, withImpactAtLease: Int) -> [Int]
     {
         var reagentIDs: [Int] = []

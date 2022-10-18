@@ -124,6 +124,9 @@
 		3F9C67AE28FE622A00BC44FA /* Nitrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67AD28FE622A00BC44FA /* Nitrite.swift */; };
 		3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67AF28FE625100BC44FA /* Leukocyte.swift */; };
 		3F9C67B228FE627B00BC44FA /* Sodium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B128FE627B00BC44FA /* Sodium.swift */; };
+		3F9C67B428FF011300BC44FA /* StudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B328FF011300BC44FA /* StudiesViewController.swift */; };
+		3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */; };
+		3F9C67B828FF1C4E00BC44FA /* SourceInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */; };
 		3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */; };
 		3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */; };
 		3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */; };
@@ -359,6 +362,9 @@
 		3F9C67AD28FE622A00BC44FA /* Nitrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nitrite.swift; sourceTree = "<group>"; };
 		3F9C67AF28FE625100BC44FA /* Leukocyte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leukocyte.swift; sourceTree = "<group>"; };
 		3F9C67B128FE627B00BC44FA /* Sodium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sodium.swift; sourceTree = "<group>"; };
+		3F9C67B328FF011300BC44FA /* StudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiesViewController.swift; sourceTree = "<group>"; };
+		3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceInfoView.swift; sourceTree = "<group>"; };
+		3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceInfoView.xib; sourceTree = "<group>"; };
 		3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlreadyScannedSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalibrationErrorSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadErrorSlideupViewController.swift; sourceTree = "<group>"; };
@@ -628,6 +634,7 @@
 				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
 				3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */,
 				3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */,
+				3F9C67B328FF011300BC44FA /* StudiesViewController.swift */,
 				3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */,
 			);
 			path = Results;
@@ -849,6 +856,8 @@
 				3F9C679628FDEC7300BC44FA /* ScienceStudiesView.xib */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
+				3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */,
+				3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */,
 				3F59A18128E28715005E5F46 /* TestsGoals */,
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
@@ -1271,6 +1280,7 @@
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
 				3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */,
 				3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */,
+				3F9C67B828FF1C4E00BC44FA /* SourceInfoView.xib in Resources */,
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
@@ -1426,6 +1436,7 @@
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */,
+				3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
@@ -1448,6 +1459,7 @@
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
 				3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
+				3F9C67B428FF011300BC44FA /* StudiesViewController.swift in Sources */,
 				3F9C67A628FE616700BC44FA /* Magnesium.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				72DD1FCC28F541C8006071B0 /* HydroQuizViewController.swift in Sources */,

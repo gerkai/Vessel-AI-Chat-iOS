@@ -45,11 +45,11 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         navigationController?.popViewController(animated: true)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    /*func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         //print("Content offset: \(scrollView.contentOffset)")
-        print("Wellness Score: \(titleLabel.frame.origin.y)")
-    }
+        //print("Wellness Score: \(titleLabel.frame.origin.y)")
+    }*/
     
     func configureChartZone()
     {
@@ -157,6 +157,10 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     //MARK: - ScienceStudiesViewDelegates
     func didSelectStudy(buttonID: Int)
     {
-        print("Selected study: \(buttonID)")
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "StudiesViewController") as! StudiesViewController
+        vc.goalID = Goal.ID(rawValue: buttonID)
+        vc.reagentID = Reagent.ID(rawValue: reagentID)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
