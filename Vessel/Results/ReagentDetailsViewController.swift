@@ -14,13 +14,18 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBOutlet weak var chartZoneStackView: UIStackView!
     @IBOutlet weak var chartView: ChartView!
     @IBOutlet weak var reagentImageView: UIImageView!
+    @IBOutlet weak var resultTitleLabel: UILabel!
+    @IBOutlet weak var resultTextLabel: UILabel!
+    @IBOutlet weak var scienceLabel: UILabel!
     
     var reagentID: Int!
     var viewModel: ResultsTabViewModel!
     
     override func viewDidLoad()
     {
+        print("VIEW DID LOAD")
         super.viewDidLoad()
+        
         scrollView.delegate = self
         chartView.delegate = self
         chartView.dataSource = self
@@ -31,6 +36,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         let reagent = Reagent.fromID(id: reagentID)
         titleLabel.text = reagent.name
         reagentImageView.image = UIImage(named: reagent.imageName + "-top-right")
+        populateScienceSection()
     }
     
     @IBAction func back()
@@ -90,5 +96,39 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     func chartViewCellSelected(cellIndex: Int)
     {
+        //populate the infoView title and description text
+        let result = viewModel.resultForIndex(i: cellIndex).result
+        let reagent_ID = Reagent.ID(rawValue: reagentID)
+        if let reagentResult = result.getResult(id: reagent_ID!)
+        {
+            let reagent = Reagent.fromID(id: reagentID)
+            if let bucketIndex = reagent.getBucketIndex(value: reagentResult.value)
+            {
+                let bucket = reagent.buckets[bucketIndex]
+                resultTitleLabel.text = bucket.hint.title
+                resultTextLabel.text = bucket.hint.description
+            }
+            else
+            {
+                resultNotAvailable()
+            }
+        }
+        else
+        {
+            resultNotAvailable()
+        }
+    }
+    
+    func resultNotAvailable()
+    {
+        resultTitleLabel.text = NSLocalizedString("No Result", comment: "")
+        resultTextLabel.text = NSLocalizedString("There is no data for this day.", comment: "")
+    }
+    
+    func populateScienceSection()
+    {
+        let reagent = Reagent.fromID(id: reagentID)
+        let string = String(format: NSLocalizedString("Below are peer-reviewed scientific studies on how %@ might affect you.", comment: ""), reagent.name.capitalized)
+        scienceLabel.text = string
     }
 }

@@ -110,6 +110,20 @@
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
+		3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C679428FDEC5500BC44FA /* ScienceStudiesView.swift */; };
+		3F9C679728FDEC7300BC44FA /* ScienceStudiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C679628FDEC7300BC44FA /* ScienceStudiesView.xib */; };
+		3F9C679928FDF36D00BC44FA /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C679828FDF36D00BC44FA /* Source.swift */; };
+		3F9C679E28FE5FE700BC44FA /* PH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C679D28FE5FE700BC44FA /* PH.swift */; };
+		3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C679F28FE608A00BC44FA /* Hydration.swift */; };
+		3F9C67A228FE60EE00BC44FA /* Ketones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67A128FE60EE00BC44FA /* Ketones.swift */; };
+		3F9C67A428FE613700BC44FA /* VitaminC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67A328FE613700BC44FA /* VitaminC.swift */; };
+		3F9C67A628FE616700BC44FA /* Magnesium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67A528FE616700BC44FA /* Magnesium.swift */; };
+		3F9C67A828FE61A200BC44FA /* Cortisol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67A728FE61A200BC44FA /* Cortisol.swift */; };
+		3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67A928FE61D000BC44FA /* VitaminB7.swift */; };
+		3F9C67AC28FE61FB00BC44FA /* Calcium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67AB28FE61FB00BC44FA /* Calcium.swift */; };
+		3F9C67AE28FE622A00BC44FA /* Nitrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67AD28FE622A00BC44FA /* Nitrite.swift */; };
+		3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67AF28FE625100BC44FA /* Leukocyte.swift */; };
+		3F9C67B228FE627B00BC44FA /* Sodium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C67B128FE627B00BC44FA /* Sodium.swift */; };
 		3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */; };
 		3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */; };
 		3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */; };
@@ -331,6 +345,20 @@
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
+		3F9C679428FDEC5500BC44FA /* ScienceStudiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceStudiesView.swift; sourceTree = "<group>"; };
+		3F9C679628FDEC7300BC44FA /* ScienceStudiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScienceStudiesView.xib; sourceTree = "<group>"; };
+		3F9C679828FDF36D00BC44FA /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		3F9C679D28FE5FE700BC44FA /* PH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PH.swift; sourceTree = "<group>"; };
+		3F9C679F28FE608A00BC44FA /* Hydration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hydration.swift; sourceTree = "<group>"; };
+		3F9C67A128FE60EE00BC44FA /* Ketones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ketones.swift; sourceTree = "<group>"; };
+		3F9C67A328FE613700BC44FA /* VitaminC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitaminC.swift; sourceTree = "<group>"; };
+		3F9C67A528FE616700BC44FA /* Magnesium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magnesium.swift; sourceTree = "<group>"; };
+		3F9C67A728FE61A200BC44FA /* Cortisol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cortisol.swift; sourceTree = "<group>"; };
+		3F9C67A928FE61D000BC44FA /* VitaminB7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitaminB7.swift; sourceTree = "<group>"; };
+		3F9C67AB28FE61FB00BC44FA /* Calcium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calcium.swift; sourceTree = "<group>"; };
+		3F9C67AD28FE622A00BC44FA /* Nitrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nitrite.swift; sourceTree = "<group>"; };
+		3F9C67AF28FE625100BC44FA /* Leukocyte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leukocyte.swift; sourceTree = "<group>"; };
+		3F9C67B128FE627B00BC44FA /* Sodium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sodium.swift; sourceTree = "<group>"; };
 		3F9CB7AD28C7F7410093228E /* AlreadyScannedSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlreadyScannedSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AE28C7F7410093228E /* CalibrationErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalibrationErrorSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadErrorSlideupViewController.swift; sourceTree = "<group>"; };
@@ -525,8 +553,10 @@
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
+				3F9C679C28FE5FE700BC44FA /* Reagents */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
 				72332FAF28EE8D94008CBA8C /* Food.swift */,
+				3F9C679828FDF36D00BC44FA /* Source.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -634,6 +664,24 @@
 				3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		3F9C679C28FE5FE700BC44FA /* Reagents */ = {
+			isa = PBXGroup;
+			children = (
+				3F9C679D28FE5FE700BC44FA /* PH.swift */,
+				3F9C67A128FE60EE00BC44FA /* Ketones.swift */,
+				3F9C67A928FE61D000BC44FA /* VitaminB7.swift */,
+				3F9C67AF28FE625100BC44FA /* Leukocyte.swift */,
+				3F9C67B128FE627B00BC44FA /* Sodium.swift */,
+				3F9C67AD28FE622A00BC44FA /* Nitrite.swift */,
+				3F9C67AB28FE61FB00BC44FA /* Calcium.swift */,
+				3F9C67A728FE61A200BC44FA /* Cortisol.swift */,
+				3F9C67A528FE616700BC44FA /* Magnesium.swift */,
+				3F9C67A328FE613700BC44FA /* VitaminC.swift */,
+				3F9C679F28FE608A00BC44FA /* Hydration.swift */,
+			);
+			path = Reagents;
 			sourceTree = "<group>";
 		};
 		3F9CB7AC28C7F7410093228E /* Error Popups */ = {
@@ -797,6 +845,8 @@
 				3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */,
 				3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */,
 				3F0405C92890A99100ADD5FC /* ReagentTileView.xib */,
+				3F9C679428FDEC5500BC44FA /* ScienceStudiesView.swift */,
+				3F9C679628FDEC7300BC44FA /* ScienceStudiesView.xib */,
 				3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */,
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
 				3F59A18128E28715005E5F46 /* TestsGoals */,
@@ -1232,6 +1282,7 @@
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
+				3F9C679728FDEC7300BC44FA /* ScienceStudiesView.xib in Resources */,
 				7282D415288F7CA400B4E26D /* MoreTab.storyboard in Resources */,
 				3F426DC128DFA33200927B68 /* Results.storyboard in Resources */,
 				7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */,
@@ -1374,6 +1425,7 @@
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
+				3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
@@ -1394,7 +1446,9 @@
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
+				3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
+				3F9C67A628FE616700BC44FA /* Magnesium.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				72DD1FCC28F541C8006071B0 /* HydroQuizViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
@@ -1428,11 +1482,13 @@
 				3F47B48628FB1FAB00D35E97 /* ReagentDetailsChartCell.swift in Sources */,
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
+				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
+				3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
@@ -1444,6 +1500,8 @@
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
+				3F9C67AE28FE622A00BC44FA /* Nitrite.swift in Sources */,
+				3F9C67A428FE613700BC44FA /* VitaminC.swift in Sources */,
 				72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */,
 				3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
@@ -1460,6 +1518,7 @@
 				72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
+				3F9C67AC28FE61FB00BC44FA /* Calcium.swift in Sources */,
 				72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingCoordinator.swift in Sources */,
 				3F0547C927CA9FF1006E3098 /* Server.swift in Sources */,
@@ -1490,6 +1549,8 @@
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				72384F3428E2D9230033C3FC /* Insight.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
+				3F9C67A228FE60EE00BC44FA /* Ketones.swift in Sources */,
+				3F9C67A828FE61A200BC44FA /* Cortisol.swift in Sources */,
 				72F3D62E28F15C54007ED9A8 /* FoodCheckmarkView.swift in Sources */,
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
@@ -1504,6 +1565,8 @@
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
+				3F9C679E28FE5FE700BC44FA /* PH.swift in Sources */,
+				3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */,
 				3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */,
@@ -1512,6 +1575,7 @@
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
+				3F9C67B228FE627B00BC44FA /* Sodium.swift in Sources */,
 				72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,

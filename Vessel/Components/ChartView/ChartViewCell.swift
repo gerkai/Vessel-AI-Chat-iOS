@@ -33,7 +33,7 @@ class ChartViewCell: UICollectionViewCell
     
     override func awakeFromNib()
     {
-        print("CELL: awakeFromNib")
+        //print("CELL: awakeFromNib")
         super.awakeFromNib()
         originalHeight = infoHeight.constant
         NotificationCenter.default.addObserver(self, selector: #selector(self.selected(_:)), name: .selectChartViewCell, object: nil)
@@ -51,12 +51,12 @@ class ChartViewCell: UICollectionViewCell
     
     func select(selectionIntent: Bool)
     {
-        print("SELECT CELL")
+       // print("SELECT CELL")
         graphView.isSelected = selectionIntent
         graphView.layoutIfNeeded()
         if selectionIntent
         {
-            print("ChartViewCell: Select")
+            //print("ChartViewCell: Select")
             infoHeight.constant = frame.height
             infoView.alpha = 1.0
             setScoreLabelPosition()
@@ -70,8 +70,8 @@ class ChartViewCell: UICollectionViewCell
     
     func setScoreLabelPosition()
     {
-        print("setScoreLabelPosition for cell: \(tag)")
-        print("frame: \(frame), graphViewFrame: \(graphView.frame)")
+        //print("setScoreLabelPosition for cell: \(tag)")
+        //print("frame: \(frame), graphViewFrame: \(graphView.frame)")
         //sets the infoView bottom to be slightly above the plotted dot in the graphView
         graphView.layoutIfNeeded()
         //get position from the coordinate plotted in the graphView and convert point to same location in our view
@@ -127,7 +127,6 @@ class ChartViewCell: UICollectionViewCell
             else
             {
                 //animate to unselected state
-                
                 if notification.userInfo?["animated"] as? Bool == true
                 {
                     if animatingUnselected == false
