@@ -42,10 +42,8 @@ extension String
     func makeAttributedString() -> NSMutableAttributedString
     {
         var attrStr = NSMutableAttributedString()
-        let attrStrUrl = Bundle.main.url(forResource: self, withExtension: "md")
-        if let attrStrUrl = attrStrUrl,
-           let md = SwiftyMarkdown(url: attrStrUrl),
-           let attributedString = md.attributedString() as? NSMutableAttributedString
+        let md = SwiftyMarkdown(string: self)
+        if let attributedString = md.attributedString() as? NSMutableAttributedString
         {
             attrStr = attributedString
         }

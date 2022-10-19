@@ -18,6 +18,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBOutlet weak var resultTextLabel: UILabel!
     @IBOutlet weak var scienceStackview: UIStackView!
     @IBOutlet weak var scienceLabel: UILabel!
+    @IBOutlet weak var tipsStackView: UIStackView!
     
     var reagentID: Int!
     var viewModel: ResultsTabViewModel!
@@ -38,6 +39,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         titleLabel.text = reagent.name
         reagentImageView.image = UIImage(named: reagent.imageName + "-top-right")
         populateScienceSection()
+        populateTipsSection()
     }
     
     @IBAction func back()
@@ -154,6 +156,27 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         }
     }
     
+    func populateTipsSection()
+    {
+        let reagent = Reagent.fromID(id: reagentID)
+        tipsStackView.removeAllArrangedSubviews() //remove placeholder
+        
+        for tip in reagent.moreInfo
+        {
+            let view = ExpandableContentView(title: tip.title, info: tip.description.makeAttributedString())
+            tipsStackView.addArrangedSubview(view)
+        }
+    }
+    
+    @IBAction func chatWithHealthCoach()
+    {
+        print("Chat With Health Coach")
+    }
+    
+    @IBAction func customerSupport()
+    {
+        print("Customer Support")
+    }
     //MARK: - ScienceStudiesViewDelegates
     func didSelectStudy(buttonID: Int)
     {

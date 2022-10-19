@@ -58,7 +58,7 @@ let VitaminB7 = Reagent(
             Source(url: "https://www.ncbi.nlm.nih.gov/pubmed/15863846?dopt=Abstract", text: NSLocalizedString("Biotin deficiency is characterized by hair loss and a red scaly rash around body orifices.", comment: "")),
             Source(url: "https://pubmed.ncbi.nlm.nih.gov/31638351/", text: NSLocalizedString("Biotin is helpful in the treatment of acne and dandruff (seborrheic dermatitis)", comment: "")),
             Source(url: "https://pubmed.ncbi.nlm.nih.gov/31022908/", text: NSLocalizedString("Biotin deficiency can also lead to zinc deficiency which is another cause of a severe type of skin rash.", comment: "")),
-            Source(url: "https://jhu.pure.elsevier.com/en/publications/modern-nutrition-in-health-and-disease-eleventh-edition", text: NSLocalizedString("Low biotin levels are associated with bloodshot eyes.", comment: ""))]),],
+            Source(url: "https://jhu.pure.elsevier.com/en/publications/modern-nutrition-in-health-and-disease-eleventh-edition", text: NSLocalizedString("Low biotin levels are associated with bloodshot eyes.", comment: ""))])],
     moreInfo: [
         TitleDescription(
             title: Constants.HOW_TO_READ_THE_GRAPH,
