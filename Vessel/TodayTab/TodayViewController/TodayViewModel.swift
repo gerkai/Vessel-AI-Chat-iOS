@@ -24,10 +24,18 @@ enum TodayViewSection: Equatable
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         //case .insights(let insights): return createInsightsSection(insights: insights)
-        case .food(let foods): return [
-            .sectionTitle(icon: "food-icon", name: "Food"),
-            .foodDetails(foods: foods)
-        ]
+        case .food(let foods):
+            if foods.count > 0
+            {
+                return [
+                    .sectionTitle(icon: "food-icon", name: "Food"),
+                    .foodDetails(foods: foods)
+                ]
+            }
+            else
+            {
+                return []
+            }
         case .water(let glassesNumber, let checkedGlasses): return [
             .sectionTitle(icon: "water-icon", name: NSLocalizedString("\(glassesNumber * 8) oz Water", comment: "Water amount")),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
@@ -113,8 +121,19 @@ class TodayViewModel
     {
         return [Insight(id: 0, lastUpdated: 0, title: "How Yoga Improves Sleep", subtitle: "Mood and Sleep (2 mins)", description: "Legumes have been proven in various studies to reduce your cortisol levels and improve... more", backgroundImage: "yogaImprovesSleep", completedDate: nil)]
     }
+    var results: [Result]!
     
-    var isEmpty: Bool = false
+    init()
+    {
+        results = Storage.retrieve(as: Result.self)
+    }
+    
+    func refresh()
+    {
+        results = Storage.retrieve(as: Result.self)
+    }
+    
+    var isEmpty: Bool { results.isEmpty }
     
     var numberOfGlasses: Int?
     {
@@ -131,7 +150,7 @@ class TodayViewModel
             .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
             //.insights(insights: insights),
             .food(foods: contact?.suggestedFoods ?? []),
-            .water(glassesNumber: contact?.dailyWaterIntake ?? 2, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),
+            .water(glassesNumber: contact?.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),
             .footer
         ]
     }

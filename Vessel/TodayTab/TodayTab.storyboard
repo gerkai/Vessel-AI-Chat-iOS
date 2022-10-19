@@ -811,19 +811,37 @@ However, most people drink below what their body needs because it's hard to know
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHB-tH-Vww">
-                                                        <rect key="frame" x="19.999999999999993" y="548" width="97.333333333333314" height="28"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="· Reagents">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="BananaGrotesk-Semibold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="gZm-Yf-eCN">
+                                                        <rect key="frame" x="19.999999999999986" y="548" width="234.66666666666663" height="28"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHB-tH-Vww">
+                                                                <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="28"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="· Reagents">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="20" name="BananaGrotesk-Semibold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfO-Lt-s9e">
+                                                                <rect key="frame" x="137.33333333333334" y="0.0" width="97.333333333333343" height="28"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Quantities">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="20" name="BananaGrotesk-Semibold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SP-22-Ci4">
                                                         <rect key="frame" x="20" y="463.33333333333331" width="73.666666666666671" height="22.666666666666686"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="20"/>
@@ -856,18 +874,19 @@ However, most people drink below what their body needs because it's hard to know
                                                     <constraint firstItem="Y3d-gc-K81" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" id="0rt-xW-JvC"/>
                                                     <constraint firstItem="Y3d-gc-K81" firstAttribute="top" secondItem="27m-mV-9DP" secondAttribute="top" id="2sh-uO-oi2"/>
                                                     <constraint firstAttribute="trailing" secondItem="Y3d-gc-K81" secondAttribute="trailing" id="6ch-Ub-tkL"/>
+                                                    <constraint firstItem="gZm-Yf-eCN" firstAttribute="top" secondItem="IG5-1c-3A5" secondAttribute="bottom" constant="22" id="B9o-Io-KgR"/>
                                                     <constraint firstAttribute="bottom" secondItem="Y3d-gc-K81" secondAttribute="bottom" id="GE5-5G-mj3"/>
                                                     <constraint firstItem="WW8-60-Pah" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" constant="20" id="JLX-4O-OnT"/>
                                                     <constraint firstItem="006-q2-IxJ" firstAttribute="top" secondItem="27m-mV-9DP" secondAttribute="top" id="Lvl-ru-oNS"/>
-                                                    <constraint firstItem="tHB-tH-Vww" firstAttribute="top" secondItem="IG5-1c-3A5" secondAttribute="bottom" constant="22" id="MNh-dB-beY"/>
                                                     <constraint firstItem="6SP-22-Ci4" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" constant="20" id="PMM-gB-CvE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gZm-Yf-eCN" secondAttribute="bottom" constant="36" id="TH1-NB-xGs"/>
                                                     <constraint firstItem="IG5-1c-3A5" firstAttribute="top" secondItem="6SP-22-Ci4" secondAttribute="bottom" constant="12" id="YIC-Y1-87i"/>
                                                     <constraint firstAttribute="bottom" secondItem="006-q2-IxJ" secondAttribute="bottom" id="ZvR-v3-Xbq"/>
-                                                    <constraint firstItem="tHB-tH-Vww" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" constant="20" id="jmm-3c-aOs"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gZm-Yf-eCN" secondAttribute="trailing" constant="20" id="pWH-l1-JUF"/>
                                                     <constraint firstAttribute="trailing" secondItem="006-q2-IxJ" secondAttribute="trailing" id="q5d-hd-2C0"/>
+                                                    <constraint firstItem="gZm-Yf-eCN" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" constant="20" id="qnv-aK-q2D"/>
                                                     <constraint firstAttribute="height" constant="612" id="seW-HK-mOJ"/>
                                                     <constraint firstItem="6SP-22-Ci4" firstAttribute="top" secondItem="WW8-60-Pah" secondAttribute="bottom" constant="12" id="ubh-5n-mXB"/>
-                                                    <constraint firstAttribute="bottom" secondItem="tHB-tH-Vww" secondAttribute="bottom" constant="36" id="xMn-cl-Aik"/>
                                                     <constraint firstAttribute="trailing" secondItem="IG5-1c-3A5" secondAttribute="trailing" constant="20" id="y8i-Dd-R8e"/>
                                                     <constraint firstItem="006-q2-IxJ" firstAttribute="leading" secondItem="27m-mV-9DP" secondAttribute="leading" id="zFt-aH-A28"/>
                                                 </constraints>
@@ -945,6 +964,7 @@ However, most people drink below what their body needs because it's hard to know
                         <outlet property="descriptionLabel" destination="IG5-1c-3A5" id="itH-UC-Vx2"/>
                         <outlet property="headerImageView" destination="Y3d-gc-K81" id="0nd-Nd-2Tv"/>
                         <outlet property="headerView" destination="27m-mV-9DP" id="MVf-UR-f7o"/>
+                        <outlet property="quantitiesLabel" destination="VfO-Lt-s9e" id="7yk-nm-G4a"/>
                         <outlet property="reagentsLabel" destination="tHB-tH-Vww" id="rLK-nW-1HJ"/>
                         <outlet property="scrollView" destination="tgC-MZ-s97" id="c2y-oy-fZY"/>
                         <outlet property="subtitleLabel" destination="6SP-22-Ci4" id="xEY-0u-EFx"/>

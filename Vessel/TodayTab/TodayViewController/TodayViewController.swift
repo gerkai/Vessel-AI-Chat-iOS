@@ -33,6 +33,9 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         super.viewDidLoad()
         emptyView.isHidden = !viewModel.isEmpty
         view.bringSubviewToFront(emptyView)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -47,13 +50,25 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        reloadUI()
     }
     
     // MARK: - Actions
     @IBAction func onTakeATest()
     {
         mainTabBarController?.vesselButtonPressed()
+    }
+    
+    // MARK: - Notifications
+    @objc
+    func onReloadNotification(_ notification: NSNotification)
+    {
+        reloadUI()
+    }
+    
+    private func reloadUI()
+    {
+        tableView.reloadData()
     }
 }
 
@@ -124,7 +139,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
             waterDetailsVC.hidesBottomBarWhenPushed = true
             waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses ?? 0
-            waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? 2
+            waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? Constants.MINIMUM_WATER_INTAKE
             waterDetailsVC.waterIntakeViewDelegate = self
             navigationController?.pushViewController(waterDetailsVC, animated: true)
         default:
@@ -150,7 +165,7 @@ extension TodayViewController: UIScrollViewDelegate
         if tableViewOffset == nil
         {
             tableViewOffset = tableView.frame.height - tableView.contentSize.height
-            tableView.reloadData()
+            reloadUI()
         }
         
         if tableView.contentOffset.y <= 0
@@ -166,6 +181,20 @@ extension TodayViewController: UIScrollViewDelegate
 
 extension TodayViewController: FoodCheckmarkViewDelegate
 {
+    func checkmarkTapped(view: FoodCheckmarkView)
+    {
+        let planIsChecked = view.isChecked
+        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }),
+              let planId = plan.id else { return }
+        Server.shared.completePlan(planId: planId, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
+        {
+            print("SUCCESS")
+        } onFailure: { error in
+            print("ERROR: \(error)")
+            view.isChecked = !planIsChecked
+        }
+    }
+    
     func checkmarkViewTapped(view: FoodCheckmarkView)
     {
         guard let food = view.food else { return }

@@ -9,6 +9,13 @@ import Foundation
 
 extension Date
 {
+    static var serverDateFormatter: DateFormatter =
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.SERVER_DATE_FORMAT
+        return formatter
+    }()
+    
     //Create a Date from a string like so:
     //Date("2022-07-09")
     init(_ dateString: String)

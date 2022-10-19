@@ -182,6 +182,9 @@
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
+		7271DFAF28FA7F8B00909A9D /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFAE28FA7F8B00909A9D /* FoodManager.swift */; };
+		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
+		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
 		727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */; };
 		727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B528B74BA500039BE0 /* DebugMenuCell.swift */; };
@@ -194,6 +197,9 @@
 		728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593528921967001C4B2A /* EditProfileViewController.swift */; };
 		728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B593728924A64001C4B2A /* EditProfileViewModel.swift */; };
 		7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7295133128F7DEC600E4E950 /* CoachTab.storyboard */; };
+		7295568028F67980000DD006 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295567F28F67980000DD006 /* Plan.swift */; };
+		7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295568128F6893E000DD006 /* ReagentFoodViewController.swift */; };
+		7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
 		72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */; };
@@ -431,6 +437,9 @@
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
+		7271DFAE28FA7F8B00909A9D /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
+		7271DFB028FA88ED00909A9D /* ReagentFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFood.swift; sourceTree = "<group>"; };
+		7271DFB228FA9B4B00909A9D /* PlansManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansManager.swift; sourceTree = "<group>"; };
 		727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewController.swift; sourceTree = "<group>"; };
 		727C07B328B7484500039BE0 /* DebugMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewModel.swift; sourceTree = "<group>"; };
 		727C07B528B74BA500039BE0 /* DebugMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuCell.swift; sourceTree = "<group>"; };
@@ -443,6 +452,9 @@
 		728B593528921967001C4B2A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		728B593728924A64001C4B2A /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		7295133128F7DEC600E4E950 /* CoachTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CoachTab.storyboard; sourceTree = "<group>"; };
+		7295567F28F67980000DD006 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		7295568128F6893E000DD006 /* ReagentFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodViewController.swift; sourceTree = "<group>"; };
+		7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodTableViewCell.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewModel.swift; sourceTree = "<group>"; };
@@ -547,6 +559,8 @@
 				3F0547C827CA9FF1006E3098 /* Server.swift */,
 				3F15AD03288C9ADC004716CA /* TestCardUploader.swift */,
 				3FF833AC28A1AD4D005D5B43 /* Reachability.swift */,
+				7271DFAE28FA7F8B00909A9D /* FoodManager.swift */,
+				7271DFB228FA9B4B00909A9D /* PlansManager.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -567,6 +581,8 @@
 				3F1A248C2891E8B600BC539F /* Result.swift */,
 				72332FAF28EE8D94008CBA8C /* Food.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
+				7295567F28F67980000DD006 /* Plan.swift */,
+				7271DFB028FA88ED00909A9D /* ReagentFood.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -604,11 +620,13 @@
 		3F15AD07288DC87C004716CA /* AfterTest */ = {
 			isa = PBXGroup;
 			children = (
+				7299878128F68E4E0010C8D4 /* Cells */,
 				3F15AD08288DC87C004716CA /* ResultsViewController.swift */,
 				3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */,
 				3F1A24922893479500BC539F /* ReagentInfoViewController.swift */,
 				3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */,
 				3F15AD0A288DC896004716CA /* AfterTest.storyboard */,
+				7295568128F6893E000DD006 /* ReagentFoodViewController.swift */,
 				72DD1FCB28F541C8006071B0 /* HydroQuizViewController.swift */,
 			);
 			path = AfterTest;
@@ -992,6 +1010,14 @@
 				7295133128F7DEC600E4E950 /* CoachTab.storyboard */,
 			);
 			path = CoachTab;
+			sourceTree = "<group>";
+		};
+		7299878128F68E4E0010C8D4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		72B2E77F28B8847C005AA536 /* OnboardingWelcome */ = {
@@ -1441,6 +1467,7 @@
 				3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */,
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
+				7271DFAF28FA7F8B00909A9D /* FoodManager.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */,
 				3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */,
@@ -1480,6 +1507,7 @@
 				727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */,
 				72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */,
 				3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */,
+				7295568028F67980000DD006 /* Plan.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */,
@@ -1487,6 +1515,7 @@
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
 				72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */,
+				7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */,
 				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
 				721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */,
 				7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */,
@@ -1516,6 +1545,7 @@
 				3F426DBF28DFA2FF00927B68 /* ResultsTabViewController.swift in Sources */,
 				72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */,
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
+				7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
@@ -1562,6 +1592,7 @@
 				3F1A24932893479500BC539F /* ReagentInfoViewController.swift in Sources */,
 				3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */,
 				3F0547C427CA9823006E3098 /* VesselButton.swift in Sources */,
+				7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */,
 				3F12F058287E532200FCC52E /* KeyboardFriendlyViewController.swift in Sources */,
 				3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */,
 				3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */,
@@ -1584,6 +1615,7 @@
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
+				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F9C679E28FE5FE700BC44FA /* PH.swift in Sources */,
 				3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */,
@@ -1773,7 +1805,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -1808,7 +1840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

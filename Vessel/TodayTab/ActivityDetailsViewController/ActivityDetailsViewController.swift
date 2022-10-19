@@ -18,6 +18,7 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var reagentsLabel: UILabel!
+    @IBOutlet private weak var quantitiesLabel: UILabel!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
@@ -64,6 +65,7 @@ private extension ActivityDetailsViewController
         subtitleLabel.text = viewModel?.subtitle
         descriptionLabel.text = viewModel?.description
         reagentsLabel.text = viewModel?.reagents
+        quantitiesLabel.text = viewModel?.quantities
         guard let url = viewModel?.foodImageURL else { return }
         headerImageView.kf.setImage(with: url)
     }

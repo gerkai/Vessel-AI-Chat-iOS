@@ -20,7 +20,7 @@ class ActivityDetailsViewModel
     // MARK: - Public properties
     var foodImageURL: URL?
     {
-        URL(string: food.image_url)
+        URL(string: food.imageUrl ?? "")
     }
     
     var title: String
@@ -30,29 +30,44 @@ class ActivityDetailsViewModel
     
     var subtitle: String
     {
+        guard let servingGrams = food.servingGrams,
+              let servingQuantity = food.servingQuantity,
+              let servingUnit = food.servingUnit else { return "" }
         if isMetric
         {
-            return NSLocalizedString("\(food.serving_grams) gr", comment: "Food amount")
+            return NSLocalizedString("\(servingGrams) gr", comment: "Food amount")
         }
         else
         {
-            return "\(Int(food.serving_quantity)) \(food.serving_unit)"
+            return "\(Int(servingQuantity)) \(servingUnit)"
         }
     }
     
     var description: String
     {
-        NSLocalizedString("Recomended because you are \("low") in \("Vitamin C and Vitamin B7")", comment: "Food recommendation description")
+        ""//NSLocalizedString("Recomended because you are \("low") in \("Vitamin C and Vitamin B7")", comment: "Food recommendation description")
     }
     
     var reagents: String
     {
         var reagents = ""
-        for reagent in food.reagents
+        guard let nutrientsArray = food.nutrients else { return "" }
+        for nutrient in nutrientsArray
         {
-            reagents.append("• \(reagent.name)\(reagent.name == food.reagents.last?.name ? "" : "\n")")
+            reagents.append("• \(nutrient.name)\(nutrient == nutrientsArray.last ? "" : "\n")")
         }
         return reagents
+    }
+    
+    var quantities: String
+    {
+        var quantities = ""
+        guard let nutrientsArray = food.nutrients else { return "" }
+        for nutrient in nutrientsArray
+        {
+            quantities.append("\(Int(nutrient.quantity))\(nutrient == nutrientsArray.last ? "" : "\n")")
+        }
+        return quantities
     }
     
     init(food: Food)

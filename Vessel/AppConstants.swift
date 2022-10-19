@@ -17,6 +17,8 @@ extension Notification.Name
     static let newDataFromServer = Notification.Name("NewDataFromServer")
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
+    static let foodsLoaded = Notification.Name("FoodsLoaded")
+    static let plansLoaded = Notification.Name("PlansLoaded")
 }
 
 struct Constants
@@ -145,6 +147,7 @@ struct Constants
     static let TAB_BAR_COACH_INDEX = 3
     static let TAB_BAR_MORE_INDEX = 4
     static let WATER_GLASSESS_PER_ROW = 9
+    static let MINIMUM_WATER_INTAKE = 4
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")

@@ -11,6 +11,7 @@ import Kingfisher
 protocol FoodCheckmarkViewDelegate: AnyObject
 {
     func checkmarkViewTapped(view: FoodCheckmarkView)
+    func checkmarkTapped(view: FoodCheckmarkView)
 }
 
 class FoodCheckmarkView: NibLoadingView
@@ -22,7 +23,6 @@ class FoodCheckmarkView: NibLoadingView
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var servingLabel: UILabel!
     @IBOutlet private weak var checkImage: UIImageView!
-    @IBOutlet private weak var button: UIButton!
     
     // MARK: - Model
     var food: Food?
@@ -30,13 +30,22 @@ class FoodCheckmarkView: NibLoadingView
         didSet
         {
             backgroundImage.addSubview(fadeView)
-            button.setTitle("", for: .normal)
             
             guard let food = food else { return }
             nameLabel.text = food.title
-            servingLabel.text = "\(Int(food.serving_quantity)) \(food.serving_unit)"
+            servingLabel.text = "\(Int(food.servingQuantity ?? 0.0)) \(food.servingUnit ?? "")"
             
-            guard let url = URL(string: food.image_url) else { return }
+            if !hasSetGestureRecognizers
+            {
+                let viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onViewTapped))
+                backgroundImage.addGestureRecognizer(viewGestureRecognizer)
+                
+                let checkmarkGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCheckmarkTapped))
+                checkImage.addGestureRecognizer(checkmarkGestureRecognizer)
+            }
+            
+            guard let imageUrl = food.imageUrl,
+                  let url = URL(string: imageUrl) else { return }
             backgroundImage.kf.setImage(with: url)
         }
     }
@@ -44,6 +53,7 @@ class FoodCheckmarkView: NibLoadingView
     var originalColor: UIColor!
     weak var delegate: FoodCheckmarkViewDelegate?
     var isUnchecking = false
+    var hasSetGestureRecognizers = false
     
     var isChecked: Bool = false
     {
@@ -89,7 +99,7 @@ class FoodCheckmarkView: NibLoadingView
         originalColor = backgroundImage.backgroundColor
     }
     
-    @IBAction func checkmarkPressed()
+    func checkmarkPressed()
     {
         isChecked = !isChecked
     }
@@ -104,9 +114,16 @@ class FoodCheckmarkView: NibLoadingView
     }
     
     // MARK: - Actions
-    
-    @IBAction func onViewTapped()
+    @objc
+    func onViewTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         delegate?.checkmarkViewTapped(view: self)
+    }
+    
+    @objc
+    func onCheckmarkTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        checkmarkPressed()
+        delegate?.checkmarkTapped(view: self)
     }
 }
