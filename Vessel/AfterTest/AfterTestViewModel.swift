@@ -287,7 +287,6 @@ class AfterTestViewModel
             {
             case .MAG_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Magnesium is Low", comment: ""),
-
                                                    NSLocalizedString("Studies suggest Magnesium plays a key role in supporting sleep, digestion, and calm through regulating important brain chemicals such as melatonin and GABA as well as supporting the relaxation of nerves and smooth muscle contractions.", comment: ""),
                                                    "mag-top-right",
                                                    .fade)
@@ -397,7 +396,6 @@ class AfterTestViewModel
                 
             case .HYDRO_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Hydration is High", comment: ""),
-
                                                    NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management.", comment: ""),
                                                    "hydro-top-right",
                                                    .fade)
@@ -417,7 +415,6 @@ class AfterTestViewModel
                 
             case .KETO_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are Low", comment: ""),
-
                                                    NSLocalizedString("Let’s break down how to optimize your production of ketones using the ketogenic diet to raise your level. Keep in mind that it can take several weeks to a month to increase ketone levels.", comment: ""),
                                                    "keto-top-right",
                                                    .fade)
