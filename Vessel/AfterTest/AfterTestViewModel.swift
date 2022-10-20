@@ -511,7 +511,7 @@ class AfterTestViewModel
     {
         if selectedFoods.count == 1
         {
-            let plan = Plan(clear: true, foodId: selectedFoods.first!.id)
+            let plan = Plan(foodId: selectedFoods.first!.id)
             Server.shared.addSinglePlan(plan: plan)
             { plan in
                 PlansManager.shared.addPlans(plan: [plan])
@@ -523,7 +523,7 @@ class AfterTestViewModel
         else
         {
             let foodsIds = selectedFoods.map { $0.id }
-            let multiplePlans = MultiplePlans(clear: true, foodIds: foodsIds)
+            let multiplePlans = MultiplePlans(foodIds: foodsIds)
             Server.shared.addMultiplePlans(plans: multiplePlans)
             { multiplePlans in
                 PlansManager.shared.addPlans(plan: multiplePlans)

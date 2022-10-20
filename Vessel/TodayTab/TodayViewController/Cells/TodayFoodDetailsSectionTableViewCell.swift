@@ -17,7 +17,6 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     func setup(foods: [Food], delegate: FoodCheckmarkViewDelegate)
     {
         self.foods = foods
-        self.checked = Array(repeating: false, count: foods.count)
         stackView.removeAllArrangedSubviews()
         
         for (i, food) in foods.enumerated()
@@ -35,15 +34,43 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
             
             let foodView = FoodCheckmarkView(frame: .zero)
             foodView.food = food
-            foodView.isChecked = checked[i]
             foodView.delegate = delegate
             horizontalStackView.addArrangedSubview(foodView)
         }
+        updateCheckedFoods()
         
         // If foods are odd, add an empty view to the last stack view to balance the views
         if foods.count % 2 != 0
         {
             (stackView.arrangedSubviews.last as? UIStackView)?.addArrangedSubview(UIView())
+        }
+    }
+    
+    func updateCheckedFoods()
+    {
+        guard let contact = Contact.main() else { return }
+        checked = PlansManager.shared.plans.filter
+        { plan in
+            contact.suggestedFoods.contains(where: { $0.id == plan.foodId })
+        }.map({ $0.isComplete })
+        
+        for (i, view) in stackView.arrangedSubviews.enumerated()
+        {
+            guard let stackView = view as? UIStackView else { return }
+            if let foodView = stackView.arrangedSubviews[safe: 0] as? FoodCheckmarkView
+            {
+                if foodView.isChecked != checked[i * 2]
+                {
+                    foodView.isChecked = checked[i * 2]
+                }
+            }
+            if let foodView = stackView.arrangedSubviews[safe: 1] as? FoodCheckmarkView
+            {
+                if foodView.isChecked != checked[(i * 2) + 1]
+                {
+                    foodView.isChecked = checked[(i * 2) + 1]
+                }
+            }
         }
     }
 }

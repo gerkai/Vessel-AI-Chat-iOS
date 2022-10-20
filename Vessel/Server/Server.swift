@@ -748,76 +748,31 @@ class Server: NSObject
     // MARK: Plan
     func getPlans(onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
-        let urlString = "\(API())\(GET_PLANS_PATH)"
-        guard let request = Server.shared.GenerateRequest(urlString: urlString) else
-        {
-            let error = ServerError(code: 400, description: NSLocalizedString("Unable to get plans response", comment: "Server error message"))
-            failure(error)
-            return
-        }
-        
-        serverGet(request: request) { data in
+        getAllObjects(objects: AllObjectReq(type: "plan", last_updated: 1))
+        { dict in
             do
             {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let foodDict = dict["plan"] as? [[String: Any]] else { return }
+                let json = try JSONSerialization.data(withJSONObject: foodDict)
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                if let plansResult = try? decoder.decode(PlanResponse.self, from: data)
+                let decodedFoods = try decoder.decode([Plan].self, from: json)
+                DispatchQueue.main.async()
                 {
-                    DispatchQueue.main.async()
-                    {
-                        success(plansResult.plans)
-                    }
-                }
-                else if let object = json as? [String: Any]
-                {
-                    DispatchQueue.main.async()
-                    {
-                        if let message = object["message"] as? String
-                        {
-                            if let errorArray = object["errors"] as? [[String: Any]]
-                            {
-                                if let firstErrorArray = errorArray.first
-                                {
-                                    let code = firstErrorArray["code"] as? Int
-                                    let label = firstErrorArray["label"] as? String
-                                    let error = ServerError(code: code ?? 0, description: label ?? "unknown")
-                                    failure(error)
-                                }
-                            }
-                            else
-                            {
-                                let error = ServerError(code: 404, description: message)
-                                failure(error)
-                            }
-                        }
-                        else
-                        {
-                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
-                            failure(error)
-                        }
-                    }
-                }
-                else
-                {
-                    DispatchQueue.main.async()
-                    {
-                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
-                        failure(error)
-                    }
+                    success(decodedFoods)
                 }
             }
             catch
             {
                 DispatchQueue.main.async()
                 {
-                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to get all plans response", comment: ""))
                     failure(error)
                 }
             }
         } onFailure: { error in
-            let error = ServerError(code: 400, description: error?.localizedDescription ?? "")
-            failure(error)
+            let serverError = ServerError(code: 400, description: error)
+            failure(serverError)
         }
     }
     
@@ -922,7 +877,7 @@ class Server: NSObject
         })
     }
     
-    func completePlan(planId: Int, toggleData: TogglePlanData, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    func completePlan(planId: Int, toggleData: TogglePlanData, onSuccess success: @escaping (_ togglePlanData: TogglePlanData) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         let urlString = "\(API())\(TOGGLE_PLAN_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
@@ -939,9 +894,25 @@ class Server: NSObject
         
         serverPost(request: request, onSuccess:
         { (object) in
-            DispatchQueue.main.async()
+            do
             {
-                success()
+                let json = try JSONSerialization.data(withJSONObject: object)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let togglePlanData = try decoder.decode(TogglePlanData.self, from: json)
+                
+                DispatchQueue.main.async()
+                {
+                    success(togglePlanData)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
+                    failure(error)
+                }
             }
         },
         onFailure:

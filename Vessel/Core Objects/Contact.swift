@@ -67,7 +67,14 @@ class Contact: CoreObjectProtocol
     
     var suggestedFoods: [Food]
     {
-        let foodIds = PlansManager.shared.plans.compactMap { $0.foodId }
+        let foodIds = PlansManager.shared.plans.compactMap
+        {
+            if let dayOfWeek = Date().dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
+            {
+                return $0.foodId
+            }
+            return nil
+        }
         let foods = FoodManager.shared.foods.filter { foodIds.contains($0.id) }
         return foods
     }

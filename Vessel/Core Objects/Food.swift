@@ -22,10 +22,10 @@ struct Food: Equatable, Decodable
     var nutrients: [Nutrient]?
     var allergyIds: [Int]?
     
-    internal init(id: Int, last_updated: Double, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String)
+    internal init(id: Int, lastUpdated: Double, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String)
     {
         self.id = id
-        self.lastUpdated = last_updated
+        self.lastUpdated = lastUpdated
         self.title = title
         self.servingQuantity = serving_quantity
         self.servingUnit = serving_unit

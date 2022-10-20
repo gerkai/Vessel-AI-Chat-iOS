@@ -25,12 +25,11 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: Codable
+struct Plan: Codable, Hashable
 {
     let id: Int?
     let last_updated: Int?
 //    let storage: StorageType = .cache
-    let clear: Bool?
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     let foodId: Int?
@@ -38,14 +37,18 @@ struct Plan: Codable
     let activityId: Int?
     let planId: Int?
     let contactId: Int?
-    let completed: [String]?
+    var completed: [String]?
+
+    var isComplete: Bool
+    {
+        (completed ?? []).contains(Date.serverDateFormatter.string(from: Date()))
+    }
     
     var type: PlanType = .food
     
     internal init(id: Int? = nil,
                   last_updated: Int? = nil,
                   timeOfDay: String? = nil,
-                  clear: Bool? = nil,
                   dayOfWeek: [Int]? = nil,
                   foodId: Int? = nil,
                   reagentLifestyleRecommendationId: Int? = nil,
@@ -57,7 +60,6 @@ struct Plan: Codable
         self.id = id
         self.last_updated = last_updated
         self.timeOfDay = timeOfDay
-        self.clear = clear
         self.dayOfWeek = dayOfWeek
         self.foodId = foodId
         self.reagentLifestyleRecommendationId = reagentLifestyleRecommendationId
@@ -67,11 +69,10 @@ struct Plan: Codable
         self.completed = completed
     }
     
-    enum CodingKeys: String, CodingKey
+    enum CodingKeys: CodingKey
     {
         case id
         case last_updated
-        case clear
         case timeOfDay
         case dayOfWeek
         case foodId
@@ -83,18 +84,17 @@ struct Plan: Codable
     }
 }
 
-struct TogglePlanData: Encodable
+struct TogglePlanData: Codable
 {
     let isDeleted: Bool?
-    let contactId: Int?
     let date: String
     let programDay: Int?
     let completed: Bool
     
-    internal init(isDeleted: Bool? = nil, contactId: Int? = nil, date: Date, programDay: Int? = nil, completed: Bool)
+    internal init(isDeleted: Bool? = nil, date: Date, programDay: Int? = nil, completed: Bool)
     {
         self.isDeleted = isDeleted
-        self.contactId = contactId
+
         self.date = Date.serverDateFormatter.string(from: date)
         self.programDay = programDay
         self.completed = completed
@@ -103,7 +103,6 @@ struct TogglePlanData: Encodable
     enum CodingKeys: CodingKey
     {
         case isDeleted
-        case contactId
         case date
         case programDay
         case completed
@@ -112,17 +111,14 @@ struct TogglePlanData: Encodable
 
 struct MultiplePlans: Codable
 {
-    let clear: Bool
     let supplementsIds: [Int]?
     let foodIds: [Int]?
     let reagentLifestyleRecommendationsIds: [Int]?
     
-    internal init(clear: Bool,
-                  supplementsIds: [Int]? = nil,
+    internal init(supplementsIds: [Int]? = nil,
                   foodIds: [Int]? = nil,
                   reagentLifestyleRecommendationsIds: [Int]? = nil)
     {
-        self.clear = clear
         self.supplementsIds = supplementsIds
         self.foodIds = foodIds
         self.reagentLifestyleRecommendationsIds = reagentLifestyleRecommendationsIds
@@ -148,7 +144,6 @@ struct MultiplePlans: Codable
     
     enum CodingKeys: String, CodingKey
     {
-        case clear
         case supplementsIds
         case foodIds
         case reagentLifestyleRecommendationsIds

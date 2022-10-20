@@ -18,6 +18,17 @@ enum TodayViewSection: Equatable
     //case customize
     case footer
     
+    var sectionIndex: Int
+    {
+        switch self
+        {
+        case .header: return 0
+        case .food: return 1
+        case .water: return 2
+        case .footer: return 3
+        }
+    }
+    
     var cells: [TodayViewCell]
     {
         switch self
@@ -133,7 +144,7 @@ class TodayViewModel
         results = Storage.retrieve(as: Result.self)
     }
     
-    var isEmpty: Bool { results.isEmpty }
+    var isEmpty: Bool = false //{ results.isEmpty }
     
     var numberOfGlasses: Int?
     {

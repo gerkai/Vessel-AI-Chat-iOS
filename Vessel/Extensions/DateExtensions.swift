@@ -16,6 +16,14 @@ extension Date
         return formatter
     }()
     
+    // [0 to 6] -> (Monday to Sunday)
+    var dayOfWeek: Int?
+    {
+        let myCalendar = Calendar(identifier: .gregorian)
+        let day = myCalendar.component(.weekday, from: self)
+        return day == 1 ? 6 : day - 2
+    }
+    
     //Create a Date from a string like so:
     //Date("2022-07-09")
     init(_ dateString: String)
