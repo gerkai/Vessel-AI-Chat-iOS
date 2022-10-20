@@ -416,12 +416,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
             }
             else
             {
-                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
-                vc.viewModel = viewModel
-                vc.titleText = result.title
-                vc.details = result.details
-                vc.image = UIImage.init(named: result.imageName)
+                let vc = ReagentInfoViewController.initWith(viewModel: viewModel, result: result)
                 vc.transition = result.transition
                 
                 self.navigationController?.pushViewController(vc, animated: true)
