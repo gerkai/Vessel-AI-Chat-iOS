@@ -30,30 +30,6 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     @objc
     func onCoachViewTapped(gestureRecognizer: UIGestureRecognizer)
     {
-        navigateToLiveChat()
-    }
-}
-
-extension CoachViewController: LiveChatDelegate
-{
-    func chatDismissed()
-    {
-        LiveChat.chatViewController!.dismiss(animated: true)
-    }
-}
-
-private extension CoachViewController
-{
-    func navigateToLiveChat()
-    {
-        guard let contact = Contact.main() else { return }
-        LiveChat.name = contact.fullName
-        LiveChat.email = contact.email
-        LiveChat.groupId = "2" //nutritionist coach group == 2  support == 1
-        LiveChat.licenseId = Constants.LiveChatLicenseID
-        LiveChat.delegate = self
-        LiveChat.customPresentationStyleEnabled = true
-
-        present(LiveChat.chatViewController!, animated: true)
+        LiveChatManager.shared.navigateToLiveChat(in: self)
     }
 }

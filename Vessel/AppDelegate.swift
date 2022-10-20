@@ -7,6 +7,10 @@
 
 import UIKit
 import Firebase
+import ZendeskCoreSDK
+import ChatSDK
+import ChatProvidersSDK
+import SupportSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -20,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         configureAppearance()
         MediaManager.shared.initMedia()
         UIViewController.swizzle()
+        initializeZendesk()
         return true
     }
 
@@ -51,6 +56,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         //app-wide tab bar appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Semibold", size: 16)!], for: .normal)
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = .systemBlue
+    }
+    
+    private func initializeZendesk()
+    {
+        var appId: String
+        var clientId: String
+        let environment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch environment
+        {
+        case Constants.DEV_INDEX:
+            appId = Constants.devZendeskAppId
+            clientId = Constants.devZendeskClientId
+        case Constants.STAGING_INDEX:
+            appId = Constants.prodZendeskAppId
+            clientId = Constants.prodZendeskClientId
+        default:
+            appId = Constants.prodZendeskAppId
+            clientId = Constants.prodZendeskClientId
+        }
+        
+        Zendesk.initialize(
+            appId: appId,
+            clientId: clientId,
+            zendeskUrl: Constants.zenDeskSupportURL
+        )
+        
+        Support.initialize(withZendesk: Zendesk.instance)
+        Chat.initialize(accountKey: Constants.zendeskAccountKey)
+        CoreLogger.enabled = true
+        CoreLogger.logLevel = .debug
     }
 }
 

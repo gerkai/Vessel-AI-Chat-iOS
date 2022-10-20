@@ -43,7 +43,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
-    private var animationView: AnimationView?
+    private var animationView: LottieAnimationView?
     private var retryCount = 0
     let maxRetryCount = 20
     var sampleUUID: String!
@@ -288,9 +288,9 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     }
     
     //MARK: - AlreadyScanedSlideupViewController delegates
-    func alreadyScannedViewResults()
+    func alreadyScannedCustomerSupport()
     {
-        //TODO: navigate to this specific card in results tab
+        ZendeskManager.shared.navigateToChatWithSupport(in: self)
     }
     
     func alreadyScannedScanNewCard()
@@ -301,7 +301,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     //MARK: - CalibrationErrorSlideupViewController delegates
     func calibrationErrorCustomerSupport()
     {
-        //TODO: Navigate to customer support
+        ZendeskManager.shared.navigateToChatWithSupport(in: self)
     }
     
     //MARK: - InvalidQRSlideupViewController delegates

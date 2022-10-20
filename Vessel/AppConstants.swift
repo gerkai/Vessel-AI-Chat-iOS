@@ -27,6 +27,7 @@ struct Constants
     static let websiteURL = "https://vesselhealth.com/pages"
     static let privacyPolicyURL = "\(websiteURL)/privacy-policy.html"
     static let termsOfServiceURL = "\(websiteURL)/terms-of-service.html"
+    static let zenDeskSupportURL = "https://vesselhealth.zendesk.com/hc/en-us"
     
     //media
     static let mediaPath = "https://dittylabs.com/temp/vessel"
@@ -167,6 +168,16 @@ struct Constants
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
     static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)
+    
+    //Zendesk
+    static let prodZendeskAppId = "b6273136dbc4bea26a8ad79ba27bd254d1f63c1ad9cfe7c9"
+    static let devZendeskAppId = "e4ae8e69bbad13f5cc56ebd5539f0feee0d4770850c668f6"
+    static let prodZendeskClientId = "mobile_sdk_client_cfeee48b507a629642f2"
+    static let devZendeskClientId = "mobile_sdk_client_c13e73cb4f8c7c461a39"
+    static let zendeskURL = "https://vesselhealth.zendesk.com"
+    static let zendeskAccountKey = "EWda2709qRt8svzTBZIRlwHEnXaBVIwl"
+    static let prodZendeskChatAppKey = "310166506647351297"
+    static let devZendeskChatAppKey = "310166681225994241"
     
     static func stringForScore(score: Double) -> String
     {

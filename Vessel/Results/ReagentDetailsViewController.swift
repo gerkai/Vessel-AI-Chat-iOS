@@ -182,12 +182,12 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     @IBAction func chatWithHealthCoach()
     {
-        print("Chat With Health Coach")
+        LiveChatManager.shared.navigateToLiveChat(in: self)
     }
     
     @IBAction func customerSupport()
     {
-        print("Customer Support")
+        ZendeskManager.shared.navigateToChatWithSupport(in: self)
     }
     //MARK: - ScienceStudiesViewDelegates
     func didSelectStudy(buttonID: Int)

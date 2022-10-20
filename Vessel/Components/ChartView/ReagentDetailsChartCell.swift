@@ -17,7 +17,7 @@ class ReagentDetailsChartCell: ChartViewCell
         scoreLabel.text = text
         reagentUnit.text = unit
         
-        let zoneHeight = graphView.frame.height / CGFloat(numBuckets)
+        //let zoneHeight = graphView.frame.height / CGFloat(numBuckets)
         //scoreLabelYPosition.constant = CGFloat(bucket) * zoneHeight + (zoneHeight / 2.0)
         //print("bucket: \(bucket), numBuckets: \(numBuckets), zoneHeight: \(zoneHeight), constant: \(scoreLabelYPosition.constant)")
     }

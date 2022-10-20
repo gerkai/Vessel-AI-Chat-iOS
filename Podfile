@@ -15,6 +15,9 @@ def pods
   pod 'Mixpanel-swift'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'
+  pod 'ZendeskAnswerBotSDK' # AnswerBot-only on the Unified SDK
+  pod 'ZendeskChatSDK'      # Chat-only on the Unified SDK
+  pod 'ZendeskSupportSDK'   # Support-only on the Unified SDK
   pod 'SwiftyMarkdown'
 end
 

@@ -199,6 +199,8 @@
 		7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7295133128F7DEC600E4E950 /* CoachTab.storyboard */; };
 		7295568028F67980000DD006 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295567F28F67980000DD006 /* Plan.swift */; };
 		7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295568128F6893E000DD006 /* ReagentFoodViewController.swift */; };
+		729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AA29011C5400EEFB65 /* ZendeskManager.swift */; };
+		729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AC2901220D00EEFB65 /* LiveChatManager.swift */; };
 		7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
@@ -454,6 +456,8 @@
 		7295133128F7DEC600E4E950 /* CoachTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CoachTab.storyboard; sourceTree = "<group>"; };
 		7295567F28F67980000DD006 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		7295568128F6893E000DD006 /* ReagentFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodViewController.swift; sourceTree = "<group>"; };
+		729757AA29011C5400EEFB65 /* ZendeskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZendeskManager.swift; sourceTree = "<group>"; };
+		729757AC2901220D00EEFB65 /* LiveChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatManager.swift; sourceTree = "<group>"; };
 		7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodTableViewCell.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
@@ -561,6 +565,8 @@
 				3FF833AC28A1AD4D005D5B43 /* Reachability.swift */,
 				7271DFAE28FA7F8B00909A9D /* FoodManager.swift */,
 				7271DFB228FA9B4B00909A9D /* PlansManager.swift */,
+				729757AA29011C5400EEFB65 /* ZendeskManager.swift */,
+				729757AC2901220D00EEFB65 /* LiveChatManager.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1518,6 +1524,7 @@
 				7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */,
 				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
 				721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */,
+				729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */,
 				7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
@@ -1616,6 +1623,7 @@
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
+				729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,
 				3F9C679E28FE5FE700BC44FA /* PH.swift in Sources */,
 				3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */,

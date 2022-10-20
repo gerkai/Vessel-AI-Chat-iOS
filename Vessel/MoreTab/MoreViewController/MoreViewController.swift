@@ -97,7 +97,7 @@ extension MoreViewController: UITableViewDelegate
             }
             else
             {
-                openInSafari(url: "https://help.vesselhealth.com")
+                openInSafari(url: Constants.zenDeskSupportURL)
             }
         case .debug:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
