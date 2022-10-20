@@ -120,63 +120,53 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //animates background color of wellness card from poor color to fair color, good color and great color depending on
         //wellness score.
+        let score = testResult.wellnessScore
         let sectionSize = 0.25
-        var remainingScore = testResult.wellnessScore
-        let sectionTime = sectionSize / remainingScore * wellnessCardAnimationTime
+        let numSections = score / sectionSize
         
-        if remainingScore > sectionSize
+        //var remainingScore = testResult.wellnessScore
+        let sectionTime = wellnessCardAnimationTime / numSections
+        
+        if score >= sectionSize
         {
-            remainingScore -= sectionSize
-            //print("Animating to Fair with remaining score: \(remainingScore)")
-            var duration = (remainingScore / sectionSize) * sectionTime
-            if duration > sectionTime
+            if score < 0.5
             {
-                duration = sectionTime
-            }
-            var percentage = duration / sectionTime
-            //print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
-            UIView.animate(withDuration: duration, delay: sectionTime, options: .curveLinear)
-            {
-                self.setBackgroundColor(startColor: Constants.POOR_COLOR, endColor: Constants.FAIR_COLOR, percentage: percentage)
-            }
-            completion:
-            { completed in
-                //Animate to Good
-                remainingScore -= sectionSize
-                if remainingScore > 0
+                UIView.animate(withDuration: wellnessCardAnimationTime, delay: 0, options: .curveLinear)
                 {
-                    //print("Animating to Good with remaining score: \(remainingScore)")
-                    duration = (remainingScore / sectionSize) * sectionTime
-                    
-                    if duration > sectionTime
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+            }
+            else if score < 0.75
+            {
+                UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
+                {
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+                completion:
+                { completed in
+                    UIView.animate(withDuration: self.wellnessCardAnimationTime - sectionTime, delay: 0, options: .curveLinear)
                     {
-                        duration = sectionTime
+                        self.wellnessCard.backgroundColor = Constants.vesselGood
                     }
-                    percentage = duration / sectionTime
-                    UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
+                }
+            }
+            else
+            {
+                UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
+                {
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+                completion:
+                { completed in
+                    UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
                     {
-                        self.setBackgroundColor(startColor: Constants.FAIR_COLOR, endColor: Constants.GOOD_COLOR, percentage: percentage)
+                        self.wellnessCard.backgroundColor = Constants.vesselGood
                     }
                     completion:
-                    { _ in
-                        //Animate to Great
-                        remainingScore -= sectionSize
-                        if remainingScore > 0
+                    { completed in
+                        UIView.animate(withDuration: self.wellnessCardAnimationTime - (sectionTime * 2), delay: 0, options: .curveLinear)
                         {
-                            //print("Animating to Great with remaining score: \(remainingScore)")
-                            duration = (remainingScore / sectionSize) * sectionTime
-                            if duration > sectionTime
-                            {
-                                duration = sectionTime
-                            }
-                            percentage = duration / sectionTime
-                            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
-                            {
-                                self.setBackgroundColor(startColor: Constants.GOOD_COLOR, endColor: Constants.GREAT_COLOR, percentage: percentage)
-                            }
-                            completion:
-                            { _ in
-                            }
+                            self.wellnessCard.backgroundColor = Constants.vesselGreat
                         }
                     }
                 }
@@ -357,6 +347,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     
     func setBackgroundColor(startColor: Color, endColor: Color, percentage: Double)
     {
+        print("Setting color from: \(startColor) to \(endColor), percentage: \(percentage)")
         var percent = CGFloat(percentage)
         if percent > 1.0
         {
@@ -428,7 +419,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //used for test/debug
         
-        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.73, insert_date: "2022-09-24T15:22:14", reagentResults: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.81, insert_date: "2022-09-24T15:22:14", reagentResults: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
                                                                         ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
                                                                         ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
                                                                         ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),
