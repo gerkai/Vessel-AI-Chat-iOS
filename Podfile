@@ -15,6 +15,7 @@ def pods
   pod 'Mixpanel-swift'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'
+  pod 'SwiftyMarkdown'
 end
 
 target 'Vessel' do

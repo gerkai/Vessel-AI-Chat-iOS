@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyMarkdown
 
 extension String
 {
@@ -36,5 +37,16 @@ extension String
     var firstUppercased: String
     {
         prefix(1).uppercased() + dropFirst()
+    }
+    
+    func makeAttributedString() -> NSMutableAttributedString
+    {
+        var attrStr = NSMutableAttributedString()
+        let md = SwiftyMarkdown(string: self)
+        if let attributedString = md.attributedString() as? NSMutableAttributedString
+        {
+            attrStr = attributedString
+        }
+        return attrStr
     }
 }

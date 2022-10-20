@@ -12,7 +12,6 @@ protocol SelectionCheckmarkViewDelegate
     func didTapCheckmark(_ isChecked: Bool)
 }
 
-@IBDesignable
 class SelectionCheckmarkView: UIView
 {
     @IBOutlet var contentView: UIView!

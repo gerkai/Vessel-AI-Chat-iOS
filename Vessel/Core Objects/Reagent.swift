@@ -116,12 +116,25 @@ struct Bucket
     let high: Double
     let score: Float
     let evaluation: Evaluation
+    let hint: TitleDescription
+}
+
+struct TitleDescription
+{
+    let title: String
+    let description: String
 }
 
 struct GoalImpact
 {
     let goalID: Int
     let impact: Int
+}
+
+struct GoalSources
+{
+    let goalID: Goal.ID
+    let sources: [Source]
 }
 
 struct Reagent
@@ -149,6 +162,8 @@ struct Reagent
     var imageName: String
     var buckets: [Bucket]
     var goalImpacts: [GoalImpact]
+    var goalSources: [GoalSources]
+    var moreInfo: [TitleDescription]
     
     //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
     //returns .notAvailable if invalid parameter given
@@ -182,6 +197,40 @@ struct Reagent
         return Evaluation.notAvailable
     }
     
+    func rangeFor(value: Double) -> String
+    {
+        //returns the lower and upper ranges of the bucket this value falls in
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                if (Double(Int(bucket.low)) == bucket.low) && (Double(Int(bucket.high)) == bucket.high)
+                {
+                    return "\(Int(bucket.low)) - \(Int(bucket.high))"
+                }
+                return "\(bucket.low) - \(bucket.high)"
+            }
+        }
+        return NSLocalizedString("N/A", comment: "Abbreviation for 'not available'")
+    }
+    
+    //returns which bucket this value falls in. If out of range of all buckets, returns nil
+    func getBucketIndex(value: Double) -> Int?
+    {
+        var index: Int?
+        var i = 0
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                index = i
+                break
+            }
+            i += 1
+        }
+        return index
+    }
+    
     //given a goalID, this will return the impact level for that goal. 0 if none, or not found.
     func impactFor(goal: Int) -> Int
     {
@@ -195,6 +244,18 @@ struct Reagent
             }
         }
         return impact
+    }
+    
+    func sources(for goal: Goal.ID) -> [Source]
+    {
+        for source in goalSources
+        {
+            if source.goalID == goal
+            {
+                return source.sources
+            }
+        }
+        return []
     }
     
     static func reagentsFor(goal: Int, withImpactAtLease: Int) -> [Int]
@@ -215,289 +276,27 @@ struct Reagent
         }
         return reagentIDs
     }
+    
+    //given a reagentID (Int), return the associated Reagent
+    static func fromID(id: Int) -> Reagent
+    {
+        let reagentID = Reagent.ID(rawValue: id)!
+        return Reagents[reagentID]!
+    }
 }
 
 //Here are the reagents used by the app
 let Reagents: [Reagent.ID: Reagent] =
 //PH
-[Reagent.ID.PH: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
-            unit: NSLocalizedString("pH", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("pH", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "pH",
-            buckets: [Bucket(low: 5.0,
-                             high: 6.0,
-                             score: 30.0,
-                             evaluation: .low),
-                      Bucket(low: 6.0,
-                             high: 7.75,
-                             score: 100.0,
-                             evaluation: .good),
-                      Bucket(low: 7.78,
-                             high: 8.0,
-                             score: 30.0,
-                             evaluation: .high)],
-                       goalImpacts: [GoalImpact(goalID: 5, impact: 1),
-                                     GoalImpact(goalID: 6, impact: 1),
-                                     GoalImpact(goalID: 10, impact: 2),
-                                    ]),
-
- //HYDRATION
- Reagent.ID.HYDRATION: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
-            unit: NSLocalizedString("sp gr", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "Hydration",
-            buckets: [Bucket(low: 1.0,
-                             high: 1.0015,
-                             score: 80.0,
-                             evaluation: .high),
-                        Bucket(low: 1.0015,
-                                high: 1.006,
-                                score: 100.0,
-                                evaluation: .good),
-                        Bucket(low: 1.006,
-                                 high: 1.015,
-                                 score: 80.0,
-                                 evaluation: .low),
-                        Bucket(low: 1.015,
-                                 high: 1.03,
-                                 score: 20.0,
-                                 evaluation: .veryLow)],
-                       goalImpacts: [GoalImpact(goalID: 1, impact: 1),
-                                     GoalImpact(goalID: 2, impact: 3),
-                                     GoalImpact(goalID: 3, impact: 1),
-                                     GoalImpact(goalID: 4, impact: 1),
-                                     GoalImpact(goalID: 5, impact: 3),
-                                     GoalImpact(goalID: 6, impact: 2),
-                                     GoalImpact(goalID: 7, impact: 1),
-                                     GoalImpact(goalID: 9, impact: 3),
-                                     GoalImpact(goalID: 10, impact: 3)
-                                    ]),
-
- //KETONES
- Reagent.ID.KETONES_A: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
-            unit: NSLocalizedString("mmol/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "Ketones",
-            buckets: [Bucket(low: 0.0,
-                             high: 2.21,
-                             score: 0.0,
-                             evaluation: .ketoLow),
-                      Bucket(low: 2.21,
-                             high: 8.81,
-                              score: 0,
-                              evaluation: .ketoHigh)],
-            goalImpacts: [GoalImpact(goalID: 1, impact: 1),
-                          GoalImpact(goalID: 2, impact: 1),
-                          GoalImpact(goalID: 3, impact: 1),
-                          GoalImpact(goalID: 5, impact: 2),
-                          GoalImpact(goalID: 6, impact: 3)
-                         ]),
-
- //VITAMIN C
- Reagent.ID.VITAMIN_C: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 90,
-            imageName: "Vitamin C",
-            buckets: [Bucket(low: 0.0,
-                             high: 350.0,
-                             score: 20.0,
-                             evaluation: .low),
-                      Bucket(low: 350,
-                             high: 1000,
-                             score: 100.0,
-                              evaluation: .good)],
-            goalImpacts: [GoalImpact(goalID: 1, impact: 3),
-                          GoalImpact(goalID: 2, impact: 2),
-                          GoalImpact(goalID: 3, impact: 1),
-                          GoalImpact(goalID: 4, impact: 1),
-                          GoalImpact(goalID: 5, impact: 2),
-                          GoalImpact(goalID: 6, impact: 1),
-                          GoalImpact(goalID: 7, impact: 1),
-                          GoalImpact(goalID: 8, impact: 3),
-                          GoalImpact(goalID: 10, impact: 1)
-                        ]),
-
- //MAGNESIUM
- Reagent.ID.MAGNESIUM: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 400,
-            imageName: "Magnesium",
-            buckets: [Bucket(low: 0.0,
-                             high: 100.0,
-                             score: 20.0,
-                             evaluation: .low),
-                      Bucket(low: 100.0,
-                            high: 300.0,
-                             score: 80.0,
-                            evaluation: .good),
-                      Bucket(low: 300.0,
-                             high: 1000.0,
-                             score: 100.0,
-                            evaluation: .excellent)],
-            goalImpacts: [GoalImpact(goalID: 1, impact: 3),
-                        GoalImpact(goalID: 2, impact: 1),
-                        GoalImpact(goalID: 3, impact: 2),
-                        GoalImpact(goalID: 4, impact: 3),
-                        GoalImpact(goalID: 5, impact: 3),
-                        GoalImpact(goalID: 6, impact: 3),
-                        GoalImpact(goalID: 7, impact: 1),
-                        GoalImpact(goalID: 8, impact: 1),
-                        GoalImpact(goalID: 9, impact: 2),
-                        GoalImpact(goalID: 10, impact: 3)
-                        ]),
-
- //CORTISOL
- Reagent.ID.CORTISOL: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
-            type: .LFA,
-            recommendedDailyAllowance: nil,
-            imageName: "Cortisol",
-            buckets: [Bucket(low: 0.0,
-                             high: 50.0,
-                             score: 80.0,
-                             evaluation: .low),
-                      Bucket(low: 50.0,
-                             high: 150.0,
-                                score: 100.0,
-                                evaluation: .good),
-                      Bucket(low: 150.0,
-                             high: 405.0,
-                                 score: 50.0,
-                                 evaluation: .high)],
-              goalImpacts: [GoalImpact(goalID: 1, impact: 3),
-                            GoalImpact(goalID: 2, impact: 2),
-                            GoalImpact(goalID: 3, impact: 3),
-                            GoalImpact(goalID: 4, impact: 3),
-                            GoalImpact(goalID: 5, impact: 3),
-                            GoalImpact(goalID: 6, impact: 3),
-                            GoalImpact(goalID: 7, impact: 1),
-                            GoalImpact(goalID: 8, impact: 2),
-                            GoalImpact(goalID: 9, impact: 1),
-                            GoalImpact(goalID: 10, impact: 1)
-                            ]),
-
- //VITAMIN B7
- Reagent.ID.VITAMIN_B7: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
-            type: .LFA,
-            recommendedDailyAllowance: 30,
-            imageName: "B7",
-            buckets: [Bucket(low: 0.0,
-                             high: 10.0,
-                             score: 50.0,
-                             evaluation: .low),
-                      Bucket(low: 10.0,
-                             high: 20.0,
-                             score: 100.0,
-                              evaluation: .good)],
-            goalImpacts: [GoalImpact(goalID: 1, impact: 2),
-                          GoalImpact(goalID: 5, impact: 2),
-                          GoalImpact(goalID: 6, impact: 3),
-                          GoalImpact(goalID: 7, impact: 3),
-                          GoalImpact(goalID: 8, impact: 1)
-                          ]),
-
- //CALCIUM
- Reagent.ID.CALCIUM: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 0,
-            imageName: "Calcium",
-            buckets: [Bucket(low: 0.0,
-                             high: 30.0,
-                             score: 30.0,
-                             evaluation: .low),
-                      Bucket(low: 30.0,
-                             high: 110.0,
-                                score: 100.0,
-                                evaluation: .good),
-                      Bucket(low: 110.0,
-                             high: 160.0,
-                                 score: 70.0,
-                                 evaluation: .high)],
-             goalImpacts: [GoalImpact(goalID: 1, impact: 1),
-                           GoalImpact(goalID: 2, impact: 1),
-                           GoalImpact(goalID: 3, impact: 1),
-                           GoalImpact(goalID: 4, impact: 2),
-                           GoalImpact(goalID: 6, impact: 3),
-                           GoalImpact(goalID: 7, impact: 2),
-                           GoalImpact(goalID: 8, impact: 1),
-                           GoalImpact(goalID: 9, impact: 1),
-                           GoalImpact(goalID: 10, impact: 3)
-                           ]),
-
- //NITRITES
- Reagent.ID.NITRITE: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "UrinaryTract",
-            buckets: [Bucket(low: 0.0,
-                             high: 1.0,
-                             score: 0.0,
-                             evaluation: .good),
-                      Bucket(low: 1.0,
-                             high: 3.0,
-                                score: 0.0,
-                                evaluation: .low),
-                      Bucket(low: 3.0,
-                             high: 8.0,
-                                 score: 0.0,
-                                 evaluation: .high)],
-             goalImpacts: []),
-
- //LEUKOCYTE
- Reagent.ID.LEUKOCYTE: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "UrinaryTract",
-            buckets: [Bucket(low: 0.0,
-                             high: 60.0,
-                             score: 0.0,
-                             evaluation: .notDetected),
-                      Bucket(low: 60.0,
-                             high: 120.0,
-                             score: 0.0,
-                              evaluation: .detected)],
-           goalImpacts: []),
-
- //SODIUM CHLORIDE
- Reagent.ID.SODIUM: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
-            unit: NSLocalizedString("mEq/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mEq", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 0,
-            imageName: "Sodium",
-            buckets: [Bucket(low: 0.0,
-                             high: 50.0,
-                             score: 100.0,
-                             evaluation: .good),
-                      Bucket(low: 50.0,
-                             high: 120.0,
-                             score: 50.0,
-                              evaluation: .high)],
-            goalImpacts: [GoalImpact(goalID: 1, impact: 2),
-                          GoalImpact(goalID: 2, impact: 2),
-                          GoalImpact(goalID: 3, impact: 2),
-                          GoalImpact(goalID: 4, impact: 1),
-                          GoalImpact(goalID: 6, impact: 3),
-                          GoalImpact(goalID: 8, impact: 1),
-                          GoalImpact(goalID: 10, impact: 3)
-                          ]),
+[Reagent.ID.PH: PH,
+ Reagent.ID.HYDRATION: Hydration,
+ Reagent.ID.KETONES_A: Ketones,
+ Reagent.ID.VITAMIN_C: VitaminC,
+ Reagent.ID.MAGNESIUM: Magnesium,
+ Reagent.ID.CORTISOL: Cortisol,
+ Reagent.ID.VITAMIN_B7: VitaminB7,
+ Reagent.ID.CALCIUM: Calcium,
+ Reagent.ID.NITRITE: Nitrite,
+ Reagent.ID.LEUKOCYTE: Leukocyte,
+ Reagent.ID.SODIUM: Sodium
 ]

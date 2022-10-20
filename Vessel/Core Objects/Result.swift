@@ -30,7 +30,7 @@ struct Result: CoreObjectProtocol, Codable
     
     var wellnessScore: Double
     
-    let reagents: [ReagentResult]
+    let reagentResults: [ReagentResult]
     
     enum CodingKeys: String, CodingKey
     {
@@ -39,16 +39,16 @@ struct Result: CoreObjectProtocol, Codable
         case card_uuid
         case wellnessScore = "wellness_score"
         //case insert_date
-        case reagents
+        case reagentResults = "reagents" //should change this to reagentResults on back end
     }
     
     init(id: Int = 0,
-         last_updated: Int = 0, storage: StorageType = .cache, card_uuid: String = "12345", wellnessScore: Double = 0.85, insert_date: String = "", reagents: [ReagentResult] = [])
+         last_updated: Int = 0, storage: StorageType = .cache, card_uuid: String = "12345", wellnessScore: Double = 0.85, insert_date: String = "", reagentResults: [ReagentResult] = [])
          
     {
         self.storage = storage
         self.wellnessScore = wellnessScore
-        self.reagents = reagents
+        self.reagentResults = reagentResults
         self.last_updated = last_updated
         self.id = id
         self.card_uuid = card_uuid
@@ -71,23 +71,31 @@ struct Result: CoreObjectProtocol, Codable
     
     func getResult(id: Reagent.ID) -> ReagentResult?
     {
-        var result: ReagentResult?
-        for reagent in reagents
+        var reagentResult: ReagentResult?
+        for result in reagentResults
         {
-            if id.rawValue == reagent.id
+            if id.rawValue == result.id
             {
-                result = reagent
+                reagentResult = result
                 break
             }
         }
-        return result
+        return reagentResult
     }
+    
+    /*func reagentWith(id: Int) -> Reagent
+    {
+        for result in reagentResults
+        {
+            
+        }
+    }*/
 }
 
 //These are what the reagents[] array in the Result holds
 struct ReagentResult: Codable
 {
-    let id: Int
+    let id: Int //the id of the reagent
     let score: Double
     let value: Double
     var errorCodes: [Int]

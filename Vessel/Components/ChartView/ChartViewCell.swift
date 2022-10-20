@@ -19,20 +19,13 @@ class ChartViewCell: UICollectionViewCell
     @IBOutlet weak var infoHeight: NSLayoutConstraint!
     @IBOutlet weak var frostedView: UIView!
     @IBOutlet weak var graphView: GraphView!
-    @IBOutlet weak var wellnessScoreLabel: UILabel!
-    @IBOutlet weak var wellnessLabelYPosition: NSLayoutConstraint!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var scoreLabelYPosition: NSLayoutConstraint!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
-    var wellnessScore: CGFloat = 0.0
-    {
-        didSet
-        {
-            //print("Did set wellness score to \(wellnessScore)")
-            setWellnessLabelPosition()
-        }
-    }
+    var score: CGFloat = 0.0 //This variable is overridden in ResultsChartCell and ReagentDetailsChartCell classes
     var delegate: ChartViewCellDelegate?
     var originalHeight: Double!
     var animatingSelected = false
@@ -40,6 +33,7 @@ class ChartViewCell: UICollectionViewCell
     
     override func awakeFromNib()
     {
+        //print("CELL: awakeFromNib")
         super.awakeFromNib()
         originalHeight = infoHeight.constant
         NotificationCenter.default.addObserver(self, selector: #selector(self.selected(_:)), name: .selectChartViewCell, object: nil)
@@ -57,13 +51,15 @@ class ChartViewCell: UICollectionViewCell
     
     func select(selectionIntent: Bool)
     {
+       // print("SELECT CELL")
         graphView.isSelected = selectionIntent
         graphView.layoutIfNeeded()
         if selectionIntent
         {
+            //print("ChartViewCell: Select")
             infoHeight.constant = frame.height
             infoView.alpha = 1.0
-            setWellnessLabelPosition()
+            setScoreLabelPosition()
         }
         else
         {
@@ -72,10 +68,16 @@ class ChartViewCell: UICollectionViewCell
         }
     }
     
-    func setWellnessLabelPosition()
+    func setScoreLabelPosition()
     {
-        //print("wellnessScore: \(wellnessScore), graphHeight: \(graphView.bounds.height), regionSize: \(graphView.pointRegionSize)")
-        wellnessLabelYPosition.constant = -wellnessScore * (graphView.bounds.height - graphView.pointRegionSize) - 30.0
+        //print("setScoreLabelPosition for cell: \(tag)")
+        //print("frame: \(frame), graphViewFrame: \(graphView.frame)")
+        //sets the infoView bottom to be slightly above the plotted dot in the graphView
+        graphView.layoutIfNeeded()
+        //get position from the coordinate plotted in the graphView and convert point to same location in our view
+        let coordinate = graphView.convert(graphView.coordFor(index: 2), to: self)  //index 2 is the displayed point
+        
+        scoreLabelYPosition.constant = coordinate.y - 20.0 //bump it up slightly
     }
     
     @objc func selected(_ notification: NSNotification)
@@ -97,7 +99,7 @@ class ChartViewCell: UICollectionViewCell
                             self.infoHeight.constant = selectedHeight
                             self.layoutIfNeeded()
                         }
-                    completion:
+                        completion:
                         { finished in
                             if finished == true
                             {
@@ -106,7 +108,7 @@ class ChartViewCell: UICollectionViewCell
                                 {
                                     self.graphView.isSelected = true
                                     self.infoView.alpha = 1.0
-                                    self.setWellnessLabelPosition()
+                                    self.setScoreLabelPosition()
                                 }
                             }
                         }
@@ -118,14 +120,13 @@ class ChartViewCell: UICollectionViewCell
                     self.infoHeight.constant = selectedHeight
                     self.graphView.isSelected = true
                     self.infoView.alpha = 1.0
-                    self.setWellnessLabelPosition()
+                    self.setScoreLabelPosition()
                     self.animatingSelected = false
                 }
             }
             else
             {
                 //animate to unselected state
-                
                 if notification.userInfo?["animated"] as? Bool == true
                 {
                     if animatingUnselected == false

@@ -159,6 +159,9 @@ struct Constants
     static let FAIR_STRING = NSLocalizedString("Fair", comment: "")
     static let GOOD_STRING = NSLocalizedString("Good", comment: "")
     static let GREAT_STRING = NSLocalizedString("Great", comment: "")
+    static let HOW_TO_READ_THE_GRAPH = NSLocalizedString("How to read the graph", comment: "")
+    static let WHY_IT_MATTERS = NSLocalizedString("Why It Matters", comment: "")
+    static let TIPS_TO_IMPROVE = NSLocalizedString("Tips to Improve", comment: "")
     
     //Fonts
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
