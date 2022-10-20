@@ -15,8 +15,21 @@ class StudiesViewController: UIViewController, SourceInfoViewDelegate
     var reagentID: Reagent.ID!
     var goalID: Goal.ID!
     
+    static func initWith(reagentID: Reagent.ID, goalID: Goal.ID) -> StudiesViewController
+    {
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "StudiesViewController") as! StudiesViewController
+        vc.goalID = goalID
+        vc.reagentID = reagentID
+        return vc
+    }
+    
     override func viewDidLoad()
     {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
         let reagent = Reagents[reagentID]!
         let goal = Goals[goalID]!
         let title = "\(reagent.name.capitalized) & \(goal.name.capitalized)"
@@ -30,6 +43,14 @@ class StudiesViewController: UIViewController, SourceInfoViewDelegate
             let infoView = SourceInfoView(content: source.text, url: source.url)
             infoView.delegate = self
             studiesStackView.addArrangedSubview(infoView)
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
         }
     }
     

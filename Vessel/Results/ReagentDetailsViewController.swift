@@ -25,7 +25,10 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     override func viewDidLoad()
     {
-        print("VIEW DID LOAD")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 did load \(self)")
+        }
         super.viewDidLoad()
         
         scrollView.delegate = self
@@ -42,8 +45,17 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         populateTipsSection()
     }
     
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
+    }
+    
     @IBAction func back()
     {
+        viewModel = nil
         navigationController?.popViewController(animated: true)
     }
     
@@ -180,10 +192,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     //MARK: - ScienceStudiesViewDelegates
     func didSelectStudy(buttonID: Int)
     {
-        let storyboard = UIStoryboard(name: "Results", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "StudiesViewController") as! StudiesViewController
-        vc.goalID = Goal.ID(rawValue: buttonID)
-        vc.reagentID = Reagent.ID(rawValue: reagentID)
+        let vc = StudiesViewController.initWith(reagentID: Reagent.ID(rawValue: reagentID)!, goalID: Goal.ID(rawValue: buttonID)!)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

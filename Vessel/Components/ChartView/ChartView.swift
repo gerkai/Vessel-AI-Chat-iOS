@@ -12,14 +12,14 @@ extension Notification.Name
     static let selectChartViewCell = Notification.Name("SelectChartViewCell")
 }
 
-protocol ChartViewDataSource
+protocol ChartViewDataSource: AnyObject
 {
     func chartViewNumDataPoints() -> Int
     func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)
     func chartViewWhichCellSelected(cellIndex: Int) -> Bool
 }
 
-protocol ChartViewDelegate
+protocol ChartViewDelegate: AnyObject
 {
     func ChartViewInfoTapped()
     func chartViewCellSelected(cellIndex: Int)
@@ -27,22 +27,22 @@ protocol ChartViewDelegate
 
 class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ChartViewCellDelegate
 {
-    enum type
+    enum ChartViewType
     {
         case wellnessScore
         case reagentDetails
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataSource: ChartViewDataSource!
+    weak var dataSource: ChartViewDataSource!
     
     var selectedCell = 0
-    var delegate: ChartViewDelegate?
+    weak var delegate: ChartViewDelegate?
     var reagentID: Int?
     
     //if true, this will draw the tick marks on the right side of the selected cell. Defaults to true.
     var showScaleOnSelection = true
-    var chartType = type.wellnessScore
+    var chartType = ChartViewType.wellnessScore
     
     override func awakeFromNib()
     {

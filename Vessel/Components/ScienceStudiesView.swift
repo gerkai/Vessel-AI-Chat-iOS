@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ScienceStudiesViewDelegate
+protocol ScienceStudiesViewDelegate: AnyObject
 {
     func didSelectStudy(buttonID: Int)
 }
@@ -20,7 +20,7 @@ class ScienceStudiesView: UIView
     
     var goal: String
     var numStudies: String
-    var delegate: ScienceStudiesViewDelegate?
+    weak var delegate: ScienceStudiesViewDelegate?
     
     init(goalID: Goal.ID, studies: String)
     {
@@ -35,6 +35,11 @@ class ScienceStudiesView: UIView
     required init?(coder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit
+    {
+        print("ScienceStudiesView DEINIT")
     }
     
     func commonInit()

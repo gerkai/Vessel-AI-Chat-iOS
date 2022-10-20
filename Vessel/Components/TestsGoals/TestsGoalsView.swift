@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TestsGoalsViewDelegate
+protocol TestsGoalsViewDelegate: AnyObject
 {
     func learnMoreAboutReagent(id: Int)
     func learnMoreAboutGoal(id: Int)
@@ -19,7 +19,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     @IBOutlet weak var testsStackView: UIStackView!
     @IBOutlet weak var goalsStackView: UIStackView!
     @IBOutlet weak var curvyLineView: CurvyLineView!
-    var delegate: TestsGoalsViewDelegate?
+    weak var delegate: TestsGoalsViewDelegate?
     
     var isAnimated = false
     let CURVY_LINE_TILE_SPACE = CGFloat(7.0) //space between curvy line and tile

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SourceInfoViewDelegate
+protocol SourceInfoViewDelegate: AnyObject
 {
     func moreButtonPressed(url: String)
 }
@@ -17,7 +17,7 @@ class SourceInfoView: UIView
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var infoLabel: UILabel!
     
-    var delegate: SourceInfoViewDelegate?
+    weak var delegate: SourceInfoViewDelegate?
     var content: String!
     var url: String!
     
