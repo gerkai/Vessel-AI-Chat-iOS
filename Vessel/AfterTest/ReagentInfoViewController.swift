@@ -23,6 +23,18 @@ class ReagentInfoViewController: AfterTestMVVMViewController, VesselScreenIdenti
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .resultsTabFlow
     
+    static func initWith(viewModel: AfterTestViewModel, result: AfterTestViewControllerData) -> ReagentInfoViewController
+    {
+        let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
+        vc.viewModel = viewModel
+        vc.titleText = result.title
+        vc.details = result.details
+        vc.image = UIImage.init(named: result.imageName)
+        
+        return vc
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

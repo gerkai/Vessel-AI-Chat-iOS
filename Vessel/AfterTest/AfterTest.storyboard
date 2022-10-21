@@ -237,10 +237,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyH-eX-HfG" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="309.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="329.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6o-NN-iby">
-                                                <rect key="frame" x="20" y="114" width="374" height="195.5"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6o-NN-iby">
+                                                <rect key="frame" x="20" y="114" width="374" height="215.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WUW-8N-X2W">
                                                         <rect key="frame" x="220" y="0.0" width="154" height="104"/>
@@ -250,18 +250,19 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHo-ET-7cz">
-                                                        <rect key="frame" x="20" y="80" width="334" height="39.5"/>
+                                                        <rect key="frame" x="20" y="80" width="254" height="39.5"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                         <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EP7-YO-Vpa">
-                                                        <rect key="frame" x="20" y="131.5" width="334" height="24"/>
+                                                        <rect key="frame" x="20" y="131.5" width="334" height="44"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="Label">
+                                                            <fragment content="This is multiple lines of text to see how it looks when it's printed in the view">
                                                                 <attributes>
+                                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="16" name="NoeText-Book"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="12" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
@@ -271,7 +272,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="EP7-YO-Vpa" secondAttribute="bottom" constant="40" id="GLS-pA-jWE"/>
-                                                    <constraint firstAttribute="trailing" secondItem="HHo-ET-7cz" secondAttribute="trailing" constant="20" id="Mr6-hh-t79"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HHo-ET-7cz" secondAttribute="trailing" constant="100" id="Mr6-hh-t79"/>
                                                     <constraint firstItem="WUW-8N-X2W" firstAttribute="trailing" secondItem="f6o-NN-iby" secondAttribute="trailing" id="WqY-d7-nMn"/>
                                                     <constraint firstItem="EP7-YO-Vpa" firstAttribute="leading" secondItem="f6o-NN-iby" secondAttribute="leading" constant="20" id="dRw-Fl-lMl"/>
                                                     <constraint firstItem="HHo-ET-7cz" firstAttribute="leading" secondItem="f6o-NN-iby" secondAttribute="leading" constant="20" id="gWR-XD-Tot"/>
@@ -307,7 +308,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Oo8-fG-bGa"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-6E-PaQ">
-                                <rect key="frame" x="30" y="48" width="50" height="50"/>
+                                <rect key="frame" x="20" y="48" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="7ro-uA-wLc"/>
                                     <constraint firstAttribute="height" constant="50" id="Cu7-hg-EWr"/>
@@ -379,7 +380,7 @@
                         <viewLayoutGuide key="safeArea" id="hSA-8H-KOX"/>
                         <color key="backgroundColor" red="0.99323421720000005" green="0.96607202290000005" blue="0.92845708130000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="e6d-6E-PaQ" firstAttribute="leading" secondItem="hSA-8H-KOX" secondAttribute="leading" constant="30" id="2lx-NQ-kEb"/>
+                            <constraint firstItem="e6d-6E-PaQ" firstAttribute="leading" secondItem="hSA-8H-KOX" secondAttribute="leading" constant="20" id="2lx-NQ-kEb"/>
                             <constraint firstItem="kEB-hu-dhZ" firstAttribute="leading" secondItem="hSA-8H-KOX" secondAttribute="leading" id="9hZ-OK-UIW"/>
                             <constraint firstItem="hSA-8H-KOX" firstAttribute="trailing" secondItem="Ehz-7B-088" secondAttribute="trailing" constant="30" id="9tO-nf-OWJ"/>
                             <constraint firstItem="Ehz-7B-088" firstAttribute="leading" secondItem="hSA-8H-KOX" secondAttribute="leading" constant="30" id="B1t-En-l0y"/>
@@ -432,8 +433,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose up to 3 Foods to Add to your Plan:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByI-Sy-Cq5">
-                                <rect key="frame" x="20" y="168.5" width="305" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose up to 3 foods to add to your plan:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByI-Sy-Cq5">
+                                <rect key="frame" x="20" y="168.5" width="299" height="16"/>
                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
