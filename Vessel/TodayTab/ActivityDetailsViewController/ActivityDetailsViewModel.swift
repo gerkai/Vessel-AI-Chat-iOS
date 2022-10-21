@@ -54,7 +54,10 @@ class ActivityDetailsViewModel
         guard let nutrientsArray = food.nutrients else { return "" }
         for nutrient in nutrientsArray
         {
-            reagents.append("• \(nutrient.name)\(nutrient == nutrientsArray.last ? "" : "\n")")
+            if nutrient.quantity > 0
+            {
+                reagents.append("• \(nutrient.name)\(nutrient == nutrientsArray.last ? "" : "\n")")
+            }
         }
         return reagents
     }
@@ -65,7 +68,17 @@ class ActivityDetailsViewModel
         guard let nutrientsArray = food.nutrients else { return "" }
         for nutrient in nutrientsArray
         {
-            quantities.append("\(Int(nutrient.quantity))\(nutrient == nutrientsArray.last ? "" : "\n")")
+            if nutrient.quantity > 0
+            {
+                if nutrient.quantity < 1
+                {
+                    quantities.append("\(Int(nutrient.quantity * 1000))\(nutrient == nutrientsArray.last ? " μg" : " μg\n")")
+                }
+                else
+                {
+                    quantities.append("\(Int(nutrient.quantity))\(nutrient == nutrientsArray.last ? " mg" : " mg\n")")
+                }
+            }
         }
         return quantities
     }
