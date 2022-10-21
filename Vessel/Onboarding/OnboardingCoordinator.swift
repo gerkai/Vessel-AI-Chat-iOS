@@ -10,6 +10,7 @@
 //  TODO: Ensure coordinator gets deallocated once onboarding flow is complete
 
 import UIKit
+import Bugsee
 
 //this enum determines the order the onboarding screens will appear
 enum OnboardingState: Int
@@ -55,6 +56,15 @@ class OnboardingCoordinator
     {
         //MainContact is guaranteed
         let contact = Contact.main()!
+        
+        //set Bugsee contact information
+        if let email = contact.email
+        {
+            Bugsee.setEmail(email)
+        }
+        Bugsee.setAttribute("contact_id", value: contact.id)
+        
+        //if gender is nil, have user go through whole onboarding process
         if contact.gender == nil || contact.gender?.count == 0
         {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)

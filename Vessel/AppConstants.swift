@@ -63,6 +63,9 @@ struct Constants
     static let DevMixpanelToken = "c59e2fe4109393b804d14910f37323b1"
     static let DevMixpanelAPISecret = "879879b5f7e32ff541ff968e5b249429"
     
+    //Bugsee
+    static let bugseeKey = "552f7749-4035-41e4-8c1b-895630d6ef84"
+    
     //used for reducing content on smaller screens
     static let SMALL_SCREEN_HEIGHT_THRESHOLD = 700.0
     
