@@ -30,6 +30,7 @@ class ChartViewCell: UICollectionViewCell
     var originalHeight: Double!
     var animatingSelected = false
     var animatingUnselected = false
+    var selectedHeightOffset = 0.0
     
     override func awakeFromNib()
     {
@@ -57,7 +58,7 @@ class ChartViewCell: UICollectionViewCell
         if selectionIntent
         {
             //print("ChartViewCell: Select")
-            infoHeight.constant = frame.height
+            infoHeight.constant = frame.height - selectedHeightOffset
             infoView.alpha = 1.0
             setScoreLabelPosition()
         }
@@ -82,7 +83,7 @@ class ChartViewCell: UICollectionViewCell
     
     @objc func selected(_ notification: NSNotification)
     {
-        let selectedHeight = frame.height
+        let selectedHeight = frame.height - selectedHeightOffset
         if let cell = notification.userInfo?["cell"] as? Int
         {
             if cell == tag
