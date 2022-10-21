@@ -39,7 +39,7 @@ let Calcium = Reagent(
         GoalImpact(goalID: 10, impact: 3)],
     goalSources: [
         GoalSources(goalID: .CALM, sources: [
-            Source(url: "https://pubmed.ncbi.nlm.nih.gov/35215428/#:~:text=Results%3A%20A%20total%20of%201233,rumination%2C%20and%20 higher%20 resilience%20scores", text: NSLocalizedString("This study found that higher calcium intakes, particularly from dairy products, were associated with lower reported stress levels and anxiety among students.", comment: ""))]),
+            Source(url: "https://pubmed.ncbi.nlm.nih.gov/35215428", text: NSLocalizedString("This study found that higher calcium intakes, particularly from dairy products, were associated with lower reported stress levels and anxiety among students.", comment: ""))]),
         GoalSources(goalID: .SLEEP, sources: [
             Source(url: "https://www.ncbi.nlm.nih.gov/pubmed/23992533", text: NSLocalizedString("This study found that calcium deficiency was associated with difficulty falling asleep, staying asleep, and a reduction in the overall quality of sleep.", comment: "")),
             Source(url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3866235/", text: NSLocalizedString("This paper found that calcium intake was associated with decreased difficulty falling asleep and improving the quality of sleep.", comment: "")),
