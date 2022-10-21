@@ -62,6 +62,9 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
         
+        //TODO: - remove below line once insights and activites are added
+        segmentedControl.removeSegment(at: 2, animated: false)
+        
         tabDetailsLabel.text = defaultSegmentDetailsString
     }
     

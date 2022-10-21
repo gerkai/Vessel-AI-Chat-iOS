@@ -304,7 +304,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
                 goodAlignmentFrameCounter += 1
                 if goodAlignmentFrameCounter > 30 //subjective
                 {
-                    noticeLabel.text = NSLocalizedString("Hold Still", comment: "Card placement instructions for user")
+                    noticeLabel.text = NSLocalizedString("Card detected, hold still", comment: "Card placement instructions for user")
                     noticeLabel.backgroundColor = Constants.vesselGreat
                     if goodAlignmentFrameCounter > 75 //subjective
                     {
