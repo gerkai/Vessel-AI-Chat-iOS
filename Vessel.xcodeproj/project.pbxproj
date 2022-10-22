@@ -166,6 +166,8 @@
 		3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB2028FA075F00686D79 /* ChartZone.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */; };
+		3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C571290367EB001643C1 /* ReagentImpactView.swift */; };
+		3FF8C574290367FC001643C1 /* ReagentImpactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8C573290367FC001643C1 /* ReagentImpactView.xib */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
 		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
@@ -421,6 +423,8 @@
 		3FEACB2028FA075F00686D79 /* ChartZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartZone.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsViewController.swift; sourceTree = "<group>"; };
+		3FF8C571290367EB001643C1 /* ReagentImpactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentImpactView.swift; sourceTree = "<group>"; };
+		3FF8C573290367FC001643C1 /* ReagentImpactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReagentImpactView.xib; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
@@ -881,6 +885,8 @@
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
 				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
+				3FF8C571290367EB001643C1 /* ReagentImpactView.swift */,
+				3FF8C573290367FC001643C1 /* ReagentImpactView.xib */,
 				3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */,
 				3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */,
 				3F0405C72890A97D00ADD5FC /* ReagentTileView.swift */,
@@ -1347,6 +1353,7 @@
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
 				72E7FEC328F5CE3500F1A372 /* TodayTab.storyboard in Resources */,
 				3F59A18828E28715005E5F46 /* GoalLearnMoreTileView.xib in Resources */,
+				3FF8C574290367FC001643C1 /* ReagentImpactView.xib in Resources */,
 				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
 				3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */,
@@ -1559,6 +1566,7 @@
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
+				3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
 				3F9C67AE28FE622A00BC44FA /* Nitrite.swift in Sources */,
 				3F9C67A428FE613700BC44FA /* VitaminC.swift in Sources */,
