@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GoalDetailsViewController: UIViewController
+class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
 {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerTitleLabel: UILabel!
@@ -45,6 +45,7 @@ class GoalDetailsViewController: UIViewController
             let impactView = ReagentImpactView()
             let heightConstraint = NSLayoutConstraint(item: impactView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 46)
             impactView.addConstraints([heightConstraint])
+            impactView.delegate = self
             if let reagentID = Reagent.ID(rawValue: reagentResult.id)
             {
                 let reagent = Reagents[reagentID]!
@@ -65,5 +66,11 @@ class GoalDetailsViewController: UIViewController
     {
         viewModel = nil
         navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: - ReagentImpactView delegates
+    func reagentImpactViewTapped()
+    {
+        print("Reagent Impact View tapped")
     }
 }

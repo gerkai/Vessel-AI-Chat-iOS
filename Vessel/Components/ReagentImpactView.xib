@@ -74,10 +74,21 @@
                         </view>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9l9-pM-hNx">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="46"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="tapped" destination="-1" eventType="touchUpInside" id="CZU-Ox-kgQ"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="9l9-pM-hNx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3cH-9l-Yok"/>
+                <constraint firstItem="9l9-pM-hNx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E2l-7C-asB"/>
+                <constraint firstAttribute="trailing" secondItem="9l9-pM-hNx" secondAttribute="trailing" id="NwN-ns-6Rc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9l9-pM-hNx" secondAttribute="bottom" id="Of9-9O-eZM"/>
                 <constraint firstItem="SQ2-aR-OFT" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-12" id="WdG-A0-mC4"/>
                 <constraint firstItem="SQ2-aR-OFT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XK6-Bb-ceI"/>
                 <constraint firstItem="SQ2-aR-OFT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="XP6-tJ-AMl"/>

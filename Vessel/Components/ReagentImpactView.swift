@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol ReagentImpactViewDelegate: AnyObject
+{
+    func reagentImpactViewTapped()
+}
+
 class ReagentImpactView: UIView
 {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var reagentNameLabel: UILabel!
     @IBOutlet weak var evaluationLabel: UILabel!
     @IBOutlet weak var impactImageView: UIImageView!
+    weak var delegate: ReagentImpactViewDelegate?
     
     var numDots: Int = 2
     {
@@ -55,5 +61,10 @@ class ReagentImpactView: UIView
         contentView.fixInView(self)
         //self.backgroundColor = .clear
         
+    }
+    
+    @IBAction func tapped()
+    {
+        delegate?.reagentImpactViewTapped()
     }
 }
