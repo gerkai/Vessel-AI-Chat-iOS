@@ -2,6 +2,7 @@ PODS:
   - AWSCore (2.28.0)
   - AWSS3 (2.28.0):
     - AWSCore (= 2.28.0)
+  - Bugsee (3.1.0)
   - Firebase/Core (10.0.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 10.0.0)
@@ -119,6 +120,7 @@ PODS:
 DEPENDENCIES:
   - AWSCore
   - AWSS3
+  - Bugsee
   - Firebase/Core
   - IQKeyboardManagerSwift (~> 6.5)
   - Kingfisher
@@ -136,6 +138,7 @@ SPEC REPOS:
   trunk:
     - AWSCore
     - AWSS3
+    - Bugsee
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -169,6 +172,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AWSCore: 0ebe9ba8a459893cdf268ce0bae61875efd0182b
   AWSS3: 40a2bed039c432e580f1d4b4f740ca80f0610a9e
+  Bugsee: 7f6665145f82b9e619cd863b33c9617b53d27951
   Firebase: 1b810f3d0c0532e27a48f1961f8c0400a668a2cf
   FirebaseAnalytics: 9921a52739f4ab66099da31b6e0243db78a3ac0a
   FirebaseCore: 97f48a3a567a72b8d4daa0f03c3aadb78df4e995
@@ -199,6 +203,6 @@ SPEC CHECKSUMS:
   ZendeskSupportProvidersSDK: 77a62fe6bacc05bb10ff20edce75612fa109fd61
   ZendeskSupportSDK: ba72e90e327635b5fde3d023a3de33242a6ee8ab
 
-PODFILE CHECKSUM: ae604d62a2ea34532fb6db6e32c2d4afd36371d0
+PODFILE CHECKSUM: 7080f2184ef3ca7ac52d815713ccce7d4552f30f
 
 COCOAPODS: 1.11.2
