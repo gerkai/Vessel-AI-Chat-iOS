@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Bugsee
 import Firebase
 import ZendeskCoreSDK
 import ChatSDK
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         MediaManager.shared.initMedia()
         UIViewController.swizzle()
         initializeZendesk()
+        Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
         return true
     }
 
@@ -91,4 +93,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         CoreLogger.logLevel = .debug
     }
 }
-
+/*
+//MARK: - Bugsee
+extension AppDelegate
+{
+    func launchBugsee()
+    {
+        if !Constants.isProdMode
+        {
+            Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+            if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
+            {
+                Bugsee.setEmail(userEmail)
+                Bugsee.setAttribute("contact_id", value: contactId)
+            }
+            
+        }
+        else if let savedBugseeDateString = UserDefaults.standard.value(forKey: UserDefaultsKeys.bugseeDate.rawValue) as? String
+        {
+            let bugseeDate = savedBugseeDateString.toDate("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+            let daysSinceSaving = Calendar.current.dateComponents([.day], from: bugseeDate, to: Date()).day
+            if daysSinceSaving! <= 30
+            {
+                Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+                if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
+                {
+                    Bugsee.setEmail(userEmail)
+                    Bugsee.setAttribute("contact_id", value: contactId)
+                }
+            }
+        }
+    }
+}
+*/

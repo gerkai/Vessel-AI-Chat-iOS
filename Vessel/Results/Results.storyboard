@@ -634,7 +634,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="390" height="360.66666666666669"/>
                                                         <subviews>
                                                             <collectionView contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="scs-5g-T77">
-                                                                <rect key="frame" x="0.0" y="20" width="390" height="340.66666666666669"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="360.66666666666669"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="ci2-eB-OCP">
                                                                     <size key="itemSize" width="128" height="279"/>
@@ -649,7 +649,7 @@
                                                         <constraints>
                                                             <constraint firstItem="scs-5g-T77" firstAttribute="leading" secondItem="IzB-fP-yhR" secondAttribute="leading" id="9QB-71-D9b"/>
                                                             <constraint firstItem="scs-5g-T77" firstAttribute="bottom" secondItem="IzB-fP-yhR" secondAttribute="bottom" id="Drq-Jg-byb"/>
-                                                            <constraint firstItem="scs-5g-T77" firstAttribute="top" secondItem="IzB-fP-yhR" secondAttribute="top" constant="20" id="eDX-2u-X0A"/>
+                                                            <constraint firstItem="scs-5g-T77" firstAttribute="top" secondItem="IzB-fP-yhR" secondAttribute="top" id="eDX-2u-X0A"/>
                                                             <constraint firstItem="scs-5g-T77" firstAttribute="trailing" secondItem="IzB-fP-yhR" secondAttribute="trailing" id="mOY-l5-sFg"/>
                                                         </constraints>
                                                         <connections>

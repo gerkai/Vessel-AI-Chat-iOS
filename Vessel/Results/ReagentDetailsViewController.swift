@@ -103,7 +103,8 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     //MARK: - ChartView datasource & delegates
     func chartViewNumDataPoints() -> Int
     {
-        return viewModel.numberOfResults()
+        //return 0 if viewModel is nil. This could happen if user dismisses ReagentDetailsViewController WHILE chart is still scrolling. Fixes a crash bug.
+        return viewModel?.numberOfResults() ?? 0
     }
     
     func chartViewData(forIndex index: Int) -> (result: Result, isSelected: Bool)

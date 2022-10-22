@@ -63,6 +63,9 @@ struct Constants
     static let DevMixpanelToken = "c59e2fe4109393b804d14910f37323b1"
     static let DevMixpanelAPISecret = "879879b5f7e32ff541ff968e5b249429"
     
+    //Bugsee
+    static let bugseeKey = "552f7749-4035-41e4-8c1b-895630d6ef84"
+    
     //used for reducing content on smaller screens
     static let SMALL_SCREEN_HEIGHT_THRESHOLD = 700.0
     
@@ -117,6 +120,7 @@ struct Constants
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
+    static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001

@@ -12,6 +12,12 @@ class ReagentDetailsChartCell: ChartViewCell
 {
     @IBOutlet weak var reagentUnit: UILabel!
     
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+        selectedHeightOffset = 20.0
+    }
+    
     func setTextUnitAndYPosition(text: String, unit: String, bucket: Int, numBuckets: Int)
     {
         scoreLabel.text = text
