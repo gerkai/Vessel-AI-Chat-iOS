@@ -168,6 +168,7 @@
 		3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */; };
 		3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C571290367EB001643C1 /* ReagentImpactView.swift */; };
 		3FF8C574290367FC001643C1 /* ReagentImpactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8C573290367FC001643C1 /* ReagentImpactView.xib */; };
+		3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
 		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
@@ -425,6 +426,7 @@
 		3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsViewController.swift; sourceTree = "<group>"; };
 		3FF8C571290367EB001643C1 /* ReagentImpactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentImpactView.swift; sourceTree = "<group>"; };
 		3FF8C573290367FC001643C1 /* ReagentImpactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReagentImpactView.xib; sourceTree = "<group>"; };
+		3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactScoreSlideupViewController.swift; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
@@ -663,10 +665,11 @@
 		3F426DBD28DFA2FF00927B68 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */,
+				3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */,
 				3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */,
 				3F426DC028DFA33200927B68 /* Results.storyboard */,
 				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
-				3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */,
 				3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */,
 				3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */,
 				3F9C67B328FF011300BC44FA /* StudiesViewController.swift */,
@@ -1594,6 +1597,7 @@
 				3F1A248F28932D2D00BC539F /* AfterTestViewModel.swift in Sources */,
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */,
+				3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,

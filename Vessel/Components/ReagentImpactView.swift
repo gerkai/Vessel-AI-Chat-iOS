@@ -25,7 +25,6 @@ class ReagentImpactView: UIView
         didSet
         {
             //print("Setting numDots: \(numDots)")
-            impactImageView.alpha = 1.0
             switch numDots
             {
                 case 1:
@@ -35,8 +34,7 @@ class ReagentImpactView: UIView
                 case 3:
                     impactImageView.image = UIImage(named: "dots-3")
                 default:
-                    impactImageView.image = UIImage(named: "dots-3")
-                    impactImageView.alpha = 0.0
+                    impactImageView.image = UIImage(named: "dots-0")
             }
         }
     }

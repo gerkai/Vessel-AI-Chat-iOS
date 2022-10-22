@@ -71,6 +71,8 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
     //MARK: - ReagentImpactView delegates
     func reagentImpactViewTapped()
     {
-        print("Reagent Impact View tapped")
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ImpactScoreSlideupViewController") as! ImpactScoreSlideupViewController
+        self.present(vc, animated: false)
     }
 }

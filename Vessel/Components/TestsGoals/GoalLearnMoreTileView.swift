@@ -46,7 +46,7 @@ class GoalLearnMoreTileView: UIView
                 case 3:
                     dotImageView.image = UIImage(named: "dots-3")
                 default:
-                    dotImageView.image = UIImage(named: "dots-3")
+                    dotImageView.image = UIImage(named: "dots-0")
                     dotImageView.alpha = 0.0
             }
         }
