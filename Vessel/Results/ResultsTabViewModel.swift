@@ -29,15 +29,27 @@ class ResultsTabViewModel
      */
     init()
     {
-        //results = mockResults
-        results = Storage.retrieve(as: Result.self)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+        {
+            results = mockResults
+        }
+        else
+        {
+            results = Storage.retrieve(as: Result.self)
+        }
         selectedResultIndex = numberOfResults() - 1
     }
     
     func refresh()
     {
-        //results = mockResults
-        results = Storage.retrieve(as: Result.self)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+        {
+            results = mockResults
+        }
+        else
+        {
+            results = Storage.retrieve(as: Result.self)
+        }
         selectedResultIndex = numberOfResults() - 1
     }
     
