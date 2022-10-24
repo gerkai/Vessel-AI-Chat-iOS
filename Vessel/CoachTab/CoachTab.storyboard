@@ -25,17 +25,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-CN-neQ">
-                                <rect key="frame" x="20" y="107" width="183.66666666666666" height="38.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-CN-neQ">
+                                <rect key="frame" x="20" y="107" width="304" height="40"/>
+                                <string key="text">Your Health Coach
+</string>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1e2-hX-4nj">
-                                <rect key="frame" x="20" y="154.33333333333334" width="350" height="84"/>
+                                <rect key="frame" x="20" y="156" width="350" height="140"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">The science is clear, getting support from a 1:1 coach and from others facing a similar challenge will help you achieve your goals.</string>
+                                        <string key="content">Enjoy unlimited messaging with your Vessel certified nutritionist dedicated to help you feel and perform at your best. Go ahead, ask them anything.
+</string>
                                         <attributes>
                                             <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="16" name="NoeText-Book"/>
@@ -46,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfD-ig-UP7">
-                                <rect key="frame" x="20" y="266.33333333333331" width="350" height="72"/>
+                                <rect key="frame" x="20" y="324" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coach" translatesAutoresizingMaskIntoConstraints="NO" id="24N-M3-mRI">
                                         <rect key="frame" x="16" y="16" width="40" height="40"/>
