@@ -365,23 +365,23 @@
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" id="ShQ-ux-mr3" customClass="EditProfileViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R3H-eA-HxZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1324"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1254"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzF-Qx-3si">
-                                <rect key="frame" x="20" y="118" width="335" height="1142"/>
+                                <rect key="frame" x="20" y="118" width="335" height="1072"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hnG-bi-ZWL">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="1170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="1100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyK-uL-hlK">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="74.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="71"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhG-oV-LTN">
-                                                <rect key="frame" x="119.5" y="90.5" width="96" height="96"/>
+                                                <rect key="frame" x="119.5" y="87" width="96" height="96"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="NjN-rX-LzZ"/>
@@ -391,7 +391,7 @@
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-IU-g0E" userLabel="Spacing">
-                                                <rect key="frame" x="152.5" y="202.5" width="30" height="20"/>
+                                                <rect key="frame" x="152.5" y="199" width="30" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="omv-fL-ARg"/>
@@ -411,7 +411,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qim-SW-Fdt" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="238.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="235" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="RvV-Ox-H5N"/>
@@ -429,7 +429,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qz-Au-XgQ" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="314.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="311" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Pdy-dc-e3s"/>
@@ -447,7 +447,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQg-Gk-hLE" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="390.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="387" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Gka-K8-nsl"/>
@@ -465,7 +465,7 @@
                                                 </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nat-E3-83a" customClass="VesselSegmentedControl" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="466.5" width="335" height="61"/>
+                                                <rect key="frame" x="0.0" y="463" width="335" height="61"/>
                                                 <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Os7-tq-6Ib"/>
@@ -481,7 +481,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sda-pX-TGB" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="542.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="539" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="jVs-su-NLk"/>
@@ -499,7 +499,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uFz-cF-1ek" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="618.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="615" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Dqi-bD-GhJ"/>
@@ -517,7 +517,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Birthday" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b6L-91-2NU" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="694.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="691" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="qGs-xC-D6i"/>
@@ -535,13 +535,13 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbY-XG-Jiy">
-                                                <rect key="frame" x="0.0" y="770.5" width="335" height="51"/>
+                                                <rect key="frame" x="0.0" y="767" width="335" height="49"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7q-76-sVf" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="837.5" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="832" width="335" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="18l-Ba-2B3"/>
@@ -561,7 +561,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8or-rO-a9k" userLabel="Spacing">
-                                                <rect key="frame" x="152.5" y="913.5" width="30" height="20"/>
+                                                <rect key="frame" x="152.5" y="908" width="30" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="tCF-jF-s1F"/>
@@ -580,27 +580,44 @@
                                                     <action selector="onChangeProfilePhoto" destination="ShQ-ux-mr3" eventType="touchUpInside" id="KL4-KR-3X0"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Vessel Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gv-IA-rme">
-                                                <rect key="frame" x="0.0" y="949.5" width="335" height="51"/>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Us-RIu">
-                                                <rect key="frame" x="0.0" y="1016.5" width="335" height="77.5"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Permanently delete your account and associated data from all Vessel products">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="16" name="NoeText-Book"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="14" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hv5-we-bOQ">
+                                                <rect key="frame" x="0.0" y="944" width="335" height="80"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Vessel Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gv-IA-rme">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="27"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Us-RIu">
+                                                        <rect key="frame" x="0.0" y="27" width="335" height="53"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Permanently delete your account and associated data from all Vessel products">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="14" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="width" secondItem="hv5-we-bOQ" secondAttribute="width" id="2Le-bf-YYZ"/>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="centerX" secondItem="hv5-we-bOQ" secondAttribute="centerX" id="4CG-Px-54s"/>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="top" secondItem="hv5-we-bOQ" secondAttribute="top" id="GOr-HQ-gqM"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="top" secondItem="5Gv-IA-rme" secondAttribute="bottom" id="few-N8-fqA"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="centerX" secondItem="hv5-we-bOQ" secondAttribute="centerX" id="jHX-tf-nXx"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="width" secondItem="hv5-we-bOQ" secondAttribute="width" id="oy3-js-pPs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sTC-Us-RIu" secondAttribute="bottom" id="qaj-Ax-Q9g"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-8F-7aq" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1110" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="1040" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="gvU-Af-cyV"/>
@@ -625,11 +642,10 @@
                                             <constraint firstItem="SJn-8F-7aq" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="3xs-YU-qNB"/>
                                             <constraint firstItem="IyK-uL-hlK" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="De0-KX-7I5"/>
                                             <constraint firstItem="b6L-91-2NU" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="H2I-qF-E4t"/>
-                                            <constraint firstItem="5Gv-IA-rme" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="PGP-PK-34o"/>
                                             <constraint firstItem="uFz-cF-1ek" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="WIW-z3-oal"/>
-                                            <constraint firstItem="sTC-Us-RIu" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="X08-LA-mYX"/>
+                                            <constraint firstItem="hv5-we-bOQ" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="WUC-V7-vsm"/>
                                             <constraint firstItem="gQg-Gk-hLE" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="eCT-Se-sO6"/>
-                                            <constraint firstAttribute="height" constant="1170" id="fUM-6L-RpI"/>
+                                            <constraint firstAttribute="height" constant="1100" id="fUM-6L-RpI"/>
                                             <constraint firstItem="o7q-76-sVf" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="l2i-4v-N7Q"/>
                                             <constraint firstItem="qim-SW-Fdt" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="man-30-Y9e"/>
                                             <constraint firstItem="sda-pX-TGB" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="p3K-R9-e0c"/>
@@ -700,7 +716,7 @@
                         </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1324"/>
+                    <size key="freeformSize" width="375" height="1254"/>
                     <connections>
                         <outlet property="birthDateTextField" destination="b6L-91-2NU" id="tGR-1e-IU1"/>
                         <outlet property="changePasswordButton" destination="o7q-76-sVf" id="pVb-tI-XK0"/>
@@ -718,7 +734,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AO2-wd-6dn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2512" y="297"/>
+            <point key="canvasLocation" x="2510.8695652173915" y="296.65178571428572"/>
         </scene>
         <!--Food Preferences View Controller-->
         <scene sceneID="Z5L-45-sIh">
@@ -982,113 +998,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyG-q1-LDD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3206" y="129"/>
-        </scene>
-        <!--Goals Preferences View Controller-->
-        <scene sceneID="zPD-38-aau">
-            <objects>
-                <viewController storyboardIdentifier="GoalsPreferencesViewController" id="CQC-ag-c5y" customClass="GoalsPreferencesViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oWN-aY-Utn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RwY-Wy-FFY" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="20" y="48" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Kip-IA-s0b"/>
-                                    <constraint firstAttribute="height" constant="50" id="cMC-ZD-8yy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
-                                <state key="normal" image="square_back_button">
-                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onBackButtonPressed:" destination="yZo-eU-bGo" eventType="touchUpInside" id="3UN-cV-Qw3"/>
-                                    <action selector="onBackButtonPressed:" destination="ShQ-ux-mr3" eventType="touchUpInside" id="BDT-nA-efF"/>
-                                    <action selector="onBackTapped" destination="CQC-ag-c5y" eventType="touchUpInside" id="Qnk-Ui-J2c"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select main goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQJ-0f-Dk1">
-                                <rect key="frame" x="20" y="126" width="265.5" height="39.5"/>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hS5-Rg-ZGh" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                <rect key="frame" x="20" y="768" width="374" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="xGf-za-fEQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="FLa-q4-XTT"/>
-                                    <action selector="onSaveTapped" destination="CQC-ag-c5y" eventType="touchUpInside" id="esc-bt-OZw"/>
-                                </connections>
-                            </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ruy-uj-25f">
-                                <rect key="frame" x="20" y="226.5" width="374" height="541.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="200" id="GbG-IX-MFs"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="8" sectionInsetReference="safeArea" id="VcB-RA-S94">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="CQC-ag-c5y" id="JHZ-Y6-Ap1"/>
-                                    <outlet property="delegate" destination="CQC-ag-c5y" id="sgn-mr-wEM"/>
-                                </connections>
-                            </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the goal you want to focus on now:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSi-nw-5Vm">
-                                <rect key="frame" x="20" y="177.5" width="327" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="OVm-Tq-2i1"/>
-                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="RwY-Wy-FFY" firstAttribute="leading" secondItem="OVm-Tq-2i1" secondAttribute="leading" constant="20" id="1dR-Uc-2OY"/>
-                            <constraint firstItem="Ruy-uj-25f" firstAttribute="top" secondItem="GSi-nw-5Vm" secondAttribute="bottom" constant="28" id="7cC-ta-vlj"/>
-                            <constraint firstItem="RwY-Wy-FFY" firstAttribute="top" secondItem="OVm-Tq-2i1" secondAttribute="top" id="B9Y-Nv-G3H"/>
-                            <constraint firstItem="GSi-nw-5Vm" firstAttribute="top" secondItem="uQJ-0f-Dk1" secondAttribute="bottom" constant="12" id="BcG-XK-0Xg"/>
-                            <constraint firstItem="OVm-Tq-2i1" firstAttribute="bottom" secondItem="hS5-Rg-ZGh" secondAttribute="bottom" constant="34" id="QcO-q5-YmK"/>
-                            <constraint firstItem="uQJ-0f-Dk1" firstAttribute="top" secondItem="RwY-Wy-FFY" secondAttribute="bottom" constant="28" id="Rn0-hp-cdu"/>
-                            <constraint firstItem="OVm-Tq-2i1" firstAttribute="trailing" secondItem="Ruy-uj-25f" secondAttribute="trailing" constant="20" id="eRa-v3-j2M"/>
-                            <constraint firstItem="GSi-nw-5Vm" firstAttribute="leading" secondItem="OVm-Tq-2i1" secondAttribute="leading" constant="20" id="ekE-AT-g9f"/>
-                            <constraint firstItem="hS5-Rg-ZGh" firstAttribute="leading" secondItem="OVm-Tq-2i1" secondAttribute="leading" constant="20" id="hA7-Dm-qPP"/>
-                            <constraint firstItem="Ruy-uj-25f" firstAttribute="leading" secondItem="OVm-Tq-2i1" secondAttribute="leading" constant="20" id="hpw-JG-KtS"/>
-                            <constraint firstItem="OVm-Tq-2i1" firstAttribute="trailing" secondItem="hS5-Rg-ZGh" secondAttribute="trailing" constant="20" id="j8b-JB-nah"/>
-                            <constraint firstItem="hS5-Rg-ZGh" firstAttribute="top" secondItem="Ruy-uj-25f" secondAttribute="bottom" id="sgg-7V-Zck"/>
-                            <constraint firstItem="uQJ-0f-Dk1" firstAttribute="leading" secondItem="OVm-Tq-2i1" secondAttribute="leading" constant="20" id="u8i-4N-9wJ"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="Ruy-uj-25f" id="Su0-nD-qCf"/>
-                        <outlet property="saveButton" destination="hS5-Rg-ZGh" id="kbM-va-iWQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eVk-3I-juT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4706" y="128"/>
         </scene>
     </scenes>
     <resources>

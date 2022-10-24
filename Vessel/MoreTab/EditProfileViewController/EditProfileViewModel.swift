@@ -84,6 +84,7 @@ class EditProfileViewModel
     
     // MARK: - Public interface
     var onModelChanged: (() -> ())?
+    var onError: ((_ error: String) -> ())?
     
     var name: String?
     {
@@ -95,6 +96,13 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newName = newValue else { return }
+            guard newName.isValidName() else
+            {
+                onError?(NSLocalizedString("Please enter a valid first name", comment: ""))
+                onModelChanged?()
+                return
+            }
+            
             contact.first_name = newName
             updateContact(contact: contact)
             analytics.setUserProperty(property: "$name", value: contact.fullName)
@@ -111,6 +119,12 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newLastName = newValue else { return }
+            guard newLastName.isValidName() else
+            {
+                onError?(NSLocalizedString("Please enter a valid last name", comment: ""))
+                onModelChanged?()
+                return
+            }
             contact.last_name = newLastName
             updateContact(contact: contact)
             analytics.setUserProperty(property: "$name", value: contact.fullName)

@@ -43,6 +43,8 @@ class FoodPreferencesViewController: UIViewController, VesselScreenIdentifiable
         
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         updateSaveButton()
+        viewModel.onContactSaved = onContactSaved
+        viewModel.onError = onError
     }
     
     deinit
@@ -64,7 +66,7 @@ class FoodPreferencesViewController: UIViewController, VesselScreenIdentifiable
         if viewModel.anyItemChecked() == true
         {
             viewModel.save()
-            navigationController?.popViewController(animated: true)
+            updateSaveButton()
         }
         else
         {
@@ -80,16 +82,28 @@ class FoodPreferencesViewController: UIViewController, VesselScreenIdentifiable
         analytics.log(event: .viewedPage(screenName: String(describing: type(of: self)), flowName: self.flowName, associatedValue: self.associatedValue))
     }
     
+    func onContactSaved()
+    {
+        updateSaveButton()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func onError(_ error: String)
+    {
+        updateSaveButton()
+        UIView.showError(text: "", detailText: error, image: nil)
+    }
+    
     // MARK: UI
     func updateSaveButton()
     {
-        if viewModel.anyItemChecked() == true
-        {     
-            saveButton.backgroundColor = Constants.vesselBlack
+        if !viewModel.anyItemChecked() || viewModel.isLoading
+        {
+            saveButton.backgroundColor = Constants.vesselGray
         }
         else
         {
-            saveButton.backgroundColor = Constants.vesselGray
+            saveButton.backgroundColor = Constants.vesselBlack
         }
     }
 }

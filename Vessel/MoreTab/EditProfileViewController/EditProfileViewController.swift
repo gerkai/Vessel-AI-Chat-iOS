@@ -67,6 +67,7 @@ class EditProfileViewController: KeyboardFriendlyViewController, VesselScreenIde
     {
         let viewModel = EditProfileViewModel()
         viewModel.onModelChanged = self.updateUI
+        viewModel.onError = self.onError
         return viewModel
     }()
     
@@ -154,6 +155,11 @@ class EditProfileViewController: KeyboardFriendlyViewController, VesselScreenIde
         weightTextField.text = viewModel.weight
         birthDateTextField.text = (viewModel.contactFlags & Constants.DECLINED_BIRTH_DATE == 1) ? nil : viewModel.birthDateString
     }
+    
+    func onError(_ error: String)
+    {
+        UIView.showError(text: "", detailText: error)
+    }
 }
 
 // MARK: - Private methods
@@ -194,7 +200,7 @@ private extension EditProfileViewController
         nameTextField.textColor = textFieldsColor
         lastNameTextField.font = textFieldsFont
         lastNameTextField.textColor = textFieldsColor
-        emailTextField.font = textFieldsFont
+        emailTextField.font = textFieldsFont 
         emailTextField.textColor = textFieldsColor
         heightTextField.font = textFieldsFont
         heightTextField.textColor = textFieldsColor
