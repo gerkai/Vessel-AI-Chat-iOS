@@ -23,6 +23,17 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     var reagentID: Int!
     var viewModel: ResultsTabViewModel!
     
+    static func initWith(reagentID: Int, viewModel: ResultsTabViewModel) -> ReagentDetailsViewController
+    {
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReagentDetailsViewController") as! ReagentDetailsViewController
+        
+        vc.reagentID = reagentID
+        vc.viewModel = viewModel
+        
+        return vc
+    }
+    
     override func viewDidLoad()
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)

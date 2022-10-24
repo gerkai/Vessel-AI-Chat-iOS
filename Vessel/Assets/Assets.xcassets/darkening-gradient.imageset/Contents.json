@@ -1,0 +1,26 @@
+{
+  "images" : [
+    {
+      "filename" : "darkening-gradient.png",
+      "idiom" : "universal",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 29,
+          "left" : 1,
+          "right" : 1,
+          "top" : 344
+        },
+        "center" : {
+          "height" : 1,
+          "mode" : "stretch",
+          "width" : 1
+        },
+        "mode" : "9-part"
+      }
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

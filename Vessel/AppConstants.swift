@@ -85,6 +85,7 @@ struct Constants
     static let vesselFair = #colorLiteral(red: 0.9455940127, green: 0.8627095222, blue: 0.8065157533, alpha: 1)     //#F1DCCe
     static let vesselGood = #colorLiteral(red: 0.8588235294, green: 0.9215686275, blue: 0.8352941176, alpha: 1)     //#DBEBD5
     static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
+    static let vesselTope = #colorLiteral(red: 0.831372549, green: 0.7960784314, blue: 0.7725490196, alpha: 1)      //#D4CBC5
     
     //color components
     static let POOR_COLOR = Color(red: 0.9059, green: 0.7686, blue: 0.6941)

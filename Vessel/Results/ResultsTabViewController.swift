@@ -145,15 +145,14 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     //MARK: - TestsGoalsViewDelegates
     func learnMoreAboutGoal(id: Int)
     {
-        print("LEARN MORE ABOUT GOAL \(id)")
+        let goalID = Goal.ID(rawValue: id)!
+        let vc = GoalDetailsViewController.initWith(goal: goalID, viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func learnMoreAboutReagent(id: Int)
     {
-        let storyboard = UIStoryboard(name: "Results", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ReagentDetailsViewController") as! ReagentDetailsViewController
-        vc.reagentID = id
-        vc.viewModel = viewModel
+        let vc = ReagentDetailsViewController.initWith(reagentID: id, viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
