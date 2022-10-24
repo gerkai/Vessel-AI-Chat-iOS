@@ -16,6 +16,7 @@ class PlansManager
     
     func loadPlans()
     {
+        //CW: TODO: Use ObjectStore to retrieve plans rather than make server call directly from here
         Server.shared.getPlans(onSuccess: { plans in
             for plan in plans
             {
@@ -25,7 +26,7 @@ class PlansManager
                     self.plans.append(plan)
                 }
             }
-            NotificationCenter.default.post(name: .plansLoaded, object: nil, userInfo: [:])
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }, onFailure: { error in
             print(error)
         })
@@ -41,7 +42,7 @@ class PlansManager
                 plans.append(plan)
             }
         }
-        NotificationCenter.default.post(name: .plansLoaded, object: nil, userInfo: [:])
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
     func togglePlanCompleted(planId: Int, date: String, completed: Bool)

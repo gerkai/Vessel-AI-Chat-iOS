@@ -144,7 +144,7 @@ class TodayViewModel
         results = Storage.retrieve(as: Result.self)
     }
     
-    var isEmpty: Bool = false //{ results.isEmpty }
+    var isEmpty: Bool { results.isEmpty }
     
     var numberOfGlasses: Int?
     {

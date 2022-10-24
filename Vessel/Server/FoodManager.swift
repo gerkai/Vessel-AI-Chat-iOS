@@ -16,10 +16,14 @@ class FoodManager
     
     func loadFoods()
     {
-        Server.shared.getAllFoods { foods in
+        Server.shared.getAllFoods
+        { foods in
             self.foods.append(contentsOf: foods)
-            NotificationCenter.default.post(name: .foodsLoaded, object: nil, userInfo: [:])
-        } onFailure: { error in
+            //print("Sending .newDataArrived notificaiton with \(String(describing: Food.self))")
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
+        }
+        onFailure:
+        { error in
             print(error)
         }
     }

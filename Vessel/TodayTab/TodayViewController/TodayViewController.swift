@@ -17,7 +17,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     // MARK: - UI
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var emptyView: UIView!
+    @IBOutlet private weak var lockoutView: UIView!
     
     // MARK: - Model
     private var viewModel = TodayViewModel()
@@ -31,11 +31,9 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        emptyView.isHidden = !viewModel.isEmpty
-        view.bringSubviewToFront(emptyView)
+        lockoutView.isHidden = !viewModel.isEmpty
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -50,6 +48,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        handleLockoutView()
         reloadUI()
     }
     
@@ -60,10 +59,39 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     }
     
     // MARK: - Notifications
-    @objc
-    func onReloadNotification(_ notification: NSNotification)
+    
+    @objc func dataUpdated(_ notification: NSNotification)
     {
-        reloadUI()
+        //print("TodayVC: DataUpdated")
+        if let type = notification.userInfo?["objectType"] as? String
+        {
+            //if the new data is a Result then refresh the chart and tests/goals
+            if type == String(describing: Result.self)
+            {
+                //print("It's a result! Refreshing...")
+                viewModel.refresh()
+                handleLockoutView()
+            }
+            else if type == String(describing: Food.self) || type == String(describing: Plan.self)
+            {
+                //print("It's a food. Reloading UI")
+                reloadUI()
+            }
+        }
+    }
+    
+    func handleLockoutView()
+    {
+        if viewModel.isEmpty
+        {
+            //print("0 results: Showing lockoutView")
+            lockoutView.isHidden = false
+        }
+        else
+        {
+           //print("some results. Hiding lockoutView")
+            lockoutView.isHidden = true
+        }
     }
     
     private func reloadUI()

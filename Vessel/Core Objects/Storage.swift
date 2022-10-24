@@ -203,7 +203,7 @@ public class Storage
         }
         catch
         {
-            fatalError(error.localizedDescription)
+            //do nothing. There were already no objects of that type stored here
         }
     }
     

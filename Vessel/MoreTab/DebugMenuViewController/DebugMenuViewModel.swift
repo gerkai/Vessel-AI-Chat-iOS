@@ -68,6 +68,8 @@ enum DebugMenuOption: Int
         {
             //clear all results from storage
             Storage.clear(objectType: Result.self)
+            //force today and results tabs to update and show/hide blocker view if necessary
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
         }
         else if let flag = flag
         {
@@ -82,7 +84,7 @@ enum DebugMenuOption: Int
             if self == .useMockResults
             {
                 //force today and results tabs to update and show/hide blocker view if necessary
-                NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: ["objectType": String(describing: Result.self)])
+                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
             }
         }
     }
