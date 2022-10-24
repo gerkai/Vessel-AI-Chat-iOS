@@ -14,9 +14,7 @@ class HydroQuizViewController: AfterTestMVVMViewController
     @IBOutlet private var checkmarkViews: [UIImageView]!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var titleStackViewVerticalSeparator: NSLayoutConstraint!
-    
-    // MARK: - Model
-    private var selectedOption: Int?
+    @IBOutlet private weak var nextButton: BounceButton!
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
@@ -35,6 +33,7 @@ class HydroQuizViewController: AfterTestMVVMViewController
             titleStackViewVerticalSeparator.constant = 10
             view.layoutIfNeeded()
         }
+        updateNextButton()
     }
     
     // MARK: - Actions
@@ -45,7 +44,11 @@ class HydroQuizViewController: AfterTestMVVMViewController
     
     @IBAction func onNext()
     {
-        guard let selectedOption = selectedOption else { return }
+        guard let selectedOption = viewModel.selectedWaterOption else
+        {
+            UIView.showError(text: "", detailText: NSLocalizedString("Please select an answer", comment: ""))
+            return
+        }
         switch selectedOption
         {
         case 0:
@@ -61,17 +64,31 @@ class HydroQuizViewController: AfterTestMVVMViewController
         }
         nextScreen()
     }
+    
+    // MARK: - UI
+    func updateNextButton()
+    {
+        if viewModel.selectedWaterOption != nil
+        {
+            nextButton.backgroundColor = Constants.vesselBlack
+        }
+        else
+        {
+            nextButton.backgroundColor = Constants.vesselGray
+        }
+    }
 }
 
 private extension HydroQuizViewController
 {
     func reloadUI()
     {
+        updateNextButton()
         for view in checkmarkViews
         {
             view.image = UIImage(named: "Checkbox_beige_unselected")
         }
-        guard let selectedOption = selectedOption,
+        guard let selectedOption = viewModel.selectedWaterOption,
               let checkmarkView = checkmarkViews[safe: selectedOption] else { return }
         checkmarkView.image = UIImage(named: "Checkbox_beige_selected")
     }
@@ -81,13 +98,13 @@ private extension HydroQuizViewController
     {
         guard let view = gestureRecognizer.view,
               let index = optionViews.firstIndex(of: view) else { return }
-        if selectedOption == index
+        if viewModel.selectedWaterOption == index
         {
-            selectedOption = nil
+            viewModel.selectedWaterOption = nil
         }
         else
         {
-            selectedOption = index
+            viewModel.selectedWaterOption = index
         }
         reloadUI()
     }

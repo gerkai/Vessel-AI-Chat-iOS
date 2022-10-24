@@ -1025,6 +1025,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="OF1-nc-RWo" id="4GY-KA-BKT"/>
                         <outlet property="titleLabel" destination="kwI-dY-7mx" id="hzX-5U-Iwp"/>
                         <outlet property="titleStackViewVerticalSeparator" destination="ekc-9p-CNm" id="07X-F3-Zkd"/>
                         <outletCollection property="checkmarkViews" destination="TOm-Hr-fbj" collectionClass="NSMutableArray" id="RGe-hu-0eY"/>

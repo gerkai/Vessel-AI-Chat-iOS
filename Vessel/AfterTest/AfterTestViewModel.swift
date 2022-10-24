@@ -41,6 +41,7 @@ class AfterTestViewModel
     var selectedFoods: [ReagentFood] = []
     var suggestedFoods: [ReagentFood] = []
     var isHydroLow: Bool = true
+    var selectedWaterOption: Int?
     
     enum AfterTestScreen
     {
