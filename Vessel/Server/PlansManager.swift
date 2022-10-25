@@ -11,21 +11,15 @@ import Foundation
 class PlansManager
 {
     static let shared = PlansManager()
-    
-    var plans = [Plan]()
-    
+    var plans = Storage.retrieve(as: Plan.self)
+    // Commented out to fix a bug where the plans would not arrive from the server after completing
+    let lastUpdated: Int = 1//UserDefaults.standard.object(forKey: Constants.PLANS_LAST_UPDATED_DATE) as? Int ?? 1
+
     func loadPlans()
     {
-        Server.shared.getPlans(onSuccess: { plans in
-            for plan in plans
-            {
-                //This fixes a bug when there are multiple plans for the same food
-                if !self.plans.contains(where: { $0.foodId == plan.foodId })
-                {
-                    self.plans.append(plan)
-                }
-            }
-            NotificationCenter.default.post(name: .plansLoaded, object: nil, userInfo: [:])
+        ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess: { [weak self] plans in
+            guard let self = self else { return }
+            self.plans = plans
         }, onFailure: { error in
             print(error)
         })
@@ -35,13 +29,11 @@ class PlansManager
     {
         for plan in plans
         {
-            //This fixes a bug when there are multiple plans for the same food
-            if !self.plans.contains(where: { $0.foodId == plan.foodId })
-            {
-                plans.append(plan)
-            }
+            ObjectStore.shared.serverSave(plan)
         }
-        NotificationCenter.default.post(name: .plansLoaded, object: nil, userInfo: [:])
+        
+        self.plans = Storage.retrieve(as: Plan.self)
+        NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: [:])
     }
     
     func togglePlanCompleted(planId: Int, date: String, completed: Bool)

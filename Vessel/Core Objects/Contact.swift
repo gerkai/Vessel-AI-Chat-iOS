@@ -75,7 +75,10 @@ class Contact: CoreObjectProtocol
             }
             return nil
         }
-        let foods = FoodManager.shared.foods.filter { foodIds.contains($0.id) }
+        
+        let foods: [Food] = foodIds.compactMap({ foodId in
+            return FoodManager.shared.foods.first(where: { $0.id == foodId })
+        })
         return foods
     }
         /*Food(id: 0,

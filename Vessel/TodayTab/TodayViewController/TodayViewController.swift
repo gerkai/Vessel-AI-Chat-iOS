@@ -31,11 +31,10 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        emptyView.isHidden = !viewModel.isEmpty
         view.bringSubviewToFront(emptyView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .foodsLoaded, object: nil)
+        //get notified when new foods, plans or results comes in from After Test Flow
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .newDataFromServer, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -50,6 +49,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        viewModel.refresh()
         reloadUI()
     }
     
@@ -63,11 +63,13 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     @objc
     func onReloadNotification(_ notification: NSNotification)
     {
+        viewModel.refresh()
         reloadUI()
     }
     
     private func reloadUI()
     {
+        emptyView.isHidden = !viewModel.isEmpty
         tableView.reloadData()
     }
 }
@@ -183,12 +185,11 @@ extension TodayViewController: FoodCheckmarkViewDelegate
 {
     func checkmarkTapped(view: FoodCheckmarkView)
     {
-        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }),
-              let planId = plan.id else { return }
-        Server.shared.completePlan(planId: planId, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
+        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }) else { return }
+        Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
         { [weak self] togglePlanData in
             guard let self = self else { return }
-            PlansManager.shared.togglePlanCompleted(planId: planId, date: togglePlanData.date, completed: togglePlanData.completed)
+            PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: []).sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
         } onFailure: { error in
