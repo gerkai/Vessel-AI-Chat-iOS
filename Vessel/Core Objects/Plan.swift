@@ -25,11 +25,23 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: Codable, Hashable
+struct Plan: CoreObjectProtocol, Hashable
 {
-    let id: Int?
-    let last_updated: Int?
-//    let storage: StorageType = .cache
+    let id: Int
+    var last_updated: Int
+    {
+        get
+        {
+            lastUpdated ?? 0
+        }
+        set
+        {
+            lastUpdated = newValue
+        }
+    }
+    var lastUpdated: Int?
+    let storage: StorageType = .disk
+    
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     let foodId: Int?
@@ -46,8 +58,8 @@ struct Plan: Codable, Hashable
     
     var type: PlanType = .food
     
-    internal init(id: Int? = nil,
-                  last_updated: Int? = nil,
+    internal init(id: Int = 0,
+                  lastUpdated: Int = 0,
                   timeOfDay: String? = nil,
                   dayOfWeek: [Int]? = nil,
                   foodId: Int? = nil,
@@ -58,7 +70,7 @@ struct Plan: Codable, Hashable
                   completed: [String]? = nil)
     {
         self.id = id
-        self.last_updated = last_updated
+        self.lastUpdated = lastUpdated
         self.timeOfDay = timeOfDay
         self.dayOfWeek = dayOfWeek
         self.foodId = foodId
@@ -72,7 +84,7 @@ struct Plan: Codable, Hashable
     enum CodingKeys: CodingKey
     {
         case id
-        case last_updated
+        case lastUpdated
         case timeOfDay
         case dayOfWeek
         case foodId

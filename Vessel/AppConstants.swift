@@ -17,8 +17,6 @@ extension Notification.Name
     static let newDataArrived = Notification.Name("NewDataArrived")
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
-    //static let foodsLoaded = Notification.Name("FoodsLoaded")
-    //static let plansLoaded = Notification.Name("PlansLoaded")
 }
 
 struct Constants
@@ -120,7 +118,10 @@ struct Constants
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
+    static let FOODS_LAST_UPDATED_DATE = "FOODS_LAST_UPDATED_DATE"
+    static let PLANS_LAST_UPDATED_DATE = "PLANS_LAST_UPDATED_DATE"
     static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
+    static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001

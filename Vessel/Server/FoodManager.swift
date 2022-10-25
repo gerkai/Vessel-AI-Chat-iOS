@@ -11,19 +11,16 @@ import Foundation
 class FoodManager
 {
     static let shared = FoodManager()
-    
-    var foods = [Food]()
+    var foods = Storage.retrieve(as: Food.self)
+    let lastUpdated: Int = UserDefaults.standard.object(forKey: Constants.FOODS_LAST_UPDATED_DATE) as? Int ?? 1
     
     func loadFoods()
     {
-        Server.shared.getAllFoods
-        { foods in
-            self.foods.append(contentsOf: foods)
-            //print("Sending .newDataArrived notificaiton with \(String(describing: Food.self))")
-            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
-        }
-        onFailure:
-        { error in
+        ObjectStore.shared.loadFoods(lastUpdated: lastUpdated)
+        { [weak self] foods in
+            guard let self = self else { return }
+            self.foods = foods
+        } onFailure: { error in
             print(error)
         }
     }

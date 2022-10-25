@@ -91,11 +91,54 @@ class ObjectStore: NSObject
         }
     }
     
-    /*func loadAllFoods(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        
-    }*/
+        Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
+            for plan in newPlans
+            {
+                self.serverSave(plan)
+            }
+            
+            let plans = Storage.retrieve(as: Plan.self)
+            
+            // TODO: Change to calculate the lastUpdated from the Storage function
+            let lastUpdated = plans.reduce(0, {
+                max($0, $1.lastUpdated ?? 0)
+            })
+            
+            // Update lastUpdated on user defaults
+            UserDefaults.standard.set(lastUpdated, forKey: Constants.PLANS_LAST_UPDATED_DATE)
+            
+            success(plans)
+        } onFailure: { error in
+            failure(error.description)
+        }
+    }
     
+    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
+            for food in newFoods
+            {
+                self.serverSave(food)
+            }
+            
+            let foods = Storage.retrieve(as: Food.self)
+            
+            // TODO: Change to calculate the lastUpdated from the Storage function
+            let lastUpdated = foods.reduce(0, {
+                max($0, $1.last_updated)
+            })
+            
+            // Update lastUpdated on user defaults
+            UserDefaults.standard.set(lastUpdated, forKey: Constants.FOODS_LAST_UPDATED_DATE)
+            
+            success(foods)
+        } onFailure: { error in
+            failure(error.description)
+        }
+    }
+
     func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
     {
         if let object = objectFromCache(of: type, id: id)

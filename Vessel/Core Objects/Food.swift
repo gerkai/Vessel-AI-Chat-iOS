@@ -7,9 +7,22 @@
 
 import Foundation
 
-struct Food: Equatable, Decodable
+struct Food: CoreObjectProtocol, Equatable
 {
     var id: Int
+    var last_updated: Int
+    {
+        get
+        {
+            Int(lastUpdated ?? 0.0)
+        }
+        set
+        {
+            lastUpdated = Double(newValue)
+        }
+    }
+    var storage: StorageType = .disk
+
     var lastUpdated: Double?
     var title: String
     var servingQuantity: Double?
@@ -67,7 +80,7 @@ struct Food: Equatable, Decodable
     }
 }
 
-struct Nutrient: Decodable, Equatable
+struct Nutrient: Codable, Equatable
 {
     var id: Int
     var name: String

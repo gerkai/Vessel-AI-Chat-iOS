@@ -219,6 +219,7 @@
 		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
 		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
+		72DB1C972907ABFD00410C2D /* WaterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DB1C962907ABFD00410C2D /* WaterManager.swift */; };
 		72DD1FCC28F541C8006071B0 /* HydroQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DD1FCB28F541C8006071B0 /* HydroQuizViewController.swift */; };
 		72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DEA1CB289E44AA00C92695 /* Blurable.swift */; };
 		72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF47FD2890EDCC00DF33BE /* ChangePasswordViewController.swift */; };
@@ -480,6 +481,7 @@
 		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
+		72DB1C962907ABFD00410C2D /* WaterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterManager.swift; sourceTree = "<group>"; };
 		72DD1FCB28F541C8006071B0 /* HydroQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroQuizViewController.swift; sourceTree = "<group>"; };
 		72DEA1CB289E44AA00C92695 /* Blurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blurable.swift; sourceTree = "<group>"; };
 		72DF47FD2890EDCC00DF33BE /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				7271DFB228FA9B4B00909A9D /* PlansManager.swift */,
 				729757AA29011C5400EEFB65 /* ZendeskManager.swift */,
 				729757AC2901220D00EEFB65 /* LiveChatManager.swift */,
+				72DB1C962907ABFD00410C2D /* WaterManager.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1530,6 +1533,7 @@
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */,
+				72DB1C972907ABFD00410C2D /* WaterManager.swift in Sources */,
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
@@ -1829,7 +1833,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -1864,7 +1868,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
