@@ -31,16 +31,10 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-//<<<<<<< HEAD
         lockoutView.isHidden = !viewModel.isEmpty
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
-/*=======
-        view.bringSubviewToFront(emptyView)
-        
         //get notified when new foods, plans or results comes in from After Test Flow
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onReloadNotification(_:)), name: .newDataFromServer, object: nil)
->>>>>>> develop*/
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -55,11 +49,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-//<<<<<<< HEAD
         handleLockoutView()
-//=======
-        //viewModel.refresh()
-//>>>>>>> develop
         reloadUI()
     }
     
