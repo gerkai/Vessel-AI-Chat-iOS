@@ -74,6 +74,45 @@ public class Storage
     
     //MARK: - public functions
     
+    //returns the highest last_updated value found of the given object type stored on disk
+    static func newestLastUpdatedFor<T: CoreObjectProtocol>(type: T.Type, from directory: Directory = .caches) -> Int
+    {
+        var result = 0
+        
+        let url = getURL(for: directory, objectName: "\(type.self)")
+        do
+        {
+            //examine all files of specified type from specified directory
+            let files = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            for url in files
+            {
+                if let data = FileManager.default.contents(atPath: url.path)
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        let model = try decoder.decode(type, from: data)
+                        if model.last_updated > result
+                        {
+                            result = model.last_updated
+                        }
+                    }
+                    catch
+                    {
+                        //this file data is corrupt. Skip it.
+                    }
+                }
+            }
+            //print("FILES: \(files)")
+        }
+        catch
+        {
+            print(error)
+        }
+        
+        return result
+    }
+    
     /// Store an encodable struct to the specified directory on disk
     ///
     /// - Parameters:

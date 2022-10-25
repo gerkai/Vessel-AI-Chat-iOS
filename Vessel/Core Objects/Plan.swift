@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlanType
+enum PlanType: Codable
 {
     case food
     case activity
@@ -25,11 +25,11 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: Codable, Hashable
+struct Plan: CoreObjectProtocol, Codable, Hashable
 {
-    let id: Int?
-    let last_updated: Int?
-//    let storage: StorageType = .cache
+    let id: Int
+    var last_updated: Int
+    let storage: StorageType = .cacheAndDisk
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     let foodId: Int?
@@ -46,8 +46,8 @@ struct Plan: Codable, Hashable
     
     var type: PlanType = .food
     
-    internal init(id: Int? = nil,
-                  last_updated: Int? = nil,
+    internal init(id: Int = 0,
+                  last_updated: Int = 0,
                   timeOfDay: String? = nil,
                   dayOfWeek: [Int]? = nil,
                   foodId: Int? = nil,

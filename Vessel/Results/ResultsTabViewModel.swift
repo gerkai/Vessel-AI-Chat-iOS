@@ -65,6 +65,7 @@ class ResultsTabViewModel
     
     func selectedResult() -> Result
     {
+        print("selected result last_updated: \(results[selectedResultIndex].last_updated)")
         return results[selectedResultIndex]
     }
     

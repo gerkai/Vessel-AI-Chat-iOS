@@ -183,12 +183,12 @@ extension TodayViewController: FoodCheckmarkViewDelegate
 {
     func checkmarkTapped(view: FoodCheckmarkView)
     {
-        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }),
-              let planId = plan.id else { return }
-        Server.shared.completePlan(planId: planId, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
+        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id })
+               else { return }
+        Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
         { [weak self] togglePlanData in
             guard let self = self else { return }
-            PlansManager.shared.togglePlanCompleted(planId: planId, date: togglePlanData.date, completed: togglePlanData.completed)
+            PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: []).sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
         } onFailure: { error in

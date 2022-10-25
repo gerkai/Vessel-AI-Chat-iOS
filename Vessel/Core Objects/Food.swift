@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Food: Equatable, Decodable
+struct Food: CoreObjectProtocol, Equatable, Codable
 {
+    var storage: StorageType = .cacheAndDisk
     var id: Int
-    var lastUpdated: Double?
+    var last_updated: Int
     var title: String
     var servingQuantity: Double?
     var servingUnit: String?
@@ -22,10 +23,10 @@ struct Food: Equatable, Decodable
     var nutrients: [Nutrient]?
     var allergyIds: [Int]?
     
-    internal init(id: Int, lastUpdated: Double, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String)
+    internal init(id: Int, lastUpdated: Int, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String], image_url: String)
     {
         self.id = id
-        self.lastUpdated = lastUpdated
+        self.last_updated = lastUpdated
         self.title = title
         self.servingQuantity = serving_quantity
         self.servingUnit = serving_unit
@@ -39,7 +40,7 @@ struct Food: Equatable, Decodable
     static func == (lhs: Food, rhs: Food) -> Bool
     {
         return lhs.id == rhs.id &&
-        lhs.lastUpdated == rhs.lastUpdated &&
+        lhs.last_updated == rhs.last_updated &&
         lhs.title == rhs.title &&
         lhs.servingQuantity == rhs.servingQuantity &&
         lhs.servingUnit == rhs.servingUnit &&
@@ -49,11 +50,11 @@ struct Food: Equatable, Decodable
         lhs.categories == rhs.categories &&
         lhs.imageUrl == rhs.imageUrl
     }
-    
+
     enum CodingKeys: CodingKey
     {
         case id
-        case lastUpdated
+        case last_updated
         case title
         case servingQuantity
         case servingUnit
@@ -67,7 +68,7 @@ struct Food: Equatable, Decodable
     }
 }
 
-struct Nutrient: Decodable, Equatable
+struct Nutrient: Codable, Equatable
 {
     var id: Int
     var name: String

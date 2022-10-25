@@ -74,6 +74,16 @@ class ObjectStore: NSObject
         return nil
     }
     
+    func getMetaType(typeString: String) -> CoreObjectProtocol.Type?
+    {
+        let objectType = typeString.capitalized
+        
+        if objectType == "\(Result.self)" { return Result.self }
+        else if objectType == "\(Food.self)" { return Food.self }
+        else if objectType == "\(Plan.self)" { return Plan.self }
+        return nil
+    }
+    
     //MARK: - Public functions
     
     func loadMainContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
@@ -91,10 +101,60 @@ class ObjectStore: NSObject
         }
     }
     
-    /*func loadAllFoods(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
+    func testFetch()
     {
+        getMostRecent(objectTypes: [Result.self, Food.self])
+    }
+    
+    func getMostRecent(objectTypes: [CoreObjectProtocol.Type])
+    {
+        var objectReqs: [AllObjectReq] = []
         
-    }*/
+        for object in objectTypes
+        {
+            let lastUpdated = Storage.newestLastUpdatedFor(type: object)
+            let objectReq = AllObjectReq(type: "\(object.self)".lowercased(), last_updated: lastUpdated)
+            objectReqs.append(objectReq)
+            //print("\(object): last_udpated: \(lastUpdated)")
+        }
+        print("ObjectReqs: \(objectReqs)")
+        Server.shared.getAllObjects(objects: objectReqs)
+        { objectDict in
+            for typeName in objectDict.keys
+            {
+                if let metaType = self.getMetaType(typeString: typeName)
+                {
+                    if let objects = objectDict[typeName] as? [[String: Any]]
+                    {
+                        for singleObjectDict in objects
+                        {
+                            do
+                            {
+                                let json = try JSONSerialization.data(withJSONObject: singleObjectDict)
+                                let decoder = JSONDecoder()
+                                
+                                let object = try decoder.decode(metaType, from: json)
+                                print("Received: \(object.self) with last_updated \(object.last_updated)")
+                                self.serverSave(object)
+                            }
+                            catch
+                            {
+                                print(error)
+                            }
+                        }
+                        print("\(objects)")
+                    }
+                }
+            }
+            print("Got objects: \(objectDict)")
+            print(".")
+        }
+        onFailure:
+        { error in
+            print("Got error: \(error)")
+            print(".")
+        }
+    }
     
     func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
     {
@@ -155,7 +215,7 @@ class ObjectStore: NSObject
         {*/
         let name = String(describing: T.self).lowercased()
         
-        Server.shared.getAllObjects(objects: AllObjectReq(type: name, last_updated: 0))
+        Server.shared.getAllObjects(objects: [AllObjectReq(type: name, last_updated: 0)])
         { objectDict in
             if let values = objectDict[name] as? [[String: Any]]
             {

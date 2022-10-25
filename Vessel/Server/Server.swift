@@ -614,7 +614,7 @@ class Server: NSObject
     //MARK: Foods
     func getAllFoods(onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        getAllObjects(objects: AllObjectReq(type: "food", last_updated: 1))
+        getAllObjects(objects: [AllObjectReq(type: "food", last_updated: 1)])
         { dict in
             do
             {
@@ -748,7 +748,7 @@ class Server: NSObject
     // MARK: Plan
     func getPlans(onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
-        getAllObjects(objects: AllObjectReq(type: "plan", last_updated: 1))
+        getAllObjects(objects: [AllObjectReq(type: "plan", last_updated: 1)])
         { dict in
             do
             {
@@ -1298,11 +1298,13 @@ class Server: NSObject
         })
     }
     
-    func getAllObjects(objects: AllObjectReq, onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getAllObjects(objects: [AllObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         var objectDict: [String: [String: Int]] = [:]
-        objectDict[objects.type] = ["last_updated": objects.last_updated]
-        
+        for object in objects
+        {
+            objectDict[object.type] = ["last_updated": object.last_updated]
+        }
         let url = "\(API())\(OBJECT_ALL_PATH)"
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted

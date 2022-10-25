@@ -140,6 +140,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     @IBAction func customerSupport()
     {
         print("CUSTOMER SUPPORT")
+        ObjectStore.shared.testFetch() //TODO: remove this test code.
     }
     
     //MARK: - TestsGoalsViewDelegates
