@@ -121,6 +121,7 @@ struct Constants
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
     static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
+    static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001

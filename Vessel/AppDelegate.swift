@@ -93,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         CoreLogger.logLevel = .debug
     }
 }
+
 /*
 //MARK: - Bugsee
 extension AppDelegate
