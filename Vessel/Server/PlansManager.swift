@@ -31,9 +31,8 @@ class PlansManager
         {
             ObjectStore.shared.serverSave(plan)
         }
-        
         self.plans = Storage.retrieve(as: Plan.self)
-        NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: [:])
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
     func togglePlanCompleted(planId: Int, date: String, completed: Bool)

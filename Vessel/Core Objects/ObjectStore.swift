@@ -242,8 +242,8 @@ class ObjectStore: NSObject
         {
             Storage.store(object)
         }
-        //print("Sending .newDataFromServer notificaiton with \(String(describing: T.self))")
-        NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: ["objectType": String(describing: T.self)])
+        //print("Sending .newDataArrived notification with \(String(describing: T.self))")
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
     }
     
     //Call this to save objects that have been modified by the client
