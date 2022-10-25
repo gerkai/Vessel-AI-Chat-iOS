@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlanType
+enum PlanType: Codable
 {
     case food
     case activity
@@ -25,23 +25,11 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: CoreObjectProtocol, Hashable
+struct Plan: CoreObjectProtocol, Codable, Hashable
 {
     let id: Int
     var last_updated: Int
-    {
-        get
-        {
-            lastUpdated ?? 0
-        }
-        set
-        {
-            lastUpdated = newValue
-        }
-    }
-    var lastUpdated: Int?
-    let storage: StorageType = .disk
-    
+    let storage: StorageType = .cacheAndDisk
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     let foodId: Int?
@@ -59,7 +47,7 @@ struct Plan: CoreObjectProtocol, Hashable
     var type: PlanType = .food
     
     internal init(id: Int = 0,
-                  lastUpdated: Int = 0,
+                  last_updated: Int = 0,
                   timeOfDay: String? = nil,
                   dayOfWeek: [Int]? = nil,
                   foodId: Int? = nil,
@@ -70,7 +58,7 @@ struct Plan: CoreObjectProtocol, Hashable
                   completed: [String]? = nil)
     {
         self.id = id
-        self.lastUpdated = lastUpdated
+        self.last_updated = last_updated
         self.timeOfDay = timeOfDay
         self.dayOfWeek = dayOfWeek
         self.foodId = foodId
@@ -84,7 +72,7 @@ struct Plan: CoreObjectProtocol, Hashable
     enum CodingKeys: CodingKey
     {
         case id
-        case lastUpdated
+        case last_updated
         case timeOfDay
         case dayOfWeek
         case foodId

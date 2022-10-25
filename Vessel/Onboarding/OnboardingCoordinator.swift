@@ -75,10 +75,11 @@ class OnboardingCoordinator
         }
         else
         {
-            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
-            FoodManager.shared.loadFoods()
-            PlansManager.shared.loadPlans()
+            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Plan.self])
+            //FoodManager.shared.loadFoods()
+            //PlansManager.shared.loadPlans()
             
             //if gender was chosen then we can assume all demographics were populated so skip onboarding
             //and go directly to MainTabBarController

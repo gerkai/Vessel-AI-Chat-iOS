@@ -20,7 +20,7 @@ class ActivityDetailsViewModel
     // MARK: - Public properties
     var foodImageURL: URL?
     {
-        URL(string: food.imageUrl ?? "")
+        URL(string: food.imageUrl)
     }
     
     var title: String
@@ -30,16 +30,16 @@ class ActivityDetailsViewModel
     
     var subtitle: String
     {
-        guard let servingGrams = food.servingGrams,
-              let servingQuantity = food.servingQuantity,
-              let servingUnit = food.servingUnit else { return "" }
+        let serving_grams = food.servingGrams
+        let serving_quantity = food.servingQuantity
+        let serving_unit = food.servingUnit
         if isMetric
         {
-            return NSLocalizedString("\(servingGrams) gr", comment: "Food amount")
+            return NSLocalizedString("\(serving_grams) gr", comment: "Food amount")
         }
         else
         {
-            return "\(Int(servingQuantity)) \(servingUnit)"
+            return "\(Int(serving_quantity)) \(serving_unit)"
         }
     }
     
@@ -51,7 +51,7 @@ class ActivityDetailsViewModel
     var reagents: String
     {
         var reagents = ""
-        guard let nutrientsArray = food.nutrients else { return "" }
+        let nutrientsArray = food.nutrients
         for nutrient in nutrientsArray
         {
             if nutrient.quantity > 0
@@ -65,7 +65,7 @@ class ActivityDetailsViewModel
     var quantities: String
     {
         var quantities = ""
-        guard let nutrientsArray = food.nutrients else { return "" }
+        let nutrientsArray = food.nutrients
         for nutrient in nutrientsArray
         {
             if nutrient.quantity > 0

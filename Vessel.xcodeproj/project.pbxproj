@@ -588,18 +588,18 @@
 				3F12F00A287A736600FCC52E /* Allergy.swift */,
 				3F0547CF27CAEE3B006E3098 /* Contact.swift */,
 				3F13A7912877BEA200C74FB9 /* Diet.swift */,
+				72332FAF28EE8D94008CBA8C /* Food.swift */,
 				3F12F010287B4C0600FCC52E /* Goal.swift */,
 				7215E9562893ADB100C22A24 /* HeightComponents.swift */,
 				72384F3328E2D9230033C3FC /* Insight.swift */,
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
+				7295567F28F67980000DD006 /* Plan.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 				3F1A248A2891B5FB00BC539F /* Reagent.swift */,
+				7271DFB028FA88ED00909A9D /* ReagentFood.swift */,
 				3F9C679C28FE5FE700BC44FA /* Reagents */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
-				72332FAF28EE8D94008CBA8C /* Food.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
-				7295567F28F67980000DD006 /* Plan.swift */,
-				7271DFB028FA88ED00909A9D /* ReagentFood.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";

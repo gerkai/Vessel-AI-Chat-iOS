@@ -10,7 +10,7 @@ import Foundation
 struct Result: CoreObjectProtocol, Codable
 {
     var id: Int
-    var last_updated: Int //object is not returned from server yet so we mock it with a private var
+    var last_updated: Int 
     var card_uuid: String
     var insert_date: String
     {
@@ -38,7 +38,6 @@ struct Result: CoreObjectProtocol, Codable
         case last_updated
         case card_uuid
         case wellnessScore = "wellness_score"
-        //case insert_date
         case reagentResults = "reagents" //should change this to reagentResults on back end
     }
     
