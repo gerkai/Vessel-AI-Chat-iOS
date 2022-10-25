@@ -38,6 +38,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
 {
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var validator = BoughtCardLoginValidator()
     var email = ""
@@ -45,9 +46,13 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
     
-    override func viewDidLoad()
+    override func viewDidAppear(_ animated: Bool)
     {
-        super.viewDidLoad()
+        super.viewDidAppear(animated)
+        DispatchQueue.main.async
+        {
+            self.scrollView.flashScrollIndicators()
+        }
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)

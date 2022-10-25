@@ -101,6 +101,7 @@ class ObjectStore: NSObject
         }
     }
     
+//<<<<<<< HEAD
     func testFetch()
     {
         getMostRecent(objectTypes: [Result.self, Food.self])
@@ -149,13 +150,62 @@ class ObjectStore: NSObject
             print("Got objects: \(objectDict)")
             print(".")
         }
-        onFailure:
+    onFailure:
         { error in
             print("Got error: \(error)")
             print(".")
         }
     }
+    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
+            for plan in newPlans
+            {
+                self.serverSave(plan)
+            }
+            
+            let plans = Storage.retrieve(as: Plan.self)
+            
+            // TODO: Change to calculate the lastUpdated from the Storage function
+            let lastUpdated = plans.reduce(0, {
+                max($0, $1.last_updated)
+            })
+            
+            // Update lastUpdated on user defaults
+            UserDefaults.standard.set(lastUpdated, forKey: Constants.PLANS_LAST_UPDATED_DATE)
+            
+            success(plans)
+        }
+        onFailure:
+        { error in
+            failure(error.description)
+        }
+    }
     
+    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
+            for food in newFoods
+            {
+                self.serverSave(food)
+            }
+            
+            let foods = Storage.retrieve(as: Food.self)
+            
+            // TODO: Change to calculate the lastUpdated from the Storage function
+            let lastUpdated = foods.reduce(0, {
+                max($0, $1.last_updated)
+            })
+            
+            // Update lastUpdated on user defaults
+            UserDefaults.standard.set(lastUpdated, forKey: Constants.FOODS_LAST_UPDATED_DATE)
+            
+            success(foods)
+        } onFailure: { error in
+            failure(error.description)
+        }
+    }
+
     func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
     {
         if let object = objectFromCache(of: type, id: id)
@@ -259,8 +309,8 @@ class ObjectStore: NSObject
         {
             Storage.store(object)
         }
-        //print("Sending .newDataFromServer notificaiton with \(String(describing: T.self))")
-        NotificationCenter.default.post(name: .newDataFromServer, object: nil, userInfo: ["objectType": String(describing: T.self)])
+        //print("Sending .newDataArrived notification with \(String(describing: T.self))")
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
     }
     
     //Call this to save objects that have been modified by the client

@@ -23,7 +23,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         testsGoalsView.delegate = self
         super.viewDidLoad()
         //get notified when new result comes in from After Test Flow
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataFromServer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         //get notified if food preferences changes (specifically ketones which changes color of ketone tile)
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
     }
@@ -36,22 +36,17 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     override func viewWillAppear(_ animated: Bool)
     {
         //show lockout view if there are no test results to display
+        //print("Results: viewWillAppear")
+        viewModel.refresh()
         if initialLoad
         {
             testsGoalsView.setupGoals()
         }
+        handleLockoutView()
         let numResults = viewModel.numberOfResults()
-        if numResults == 0
+        if numResults != 0 && initialLoad
         {
-            lockoutView.isHidden = false
-        }
-        else
-        {
-            lockoutView.isHidden = true
-            if initialLoad
-            {
-                testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
-            }
+            testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
         }
     }
     
@@ -63,7 +58,6 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         }
         else
         {
-            viewModel.refresh()
             chartView.refresh()
         }
     }
@@ -75,13 +69,31 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     @objc func dataUpdated(_ notification: NSNotification)
     {
+        //print("Results: Data Updated")
         if let type = notification.userInfo?["objectType"] as? String
         {
             //if the new data is a Result then refresh the chart and tests/goals
             if type == String(describing: Result.self)
             {
+                //print("It's a Result. Refreshing...")
                 refresh()
+                handleLockoutView()
             }
+        }
+    }
+    
+    func handleLockoutView()
+    {
+        let numResults = viewModel.numberOfResults()
+        if numResults == 0
+        {
+            //print("0 results: Showing lockoutView")
+            lockoutView.isHidden = false
+        }
+        else
+        {
+            //print("\(numResults) results. Hiding lockoutView")
+            lockoutView.isHidden = true
         }
     }
     
@@ -140,7 +152,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     @IBAction func customerSupport()
     {
         print("CUSTOMER SUPPORT")
-        ObjectStore.shared.testFetch() //TODO: remove this test code.
+        //ObjectStore.shared.testFetch() //TODO: remove this test code.
     }
     
     //MARK: - TestsGoalsViewDelegates

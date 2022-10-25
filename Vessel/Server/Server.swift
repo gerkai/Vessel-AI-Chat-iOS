@@ -612,9 +612,9 @@ class Server: NSObject
     }
     
     //MARK: Foods
-    func getAllFoods(onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getAllFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        getAllObjects(objects: [AllObjectReq(type: "food", last_updated: 1)])
+        getAllObjects(objects: [AllObjectReq(type: "food", last_updated: lastUpdated)])
         { dict in
             do
             {
@@ -746,9 +746,9 @@ class Server: NSObject
     }
     
     // MARK: Plan
-    func getPlans(onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    func getPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
-        getAllObjects(objects: [AllObjectReq(type: "plan", last_updated: 1)])
+        getAllObjects(objects: [AllObjectReq(type: "plan", last_updated: lastUpdated)])
         { dict in
             do
             {
