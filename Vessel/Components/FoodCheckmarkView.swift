@@ -33,7 +33,7 @@ class FoodCheckmarkView: NibLoadingView
             
             guard let food = food else { return }
             nameLabel.text = food.title
-            servingLabel.text = "\(Int(food.serving_quantity)) \(food.serving_unit)"
+            servingLabel.text = "\(Int(food.servingQuantity)) \(food.servingUnit)"
             
             if !hasSetGestureRecognizers
             {
@@ -44,7 +44,7 @@ class FoodCheckmarkView: NibLoadingView
                 checkImage.addGestureRecognizer(checkmarkGestureRecognizer)
             }
             
-            let imageUrl = food.image_url
+            let imageUrl = food.imageUrl
             let url = URL(string: imageUrl)
             backgroundImage.kf.setImage(with: url)
         }

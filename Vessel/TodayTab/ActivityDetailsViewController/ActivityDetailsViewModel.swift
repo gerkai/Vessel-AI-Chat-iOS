@@ -20,7 +20,7 @@ class ActivityDetailsViewModel
     // MARK: - Public properties
     var foodImageURL: URL?
     {
-        URL(string: food.image_url)
+        URL(string: food.imageUrl)
     }
     
     var title: String
@@ -30,9 +30,9 @@ class ActivityDetailsViewModel
     
     var subtitle: String
     {
-        let serving_grams = food.serving_grams
-        let serving_quantity = food.serving_quantity
-        let serving_unit = food.serving_unit
+        let serving_grams = food.servingGrams
+        let serving_quantity = food.servingQuantity
+        let serving_unit = food.servingUnit
         if isMetric
         {
             return NSLocalizedString("\(serving_grams) gr", comment: "Food amount")
