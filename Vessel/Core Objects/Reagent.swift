@@ -148,7 +148,6 @@ struct Reagent
         case MAGNESIUM = 5
         case CORTISOL = 8
         case VITAMIN_B7 = 11
-        case CREATININE = 12
         case CALCIUM = 18
         case NITRITE = 21
         case LEUKOCYTE = 22

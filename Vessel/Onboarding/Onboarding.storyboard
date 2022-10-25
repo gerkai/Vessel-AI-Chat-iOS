@@ -503,19 +503,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="YAK-y7-8uX">
-                                <rect key="frame" x="40" y="0.0" width="340" height="896"/>
+                                <rect key="frame" x="40" y="0.0" width="374" height="896"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-e2-wJc">
-                                <rect key="frame" x="0.0" y="0.0" width="380" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dna-mm-TOn" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="380" height="924"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="924"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lD8-5e-7wM">
-                                                <rect key="frame" x="30" y="166" width="320" height="724"/>
+                                                <rect key="frame" x="30" y="166" width="354" height="724"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TZ-so-Tw9" userLabel="DOB container View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="78.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="78.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Birth" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhn-zr-88B">
                                                                 <rect key="frame" x="0.0" y="0.0" width="180" height="78.5"/>
@@ -544,7 +544,7 @@
                                                         </variation>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB0-mG-t0R">
-                                                        <rect key="frame" x="0.0" y="98.5" width="320" height="26"/>
+                                                        <rect key="frame" x="0.0" y="98.5" width="354" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="200" id="vl8-vn-EqG"/>
                                                         </constraints>
@@ -560,24 +560,24 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ai5-Hw-upr" userLabel="Spacer View">
-                                                        <rect key="frame" x="0.0" y="144.5" width="320" height="100.5"/>
+                                                        <rect key="frame" x="0.0" y="144.5" width="354" height="100.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" priority="250" constant="1" id="rJX-xL-fj6"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGA-HQ-bku" customClass="SelectionCheckmarkView" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="265" width="320" height="60"/>
+                                                        <rect key="frame" x="0.0" y="265" width="354" height="60"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="vz1-rw-Yct"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shm-CF-ynQ" userLabel="Picker Container">
-                                                        <rect key="frame" x="0.0" y="345" width="320" height="248"/>
+                                                        <rect key="frame" x="0.0" y="345" width="354" height="248"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZ9-6b-0uo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="248"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.39859271523178808" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -586,7 +586,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="gdK-x4-M1W">
-                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="248"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                                         <color key="value" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -608,7 +608,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-2B-Ec7" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="613" width="320" height="60"/>
+                                                        <rect key="frame" x="0.0" y="613" width="354" height="60"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="qQY-lu-OYh"/>
@@ -627,7 +627,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djN-hb-kZd">
-                                                        <rect key="frame" x="0.0" y="693" width="320" height="31"/>
+                                                        <rect key="frame" x="0.0" y="693" width="354" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="31" id="2aN-9d-ihb"/>
                                                         </constraints>
@@ -769,8 +769,8 @@
                                                 <rect key="frame" x="0.0" y="138" width="354" height="347"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional. 
-</mutableString>
+                                                        <string key="content">The wellness test is based on, and provides the most accurate results with, normal human physiology. Diseases and medications can alter physiology and can lead to potentially inaccurate results. This is especially true with diseases or medications that alter kidney function. You should contact your healthcare professional prior to use if you are pregnant, breastfeeding, have any medical condition, or are on any treatment that could alter the way your kidneys produce urine. Do not make any changes to your medication, diet or exercise regimen prior to consulting your healthcare professional. 
+</string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>

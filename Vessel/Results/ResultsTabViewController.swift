@@ -146,13 +146,12 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     @IBAction func talkToANutritionist()
     {
-        print("TALK TO A NUTRITIONIST")
+        LiveChatManager.shared.navigateToLiveChat(in: self)
     }
     
     @IBAction func customerSupport()
     {
-        print("CUSTOMER SUPPORT")
-        //ObjectStore.shared.testFetch() //TODO: remove this test code.
+        ZendeskManager.shared.navigateToChatWithSupport(in: self)
     }
     
     //MARK: - TestsGoalsViewDelegates
