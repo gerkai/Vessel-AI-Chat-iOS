@@ -12,6 +12,7 @@ import ZendeskCoreSDK
 import ChatSDK
 import ChatProvidersSDK
 import SupportSDK
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -27,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         UIViewController.swizzle()
         initializeZendesk()
         Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+        //so videos will play sound even if mute button is on
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         return true
     }
 

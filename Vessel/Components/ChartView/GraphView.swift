@@ -44,7 +44,7 @@ class GraphView: UIView
     func coordFor(index: Int) -> CGPoint
     {
         let x = CGFloat(index - 2) * frame.width + (frame.width / 2)
-        var y = -1.0
+        var y = Constants.CHART_Y_COORDINATE_FOR_BAD_DATA
         
         if let reagentID = reagentID
         {
@@ -192,6 +192,13 @@ class GraphView: UIView
             p3 = coordFor(index: 3)
             p4 = coordFor(index: 4)
         }
+        
+        //if it's a bad data point, don't draw lines to it
+        if p2.y == Constants.CHART_Y_COORDINATE_FOR_BAD_DATA || p3.y == Constants.CHART_Y_COORDINATE_FOR_BAD_DATA
+        {
+            return
+        }
+        
         let oldCP = antipodalFor(point: controlPointForPoints(p1: p1, p2: p2, next: p3), center: p2)
         let newCP = controlPointForPoints(p1: p2, p2: p3, next: p4)
         path.move(to: p2)
