@@ -42,7 +42,7 @@ enum Evaluation: String
             case .low:
                 return NSLocalizedString("low", comment: "Reagent evaluation label")
             case .ketoLow:
-                return NSLocalizedString("low", comment: "Reagent evaluation label")
+                return NSLocalizedString("normal", comment: "Reagent evaluation label")
             case .moderate:
                 return NSLocalizedString("moderate", comment: "Reagent evaluation label")
             case .good:
@@ -54,7 +54,7 @@ enum Evaluation: String
             case .high:
                 return NSLocalizedString("high", comment: "Reagent evaluation label")
             case .ketoHigh:
-                return NSLocalizedString("high", comment: "Reagent evaluation label")
+                return NSLocalizedString("elevated", comment: "Reagent evaluation label")
             case .excellent:
                 return NSLocalizedString("excellent", comment: "Reagent evaluation label")
             case .detected:
