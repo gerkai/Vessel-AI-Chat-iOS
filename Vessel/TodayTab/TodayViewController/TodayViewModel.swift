@@ -9,7 +9,7 @@ import UIKit
 
 enum TodayViewSection: Equatable
 {
-    case header(name: String, goals: String)
+    case header(name: String, goals: [String])
     //case days
     //case insights(insights: [Insight])
     //case activities
@@ -88,7 +88,7 @@ enum TodayViewSection: Equatable
 
 enum TodayViewCell: Equatable
 {
-    case header(name: String, goals: String)
+    case header(name: String, goals: [String])
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food])
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
@@ -158,7 +158,7 @@ class TodayViewModel
     
     var sections: [TodayViewSection] {
         return [
-            .header(name: contact?.first_name ?? "", goals: contact?.getGoalsListedString() ?? ""),
+            .header(name: contact?.first_name ?? "", goals: contact?.getGoals() ?? []),
             //.insights(insights: insights),
             .food(foods: contact?.suggestedFoods ?? []),
             .water(glassesNumber: contact?.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),

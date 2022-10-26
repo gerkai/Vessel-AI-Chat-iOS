@@ -38,6 +38,7 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         self.tableView.contentInset = inset
         
         updateNextButton()
+        viewModel.selectedFoods = []
     }
     
     // MARK: - UI

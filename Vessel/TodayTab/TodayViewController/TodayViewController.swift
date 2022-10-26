@@ -21,6 +21,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     // MARK: - Model
     private var viewModel = TodayViewModel()
+    private let resultsViewModel = ResultsTabViewModel()
     private var didLayout = false
     private var tableViewOffset: CGFloat?
     
@@ -32,6 +33,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         super.viewDidLoad()
         lockoutView.isHidden = !viewModel.isEmpty
+//        view.bringSubviewToFront(lockoutView)
+        resultsViewModel.refresh()
         
         //get notified when new foods, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
@@ -132,7 +135,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         {
         case .header(let name, let goals):
             guard let cell = cell as? TodayHeaderTableViewCell else { fatalError("Can't dequeue cell TodayHeaderTableViewCell from tableView in TodayViewController") }
-            cell.setup(name: name, goals: goals)
+            cell.setup(name: name, goals: goals, delegate: self)
         case .sectionTitle(let icon, let name):
             guard let cell = cell as? TodaySectionTitleTableViewCell else { fatalError("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController") }
             cell.setup(iconName: icon, title: name)
@@ -234,5 +237,18 @@ extension TodayViewController: FoodCheckmarkViewDelegate
         activityDetailsVC.hidesBottomBarWhenPushed = true
         activityDetailsVC.setup(food: food)
         navigationController?.pushViewController(activityDetailsVC, animated: true)
+    }
+}
+
+extension TodayViewController: TodayHeaderTableViewCellDelegate
+{
+    func onGoalTapped(goal: String)
+    {
+        guard let goalIndex = Goals.firstIndex(where: { $1.name == goal.lowercased() }) else { return }
+        let id = Goals[goalIndex].key.rawValue
+        
+        let goalID = Goal.ID(rawValue: id)!
+        let vc = GoalDetailsViewController.initWith(goal: goalID, viewModel: resultsViewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

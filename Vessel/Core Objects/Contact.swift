@@ -270,7 +270,7 @@ class Contact: CoreObjectProtocol
         case email
         case expert_id
         case dailyWaterIntake = "daily_water_intake_glasses"
-        case drinkedWaterGlasses
+        case drinkedWaterGlasses = "drinked_water_glasses"
     }
     
     // MARK: - Strings
@@ -292,13 +292,13 @@ class Contact: CoreObjectProtocol
         return allergiesString.joined(separator: ", ")
     }
     
-    func getGoalsListedString() -> String
+    func getGoals() -> [String]
     {
-        let goalsString: [String] = goal_ids.compactMap({ id in
+        let goalsStrings: [String] = goal_ids.compactMap({ id in
             guard let goalID = Goal.ID(rawValue: id) else { return nil }
             return Goals[goalID]?.name.capitalized
         })
-        return goalsString.joined(separator: ", ")
+        return goalsStrings
     }
     
     // MARK: - Analytics
@@ -324,7 +324,7 @@ class Contact: CoreObjectProtocol
     
     func setGoalsAnalytics()
     {
-        analytics.setUserProperty(property: "Goals", value: getGoalsListedString())
+        analytics.setUserProperty(property: "Goals", value: getGoals().joined(separator: ", "))
     }
 }
 
