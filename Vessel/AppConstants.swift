@@ -155,6 +155,7 @@ struct Constants
     static let TAB_BAR_MORE_INDEX = 4
     static let WATER_GLASSESS_PER_ROW = 9
     static let MINIMUM_WATER_INTAKE = 4
+    static let CHART_Y_COORDINATE_FOR_BAD_DATA = -10.0 //far enough off chart to not plot visible dot
     
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")
