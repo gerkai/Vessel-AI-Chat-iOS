@@ -42,7 +42,7 @@ enum Evaluation: String
             case .low:
                 return NSLocalizedString("low", comment: "Reagent evaluation label")
             case .ketoLow:
-                return NSLocalizedString("normal", comment: "Reagent evaluation label")
+                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("low", comment: "Keto diet evaluation label") : NSLocalizedString("normal", comment: "Non Keto diet evaluation label")
             case .moderate:
                 return NSLocalizedString("moderate", comment: "Reagent evaluation label")
             case .good:
@@ -52,7 +52,7 @@ enum Evaluation: String
             case .elevated:
                 return NSLocalizedString("elevated", comment: "Reagent evaluation label")
             case .high:
-                return NSLocalizedString("high", comment: "Reagent evaluation label")
+                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("good", comment: "Keto diet evaluation label") : NSLocalizedString("high", comment: "Non Keto diet evaluation label")
             case .ketoHigh:
                 return NSLocalizedString("elevated", comment: "Reagent evaluation label")
             case .excellent:
@@ -77,7 +77,7 @@ enum Evaluation: String
             case .ketoLow:
                 if Contact.main()!.isOnDiet(.KETO)
                 {
-                    return Constants.vesselFair
+                    return Constants.vesselPoor
                 }
                 else
                 {
@@ -123,6 +123,14 @@ struct TitleDescription
 {
     let title: String
     let description: String
+    let variation: String?
+    
+    internal init(title: String, description: String, variation: String? = nil)
+    {
+        self.title = title
+        self.description = description
+        self.variation = variation
+    }
 }
 
 struct GoalImpact

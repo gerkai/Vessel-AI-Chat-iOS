@@ -16,12 +16,15 @@ let Ketones = Reagent(
     imageName: "Ketones",
     buckets: [
         Bucket(low: 2.21, high: 8.81, score: 0, evaluation: .ketoHigh,
-            hint: TitleDescription(
-            title: NSLocalizedString("Your Ketone levels are elevated.", comment: ""),
-            description: NSLocalizedString("Good job! The diet is working and your body is switching to ketone bodies as its primary fuel source. If you’re not on a ketogenic diet please check in with your doctor as this could be a sign of an underlying disease. Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Ketones.", comment: ""))),
+               hint: TitleDescription(
+                title: NSLocalizedString("Your Ketone levels are elevated.", comment: ""),
+                description: NSLocalizedString("Long periods of intermittent fasting, exercising regularly or testing with a Vessel card shortly after exercise may show an elevated reading. High ketones may also be a sign of diabetic ketoacidosis (DKA), a life-threatening condition associated with Type 1 Diabetes or alcoholism. We recommend speaking with your primary care doctor if you continue to receive a high ketone level", comment: ""),
+                variation: NSLocalizedString("Good job! The diet is working and your body is switching to ketone bodies as its primary fuel source. If you’re not on a ketogenic diet please check in with your doctor as this could be a sign of an underlying disease. Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Ketones", comment: ""))),
         Bucket(low: 0.0, high: 2.21, score: 0.0, evaluation: .ketoLow,
-           hint: TitleDescription(title: NSLocalizedString("Your Ketone levels are normal.", comment: ""),
-           description: NSLocalizedString("This is totally normal in people not trying to do a ketogenic diet. If you are, you might want to re-visit the calculations of your target fat, protein, and carbs each day. We’re here to help. Tap below to see your personalized plan. You got this!", comment: "")))],
+               hint: TitleDescription(
+                title: NSLocalizedString("Your Ketone levels are low.", comment: ""),
+                description: NSLocalizedString("Not to worry, this is completely normal for those who are not on a ketogenic diet. Low ketones means your body is efficiently using glucose as its primary source of fuel. Keep up the good work!", comment: ""),
+                variation: NSLocalizedString("Ketones can be beneficial for improved focus, healthy weight management, increased energy, and a balanced mood through increasing your metabolic machinery in your cells to more efficiently burn fat for fuel. Achieving a \"good\" or \"high\" ketone reading on your Vessel Wellness card requires increased attention to your diet. Ketones are produced when carbohydrate intake is very low, typically 20-50g/day, healthy fat intake is high, roughly 70% of caloric intake, and protein intake is moderate. Consume foods such as avocado, olive oil, salmon, hemp seeds and lean protien. Keep in mind that it can take several weeks to a month to increase ketone levels.", comment: "")))],
     goalImpacts: [
         GoalImpact(goalID: 1, impact: 1),
         GoalImpact(goalID: 2, impact: 1),

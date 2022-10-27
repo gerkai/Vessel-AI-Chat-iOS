@@ -134,6 +134,10 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
                 let bucket = reagent.buckets[bucketIndex]
                 resultTitleLabel.text = bucket.hint.title
                 resultTextLabel.text = bucket.hint.description
+                if reagent.name == "Ketones" && Contact.main()!.isOnDiet(.KETO)
+                {
+                    resultTextLabel.text = bucket.hint.variation
+                }
             }
             else
             {

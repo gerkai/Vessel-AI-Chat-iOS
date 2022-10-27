@@ -189,28 +189,22 @@ class AfterTestViewModel
         }
         if contact.flags & Constants.SAW_KETONES_LOW_INFO == 0
         {
-            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .low)
+            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .ketoLow) && Contact.main()!.isOnDiet(.KETO)
             {
-                if contact.isOnDiet(Diet.ID.KETO)
-                {
-                    contactFlags |= Constants.SAW_KETONES_LOW_INFO
-                    screens.append(.KETO_LOW_1)
-                    screens.append(.KETO_LOW_2)
-                    screens.append(.KETO_LOW_3)
-                    screens.append(.KETO_LOW_4)
-                }
+                contactFlags |= Constants.SAW_KETONES_LOW_INFO
+                screens.append(.KETO_LOW_1)
+                screens.append(.KETO_LOW_2)
+                screens.append(.KETO_LOW_3)
+                screens.append(.KETO_LOW_4)
             }
         }
         if contact.flags & Constants.SAW_KETONES_ELEVATED_INFO == 0
         {
-            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .elevated)
+            if testResult.isEvaluatedTo(id: Reagent.ID.KETONES_A, evaluation: .ketoHigh)
             {
-                if contact.isOnDiet(Diet.ID.KETO)
-                {
-                    contactFlags |= Constants.SAW_KETONES_ELEVATED_INFO
-                    screens.append(.KETO_ELEVATED_1)
-                    screens.append(.KETO_ELEVATED_2)
-                }
+                contactFlags |= Constants.SAW_KETONES_ELEVATED_INFO
+                screens.append(.KETO_ELEVATED_1)
+                screens.append(.KETO_ELEVATED_2)
             }
         }
         if contact.flags & Constants.SAW_KETONES_HIGH_INFO == 0

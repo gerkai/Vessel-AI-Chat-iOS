@@ -274,13 +274,12 @@ class Contact: CoreObjectProtocol
     }
     
     // MARK: - Strings
-    func getDietsListedString() -> String
+    func getDietsNames() -> [String]
     {
-        let dietsString: [String] = diet_ids.compactMap({ id in
+        return diet_ids.compactMap({ id in
             guard let dietID = Diet.ID(rawValue: id) else { return nil }
             return Diets[dietID]?.name.capitalized
         })
-        return dietsString.joined(separator: ", ")
     }
     
     func getAllergiesListedString() -> String
@@ -294,11 +293,10 @@ class Contact: CoreObjectProtocol
     
     func getGoals() -> [String]
     {
-        let goalsStrings: [String] = goal_ids.compactMap({ id in
+        return goal_ids.compactMap({ id in
             guard let goalID = Goal.ID(rawValue: id) else { return nil }
             return Goals[goalID]?.name.capitalized
         })
-        return goalsStrings
     }
     
     // MARK: - Analytics
@@ -314,7 +312,7 @@ class Contact: CoreObjectProtocol
     
     func setDietsAnalytics()
     {
-        analytics.setUserProperty(property: "Diet", value: getDietsListedString())
+        analytics.setUserProperty(property: "Diet", value: getDietsNames().joined(separator: ", "))
     }
     
     func setAllergiesAnalytics()

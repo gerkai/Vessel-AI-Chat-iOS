@@ -419,12 +419,14 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //used for test/debug
         
-        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.81, insert_date: "2022-09-24T15:22:14", reagentResults: [ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
-                                                                        ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
-                                                                        ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
-                                                                        ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),
-                                                                        ReagentResult(id: 4, score: 0.2, value: 150.0, errorCodes: []),
-                                                                        ReagentResult(id: 2, score: 0.6, value: 1.010, errorCodes: []),
-                                                                        ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: [])])
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.81, insert_date: "2022-09-24T15:22:14", reagentResults: [
+            ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
+            ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
+            ReagentResult(id: 1, score: 1.0, value: 7.5, errorCodes: []),
+            ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []),
+            ReagentResult(id: 4, score: 0.2, value: 150.0, errorCodes: []),
+            ReagentResult(id: 2, score: 0.6, value: 1.010, errorCodes: []),
+            ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: [])
+        ])
     }
 }
