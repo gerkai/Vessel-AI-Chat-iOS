@@ -14,6 +14,7 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
     @IBOutlet weak var headerSubtextLabel: UILabel!
     @IBOutlet weak var headerBackgroundView: UIView!
     @IBOutlet weak var testsStackView: UIStackView!
+    @IBOutlet weak var subtitleLabel: UILabel!
     
     var goal: Goal!
     var viewModel: ResultsTabViewModel!
@@ -36,6 +37,7 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
         headerTitleLabel.text = goal.name.capitalized
         headerSubtextLabel.text = goal.headerText
         headerBackgroundView.backgroundColor = goal.backgroundColor
+        subtitleLabel.text = NSLocalizedString("Tests that affect \(goal.name.lowercased())", comment: "Goal details subtitle")
         
         testsStackView.removeAllArrangedSubviews() //remove placeholder view
         let result = viewModel.selectedResult()
