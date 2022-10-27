@@ -354,11 +354,13 @@ private extension EditProfileViewController
     {
         viewModel.minDateComponents = viewModel.calendar.dateComponents([.day, .month, .year], from: Date())
         viewModel.maxDateComponents = viewModel.calendar.dateComponents([.day, .month, .year], from: Date())
-        if let year = viewModel.minDateComponents.year
+        if let year = viewModel.minDateComponents.year,
+           let month = viewModel.minDateComponents.month,
+           let day = viewModel.minDateComponents.day
         {
             viewModel.minDateComponents.year = year - viewModel.minAge
-            viewModel.minDateComponents.month = 12
-            viewModel.minDateComponents.day = 31
+            viewModel.minDateComponents.month = month
+            viewModel.minDateComponents.day = day
             if let date = viewModel.calendar.date(from: viewModel.minDateComponents)
             {
                 viewModel.maxDate = date
