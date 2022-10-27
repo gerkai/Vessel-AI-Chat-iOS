@@ -39,7 +39,14 @@ class ActivityDetailsViewModel
         }
         else
         {
-            return "\(Int(serving_quantity)) \(serving_unit)"
+            if serving_quantity == Double(Int(serving_quantity))
+            {
+                return "\(Int(serving_quantity)) \(serving_unit)"
+            }
+            else
+            {
+                return "\(serving_quantity) \(serving_unit)"
+            }
         }
     }
     

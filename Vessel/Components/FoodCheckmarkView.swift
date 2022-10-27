@@ -33,8 +33,16 @@ class FoodCheckmarkView: NibLoadingView
             
             guard let food = food else { return }
             nameLabel.text = food.title
-            servingLabel.text = "\(Int(food.servingQuantity)) \(food.servingUnit)"
             
+            if food.servingQuantity == Double(Int(food.servingQuantity))
+            {
+                servingLabel.text = "\(Int(food.servingQuantity)) \(food.servingUnit)"
+            }
+            else
+            {
+                servingLabel.text = "\(food.servingQuantity) \(food.servingUnit)"
+            }
+
             if !hasSetGestureRecognizers
             {
                 let viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onViewTapped))
