@@ -9,7 +9,8 @@ import UIKit
 
 protocol ReagentImpactViewDelegate: AnyObject
 {
-    func reagentImpactViewTapped()
+    func reagentImpactViewTappedImpact()
+    func reagentImpactViewTappedReagent(reagentId: Int)
 }
 
 class ReagentImpactView: UIView
@@ -18,13 +19,15 @@ class ReagentImpactView: UIView
     @IBOutlet weak var reagentNameLabel: UILabel!
     @IBOutlet weak var evaluationLabel: UILabel!
     @IBOutlet weak var impactImageView: UIImageView!
+    @IBOutlet weak var reagentImpactView: UIView!
+    
     weak var delegate: ReagentImpactViewDelegate?
     
+    var reagentId: Int?
     var numDots: Int = 2
     {
         didSet
         {
-            //print("Setting numDots: \(numDots)")
             switch numDots
             {
                 case 1:
@@ -57,12 +60,21 @@ class ReagentImpactView: UIView
         
         Bundle.main.loadNibNamed(xibName, owner: self, options: nil)
         contentView.fixInView(self)
-        //self.backgroundColor = .clear
         
+        reagentImpactView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(impactTapped)))
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
     }
     
-    @IBAction func tapped()
+    @objc
+    func viewTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        delegate?.reagentImpactViewTapped()
+        guard let reagentId = reagentId else { return }
+        delegate?.reagentImpactViewTappedReagent(reagentId: reagentId)
+    }
+    
+    @objc
+    func impactTapped(gestureRecognizder: UITapGestureRecognizer)
+    {
+        delegate?.reagentImpactViewTappedImpact()
     }
 }

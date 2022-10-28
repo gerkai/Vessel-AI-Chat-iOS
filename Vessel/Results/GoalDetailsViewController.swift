@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
+class GoalDetailsViewController: UIViewController
 {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerTitleLabel: UILabel!
@@ -70,6 +70,7 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
                 
                 let impact = reagent.impactFor(goal: goal.id)
                 impactView.numDots = impact
+                impactView.reagentId = reagentID.rawValue
                 
                 testsStackView.addArrangedSubview(impactView)
             }
@@ -81,12 +82,20 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
         viewModel = nil
         navigationController?.popViewController(animated: true)
     }
-    
-    //MARK: - ReagentImpactView delegates
-    func reagentImpactViewTapped()
+}
+
+extension GoalDetailsViewController: ReagentImpactViewDelegate
+{
+    func reagentImpactViewTappedImpact()
     {
         let storyboard = UIStoryboard(name: "Results", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ImpactScoreSlideupViewController") as! ImpactScoreSlideupViewController
         self.present(vc, animated: false)
+    }
+    
+    func reagentImpactViewTappedReagent(reagentId: Int)
+    {
+        let vc = ReagentDetailsViewController.initWith(reagentID: reagentId, viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
