@@ -42,7 +42,19 @@ class GoalDetailsViewController: UIViewController, ReagentImpactViewDelegate
         testsStackView.removeAllArrangedSubviews() //remove placeholder view
         let result = viewModel.selectedResult()
         
-        for reagentResult in result.reagentResults
+        let filteredReagentResults = result.reagentResults.filter({ Reagent.ID(rawValue: $0.id) != nil })
+        let sortedReagentResults = filteredReagentResults.sorted(by: { (firstReagentResult, secondReagentResult) in
+            if let firstReagentID = Reagent.ID(rawValue: firstReagentResult.id),
+               let secondReagentID = Reagent.ID(rawValue: secondReagentResult.id),
+               let firstReagent = Reagents[firstReagentID],
+               let secondReagent = Reagents[secondReagentID]
+            {
+                return firstReagent.impactFor(goal: goal.id) > secondReagent.impactFor(goal: goal.id)
+            }
+            return false
+        })
+        
+        for reagentResult in sortedReagentResults
         {
             let impactView = ReagentImpactView()
             let heightConstraint = NSLayoutConstraint(item: impactView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 46)
