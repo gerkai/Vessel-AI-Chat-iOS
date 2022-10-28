@@ -163,7 +163,8 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         scienceLabel.text = string
         scienceStackview.removeAllArrangedSubviews() //remove placeholder
         
-        for item in reagent.goalSources
+        let sortedGoalSources = reagent.goalSources.sorted(by: { $0.sources.count > $1.sources.count })
+        for item in sortedGoalSources
         {
             let count = item.sources.count
             var studiesView: ScienceStudiesView!
