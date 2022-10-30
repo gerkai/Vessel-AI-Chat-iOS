@@ -69,17 +69,17 @@ struct Plan: CoreObjectProtocol, Codable, Hashable
         self.completed = completed
     }
     
-    enum CodingKeys: CodingKey
+    enum CodingKeys: String, CodingKey
     {
         case id
         case last_updated
-        case timeOfDay
-        case dayOfWeek
-        case foodId
-        case reagentLifestyleRecommendationId
-        case activityId
-        case planId
-        case contactId
+        case timeOfDay = "time_of_day"
+        case dayOfWeek = "day_of_week"
+        case foodId = "food_id"
+        case reagentLifestyleRecommendationId = "reagent_lifestyle_recommendation_id"
+        case activityId = "activity_id"
+        case planId = "plan_id"
+        case contactId = "contact_id"
         case completed
     }
 }

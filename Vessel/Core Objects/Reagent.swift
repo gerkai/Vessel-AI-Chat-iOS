@@ -294,16 +294,16 @@ struct Reagent
 
 //Here are the reagents used by the app
 let Reagents: [Reagent.ID: Reagent] =
-//PH
-[Reagent.ID.PH: PH,
- Reagent.ID.HYDRATION: Hydration,
- Reagent.ID.KETONES_A: Ketones,
- Reagent.ID.VITAMIN_C: VitaminC,
- Reagent.ID.MAGNESIUM: Magnesium,
- Reagent.ID.CORTISOL: Cortisol,
- Reagent.ID.VITAMIN_B7: VitaminB7,
- Reagent.ID.CALCIUM: Calcium,
- Reagent.ID.NITRITE: Nitrite,
- Reagent.ID.LEUKOCYTE: Leukocyte,
- Reagent.ID.SODIUM: Sodium
+[
+    Reagent.ID.PH: PH,
+    Reagent.ID.HYDRATION: Hydration,
+    Reagent.ID.KETONES_A: Ketones,
+    Reagent.ID.VITAMIN_C: VitaminC,
+    Reagent.ID.MAGNESIUM: Magnesium,
+    Reagent.ID.CORTISOL: Cortisol,
+    Reagent.ID.VITAMIN_B7: VitaminB7,
+    Reagent.ID.CALCIUM: Calcium,
+    Reagent.ID.NITRITE: Nitrite,
+    Reagent.ID.LEUKOCYTE: Leukocyte,
+    Reagent.ID.SODIUM: Sodium
 ]

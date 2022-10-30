@@ -801,7 +801,6 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.data(withJSONObject: planDict)
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let decodedPlan = try decoder.decode(Plan.self, from: json)
                 DispatchQueue.main.async()
                 {
@@ -851,7 +850,6 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.data(withJSONObject: plansDict)
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let multiplePlansResponse = try decoder.decode(PlanResponse.self, from: json)
                 
                 DispatchQueue.main.async()
