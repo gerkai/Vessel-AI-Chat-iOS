@@ -301,26 +301,12 @@ class OnboardingCoordinator
                 //diets, allergies, goals
                 if let dietViewModel = dietViewModel
                 {
-                    if dietViewModel.userDiets.contains(Diet.ID.NONE.rawValue)
-                    {
-                        contact.diet_ids = []
-                    }
-                    else
-                    {
-                        contact.diet_ids = dietViewModel.userDiets
-                    }
+                    contact.diet_ids = dietViewModel.userDiets
                     contact.setDietsAnalytics()
                 }
                 if let allergiesViewModel = allergiesViewModel
                 {
-                    if allergiesViewModel.userAllergies.contains(Allergy.ID.NONE.rawValue)
-                    {
-                        contact.allergy_ids = []
-                    }
-                    else
-                    {
-                        contact.allergy_ids = allergiesViewModel.userAllergies
-                    }
+                    contact.allergy_ids = allergiesViewModel.userAllergies
                     contact.setAllergiesAnalytics()
                 }
                 

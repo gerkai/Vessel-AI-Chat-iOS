@@ -225,6 +225,28 @@ class Contact: CoreObjectProtocol
         self.drinkedWaterGlasses = drinkedWaterGlasses
     }
     
+    init(_ contact: Contact)
+    {
+        self.id = contact.id
+        self.last_updated = contact.last_updated
+        self.first_name = contact.first_name
+        self.last_name = contact.last_name
+        self.gender = contact.gender
+        self.height = contact.height
+        self.weight = contact.weight
+        self.birth_date = contact.birth_date
+        self.email = contact.email
+        self.flags = contact.flags
+        _enrolled_program_ids = contact.enrolled_program_ids
+        self.diet_ids = contact.diet_ids
+        self.allergy_ids = contact.allergy_ids
+        self.goal_ids = contact.goal_ids
+        self.expert_id = contact.expert_id
+        self.loginType = contact.loginType
+        self.dailyWaterIntake = contact.dailyWaterIntake
+        self.drinkedWaterGlasses = contact.drinkedWaterGlasses
+    }
+    
     var fullName: String
     {
         return [first_name, last_name].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ")
@@ -271,6 +293,32 @@ class Contact: CoreObjectProtocol
         case expert_id
         case dailyWaterIntake = "daily_water_intake_glasses"
         case drinkedWaterGlasses = "drinked_water_glasses"
+    }
+    
+    func replaceEmptyDietsAndAllergies() -> Contact
+    {
+        let contact = Contact(self)
+        let userDiets = self.diet_ids
+        let userAllergies = self.allergy_ids
+        
+        if userDiets.contains(Diet.ID.NONE.rawValue)
+        {
+            contact.diet_ids = []
+        }
+        else
+        {
+            contact.diet_ids = userDiets
+        }
+        
+        if userAllergies.contains(Allergy.ID.NONE.rawValue)
+        {
+            contact.allergy_ids = []
+        }
+        else
+        {
+            contact.allergy_ids = userAllergies
+        }
+        return contact
     }
     
     // MARK: - Strings

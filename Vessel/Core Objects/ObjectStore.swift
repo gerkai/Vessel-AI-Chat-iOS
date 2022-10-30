@@ -316,17 +316,23 @@ class ObjectStore: NSObject
     //Call this to save objects that have been modified by the client
     func ClientSave<T: CoreObjectProtocol>(_ object: T)
     {
+        var newObject = object
+        if let contact = newObject as? Contact
+        {
+            newObject = contact.replaceEmptyDietsAndAllergies() as! T
+        }
+        
         if object.storage == .cache || object.storage == .cacheAndDisk
         {
-            cacheObject(object)
+            cacheObject(newObject)
         }
         if object.storage == .disk || object.storage == .cacheAndDisk
         {
-            Storage.store(object)
+            Storage.store(newObject)
         }
 
-        let objectArray = [object]
-        let name = String(describing: type(of: object)).lowercased()
+        let objectArray = [newObject]
+        let name = String(describing: type(of: newObject)).lowercased()
         let dict = [name: objectArray]
         
         //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
