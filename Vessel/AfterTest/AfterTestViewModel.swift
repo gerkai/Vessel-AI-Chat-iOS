@@ -305,7 +305,7 @@ class AfterTestViewModel
                                                    .fade)
             case .SOD_HIGH_3:
                 return AfterTestViewControllerData(NSLocalizedString("How to Lower Sodium Levels", comment: ""),
-                                                   NSLocalizedString("Do you best to limit your Sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to foods when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
+                                                   NSLocalizedString("Do your best to limit your Sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to foods when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
                                                    "Sodium-top-right",
                                                    .push)
                 
