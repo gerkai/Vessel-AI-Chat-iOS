@@ -19,6 +19,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBOutlet weak var scienceStackview: UIStackView!
     @IBOutlet weak var scienceLabel: UILabel!
     @IBOutlet weak var tipsStackView: UIStackView!
+    @IBOutlet weak var infoView: UIView!
     
     var reagentID: Int!
     var viewModel: ResultsTabViewModel!
@@ -134,6 +135,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
                 let bucket = reagent.buckets[bucketIndex]
                 resultTitleLabel.text = bucket.hint.title
                 resultTextLabel.text = bucket.hint.description
+                infoView.backgroundColor = bucket.evaluation.color
                 if reagent.name == "Ketones" && Contact.main()!.isOnDiet(.KETO)
                 {
                     resultTextLabel.text = bucket.hint.variation
