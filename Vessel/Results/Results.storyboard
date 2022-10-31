@@ -964,6 +964,7 @@
                     <connections>
                         <outlet property="chartView" destination="IzB-fP-yhR" id="Fnd-VG-u1t"/>
                         <outlet property="chartZoneStackView" destination="bUY-9y-DWR" id="dib-86-vxW"/>
+                        <outlet property="infoView" destination="VqS-0d-5pb" id="Xto-UU-Szg"/>
                         <outlet property="reagentImageView" destination="5iw-dT-qyA" id="Ey5-JN-UCL"/>
                         <outlet property="resultTextLabel" destination="g3B-OA-tEj" id="nNd-9m-Koj"/>
                         <outlet property="resultTitleLabel" destination="hR8-co-43T" id="2Lv-Q3-1HV"/>
