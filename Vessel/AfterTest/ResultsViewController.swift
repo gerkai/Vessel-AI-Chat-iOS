@@ -239,7 +239,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
             let evaluation = reagent.getEvaluation(value: value)
             
             reagentView.titleLabel.text = reagent.name
-            reagentView.subtextLabel.text = evaluation.title
+            reagentView.subtextLabel.text = evaluation.title.capitalized
             reagentView.contentView.backgroundColor = evaluation.color
             reagentView.imageView.image = UIImage.init(named: reagent.imageName)
             
@@ -318,7 +318,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
         if percentage == 1.0
         {
             timer.invalidate()
-            evaluationLabel.text = evaluation(value)
+            evaluationLabel.text = evaluation(value).capitalized
             
             //pop the evaluation label in
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
