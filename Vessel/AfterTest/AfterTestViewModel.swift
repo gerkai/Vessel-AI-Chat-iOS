@@ -499,7 +499,7 @@ class AfterTestViewModel
                                                    "B7-top-right",
                                                    .fade)
             case .B7_LOW_2:
-                return AfterTestViewControllerData(NSLocalizedString("Reasons Your Biot in is Low", comment: ""),
+                return AfterTestViewControllerData(NSLocalizedString("Reasons Your Biotin is Low", comment: ""),
                                                    NSLocalizedString("The most common cause of low Biotin is not consuming enough through your diet. Other causes may include alcohol consumption and long-term use of certain medications. With proper food and supplementation, your Biotin levels may improve in a few days!", comment: ""),
                                                    "B7-top-right",
                                                    .push)
