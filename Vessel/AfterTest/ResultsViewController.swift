@@ -23,12 +23,21 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var resultViewCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultViewLeftEdgeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultViewBottomEdgeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var wellnessCardSubtextLabel: UILabel!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .resultsTabFlow
+    let resultViewEdgeInset = 20.0
     
     var testResult: Result! //set by the caller during instantiation
     var timer: Timer!
+    var startingResultViewWidth: CGFloat!
+    var startingResultViewHeight: CGFloat!
+    
     var iteration = 0
     let wellnessCardAnimationTime = 2.0
     let tickTime = 0.05
@@ -48,8 +57,10 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
         viewModel = AfterTestViewModel(testResult: testResult)
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
+        wellnessCardSubtextLabel.alpha = 0.0
         originalStaggerConstraintConstant = staggerConstraint.constant
-        
+        startingResultViewWidth = resultView.frame.width
+        startingResultViewHeight = resultView.frame.height
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
@@ -323,7 +334,68 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
                 }
                 completion:
                 { _ in
+                    self.animateResultViewDown()
                 }
+            }
+        }
+    }
+    
+    func animateResultViewDown()
+    {
+        self.wellnessCard.layoutIfNeeded()
+        self.resultViewCenterYConstraint.isActive = false
+        self.resultViewLeftEdgeConstraint.constant = resultViewEdgeInset - (startingResultViewWidth / 2.0) + resultViewEdgeInset
+        self.resultViewBottomEdgeConstraint.constant = resultViewEdgeInset - (startingResultViewHeight / 2.0) + resultViewEdgeInset + resultViewEdgeInset / 2.0
+        UIView.animate(withDuration: 0.5, delay: 0.0)
+        {
+            self.resultView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            self.wellnessCard.layoutIfNeeded()
+        }
+        completion:
+        { _ in
+            self.setWellnessCardSubtext()
+            UIView.animate(withDuration: 0.25, delay: 0.0)
+            {
+                self.wellnessCardSubtextLabel.alpha = 1.0
+            }
+        }
+    }
+    
+    func setWellnessCardSubtext()
+    {
+        if self.viewModel.numberOfResults() == 1
+        {
+            wellnessCardSubtextLabel.text = NSLocalizedString("This combines all your test results into one score up to 100.", comment: "")
+        }
+        else
+        {
+            let comparison = viewModel.compareWithPreviousScore()
+            if comparison > 0
+            {
+                if comparison == 1
+                {
+                    wellnessCardSubtextLabel.text = NSLocalizedString("Congratulations! You've improved by 1 point.", comment: "")
+                }
+                else
+                {
+                    wellnessCardSubtextLabel.text = String(format: NSLocalizedString("Congratulations! You've improved by %i points.", comment: ""), comparison)
+                }
+            }
+            else if comparison < 0
+            {
+                let goodResults = viewModel.numGoodResults()
+                if goodResults == 1
+                {
+                    wellnessCardSubtextLabel.text = NSLocalizedString("You got 1 good result. Focus on the red results to improve & feel great!", comment: "")
+                }
+                else
+                {
+                    wellnessCardSubtextLabel.text = String(format: NSLocalizedString("You got %i good results. Focus on the red results to improve & feel great!", comment: ""), goodResults)
+                }
+            }
+            else
+            {
+                wellnessCardSubtextLabel.text = NSLocalizedString("Well done! Your score held steady. Focus on the red results to improve & feel great! ", comment: "")
             }
         }
     }

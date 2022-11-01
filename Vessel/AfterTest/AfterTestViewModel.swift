@@ -42,6 +42,7 @@ class AfterTestViewModel
     var suggestedFoods: [ReagentFood] = []
     var isHydroLow: Bool = true
     var selectedWaterOption: Int?
+    var results: [Result]!
     
     enum AfterTestScreen
     {
@@ -96,6 +97,53 @@ class AfterTestViewModel
     {
         self.testResult = testResult
         calculateTotalScreens()
+        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+        {
+            results = mockResults
+        }
+        else
+        {
+            results = Storage.retrieve(as: Result.self)
+        }
+    }
+    
+    func numberOfResults() -> Int
+    {
+        //don't ever allow 0 results. This is to handle special case when bypass scanning is turned on in the debug menu.
+        //in that case, a result is not saved and you could have 0 results after taking a test. In this case, we'll act like
+        //it's their first test.
+        var count = 1
+        if results.count > 1
+        {
+            count = results.count
+        }
+        return count
+    }
+    
+    //returns how many points we increased or decreased since last test
+    func compareWithPreviousScore() -> Int
+    {
+        let thisResult = results[results.count - 1]
+        let lastResult = results[results.count - 2]
+        
+        return Int((thisResult.wellnessScore - lastResult.wellnessScore) * 100.0)
+    }
+    
+    func numGoodResults() -> Int
+    {
+        var goodResults = 0
+        
+        let result = results[results.count - 1]
+        for reagentResult in result.reagentResults
+        {
+            let reagent = Reagents[Reagent.ID(rawValue: reagentResult.id)!]
+            let evaluation = reagent!.getEvaluation(value: reagentResult.value)
+            if evaluation.isGood()
+            {
+                goodResults += 1
+            }
+        }
+        return goodResults
     }
     
     func calculateTotalScreens()
@@ -451,7 +499,7 @@ class AfterTestViewModel
                                                    "B7-top-right",
                                                    .fade)
             case .B7_LOW_2:
-                return AfterTestViewControllerData(NSLocalizedString("Reasons Your Biot in is Low", comment: ""),
+                return AfterTestViewControllerData(NSLocalizedString("Reasons Your Biotin is Low", comment: ""),
                                                    NSLocalizedString("The most common cause of low Biotin is not consuming enough through your diet. Other causes may include alcohol consumption and long-term use of certain medications. With proper food and supplementation, your Biotin levels may improve in a few days!", comment: ""),
                                                    "B7-top-right",
                                                    .push)

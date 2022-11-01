@@ -164,6 +164,7 @@
 		3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */; };
 		3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEACB1E28FA073600686D79 /* ChartZone.xib */; };
 		3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB2028FA075F00686D79 /* ChartZone.swift */; };
+		3FF45285291185C900B967CA /* MockResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45284291185C900B967CA /* MockResults.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */; };
 		3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C571290367EB001643C1 /* ReagentImpactView.swift */; };
@@ -423,6 +424,7 @@
 		3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentDetailsViewController.swift; sourceTree = "<group>"; };
 		3FEACB1E28FA073600686D79 /* ChartZone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartZone.xib; sourceTree = "<group>"; };
 		3FEACB2028FA075F00686D79 /* ChartZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartZone.swift; sourceTree = "<group>"; };
+		3FF45284291185C900B967CA /* MockResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResults.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsViewController.swift; sourceTree = "<group>"; };
 		3FF8C571290367EB001643C1 /* ReagentImpactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentImpactView.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 			children = (
 				3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */,
 				3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */,
+				3FF45284291185C900B967CA /* MockResults.swift */,
 				3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */,
 				3F426DC028DFA33200927B68 /* Results.storyboard */,
 				3F426DBE28DFA2FF00927B68 /* ResultsTabViewController.swift */,
@@ -1608,6 +1611,7 @@
 				3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */,
 				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */,
+				3FF45285291185C900B967CA /* MockResults.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
 				3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */,

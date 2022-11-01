@@ -62,43 +62,74 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HappyWoman" translatesAutoresizingMaskIntoConstraints="NO" id="EnJ-1F-lZi">
                                                         <rect key="frame" x="213" y="35" width="161" height="237"/>
                                                     </imageView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cSq-Wx-YZb">
-                                                        <rect key="frame" x="20" y="106" width="124" height="60"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSZ-pM-0Qo">
+                                                        <rect key="frame" x="20" y="55" width="205" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="205" id="FhK-G9-XnL"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Label (DNT)">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yiz-Is-akJ">
+                                                        <rect key="frame" x="20" y="90" width="124" height="92"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maH-xo-x4u">
-                                                                <rect key="frame" x="0.0" y="0.0" width="52.5" height="60"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="60" id="YPI-iJ-AtT"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="80"/>
-                                                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xu8-FI-vki">
-                                                                <rect key="frame" x="52.5" y="28" width="71.5" height="32"/>
-                                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="32"/>
-                                                                <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cSq-Wx-YZb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="124" height="60"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maH-xo-x4u">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="52.5" height="60"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="60" id="YPI-iJ-AtT"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="80"/>
+                                                                        <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xu8-FI-vki">
+                                                                        <rect key="frame" x="52.5" y="28" width="71.5" height="32"/>
+                                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="32"/>
+                                                                        <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-Sk-TYt">
+                                                                <rect key="frame" x="0.0" y="64" width="139.5" height="28"/>
+                                                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="28"/>
+                                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                    </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair (DNT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-Sk-TYt">
-                                                        <rect key="frame" x="20" y="174" width="139.5" height="28"/>
-                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="28"/>
-                                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Dif-Sk-TYt" firstAttribute="leading" secondItem="maH-xo-x4u" secondAttribute="leading" id="5Cr-WR-YHx"/>
+                                                            <constraint firstItem="Dif-Sk-TYt" firstAttribute="top" secondItem="cSq-Wx-YZb" secondAttribute="bottom" constant="4" id="EWm-N2-ZHN"/>
+                                                            <constraint firstAttribute="width" secondItem="cSq-Wx-YZb" secondAttribute="width" id="Mj6-ra-NZs"/>
+                                                            <constraint firstItem="cSq-Wx-YZb" firstAttribute="top" secondItem="Yiz-Is-akJ" secondAttribute="top" id="PHf-P8-Iu6"/>
+                                                            <constraint firstItem="cSq-Wx-YZb" firstAttribute="leading" secondItem="Yiz-Is-akJ" secondAttribute="leading" id="ZWj-4e-seB"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Dif-Sk-TYt" secondAttribute="bottom" id="xFA-el-cIm"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.90588235294117647" green="0.76862745098039209" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstItem="Dif-Sk-TYt" firstAttribute="top" secondItem="cSq-Wx-YZb" secondAttribute="bottom" constant="8" symbolic="YES" id="4He-Ft-PAb"/>
-                                                    <constraint firstItem="cSq-Wx-YZb" firstAttribute="centerY" secondItem="XEk-N3-tyA" secondAttribute="centerY" id="7Nz-df-lTg"/>
-                                                    <constraint firstItem="Dif-Sk-TYt" firstAttribute="leading" secondItem="Rp7-fy-VC0" secondAttribute="leading" id="ERt-YF-zE2"/>
                                                     <constraint firstItem="Rp7-fy-VC0" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="ICP-JX-vdR"/>
+                                                    <constraint firstItem="Yiz-Is-akJ" firstAttribute="bottom" secondItem="XEk-N3-tyA" secondAttribute="bottom" priority="10" constant="-20" id="cek-DO-QTY"/>
+                                                    <constraint firstItem="bSZ-pM-0Qo" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="eWW-lB-JpN"/>
                                                     <constraint firstItem="EnJ-1F-lZi" firstAttribute="trailing" secondItem="XEk-N3-tyA" secondAttribute="trailing" id="hee-AJ-jZE"/>
+                                                    <constraint firstItem="bSZ-pM-0Qo" firstAttribute="top" secondItem="Rp7-fy-VC0" secondAttribute="bottom" constant="8" symbolic="YES" id="lML-cn-XnF"/>
                                                     <constraint firstAttribute="height" constant="272" id="qKN-Vi-f9p"/>
-                                                    <constraint firstItem="cSq-Wx-YZb" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="rfN-U0-pvk"/>
+                                                    <constraint firstItem="Yiz-Is-akJ" firstAttribute="centerY" secondItem="XEk-N3-tyA" secondAttribute="centerY" id="rER-6b-bHo"/>
                                                     <constraint firstItem="Rp7-fy-VC0" firstAttribute="top" secondItem="XEk-N3-tyA" secondAttribute="top" constant="20" id="u8q-Z1-4ts"/>
+                                                    <constraint firstItem="Yiz-Is-akJ" firstAttribute="leading" secondItem="XEk-N3-tyA" secondAttribute="leading" constant="20" id="v9p-LG-ImR"/>
                                                     <constraint firstItem="EnJ-1F-lZi" firstAttribute="bottom" secondItem="XEk-N3-tyA" secondAttribute="bottom" id="yAC-hK-kKc"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -214,10 +245,15 @@
                     <connections>
                         <outlet property="evaluationLabel" destination="Dif-Sk-TYt" id="21B-Ia-61L"/>
                         <outlet property="leftStackView" destination="3gt-oU-l4J" id="LN6-aa-VJO"/>
+                        <outlet property="resultView" destination="Yiz-Is-akJ" id="h9u-7N-4da"/>
+                        <outlet property="resultViewBottomEdgeConstraint" destination="cek-DO-QTY" id="9Z1-Hc-Ek4"/>
+                        <outlet property="resultViewCenterYConstraint" destination="rER-6b-bHo" id="JQI-YY-pnN"/>
+                        <outlet property="resultViewLeftEdgeConstraint" destination="v9p-LG-ImR" id="Do9-9E-13d"/>
                         <outlet property="rightStackView" destination="mPF-LQ-Z0e" id="oCu-GM-nzp"/>
                         <outlet property="staggerConstraint" destination="CPZ-BH-DmS" id="rrq-co-J1E"/>
                         <outlet property="titleLabel" destination="k1p-qy-G9M" id="mzw-yY-CNf"/>
                         <outlet property="wellnessCard" destination="XEk-N3-tyA" id="7fH-R9-9ty"/>
+                        <outlet property="wellnessCardSubtextLabel" destination="bSZ-pM-0Qo" id="Iwb-AS-SPw"/>
                         <outlet property="wellnessScoreLabel" destination="maH-xo-x4u" id="T2w-y4-5RC"/>
                     </connections>
                 </viewController>
