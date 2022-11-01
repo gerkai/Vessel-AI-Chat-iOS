@@ -108,6 +108,15 @@ enum Evaluation: String
                 return Constants.vesselFair
         }
     }
+    
+    func isGood() -> Bool
+    {
+        if color == Constants.vesselGood || color == Constants.vesselGreat
+        {
+            return true
+        }
+        return false
+    }
 }
 
 struct Bucket
