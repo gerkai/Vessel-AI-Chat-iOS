@@ -29,6 +29,12 @@
             <rect key="frame" x="0.0" y="0.0" width="411" height="175"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PAU-rX-X3f">
+                    <rect key="frame" x="253.5" y="17.5" width="157.5" height="157.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="PAU-rX-X3f" secondAttribute="height" id="Nx2-VC-eKy"/>
+                    </constraints>
+                </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tyR-lb-6NB">
                     <rect key="frame" x="28" y="62" width="133" height="51"/>
                     <subviews>
@@ -46,12 +52,6 @@
                         </label>
                     </subviews>
                 </stackView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PAU-rX-X3f">
-                    <rect key="frame" x="253.5" y="17.5" width="157.5" height="157.5"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="PAU-rX-X3f" secondAttribute="height" id="Nx2-VC-eKy"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.9043522477" green="0.76740390059999997" blue="0.69519096609999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
