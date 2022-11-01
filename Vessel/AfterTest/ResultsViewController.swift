@@ -330,11 +330,11 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     
     func evaluation(_ score: Int) -> String
     {
-        if score <= 25
+        if score < 25
         {
             return Constants.POOR_STRING
         }
-        if score <= 50
+        if score < 50
         {
             return Constants.FAIR_STRING
         }
