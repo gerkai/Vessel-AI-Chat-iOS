@@ -425,7 +425,7 @@ class AfterTestViewModel
                 
             case .HYDRO_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Hydration is Low", comment: ""),
-                                                   NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management.", comment: ""),
+                                                   NSLocalizedString("Studies show that maintaining optimal cellular hydration is important for many bodily functions including mood, brain function, digestive health, energy levels, and even healthy weight management. Properly hydrated cells are essential for optimal health and wellness.", comment: ""),
                                                    "Hydration-top-right",
                                                    .fade)
             case .HYDRO_LOW_2:
