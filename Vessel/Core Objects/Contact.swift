@@ -67,6 +67,8 @@ class Contact: CoreObjectProtocol
     
     var suggestedFoods: [Food]
     {
+        let storedFoods = Storage.retrieve(as: Food.self)
+
         let foodIds = PlansManager.shared.plans.compactMap
         {
             if let dayOfWeek = Date().dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
@@ -77,7 +79,7 @@ class Contact: CoreObjectProtocol
         }
         
         let foods: [Food] = foodIds.compactMap({ foodId in
-            return FoodManager.shared.foods.first(where: { $0.id == foodId })
+            return storedFoods.first(where: { $0.id == foodId })
         })
         return foods
     }

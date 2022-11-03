@@ -621,7 +621,6 @@ class Server: NSObject
                 guard let foodDict = dict["food"] as? [[String: Any]] else { return }
                 let json = try JSONSerialization.data(withJSONObject: foodDict)
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let decodedFoods = try decoder.decode([Food].self, from: json)
                 DispatchQueue.main.async()
                 {
@@ -755,11 +754,10 @@ class Server: NSObject
                 guard let foodDict = dict["plan"] as? [[String: Any]] else { return }
                 let json = try JSONSerialization.data(withJSONObject: foodDict)
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let decodedFoods = try decoder.decode([Plan].self, from: json)
+                let decodedPlans = try decoder.decode([Plan].self, from: json)
                 DispatchQueue.main.async()
                 {
-                    success(decodedFoods)
+                    success(decodedPlans)
                 }
             }
             catch

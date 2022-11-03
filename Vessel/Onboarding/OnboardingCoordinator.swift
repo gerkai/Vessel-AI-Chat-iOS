@@ -77,9 +77,10 @@ class OnboardingCoordinator
         {
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
-            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Plan.self])
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
             //FoodManager.shared.loadFoods()
-            //PlansManager.shared.loadPlans()
+            //Separated load plans call because an issue with stored plans not having weekdays
+            PlansManager.shared.loadPlans()
             
             //if gender was chosen then we can assume all demographics were populated so skip onboarding
             //and go directly to MainTabBarController
@@ -210,7 +211,8 @@ class OnboardingCoordinator
         else
         {
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
-            FoodManager.shared.loadFoods()
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
+            //Separated load plans call because an issue with stored plans not having weekdays
             PlansManager.shared.loadPlans()
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")

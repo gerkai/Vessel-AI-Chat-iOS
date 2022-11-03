@@ -187,7 +187,6 @@
 		72411CF8287E413C004A312E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF6287E413C004A312E /* Resolver.swift */; };
 		72411CF9287E413C004A312E /* Resolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72411CF7287E413C004A312E /* Resolved.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
-		7271DFAF28FA7F8B00909A9D /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFAE28FA7F8B00909A9D /* FoodManager.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
 		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
@@ -450,7 +449,6 @@
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
-		7271DFAE28FA7F8B00909A9D /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
 		7271DFB028FA88ED00909A9D /* ReagentFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFood.swift; sourceTree = "<group>"; };
 		7271DFB228FA9B4B00909A9D /* PlansManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansManager.swift; sourceTree = "<group>"; };
 		727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuViewController.swift; sourceTree = "<group>"; };
@@ -575,7 +573,6 @@
 				3F0547C827CA9FF1006E3098 /* Server.swift */,
 				3F15AD03288C9ADC004716CA /* TestCardUploader.swift */,
 				3FF833AC28A1AD4D005D5B43 /* Reachability.swift */,
-				7271DFAE28FA7F8B00909A9D /* FoodManager.swift */,
 				7271DFB228FA9B4B00909A9D /* PlansManager.swift */,
 				729757AA29011C5400EEFB65 /* ZendeskManager.swift */,
 				729757AC2901220D00EEFB65 /* LiveChatManager.swift */,
@@ -1492,7 +1489,6 @@
 				3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */,
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
-				7271DFAF28FA7F8B00909A9D /* FoodManager.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */,
 				3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */,
