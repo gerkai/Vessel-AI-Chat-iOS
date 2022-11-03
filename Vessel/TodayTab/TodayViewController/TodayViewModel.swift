@@ -157,6 +157,7 @@ class TodayViewModel
     }
     
     var sections: [TodayViewSection] {
+        contact = Contact.main()
         return [
             .header(name: contact?.first_name ?? "", goals: contact?.getGoals() ?? []),
             //.insights(insights: insights),

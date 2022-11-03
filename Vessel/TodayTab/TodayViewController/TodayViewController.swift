@@ -66,19 +66,16 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     @objc func dataUpdated(_ notification: NSNotification)
     {
-        //print("TodayVC: DataUpdated")
         if let type = notification.userInfo?["objectType"] as? String
         {
             //if the new data is a Result then refresh the chart and tests/goals
             if type == String(describing: Result.self)
             {
-                //print("It's a result! Refreshing...")
                 viewModel.refresh()
                 handleLockoutView()
             }
             else if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
-                //print("It's a food. Reloading UI")
                 reloadUI()
             }
         }
@@ -88,19 +85,16 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         if viewModel.isEmpty
         {
-            //print("0 results: Showing lockoutView")
             lockoutView.isHidden = false
         }
         else
         {
-           //print("some results. Hiding lockoutView")
             lockoutView.isHidden = true
         }
     }
     
     private func reloadUI()
     {
-        //emptyView.isHidden = !viewModel.isEmpty
         tableView.reloadData()
     }
 }

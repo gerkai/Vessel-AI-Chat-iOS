@@ -602,5 +602,6 @@ class AfterTestViewModel
         }
         
         ObjectStore.shared.ClientSave(contact)
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
 }

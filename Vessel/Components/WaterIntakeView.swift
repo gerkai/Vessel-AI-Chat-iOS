@@ -108,12 +108,15 @@ private extension WaterIntakeView
 {
     func reloadUI()
     {
+        bottomStackView.isHidden = false
         if numberOfGlasses <= Constants.WATER_GLASSESS_PER_ROW
         {
             bottomStackView.isHidden = true
         }
         for (i, glassButton) in glassButtons.enumerated()
         {
+            glassButton.alpha = 1.0
+            glassButton.setTitle("", for: .normal)
             if i < checkedGlasses
             {
                 glassButton.setImage(UIImage(named: waterIntakeViewType == .normal ? "water-glass-empty" : "water-glass-empty-green"), for: .normal)
@@ -126,7 +129,6 @@ private extension WaterIntakeView
             {
                 glassButton.alpha = 0.0
             }
-            glassButton.setTitle("", for: .normal)
         }
     }
 }
