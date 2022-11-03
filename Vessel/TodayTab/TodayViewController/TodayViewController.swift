@@ -32,8 +32,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        lockoutView.isHidden = !viewModel.isEmpty
-//        view.bringSubviewToFront(lockoutView)
+        handleLockoutView()
         resultsViewModel.refresh()
         
         //get notified when new foods, plans or results comes in from After Test Flow
@@ -71,7 +70,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             //if the new data is a Result then refresh the chart and tests/goals
             if type == String(describing: Result.self)
             {
-                viewModel.refresh()
+                resultsViewModel.refresh()
                 handleLockoutView()
             }
             else if type == String(describing: Food.self) || type == String(describing: Plan.self)
@@ -83,7 +82,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     func handleLockoutView()
     {
-        if viewModel.isEmpty
+        if resultsViewModel.isEmpty
         {
             lockoutView.isHidden = false
         }
@@ -192,7 +191,6 @@ extension TodayViewController: UIScrollViewDelegate
         if tableViewOffset == nil
         {
             tableViewOffset = tableView.frame.height - tableView.contentSize.height
-            reloadUI()
         }
         
         if tableView.contentOffset.y <= 0
@@ -238,6 +236,7 @@ extension TodayViewController: TodayHeaderTableViewCellDelegate
 {
     func onGoalTapped(goal: String)
     {
+        resultsViewModel.refresh()
         guard let goalIndex = Goals.firstIndex(where: { $1.name == goal.lowercased() }) else { return }
         let id = Goals[goalIndex].key.rawValue
         

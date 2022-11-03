@@ -132,19 +132,10 @@ class TodayViewModel
     {
         return [Insight(id: 0, lastUpdated: 0, title: "How Yoga Improves Sleep", subtitle: "Mood and Sleep (2 mins)", description: "Legumes have been proven in various studies to reduce your cortisol levels and improve... more", backgroundImage: "yogaImprovesSleep", completedDate: nil)]
     }
-    var results: [Result]!
     
     init()
     {
-        results = Storage.retrieve(as: Result.self)
     }
-    
-    func refresh()
-    {
-        results = Storage.retrieve(as: Result.self)
-    }
-    
-    var isEmpty: Bool { results.isEmpty }
     
     var numberOfGlasses: Int?
     {

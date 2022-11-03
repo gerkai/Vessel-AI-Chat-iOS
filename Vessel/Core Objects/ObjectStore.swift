@@ -101,7 +101,6 @@ class ObjectStore: NSObject
         }
     }
     
-//<<<<<<< HEAD
     func testFetch()
     {
         getMostRecent(objectTypes: [Result.self, Food.self])
@@ -118,7 +117,7 @@ class ObjectStore: NSObject
             objectReqs.append(objectReq)
             //print("\(object): last_udpated: \(lastUpdated)")
         }
-        print("ObjectReqs: \(objectReqs)")
+        //print("ObjectReqs: \(objectReqs)")
         Server.shared.getAllObjects(objects: objectReqs)
         { objectDict in
             for typeName in objectDict.keys
@@ -135,7 +134,7 @@ class ObjectStore: NSObject
                                 let decoder = JSONDecoder()
                                 
                                 let object = try decoder.decode(metaType, from: json)
-                                print("Received: \(object.self) with last_updated \(object.last_updated)")
+                                //print("Received: \(object.self) with last_updated \(object.last_updated)")
                                 self.serverSave(object)
                             }
                             catch
@@ -143,12 +142,12 @@ class ObjectStore: NSObject
                                 print(error)
                             }
                         }
-                        print("\(objects)")
+                        //print("\(objects)")
                     }
                 }
             }
-            print("Got objects: \(objectDict)")
-            print(".")
+            //print("Got objects: \(objectDict)")
+            //print(".")
         }
     onFailure:
         { error in
@@ -165,15 +164,6 @@ class ObjectStore: NSObject
             }
             
             let plans = Storage.retrieve(as: Plan.self)
-            
-            // TODO: Change to calculate the lastUpdated from the Storage function
-            let lastUpdated = plans.reduce(0, {
-                max($0, $1.last_updated)
-            })
-            
-            // Update lastUpdated on user defaults
-            UserDefaults.standard.set(lastUpdated, forKey: Constants.PLANS_LAST_UPDATED_DATE)
-            
             success(plans)
         }
         onFailure:
@@ -191,14 +181,6 @@ class ObjectStore: NSObject
             }
             
             let foods = Storage.retrieve(as: Food.self)
-            
-            // TODO: Change to calculate the lastUpdated from the Storage function
-            let lastUpdated = foods.reduce(0, {
-                max($0, $1.last_updated)
-            })
-            
-            // Update lastUpdated on user defaults
-            UserDefaults.standard.set(lastUpdated, forKey: Constants.FOODS_LAST_UPDATED_DATE)
             
             success(foods)
         } onFailure: { error in

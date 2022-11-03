@@ -12,6 +12,8 @@ class ResultsTabViewModel
     var selectedResultIndex: Int!
     var results: [Result]!
     
+    var isEmpty: Bool { results.isEmpty }
+    
     //mock data
     /*
      case PH = 1

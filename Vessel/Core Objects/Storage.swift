@@ -218,13 +218,13 @@ public class Storage
         
         //the order of the files returned by FileManager is undefined. So let's sort them here
         let files = filesArray.sorted(by: { $0.id < $1.id })
-        for file in files
-        {
-            if let result = file as? Result
-            {
-                print("ID: \(result.id), \(result.wellnessScore)")
-            }
-        }
+//        for file in files
+//        {
+//            if let result = file as? Result
+//            {
+//                print("ID: \(result.id), \(result.wellnessScore)")
+//            }
+//        }
         return files
     }
     

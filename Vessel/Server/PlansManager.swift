@@ -13,7 +13,7 @@ class PlansManager
     static let shared = PlansManager()
     var plans = Storage.retrieve(as: Plan.self)
     // Commented out to fix a bug where the plans would not arrive from the server after completing
-    let lastUpdated: Int = 1//UserDefaults.standard.object(forKey: Constants.PLANS_LAST_UPDATED_DATE) as? Int ?? 1
+    let lastUpdated = 1//Storage.newestLastUpdatedFor(type: Plan.self)
 
     func loadPlans()
     {
