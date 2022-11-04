@@ -158,13 +158,14 @@ class ObjectStore: NSObject
     func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
-            for plan in newPlans
+            // TODO: Uncomment when loading plans from objectStore
+            /*for plan in newPlans
             {
                 self.serverSave(plan)
-            }
+            }*/
             
-            let plans = Storage.retrieve(as: Plan.self)
-            success(plans)
+            //let plans = Storage.retrieve(as: Plan.self)
+            success(newPlans)
         }
         onFailure:
         { error in

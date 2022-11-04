@@ -103,9 +103,12 @@ extension Date
     
     static func components(for date: Date) -> (month: Int, day: Int, year: Int)
     {
-        let month = NSCalendar.current.component(.month, from: date)
-        let day = NSCalendar.current.component(.day, from: date)
-        let year = NSCalendar.current.component(.year, from: date)
+        var calendar = NSCalendar.current
+        calendar.locale = .current
+        
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let year = calendar.component(.year, from: date)
         
         return (month, day, year)
     }
@@ -132,7 +135,7 @@ extension Date
             let targetOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
             let localOffeset = TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self))
 
-            return self.addingTimeInterval(targetOffset - localOffeset)
+            return self.addingTimeInterval(localOffeset - targetOffset)
         }
     
         return nil
