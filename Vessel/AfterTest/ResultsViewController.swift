@@ -491,7 +491,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     {
         //used for test/debug
         
-        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.81, insert_date: "2022-09-24T15:22:14", reagentResults: [
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.5, insert_date: "2022-09-24T15:22:14", reagentResults: [
             ReagentResult(id: 11, score: 1.0, value: 30.0, errorCodes: []),
             ReagentResult(id: 8, score: 0.4, value: 225.0, errorCodes: []),
             ReagentResult(id: 1, score: 1.0, value: 5.5, errorCodes: []),

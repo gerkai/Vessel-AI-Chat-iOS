@@ -186,11 +186,11 @@ struct Constants
     
     static func stringForScore(score: Double) -> String
     {
-        if score <= 0.25
+        if score < 0.25
         {
             return Constants.POOR_STRING
         }
-        if score <= 0.5
+        if score < 0.5
         {
             return Constants.FAIR_STRING
         }
@@ -203,11 +203,11 @@ struct Constants
     
     static func colorForScore(score: Double) -> UIColor
     {
-        if score <= 0.25
+        if score < 0.25
         {
             return Constants.vesselPoor
         }
-        if score <= 0.5
+        if score < 0.5
         {
             return Constants.vesselFair
         }
