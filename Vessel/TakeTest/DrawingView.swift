@@ -171,10 +171,11 @@ class DrawingView: UIView
                 
                 //if area of fiducial box is significantly less than area of cameraView set isCloseEnough to false
                 let widthEF = length(pointE, pointF)
+                
                 //uncomment below to determine too-close / too-far values
                 //print("Distance: \(widthEF / validArea.size.width)")
                 
-                if widthEF < validArea.size.width * 0.70 //subjective
+                if widthEF < validArea.size.width * 0.70 //subjective (use print statement above to set)
                 {
                     //too far away
                     if debugRelaxScanningDistance == true
@@ -186,7 +187,7 @@ class DrawingView: UIView
                         isCloseEnough = -1
                     }
                 }
-                else if widthEF > validArea.size.width * 0.82 //subjective
+                else if widthEF > validArea.size.width * 0.84 //subjective  (use print statement above to set)
                 {
                     //too cloase
                     if debugRelaxScanningDistance == true
