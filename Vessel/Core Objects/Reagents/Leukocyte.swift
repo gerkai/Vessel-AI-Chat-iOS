@@ -15,7 +15,7 @@ let Leukocyte = Reagent(
     recommendedDailyAllowance: nil,
     imageName: "UrinaryTract",
     buckets: [
-        Bucket(low: 60.0, high: 120.0, score: 0.0, evaluation: .detected,
+        Bucket(low: 60.0, high: 120.0, score: 0.0, evaluation: .detectedLow,
             hint: TitleDescription(
                 title: NSLocalizedString("PLACEHOLDER TEXT - POSITIVE LEUKOCYTE", comment: ""),
                 description: NSLocalizedString("PLACEHOLDER DESCRIPTION - POSITIVE LEUKOCYTE", comment: ""))),
