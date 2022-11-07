@@ -15,12 +15,12 @@ let VitaminB7 = Reagent(
     recommendedDailyAllowance: 30,
     imageName: "B7",
     buckets: [
-        Bucket(low: 0.0, high: 10.0, score: 50.0, evaluation: .low,
-            hint: TitleDescription(title: NSLocalizedString("You’re low in Biotin", comment: ""),
-            description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-4 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: ""))),
         Bucket(low: 10.0, high: 30.0, score: 100.0, evaluation: .good,
             hint: TitleDescription(title: NSLocalizedString("Your Biotin level is great!", comment: ""),
-            description: NSLocalizedString("Good job! You’ve filled up your body’s Biotin tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Biotin.", comment: "")))],
+            description: NSLocalizedString("Good job! You’ve filled up your body’s Biotin tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Biotin.", comment: ""))),
+        Bucket(low: 0.0, high: 10.0, score: 50.0, evaluation: .low,
+            hint: TitleDescription(title: NSLocalizedString("You’re low in Biotin", comment: ""),
+                                   description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-4 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")))],
     goalImpacts: [
         GoalImpact(goalID: 1, impact: 2),
         GoalImpact(goalID: 5, impact: 2),
