@@ -36,7 +36,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     weak var dataSource: ChartViewDataSource!
     
-    var selectedCell = 0
+    var selectedCell = -1
     weak var delegate: ChartViewDelegate?
     var reagentID: Int?
     
@@ -82,7 +82,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-       // print("ScrollViewDidScroll: \(scrollView.contentOffset.x)")
+        //print("ScrollViewDidScroll: \(scrollView.contentOffset.x)")
         let numCells = dataSource.chartViewNumDataPoints()
         if numCells != 0
         {
