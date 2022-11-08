@@ -13,7 +13,6 @@ class ItemPreferencesViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - View
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var titleLabelSpacing: NSLayoutConstraint!
     @IBOutlet private weak var nextButton: UIButton!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTextLabel: UILabel!
@@ -50,12 +49,6 @@ class ItemPreferencesViewController: UIViewController, VesselScreenIdentifiable
 
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         collectionView.registerFromNib(CheckmarkImageCollectionViewCell.self)
-        //on smaller screens move everything up so all checkboxes have best chance of fitting on screen
-        //without making the user have to scroll.
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
-        {
-            titleLabelSpacing.constant = Constants.MIN_VERT_SPACING_TO_BACK_BUTTON
-        }
         updateNextButton()
     }
     
@@ -112,12 +105,8 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        var height = Constants.CHECK_BUTTON_HEIGHT
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
-        {
-            height = Constants.SMALL_SCREEN_CHECK_BUTTON_HEIGHT
-        }
-        return CGSize(width: collectionView.frame.width * 0.48, height: height)
+        //80.0 = 30.0 for padding on each side + 20.0 padding between cells, then /2.0 for 2 columns
+        return CGSize(width: (view.frame.width - 80.0) / 2.0, height: Constants.CHECK_BUTTON_HEIGHT)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int

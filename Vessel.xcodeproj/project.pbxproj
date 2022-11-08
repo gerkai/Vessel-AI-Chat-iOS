@@ -86,6 +86,7 @@
 		3F47B48628FB1FAB00D35E97 /* ReagentDetailsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47B48428FB1FAB00D35E97 /* ReagentDetailsChartCell.swift */; };
 		3F47B48728FB1FAB00D35E97 /* ReagentDetailsChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */; };
 		3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */; };
+		3F4A989929198EED0031B8B8 /* AutoSizedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
 		3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */; };
@@ -339,6 +340,7 @@
 		3F47B48428FB1FAB00D35E97 /* ReagentDetailsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentDetailsChartCell.swift; sourceTree = "<group>"; };
 		3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentDetailsChartCell.xib; sourceTree = "<group>"; };
 		3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsChartCell.swift; sourceTree = "<group>"; };
+		3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedCollectionView.swift; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		3F4C59492877CEC10088F03A /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessScoreViewController.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 			isa = PBXGroup;
 			children = (
 				72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */,
+				3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */,
 				72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */,
 				3F12F006287A6B4800FCC52E /* DateExtensions.swift */,
 				3F87B96627D4209F00D589F7 /* Encodable.swift */,
@@ -1607,6 +1610,7 @@
 				3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */,
 				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */,
+				3F4A989929198EED0031B8B8 /* AutoSizedCollectionView.swift in Sources */,
 				3FF45285291185C900B967CA /* MockResults.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
