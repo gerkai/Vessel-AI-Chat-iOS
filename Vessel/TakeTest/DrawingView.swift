@@ -187,7 +187,7 @@ class DrawingView: UIView
                         isCloseEnough = -1
                     }
                 }
-                else if widthEF > validArea.size.width * 0.84 //subjective  (use print statement above to set)
+                else if widthEF > validArea.size.width * 0.91 //subjective  (use print statement above to set)
                 {
                     //too cloase
                     if debugRelaxScanningDistance == true
