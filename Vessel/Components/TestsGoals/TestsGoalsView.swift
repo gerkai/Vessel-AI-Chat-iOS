@@ -69,15 +69,13 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
     func refresh(result: Result, selectedReagentID: Reagent.ID)
     {
         setupReagents(forResult: result, selectedReagentID: selectedReagentID)
-        if let reagentView = testsStackView.arrangedSubviews[0] as? ReagentLearnMoreTileView
-        {
-            reagentView.isSelected = true
-        }
     }
     
     func setupReagents(forResult result: Result, selectedReagentID: Reagent.ID)
     {
         testsStackView.removeAllArrangedSubviews()
+        
+        //add reagent tiles. Select the one that matches selectedReagentID
         for reagentResult in result.reagentResults
         {
             if let reagentID = Reagent.ID(rawValue: reagentResult.id)
