@@ -95,7 +95,7 @@ struct Result: CoreObjectProtocol, Codable
 struct ReagentResult: Codable
 {
     let id: Int //the id of the reagent
-    let score: Double
+    //let score: Double //cw: Deprecated. Score is retrieved directly from reagent now based on value
     let value: Double
     var errorCodes: [Int]
     {
@@ -115,7 +115,7 @@ struct ReagentResult: Codable
          
     {
         self.id = id
-        self.score = score
+        //self.score = score
         self.value = value
         self.errorCodes = errorCodes
     }
@@ -123,9 +123,15 @@ struct ReagentResult: Codable
     enum CodingKeys: String, CodingKey
     {
         case id = "reagent_id"
-        case score
+        //case score
         case value
         //case errorCodes = "error_codes"
+    }
+    
+    func getScore() -> Double
+    {
+        let reagent = Reagents[Reagent.ID(rawValue: id)!]
+        return reagent!.getScore(value: value)
     }
 }
 

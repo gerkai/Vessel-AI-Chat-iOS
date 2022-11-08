@@ -19,7 +19,7 @@ class ReagentScoreView: UIView
     {
         didSet
         {
-            scoreLabel.text = "\(Int(score * 100.0 + 0.5))"
+            scoreLabel.text = "\(Int(score))"
         }
     }
     
