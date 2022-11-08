@@ -19,15 +19,16 @@ enum Evaluation: String
     case notDetected
     case veryLow
     case low
+    case detectedLow
     case ketoLow
     case moderate
     case good
     case normal
     case elevated
     case high
+    case detectedHigh
     case ketoHigh
     case excellent
-    case detected
     
     var title: String
     {
@@ -57,8 +58,10 @@ enum Evaluation: String
                 return NSLocalizedString("elevated", comment: "Reagent evaluation label")
             case .excellent:
                 return NSLocalizedString("excellent", comment: "Reagent evaluation label")
-            case .detected:
-                return NSLocalizedString("detected", comment: "Reagent evaluation label")
+            case .detectedLow:
+                return NSLocalizedString("detected low", comment: "Reagent evaluation label")
+            case .detectedHigh:
+            return NSLocalizedString("detected high", comment: "Reagent evaluation label")
         }
     }
     
@@ -69,7 +72,7 @@ enum Evaluation: String
             case .notAvailable:
                 return UIColor.gray
             case .notDetected:
-                return UIColor.gray
+                return Constants.vesselGood
             case .veryLow:
                 return Constants.vesselPoor
             case .low:
@@ -104,8 +107,10 @@ enum Evaluation: String
                 }
             case .excellent:
                 return Constants.vesselGreat
-            case .detected:
+            case .detectedLow:
                 return Constants.vesselFair
+            case .detectedHigh:
+                return Constants.vesselPoor
         }
     }
     
