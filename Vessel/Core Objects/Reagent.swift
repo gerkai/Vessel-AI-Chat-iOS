@@ -128,7 +128,7 @@ struct Bucket
 {
     let low: Double
     let high: Double
-    let score: Float
+    let score: Double
     let evaluation: Evaluation
     let hint: TitleDescription
 }
@@ -216,6 +216,18 @@ struct Reagent
             }
         }
         return Evaluation.notAvailable
+    }
+    
+    func getScore(value: Double) -> Double
+    {
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                return bucket.score
+            }
+        }
+        return 0.0
     }
     
     func rangeFor(value: Double) -> String

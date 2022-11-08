@@ -29,7 +29,7 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
             let scoreView = ReagentScoreView()
             let heightConstraint = NSLayoutConstraint(item: scoreView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: scoreViewHeight)
             scoreView.addConstraints([heightConstraint])
-            scoreView.score = reagentResult.score
+            scoreView.score = reagentResult.getScore()
             let reagent = Reagent.fromID(id: reagentResult.id)
             scoreView.nameLabel.text = reagent.name
             scoreView.imageView.image = UIImage(named: reagent.imageName)
@@ -45,12 +45,11 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
         let scoreView = ReagentScoreView()
         let heightConstraint = NSLayoutConstraint(item: scoreView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: scoreViewHeight)
         scoreView.addConstraints([heightConstraint])
-        scoreView.score = result.wellnessScore
+        scoreView.score = result.wellnessScore * 100.0 + 0.5
         scoreView.nameLabel.text = NSLocalizedString("Wellness Score", comment: "")
         scoreView.contentView.backgroundColor = Constants.colorForScore(score: result.wellnessScore)
         scoreView.levelLabel.text = Constants.stringForScore(score: result.wellnessScore)
         stackView.addArrangedSubview(scoreView)
-        //scoreView.imageView.contentMode = .scaleAspectFit
         scoreView.imageView.image = UIImage(named: "HappyWomanSquare")
         
         //populate wellness score ranges
