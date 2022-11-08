@@ -1188,7 +1188,15 @@ class Server: NSObject
                         }
                         else
                         {
-                            success(object)
+                            if let message = object["message"] as? String
+                            {
+                                let error = ServerError(code: 404, description: message)
+                                failure(error)
+                            }
+                            else
+                            {
+                                success(object)
+                            }
                         }
                     }
                     else
