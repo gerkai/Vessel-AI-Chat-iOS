@@ -10,15 +10,19 @@
 //  reveal a new Debug button.
 
 import UIKit
+import Lottie
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
     @IBOutlet private weak var environmentLabel: UILabel!
     @IBOutlet private weak var buttonStackView: UIStackView!
     @IBOutlet private weak var splashView: UIView!
+    @IBOutlet private weak var animationContainerView: UIView!
+    
     var timer: Timer!
+    var animationView: LottieAnimationView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
@@ -51,9 +55,69 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             print("WelcomeSignIn did load")
         }
-        if Server.shared.isLoggedIn()
+    }
+    
+    func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
+    {
+        //try connecting to the internet again.
+        checkInternet()
+    }
+    
+    func playAnimation()
+    {
+        animationView = .init(name: "splash_animation")
+        animationView!.frame = animationContainerView.bounds
+        animationView!.contentMode = .scaleAspectFit
+        animationView!.loopMode = .playOnce
+        animationView!.animationSpeed = 1.0
+        animationContainerView.addSubview(animationView!)
+        animationView!.play
+        {(isFinished) in
+            if isFinished
+            {
+                self.checkInternet()
+            }
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            if Reachability.isConnectedToNetwork()
+            print("WelcomeSignIn deinit")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        updateEnvironmentLabel(env: savedEnvironment)
+        timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        playAnimation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        timer.invalidate()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let destination = segue.destination as? DebugViewController
+        {
+            destination.delegate = self
+        }
+    }
+    
+    func checkInternet()
+    {
+        if Reachability.isConnectedToNetwork()
+        {
+            if Server.shared.isLoggedIn()
             {
                 ObjectStore.shared.loadMainContact
                 { [weak self] in
@@ -78,47 +142,19 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             }
             else
             {
-                GenericAlertViewController.presentAlert(in: self, type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Internet Error", comment: "")),
-                                                                                             subtitle: GenericAlertLabelInfo(title: Constants.INTERNET_CONNECTION_STRING, alignment: .center, height: 40.0),
-                                                                                             button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("OK", comment: "")), type: .dark)))
+                //fade splash screen in after 1 second. (Normal login flow)
+                print("Normal sign-in flow. Not re-logging in.")
+                UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+                {
+                    self.splashView.alpha = 0.0
+                }
             }
         }
         else
         {
-            //fade splash screen in after 1 second. (Normal login flow)
-            print("Normal sign-in flow. Not re-logging in.")
-            UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
-            {
-                self.splashView.alpha = 0.0
-            }
-        }
-    }
-    
-    deinit
-    {
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("WelcomeSignIn deinit")
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
-        updateEnvironmentLabel(env: savedEnvironment)
-        timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        timer.invalidate()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if let destination = segue.destination as? DebugViewController
-        {
-            destination.delegate = self
+            GenericAlertViewController.presentAlert(in: self, type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Internet Error", comment: "")),
+                                                                                         subtitle: GenericAlertLabelInfo(title: Constants.INTERNET_CONNECTION_STRING, alignment: .center, height: 40.0),
+                                                                                         button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("OK", comment: "")), type: .dark)), delegate: self)
         }
     }
     

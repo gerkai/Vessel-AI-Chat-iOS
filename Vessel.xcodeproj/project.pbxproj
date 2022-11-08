@@ -87,6 +87,7 @@
 		3F47B48728FB1FAB00D35E97 /* ReagentDetailsChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */; };
 		3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */; };
 		3F4A989929198EED0031B8B8 /* AutoSizedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */; };
+		3F4A989B291AB7960031B8B8 /* splash_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F4A989A291AB7960031B8B8 /* splash_animation.json */; };
 		3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */; };
 		3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C59492877CEC10088F03A /* NSObjectExtension.swift */; };
 		3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */; };
@@ -341,6 +342,7 @@
 		3F47B48528FB1FAB00D35E97 /* ReagentDetailsChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentDetailsChartCell.xib; sourceTree = "<group>"; };
 		3F47B48A28FB20AB00D35E97 /* ResultsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsChartCell.swift; sourceTree = "<group>"; };
 		3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedCollectionView.swift; sourceTree = "<group>"; };
+		3F4A989A291AB7960031B8B8 /* splash_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_animation.json; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		3F4C59492877CEC10088F03A /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessScoreViewController.swift; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 		3F15ACF5288C5421004716CA /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				3F4A989A291AB7960031B8B8 /* splash_animation.json */,
 				3F15ACF6288C5421004716CA /* test_result_flow_p2.json */,
 				3F15ACF7288C5421004716CA /* test_result_flow_p1.json */,
 			);
@@ -1334,6 +1337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
+				3F4A989B291AB7960031B8B8 /* splash_animation.json in Resources */,
 				3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */,
 				3F0405CA2890A99100ADD5FC /* ReagentTileView.xib in Resources */,
 				3F9C67B828FF1C4E00BC44FA /* SourceInfoView.xib in Resources */,
