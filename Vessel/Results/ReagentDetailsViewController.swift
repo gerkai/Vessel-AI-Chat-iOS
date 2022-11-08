@@ -59,6 +59,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     deinit
     {
+        viewModel = nil
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("📘 deinit \(self)")
@@ -67,7 +68,6 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     @IBAction func back()
     {
-        viewModel = nil
         navigationController?.popViewController(animated: true)
     }
     
