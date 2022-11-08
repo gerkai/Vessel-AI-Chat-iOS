@@ -39,6 +39,8 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
     var skipTimerSlideupVC: SkipTimerSlideupViewController?
     
+    let notificationIdentifier = "testActivated"
+    
     //segmented control indices
     let IntroIndex = 0
     let TourIndex = 1
@@ -71,6 +73,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     override func viewDidAppear(_ animated: Bool)
     {
         viewModel.delegate = self
+        requestNotificationPermission()
         if !firstTimeAppeared
         {
             /*segmentedControl.subviews.forEach
@@ -93,6 +96,70 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         super.viewWillDisappear(animated)
         playerViewController?.player?.pause()
+    }
+    
+    func requestNotificationPermission()
+    {
+        let center = UNUserNotificationCenter.current()
+        
+        center.getNotificationSettings
+        { (notificationSettings) in
+            if notificationSettings.authorizationStatus == .authorized
+            {
+                DispatchQueue.main.async
+                {
+                    self.scheduleNotification()
+                    //self.updateNotifyUI(hideButton: false)
+                }
+            }
+            else
+            {
+                center.requestAuthorization(options: [.alert, .sound])
+                { (granted, error) in
+                    if let error = error
+                    {
+                        print("Failed to get local notifications permissions with error: \(error)")
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async
+                        {
+                            if granted
+                            {
+                                self.scheduleNotification()
+                            }
+                            else
+                            {
+                                self.showSettingsAlertPrompt(title: "Notifications Disabled", message: "Enable Notifications in Settings")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showSettingsAlertPrompt(title: String, message: String)
+    {
+        let alertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Enable", style: .default)
+        { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else
+            {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl)
+            {
+                UIApplication.shared.open(settingsUrl, completionHandler:
+                { (success) in
+                    print("Settings opened: \(success)") // Prints true
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     func setupVideo()
@@ -139,8 +206,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         looper = nil
 #endif
         playerViewController?.player?.pause()
-        //playerViewController?.removeFromParent()
-        //playerViewController?.view.removeFromSuperview()
         playerViewController = nil
         
         viewModel.curState.back()
@@ -216,6 +281,42 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
+    //MARK: - Timer Expired Notification
+    func removeNotification()
+    {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        center.removeDeliveredNotifications(withIdentifiers: [notificationIdentifier])
+    }
+    
+    private func scheduleNotification()
+    {
+        //Remove any previously scheduled notifications
+        removeNotification()
+        
+        //build notification content
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("Your Test is Activated", comment: "")
+        content.body = NSLocalizedString("It's time to scan your test card", comment: "")
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "alarm.mp3"))
+        
+        // initial time
+        let triggerTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date().addingTimeInterval(TimeInterval(curSeconds)))
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: false)
+        let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request)
+        { (error: Error?) in
+            if let theError = error
+            {
+                print(theError.localizedDescription)
+            }
+        }
+    }
+    
     //MARK: - ViewModel delegates
     func timerUpdate(secondsRemaining: Double, percentageElapsed: Double, timeUp: Bool)
     {
@@ -251,6 +352,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         {
             viewModel.skipTimer()
             viewModel.delegate = nil
+            removeNotification()
         }
     }
 }
