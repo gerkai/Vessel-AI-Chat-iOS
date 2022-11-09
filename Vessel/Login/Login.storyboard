@@ -118,6 +118,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="V3u-fj-37a">
                                 <rect key="frame" x="30" y="16" width="125" height="45"/>
+                                <color key="tintColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="D0d-29-khM"/>
                                     <constraint firstAttribute="height" constant="45" id="mw2-2n-sxz"/>
@@ -326,9 +327,9 @@
                                 <rect key="frame" x="20" y="101" width="335" height="32"/>
                                 <color key="backgroundColor" red="0.84313726430000002" green="0.84313726430000002" blue="0.86666667460000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <segments>
-                                    <segment title="DEV"/>
-                                    <segment title="STAGING"/>
                                     <segment title="PROD"/>
+                                    <segment title="STAGING"/>
+                                    <segment title="DEV"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
