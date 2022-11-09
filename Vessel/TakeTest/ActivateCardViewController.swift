@@ -68,6 +68,8 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         segmentedControl.removeSegment(at: 2, animated: false)
         
         tabDetailsLabel.text = defaultSegmentDetailsString
+        
+        setTimerLabel(secondsRemaining: Double(curSeconds))
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -256,6 +258,14 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         return text
     }
     
+    func setTimerLabel(secondsRemaining: Double)
+    {
+        let minutes = Int(secondsRemaining) / 60 % 60
+        let seconds = Int(secondsRemaining) % 60
+        let string = String(format: "%2i:%02i", minutes, seconds)
+        timerLabel.text = string
+    }
+    
     //MARK: - Segmented Control action
     @IBAction func onSegmentChoice(_ sender: UISegmentedControl)
     {
@@ -324,10 +334,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         if secsRemaining != curSeconds
         {
             curSeconds = secsRemaining
-            let minutes = Int(secondsRemaining) / 60 % 60
-            let seconds = Int(secondsRemaining) % 60
-            let string = String(format: "%2i:%02i", minutes, seconds)
-            timerLabel.text = string
+            setTimerLabel(secondsRemaining: secondsRemaining)
         }
         progressAmount.constant = percentageElapsed * (progressView.frame.width - progressDot.frame.width)
         
