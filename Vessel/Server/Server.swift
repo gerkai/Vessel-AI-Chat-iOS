@@ -1190,6 +1190,10 @@ class Server: NSObject
                         {
                             if let message = object["message"] as? String
                             {
+                                if message == "Card already scanned successfully"
+                                {
+                                    failure(ServerError(code: 400, description: message))
+                                }
                                 let error = ServerError(code: 404, description: message)
                                 failure(error)
                             }

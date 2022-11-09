@@ -122,7 +122,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
             { error in
                 if error.code == 400
                 {
-                    if error.moreInfo == "Card already scanned successfully"
+                    if error.description == "Card already scanned successfully"
                     {
                         self.showAlreadyScannedPopup()
                     }
