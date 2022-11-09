@@ -15,7 +15,7 @@ let Cortisol = Reagent(
     recommendedDailyAllowance: nil,
     imageName: "Cortisol",
     buckets: [
-        Bucket(low: 150.0, high: 405.0, score: 50.0, evaluation: .high,
+        Bucket(low: 150.0, high: 405.0, score: 40.0, evaluation: .high,
            hint: TitleDescription(
                 title: NSLocalizedString("Your Cortisol levels are high", comment: ""),
                 description: NSLocalizedString("This is usually a sign that your body has mounted a stress response to protect you. This can (and should) happen if you’re sick, have an an injury that is healing, or just did a strenuous workout. However levels should normalize shortly after, so keep checking. Levels are often high due to acute stress, so be sure to check out the lifestyle recommendations below to reduce stress and increase your natural relaxation response.", comment: ""))),
