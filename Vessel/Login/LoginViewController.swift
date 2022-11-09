@@ -124,7 +124,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         onFailure:
                         { string in
                             self.nextButton.hideLoading()
-                            UIView.showError(text: "", detailText: string, image: nil)
+                            UIView.showError(text: "", detailText: Constants.INCORRECT_PASSWORD_STRING, image: nil)
                         }
                     }
                     else
