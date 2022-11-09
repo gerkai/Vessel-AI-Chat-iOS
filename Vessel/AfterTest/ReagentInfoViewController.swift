@@ -42,7 +42,7 @@ class ReagentInfoViewController: AfterTestMVVMViewController, VesselScreenIdenti
         detailsLabel.text = details
         reagentImage.image = image
         
-        print("\(viewModel.currentScreen), \(viewModel.screens.count)")
+        //print("\(viewModel.currentScreen), \(viewModel.screens.count)")
         if viewModel.screens.count >= 2
         {
             let percentage = CGFloat(viewModel.currentScreen) / CGFloat(viewModel.screens.count - 1)

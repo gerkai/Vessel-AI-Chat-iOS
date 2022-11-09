@@ -75,6 +75,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             }
             else if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
+                viewModel.refreshContactSuggestedfoods()
                 reloadUI()
             }
         }

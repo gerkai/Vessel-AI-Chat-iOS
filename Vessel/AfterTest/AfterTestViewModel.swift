@@ -38,7 +38,8 @@ class AfterTestViewModel
     var currentScreen: Int = -1
     var contactFlags: Int = 0
     var screens: [AfterTestScreen] = []
-    var selectedFoods: [ReagentFood] = []
+    var selectedFoodIds: [Int] = Contact.main()!.suggestedFoods.compactMap({ $0.id })
+    var newSelectedFoods: [ReagentFood] = []
     var suggestedFoods: [ReagentFood] = []
     var isHydroLow: Bool = true
     var selectedWaterOption: Int?
@@ -552,12 +553,12 @@ class AfterTestViewModel
     
     func addFoodsToPlan(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        if selectedFoods.count == 1
+        if newSelectedFoods.count == 1
         {
-            let plan = Plan(foodId: selectedFoods.first!.id)
+            let plan = Plan(foodId: newSelectedFoods.first!.id)
             Server.shared.addSinglePlan(plan: plan)
-            { plan in
-                PlansManager.shared.addPlans(plan: [plan])
+            { addedPlan in
+                PlansManager.shared.addPlans(plansToAdd: [addedPlan])
                 success()
             } onFailure: { error in
                 failure(error.description)
@@ -565,11 +566,11 @@ class AfterTestViewModel
         }
         else
         {
-            let foodsIds = selectedFoods.map { $0.id }
+            let foodsIds = newSelectedFoods.map { $0.id }
             let multiplePlans = MultiplePlans(foodIds: foodsIds)
             Server.shared.addMultiplePlans(plans: multiplePlans)
             { multiplePlans in
-                PlansManager.shared.addPlans(plan: multiplePlans)
+                PlansManager.shared.addPlans(plansToAdd: multiplePlans)
                 success()
             } onFailure: { error in
                 failure(error.description)

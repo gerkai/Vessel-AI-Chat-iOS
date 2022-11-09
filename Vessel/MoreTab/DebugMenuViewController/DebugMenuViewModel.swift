@@ -17,6 +17,7 @@ enum DebugMenuOption: Int
     case relaxedScanningDistance
     case clearResults
     case useMockResults
+    case showAllFoodsEveryday
     
     var title: String
     {
@@ -30,6 +31,7 @@ enum DebugMenuOption: Int
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             case .clearResults: return "Clear all test results"
             case .useMockResults: return "Use mock test results"
+            case .showAllFoodsEveryday: return "Show all foods everyday"
         }
     }
     
@@ -51,6 +53,7 @@ enum DebugMenuOption: Int
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
+            case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
         }
     }
     
@@ -100,6 +103,7 @@ class DebugMenuViewModel
         .printInitAndDeinit,
         .relaxedScanningDistance,
         .clearResults,
-        .useMockResults
+        .useMockResults,
+        .showAllFoodsEveryday
     ]
 }

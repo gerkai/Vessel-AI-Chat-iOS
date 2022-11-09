@@ -65,24 +65,33 @@ class Contact: CoreObjectProtocol
     var dailyWaterIntake: Int?
     var drinkedWaterGlasses: Int?
     
-    var suggestedFoods: [Food]
+    lazy var suggestedFoods: [Food] =
     {
         let storedFoods = Storage.retrieve(as: Food.self)
         let dayOfWeek = Date().dayOfWeek
-        let foodIds = PlansManager.shared.plans.compactMap
+        
+        let foodIds: [Int]
+        if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
         {
-            if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
+            foodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
+        }
+        else
+        {
+            foodIds = PlansManager.shared.plans.compactMap
             {
-                return $0.foodId
+                if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
+                {
+                    return $0.foodId
+                }
+                return nil
             }
-            return nil
         }
         
         let foods: [Food] = foodIds.compactMap({ foodId in
             return storedFoods.first(where: { $0.id == foodId })
         })
         return foods
-    }
+    }()
         /*Food(id: 0,
              last_updated: 0,
              title: "Avocado",
@@ -321,6 +330,38 @@ class Contact: CoreObjectProtocol
             contact.allergy_ids = userAllergies
         }
         return contact
+    }
+    
+    // MARK: - Suggested Foods
+    func refreshSuggestedFoods()
+    {
+        suggestedFoods =
+        {
+            let storedFoods = Storage.retrieve(as: Food.self)
+            let dayOfWeek = Date().dayOfWeek
+            let foodIds: [Int]
+            
+            if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
+            {
+                foodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
+            }
+            else
+            {
+                foodIds = PlansManager.shared.plans.compactMap
+                {
+                    if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
+                    {
+                        return $0.foodId
+                    }
+                    return nil
+                }
+            }
+            
+            let foods: [Food] = foodIds.compactMap({ foodId in
+                return storedFoods.first(where: { $0.id == foodId })
+            })
+            return foods
+        }()
     }
     
     // MARK: - Strings

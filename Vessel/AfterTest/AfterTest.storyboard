@@ -469,10 +469,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose up to 3 foods to add to your plan:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByI-Sy-Cq5">
-                                <rect key="frame" x="20" y="164.5" width="299" height="16"/>
-                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
-                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByI-Sy-Cq5">
+                                <rect key="frame" x="20" y="164.5" width="374" height="28"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Choose up to 3 foods to add to your plan:">
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="NoeText-Book"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Az-sS-5q9" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
@@ -496,7 +503,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-kM-lcP">
-                                <rect key="frame" x="20" y="180.5" width="374" height="587.5"/>
+                                <rect key="frame" x="20" y="192.5" width="374" height="575.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="9xt-AR-DwD"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="UXG-0Y-0Ju"/>
@@ -582,11 +589,13 @@
                             <constraint firstItem="DBb-Fs-sld" firstAttribute="trailing" secondItem="AKn-56-Ice" secondAttribute="trailing" constant="20" id="Yff-KW-unz"/>
                             <constraint firstItem="AKn-56-Ice" firstAttribute="leading" secondItem="DBb-Fs-sld" secondAttribute="leading" constant="20" id="fUq-V0-gqG"/>
                             <constraint firstItem="l8o-zd-2Mh" firstAttribute="leading" secondItem="DBb-Fs-sld" secondAttribute="leading" constant="20" id="jIY-DK-6gr"/>
+                            <constraint firstItem="DBb-Fs-sld" firstAttribute="trailing" secondItem="ByI-Sy-Cq5" secondAttribute="trailing" constant="20" id="s23-xL-Znq"/>
                             <constraint firstItem="DBb-Fs-sld" firstAttribute="bottom" secondItem="4Az-sS-5q9" secondAttribute="bottom" constant="34" id="wbA-bH-xBc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="nextButton" destination="4Az-sS-5q9" id="A4d-QS-oxL"/>
+                        <outlet property="subtitleLabel" destination="ByI-Sy-Cq5" id="kn3-Ik-YdR"/>
                         <outlet property="tableView" destination="CEs-kM-lcP" id="nH5-tr-vNZ"/>
                         <outlet property="titleLabel" destination="AKn-56-Ice" id="EKw-a2-Ufk"/>
                     </connections>

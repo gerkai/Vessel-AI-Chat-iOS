@@ -127,7 +127,7 @@ enum TodayViewCell: Equatable
 
 class TodayViewModel
 {
-    private var contact = Contact.main()
+    private var contact = Contact.main()!
     private var insights: [Insight]
     {
         return [Insight(id: 0, lastUpdated: 0, title: "How Yoga Improves Sleep", subtitle: "Mood and Sleep (2 mins)", description: "Legumes have been proven in various studies to reduce your cortisol levels and improve... more", backgroundImage: "yogaImprovesSleep", completedDate: nil)]
@@ -139,29 +139,33 @@ class TodayViewModel
     
     var numberOfGlasses: Int?
     {
-        contact?.dailyWaterIntake
+        contact.dailyWaterIntake
     }
     
     var drinkedWaterGlasses: Int?
     {
-        contact?.drinkedWaterGlasses
+        contact.drinkedWaterGlasses
     }
     
     var sections: [TodayViewSection] {
-        contact = Contact.main()
+        contact = Contact.main()!
         return [
-            .header(name: contact?.first_name ?? "", goals: contact?.getGoals() ?? []),
+            .header(name: contact.first_name, goals: contact.getGoals()),
             //.insights(insights: insights),
-            .food(foods: contact?.suggestedFoods ?? []),
-            .water(glassesNumber: contact?.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact?.drinkedWaterGlasses ?? 0),
+            .food(foods: contact.suggestedFoods),
+            .water(glassesNumber: contact.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
             .footer
         ]
     }
     
     func updateCheckedGlasses(_ glasses: Int)
     {
-        contact?.drinkedWaterGlasses = glasses
-        guard let contact = contact else { return }
+        contact.drinkedWaterGlasses = glasses
         ObjectStore.shared.ClientSave(contact)
+    }
+    
+    func refreshContactSuggestedfoods()
+    {
+        contact.refreshSuggestedFoods()
     }
 }

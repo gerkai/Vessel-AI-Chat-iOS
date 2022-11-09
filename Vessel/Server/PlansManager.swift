@@ -11,7 +11,7 @@ import Foundation
 class PlansManager
 {
     static let shared = PlansManager()
-    var plans = Storage.retrieve(as: Plan.self)
+    var plans = [Plan]()
     // Commented out to fix a bug where the plans would not arrive from the server after completing
     let lastUpdated = 1//Storage.newestLastUpdatedFor(type: Plan.self)
 
@@ -20,18 +20,20 @@ class PlansManager
         ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess: { [weak self] plans in
             guard let self = self else { return }
             self.plans = plans
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }, onFailure: { error in
             print(error)
         })
     }
     
-    func addPlans(plan: [Plan])
+    func addPlans(plansToAdd: [Plan])
     {
-        for plan in plans
+        /*for plan in plansToAdd
         {
             ObjectStore.shared.serverSave(plan)
         }
-        self.plans = Storage.retrieve(as: Plan.self)
+        self.plans = Storage.retrieve(as: Plan.self)*/
+        self.plans.append(contentsOf: plansToAdd)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     

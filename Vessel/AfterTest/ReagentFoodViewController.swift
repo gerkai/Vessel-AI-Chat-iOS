@@ -11,8 +11,9 @@ class ReagentFoodViewController: AfterTestMVVMViewController
 {
     // MARK: - View
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var nextButton: BounceButton!
+    @IBOutlet private weak var nextButton: BounceButton!
     
     var titleText: String!
     var reagentId: Int?
@@ -21,12 +22,15 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        subtitleLabel.text = ""
         if let reagentId = reagentId
         {
             viewModel.loadFoodsForReagent(reagentId: reagentId)
             { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
+                self.updateSubtitle()
+                self.updateNextButton()
             }
             onFailure:
             { error in
@@ -38,19 +42,45 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         self.tableView.contentInset = inset
         
         updateNextButton()
-        viewModel.selectedFoods = []
+        viewModel.newSelectedFoods = []
     }
     
     // MARK: - UI
     func updateNextButton()
     {
-        if viewModel.selectedFoods.count > 0
+        let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
+            { (selectedFoodId) in
+                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
+            }
+        )
+        
+        if viewModel.newSelectedFoods.count > 0 || (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
         {
             nextButton.backgroundColor = Constants.vesselBlack
         }
         else
         {
             nextButton.backgroundColor = Constants.vesselGray
+        }
+    }
+    
+    func updateSubtitle()
+    {
+        let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
+            { (selectedFoodId) in
+                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
+            }
+        )
+        
+        if viewModel.newSelectedFoods.count > 0 || (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
+        {
+            guard let reagentID = Reagent.ID(rawValue: reagentId ?? -1),
+                  let reagentName = Reagents[reagentID]?.name else { return }
+            subtitleLabel.text = "Looks like you already added all the foods for \(reagentName)"
+        }
+        else
+        {
+            subtitleLabel.text = "Choose up to 3 foods to add to your plan:"
         }
     }
     
@@ -62,7 +92,13 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     
     @IBAction func onNext()
     {
-        if viewModel.selectedFoods.count > 0
+        let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
+            { (selectedFoodId) in
+                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
+            }
+        )
+
+        if viewModel.newSelectedFoods.count > 0
         {
             nextButton.isEnabled = false
             nextButton.backgroundColor = Constants.vesselGray
@@ -72,6 +108,10 @@ class ReagentFoodViewController: AfterTestMVVMViewController
                 self.nextButton.isEnabled = true
                 self.nextButton.backgroundColor = Constants.vesselBlack
             }
+        }
+        else if (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
+        {
+            nextScreen()
         }
         else
         {
@@ -89,7 +129,15 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 96.0
+        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else { return 0 }
+        if viewModel.selectedFoodIds.contains(food.id)
+        {
+            return 0.0
+        }
+        else
+        {
+            return 96.0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -97,7 +145,7 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReagentFoodCell", for: indexPath) as? ReagentFoodTableViewCell,
               let food = viewModel.suggestedFoods[safe: indexPath.row],
               let imageURL = URL(string: food.imageUrl) else { return UITableViewCell() }
-        let isChecked = viewModel.selectedFoods.contains(food)
+        let isChecked = viewModel.newSelectedFoods.contains(food)
         cell.setup(foodName: food.foodTitle, isChecked: isChecked, backgroundImageURL: imageURL)
         return cell
     }
@@ -105,17 +153,17 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         guard let food = viewModel.suggestedFoods[safe: indexPath.row] else { return }
-        if let index = viewModel.selectedFoods.firstIndex(of: food)
+        if let index = viewModel.newSelectedFoods.firstIndex(of: food)
         {
-            viewModel.selectedFoods.remove(at: index)
+            viewModel.newSelectedFoods.remove(at: index)
         }
         else
         {
-            if viewModel.selectedFoods.count == 3
+            if viewModel.newSelectedFoods.count == 3
             {
-                viewModel.selectedFoods.remove(at: 0)
+                viewModel.newSelectedFoods.remove(at: 0)
             }
-            viewModel.selectedFoods.append(food)
+            viewModel.newSelectedFoods.append(food)
         }
         tableView.reloadData()
         updateNextButton()
