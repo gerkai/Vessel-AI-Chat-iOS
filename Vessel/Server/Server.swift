@@ -1199,6 +1199,11 @@ class Server: NSObject
                                     //happens when user changes password in ChangePasswordViewController
                                     success(object)
                                 }
+                                else if message == "An email will be sent if an associated account exists."
+                                {
+                                    //happens when user does forgot password flow
+                                    success(object)
+                                }
                                 else
                                 {
                                     let error = ServerError(code: 404, description: message)
