@@ -215,7 +215,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onRetake()
     {
-        viewModel.cardQRCode = nil
         DispatchQueue.global(qos: .userInitiated).async
         {
             self.captureSession.startRunning()
@@ -266,10 +265,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     func found(code: String)
     {
         //print(code)
-        if viewModel.cardQRCode == nil
-        {
-            viewModel.cardQRCode = code
-        }
+        viewModel.cardQRCode = code
     }
     
     //MARK: - DrawingView delegates
