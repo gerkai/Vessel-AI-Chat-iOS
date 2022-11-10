@@ -525,7 +525,19 @@
                                                 </imageView>
                                                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zen-As-OzI">
                                                     <rect key="frame" x="20" y="0.0" width="354" height="80"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eL-pn-WfI">
+                                                            <rect key="frame" x="38" y="50" width="30" height="12"/>
+                                                            <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="5eL-pn-WfI" secondAttribute="bottom" constant="18" id="3uk-Rz-1sg"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5eL-pn-WfI" secondAttribute="trailing" constant="20" id="dJg-yz-yCl"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <integer key="value" value="24"/>
@@ -536,7 +548,7 @@
                                                     <rect key="frame" x="0.0" y="16" width="48" height="48"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmy-We-4XA">
-                                                    <rect key="frame" x="58" y="32" width="35.5" height="16"/>
+                                                    <rect key="frame" x="58" y="18" width="35.5" height="16"/>
                                                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -544,6 +556,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="5eL-pn-WfI" firstAttribute="leading" secondItem="iqI-le-jJq" secondAttribute="trailing" constant="10" id="7f4-yE-8ii"/>
                                                 <constraint firstItem="Zen-As-OzI" firstAttribute="centerX" secondItem="njG-pk-j2X" secondAttribute="centerX" id="GXw-8B-VGy"/>
                                                 <constraint firstItem="njG-pk-j2X" firstAttribute="leading" secondItem="a97-q2-yn7" secondAttribute="leading" constant="20" id="Hab-Mi-Jub"/>
                                                 <constraint firstAttribute="bottom" secondItem="njG-pk-j2X" secondAttribute="bottom" constant="16" id="Kvm-E9-3Mp"/>
@@ -553,7 +566,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="njG-pk-j2X" secondAttribute="trailing" id="YzW-G3-IDP"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xmy-We-4XA" secondAttribute="trailing" constant="20" id="diA-Kl-EzK"/>
                                                 <constraint firstItem="Zen-As-OzI" firstAttribute="centerY" secondItem="njG-pk-j2X" secondAttribute="centerY" id="gCv-6c-rlO"/>
-                                                <constraint firstItem="Xmy-We-4XA" firstAttribute="centerY" secondItem="iqI-le-jJq" secondAttribute="centerY" id="oZX-xM-duG"/>
+                                                <constraint firstItem="Xmy-We-4XA" firstAttribute="top" secondItem="a97-q2-yn7" secondAttribute="top" constant="18" id="ndP-Pw-kxQ"/>
                                                 <constraint firstItem="Zen-As-OzI" firstAttribute="width" secondItem="njG-pk-j2X" secondAttribute="width" id="sH6-RH-xY3"/>
                                                 <constraint firstItem="iqI-le-jJq" firstAttribute="centerY" secondItem="njG-pk-j2X" secondAttribute="centerY" id="v5r-7X-WOU"/>
                                                 <constraint firstItem="Zen-As-OzI" firstAttribute="height" secondItem="njG-pk-j2X" secondAttribute="height" id="yAG-Dh-IFk"/>
@@ -563,6 +576,7 @@
                                         <connections>
                                             <outlet property="backgroundImageView" destination="njG-pk-j2X" id="1Rq-cN-eXC"/>
                                             <outlet property="checkmarkView" destination="iqI-le-jJq" id="H33-xG-1c1"/>
+                                            <outlet property="subtitleLabel" destination="5eL-pn-WfI" id="68Q-fK-vVG"/>
                                             <outlet property="titleLabel" destination="Xmy-We-4XA" id="hNZ-Gf-aqb"/>
                                         </connections>
                                     </tableViewCell>

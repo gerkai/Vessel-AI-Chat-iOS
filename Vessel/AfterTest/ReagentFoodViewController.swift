@@ -146,8 +146,22 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReagentFoodCell", for: indexPath) as? ReagentFoodTableViewCell,
               let food = viewModel.suggestedFoods[safe: indexPath.row],
               let imageURL = URL(string: food.imageUrl) else { return UITableViewCell() }
+        
+        var reagentQuantity = ""
+        if food.quantity > 0
+        {
+            if food.quantity < 1
+            {
+                reagentQuantity = "\(Int(food.quantity * 1000))\(" μg")"
+            }
+            else
+            {
+                reagentQuantity = "\(Int(food.quantity))\(" mg")"
+            }
+        }
+        
         let isChecked = viewModel.newSelectedFoods.contains(food)
-        cell.setup(foodName: food.foodTitle, isChecked: isChecked, backgroundImageURL: imageURL)
+        cell.setup(foodName: food.foodTitle, reagentQuantity: reagentQuantity, isChecked: isChecked, backgroundImageURL: imageURL)
         return cell
     }
     
