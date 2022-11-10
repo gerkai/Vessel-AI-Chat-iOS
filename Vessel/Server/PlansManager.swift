@@ -42,11 +42,25 @@ class PlansManager
         guard let index = plans.firstIndex(where: { $0.id == planId }) else { return }
         if completed
         {
-            plans[index].completed?.append(date)
+            if plans[index].completed == nil
+            {
+                plans[index].completed = [date]
+            }
+            else
+            {
+                plans[index].completed?.append(date)
+            }
         }
         else
         {
-            plans[index].completed?.removeAll(where: { $0 == date })
+            if plans[index].completed == nil
+            {
+                plans[index].completed = []
+            }
+            else
+            {
+                plans[index].completed?.removeAll(where: { $0 == date })
+            }
         }
     }
 }

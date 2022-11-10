@@ -578,6 +578,11 @@ class AfterTestViewModel
         }
     }
     
+    func refreshSelectedFoods()
+    {
+        selectedFoodIds = Contact.main()!.suggestedFoods.compactMap({ $0.id })
+    }
+    
     // MARK: - Water
     func setDailyWaterIntake(dailyDrinkedGlasses: Int)
     {

@@ -22,6 +22,7 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        viewModel.refreshSelectedFoods()
         subtitleLabel.text = ""
         if let reagentId = reagentId
         {
