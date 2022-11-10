@@ -12,13 +12,20 @@ import MessagingSDK
 import ChatSDK
 import ChatProvidersSDK
 
+protocol ZendeskManagerDelegate: AnyObject
+{
+    func onZendeskDismissed()
+}
+
 class ZendeskManager: NSObject
 {
     static let shared = ZendeskManager()
     weak var viewController: UIViewController?
+    weak var delegate: ZendeskManagerDelegate?
     
-    func navigateToChatWithSupport(in viewController: UIViewController)
+    func navigateToChatWithSupport(in viewController: UIViewController, delegate: ZendeskManagerDelegate? = nil)
     {
+        self.delegate = delegate
         guard let contact = Contact.main(),
               let token = Server.shared.accessToken else { return }
         
@@ -56,6 +63,8 @@ class ZendeskManager: NSObject
     @objc
     private func dismissChatView()
     {
-        self.viewController?.dismiss(animated: true, completion: nil)
+        viewController?.dismiss(animated: true, completion: nil)
+        delegate?.onZendeskDismissed()
+        delegate = nil
     }
 }

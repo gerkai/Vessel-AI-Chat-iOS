@@ -290,7 +290,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     //MARK: - AlreadyScanedSlideupViewController delegates
     func alreadyScannedCustomerSupport()
     {
-        ZendeskManager.shared.navigateToChatWithSupport(in: self)
+        ZendeskManager.shared.navigateToChatWithSupport(in: self, delegate: self)
     }
     
     func alreadyScannedScanNewCard()
@@ -301,7 +301,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     //MARK: - CalibrationErrorSlideupViewController delegates
     func calibrationErrorCustomerSupport()
     {
-        ZendeskManager.shared.navigateToChatWithSupport(in: self)
+        ZendeskManager.shared.navigateToChatWithSupport(in: self, delegate: self)
     }
     
     //MARK: - InvalidQRSlideupViewController delegates
@@ -316,5 +316,13 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         viewModel.uploadingFinished()
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension UploadingSampleViewController: ZendeskManagerDelegate
+{
+    func onZendeskDismissed()
+    {
+        self.retryScan()
     }
 }
