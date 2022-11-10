@@ -1192,10 +1192,18 @@ class Server: NSObject
                             {
                                 if message == "Card already scanned successfully"
                                 {
-                                    failure(ServerError(code: 400, description: message))
+                                    failure(ServerError(code: 400, description: NSLocalizedString("Card has already been scanned", comment: "")))
                                 }
-                                let error = ServerError(code: 404, description: message)
-                                failure(error)
+                                else if message == "Updated."
+                                {
+                                    //happens when user changes password in ChangePasswordViewController
+                                    success(object)
+                                }
+                                else
+                                {
+                                    let error = ServerError(code: 404, description: message)
+                                    failure(error)
+                                }
                             }
                             else
                             {
