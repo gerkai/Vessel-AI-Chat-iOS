@@ -35,7 +35,13 @@ class AfterTestMVVMViewController: UIViewController
     
     func back()
     {
+        guard let viewControllersCount = navigationController?.viewControllers.count,
+              let lastVC = navigationController?.viewControllers[safe: viewControllersCount - 2],
+              lastVC.isMember(of: ReagentFoodViewController.self) == false
+        else { return }
+        
         viewModel.back()
+        
         if backTransition == .push
         {
             navigationController?.popViewController(animated: true)
