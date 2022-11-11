@@ -481,7 +481,7 @@ class AfterTestViewModel
                                                    "Ketones-top-right",
                                                    .fade)
             case .KETO_ELEVATED_2:
-                return AfterTestViewControllerData(NSLocalizedString("Foods to Maintain Ketones ", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.MAGNESIUM.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods to Maintain Ketones ", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.KETONES_A.rawValue)
                 
             case .KETO_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are High", comment: ""),
