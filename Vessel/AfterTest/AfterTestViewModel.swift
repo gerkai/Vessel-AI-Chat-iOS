@@ -580,7 +580,7 @@ class AfterTestViewModel
     
     func refreshSelectedFoods()
     {
-        selectedFoodIds = Contact.main()!.suggestedFoods.compactMap({ $0.id })
+        selectedFoodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
     }
     
     // MARK: - Water
