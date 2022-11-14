@@ -72,11 +72,11 @@ enum Evaluation: String
             case .notAvailable:
                 return UIColor.gray
             case .notDetected:
-                return Constants.vesselGood
+                return Constants.vesselGreat
             case .veryLow:
                 return Constants.vesselPoor
             case .low:
-                return Constants.vesselFair
+                return Constants.vesselPoor
             case .ketoLow:
                 if Contact.main()!.isOnDiet(.KETO)
                 {
@@ -84,31 +84,31 @@ enum Evaluation: String
                 }
                 else
                 {
-                    return Constants.vesselGood
+                    return Constants.vesselGreat
                 }
             case .moderate:
-                return Constants.vesselGood
+                return Constants.vesselGreat
             case .good:
-                return Constants.vesselGood
+                return Constants.vesselGreat
             case .normal:
                 return Constants.vesselGreat
             case .elevated:
-                return Constants.vesselFair
+                return Constants.vesselPoor
             case .high:
                 return Constants.vesselPoor
             case .ketoHigh:
                 if Contact.main()!.isOnDiet(.KETO)
                 {
-                    return Constants.vesselGood
+                    return Constants.vesselGreat
                 }
                 else
                 {
-                    return Constants.vesselFair
+                    return Constants.vesselPoor
                 }
             case .excellent:
                 return Constants.vesselGreat
             case .detectedLow:
-                return Constants.vesselFair
+                return Constants.vesselPoor
             case .detectedHigh:
                 return Constants.vesselPoor
         }
