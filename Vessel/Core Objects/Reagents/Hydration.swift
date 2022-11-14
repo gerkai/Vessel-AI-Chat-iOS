@@ -24,7 +24,7 @@ let Hydration = Reagent(
         Bucket(low: 1.006, high: 1.015, score: 80.0, evaluation: .low,
             hint: TitleDescription(title: NSLocalizedString("You're under hydrated", comment: ""),
             description: NSLocalizedString("You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: ""))),
-        Bucket(low: 1.015, high: 1.03, score: 20.0, evaluation: .veryLow,
+        Bucket(low: 1.015, high: 1.031, score: 20.0, evaluation: .veryLow,
             hint: TitleDescription(title: NSLocalizedString("You’re dehydrated", comment: ""),
             description: NSLocalizedString("Not to worry. You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: "")))],
     goalImpacts: [
