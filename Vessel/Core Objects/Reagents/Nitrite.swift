@@ -8,7 +8,7 @@
 import Foundation
 
 let Nitrite = Reagent(
-    name: NSLocalizedString("Nitrites", comment: "Reagent name"),
+    name: NSLocalizedString("Urinary Tract", comment: "Reagent name"),
     unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
     consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
     type: .Colorimetric,
