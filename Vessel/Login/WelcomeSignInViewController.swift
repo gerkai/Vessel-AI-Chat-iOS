@@ -20,6 +20,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var buttonStackView: UIStackView!
     @IBOutlet private weak var splashView: UIView!
     @IBOutlet private weak var animationContainerView: UIView!
+    @IBOutlet private weak var vesselLogoImageView: UIImageView!
     
     var timer: Timer!
     var animationView: LottieAnimationView!
@@ -43,6 +44,8 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     var goalIndex = 0
     let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
     var key = [0, 0, 0, 0, 0, 0]
+    
+    var leftButtonTaps = 0
     
     override func viewDidLoad()
     {
@@ -176,6 +179,25 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         key.append(0)
         key.remove(at: 0)
         //print("LEFT: \(key)")
+        //toggle Bugsee if user taps left button 50 times
+        leftButtonTaps += 1
+        if leftButtonTaps == 50
+        {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
+            {
+                self.vesselLogoImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+            let allowBugsee = UserDefaults.standard.bool(forKey: Constants.ALLOW_BUGSEE_KEY)
+            if allowBugsee == true
+            {
+                //disable bugsee
+                UserDefaults.standard.removeObject(forKey: Constants.ALLOW_BUGSEE_KEY)
+            }
+            else
+            {
+                UserDefaults.standard.set(true, forKey: Constants.ALLOW_BUGSEE_KEY)
+            }
+        }
     }
     
     @IBAction func onRightButton()

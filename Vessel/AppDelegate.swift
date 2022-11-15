@@ -25,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         analytics.setup()
         configureAppearance()
         MediaManager.shared.initMedia()
-        UIViewController.swizzle()
+        UIViewController.swizzle() //used for analytics
         initializeZendesk()
-        Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+        launchBugsee()
         //so videos will play sound even if mute button is on
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         return true
@@ -47,6 +47,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func launchBugsee()
+    {
+        //launch bugsee if we're in dev or staging. If we're in prod, only launch bugsee if ALLOW_BUGSEE key has been set.
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+            case Constants.STAGING_INDEX:
+                Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+            default:
+                //production
+                //only launch Bugsee if ALLOW_BUGSEE userDefault key is present
+                let allowBugsee = UserDefaults.standard.bool(forKey: Constants.ALLOW_BUGSEE_KEY)
+                if allowBugsee == true
+                {
+                    Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
+                }
+        }
     }
     
     func configureAppearance()

@@ -299,6 +299,7 @@
                         <outlet property="environmentLabel" destination="RA4-wR-TGS" id="B86-4L-Fsb"/>
                         <outlet property="mindLabel" destination="CLE-qB-BDH" id="iKd-yr-NUS"/>
                         <outlet property="splashView" destination="Epr-an-DNc" id="PbX-fi-kD6"/>
+                        <outlet property="vesselLogoImageView" destination="V3u-fj-37a" id="XI8-Xa-bLQ"/>
                         <segue destination="Dhf-WK-NsZ" kind="popoverPresentation" identifier="showDebug" popoverAnchorView="aW9-A3-esl" id="PwG-9i-GCl">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
