@@ -120,6 +120,7 @@ struct Constants
     static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
     static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     static let SHOW_ALL_FOODS_EVERYDAY = "SHOW_ALL_FOODS_EVERYDAY"
+    static let ALLOW_BUGSEE_KEY = "ALLOW_BUGSEE"
     
     //Contact Flags
     static let DECLINED_BIRTH_DATE          = 0x00000001
