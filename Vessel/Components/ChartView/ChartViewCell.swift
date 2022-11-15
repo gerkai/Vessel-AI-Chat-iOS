@@ -78,7 +78,7 @@ class ChartViewCell: UICollectionViewCell
         //get position from the coordinate plotted in the graphView and convert point to same location in our view
         let coordinate = graphView.convert(graphView.coordFor(index: 2), to: self)  //index 2 is the displayed point
         
-        scoreLabelYPosition.constant = coordinate.y - 20.0 //bump it up slightly
+        scoreLabelYPosition.constant = coordinate.y - 5.0 //bump it up slightly
     }
     
     @objc func selected(_ notification: NSNotification)
