@@ -20,14 +20,14 @@ enum Evaluation: String
     case veryLow
     case low
     case detectedLow
-    case ketoLow
+    case ketoLow //Ketones uses a special enum value for Low
     case moderate
     case good
     case normal
     case elevated
     case high
     case detectedHigh
-    case ketoHigh
+    case ketoHigh //Ketones uses a special enum value for High
     case excellent
     
     var title: String
@@ -52,10 +52,10 @@ enum Evaluation: String
                 return NSLocalizedString("normal", comment: "Reagent evaluation label")
             case .elevated:
                 return NSLocalizedString("elevated", comment: "Reagent evaluation label")
-            case .high:
-                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("good", comment: "Keto diet evaluation label") : NSLocalizedString("high", comment: "Non Keto diet evaluation label")
             case .ketoHigh:
-                return NSLocalizedString("elevated", comment: "Reagent evaluation label")
+                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("good", comment: "Keto diet evaluation label") : NSLocalizedString("elevated", comment: "Non Keto diet evaluation label")
+            case .high:
+                return NSLocalizedString("high", comment: "Reagent evaluation label")
             case .excellent:
                 return NSLocalizedString("excellent", comment: "Reagent evaluation label")
             case .detectedLow:
