@@ -122,20 +122,17 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
             { error in
                 if error.code == 400
                 {
-                    if error.description == "Card already scanned successfully"
-                    {
-                        self.showAlreadyScannedPopup()
-                    }
-                    else
-                    {
-                        self.showOtherErrorPopup()
-                    }
+                    self.showOtherErrorPopup()
                 }
                 else
                 {
                     if error.code == 404
                     {
                         self.showInvalidQRCodePopup()
+                    }
+                    else if error.code == 405
+                    {
+                        self.showAlreadyScannedPopup()
                     }
                     else
                     {

@@ -1193,7 +1193,7 @@ class Server: NSObject
                             {
                                 if message == "Card already scanned successfully"
                                 {
-                                    failure(ServerError(code: 400, description: NSLocalizedString("Card has already been scanned", comment: "")))
+                                    failure(ServerError(code: 405, description: NSLocalizedString("Card has already been scanned", comment: "")))
                                 }
                                 else if message == "Updated."
                                 {
