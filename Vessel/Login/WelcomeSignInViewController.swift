@@ -181,7 +181,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //print("LEFT: \(key)")
         //toggle Bugsee if user taps left button 50 times
         leftButtonTaps += 1
-        if leftButtonTaps == 50
+        if leftButtonTaps == 15
         {
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
             {
