@@ -63,7 +63,8 @@ enum DebugMenuOption: Int
         {
             if let main = Contact.main()
             {
-                main.flags = 0
+                main.flags = 0 //clears all app_flags (definitions of each flag in AppConstants)
+                main.gender = nil //forces user to go through onboarding again as well
                 ObjectStore.shared.ClientSave(main)
             }
         }

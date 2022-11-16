@@ -39,7 +39,7 @@ class Contact: CoreObjectProtocol
     
     var first_name: String
     var last_name: String
-    var gender: String?
+    @NullCodable var gender: String?
     var height: Double?
     var weight: Double?
     var birth_date: String?     //in yyyy-mm-dd format

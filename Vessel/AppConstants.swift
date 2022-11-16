@@ -122,7 +122,7 @@ struct Constants
     static let SHOW_ALL_FOODS_EVERYDAY = "SHOW_ALL_FOODS_EVERYDAY"
     static let ALLOW_BUGSEE_KEY = "ALLOW_BUGSEE"
     
-    //Contact Flags
+    //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001
     static let HIDE_PEE_TIPS                = 0x00000002
     static let HIDE_DROPLET_TIPS            = 0x00000004
