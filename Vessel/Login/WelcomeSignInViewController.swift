@@ -10,17 +10,24 @@
 //  reveal a new Debug button.
 
 import UIKit
+import Lottie
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
     @IBOutlet private weak var environmentLabel: UILabel!
     @IBOutlet private weak var buttonStackView: UIStackView!
     @IBOutlet private weak var splashView: UIView!
-    var timer: Timer!
+    @IBOutlet private weak var animationContainerView: UIView!
+    @IBOutlet private weak var vesselLogoImageView: UIImageView!
     
-    @Resolved private var analytics: Analytics
+    var timer: Timer!
+    var animationView: LottieAnimationView!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
+    
     let labelRefreshInterval = 2.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
@@ -32,10 +39,13 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                  NSLocalizedString("mood", comment: ""),
                  NSLocalizedString("digestion", comment: ""),
                  NSLocalizedString("beauty", comment: ""),
-                 NSLocalizedString("living", comment: "")]
+                 NSLocalizedString("calm", comment: ""),
+                 NSLocalizedString("fitness", comment: "")]
     var goalIndex = 0
     let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
     var key = [0, 0, 0, 0, 0, 0]
+    
+    var leftButtonTaps = 0
     
     override func viewDidLoad()
     {
@@ -48,36 +58,27 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             print("WelcomeSignIn did load")
         }
-        if Server.shared.isLoggedIn()
-        {
-            ObjectStore.shared.loadMainContact
-            { [weak self] in
-                guard let self = self else { return }
-                print("Successfully loaded contact during auto-login. Jumping to Onboarding")
-                OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
-                //just clear the splashView after enough time for above fade to complete.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
-                {
-                    self.splashView.alpha = 0.0
-                }
-            }
-            onFailure:
+    }
+    
+    func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
+    {
+        //try connecting to the internet again.
+        checkInternet()
+    }
+    
+    func playAnimation()
+    {
+        animationView = .init(name: "splash_animation")
+        animationView!.frame = animationContainerView.bounds
+        animationView!.contentMode = .scaleAspectFit
+        animationView!.loopMode = .playOnce
+        animationView!.animationSpeed = 1.0
+        animationContainerView.addSubview(animationView!)
+        animationView!.play
+        {(isFinished) in
+            if isFinished
             {
-                print("Unsuccessful at re-logging in. Making user sign-in again")
-                //fade splash screen in right away since we already spent time trying to load contact from back end
-                UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
-                {
-                    self.splashView.alpha = 0.0
-                }
-            }
-        }
-        else
-        {
-            //fade splash screen in after 1 second. (Normal login flow)
-            print("Normal sign-in flow. Not re-logging in.")
-            UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
-            {
-                self.splashView.alpha = 0.0
+                self.checkInternet()
             }
         }
     }
@@ -90,23 +91,20 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .main))
-    }
-    
     override func viewWillAppear(_ animated: Bool)
     {
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         updateEnvironmentLabel(env: savedEnvironment)
         timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
-        print("Starting welcome timer")
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        playAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
-        print("Disabling welcome timer")
         timer.invalidate()
     }
     
@@ -115,6 +113,51 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         if let destination = segue.destination as? DebugViewController
         {
             destination.delegate = self
+        }
+    }
+    
+    func checkInternet()
+    {
+        if Reachability.isConnectedToNetwork()
+        {
+            if Server.shared.isLoggedIn()
+            {
+                ObjectStore.shared.loadMainContact
+                { [weak self] in
+                    guard let self = self else { return }
+                    print("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                    OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                    //just clear the splashView after enough time for above fade to complete.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
+                    {
+                        self.splashView.alpha = 0.0
+                    }
+                }
+                onFailure:
+                {
+                    print("Unsuccessful at re-logging in. Making user sign-in again")
+                    //fade splash screen in right away since we already spent time trying to load contact from back end
+                    UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
+                    {
+                        self.splashView.alpha = 0.0
+                    }
+                }
+            }
+            else
+            {
+                //fade splash screen in after 1 second. (Normal login flow)
+                print("Normal sign-in flow. Not re-logging in.")
+                UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+                {
+                    self.splashView.alpha = 0.0
+                }
+            }
+        }
+        else
+        {
+            GenericAlertViewController.presentAlert(in: self, type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Internet Error", comment: "")),
+                                                                                         subtitle: GenericAlertLabelInfo(title: Constants.INTERNET_CONNECTION_STRING, alignment: .center, height: 40.0),
+                                                                                         button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("OK", comment: "")), type: .dark)), delegate: self)
         }
     }
     
@@ -136,6 +179,25 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         key.append(0)
         key.remove(at: 0)
         //print("LEFT: \(key)")
+        //toggle Bugsee if user taps left button 50 times
+        leftButtonTaps += 1
+        if leftButtonTaps == 15
+        {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
+            {
+                self.vesselLogoImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+            let allowBugsee = UserDefaults.standard.bool(forKey: Constants.ALLOW_BUGSEE_KEY)
+            if allowBugsee == true
+            {
+                //disable bugsee
+                UserDefaults.standard.removeObject(forKey: Constants.ALLOW_BUGSEE_KEY)
+            }
+            else
+            {
+                UserDefaults.standard.set(true, forKey: Constants.ALLOW_BUGSEE_KEY)
+            }
+        }
     }
     
     @IBAction func onRightButton()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReagentInfoViewController: AfterTestMVVMViewController
+class ReagentInfoViewController: AfterTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var detailsLabel: UILabel!
@@ -20,6 +20,21 @@ class ReagentInfoViewController: AfterTestMVVMViewController
     var details: String!
     var image: UIImage!
     
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .resultsTabFlow
+    
+    static func initWith(viewModel: AfterTestViewModel, result: AfterTestViewControllerData) -> ReagentInfoViewController
+    {
+        let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
+        vc.viewModel = viewModel
+        vc.titleText = result.title
+        vc.details = result.details
+        vc.image = UIImage.init(named: result.imageName)
+        
+        return vc
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -27,7 +42,7 @@ class ReagentInfoViewController: AfterTestMVVMViewController
         detailsLabel.text = details
         reagentImage.image = image
         
-        print("\(viewModel.currentScreen), \(viewModel.screens.count)")
+        //print("\(viewModel.currentScreen), \(viewModel.screens.count)")
         if viewModel.screens.count >= 2
         {
             let percentage = CGFloat(viewModel.currentScreen) / CGFloat(viewModel.screens.count - 1)

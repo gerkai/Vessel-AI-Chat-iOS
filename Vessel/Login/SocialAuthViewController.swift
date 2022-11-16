@@ -21,7 +21,7 @@ protocol SocialAuthViewDelegate
     func gotSocialAuthToken(isBrandNewAccount: Bool, loginType: LoginType)
 }
 
-class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
+class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var webContentView: UIView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -33,6 +33,9 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     var strURL: String!
     var loginType: LoginType = .google
     var delegate: SocialAuthViewDelegate?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -57,12 +60,6 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         let url = URL(string: strURL)
         let request = URLRequest(url: url!)
         webView.load(request)
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     @IBAction func doneButtonAction(_ sender: Any)
@@ -108,11 +105,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         let urlString = navigationAction.request.url?.absoluteString
-        #warning ("CW: Temporary fix until backend gets fixed")
-        let fixString = urlString?.replacingOccurrences(of: "/v2/", with: "/v3/")
-        //print("\(String(describing: fixString))")
-        //print("Retrieve URL: \(String(describing: retrieveURL))")
-        if fixString!.contains(retrieveURL)
+        
+        if urlString!.contains(retrieveURL)
         {
             let host = navigationAction.request.url?.host ?? Server.shared.API().replacingOccurrences(of: "https://", with: "")
             webView.getCookies(for: host)

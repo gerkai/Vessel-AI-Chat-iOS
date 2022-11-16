@@ -7,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate
+class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
@@ -26,6 +26,9 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     var processingPhoto = false
     weak var clearTimer: Timer?
     var clearTimerCount = 0
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {
@@ -96,7 +99,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             previewLayer.videoGravity = .resizeAspectFill
             cameraView.layer.addSublayer(previewLayer)
 
-            captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                self.captureSession.startRunning()
+            }
             UIApplication.shared.isIdleTimerDisabled = true
         }
     }
@@ -150,7 +156,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
         if (captureSession?.isRunning == false)
         {
-            captureSession.startRunning()
+            DispatchQueue.global(qos: .userInitiated).async
+            {
+                self.captureSession.startRunning()
+            }
         }
     }
 
@@ -206,7 +215,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onRetake()
     {
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .userInitiated).async
+        {
+            self.captureSession.startRunning()
+        }
         darkenView.alpha = 0.0
         darkenView.isHidden = false
         processingPhoto = false
@@ -253,10 +265,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     func found(code: String)
     {
         //print(code)
-        if viewModel.cardQRCode == nil
-        {
-            viewModel.cardQRCode = code
-        }
+        viewModel.cardQRCode = code
     }
     
     //MARK: - DrawingView delegates
@@ -292,7 +301,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
                 goodAlignmentFrameCounter += 1
                 if goodAlignmentFrameCounter > 30 //subjective
                 {
-                    noticeLabel.text = NSLocalizedString("Hold Still", comment: "Card placement instructions for user")
+                    noticeLabel.text = NSLocalizedString("Card detected, hold still", comment: "Card placement instructions for user")
                     noticeLabel.backgroundColor = Constants.vesselGreat
                     if goodAlignmentFrameCounter > 75 //subjective
                     {
@@ -315,6 +324,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             processingPhoto = true
             
+            viewModel.cardQRCoordinates = drawingView.qrBoxPercentages()
             drawingView.qrBox = nil
             drawingView.setNeedsDisplay()
             darkenView.isHidden = true

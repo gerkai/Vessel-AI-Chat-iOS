@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaterIntakeView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomStackView" destination="QPj-3Z-nmH" id="gz1-je-eqN"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="AD7-ae-H5L"/>
+                <outlet property="topStackView" destination="EcO-4y-iUS" id="6Lm-pH-Jj7"/>
+                <outletCollection property="glassButtons" destination="jss-OS-6wj" collectionClass="NSMutableArray" id="V1Q-Gr-05U"/>
+                <outletCollection property="glassButtons" destination="Tl5-Mx-aJn" collectionClass="NSMutableArray" id="rlR-ql-Z6w"/>
+                <outletCollection property="glassButtons" destination="Znq-00-Axv" collectionClass="NSMutableArray" id="6kL-ct-7FG"/>
+                <outletCollection property="glassButtons" destination="rZL-gj-1VL" collectionClass="NSMutableArray" id="D3Q-tJ-1tX"/>
+                <outletCollection property="glassButtons" destination="GSM-dX-kVi" collectionClass="NSMutableArray" id="mcl-bJ-e3o"/>
+                <outletCollection property="glassButtons" destination="EaS-uI-HtY" collectionClass="NSMutableArray" id="xns-g6-8LE"/>
+                <outletCollection property="glassButtons" destination="mzc-MY-ra6" collectionClass="NSMutableArray" id="1Q8-0t-S11"/>
+                <outletCollection property="glassButtons" destination="FJ7-vZ-5EK" collectionClass="NSMutableArray" id="YLe-q8-aiB"/>
+                <outletCollection property="glassButtons" destination="3oK-jA-8pq" collectionClass="NSMutableArray" id="ybB-dV-Wqq"/>
+                <outletCollection property="glassButtons" destination="meW-tr-8Ob" collectionClass="NSMutableArray" id="wqc-oT-bcy"/>
+                <outletCollection property="glassButtons" destination="goh-HH-GWi" collectionClass="NSMutableArray" id="611-GF-oEY"/>
+                <outletCollection property="glassButtons" destination="Zk8-qT-fLy" collectionClass="NSMutableArray" id="sSd-FP-C2S"/>
+                <outletCollection property="glassButtons" destination="fVE-Ef-Odi" collectionClass="NSMutableArray" id="xdE-Yz-06t"/>
+                <outletCollection property="glassButtons" destination="SBd-Rm-gOI" collectionClass="NSMutableArray" id="yBG-vk-3lK"/>
+                <outletCollection property="glassButtons" destination="avv-Lq-Xi6" collectionClass="NSMutableArray" id="VpG-Mj-7Zk"/>
+                <outletCollection property="glassButtons" destination="WyE-Sr-Djc" collectionClass="NSMutableArray" id="o2I-cx-TFg"/>
+                <outletCollection property="glassButtons" destination="suo-h4-ACJ" collectionClass="NSMutableArray" id="68f-Uv-ciz"/>
+                <outletCollection property="glassButtons" destination="Sab-E7-EcK" collectionClass="NSMutableArray" id="VBG-Xg-x8n"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="98"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ezI-rj-QbW">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="98"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="EcO-4y-iUS">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="45"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jss-OS-6wj">
+                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="EuI-LH-JcF"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tl5-Mx-aJn">
+                                    <rect key="frame" x="43.333333333333329" y="0.0" width="43.333333333333329" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="nZo-vC-4lZ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Znq-00-Axv">
+                                    <rect key="frame" x="86.666666666666671" y="0.0" width="43.333333333333329" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="vQK-GS-aDY"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZL-gj-1VL">
+                                    <rect key="frame" x="130" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="8T0-yx-0zw"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSM-dX-kVi">
+                                    <rect key="frame" x="173.33333333333334" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="r3y-e3-kMa"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaS-uI-HtY">
+                                    <rect key="frame" x="216.66666666666666" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="SoW-pj-Kk0"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-MY-ra6">
+                                    <rect key="frame" x="260" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="NjW-dN-4hB"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJ7-vZ-5EK">
+                                    <rect key="frame" x="303.33333333333331" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="WH2-7i-DSw"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3oK-jA-8pq">
+                                    <rect key="frame" x="346.66666666666669" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="hPe-cv-LXN"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-3Z-nmH">
+                            <rect key="frame" x="0.0" y="53" width="390" height="45"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meW-tr-8Ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="Fhd-pg-ii5"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goh-HH-GWi">
+                                    <rect key="frame" x="43.333333333333329" y="0.0" width="43.333333333333329" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="H8X-hJ-vGd"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zk8-qT-fLy">
+                                    <rect key="frame" x="86.666666666666671" y="0.0" width="43.333333333333329" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="qhY-jI-uUW"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVE-Ef-Odi">
+                                    <rect key="frame" x="130" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="Lnf-dW-PBA"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBd-Rm-gOI">
+                                    <rect key="frame" x="173.33333333333334" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="Hfm-b9-4ZM"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avv-Lq-Xi6">
+                                    <rect key="frame" x="216.66666666666666" y="0.0" width="43.333333333333343" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="1eb-4L-wUK"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyE-Sr-Djc">
+                                    <rect key="frame" x="260" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="wgM-kB-gW7"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suo-h4-ACJ">
+                                    <rect key="frame" x="303.33333333333331" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="asD-eF-6ZD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-E7-EcK">
+                                    <rect key="frame" x="346.66666666666669" y="0.0" width="43.333333333333314" height="45"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="water-glass-full"/>
+                                    <connections>
+                                        <action selector="onGlassSelected:" destination="-1" eventType="touchUpInside" id="pJL-tg-CJ2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="QPj-3Z-nmH" firstAttribute="top" secondItem="ezI-rj-QbW" secondAttribute="top" constant="53" id="zeX-7r-K74"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ezI-rj-QbW" secondAttribute="bottom" id="Iw3-xA-Bpx"/>
+                <constraint firstItem="ezI-rj-QbW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LiV-yM-lSU"/>
+                <constraint firstAttribute="trailing" secondItem="ezI-rj-QbW" secondAttribute="trailing" id="VGM-FM-vBt"/>
+                <constraint firstItem="ezI-rj-QbW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kTF-58-wde"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="76.92307692307692" y="-238.86255924170615"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="water-glass-full" width="30" height="45"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -80,8 +80,11 @@ class EditProfileViewModel
         return formatter
     }()
     
+    @Resolved private var analytics: Analytics
+    
     // MARK: - Public interface
     var onModelChanged: (() -> ())?
+    var onError: ((_ error: String) -> ())?
     
     var name: String?
     {
@@ -93,8 +96,16 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newName = newValue else { return }
+            guard newName.isValidName() else
+            {
+                onError?(NSLocalizedString("Please enter a valid first name", comment: ""))
+                onModelChanged?()
+                return
+            }
+            
             contact.first_name = newName
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "$name", value: contact.fullName)
         }
     }
     
@@ -108,8 +119,15 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newLastName = newValue else { return }
+            guard newLastName.isValidName() else
+            {
+                onError?(NSLocalizedString("Please enter a valid last name", comment: ""))
+                onModelChanged?()
+                return
+            }
             contact.last_name = newLastName
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "$name", value: contact.fullName)
         }
     }
     
@@ -154,6 +172,8 @@ class EditProfileViewModel
                 contact.gender = Constants.GENDER_OTHER
             }
             updateContact(contact: contact)
+            guard let gender = contact.gender else { return }
+            analytics.setUserProperty(property: "Gender", value: gender)
         }
     }
     
@@ -190,6 +210,8 @@ class EditProfileViewModel
                 contact.height = newHeight
             }
             updateContact(contact: contact)
+            guard let height = contact.height else { return }
+            analytics.setUserProperty(property: "Height", value: height)
         }
     }
     
@@ -222,6 +244,8 @@ class EditProfileViewModel
                 contact.weight = max(min(newWeight, Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
             }
             updateContact(contact: contact)
+            guard let weight = contact.weight else { return }
+            analytics.setUserProperty(property: "Weight", value: weight)
         }
     }
     
@@ -254,6 +278,7 @@ class EditProfileViewModel
             let newBirthDateString = serverDateFormatter.string(from: newBirthDate)
             contact.birth_date = newBirthDateString
             updateContact(contact: contact)
+            analytics.setUserProperty(property: "DOB", value: newBirthDateString)
         }
     }
     

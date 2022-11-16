@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
+        <array key="NoeText.otf">
+            <string>NoeText</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReagentImpactView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="zcw-rn-c5c"/>
+                <outlet property="evaluationLabel" destination="vGa-yn-NJS" id="Dxy-ra-5MD"/>
+                <outlet property="impactImageView" destination="94q-oD-6X2" id="0is-F5-gZA"/>
+                <outlet property="reagentImpactView" destination="4Cb-Gw-aKt" id="gW8-5b-iaX"/>
+                <outlet property="reagentNameLabel" destination="rd6-rp-SZ7" id="Sb7-TA-4sa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-aR-OFT">
+                    <rect key="frame" x="12" y="0.0" width="366" height="46"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rd6-rp-SZ7">
+                            <rect key="frame" x="0.0" y="14.999999999999998" width="122" height="16.333333333333329"/>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="14"/>
+                            <color key="textColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGa-yn-NJS">
+                            <rect key="frame" x="122" y="14.999999999999998" width="122" height="16.333333333333329"/>
+                            <fontDescription key="fontDescription" name="NoeText" family="Noe Text" pointSize="14"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cb-Gw-aKt">
+                            <rect key="frame" x="244" y="8" width="122" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impact" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qc-tX-NBY">
+                                    <rect key="frame" x="12.000000000000004" y="7" width="43.333333333333343" height="16.333333333333332"/>
+                                    <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="14"/>
+                                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dots-1" translatesAutoresizingMaskIntoConstraints="NO" id="94q-oD-6X2">
+                                    <rect key="frame" x="91" y="13" width="19" height="4"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.69921875" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="2qc-tX-NBY" firstAttribute="centerY" secondItem="4Cb-Gw-aKt" secondAttribute="centerY" id="Th6-1A-sil"/>
+                                <constraint firstAttribute="height" constant="30" id="bH0-ZX-Ttn"/>
+                                <constraint firstAttribute="trailing" secondItem="94q-oD-6X2" secondAttribute="trailing" constant="12" id="d4j-g2-0iR"/>
+                                <constraint firstItem="2qc-tX-NBY" firstAttribute="leading" secondItem="4Cb-Gw-aKt" secondAttribute="leading" constant="12" id="qpK-8S-0fa"/>
+                                <constraint firstItem="94q-oD-6X2" firstAttribute="centerY" secondItem="4Cb-Gw-aKt" secondAttribute="centerY" id="wOP-Ii-75W"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="SQ2-aR-OFT" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-12" id="WdG-A0-mC4"/>
+                <constraint firstItem="SQ2-aR-OFT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XK6-Bb-ceI"/>
+                <constraint firstItem="SQ2-aR-OFT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="XP6-tJ-AMl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SQ2-aR-OFT" secondAttribute="bottom" id="qSg-iE-ukp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="14"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="236.92307692307691" y="178.43601895734596"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dots-1" width="19" height="4"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

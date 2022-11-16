@@ -9,11 +9,10 @@
 
 import UIKit
 
-class ItemPreferencesViewController: UIViewController
+class ItemPreferencesViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - View
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var titleLabelSpacing: NSLayoutConstraint!
     @IBOutlet private weak var nextButton: UIButton!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTextLabel: UILabel!
@@ -23,6 +22,21 @@ class ItemPreferencesViewController: UIViewController
     var viewModel = ItemPreferencesViewModel()
     var coordinator: OnboardingCoordinator?
     
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
+    var associatedValue: String?
+    {
+        switch viewModel.type
+        {
+        case .diet:
+            return "Diet"
+        case .allergy:
+            return "Allergies"
+        case .goals:
+            return "Goal Selection"
+        }
+    }
+
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
     {
@@ -35,12 +49,6 @@ class ItemPreferencesViewController: UIViewController
 
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         collectionView.registerFromNib(CheckmarkImageCollectionViewCell.self)
-        //on smaller screens move everything up so all checkboxes have best chance of fitting on screen
-        //without making the user have to scroll.
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
-        {
-            titleLabelSpacing.constant = Constants.MIN_VERT_SPACING_TO_BACK_BUTTON
-        }
         updateNextButton()
     }
     
@@ -50,12 +58,6 @@ class ItemPreferencesViewController: UIViewController
         {
             print("📘 deinit \(self)")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -103,17 +105,8 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        var height = Constants.CHECK_BUTTON_HEIGHT
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
-        {
-            height = Constants.SMALL_SCREEN_CHECK_BUTTON_HEIGHT
-        }
-        //SingleGoal uses bigger cells
-        if viewModel.type == .mainGoal
-        {
-            height = collectionView.frame.width * 0.48
-        }
-        return CGSize(width: collectionView.frame.width * 0.48, height: height)
+        //80.0 = 30.0 for padding on each side + 20.0 padding between cells, then /2.0 for 2 columns
+        return CGSize(width: (view.frame.width - 80.0) / 2.0, height: Constants.CHECK_BUTTON_HEIGHT)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -123,42 +116,27 @@ extension ItemPreferencesViewController: UICollectionViewDelegateFlowLayout, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        if viewModel.type == .mainGoal
-        {
-            //show image checkmark cell
-            let cell: CheckmarkImageCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel.infoForItemAt(indexPath: indexPath)
-            cell.titleLabel.text = info.name
-            cell.backgroundImage.image = UIImage(named: info.imageName ?? "")
-            //we'll use the tag to hold the goal ID
-            cell.tag = info.id
-            cell.delegate = self
-            cell.isChecked = viewModel.itemIsChecked(id: info.id)
-            return cell
-        }
-        else
-        {
-            //show regular checkmark cell
-            let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
-            let info = viewModel.infoForItemAt(indexPath: indexPath)
-            cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
-            return cell
-        }
+        //show regular checkmark cell
+        let cell: CheckmarkCollectionViewCell = collectionView.dequeueCell(for: indexPath)
+        let info = viewModel.infoForItemAt(indexPath: indexPath)
+        cell.setup(name: info.name, id: info.id, delegate: self, isChecked: viewModel.itemIsChecked(id: info.id))
+        return cell
     }
 }
 
 //MARK: - CheckmarkCollectionViewCell delegates
 extension ItemPreferencesViewController: CheckmarkCollectionViewCellDelegate, CheckmarkImageCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
-        collectionView.reloadData()
+        viewModel.itemTapped(id: id)
+        NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
+        
         updateNextButton()
     }
     
-    func canCheckMoreButtons() -> Bool
+    func isChecked(forID id: Int) -> Bool
     {
-        return true
+        return viewModel.itemIsChecked(id: id)
     }
 }

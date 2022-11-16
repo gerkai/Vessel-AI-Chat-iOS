@@ -37,17 +37,20 @@ enum PopupErrorType: Int
     case otherError
 }
 
-class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedSlideupViewControllerDelegate, CalibrationErrorSlideupViewControllerDelegate, InvalidQRSlideupViewControllerDelegate, UploadErrorSlideupViewControllerDelegate, CropFailureSlideupViewControllerDelegate
+class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedSlideupViewControllerDelegate, CalibrationErrorSlideupViewControllerDelegate, InvalidQRSlideupViewControllerDelegate, UploadErrorSlideupViewControllerDelegate, CropFailureSlideupViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
-    private var animationView: AnimationView?
+    private var animationView: LottieAnimationView?
     private var retryCount = 0
     let maxRetryCount = 20
     var sampleUUID: String!
     var delegate: UploadingSampleViewControllerDelegate?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {
@@ -119,20 +122,17 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
             { error in
                 if error.code == 400
                 {
-                    if error.moreInfo == "Card already scanned successfully"
-                    {
-                        self.showAlreadyScannedPopup()
-                    }
-                    else
-                    {
-                        self.showOtherErrorPopup()
-                    }
+                    self.showOtherErrorPopup()
                 }
                 else
                 {
                     if error.code == 404
                     {
                         self.showInvalidQRCodePopup()
+                    }
+                    else if error.code == 405
+                    {
+                        self.showAlreadyScannedPopup()
                     }
                     else
                     {
@@ -149,7 +149,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func uploadToS3(fileData: Data, orcaName: String?, uuid: String, contactID: String, batchID: String? = nil, calibrationMode: String? = nil)
     {        
-        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, progressBlock:
+        TestCardUploader.shared.uploadImage(with: fileData, uuid: uuid, contactID: contactID, orcaName: orcaName, batchID: batchID, calibrationMode: calibrationMode, qrBox: viewModel.cardQRCoordinates, progressBlock:
         { [weak self](task, progress) in
             DispatchQueue.main.async(execute:
             {[weak self] in
@@ -204,18 +204,15 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { testResult in
-            if testResult.errors.count == 0
-            {
-                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
-                vc.testResult = testResult
-                self.viewModel.uploadingFinished()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            else
-            {
-                print("Error in object response: \(testResult)")
-            }
+            let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+            vc.testResult = testResult
+            
+            //save Result to objectStore
+            ObjectStore.shared.serverSave(testResult)
+            
+            self.viewModel.uploadingFinished()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         onFailure:
         { error in
@@ -288,9 +285,9 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     }
     
     //MARK: - AlreadyScanedSlideupViewController delegates
-    func alreadyScannedViewResults()
+    func alreadyScannedCustomerSupport()
     {
-        //TODO: navigate to this specific card in results tab
+        ZendeskManager.shared.navigateToChatWithSupport(in: self, delegate: self)
     }
     
     func alreadyScannedScanNewCard()
@@ -301,7 +298,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     //MARK: - CalibrationErrorSlideupViewController delegates
     func calibrationErrorCustomerSupport()
     {
-        //TODO: Navigate to customer support
+        ZendeskManager.shared.navigateToChatWithSupport(in: self, delegate: self)
     }
     
     //MARK: - InvalidQRSlideupViewController delegates
@@ -316,5 +313,13 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         viewModel.uploadingFinished()
         viewModel.curState.back()
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension UploadingSampleViewController: ZendeskManagerDelegate
+{
+    func onZendeskDismissed()
+    {
+        self.retryScan()
     }
 }

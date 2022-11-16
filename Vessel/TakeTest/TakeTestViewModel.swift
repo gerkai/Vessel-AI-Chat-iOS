@@ -58,6 +58,7 @@ class TakeTestViewModel
     var photo: AVCapturePhoto?
     var compressedPhoto: Data?
     var cardQRCode: String!
+    var cardQRCoordinates: [CGPoint]!
     
     //MARK: - navigation
     static func NextViewController(viewModel: TakeTestViewModel) -> TakeTestMVVMViewController

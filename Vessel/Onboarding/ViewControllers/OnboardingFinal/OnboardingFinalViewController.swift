@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingFinalViewController: UIViewController
+class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet weak var titleLabel: UILabel!
@@ -15,6 +15,9 @@ class OnboardingFinalViewController: UIViewController
     // MARK: - Logic
     var mainGoal: Int?
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
         
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -35,12 +38,6 @@ class OnboardingFinalViewController: UIViewController
         }
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
-    }
-    
     // MARK: - Actions
     @IBAction func onBackTapped()
     {
@@ -55,14 +52,7 @@ class OnboardingFinalViewController: UIViewController
     // MARK: - Logic
     private func finalScreenText() -> String
     {
-        if let mainGoalInt = mainGoal,
-           let mainGoal = Goal.ID(rawValue: mainGoalInt),
-           let goal = Goals[mainGoal]
-        {
-            let text = String(format: NSLocalizedString("We've designed %@ program personalized to your lifestyle.", comment: ""), goal.nameWithArticle)
-            return text
-        }
-        //should never get here
-        return ""
+        let text = NSLocalizedString("We've designed a wellness plan personalized to your lifestyle.", comment: "")
+        return text
     }
 }

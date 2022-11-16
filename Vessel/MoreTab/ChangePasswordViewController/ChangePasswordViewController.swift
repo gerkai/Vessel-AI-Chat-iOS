@@ -7,13 +7,16 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController
+class ChangePasswordViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var tableView: UITableView!
     
     // MARK: Model
     private let viewModel = ChangePasswordViewModel()
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     override func viewDidLoad()
     {
@@ -85,7 +88,7 @@ extension ChangePasswordViewController: UITableViewDataSource
 
 extension ChangePasswordViewController: GenericAlertDelegate
 {
-    func onAlertDismissed()
+    func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
     {
         Server.shared.logOut()
         let story = UIStoryboard(name: "Login", bundle: nil)

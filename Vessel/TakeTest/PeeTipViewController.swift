@@ -7,10 +7,13 @@
 
 import UIKit
 
-class PeeTipViewController: TakeTestMVVMViewController
+class PeeTipViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var hideTipSelectorView: SelectionCheckmarkView!
     @IBOutlet weak var mainStackView: UIStackView!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {
@@ -20,12 +23,6 @@ class PeeTipViewController: TakeTestMVVMViewController
             mainStackView.spacing = 32.0
         }
         hideTipSelectorView.textLabel.text = Constants.DONT_SHOW_AGAIN_STRING
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
     
     @IBAction func back()

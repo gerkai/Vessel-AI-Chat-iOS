@@ -7,12 +7,15 @@
 
 import UIKit
 
-class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmarkViewDelegate
+class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmarkViewDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     @IBOutlet weak var botViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topView: IconCheckmarkView!
     @IBOutlet weak var botView: IconCheckmarkView!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
     
     let smallScreenCheckmarkHeight = 100.0 //reduce checkmark heights on small screens so they'll fit better
     
@@ -45,7 +48,6 @@ class SuccessfulTestTipsViewController: TakeTestMVVMViewController, IconCheckmar
         super.viewDidAppear(animated)
         topView.delegate = self
         botView.delegate = self
-        // TODO: Add analytics for viewed page
     }
     
     override func viewDidDisappear(_ animated: Bool)

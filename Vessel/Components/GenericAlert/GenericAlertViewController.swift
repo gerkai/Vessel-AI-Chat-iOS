@@ -9,6 +9,15 @@ import UIKit
 
 class GenericAlertViewController: UIViewController
 {
+    // MARK: - Alerts Constants
+    static let DELETE_ACCOUNT_ALERT = "DeleteAccountAlert"
+    
+    private struct Constants
+    {
+        static let GENERIC_ALERT_BOTTOM_SPACING = 35.0
+        static let NOT_SELECTED = -1
+    }
+    
     static func presentAlert(in viewController: UIViewController,
                              type: GenericAlertType,
                              description: String = "",
@@ -140,11 +149,12 @@ class GenericAlertViewController: UIViewController
                     }
                     completion:
                     { _ in
-                        self?.delegate?.onAlertPresented?()
+                        guard let self = self else { return }
+                        self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                     }
                 }
             case .modal:
-                let constant = viewModel.alignment == .center ? 0 : ((screenHeight - (alertView.frame.height)) / 2.0) - 10
+                let constant = viewModel.alignment == .center ? 0 : ((screenHeight - (alertView.frame.height)) / 2.0) - 35
                 alertViewCenterYConstraint.constant = constant
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut)
                 { [weak self] in
@@ -174,7 +184,7 @@ class GenericAlertViewController: UIViewController
                                                                             constant: 0.0)
                     self.alertViewBottomSpacingConstraint.isActive = true
                     self.alertViewBottomSpacingConstraint.priority = .init(rawValue: 900)
-                    self.delegate?.onAlertPresented?()
+                    self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                 }
             }
         }
@@ -182,7 +192,7 @@ class GenericAlertViewController: UIViewController
     
     // MARK: - Actions
     @objc
-    func onBackgroundTapped(alertButtonIndexTapped: Int = -1)
+    func onBackgroundTapped(alertButtonIndexTapped: Int = Constants.NOT_SELECTED)
     {
         if viewModel.animation == .popUp
         {
@@ -200,11 +210,11 @@ class GenericAlertViewController: UIViewController
                 completion:
                 { [weak self] _ in
                     guard let self = self else { return }
-                    if alertButtonIndexTapped != -1 && self.viewModel.shouldCloseWhenButtonTapped
+                    if alertButtonIndexTapped != Constants.NOT_SELECTED && self.viewModel.shouldCloseWhenButtonTapped
                     {
-                        self.delegate?.onAlertButtonTapped?(index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
+                        self.delegate?.onAlertButtonTapped?(self, index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
                     }
-                    self.delegate?.onAlertDismissed?()
+                    self.delegate?.onAlertDismissed?(self, alertDescription: self.viewModel.description)
                     self.dismiss(animated: false)
                 }
             }
@@ -222,8 +232,13 @@ class GenericAlertViewController: UIViewController
             }
             completion:
             { [weak self] _ in
-                self?.delegate?.onAlertDismissed?()
-                self?.dismiss(animated: false)
+                guard let self = self else { return }
+                if alertButtonIndexTapped != Constants.NOT_SELECTED && self.viewModel.shouldCloseWhenButtonTapped
+                {
+                    self.delegate?.onAlertButtonTapped?(self, index: alertButtonIndexTapped, alertDescription: self.viewModel.description)
+                }
+                self.delegate?.onAlertDismissed?(self, alertDescription: self.viewModel.description)
+                self.dismiss(animated: false)
             }
         }
     }
@@ -248,7 +263,7 @@ class GenericAlertViewController: UIViewController
             }
             else
             {
-                delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
+                delegate?.onAlertButtonTapped?(self, index: index, alertDescription: viewModel.description)
             }
         }
         else if let index = horizontalButtonsStackView.arrangedSubviews.firstIndex(of: sender)
@@ -261,7 +276,7 @@ class GenericAlertViewController: UIViewController
             }
             else
             {
-                delegate?.onAlertButtonTapped?(index: index, alertDescription: viewModel.description)
+                delegate?.onAlertButtonTapped?(self, index: index, alertDescription: viewModel.description)
             }
         }
     }
@@ -298,7 +313,7 @@ private extension GenericAlertViewController
         {
             alertViewTopSpacingConstraint.isActive = false
             alertViewBottomSpacingConstraint.isActive = false
-            alertViewCenterYConstraint.constant = ((screenHeight - (alertView.frame.height * 100)) / 2.0) - 10
+            alertViewCenterYConstraint.constant = ((screenHeight - (alertView.frame.height * 100)) / 2.0) - Constants.GENERIC_ALERT_BOTTOM_SPACING
         }
         
         if viewModel.background == .green

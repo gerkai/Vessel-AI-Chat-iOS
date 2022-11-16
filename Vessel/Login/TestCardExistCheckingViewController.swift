@@ -8,24 +8,20 @@
 
 import UIKit
 
-class TestCardExistCheckingViewController: UIViewController
+class TestCardExistCheckingViewController: UIViewController, VesselScreenIdentifiable
 {
     @IBOutlet var testCardOptionsButtons: [UIButton]!
     @IBOutlet var testCardOptionsViewButtons: [UIButton]!
     @IBOutlet var testCardOptionsViews: [UIView]!
-    @Resolved private var analytics: Analytics
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
 
     private var selectedOption: Int? = nil
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .identification))
     }
     
     @IBAction func onOptionButtonTapped(_ sender: UIButton)
@@ -60,7 +56,7 @@ class TestCardExistCheckingViewController: UIViewController
     {
         guard let selectedOption = selectedOption else
         {
-            UIView.showError(text: "Error", detailText: "Please Select Answer", image: nil)
+            UIView.showError(text: "", detailText: "Please select answer", image: nil)
             return
         }
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -73,8 +69,7 @@ class TestCardExistCheckingViewController: UIViewController
         }
         else if selectedOption == 2
         {
-            let vc = storyboard.instantiateViewController(identifier: "GiftedCardOnboardViewController") as! GiftedCardOnboardViewController
-            analytics.log(event: .identification(type: .gifted))
+            let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
             self.navigationController?.fadeTo(vc)
         }
         else

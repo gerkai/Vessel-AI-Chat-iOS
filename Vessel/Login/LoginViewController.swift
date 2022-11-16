@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate
+class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, SocialAuthViewDelegate, VesselScreenIdentifiable
 {
     // to store the current active textfield
     @IBOutlet weak var emailTextField: UITextField!
@@ -17,7 +17,9 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
     
     //caller can plug a string in here
     var prepopulatedEmail: String?
-    @Resolved private var analytics: Analytics
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -42,12 +44,6 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         {
             instructionsLabel.isHidden = true
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .welcomeBack))
     }
     
     @IBAction func googleAuthAction(_ sender: Any)
@@ -113,6 +109,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
+                                Contact.main()?.identifyAnalytics()                                
                                 self.nextButton.hideLoading()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
@@ -127,7 +124,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         onFailure:
                         { string in
                             self.nextButton.hideLoading()
-                            UIView.showError(text: "", detailText: string, image: nil)
+                            UIView.showError(text: "", detailText: Constants.INCORRECT_PASSWORD_STRING, image: nil)
                         }
                     }
                     else
@@ -135,9 +132,13 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
                     }
                 }
-                else
+                else if password.isEmpty
                 {
                     UIView.showError(text: "", detailText: Constants.ENTER_PASSWORD_STRING, image: nil)
+                }
+                else
+                {
+                    UIView.showError(text: "", detailText: Constants.INCORRECT_PASSWORD_STRING, image: nil)
                 }
             }
             else

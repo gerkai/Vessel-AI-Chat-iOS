@@ -22,36 +22,37 @@ struct BoughtCardLoginValidator
         {
             return  (isValid: false, error: Constants.ENTER_VALID_EMAIL_STRING)
         }
-        guard let password = form.password, password.count >= Constants.MinimumPasswordLength else
+        guard let password = form.password, !password.isEmpty else
         {
-            return  (isValid: false, error: Constants.ENTER_PASSWORD_STRING)
+            return (isValid: false, error: Constants.ENTER_PASSWORD_STRING)
+        }
+        if password.count < Constants.MinimumPasswordLength
+        {
+            return  (isValid: false, error: Constants.INCORRECT_PASSWORD_STRING)
         }
         return (isValid: true, error: nil)
     }
 }
 
-class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate
+class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, VesselScreenIdentifiable
 {
     @IBOutlet var formFields: [VesselTextField]!
     @IBOutlet weak var doYouRememberLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
-    @Resolved private var analytics: Analytics
     private var validator = BoughtCardLoginValidator()
     var email = ""
     
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        if view.frame.height < Constants.SMALL_SCREEN_HEIGHT_THRESHOLD
-        {
-            doYouRememberLabel.text = NSLocalizedString("Remember what email you used?", comment: "Short version of 'Do you remember what email you used?")
-        }
-    }
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .boughtOnWebsite))
+        DispatchQueue.main.async
+        {
+            self.scrollView.flashScrollIndicators()
+        }
     }
     
     @IBAction func onCallCustomerSupport(_ sender: UIButton)
@@ -81,6 +82,7 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
                 {
                     ObjectStore.shared.loadMainContact
                     {
+                        Contact.main()?.identifyAnalytics()
                         let storyboard = UIStoryboard(name: "Login", bundle: nil)
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         

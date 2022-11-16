@@ -47,10 +47,17 @@ class TestCardUploader
                      orcaName: String?,
                      batchID: String?,
                      calibrationMode: String?,
+                     qrBox: [CGPoint],
                      progressBlock: @escaping AWSS3TransferUtilityProgressBlock,
                      completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?)
     {
         let expression = AWSS3TransferUtilityUploadExpression()
+        
+        //add QR code coordinates to image metadata
+        expression.setValue("\(qrBox[0].x), \(qrBox[0].y)", forRequestParameter: "x-amz-meta-qr-topleft")
+        expression.setValue("\(qrBox[1].x), \(qrBox[1].y)", forRequestParameter: "x-amz-meta-qr-bottomleft")
+        expression.setValue("\(qrBox[2].x), \(qrBox[2].y)", forRequestParameter: "x-amz-meta-qr-bottomright")
+        expression.setValue("\(qrBox[3].x), \(qrBox[3].y)", forRequestParameter: "x-amz-meta-qr-topright")
         
         addBasicMetadata(expression: expression)
         addCardAssociationProvidedMetadata(batchID: batchID,
@@ -100,16 +107,6 @@ class TestCardUploader
                              completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?)
     {
         /* cw temp commented out
-        let qrMetaDataGenerator = QRMetaDataGenerator(image: image)
-        
-        
-        if let metaData = qrMetaDataGenerator.generateMetaData()
-        {
-            expression.setValue("\(metaData.topLeft.x),\(metaData.topLeft.y)", forRequestParameter: "x-amz-meta-qr-topleft")
-            expression.setValue("\(metaData.topRight.x),\(metaData.topRight.y)", forRequestParameter: "x-amz-meta-qr-topright")
-            expression.setValue("\(metaData.bottomLeft.x),\(metaData.bottomLeft.y)", forRequestParameter: "x-amz-meta-qr-bottomleft")
-            expression.setValue("\(metaData.bottomRight.x),\(metaData.bottomRight.y)", forRequestParameter: "x-amz-meta-qr-bottomright")
-        }
         expression.setValue(orcaName ?? "", forRequestParameter: "x-amz-meta-orca-sheet-name")
         */
 

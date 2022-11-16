@@ -8,19 +8,14 @@
 
 import UIKit
 
-class NoTestCardOnboardViewController: UIViewController
+class NoTestCardOnboardViewController: UIViewController, VesselScreenIdentifiable
 {
-    @Resolved private var analytics: Analytics
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .dontHaveYet))
     }
     
     @IBAction func onContinueButtonTapped(_ sender: Any)

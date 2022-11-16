@@ -19,13 +19,16 @@ enum Evaluation: String
     case notDetected
     case veryLow
     case low
+    case detectedLow
+    case ketoLow //Ketones uses a special enum value for Low
     case moderate
     case good
     case normal
     case elevated
     case high
+    case detectedHigh
+    case ketoHigh //Ketones uses a special enum value for High
     case excellent
-    case detected
     
     var title: String
     {
@@ -34,25 +37,31 @@ enum Evaluation: String
             case .notAvailable:
                 return NSLocalizedString("N/A", comment: "Abbreviation for Not Available")
             case .notDetected:
-                return "not detected"
+                return NSLocalizedString("not detected", comment: "Reagent evaluation label")
             case .veryLow:
-                return "very low"
+                return NSLocalizedString("very low", comment: "Reagent evaluation label")
             case .low:
-                return "low"
+                return NSLocalizedString("low", comment: "Reagent evaluation label")
+            case .ketoLow:
+                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("low", comment: "Keto diet evaluation label") : NSLocalizedString("normal", comment: "Non Keto diet evaluation label")
             case .moderate:
-                return "moderate"
+                return NSLocalizedString("moderate", comment: "Reagent evaluation label")
             case .good:
-                return "good"
+                return NSLocalizedString("good", comment: "Reagent evaluation label")
             case .normal:
-                return "normal"
+                return NSLocalizedString("normal", comment: "Reagent evaluation label")
             case .elevated:
-                return "elevated"
+                return NSLocalizedString("elevated", comment: "Reagent evaluation label")
+            case .ketoHigh:
+                return Contact.main()!.isOnDiet(.KETO) ? NSLocalizedString("good", comment: "Keto diet evaluation label") : NSLocalizedString("elevated", comment: "Non Keto diet evaluation label")
             case .high:
-                return "high"
+                return NSLocalizedString("high", comment: "Reagent evaluation label")
             case .excellent:
-                return "excellent"
-            case .detected:
-                return "detected"
+                return NSLocalizedString("excellent", comment: "Reagent evaluation label")
+            case .detectedLow:
+                return NSLocalizedString("detected low", comment: "Reagent evaluation label")
+            case .detectedHigh:
+            return NSLocalizedString("detected high", comment: "Reagent evaluation label")
         }
     }
     
@@ -62,27 +71,56 @@ enum Evaluation: String
         {
             case .notAvailable:
                 return UIColor.gray
-        case .notDetected:
-            return UIColor.gray
-        case .veryLow:
-            return Constants.vesselPoor
-        case .low:
-            return Constants.vesselFair
-        case .moderate:
-            return Constants.vesselGood
-        case .good:
-            return Constants.vesselGood
-        case .normal:
-            return Constants.vesselGreat
-        case .elevated:
-            return Constants.vesselFair
-        case .high:
-            return Constants.vesselPoor
-        case .excellent:
-            return Constants.vesselGreat
-        case .detected:
-            return Constants.vesselFair
+            case .notDetected:
+                return Constants.vesselGreat
+            case .veryLow:
+                return Constants.vesselPoor
+            case .low:
+                return Constants.vesselPoor
+            case .ketoLow:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselPoor
+                }
+                else
+                {
+                    return Constants.vesselGreat
+                }
+            case .moderate:
+                return Constants.vesselGreat
+            case .good:
+                return Constants.vesselGreat
+            case .normal:
+                return Constants.vesselGreat
+            case .elevated:
+                return Constants.vesselPoor
+            case .high:
+                return Constants.vesselPoor
+            case .ketoHigh:
+                if Contact.main()!.isOnDiet(.KETO)
+                {
+                    return Constants.vesselGreat
+                }
+                else
+                {
+                    return Constants.vesselPoor
+                }
+            case .excellent:
+                return Constants.vesselGreat
+            case .detectedLow:
+                return Constants.vesselPoor
+            case .detectedHigh:
+                return Constants.vesselPoor
         }
+    }
+    
+    func isGood() -> Bool
+    {
+        if color == Constants.vesselGood || color == Constants.vesselGreat
+        {
+            return true
+        }
+        return false
     }
 }
 
@@ -90,13 +128,40 @@ struct Bucket
 {
     let low: Double
     let high: Double
-    let score: Float
+    let score: Double
     let evaluation: Evaluation
+    let hint: TitleDescription
+}
+
+struct TitleDescription
+{
+    let title: String
+    let description: String
+    let variation: String?
+    
+    internal init(title: String, description: String, variation: String? = nil)
+    {
+        self.title = title
+        self.description = description
+        self.variation = variation
+    }
+}
+
+struct GoalImpact
+{
+    let goalID: Int
+    let impact: Int
+}
+
+struct GoalSources
+{
+    let goalID: Goal.ID
+    let sources: [Source]
 }
 
 struct Reagent
 {
-    enum ID: Int
+    enum ID: Int, CaseIterable
     {
         case PH = 1
         case HYDRATION = 2
@@ -105,7 +170,6 @@ struct Reagent
         case MAGNESIUM = 5
         case CORTISOL = 8
         case VITAMIN_B7 = 11
-        case CREATININE = 12
         case CALCIUM = 18
         case NITRITE = 21
         case LEUKOCYTE = 22
@@ -118,6 +182,9 @@ struct Reagent
     var recommendedDailyAllowance: Int?
     var imageName: String
     var buckets: [Bucket]
+    var goalImpacts: [GoalImpact]
+    var goalSources: [GoalSources]
+    var moreInfo: [TitleDescription]
     
     //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
     //returns .notAvailable if invalid parameter given
@@ -138,263 +205,131 @@ struct Reagent
         return eval
     }
     
-    func getEvaluation(score: Double) -> Evaluation
+    func getEvaluation(value: Double) -> Evaluation
     {
-        var highestBucket: Bucket?
-        var lowestBucket: Bucket?
-        
         //establish highest and lowest buckets. That way if a value is out of range, we can slam it to highest or lowest.
         for bucket in buckets
         {
-            if highestBucket != nil
-            {
-                if bucket.high > highestBucket!.high
-                {
-                    highestBucket = bucket
-                }
-            }
-            else
-            {
-                highestBucket = bucket
-            }
-            if lowestBucket != nil
-            {
-                if bucket.low < lowestBucket!.low
-                {
-                    lowestBucket = bucket
-                }
-            }
-            else
-            {
-                lowestBucket = bucket
-            }
-            
-            if (score >= bucket.low) && (score <= bucket.high)
+            if (value >= bucket.low) && (value < bucket.high)
             {
                 return bucket.evaluation
             }
         }
-        if let highBucket = highestBucket
-        {
-            if score > highBucket.high
-            {
-                return highBucket.evaluation
-            }
-        }
-        if let lowBucket = lowestBucket
-        {
-            if score < lowBucket.low
-            {
-                return lowBucket.evaluation
-            }
-        }
         return Evaluation.notAvailable
+    }
+    
+    func getScore(value: Double) -> Double
+    {
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                return bucket.score
+            }
+        }
+        return 0.0
+    }
+    
+    func rangeFor(value: Double) -> String
+    {
+        //returns the lower and upper ranges of the bucket this value falls in
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                if (Double(Int(bucket.low)) == bucket.low) && (Double(Int(bucket.high)) == bucket.high)
+                {
+                    return "\(Int(bucket.low)) - \(Int(bucket.high))"
+                }
+                return "\(bucket.low) - \(bucket.high)"
+            }
+        }
+        return NSLocalizedString("N/A", comment: "Abbreviation for 'not available'")
+    }
+    
+    //returns which bucket this value falls in. If out of range of all buckets, returns nil
+    func getBucketIndex(value: Double) -> Int?
+    {
+        var index: Int?
+        var i = 0
+        for bucket in buckets
+        {
+            if (value >= bucket.low) && (value < bucket.high)
+            {
+                index = i
+                break
+            }
+            i += 1
+        }
+        return index
+    }
+    
+    //given a goalID, this will return the impact level for that goal. 0 if none, or not found.
+    func impactFor(goal: Int) -> Int
+    {
+        var impact = 0
+        for goalImpact in goalImpacts
+        {
+            if goalImpact.goalID == goal
+            {
+                impact = goalImpact.impact
+                break
+            }
+        }
+        return impact
+    }
+    
+    func sources(for goal: Goal.ID) -> [Source]
+    {
+        for source in goalSources
+        {
+            if source.goalID == goal
+            {
+                return source.sources
+            }
+        }
+        return []
+    }
+    
+    static func reagentsFor(goal: Int, withImpactAtLease: Int) -> [Int]
+    {
+        var reagentIDs: [Int] = []
+        for id in Reagent.ID.allCases
+        {
+            if let reagent = Reagents[id]
+            {
+                for goalImpact in reagent.goalImpacts
+                {
+                    if (goalImpact.goalID == goal) && (goalImpact.impact >= withImpactAtLease)
+                    {
+                        reagentIDs.append(id.rawValue)
+                    }
+                }
+            }
+        }
+        return reagentIDs
+    }
+    
+    //given a reagentID (Int), return the associated Reagent
+    static func fromID(id: Int) -> Reagent
+    {
+        let reagentID = Reagent.ID(rawValue: id)!
+        return Reagents[reagentID]!
     }
 }
 
 //Here are the reagents used by the app
 let Reagents: [Reagent.ID: Reagent] =
-//PH
-[Reagent.ID.PH: Reagent(name: NSLocalizedString("pH", comment: "Reagent Name"),
-            unit: NSLocalizedString("pH", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("pH", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "pH",
-            buckets: [Bucket(low: 5.0,
-                             high: 6.0,
-                             score: 30.0,
-                             evaluation: .low),
-                      Bucket(low: 6.0,
-                             high: 7.75,
-                             score: 100.0,
-                             evaluation: .good),
-                      Bucket(low: 7.78,
-                             high: 8.0,
-                             score: 30.0,
-                             evaluation: .high)]),
-
- //HYDRATION
- Reagent.ID.HYDRATION: Reagent(name: NSLocalizedString("Hydration", comment: "Reagent name"),
-            unit: NSLocalizedString("sp gr", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "Hydration",
-            buckets: [Bucket(low: 1.0,
-                             high: 1.0015,
-                             score: 80.0,
-                             evaluation: .high),
-                        Bucket(low: 1.0015,
-                                high: 1.006,
-                                score: 100.0,
-                                evaluation: .good),
-                        Bucket(low: 1.006,
-                                 high: 1.015,
-                                 score: 80.0,
-                                 evaluation: .low),
-                        Bucket(low: 1.015,
-                                 high: 1.03,
-                                 score: 20.0,
-                                 evaluation: .veryLow)]),
-
- //KETONES
- Reagent.ID.KETONES_A: Reagent(name: NSLocalizedString("Ketones", comment: "Reagent name"),
-            unit: NSLocalizedString("mmol/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "Ketones",
-            buckets: [Bucket(low: 0.0,
-                             high: 2.21,
-                             score: 0.0,
-                             evaluation: .low),
-                      Bucket(low: 2.21,
-                             high: 8.81,
-                              score: 0,
-                              evaluation: .high)]),
-
- //VITAMIN C
- Reagent.ID.VITAMIN_C: Reagent(name: NSLocalizedString("Vitamin C", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 90,
-            imageName: "Vitamin C",
-            buckets: [Bucket(low: 0.0,
-                             high: 350.0,
-                             score: 20.0,
-                             evaluation: .low),
-                      Bucket(low: 350,
-                             high: 1000,
-                             score: 100.0,
-                              evaluation: .good)]),
-
- //MAGNESIUM
- Reagent.ID.MAGNESIUM: Reagent(name: NSLocalizedString("Magnesium", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mg", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 400,
-            imageName: "Magnesium",
-            buckets: [Bucket(low: 0.0,
-                             high: 100.0,
-                             score: 20.0,
-                             evaluation: .low),
-                      Bucket(low: 100.0,
-                            high: 300.0,
-                             score: 80.0,
-                            evaluation: .good),
-                      Bucket(low: 300.0,
-                             high: 1000.0,
-                             score: 100.0,
-                            evaluation: .excellent)]),
-
- //CORTISOL
- Reagent.ID.CORTISOL: Reagent(name: NSLocalizedString("Cortisol", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("sp gr", comment: "consumption unit"),
-            type: .LFA,
-            recommendedDailyAllowance: nil,
-            imageName: "Cortisol",
-            buckets: [Bucket(low: 0.0,
-                             high: 50.0,
-                             score: 80.0,
-                             evaluation: .low),
-                      Bucket(low: 50.0,
-                             high: 150.0,
-                                score: 100.0,
-                                evaluation: .good),
-                      Bucket(low: 150.0,
-                             high: 405.0,
-                                 score: 50.0,
-                                 evaluation: .high)]),
-
- //VITAMIN B7
- Reagent.ID.VITAMIN_B7: Reagent(name: NSLocalizedString("B7 (Biotin)", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
-            type: .LFA,
-            recommendedDailyAllowance: 30,
-            imageName: "B7",
-            buckets: [Bucket(low: 0.0,
-                             high: 10.0,
-                             score: 50.0,
-                             evaluation: .low),
-                      Bucket(low: 10.0,
-                             high: 20.0,
-                             score: 100.0,
-                              evaluation: .good)]),
-
- //CALCIUM
- Reagent.ID.CALCIUM: Reagent(name: NSLocalizedString("Calcium", comment: "Reagent name"),
-            unit: NSLocalizedString("mg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 0,
-            imageName: "Calcium",
-            buckets: [Bucket(low: 0.0,
-                             high: 30.0,
-                             score: 30.0,
-                             evaluation: .low),
-                      Bucket(low: 30.0,
-                             high: 110.0,
-                                score: 100.0,
-                                evaluation: .good),
-                      Bucket(low: 110.0,
-                             high: 160.0,
-                                 score: 70.0,
-                                 evaluation: .high)]),
-
- //NITRITES
- Reagent.ID.NITRITE: Reagent(name: NSLocalizedString("Nitrites", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "UrinaryTract",
-            buckets: [Bucket(low: 0.0,
-                             high: 1.0,
-                             score: 0.0,
-                             evaluation: .good),
-                      Bucket(low: 1.0,
-                             high: 3.0,
-                                score: 0.0,
-                                evaluation: .low),
-                      Bucket(low: 3.0,
-                             high: 8.0,
-                                 score: 0.0,
-                                 evaluation: .high)]),
-
- //LEUKOCYTE
- Reagent.ID.LEUKOCYTE: Reagent(name: NSLocalizedString("Leukocyte", comment: "Reagent name"),
-            unit: NSLocalizedString("µg/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("µG", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: nil,
-            imageName: "UrinaryTract",
-            buckets: [Bucket(low: 0.0,
-                             high: 60.0,
-                             score: 0.0,
-                             evaluation: .notDetected),
-                      Bucket(low: 60.0,
-                             high: 120.0,
-                             score: 0.0,
-                              evaluation: .detected)]),
-
- //SODIUM CHLORIDE
- Reagent.ID.SODIUM: Reagent(name: NSLocalizedString("Sodium", comment: "Reagent name"),
-            unit: NSLocalizedString("mEq/L", comment: "unit of measurement"),
-            consumptionUnit: NSLocalizedString("mEq", comment: "consumption unit"),
-            type: .Colorimetric,
-            recommendedDailyAllowance: 0,
-            imageName: "Sodium",
-            buckets: [Bucket(low: 0.0,
-                             high: 50.0,
-                             score: 100.0,
-                             evaluation: .good),
-                      Bucket(low: 50.0,
-                             high: 120.0,
-                             score: 50.0,
-                              evaluation: .high)]),
+[
+    Reagent.ID.PH: PH,
+    Reagent.ID.HYDRATION: Hydration,
+    Reagent.ID.KETONES_A: Ketones,
+    Reagent.ID.VITAMIN_C: VitaminC,
+    Reagent.ID.MAGNESIUM: Magnesium,
+    Reagent.ID.CORTISOL: Cortisol,
+    Reagent.ID.VITAMIN_B7: VitaminB7,
+    Reagent.ID.CALCIUM: Calcium,
+    Reagent.ID.NITRITE: Nitrite,
+    Reagent.ID.LEUKOCYTE: Leukocyte,
+    Reagent.ID.SODIUM: Sodium
 ]

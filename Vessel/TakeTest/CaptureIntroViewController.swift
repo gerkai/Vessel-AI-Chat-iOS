@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class CaptureIntroViewController: TakeTestMVVMViewController
+class CaptureIntroViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -20,18 +20,15 @@ class CaptureIntroViewController: TakeTestMVVMViewController
 #endif
     private var videoThumbImage: UIImageView?
     
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .takeTestFlow
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         scrollView.contentInsetAdjustmentBehavior = .never
         setupVideo()
         setupFirstTipTextView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
     }
 
     override func viewWillAppear(_ animated: Bool)

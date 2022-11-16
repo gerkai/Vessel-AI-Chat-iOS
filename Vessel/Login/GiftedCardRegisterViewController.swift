@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFieldDelegate
+class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFieldDelegate, VesselScreenIdentifiable
 {
     @IBOutlet var formFields: [VesselTextField]!
     
@@ -20,10 +20,12 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var confirmPasswordTextField: VesselTextField!
     @IBOutlet weak var nextButton: LoadingButton!
     
-    @Resolved private var analytics: Analytics
     var initialFirstName: String = ""
     var initialLastName: String = ""
     var socialAuth: Bool = false
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .loginFlow
     
     override func viewDidLoad()
     {
@@ -39,12 +41,6 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
             confirmPasswordTextField.isHidden = true
             socialAuth = true
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        analytics.log(event: .viewedPage(screenName: .create))
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -126,6 +122,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         {
             ObjectStore.shared.loadMainContact
             {
+                Contact.main()?.identifyAnalytics()                
                 OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
                 self.nextButton.hideLoading()
             }

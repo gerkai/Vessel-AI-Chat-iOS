@@ -72,6 +72,7 @@ class MainTabBarController: UITabBarController
                 }
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.selectTab(_:)), name: .selectTabNotification, object: nil)
     }
     
     deinit
@@ -79,6 +80,15 @@ class MainTabBarController: UITabBarController
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("📘 deinit \(self)")
+        }
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func selectTab(_ notification: NSNotification)
+    {
+        if let tab = notification.userInfo?["tab"] as? Int
+        {
+            selectedIndex = tab
         }
     }
     
@@ -222,7 +232,7 @@ class MainTabBarController: UITabBarController
 
 extension MainTabBarController: GenericAlertDelegate
 {
-    func onAlertButtonTapped(index: Int, alertDescription: String)
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
     {
         if index == 1
         {

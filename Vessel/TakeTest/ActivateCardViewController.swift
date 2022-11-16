@@ -11,7 +11,7 @@
 import UIKit
 import AVKit
 
-class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate
+class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate, VesselScreenIdentifiable
 {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var preTimerView: UIView!
@@ -25,6 +25,9 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var tabDetailsLabel: UILabel!
     
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
+    
     private var playerViewController: AVPlayerViewController?
 #if LOOP_VIDEOS
     var looper: AVPlayerLooper?
@@ -35,6 +38,8 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     var firstTimeAppeared = false
     var curSeconds = Int(Constants.CARD_ACTIVATION_SECONDS)
     var skipTimerSlideupVC: SkipTimerSlideupViewController?
+    
+    let notificationIdentifier = "testActivated"
     
     //segmented control indices
     let IntroIndex = 0
@@ -59,12 +64,18 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
         
+        //TODO: - remove below line once insights and activites are added
+        segmentedControl.removeSegment(at: 2, animated: false)
+        
         tabDetailsLabel.text = defaultSegmentDetailsString
+        
+        setTimerLabel(secondsRemaining: Double(curSeconds))
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         viewModel.delegate = self
+        requestNotificationPermission()
         if !firstTimeAppeared
         {
             /*segmentedControl.subviews.forEach
@@ -87,6 +98,70 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         super.viewWillDisappear(animated)
         playerViewController?.player?.pause()
+    }
+    
+    func requestNotificationPermission()
+    {
+        let center = UNUserNotificationCenter.current()
+        
+        center.getNotificationSettings
+        { (notificationSettings) in
+            if notificationSettings.authorizationStatus == .authorized
+            {
+                DispatchQueue.main.async
+                {
+                    self.scheduleNotification()
+                    //self.updateNotifyUI(hideButton: false)
+                }
+            }
+            else
+            {
+                center.requestAuthorization(options: [.alert, .sound])
+                { (granted, error) in
+                    if let error = error
+                    {
+                        print("Failed to get local notifications permissions with error: \(error)")
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async
+                        {
+                            if granted
+                            {
+                                self.scheduleNotification()
+                            }
+                            else
+                            {
+                                self.showSettingsAlertPrompt(title: "Notifications Disabled", message: "Enable Notifications in Settings")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showSettingsAlertPrompt(title: String, message: String)
+    {
+        let alertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Enable", style: .default)
+        { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else
+            {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl)
+            {
+                UIApplication.shared.open(settingsUrl, completionHandler:
+                { (success) in
+                    print("Settings opened: \(success)") // Prints true
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     func setupVideo()
@@ -133,8 +208,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         looper = nil
 #endif
         playerViewController?.player?.pause()
-        //playerViewController?.removeFromParent()
-        //playerViewController?.view.removeFromSuperview()
         playerViewController = nil
         
         viewModel.curState.back()
@@ -170,17 +243,27 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     func insightsText() -> String
     {
-        let contact = Contact.main()!
-        if contact.main_goal_id != nil
-        {
-            if let key = Goal.ID(rawValue: contact.main_goal_id!)
+        guard let contact = Contact.main() else { return "" }
+        
+        var goalsString = ""
+        contact.goal_ids.forEach { goalID in
+            if let key = Goal.ID(rawValue: goalID), let goalName = Goals[key]?.name
             {
-                let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), Goals[key]!.name)
-                return text
+                goalsString += goalID == contact.goal_ids.first ? "" : goalID == contact.goal_ids.last ? " and " : ", "
+                goalsString += goalName
             }
         }
-        //should never get here
-        return ""
+        
+        let text = String(format: NSLocalizedString("Learn how to improve your %@ while you wait", comment: ""), goalsString)
+        return text
+    }
+    
+    func setTimerLabel(secondsRemaining: Double)
+    {
+        let minutes = Int(secondsRemaining) / 60 % 60
+        let seconds = Int(secondsRemaining) % 60
+        let string = String(format: "%2i:%02i", minutes, seconds)
+        timerLabel.text = string
     }
     
     //MARK: - Segmented Control action
@@ -208,6 +291,42 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
+    //MARK: - Timer Expired Notification
+    func removeNotification()
+    {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        center.removeDeliveredNotifications(withIdentifiers: [notificationIdentifier])
+    }
+    
+    private func scheduleNotification()
+    {
+        //Remove any previously scheduled notifications
+        removeNotification()
+        
+        //build notification content
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("Your Test is Activated", comment: "")
+        content.body = NSLocalizedString("It's time to scan your test card", comment: "")
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "alarm.mp3"))
+        
+        // initial time
+        let triggerTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date().addingTimeInterval(TimeInterval(curSeconds)))
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: false)
+        let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request)
+        { (error: Error?) in
+            if let theError = error
+            {
+                print(theError.localizedDescription)
+            }
+        }
+    }
+    
     //MARK: - ViewModel delegates
     func timerUpdate(secondsRemaining: Double, percentageElapsed: Double, timeUp: Bool)
     {
@@ -215,10 +334,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         if secsRemaining != curSeconds
         {
             curSeconds = secsRemaining
-            let minutes = Int(secondsRemaining) / 60 % 60
-            let seconds = Int(secondsRemaining) % 60
-            let string = String(format: "%2i:%02i", minutes, seconds)
-            timerLabel.text = string
+            setTimerLabel(secondsRemaining: secondsRemaining)
         }
         progressAmount.constant = percentageElapsed * (progressView.frame.width - progressDot.frame.width)
         
@@ -243,6 +359,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         {
             viewModel.skipTimer()
             viewModel.delegate = nil
+            removeNotification()
         }
     }
 }

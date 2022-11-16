@@ -10,6 +10,7 @@
 //  TODO: Ensure coordinator gets deallocated once onboarding flow is complete
 
 import UIKit
+import Bugsee
 
 //this enum determines the order the onboarding screens will appear
 enum OnboardingState: Int
@@ -22,7 +23,6 @@ enum OnboardingState: Int
     case allergySelect
     case viewTerms
     case goalsSelect
-    case mainGoalSelect
     case finalOnboarding
     case nextFlow
     
@@ -48,13 +48,23 @@ class OnboardingCoordinator
     private var dietViewModel: ItemPreferencesViewModel?
     private var allergiesViewModel: ItemPreferencesViewModel?
     private var goalsViewModel: ItemPreferencesViewModel?
-    private var mainGoalViewModel: ItemPreferencesViewModel?
+    
+    @Resolved private var analytics: Analytics
     
     //MARK: - Navigation
     static func pushInitialViewController(to navigationController: UINavigationController?)
     {
         //MainContact is guaranteed
         let contact = Contact.main()!
+        
+        //set Bugsee contact information
+        if let email = contact.email
+        {
+            Bugsee.setEmail(email)
+        }
+        Bugsee.setAttribute("contact_id", value: contact.id)
+        
+        //if gender is nil, have user go through whole onboarding process
         if contact.gender == nil || contact.gender?.count == 0
         {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -65,6 +75,13 @@ class OnboardingCoordinator
         }
         else
         {
+            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
+            WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
+            //FoodManager.shared.loadFoods()
+            //Separated load plans call because an issue with stored plans not having weekdays
+            PlansManager.shared.loadPlans()
+            
             //if gender was chosen then we can assume all demographics were populated so skip onboarding
             //and go directly to MainTabBarController
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -181,38 +198,22 @@ class OnboardingCoordinator
                 goalsViewModel = vc.viewModel
             }
             vc.viewModel.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-            vc.viewModel.subtext = NSLocalizedString("What are your top 3 wellness goals?", comment: "Subtext of Goal Preferences screen")
+            vc.viewModel.subtext = NSLocalizedString("Select up to 3 wellness goals to work on.", comment: "Subtext of Goal Preferences screen")
             vc.viewModel.type = .goals
-            navigationController?.fadeTo(vc)
-        }
-        else if curState == .mainGoalSelect
-        {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ItemPreferencesViewController") as! ItemPreferencesViewController
-            if let mainGoalViewModel = mainGoalViewModel
-            {
-                vc.viewModel = mainGoalViewModel
-            }
-            else
-            {
-                mainGoalViewModel = vc.viewModel
-            }
-            vc.coordinator = self
-            vc.viewModel.titleText = NSLocalizedString("Goals", comment: "Title of Goal Preferences screen")
-            vc.viewModel.subtext = NSLocalizedString("Please select one goal to focus on first.", comment: "Subtext of Goal Preferences screen")
-            vc.viewModel.type = .mainGoal
-            vc.viewModel.hideBackground = true
-            vc.viewModel.userGoals = goalsViewModel?.userGoals ?? []
             navigationController?.fadeTo(vc)
         }
         else if curState == .finalOnboarding
         {
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingFinalViewController") as! OnboardingFinalViewController
-            vc.mainGoal = mainGoalViewModel?.mainGoal
             vc.coordinator = self
             navigationController?.fadeTo(vc)
         }
         else
         {
+            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
+            //Separated load plans call because an issue with stored plans not having weekdays
+            PlansManager.shared.loadPlans()
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
             navigationController?.fadeTo(vc)
@@ -268,12 +269,17 @@ class OnboardingCoordinator
                 }
                 contact.gender = genderString
                 
+                analytics.setUserProperty(property: "Gender", value: genderString)
+                
                 //height / weight
                 if let userHeight = heightWeightViewModel?.userHeight,
                    let userWeight = heightWeightViewModel?.userWeight
                 {
                     contact.height = userHeight
                     contact.weight = userWeight
+                    
+                    analytics.setUserProperty(property: "Height", value: userHeight)
+                    analytics.setUserProperty(property: "Weight", value: userWeight)
                 }
                 
                 //birthday
@@ -289,6 +295,8 @@ class OnboardingCoordinator
                         formatter.dateFormat = Constants.SERVER_DATE_FORMAT
                         let strDate = formatter.string(from: birthdayViewModel.userBirthdate)
                         contact.birth_date = strDate
+                        
+                        analytics.setUserProperty(property: "DOB", value: strDate)
                     }
                 }
                     
@@ -296,20 +304,18 @@ class OnboardingCoordinator
                 if let dietViewModel = dietViewModel
                 {
                     contact.diet_ids = dietViewModel.userDiets
+                    contact.setDietsAnalytics()
                 }
                 if let allergiesViewModel = allergiesViewModel
                 {
                     contact.allergy_ids = allergiesViewModel.userAllergies
+                    contact.setAllergiesAnalytics()
                 }
                 
                 if let goalsViewModel = goalsViewModel
                 {
                     contact.goal_ids = goalsViewModel.userGoals
-                }
-                
-                if let mainGoalViewModel = mainGoalViewModel
-                {
-                    contact.main_goal_id = mainGoalViewModel.mainGoal
+                    contact.setGoalsAnalytics()
                 }
                 
                 ObjectStore.shared.ClientSave(contact)

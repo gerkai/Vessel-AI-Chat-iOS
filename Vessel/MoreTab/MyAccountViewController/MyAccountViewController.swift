@@ -7,13 +7,16 @@
 
 import UIKit
 
-class MyAccountViewController: UIViewController
+class MyAccountViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var tableView: UITableView!
     
     // MARK: Model
     private let viewModel = MyAccountViewModel()
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     override func viewDidLoad()
     {
@@ -84,9 +87,6 @@ extension MyAccountViewController: UITableViewDelegate
         {
         case .profile:
             let vc = storyboard.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
-            navigationController?.pushViewController(vc, animated: true)
-        case .manageMyGoals:
-            let vc = storyboard.instantiateViewController(identifier: "GoalsPreferencesViewController") as! GoalsPreferencesViewController
             navigationController?.pushViewController(vc, animated: true)
         case .manageMyDietOrAllergies:
             let vc = storyboard.instantiateViewController(identifier: "FoodPreferencesViewController") as! FoodPreferencesViewController

@@ -6,13 +6,20 @@ inhibit_all_warnings!
 
 def pods
   pod 'AWSCore'
-  pod 'AWSS3' 
+  pod 'AWSS3'
+  pod 'Bugsee'
   pod 'Firebase/Core'
   pod 'IQKeyboardManagerSwift', '~> 6.5'
+  pod 'Kingfisher'
+  pod 'LiveChat'
   pod 'lottie-ios'
   pod 'Mixpanel-swift'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'
+  pod 'SwiftyMarkdown'
+  pod 'ZendeskAnswerBotSDK' # AnswerBot-only on the Unified SDK
+  pod 'ZendeskChatSDK'      # Chat-only on the Unified SDK
+  pod 'ZendeskSupportSDK'   # Support-only on the Unified SDK
 end
 
 target 'Vessel' do

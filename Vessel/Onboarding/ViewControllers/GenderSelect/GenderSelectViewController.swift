@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenderSelectViewController: UIViewController
+class GenderSelectViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var segmentedControl: VesselSegmentedControl!
@@ -15,6 +15,9 @@ class GenderSelectViewController: UIViewController
     // MARK: - Logic
     var viewModel = GenderSelectViewModel()
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -31,7 +34,7 @@ class GenderSelectViewController: UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        // TODO: Add analytics for viewed page
+        print("This will get called")
     }
     
     // MARK: - UI

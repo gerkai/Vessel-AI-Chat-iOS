@@ -10,8 +10,8 @@ import UIKit
 
 protocol CheckmarkImageCollectionViewCellDelegate: AnyObject
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
-    func canCheckMoreButtons() -> Bool
+    func checkButtonTapped(id: Int)
+    func isChecked(forID id: Int) -> Bool //returns true if checked, false if not.
 }
 
 class CheckmarkImageCollectionViewCell: UICollectionViewCell
@@ -23,69 +23,87 @@ class CheckmarkImageCollectionViewCell: UICollectionViewCell
     
     weak var delegate: CheckmarkImageCollectionViewCellDelegate?
     var originalColor: UIColor!
+    var type: ItemPreferencesType!
     
     var isChecked = false
-    {
-        didSet
-        {
-            if isChecked
-            {
-                self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
-                self.rootView.backgroundColor = UIColor.white
-            }
-            else
-            {
-                self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
-                self.rootView.backgroundColor = self.originalColor
-            }
-        }
-    }
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
         originalColor = rootView.backgroundColor
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCheckmarks), name: .updateCheckmarks, object: nil)
     }
     
-    @IBAction func onTapped(_ sender: UIButton)
+    deinit
     {
-        if isChecked == false
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateCheckmarks()
+    {
+        if let shouldBeChecked = delegate?.isChecked(forID: tag)
         {
-            if delegate?.canCheckMoreButtons() == true
+            if isChecked != shouldBeChecked
             {
-                isChecked = true
+                isChecked = shouldBeChecked
+                UIView.animate(withDuration: 0.1)
+                {
+                    self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                }
+                completion:
+                { _ in
+                    UIView.animate(withDuration: 0.1)
+                    {
+                        self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        if self.isChecked
+                        {
+                            self.select()
+                        }
+                        else
+                        {
+                            self.unselect()
+                        }
+                    }
+                    completion:
+                    { _ in
+                    }
+                }
             }
-            else
-            {
-                return
-            }
+        }
+    }
+    
+    func select()
+    {
+        self.rootView.backgroundColor = UIColor.white
+        self.checkImage.image = UIImage.init(named: "Checkbox_green_selected")
+    }
+    
+    func unselect()
+    {
+        self.rootView.backgroundColor = self.originalColor
+        self.checkImage.image = UIImage.init(named: "Checkbox_green_unselected")
+    }
+    
+    func setup(name: String, id: Int, imageName: String, delegate: CheckmarkImageCollectionViewCellDelegate, isChecked: Bool)
+    {
+        titleLabel.text = name
+        //we'll use the tag to hold the diet/allergy/goal ID
+        tag = id
+        self.backgroundImage.image = UIImage(named: imageName)
+        self.delegate = delegate
+        self.isChecked = isChecked
+        if isChecked == true
+        {
+            select()
         }
         else
         {
-            isChecked = false
+            unselect()
         }
-        UIView.animate(withDuration: 0.1)
-        {
-            self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }
-        completion:
-        { _ in
-            UIView.animate(withDuration: 0.1)
-            {
-                self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                if self.isChecked
-                {
-                    self.rootView.backgroundColor = UIColor.white
-                }
-                else
-                {
-                    self.rootView.backgroundColor = self.originalColor
-                }
-            }
-            completion:
-            { _ in
-                self.delegate?.checkButtonTapped(forCell: self, checked: self.isChecked)
-            }
-        }
+    }
+    
+    @IBAction func onTapped()
+    {
+        delegate?.checkButtonTapped(id: tag)
     }
 }

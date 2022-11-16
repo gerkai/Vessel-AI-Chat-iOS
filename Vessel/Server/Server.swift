@@ -10,6 +10,7 @@
 import Foundation
 import Security
 
+// MARK: - PATHS
 let ENDPOINT_ROOT = "v3/"
 
 //Environment Constants
@@ -61,7 +62,14 @@ let SAMPLE_PATH = "sample"
 let GET_SCORE_PATH = "sample/{sample_uuid}/super"
 let OBJECT_SAVE_PATH = "objects/save"
 let OBJECT_GET_PATH = "objects/get"
+let OBJECT_ALL_PATH = "objects/all"
+let REAGENT_FOOD_RECOMMENDATIONS_PATH = "recommendations/food/reagent"
+let GET_PLANS_PATH = "plan"
+let ADD_NEW_SINGLE_PLAN_PATH = "plan"
+let ADD_NEW_MULTIPLE_PLAN_PATH = "plan/build"
+let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
 
+// MARK: - Structs
 struct CardAssociation
 {
     var cardBatchID: String?
@@ -76,6 +84,7 @@ struct ServerError
     var moreInfo: String?
 }
 
+// MARK: - Server Class
 class Server: NSObject
 {
     static let shared = Server()
@@ -83,6 +92,7 @@ class Server: NSObject
     var accessToken: String?
     var refreshToken: String?
     
+    // MARK: - URLs and Keys
     func API() -> String
     {
         let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
@@ -153,281 +163,9 @@ class Server: NSObject
         }
     }
     
-    func allowDebugPrint() -> Bool
-    {
-        return UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_NETWORK_TRAFFIC)
-    }
-    
     func SupportURL() -> String
     {
         return SUPPORT_URL
-    }
-
-    func GenerateRequest(urlString: String) -> URLRequest?
-    {
-        guard let serviceUrl = URL(string: urlString) else { return nil}
-        return URLRequest(url: serviceUrl)
-    }
-    
-    private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        var mutableRequest = request
-        let allowPrint = allowDebugPrint()
-        mutableRequest.httpMethod = "GET"
-        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        if accessToken != nil
-        {
-            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
-        }
-        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        
-        if allowPrint
-        {
-            if let url = request.url
-            {
-                print("GET: \(url)")
-            }
-        }
-        
-        let session = URLSession.shared
-        session.dataTask(with: mutableRequest)
-        { (data, response, error) in
-            if let data = data //unwrap data
-            {
-                if allowPrint
-                {
-                    self.debugJSONResponse(data: data)
-                }
-                success(data)
-            }
-            else
-            {
-                failure(error)
-            }
-        }.resume()
-    }
-    
-    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        serverWrite(request: request, requestType: "POST", onSuccess: success, onFailure: failure)
-    }
-    
-    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
-    }
-    
-    private func serverDelete(request: URLRequest, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: ServerError) -> Void)
-    {
-        var mutableRequest = request
-        let allowPrint = allowDebugPrint()
-        mutableRequest.httpMethod = "DELETE"
-        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        if accessToken != nil
-        {
-            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
-        }
-        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        /*if let url = request.url
-        {
-            print("DELETE: \(url)")
-        }*/
-        if allowPrint
-        {
-            if let url = request.url
-            {
-                print("DELETE: \(url)")
-            }
-        }
-        let session = URLSession.shared
-        session.dataTask(with: mutableRequest)
-        { (data, response, error) in
-            if let response = response as? HTTPURLResponse //unwrap response
-            {
-                if response.statusCode == 204
-                {
-                    if allowPrint
-                    {
-                        print("SUCCESS")
-                    }
-                    success()
-                }
-                else
-                {
-                    let string = "Unable to delete object from server"
-                    if allowPrint
-                    {
-                        print(string)
-                    }
-                    let error = ServerError(code: 400, description: NSLocalizedString(string, comment: "Server error message"))
-                    failure(error)
-                }
-            }
-        }.resume()
-    }
-    
-    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        var mutableRequest = request
-        mutableRequest.httpMethod = requestType
-        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        if accessToken != nil
-        {
-            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
-        }
-        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        if allowDebugPrint()
-        {
-            if let url = request.url
-            {
-                print("\(requestType): \(url)")
-                if request.httpBody != nil
-                {
-                    if let jsonData = request.httpBody
-                    {
-                        let jsonString = String(data: jsonData, encoding: .utf8)!
-                        print(jsonString)
-                    }
-                }
-            }
-        }
-        let session = URLSession.shared
-        session.dataTask(with: mutableRequest)
-        { (data, response, error) in
-            if let data = data //unwrap data
-            {
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if self.allowDebugPrint()
-                    {
-                        print("Server Write Response:\n\(json)\n")
-                    }
-//CW: Put a breakpoint here to see json response from server
-                    if let object = json as? [String: Any]
-                    {
-                        if let schemaErrors = object["schema_errors"]
-                        {
-                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(schemaErrors)", comment: "Server error message"))
-                            failure(error)
-                        }
-                        else
-                        {
-                            success(object)
-                        }
-                    }
-                    else
-                    {
-                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(json)", comment: "Server error message"))
-                        failure(error)
-                    }
-                }
-                catch
-                {
-                    var errorCode = 0
-                    let err = error as NSError
-                    errorCode = err.code
-                    let string = String.init(data: data, encoding: .utf8)
-                    let result = ServerError(code: errorCode, description: error.localizedDescription, moreInfo: string)
-                    //print("ERROR: \(string ?? "Unknown")")
-                    failure(result)
-                }
-            }
-        }.resume()
-    }
-    
-    private func postToServer(dictBody: [String: String], url: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
-    {
-        do
-        {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-
-            let Url = String(format: url)
-            guard let serviceUrl = URL(string: Url) else { return }
-            var request = URLRequest(url: serviceUrl)
-            request.httpBody = jsonData
-            
-            serverPost(request: request, onSuccess:
-            { (object) in
-                DispatchQueue.main.async()
-                {
-                    success(object)
-                }
-            },
-            onFailure:
-            { (string) in
-                DispatchQueue.main.async()
-                {
-                    failure(NSLocalizedString("Server Error", comment: ""))
-                }
-            })
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
-    }
-    
-    /* send the refresh token, get back a new access and refresh token */
-    func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
-    {
-        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
-        let request = URLRequest(url: url)
-        
-        var mutableRequest = request
-        mutableRequest.httpMethod = "POST"
-        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
-        mutableRequest.setValue("\(AUTH_PREFIX) \(refreshToken!)", forHTTPHeaderField: AUTH_KEY)
-        
-        //print("\(mutableRequest)")
-        let session = URLSession.shared
-        session.dataTask(with: mutableRequest)
-        { (data, response, error) in
-            if let data = data //unwrap data
-            {
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let object = json as? [String: Any]
-                    {
-                        if let accessToken = object[ACCESS_TOKEN_KEY] as? String
-                        {
-                            self.accessToken = accessToken
-                            let accessData = Data(accessToken.utf8)
-                            KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                            success()
-                        }
-                    }
-                }
-                catch
-                {
-                    let string = String.init(data: data, encoding: .utf8)
-                    print("ERROR: \(string ?? "Unknown")")
-                    failure(error)
-                }
-            }
-            /*if let data = data //unwrap data
-            {
-               
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-//CW: Put a breakpoint here to see json response from server
-                if let object = json as? [String: Any]
-                {
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String
-                    {
-                        
-                    }
-                }
-                print("Need to handle new tokens here")
-                self.debugJSONResponse(data: data)
-                success(data)
-            }
-            else
-            {
-                failure(error)
-            }*/
-        }.resume()
     }
     
     func appleLoginURL() -> String
@@ -450,8 +188,7 @@ class Server: NSObject
         return "\(API())\(GOOGLE_RETRIEVE_PATH)"
     }
     
-    //MARK: - Public functions
-    
+    //MARK: - Authentication
     func isLoggedIn() -> Bool
     {
         //if we have a stored access token, then we're assumed to be logged in
@@ -549,15 +286,6 @@ class Server: NSObject
         }
     }
     
-    private func debugJSONResponse(data: Data)
-    {
-        do
-        {
-            let jsonString = String(data: data, encoding: .utf8)!
-            print("SUCCESS: \(jsonString)")
-        }
-    }
-    
     //call this after successful Google / Apple SSO sign-in. This will establish access and refresh tokens
     func getTokens(isGoogle: Bool, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
@@ -619,6 +347,73 @@ class Server: NSObject
         }
     }
     
+    /* send the refresh token, get back a new access and refresh token */
+    func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
+        let request = URLRequest(url: url)
+        
+        var mutableRequest = request
+        mutableRequest.httpMethod = "POST"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        mutableRequest.setValue("\(AUTH_PREFIX) \(refreshToken!)", forHTTPHeaderField: AUTH_KEY)
+        
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let data = data //unwrap data
+            {
+                do
+                {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let object = json as? [String: Any]
+                    {
+                        if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                        {
+                            self.accessToken = accessToken
+                            let accessData = Data(accessToken.utf8)
+                            KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+                            success()
+                        }
+                    }
+                }
+                catch
+                {
+                    failure(error)
+                }
+            }
+            /*if let data = data //unwrap data
+            {
+               
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+//CW: Put a breakpoint here to see json response from server
+                if let object = json as? [String: Any]
+                {
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String
+                    {
+                        
+                    }
+                }
+                print("Need to handle new tokens here")
+                self.debugJSONResponse(data: data)
+                success(data)
+            }
+            else
+            {
+                failure(error)
+            }*/
+        }.resume()
+    }
+    
+    func invalidateAccessToken()
+    {
+        accessToken = "Bogus Token"
+        let accessData = Data(accessToken!.utf8)
+        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
+        print("Invalidated access token")
+    }
+    
     func logOut()
     {
         print("logout() deleting keychain tokens")
@@ -635,220 +430,9 @@ class Server: NSObject
         }
         
         Contact.reset()
+        PlansManager.shared.plans = []
     }
     
-    func invalidateAccessToken()
-    {
-        accessToken = "Bogus Token"
-        let accessData = Data(accessToken!.utf8)
-        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-        print("Invalidated access token")
-    }
-    
-    //MARK:  Contact
-    
-    ///will return true if contact e-mail exists on back end
-    func contactExists(email: String, onSuccess success: @escaping (_ exists: Bool) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
-    {
-        var dictPostBody = [String: String]()
-        dictPostBody["email"] = email
-        
-        postToServer(dictBody: dictPostBody, url: "\(API())\(CONTACT_EXISTS_PATH)")
-        { object in
-            if let exists = object["exists"] as? Bool
-            {
-                DispatchQueue.main.async()
-                {
-                    success(exists)
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async()
-                {
-                    failure("ContactExists: Unexpected Server Response")
-                }
-            }
-        }
-        onFailure:
-        { message in
-            failure(NSLocalizedString("Server Error", comment: ""))
-        }
-    }
-    
-    func createContact(contact: Contact, password: String, onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(CONTACT_CREATE_PATH)"
-        
-        if var contactDict = contact.dictionary
-        {
-            contactDict.removeValue(forKey: "id")
-            contactDict["password"] = password
-            do
-            {
-                let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
-                let jsonString = String(data: jsonData, encoding: .utf8)!
-                print(jsonString)
-                
-                let Url = String(format: url)
-                guard let serviceUrl = URL(string: Url) else { return }
-                var request = URLRequest(url: serviceUrl)
-                request.httpBody = jsonData
-                
-                //send it to server
-                serverPost(request: request, onSuccess:
-                { (object) in
-                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
-                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
-                       let mainContactID = object[CONTACT_ID_KEY] as? Int
-                    {
-                        self.accessToken = accessToken
-                        self.refreshToken = refreshToken
-                        Contact.MainID = mainContactID
-
-                        let accessData = Data(accessToken.utf8)
-                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
-                        let refreshData = Data(refreshToken.utf8)
-                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
-                        let string = "\(mainContactID)"
-                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
-
-                        DispatchQueue.main.async()
-                        {
-                            success()
-                        }
-                    }
-                    else
-                    {
-                        DispatchQueue.main.async()
-                        {
-                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
-                        }
-                    }
-                },
-                onFailure:
-                { (serverError) in
-                    DispatchQueue.main.async()
-                    {
-                        failure(serverError.description)
-                    }
-                })
-            }
-            catch
-            {
-                print(error.localizedDescription)
-                DispatchQueue.main.async()
-                {
-                    failure(error.localizedDescription)
-                }
-            }
-        }
-    }
-    //MARK: - Object get / save
-    
-    func getObjects(objects: [SpecificObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        var objectDict: [String: [ObjectReq]] = [:]
-        for req in objects
-        {
-            if var array = objectDict[req.type.rawValue]
-            {
-                array.append(ObjectReq(id: req.id, last_updated: req.last_updated))
-            }
-            else
-            {
-                objectDict[req.type.rawValue] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
-            }
-        }
-        
-        let url = "\(API())\(OBJECT_GET_PATH)"
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(objectDict)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpBody = data
-        
-        //send it to server
-        serverPost(request: request, onSuccess:
-        { (dict) in
-            DispatchQueue.main.async()
-            {
-                success(dict)
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                print("SERVER ERROR: \(string)")
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }
-    
-    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
-    {
-        let url = "\(API())\(OBJECT_SAVE_PATH)"
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(objects)
-        //let jsonString = String(data: data, encoding: .utf8)!
-        //print(jsonString)
-        
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpBody = data
-        
-        //send it to server
-        serverPost(request: request, onSuccess:
-        { (object) in
-            print("Saved contact. Response: \(object)")
-            DispatchQueue.main.async()
-            {
-                success()
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }
-    
-    // MARK: Delete Account
-    func deleteAccount(onSuccess success:@escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let url = "\(API())\(DELETE_ACCOUNT_PATH)"
-        
-        let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
-        let request = URLRequest(url: serviceUrl)
-        
-        //send it to server
-        serverDelete(request: request, onSuccess:
-        {
-            DispatchQueue.main.async()
-            {
-                success()
-            }
-        },
-        onFailure:
-        { (string) in
-            DispatchQueue.main.async()
-            {
-                failure(NSLocalizedString("Server Error", comment: ""))
-            }
-        })
-    }
-
     func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let url = "\(API())\(CHANGE_PASSWORD_PATH)"
@@ -860,8 +444,6 @@ class Server: NSObject
             "new_password": newPassword
         ]
         let data = try! encoder.encode(params)
-        /*let jsonString = String(data: data, encoding: .utf8)!
-        print(jsonString)*/
         
         let Url = String(format: url)
         guard let serviceUrl = URL(string: Url) else { return }
@@ -909,6 +491,436 @@ class Server: NSObject
         })
     }
     
+    //MARK: Contact
+    ///will return true if contact e-mail exists on back end
+    func contactExists(email: String, onSuccess success: @escaping (_ exists: Bool) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    {
+        var dictPostBody = [String: String]()
+        dictPostBody["email"] = email
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(CONTACT_EXISTS_PATH)")
+        { object in
+            if let exists = object["exists"] as? Bool
+            {
+                DispatchQueue.main.async()
+                {
+                    success(exists)
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async()
+                {
+                    failure("ContactExists: Unexpected Server Response")
+                }
+            }
+        }
+        onFailure:
+        { message in
+            failure(NSLocalizedString("Server Error", comment: ""))
+        }
+    }
+    
+    func createContact(contact: Contact, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(CONTACT_CREATE_PATH)"
+        
+        if var contactDict = contact.dictionary
+        {
+            contactDict.removeValue(forKey: "id")
+            contactDict["password"] = password
+            do
+            {
+                let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
+                
+                let Url = String(format: url)
+                guard let serviceUrl = URL(string: Url) else { return }
+                var request = URLRequest(url: serviceUrl)
+                request.httpBody = jsonData
+                
+                //send it to server
+                serverPost(request: request, onSuccess:
+                { (object) in
+                    if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
+                        let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
+                       let mainContactID = object[CONTACT_ID_KEY] as? Int
+                    {
+                        self.accessToken = accessToken
+                        self.refreshToken = refreshToken
+                        Contact.MainID = mainContactID
+
+                        let accessData = Data(accessToken.utf8)
+                        KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: "vessel")
+                        let refreshData = Data(refreshToken.utf8)
+                        KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: "vessel")
+                        let string = "\(mainContactID)"
+                        KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+
+                        DispatchQueue.main.async()
+                        {
+                            success()
+                        }
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            failure(NSLocalizedString(object["message"] as? String ?? "Error creating new user", comment: ""))
+                        }
+                    }
+                },
+                onFailure:
+                { (serverError) in
+                    DispatchQueue.main.async()
+                    {
+                        failure(serverError.description)
+                    }
+                })
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func deleteAccount(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let url = "\(API())\(DELETE_ACCOUNT_PATH)"
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        let request = URLRequest(url: serviceUrl)
+        
+        //send it to server
+        serverDelete(request: request, onSuccess:
+        {
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    //MARK: Foods
+    func getAllFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        getAllObjects(objects: [AllObjectReq(type: "food", last_updated: lastUpdated)])
+        { dict in
+            do
+            {
+                guard let foodDict = dict["food"] as? [[String: Any]] else { return }
+                let json = try JSONSerialization.data(withJSONObject: foodDict)
+                let decoder = JSONDecoder()
+                let decodedFoods = try decoder.decode([Food].self, from: json)
+                DispatchQueue.main.async()
+                {
+                    success(decodedFoods)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get all foods response", comment: "Server error message")])
+                    failure(error.localizedDescription)
+                }
+            }
+        } onFailure: { error in
+            failure(error)
+        }
+    }
+    
+    func getFoodsForReagent(reagentId: Int, onSuccess success: @escaping ([ReagentFood]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        let urlString = "\(API())\(REAGENT_FOOD_RECOMMENDATIONS_PATH)"
+        guard let request = Server.shared.GenerateRequest(urlString: urlString, withParams: ["reagent_id": "\(reagentId)"]) else
+        {
+            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+            failure(error.localizedDescription)
+            return
+        }
+        
+        serverGet(request: request) { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let foodResult = try? decoder.decode(ReagentFoodResponse.self, from: data)
+                {
+                    DispatchQueue.main.async()
+                    {
+                        success(foodResult.foodResponse)
+                    }
+                }
+                else if let object = json as? [String: Any]
+                {
+                    DispatchQueue.main.async()
+                    {
+                        if let message = object["message"] as? String
+                        {
+                            if let errorArray = object["errors"] as? [[String: Any]]
+                            {
+                                if let firstErrorArray = errorArray.first
+                                {
+                                    let code = firstErrorArray["code"] as? Int
+                                    let label = firstErrorArray["label"] as? String
+                                    let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
+                                    failure(error.localizedDescription)
+                                }
+                            }
+                            else
+                            {
+                                let error = NSError.init(domain: "", code: 404, userInfo: ["message": message])
+                                failure(error.localizedDescription)
+                            }
+                        }
+                        else
+                        {
+                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                            failure(error.localizedDescription)
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                        failure(error.localizedDescription)
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+                    failure(error.localizedDescription)
+                }
+            }
+        } onFailure: { error in
+            failure(error?.localizedDescription ?? "")
+        }
+    }
+    
+    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    {
+        let url = "\(API())\(OBJECT_SAVE_PATH)"
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objects)
+        
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (object) in
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    // MARK: Plan
+    func getPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        getAllObjects(objects: [AllObjectReq(type: "plan", last_updated: lastUpdated)])
+        { dict in
+            do
+            {
+                guard let foodDict = dict["plan"] as? [[String: Any]] else { return }
+                let json = try JSONSerialization.data(withJSONObject: foodDict)
+                let decoder = JSONDecoder()
+                let decodedPlans = try decoder.decode([Plan].self, from: json)
+                DispatchQueue.main.async()
+                {
+                    success(decodedPlans)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to get all plans response", comment: ""))
+                    failure(error)
+                }
+            }
+        } onFailure: { error in
+            let serverError = ServerError(code: 400, description: error)
+            failure(serverError)
+        }
+    }
+    
+    func addSinglePlan(plan: Plan, onSuccess success: @escaping (_ plan: Plan) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(plan)
+        
+        let urlString = "\(API())\(ADD_NEW_SINGLE_PLAN_PATH)"
+        
+        guard let url = URL(string: urlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to add new plan to contact", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (planDict) in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: planDict)
+                let decoder = JSONDecoder()
+                let decodedPlan = try decoder.decode(Plan.self, from: json)
+                DispatchQueue.main.async()
+                {
+                    success(decodedPlan)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    func addMultiplePlans(plans: MultiplePlans, onSuccess success: @escaping (_ plans: [Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(plans)
+        
+        let urlString = "\(API())\(ADD_NEW_MULTIPLE_PLAN_PATH)"
+        
+        guard let url = URL(string: urlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to add new plan to contact", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpBody = data
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (plansDict) in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: plansDict)
+                let decoder = JSONDecoder()
+                let multiplePlansResponse = try decoder.decode(PlanResponse.self, from: json)
+                
+                DispatchQueue.main.async()
+                {
+                    success(multiplePlansResponse.plans)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
+    func completePlan(planId: Int, toggleData: TogglePlanData, onSuccess success: @escaping (_ togglePlanData: TogglePlanData) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        let urlString = "\(API())\(TOGGLE_PLAN_PATH)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try! encoder.encode(toggleData)
+        let Url = String(format: finalUrlString)
+        
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        serverPost(request: request, onSuccess:
+        { (object) in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: object)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let togglePlanData = try decoder.decode(TogglePlanData.self, from: json)
+                
+                DispatchQueue.main.async()
+                {
+                    success(togglePlanData)
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        },
+        onFailure:
+        { (error) in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        })
+    }
+    
     //MARK:  Sample
     func associateTestUUID(parameters: TestUUID, onSuccess success: @escaping (_ object: CardAssociation) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
@@ -925,7 +937,6 @@ class Server: NSObject
         //send it to server
         serverPost(request: request, onSuccess:
         { (object) in
-            //print("SUCCESS: \(object)")
             DispatchQueue.main.async()
             {
                 let cardAssociation = CardAssociation(cardBatchID: object["wellness_card_batch_id"] as? String, cardCalibrationMode: object["wellness_card_calibration_mode"] as? String, orcaSheetName: object["orca_sheet_name"] as? String)
@@ -941,7 +952,7 @@ class Server: NSObject
         })
     }
     
-    func getScore(sampleID: String, onSuccess success: @escaping (_ result: TestResult) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getScore(sampleID: String, onSuccess success: @escaping (_ result: Result) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(GET_SCORE_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{sample_uuid}", with: sampleID)
@@ -952,11 +963,8 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 
-               // print("JSON: \(json)")
-                
-                if let testResult = try? JSONDecoder().decode(TestResult.self, from: data)
+                if let testResult = try? JSONDecoder().decode(Result.self, from: data)
                 {
-                    //print ("Test Result: \(testResult)")
                     DispatchQueue.main.async()
                     {
                         success(testResult)
@@ -973,7 +981,6 @@ class Server: NSObject
                             {
                                 if let firstErrorArray = errorArray.first
                                 {
-                                    //print("First Error Array: \(firstErrorArray)")
                                     let code = firstErrorArray["code"] as? Int
                                     let label = firstErrorArray["label"] as? String
                                     let error = NSError.init(domain: "", code: code ?? 0, userInfo: ["message": label ?? "unknonwn"])
@@ -1018,6 +1025,332 @@ class Server: NSObject
                 failure(error)
             }
         }
+    }
+    
+    // MARK: - Utils
+    func allowDebugPrint() -> Bool
+    {
+        return UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_NETWORK_TRAFFIC)
+    }
+    
+    func GenerateRequest(urlString: String) -> URLRequest?
+    {
+        guard let serviceUrl = URL(string: urlString) else { return nil }
+        return URLRequest(url: serviceUrl)
+    }
+    
+    func GenerateRequest(urlString: String, withParams params: [String: String]) -> URLRequest?
+    {
+        guard var components = URLComponents(string: urlString) else { return nil }
+        components.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        guard let url = components.url else { return nil }
+        return URLRequest(url: url)
+    }
+    
+    private func serverGet(request: URLRequest, onSuccess success: @escaping (_ data: Data) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        var mutableRequest = request
+        let allowPrint = allowDebugPrint()
+        mutableRequest.httpMethod = "GET"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if accessToken != nil
+        {
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
+        }
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        
+        if allowPrint
+        {
+            if let url = request.url
+            {
+                print("GET: \(url)")
+            }
+        }
+        
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let data = data //unwrap data
+            {
+                if allowPrint
+                {
+                    self.debugJSONResponse(data: data)
+                }
+                success(data)
+            }
+            else
+            {
+                failure(error)
+            }
+        }.resume()
+    }
+    
+    private func serverPost(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        serverWrite(request: request, requestType: "POST", onSuccess: success, onFailure: failure)
+    }
+    
+    private func serverPut(request: URLRequest, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        serverWrite(request: request, requestType: "PUT", onSuccess: success, onFailure: failure)
+    }
+    
+    private func serverDelete(request: URLRequest, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: ServerError) -> Void)
+    {
+        var mutableRequest = request
+        let allowPrint = allowDebugPrint()
+        mutableRequest.httpMethod = "DELETE"
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if accessToken != nil
+        {
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
+        }
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        
+        if allowPrint
+        {
+            if let url = request.url
+            {
+                print("DELETE: \(url)")
+            }
+        }
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let response = response as? HTTPURLResponse //unwrap response
+            {
+                if response.statusCode == 204
+                {
+                    if allowPrint
+                    {
+                        print("SUCCESS")
+                    }
+                    success()
+                }
+                else
+                {
+                    let string = "Unable to delete object from server"
+                    if allowPrint
+                    {
+                        print(string)
+                    }
+                    let error = ServerError(code: 400, description: NSLocalizedString(string, comment: "Server error message"))
+                    failure(error)
+                }
+            }
+        }.resume()
+    }
+    
+    private func serverWrite(request: URLRequest, requestType: String, onSuccess success: @escaping (_ json: [String: Any]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+        var mutableRequest = request
+        mutableRequest.httpMethod = requestType
+        mutableRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if accessToken != nil
+        {
+            mutableRequest.setValue("\(AUTH_PREFIX) \(accessToken!)", forHTTPHeaderField: AUTH_KEY)
+        }
+        mutableRequest.setValue("vessel-ios", forHTTPHeaderField: "User-Agent")
+        if allowDebugPrint()
+        {
+            if let url = request.url
+            {
+                print("\(requestType): \(url)")
+                if request.httpBody != nil
+                {
+                    if let jsonData = request.httpBody
+                    {
+                        let jsonString = String(data: jsonData, encoding: .utf8)!
+                        print(jsonString)
+                    }
+                }
+            }
+        }
+        let session = URLSession.shared
+        session.dataTask(with: mutableRequest)
+        { (data, response, error) in
+            if let data = data //unwrap data
+            {
+                do
+                {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if self.allowDebugPrint()
+                    {
+                        print("Server Response:\n\(json)\n")
+                    }
+//CW: Put a breakpoint here to see json response from server
+                    if let object = json as? [String: Any]
+                    {
+                        if let schemaErrors = object["schema_errors"]
+                        {
+                            let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(schemaErrors)", comment: "Server error message"))
+                            failure(error)
+                        }
+                        else
+                        {
+                            if let message = object["message"] as? String
+                            {
+                                if message == "Card already scanned successfully"
+                                {
+                                    failure(ServerError(code: 405, description: NSLocalizedString("Card has already been scanned", comment: "")))
+                                }
+                                else if message == "Updated."
+                                {
+                                    //happens when user changes password in ChangePasswordViewController
+                                    success(object)
+                                }
+                                else if message == "An email will be sent if an associated account exists."
+                                {
+                                    //happens when user does forgot password flow
+                                    success(object)
+                                }
+                                else
+                                {
+                                    let error = ServerError(code: 404, description: message)
+                                    failure(error)
+                                }
+                            }
+                            else
+                            {
+                                success(object)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        let error = ServerError(code: 400, description: NSLocalizedString("Unable to parse response from server: \(json)", comment: "Server error message"))
+                        failure(error)
+                    }
+                }
+                catch
+                {
+                    var errorCode = 0
+                    let err = error as NSError
+                    errorCode = err.code
+                    let string = String.init(data: data, encoding: .utf8)
+                    let result = ServerError(code: errorCode, description: error.localizedDescription, moreInfo: string)
+                    //print("ERROR: \(string ?? "Unknown")")
+                    failure(result)
+                }
+            }
+        }.resume()
+    }
+    
+    private func postToServer(dictBody: [String: String], url: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
+    {
+        do
+        {
+            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
+
+            let Url = String(format: url)
+            guard let serviceUrl = URL(string: Url) else { return }
+            var request = URLRequest(url: serviceUrl)
+            request.httpBody = jsonData
+            
+            serverPost(request: request, onSuccess:
+            { (object) in
+                DispatchQueue.main.async()
+                {
+                    success(object)
+                }
+            },
+            onFailure:
+            { (string) in
+                DispatchQueue.main.async()
+                {
+                    failure(NSLocalizedString("Server Error", comment: ""))
+                }
+            })
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func debugJSONResponse(data: Data)
+    {
+        do
+        {
+            let jsonString = String(data: data, encoding: .utf8)!
+            print("SUCCESS: \(jsonString)")
+        }
+    }
+    
+    //MARK: Object get / save
+    func getObjects(objects: [SpecificObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        var objectDict: [String: [ObjectReq]] = [:]
+        for req in objects
+        {
+            if var array = objectDict[req.type]
+            {
+                array.append(ObjectReq(id: req.id, last_updated: req.last_updated))
+            }
+            else
+            {
+                objectDict[req.type] = [ObjectReq(id: req.id, last_updated: req.last_updated)]
+            }
+        }
+        
+        let url = "\(API())\(OBJECT_GET_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objectDict)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (dict) in
+            DispatchQueue.main.async()
+            {
+                success(dict)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
+    func getAllObjects(objects: [AllObjectReq], onSuccess success: @escaping ([String: Any]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        var objectDict: [String: [String: Int]] = [:]
+        for object in objects
+        {
+            objectDict[object.type] = ["last_updated": object.last_updated]
+        }
+        let url = "\(API())\(OBJECT_ALL_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objectDict)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (data) in
+            DispatchQueue.main.async()
+            {
+                success(data)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
     }
 }
 

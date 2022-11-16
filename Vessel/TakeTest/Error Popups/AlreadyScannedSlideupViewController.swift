@@ -9,7 +9,7 @@ import UIKit
 
 protocol AlreadyScannedSlideupViewControllerDelegate
 {
-    func alreadyScannedViewResults()
+    func alreadyScannedCustomerSupport()
     func alreadyScannedScanNewCard()
 }
 
@@ -17,14 +17,12 @@ class AlreadyScannedSlideupViewController: SlideupViewController
 {
     var delegate: AlreadyScannedSlideupViewControllerDelegate?
     
-    @IBAction func viewResults()
+    @IBAction func chatWithSupport()
     {
-        //TODO: RE-enable once viewResults functionality implemented
-        /*
         dismissAnimation
         {
-            self.delegate?.alreadyScannedViewResults()
-        }*/
+            self.delegate?.alreadyScannedCustomerSupport()
+        }
     }
     
     @IBAction func scanNewCard()

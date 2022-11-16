@@ -9,6 +9,12 @@ import Foundation
 
 class FoodPreferencesViewModel: ItemPreferencesViewModel
 {
+    // MARK: - Public interface
+    var isLoading = false
+    
+    var onContactSaved: (() -> ())?
+    var onError: ((_ error: String) -> ())?
+    
     var selectedSegmentIndex = 0
     {
         didSet
@@ -33,10 +39,24 @@ class FoodPreferencesViewModel: ItemPreferencesViewModel
     
     func save()
     {
+        isLoading = true
+        guard Reachability.isConnectedToNetwork() else
+        {
+            isLoading = false
+            onError?(Constants.INTERNET_CONNECTION_STRING)
+            return
+        }
+        
         guard let contact = Contact.main() else { return }
         contact.diet_ids = userDiets
         contact.allergy_ids = userAllergies
         
+        contact.setDietsAnalytics()
+        contact.setAllergiesAnalytics()
+        
         ObjectStore.shared.ClientSave(contact)
+        NotificationCenter.default.post(name: .foodPreferencesChangedNotification, object: nil)
+        isLoading = false
+        onContactSaved?()
     }
 }

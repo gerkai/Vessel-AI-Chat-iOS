@@ -9,12 +9,12 @@ import UIKit
 
 struct Color
 {
-    var red: Float
-    var green: Float
-    var blue: Float
+    var red: CGFloat
+    var green: CGFloat
+    var blue: CGFloat
 }
 
-class ResultsViewController: UIViewController
+class ResultsViewController: UIViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var wellnessScoreLabel: UILabel!
     @IBOutlet weak var wellnessCard: UIView!
@@ -23,9 +23,21 @@ class ResultsViewController: UIViewController
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var staggerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var resultViewCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultViewLeftEdgeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var resultViewBottomEdgeConstraint: NSLayoutConstraint!
+    @IBOutlet weak var wellnessCardSubtextLabel: UILabel!
     
-    var testResult: TestResult! //set by the caller during instantiation
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .resultsTabFlow
+    let resultViewEdgeInset = 20.0
+    
+    var testResult: Result! //set by the caller during instantiation
     var timer: Timer!
+    var startingResultViewWidth: CGFloat!
+    var startingResultViewHeight: CGFloat!
+    
     var iteration = 0
     let wellnessCardAnimationTime = 2.0
     let tickTime = 0.05
@@ -39,20 +51,16 @@ class ResultsViewController: UIViewController
     var bouncyViews: [ReagentTileView] = []
     var originalStaggerConstraintConstant: CGFloat! //the right stackView is staggered for Results but not staggered for ranges.
     
-    //will move these to constants if we start using them in more places
-    let poorColor = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
-    let fairColor = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
-    let goodColor = Color(red: 0.8588, green: 0.9216, blue: 0.8353)
-    let greatColor = Color(red: 0.7569, green: 0.8706, blue: 0.7294)
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         viewModel = AfterTestViewModel(testResult: testResult)
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
+        wellnessCardSubtextLabel.alpha = 0.0
         originalStaggerConstraintConstant = staggerConstraint.constant
-        
+        startingResultViewWidth = resultView.frame.width
+        startingResultViewHeight = resultView.frame.height
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
@@ -83,29 +91,29 @@ class ResultsViewController: UIViewController
             if i == 0
             {
                 reagentView.titleLabel.text = NSLocalizedString("0-25", comment: "range 0 - 25")
-                reagentView.subtextLabel.text = NSLocalizedString("Poor", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(poorColor.red), green: CGFloat(poorColor.green), blue: CGFloat(poorColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.POOR_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselPoor
                 leftStackView.addArrangedSubview(reagentView)
             }
             else if i == 1
             {
                 reagentView.titleLabel.text = NSLocalizedString("25-50", comment: "range 25 - 50")
-                reagentView.subtextLabel.text = NSLocalizedString("Fair", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(fairColor.red), green: CGFloat(fairColor.green), blue: CGFloat(fairColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.FAIR_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselFair
                 rightStackView.addArrangedSubview(reagentView)
             }
             else if i == 2
             {
                 reagentView.titleLabel.text = NSLocalizedString("50-75", comment: "range 50 - 75")
-                reagentView.subtextLabel.text = NSLocalizedString("Good", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(goodColor.red), green: CGFloat(goodColor.green), blue: CGFloat(goodColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.GOOD_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselGood
                 leftStackView.addArrangedSubview(reagentView)
             }
             else
             {
                 reagentView.titleLabel.text = NSLocalizedString("75-100", comment: "range 75 - 100")
-                reagentView.subtextLabel.text = NSLocalizedString("Great", comment: "Quality level")
-                reagentView.contentView.backgroundColor = UIColor(red: CGFloat(greatColor.red), green: CGFloat(greatColor.green), blue: CGFloat(greatColor.blue), alpha: 1.0)
+                reagentView.subtextLabel.text = Constants.GREAT_STRING
+                reagentView.contentView.backgroundColor = Constants.vesselGreat
                 rightStackView.addArrangedSubview(reagentView)
             }
             reagentView.alpha = 0.0
@@ -123,63 +131,53 @@ class ResultsViewController: UIViewController
     {
         //animates background color of wellness card from poor color to fair color, good color and great color depending on
         //wellness score.
+        let score = testResult.wellnessScore
         let sectionSize = 0.25
-        var remainingScore = testResult.wellnessScore
-        let sectionTime = sectionSize / remainingScore * wellnessCardAnimationTime
+        let numSections = score / sectionSize
         
-        if remainingScore > sectionSize
+        //var remainingScore = testResult.wellnessScore
+        let sectionTime = wellnessCardAnimationTime / numSections
+        
+        if score >= sectionSize
         {
-            remainingScore -= sectionSize
-            //print("Animating to Fair with remaining score: \(remainingScore)")
-            var duration = (remainingScore / sectionSize) * sectionTime
-            if duration > sectionTime
+            if score < 0.5
             {
-                duration = sectionTime
-            }
-            var percentage = duration / sectionTime
-            //print("Starting Time: \(sectionTime), duration: \(duration), percentage: \(percentage)")
-            UIView.animate(withDuration: duration, delay: sectionTime, options: .curveLinear)
-            {
-                self.setBackgroundColor(startColor: self.poorColor, endColor: self.fairColor, percentage: percentage)
-            }
-            completion:
-            { completed in
-                //Animate to Good
-                remainingScore -= sectionSize
-                if remainingScore > 0
+                UIView.animate(withDuration: wellnessCardAnimationTime, delay: 0, options: .curveLinear)
                 {
-                    //print("Animating to Good with remaining score: \(remainingScore)")
-                    duration = (remainingScore / sectionSize) * sectionTime
-                    
-                    if duration > sectionTime
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+            }
+            else if score < 0.75
+            {
+                UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
+                {
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+                completion:
+                { completed in
+                    UIView.animate(withDuration: self.wellnessCardAnimationTime - sectionTime, delay: 0, options: .curveLinear)
                     {
-                        duration = sectionTime
+                        self.wellnessCard.backgroundColor = Constants.vesselGood
                     }
-                    percentage = duration / sectionTime
-                    UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
+                }
+            }
+            else
+            {
+                UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
+                {
+                    self.wellnessCard.backgroundColor = Constants.vesselFair
+                }
+                completion:
+                { completed in
+                    UIView.animate(withDuration: sectionTime, delay: 0, options: .curveLinear)
                     {
-                        self.setBackgroundColor(startColor: self.fairColor, endColor: self.goodColor, percentage: percentage)
+                        self.wellnessCard.backgroundColor = Constants.vesselGood
                     }
                     completion:
-                    { _ in
-                        //Animate to Great
-                        remainingScore -= sectionSize
-                        if remainingScore > 0
+                    { completed in
+                        UIView.animate(withDuration: self.wellnessCardAnimationTime - (sectionTime * 2), delay: 0, options: .curveLinear)
                         {
-                            //print("Animating to Great with remaining score: \(remainingScore)")
-                            duration = (remainingScore / sectionSize) * sectionTime
-                            if duration > sectionTime
-                            {
-                                duration = sectionTime
-                            }
-                            percentage = duration / sectionTime
-                            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear)
-                            {
-                                self.setBackgroundColor(startColor: self.goodColor, endColor: self.greatColor, percentage: percentage)
-                            }
-                            completion:
-                            { _ in
-                            }
+                            self.wellnessCard.backgroundColor = Constants.vesselGreat
                         }
                     }
                 }
@@ -229,18 +227,19 @@ class ResultsViewController: UIViewController
     {
         //populate stackViews with new reagent tiles
         //set their alpha to 0 so they remain invisible while the layout engine places them in the correct location.
-        for i in 0 ..< testResult.reagents.count
+        for i in 0 ..< testResult.reagentResults.count
         {
             let reagentView = ReagentTileView()
             let heightConstraint = NSLayoutConstraint(item: reagentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 78)
             reagentView.addConstraints([heightConstraint])
             reagentView.alpha = 0.0
-            let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
-            let value = testResult.reagents[i].value
-            let evaluation = reagent.getEvaluation(score: value)
+            let reagent = Reagent.fromID(id: testResult.reagentResults[i].id)
+            //let reagent = Reagents[Reagent.ID(rawValue: testResult.reagents[i].id)!]!
+            let value = testResult.reagentResults[i].value
+            let evaluation = reagent.getEvaluation(value: value)
             
             reagentView.titleLabel.text = reagent.name
-            reagentView.subtextLabel.text = evaluation.title
+            reagentView.subtextLabel.text = evaluation.title.capitalized
             reagentView.contentView.backgroundColor = evaluation.color
             reagentView.imageView.image = UIImage.init(named: reagent.imageName)
             
@@ -319,7 +318,7 @@ class ResultsViewController: UIViewController
         if percentage == 1.0
         {
             timer.invalidate()
-            evaluationLabel.text = evaluation(value)
+            evaluationLabel.text = evaluation(value).capitalized
             
             //pop the evaluation label in
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut)
@@ -335,31 +334,93 @@ class ResultsViewController: UIViewController
                 }
                 completion:
                 { _ in
+                    self.animateResultViewDown()
                 }
+            }
+        }
+    }
+    
+    func animateResultViewDown()
+    {
+        self.wellnessCard.layoutIfNeeded()
+        self.resultViewCenterYConstraint.isActive = false
+        self.resultViewLeftEdgeConstraint.constant = resultViewEdgeInset - (startingResultViewWidth / 2.0) + resultViewEdgeInset
+        self.resultViewBottomEdgeConstraint.constant = resultViewEdgeInset - (startingResultViewHeight / 2.0) + resultViewEdgeInset + resultViewEdgeInset / 2.0
+        UIView.animate(withDuration: 0.5, delay: 0.0)
+        {
+            self.resultView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            self.wellnessCard.layoutIfNeeded()
+        }
+        completion:
+        { _ in
+            self.setWellnessCardSubtext()
+            UIView.animate(withDuration: 0.25, delay: 0.0)
+            {
+                self.wellnessCardSubtextLabel.alpha = 1.0
+            }
+        }
+    }
+    
+    func setWellnessCardSubtext()
+    {
+        if self.viewModel.numberOfResults() == 1
+        {
+            wellnessCardSubtextLabel.text = NSLocalizedString("This combines all your test results into one score up to 100.", comment: "")
+        }
+        else
+        {
+            let comparison = viewModel.compareWithPreviousScore()
+            if comparison > 0
+            {
+                if comparison == 1
+                {
+                    wellnessCardSubtextLabel.text = NSLocalizedString("Congratulations! You've improved by 1 point.", comment: "")
+                }
+                else
+                {
+                    wellnessCardSubtextLabel.text = String(format: NSLocalizedString("Congratulations! You've improved by %i points.", comment: ""), comparison)
+                }
+            }
+            else if comparison < 0
+            {
+                let goodResults = viewModel.numGoodResults()
+                if goodResults == 1
+                {
+                    wellnessCardSubtextLabel.text = NSLocalizedString("You got 1 good result. Focus on the red results to improve & feel great!", comment: "")
+                }
+                else
+                {
+                    wellnessCardSubtextLabel.text = String(format: NSLocalizedString("You got %i good results. Focus on the red results to improve & feel great!", comment: ""), goodResults)
+                }
+            }
+            else
+            {
+                wellnessCardSubtextLabel.text = NSLocalizedString("Well done! Your score held steady. Focus on the red results to improve & feel great! ", comment: "")
             }
         }
     }
     
     func evaluation(_ score: Int) -> String
     {
-        if score <= 25
+        if score < 25
         {
-            return NSLocalizedString("Poor", comment: "Health quality")
+            return Constants.POOR_STRING
         }
-        if score <= 50
+        if score < 50
         {
-            return NSLocalizedString("Fair", comment: "Health quality")
+            return Constants.FAIR_STRING
         }
         if score < 75
         {
-            return NSLocalizedString("Good", comment: "Health quality")
+            return Constants.GOOD_STRING
         }
-        return NSLocalizedString("Great", comment: "Health quality")
+        return Constants.GREAT_STRING
     }
     
     func setBackgroundColor(startColor: Color, endColor: Color, percentage: Double)
     {
-        var percent = Float(percentage)
+        print("Setting color from: \(startColor) to \(endColor), percentage: \(percentage)")
+        var percent = CGFloat(percentage)
         if percent > 1.0
         {
             percent = 1.0
@@ -412,16 +473,13 @@ class ResultsViewController: UIViewController
             let result = viewModel.nextViewControllerData()
             if result.transition == .dismiss
             {
+                //also called in AfterTestMVVMViewController
+                NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
                 dismiss(animated: true)
             }
             else
             {
-                let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ReagentInfoViewController") as! ReagentInfoViewController
-                vc.viewModel = viewModel
-                vc.titleText = result.title
-                vc.details = result.details
-                vc.image = UIImage.init(named: result.imageName)
+                let vc = ReagentInfoViewController.initWith(viewModel: viewModel, result: result)
                 vc.transition = result.transition
                 
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -432,12 +490,16 @@ class ResultsViewController: UIViewController
     func mockTestResult()
     {
         //used for test/debug
-        testResult = TestResult(wellnessScore: 0.73, errors: [], reagents: [ReagentResult(id: 11, value: 30.0, score: 1.0),
-                                                                            ReagentResult(id: 8, value: 225.0, score: 0.4),
-                                                                            ReagentResult(id: 1, value: 7.5, score: 1.0),
-                                                                            ReagentResult(id: 3, value: 0.0, score: 0.0),
-                                                                            ReagentResult(id: 4, value: 150.0, score: 0.2),
-                                                                            ReagentResult(id: 2, value: 1.002, score: 0.8),
-                                                                            ReagentResult(id: 5, value: 450.0, score: 1.0)])
+        
+        testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.5, insert_date: "2022-09-24T15:22:14", reagentResults: [
+            ReagentResult(id: 11, score: 1.0, value: 5.0, errorCodes: []), //B7
+            ReagentResult(id: 8, score: 0.4, value: 100.0, errorCodes: []), //Cortisol
+            ReagentResult(id: 1, score: 1.0, value: 5.5, errorCodes: []), //pH
+            ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []), //Ketones
+            ReagentResult(id: 4, score: 0.2, value: 150.0, errorCodes: []), //Vitamin C
+            ReagentResult(id: 2, score: 0.6, value: 1.03, errorCodes: []), //Hydration
+            ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: []), //Magnesium
+            ReagentResult(id: 21, score: 1.0, value: 0.50, errorCodes: []) //Nitrite
+        ])
     }
 }

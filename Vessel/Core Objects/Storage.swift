@@ -7,6 +7,11 @@
 //  Handles storage and retrieval of core objects to/from disk.
 //  Objects can be saved to the documents directory (backed up by iCloud) or the caches directory
 //  defaults to caches directory if directory not specified by caller.
+//  Path from the caches or documents directory is built as follows:
+//      /[userID]/[environment]/[objectType]/objectID
+//      [environment] will be either /d, /s, or /p for development, staging or production.
+//  A typical path would look like:
+//  .../Caches/2441/d/Result/370316
 
 import Foundation
 
@@ -21,6 +26,20 @@ public class Storage
         
         // Data that can be downloaded again or regenerated should be stored in the <Application_Home>/Library/Caches directory. Examples of files you should put in the Caches directory include database cache files and downloadable content, such as that used by magazine, newspaper, and map applications.
         case caches
+    }
+    
+    static fileprivate func environmentComponent() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return "d"
+            case Constants.STAGING_INDEX:
+                return "s"
+            default:
+                return "p"
+        }
     }
     
     /// Returns URL constructed from specified directory
@@ -39,7 +58,12 @@ public class Storage
         if var url = FileManager.default.urls(for: searchPathDirectory, in: .userDomainMask).first
         {
             //return url
+            
+            let contactID = Contact.MainID
+            url.appendPathComponent("\(contactID)", isDirectory: true)
+            url.appendPathComponent(environmentComponent(), isDirectory: true)
             url.appendPathComponent(objectName, isDirectory: true)
+            //print("Storage URL: \(url)")
             return url
         }
         else
@@ -49,6 +73,45 @@ public class Storage
     }
     
     //MARK: - public functions
+    
+    //returns the highest last_updated value found of the given object type stored on disk
+    static func newestLastUpdatedFor<T: CoreObjectProtocol>(type: T.Type, from directory: Directory = .caches) -> Int
+    {
+        var result = 0
+        
+        let url = getURL(for: directory, objectName: "\(type.self)")
+        do
+        {
+            //examine all files of specified type from specified directory
+            let files = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            for url in files
+            {
+                if let data = FileManager.default.contents(atPath: url.path)
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        let model = try decoder.decode(type, from: data)
+                        if model.last_updated > result
+                        {
+                            result = model.last_updated
+                        }
+                    }
+                    catch
+                    {
+                        //this file data is corrupt. Skip it.
+                    }
+                }
+            }
+            //print("FILES: \(files)")
+        }
+        catch
+        {
+            print(error)
+        }
+        
+        return result
+    }
     
     /// Store an encodable struct to the specified directory on disk
     ///
@@ -64,7 +127,7 @@ public class Storage
             if !FileManager.default.fileExists(atPath: directoryUrl.path)
             {
                 //create directory
-                try FileManager.default.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: true, attributes: nil)
             }
             let encoder = JSONEncoder()
             
@@ -89,13 +152,13 @@ public class Storage
     ///   - type: struct type (i.e. Contact.self)
     ///   - directory: directory where struct data is stored
     /// - Returns: decoded struct model(s) of data
-    static func retrieve<T: CoreObjectProtocol>(_ id: Int, as type: T.Type, from directory: Directory = .caches) -> T
+    static func retrieve<T: CoreObjectProtocol>(_ id: Int, as type: T.Type, from directory: Directory = .caches) -> T?
     {
         let url = getURL(for: directory, objectName: "\(type.self)").appendingPathComponent("\(id)", isDirectory: false)
         
         if !FileManager.default.fileExists(atPath: url.path)
         {
-            fatalError("File at path \(url.path) does not exist!")
+            return nil
         }
         
         if let data = FileManager.default.contents(atPath: url.path)
@@ -117,6 +180,54 @@ public class Storage
         }
     }
     
+    /// Retrieve and convert structs from a all files of a given type in specified directory on disk
+    ///
+    /// - Parameters:
+    ///   - type: struct type (i.e. Contact.self)
+    ///   - directory: directory where struct data is stored
+    /// - Returns: decoded struct model(s) of data
+    static func retrieve<T: CoreObjectProtocol>(as type: T.Type, from directory: Directory = .caches) -> [T]
+    {
+        var filesArray: [T] = []
+        let url = getURL(for: directory, objectName: "\(type.self)") 
+        do
+        {
+            let files = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            for url in files
+            {
+                if let data = FileManager.default.contents(atPath: url.path)
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        let model = try decoder.decode(type, from: data)
+                        filesArray.append(model)
+                    }
+                    catch
+                    {
+                        //this file data is corrupt. Skip it.
+                    }
+                }
+            }
+            //print("FILES: \(files)")
+        }
+        catch
+        {
+            print(error)
+        }
+        
+        //the order of the files returned by FileManager is undefined. So let's sort them here
+        let files = filesArray.sorted(by: { $0.id < $1.id })
+//        for file in files
+//        {
+//            if let result = file as? Result
+//            {
+//                print("ID: \(result.id), \(result.wellnessScore)")
+//            }
+//        }
+        return files
+    }
+    
     /// Remove all files of specified type at specified directory
     static func clear<T: CoreObjectProtocol>(objectType: T.Type, _ directory: Directory = .caches)
     {
@@ -131,7 +242,7 @@ public class Storage
         }
         catch
         {
-            fatalError(error.localizedDescription)
+            //do nothing. There were already no objects of that type stored here
         }
     }
     

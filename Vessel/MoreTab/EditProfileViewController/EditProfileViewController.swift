@@ -26,7 +26,7 @@ enum EditProfileAction
     case editContact(type: EditProfileContactField, value: Any)
 }
 
-class EditProfileViewController: KeyboardFriendlyViewController
+class EditProfileViewController: KeyboardFriendlyViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -67,8 +67,12 @@ class EditProfileViewController: KeyboardFriendlyViewController
     {
         let viewModel = EditProfileViewModel()
         viewModel.onModelChanged = self.updateUI
+        viewModel.onError = self.onError
         return viewModel
     }()
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     // MARK: - UIViewController Lifecycle
     
@@ -151,6 +155,11 @@ class EditProfileViewController: KeyboardFriendlyViewController
         weightTextField.text = viewModel.weight
         birthDateTextField.text = (viewModel.contactFlags & Constants.DECLINED_BIRTH_DATE == 1) ? nil : viewModel.birthDateString
     }
+    
+    func onError(_ error: String)
+    {
+        UIView.showError(text: "", detailText: error)
+    }
 }
 
 // MARK: - Private methods
@@ -191,7 +200,7 @@ private extension EditProfileViewController
         nameTextField.textColor = textFieldsColor
         lastNameTextField.font = textFieldsFont
         lastNameTextField.textColor = textFieldsColor
-        emailTextField.font = textFieldsFont
+        emailTextField.font = textFieldsFont 
         emailTextField.textColor = textFieldsColor
         heightTextField.font = textFieldsFont
         heightTextField.textColor = textFieldsColor
@@ -242,7 +251,7 @@ private extension EditProfileViewController
         switch action
         {
         case .changeProfilePhoto:
-            // TODO: Route to Change Profile Photo
+            // TODO: Route to Change Profile Photo and add page viewed analytics
             break
         case .changePassword:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
@@ -253,34 +262,42 @@ private extension EditProfileViewController
                                                     type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: "Delete Account?", alignment: .left),
                                                                                subtitle: GenericAlertLabelInfo(title: "Are you sure you would like to delete your Vessel account? If you delete your account you will permanently lose all of your past test results, activites and progress.This action cannot be reversed.", height: 130.0),
                                                                                button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: "Delete Account"), type: .dark)),
-                                                    description: "DeleteAccountAlert",
+                                                    description: GenericAlertViewController.DELETE_ACCOUNT_ALERT,
                                                     showCloseButton: true,
                                                     alignment: .bottom,
+                                                    animation: .modal,
                                                     delegate: self)
         case .editContact(let type, let value):
-            switch type
+            if Reachability.isConnectedToNetwork()
             {
-            case .name:
-                guard let name = value as? String else { return }
-                viewModel.name = name
-            case .lastName:
-                guard let lastName = value as? String else { return }
-                viewModel.lastName = lastName
-            case .gender:
-                guard let gender = value as? Int else { return }
-                viewModel.gender = gender
-            case .height:
-                guard let height = value as? String else { return }
-                viewModel.height = height
-            case .weight:
-                guard let weight = value as? String else { return }
-                viewModel.weight = weight
-            case .birthDate:
-                guard let birthDate = value as? String else { return }
-                let strings = birthDate.split(separator: " ")
-                guard let dateString = strings[safe: 1] else { return }
-                let date = viewModel.localDateFormatter.date(from: String(dateString))
-                viewModel.birthDate = date
+                switch type
+                {
+                case .name:
+                    guard let name = value as? String else { return }
+                    viewModel.name = name
+                case .lastName:
+                    guard let lastName = value as? String else { return }
+                    viewModel.lastName = lastName
+                case .gender:
+                    guard let gender = value as? Int else { return }
+                    viewModel.gender = gender
+                case .height:
+                    guard let height = value as? String else { return }
+                    viewModel.height = height
+                case .weight:
+                    guard let weight = value as? String else { return }
+                    viewModel.weight = weight
+                case .birthDate:
+                    guard let birthDate = value as? String else { return }
+                    let strings = birthDate.split(separator: " ")
+                    guard let dateString = strings[safe: 1] else { return }
+                    let date = viewModel.localDateFormatter.date(from: String(dateString))
+                    viewModel.birthDate = date
+                }
+            }
+            else
+            {
+                UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
             }
         }
     }
@@ -337,11 +354,13 @@ private extension EditProfileViewController
     {
         viewModel.minDateComponents = viewModel.calendar.dateComponents([.day, .month, .year], from: Date())
         viewModel.maxDateComponents = viewModel.calendar.dateComponents([.day, .month, .year], from: Date())
-        if let year = viewModel.minDateComponents.year
+        if let year = viewModel.minDateComponents.year,
+           let month = viewModel.minDateComponents.month,
+           let day = viewModel.minDateComponents.day
         {
             viewModel.minDateComponents.year = year - viewModel.minAge
-            viewModel.minDateComponents.month = 12
-            viewModel.minDateComponents.day = 31
+            viewModel.minDateComponents.month = month
+            viewModel.minDateComponents.day = day
             if let date = viewModel.calendar.date(from: viewModel.minDateComponents)
             {
                 viewModel.maxDate = date
@@ -349,7 +368,7 @@ private extension EditProfileViewController
         }
         if let year = viewModel.maxDateComponents.year
         {
-            viewModel.maxDateComponents.year = viewModel.maxAge - year
+            viewModel.maxDateComponents.year = abs(viewModel.maxAge - year)
             if let date = viewModel.calendar.date(from: viewModel.maxDateComponents)
             {
                 viewModel.minDate = date
@@ -384,6 +403,17 @@ extension EditProfileViewController: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
     {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == heightTextField || textField == weightTextField
+        {
+            guard !(textField.text ?? "").contains(".") || string != "." else { return false }
+            let characterSet = NSCharacterSet(charactersIn: "0123456789.").inverted
+            return string == string.components(separatedBy: characterSet).joined(separator: "")
+        }
         return true
     }
     
@@ -499,22 +529,43 @@ extension EditProfileViewController: UIPickerViewDelegate
 
 extension EditProfileViewController: GenericAlertDelegate
 {
-    func onAlertButtonTapped(index: Int, alertDescription: String)
+    func onAlertPresented(_ alert: GenericAlertViewController, alertDescription: String)
     {
-        if alertDescription == "DeleteAccountAlert"
+        if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
         {
-            Server.shared.deleteAccount()
+            analytics.log(event: .viewedPage(screenName: "DeleteAccountPopupViewController", flowName: self.flowName))
+        }
+    }
+    
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
+    {
+        if alertDescription == GenericAlertViewController.DELETE_ACCOUNT_ALERT
+        {
+            if Reachability.isConnectedToNetwork()
             {
-                Server.shared.logOut()
-                let story = UIStoryboard(name: "Login", bundle: nil)
-                let vc = story.instantiateViewController(withIdentifier: "Welcome")
-                
-                //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
-                UIApplication.shared.windows.first?.rootViewController = vc
-                UIApplication.shared.windows.first?.makeKeyAndVisible()
-            } onFailure: { error in
-                print(error)
+                Server.shared.deleteAccount()
+                {
+                    self.analytics.log(event: .accountDeleted)
+                    Server.shared.logOut()
+                    let story = UIStoryboard(name: "Login", bundle: nil)
+                    let vc = story.instantiateViewController(withIdentifier: "Welcome")
+                    
+                    //set Welcome screen as root viewController. This causes MainViewController to get deallocated.
+                    UIApplication.shared.windows.first?.rootViewController = vc
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                } onFailure: { error in
+                    print(error)
+                }
+            }
+            else
+            {
+                UIView.showError(text: "", detailText: Constants.INTERNET_CONNECTION_STRING, image: nil)
             }
         }
+    }
+    
+    func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
+    {
+        analytics.log(event: .viewedPage(screenName: String(describing: type(of: self)), flowName: self.flowName))
     }
 }

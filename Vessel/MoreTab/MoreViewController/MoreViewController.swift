@@ -7,11 +7,14 @@
 
 import UIKit
 
-class MoreViewController: UIViewController
+class MoreViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
     
     // MARK: Model
     private let viewModel = MoreViewModel()
@@ -82,10 +85,8 @@ extension MoreViewController: UITableViewDelegate
             mainTabBarController?.vesselButtonPressed()
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
-        case .customSupplements:
-            openInSafari(url: "https://vesselhealth.com/pages/new-quiz")
         case .chatWithNutritionist:
-            tabBarController?.selectedIndex = 3
+            tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
         case .backedByScience:
             openInSafari(url: "https://vesselhealth.com/pages/backed-by-science")
         case .support:
@@ -96,7 +97,7 @@ extension MoreViewController: UITableViewDelegate
             }
             else
             {
-                openInSafari(url: "https://help.vesselhealth.com")
+                openInSafari(url: Constants.zenDeskSupportURL)
             }
         case .debug:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)

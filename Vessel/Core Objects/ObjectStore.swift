@@ -8,21 +8,24 @@
 
 import UIKit
 
+enum StorageType: Int
+{
+    case cache          //cache only
+    case disk           //disk only
+    case cacheAndDisk   //cache and disk
+}
+
 //every object should be encodable and decodable and it must have an id and a last_updated field
 protocol CoreObjectProtocol: Codable
 {
     var id: Int {get}
     var last_updated: Int {get set}
-}
-
-enum ObjectType: String, Codable
-{
-    case contact
+    var storage: StorageType {get}
 }
 
 struct SpecificObjectReq: Codable
 {
-    var type: ObjectType
+    var type: String
     var id: Int
     var last_updated: Int
 }
@@ -33,12 +36,18 @@ struct ObjectReq: Codable
     var last_updated: Int
 }
 
+struct AllObjectReq: Codable
+{
+    var type: String
+    var last_updated: Int
+}
+
 class ObjectStore: NSObject
 {
     static let shared = ObjectStore()
     var cache: [String: [Int: CoreObjectProtocol]] = [:]
     
-    private func saveObject<T: CoreObjectProtocol>(_ object: T)
+    private func cacheObject<T: CoreObjectProtocol>(_ object: T)
     {
         let objectName = String(describing: type(of: object))
         if cache[objectName] != nil
@@ -52,16 +61,38 @@ class ObjectStore: NSObject
         }
     }
     
+    private func objectFromCache<T: CoreObjectProtocol>(of type: T.Type, id: Int) -> T?
+    {
+        let objectName = String(describing: type)
+        if cache[objectName] != nil
+        {
+            if let object = cache[objectName]?[id] as? T
+            {
+                return object
+            }
+        }
+        return nil
+    }
+    
+    func getMetaType(typeString: String) -> CoreObjectProtocol.Type?
+    {
+        let objectType = typeString.capitalized
+        
+        if objectType == "\(Result.self)" { return Result.self }
+        else if objectType == "\(Food.self)" { return Food.self }
+        else if objectType == "\(Plan.self)" { return Plan.self }
+        return nil
+    }
+    
     //MARK: - Public functions
     
     func loadMainContact(onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
     {
         let contactID = Contact.MainID
-        let type = ObjectType.contact
-        get(type: type, id: contactID)
+        get(type: Contact.self, id: contactID)
         { contact in
-            let con = contact as! Contact
-            self.saveObject(con)
+            let con = contact
+            self.cacheObject(con)
             success()
         }
         onFailure:
@@ -70,32 +101,119 @@ class ObjectStore: NSObject
         }
     }
     
-    func get(type: ObjectType, id: Int, onSuccess success: @escaping (_ object: CoreObjectProtocol) -> Void, onFailure failure: @escaping () -> Void)
+    func testFetch()
     {
-        if let object = cache[type.rawValue]?[id]
+        getMostRecent(objectTypes: [Result.self, Food.self])
+    }
+    
+    func getMostRecent(objectTypes: [CoreObjectProtocol.Type])
+    {
+        var objectReqs: [AllObjectReq] = []
+        
+        for object in objectTypes
+        {
+            let lastUpdated = Storage.newestLastUpdatedFor(type: object)
+            let objectReq = AllObjectReq(type: "\(object.self)".lowercased(), last_updated: lastUpdated)
+            objectReqs.append(objectReq)
+            //print("\(object): last_udpated: \(lastUpdated)")
+        }
+        //print("ObjectReqs: \(objectReqs)")
+        Server.shared.getAllObjects(objects: objectReqs)
+        { objectDict in
+            for typeName in objectDict.keys
+            {
+                if let metaType = self.getMetaType(typeString: typeName)
+                {
+                    if let objects = objectDict[typeName] as? [[String: Any]]
+                    {
+                        for singleObjectDict in objects
+                        {
+                            do
+                            {
+                                let json = try JSONSerialization.data(withJSONObject: singleObjectDict)
+                                let decoder = JSONDecoder()
+                                
+                                let object = try decoder.decode(metaType, from: json)
+                                //print("Received: \(object.self) with last_updated \(object.last_updated)")
+                                self.serverSave(object)
+                            }
+                            catch
+                            {
+                                print(error)
+                            }
+                        }
+                        //print("\(objects)")
+                    }
+                }
+            }
+            //print("Got objects: \(objectDict)")
+            //print(".")
+        }
+    onFailure:
+        { error in
+            print("Got error: \(error)")
+            print(".")
+        }
+    }
+    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
+            // TODO: Uncomment when loading plans from objectStore
+            /*for plan in newPlans
+            {
+                self.serverSave(plan)
+            }*/
+            
+            //let plans = Storage.retrieve(as: Plan.self)
+            success(newPlans)
+        }
+        onFailure:
+        { error in
+            failure(error.description)
+        }
+    }
+    
+    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
+            for food in newFoods
+            {
+                self.serverSave(food)
+            }
+            
+            let foods = Storage.retrieve(as: Food.self)
+            
+            success(foods)
+        } onFailure: { error in
+            failure(error.description)
+        }
+    }
+
+    func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        if let object = objectFromCache(of: type, id: id)
+        {
+            success(object)
+        }
+        else if let object = Storage.retrieve(id, as: type )
         {
             success(object)
         }
         else
         {
-            Server.shared.getObjects(objects: [SpecificObjectReq(type: type, id: id, last_updated: 0)])
+            let name = String(describing: T.self).lowercased()
+        
+            Server.shared.getObjects(objects: [SpecificObjectReq(type: name, id: id, last_updated: 0)])
             { objectDict in
-                if let values = objectDict[type.rawValue] as? [[String: Any]]
+                if let values = objectDict[name] as? [[String: Any]]
                 {
                     do
                     {
                         let json = try JSONSerialization.data(withJSONObject: values.first!)
                         let decoder = JSONDecoder()
-                        if type == .contact
-                        {
-                            let contact = try decoder.decode(Contact.self, from: json)
-                            self.saveObject(contact)
-                            success(contact)
-                        }
-                        else
-                        {
-                            failure()
-                        }
+
+                        let object = try decoder.decode(T.self, from: json)
+                        success(object)
                     }
                     catch
                     {
@@ -116,36 +234,98 @@ class ObjectStore: NSObject
         }
     }
     
+    func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        /*if let object = objectFromCache(of: type, id: id)
+        {
+            success(object)
+        }
+        else if let object = Storage.retrieve(id, as: type )
+        {
+            success(object)
+        }
+        else
+        {*/
+        let name = String(describing: T.self).lowercased()
+        
+        Server.shared.getAllObjects(objects: [AllObjectReq(type: name, last_updated: 0)])
+        { objectDict in
+            if let values = objectDict[name] as? [[String: Any]]
+            {
+                do
+                {
+                    let json = try JSONSerialization.data(withJSONObject: values)
+                    let decoder = JSONDecoder()
+                    
+                    let objects = try decoder.decode([T].self, from: json)
+                    success(objects)
+                }
+                catch
+                {
+                    print(error)
+                    failure()
+                }
+            }
+            else
+            {
+                failure()
+            }
+        }
+        onFailure:
+        { error in
+            print(error)
+            failure()
+        }
+    }
+    
     //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T)
     {
         //This is an object we received from the back end. Save it to the object store and post a notification that
         //this object has been updated.
         
-        //Storage.store(object)
-        saveObject(object)
-        //TODO: post notification here
+        if object.storage == .cache || object.storage == .cacheAndDisk
+        {
+            cacheObject(object)
+        }
+        if object.storage == .disk || object.storage == .cacheAndDisk
+        {
+            Storage.store(object)
+        }
+        //print("Sending .newDataArrived notification with \(String(describing: T.self))")
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
     }
     
     //Call this to save objects that have been modified by the client
     func ClientSave<T: CoreObjectProtocol>(_ object: T)
     {
-        //Storage.store(object)
-        saveObject(object)
-        if String(describing: type(of: object)) == "Contact"
+        var newObject = object
+        if let contact = newObject as? Contact
         {
-            let objectArray = [object]
-            let dict = ["contact": objectArray]
-            
-            //note: server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
-            Server.shared.saveObjects(objects: dict)
-            {
-                print("Saved Contact")
-            }
-            onFailure:
-            { result in
-                UIView.showError(text: "Error", detailText: result)
-            }
+            newObject = contact.replaceEmptyDietsAndAllergies() as! T
+        }
+        
+        if object.storage == .cache || object.storage == .cacheAndDisk
+        {
+            cacheObject(newObject)
+        }
+        if object.storage == .disk || object.storage == .cacheAndDisk
+        {
+            Storage.store(newObject)
+        }
+
+        let objectArray = [newObject]
+        let name = String(describing: type(of: newObject)).lowercased()
+        let dict = [name: objectArray]
+        
+        //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+        Server.shared.saveObjects(objects: dict)
+        {
+            print("Saved \(name)")
+        }
+        onFailure:
+        { result in
+            UIView.showError(text: "Error", detailText: result)
         }
     }
     

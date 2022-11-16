@@ -31,11 +31,11 @@ enum ChangePasswordError: LocalizedError
         case .newAndOldPasswordMatch:
             return NSLocalizedString("New password can't be the same as old password.", comment: "")
         case .oldPasswordMismatch:
-            return NSLocalizedString("Your old password is wrong.", comment: "")
+            return NSLocalizedString("The old password does not match.", comment: "")
         case .newPasswordTooShort:
-            return NSLocalizedString("New password is shorter than minimum length 6.", comment: "")
+            return NSLocalizedString("New password must be at least \(Constants.MinimumPasswordLength) characters.", comment: "")
         case .oldPasswordTooShort:
-            return NSLocalizedString("Old password is shorter than minimum length 6.", comment: "")
+            return NSLocalizedString("Old password must be at least \(Constants.MinimumPasswordLength) characters.", comment: "")
         case .unknownError(let value):
             return NSLocalizedString(value ?? "Unknown error", comment: "")
         }
@@ -70,18 +70,19 @@ class ChangePasswordViewModel
     
     func onChangePasswordSaved(oldPassword: String, newPassword: String, newPasswordConfirmation: String, successCompletion: (() -> Void)?, errorCompletion: ((_ error: Error) -> Void)?)
     {
-        if newPassword == newPasswordConfirmation, !oldPassword.isEmpty && !newPassword.isEmpty && !newPasswordConfirmation.isEmpty, newPassword != oldPassword
+        if newPassword == newPasswordConfirmation, !oldPassword.isEmpty && !newPassword.isEmpty && !newPasswordConfirmation.isEmpty, newPassword != oldPassword, newPassword.count >= 6
         {
             Server.shared.changePassword(oldPassword: oldPassword, newPassword: newPassword)
             {
                 successCompletion?()
-            } onFailure:
+            }
+            onFailure:
             { message in
                 if message == "You must provide old and new passwords."
                 {
                     errorCompletion?(ChangePasswordError.blankPassword)
                 }
-                else if message == "Bad current password"
+                else if message == "Bad current password."
                 {
                     errorCompletion?(ChangePasswordError.oldPasswordMismatch)
                 }
@@ -115,6 +116,10 @@ class ChangePasswordViewModel
             else if oldPassword.isEmpty || newPassword.isEmpty || newPasswordConfirmation.isEmpty
             {
                 errorCompletion?(ChangePasswordError.blankPassword)
+            }
+            else if newPassword.count < Constants.MinimumPasswordLength
+            {
+                errorCompletion?(ChangePasswordError.newPasswordTooShort)
             }
             else
             {

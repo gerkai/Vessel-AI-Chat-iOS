@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FoodPreferencesViewController: UIViewController
+class FoodPreferencesViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -16,6 +16,20 @@ class FoodPreferencesViewController: UIViewController
     
     // MARK: Model
     private let viewModel = FoodPreferencesViewModel()
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .moreTabFlow
+    var associatedValue: String?
+    {
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            return "Diet"
+        }
+        else
+        {
+            return "Allergies"
+        }
+    }
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
@@ -29,6 +43,8 @@ class FoodPreferencesViewController: UIViewController
         
         collectionView.registerFromNib(CheckmarkCollectionViewCell.self)
         updateSaveButton()
+        viewModel.onContactSaved = onContactSaved
+        viewModel.onError = onError
     }
     
     deinit
@@ -50,7 +66,7 @@ class FoodPreferencesViewController: UIViewController
         if viewModel.anyItemChecked() == true
         {
             viewModel.save()
-            navigationController?.popViewController(animated: true)
+            updateSaveButton()
         }
         else
         {
@@ -63,18 +79,31 @@ class FoodPreferencesViewController: UIViewController
     {
         viewModel.selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         collectionView.reloadData()
+        analytics.log(event: .viewedPage(screenName: String(describing: type(of: self)), flowName: self.flowName, associatedValue: self.associatedValue))
+    }
+    
+    func onContactSaved()
+    {
+        updateSaveButton()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func onError(_ error: String)
+    {
+        updateSaveButton()
+        UIView.showError(text: "", detailText: error, image: nil)
     }
     
     // MARK: UI
     func updateSaveButton()
     {
-        if viewModel.anyItemChecked() == true
-        {     
-            saveButton.backgroundColor = Constants.vesselBlack
+        if !viewModel.anyItemChecked() || viewModel.isLoading
+        {
+            saveButton.backgroundColor = Constants.vesselGray
         }
         else
         {
-            saveButton.backgroundColor = Constants.vesselGray
+            saveButton.backgroundColor = Constants.vesselBlack
         }
     }
 }
@@ -110,15 +139,15 @@ extension FoodPreferencesViewController: UICollectionViewDelegateFlowLayout
 
 extension FoodPreferencesViewController: CheckmarkCollectionViewCellDelegate
 {
-    func checkButtonTapped(forCell cell: UICollectionViewCell, checked: Bool)
+    func checkButtonTapped(id: Int)
     {
-        viewModel.selectItem(id: cell.tag, selected: checked)
-        collectionView.reloadData()
+        viewModel.itemTapped(id: id)
+        NotificationCenter.default.post(name: .updateCheckmarks, object: nil, userInfo: nil)
         updateSaveButton()
     }
     
-    func canCheckMoreButtons() -> Bool
+    func isChecked(forID id: Int) -> Bool
     {
-        return true
+        return viewModel.itemIsChecked(id: id)
     }
 }

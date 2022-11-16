@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthdaySelectViewController: UIViewController
+class BirthdaySelectViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -17,6 +17,9 @@ class BirthdaySelectViewController: UIViewController
     // MARK: - Logic
     var viewModel = BirthdaySelectViewModel()
     var coordinator: OnboardingCoordinator?
+    
+    @Resolved internal var analytics: Analytics
+    let flowName: AnalyticsFlowName = .onboardingFlow
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad()
@@ -45,7 +48,6 @@ class BirthdaySelectViewController: UIViewController
     {
         super.viewDidAppear(animated)
         checkmarkView.delegate = self
-        // TODO: Add analytics for viewed page
     }
     
     // MARK: - Initialization
@@ -78,7 +80,7 @@ class BirthdaySelectViewController: UIViewController
         }
         if let year = viewModel.maxDateComponents.year
         {
-            viewModel.maxDateComponents.year = viewModel.maxAge - year
+            viewModel.maxDateComponents.year = abs(viewModel.maxAge - year)
             if let date = viewModel.calendar.date(from: viewModel.maxDateComponents)
             {
                 viewModel.minDate = date
@@ -122,6 +124,14 @@ extension BirthdaySelectViewController: SelectionCheckmarkViewDelegate
         }
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .beginFromCurrentState)
         {
+            if pickerAlpha == 1.0
+            {
+                self.pickerContainer.isHidden = false
+            }
+            else
+            {
+                self.pickerContainer.isHidden = true
+            }
             self.pickerContainer.alpha = pickerAlpha
         }
         completion:
