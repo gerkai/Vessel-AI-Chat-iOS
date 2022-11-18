@@ -26,37 +26,22 @@ class MainTabBarController: UITabBarController
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
         tabBar.items![vesselButtonIndex].isEnabled = false
         
-        //On devices with a safe area below (no home button), the tab bar icons are too close to the top of the tab bar.
-        //this will move them down. Skip this for devices with home button (iPhone SE for example)
+        setTabBarItemAppearance()
         /*
-        if let window = UIApplication.shared.windows.first
-        {
-            let bottomPadding = window.safeAreaInsets.bottom
-            
-            if bottomPadding != 0
-            {
-                for vc in self.viewControllers!
-                {
-                    vc.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
-                }
-                tabBar.items?.forEach(
-                    { $0.titlePositionAdjustment = UIOffset(horizontal: 10.0, vertical: 12.0)
-                        print("Set tab bar item position")
-                    })
-            }
-        }*/
-        
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
-        appearance.shadowImage = nil
-        appearance.shadowColor = nil
-        tabBar.standardAppearance = appearance
-        
         if #available(iOS 15.0, *)
         {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-        }
+        }*/
+        
+        let blurEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        tabBar.insertSubview(visualEffectView, at: 0)
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0).isActive = true
         
         //remove all prior viewControllers from the navigation stack which will cause them to be deallocated.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) //provide enough time for push/fade to complete
@@ -73,6 +58,13 @@ class MainTabBarController: UITabBarController
             }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.selectTab(_:)), name: .selectTabNotification, object: nil)
+    }
+    
+    func setTabBarItemAppearance()
+    {
+        let appearance = UITabBarItem.appearance()
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Regular", size: 16)]
+        appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key: Any], for: .normal)
     }
     
     deinit
@@ -101,7 +93,7 @@ class MainTabBarController: UITabBarController
             didLayout = true
         
             //cut out the transparency around the Vessel button
-            self.tabBar.cutHalfCircle(with: 35)
+            addCutout()
             
             //Unfortunately this cuts out the pixels of the center tab bar button so we won't use it. Instead, add a new BounceButton
             //and place it in the center of the tab bar. Attach action, pressed() which will programmatically switch the tab
@@ -126,6 +118,42 @@ class MainTabBarController: UITabBarController
             tabBar.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
             tabBar.topAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         }
+    }
+    
+    func addCutout()
+    {
+        let centerButtonHeight = 58.0
+        let padding = 10.0
+        let shoulderRadius = 6.0
+        
+        let f = CGFloat(centerButtonHeight / 2.0) + padding
+        let h = tabBar.frame.height
+        let w = tabBar.frame.width
+        let halfW = w / 2.0
+        let path = UIBezierPath()
+        path.move(to: .zero)
+        
+        //add line from left corner to left shoulder
+        path.addLine(to: CGPoint(x: halfW - f - shoulderRadius, y: 0))
+        
+        //add the left shoulder
+        path.addQuadCurve(to: CGPoint(x: halfW - f + 0.5, y: shoulderRadius), controlPoint: CGPoint(x: halfW - f, y: 0))
+        
+        //add the cutout
+        path.addArc(withCenter: CGPoint(x: halfW, y: 0), radius: f, startAngle: .pi - 0.15, endAngle: 0.15, clockwise: false)
+        
+        //add the right shoulder
+        path.addQuadCurve(to: CGPoint(x: halfW + f + shoulderRadius, y: 0), controlPoint: CGPoint(x: halfW + f, y: 0))
+        
+        //fill in the rest of the box
+        path.addLine(to: CGPoint(x: w, y: 0))
+        path.addLine(to: CGPoint(x: w, y: h))
+        path.addLine(to: CGPoint(x: 0.0, y: h))
+        
+        let mask = CAShapeLayer()
+        mask.fillRule = .evenOdd
+        mask.path = path.cgPath
+        tabBar.layer.mask = mask
     }
     
     @objc func vesselButtonPressed()

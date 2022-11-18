@@ -13,7 +13,7 @@
         <scene sceneID="0lD-5A-0sQ">
             <objects>
                 <viewControllerPlaceholder storyboardName="CoachTab" referencedIdentifier="CoachViewController" id="zGf-tf-2vW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qAg-wN-B8w"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Chat-Icon" selectedImage="Chat-Icon" id="qAg-wN-B8w"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKw-W5-zQS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -33,7 +33,7 @@
         <scene sceneID="Qg4-MG-qIP">
             <objects>
                 <viewControllerPlaceholder storyboardName="TodayTab" referencedIdentifier="TodayViewController" id="GhL-sL-soP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fRj-SL-Mez"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Plan-Icon" selectedImage="Plan-Icon" id="fRj-SL-Mez"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HL0-PX-389" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -43,9 +43,7 @@
         <scene sceneID="e0S-Hb-WaX">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="Results" storyboardName="Results" referencedIdentifier="ResultsTabViewController" id="Jyb-1i-tB5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Results" selectedImage="Results-Icon" id="czW-N1-kFp">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" selectedImage="Results-Icon" id="czW-N1-kFp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-gY-69T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,7 +118,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Chat-Icon" width="21" height="18"/>
         <image name="More-Icon" width="19" height="5"/>
+        <image name="Plan-Icon" width="18" height="18"/>
         <image name="Results-Icon" width="19" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

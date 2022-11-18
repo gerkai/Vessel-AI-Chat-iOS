@@ -123,19 +123,6 @@ extension UIView
         }
     }
     
-    func cutHalfCircle(with radius: CGFloat = 100)
-    {
-        //Used for cutting out a transparency border around Vessel button on home screen
-        let center = CGPoint(x: UIScreen.main.bounds.midX, y: 0)
-        let path = UIBezierPath(rect: bounds)
-        path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-
-        let mask = CAShapeLayer()
-        mask.fillRule = .evenOdd
-        mask.path = path.cgPath
-        layer.mask = mask
-    }
-    
     func fixInView(_ container: UIView!) -> Void
     {
         //we've been loaded from an XIB file. This adds us as a subview of container and constrains our bounds to it

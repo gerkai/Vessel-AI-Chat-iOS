@@ -80,9 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.white]
         UISegmentedControl.appearance().setTitleTextAttributes(selectedAttribute, for: .selected)
         
-        //app-wide tab bar appearance
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Semibold", size: 16)!], for: .normal)
-        
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .systemBlue
     }
