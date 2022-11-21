@@ -75,10 +75,16 @@ class OnboardingCoordinator
         }
         else
         {
+//            Storage.clear(objectType: Curriculum.self)
+            
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
-            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
-            //FoodManager.shared.loadFoods()
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self])
+            if Storage.retrieve(as: Curriculum.self).count > 0
+            {
+                LessonsManager.shared.buildLessonPlan()
+            }
+            
             //Separated load plans call because an issue with stored plans not having weekdays
             PlansManager.shared.loadPlans()
             
@@ -211,7 +217,7 @@ class OnboardingCoordinator
         else
         {
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
-            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self])
+            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self/*, Lesson.self, Step.self*/])
             //Separated load plans call because an issue with stored plans not having weekdays
             PlansManager.shared.loadPlans()
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)

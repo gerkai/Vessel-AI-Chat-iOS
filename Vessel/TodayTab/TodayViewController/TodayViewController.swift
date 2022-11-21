@@ -68,6 +68,17 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
                 viewModel.refreshContactSuggestedfoods()
                 reloadUI()
             }
+            else if type == String(describing: Lesson.self)
+            {
+                reloadUI()
+            }
+            else if type == String(describing: Curriculum.self)
+            {
+                if !LessonsManager.shared.planBuilt && Storage.retrieve(as: Curriculum.self).count > 0
+                {
+                    LessonsManager.shared.buildLessonPlan()
+                }
+            }
         }
     }
     

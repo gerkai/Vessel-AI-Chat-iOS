@@ -19,8 +19,9 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
     {
         titleLabel.text = title
         subtitleLabel.text = subtitle
-        backgroundImageView.image = UIImage(named: backgroundImage)
         descriptionLabel.text = description
         checkMark.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
+        guard let url = URL(string: backgroundImage) else { return }
+        backgroundImageView.kf.setImage(with: url)
     }
 }

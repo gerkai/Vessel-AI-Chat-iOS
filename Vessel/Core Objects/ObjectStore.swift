@@ -81,6 +81,7 @@ class ObjectStore: NSObject
         if objectType == "\(Result.self)" { return Result.self }
         else if objectType == "\(Food.self)" { return Food.self }
         else if objectType == "\(Plan.self)" { return Plan.self }
+        else if objectType == "\(Curriculum.self)" { return Curriculum.self }
         return nil
     }
     
@@ -117,7 +118,7 @@ class ObjectStore: NSObject
             objectReqs.append(objectReq)
             //print("\(object): last_udpated: \(lastUpdated)")
         }
-        //print("ObjectReqs: \(objectReqs)")
+        
         Server.shared.getAllObjects(objects: objectReqs)
         { objectDict in
             for typeName in objectDict.keys
@@ -135,7 +136,7 @@ class ObjectStore: NSObject
                                 
                                 let object = try decoder.decode(metaType, from: json)
                                 //print("Received: \(object.self) with last_updated \(object.last_updated)")
-                                self.serverSave(object)
+                                self.serverSave(object, notifyNewDataArrived: singleObjectDict["id"] as? Int == objects.last?["id"] as? Int && singleObjectDict["last_updated"] as? Int == objects.last?["last_updated"] as? Int)
                             }
                             catch
                             {
@@ -234,6 +235,53 @@ class ObjectStore: NSObject
         }
     }
     
+    func get<T: CoreObjectProtocol>(type: T.Type, ids: [Int], onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        /*if let object = objectFromCache(of: type, id: id)
+        {
+            success(object)
+        }
+        else if let object = Storage.retrieve(id, as: type )
+        {
+            success(object)
+        }
+        else
+        {*/
+        let name = String(describing: T.self).lowercased()
+        
+        let objects = ids.map({ SpecificObjectReq(type: name, id: $0, last_updated: 0) })
+        
+        Server.shared.getObjects(objects: objects)
+        { objectDict in
+            if let values = objectDict[name] as? [[String: Any]]
+            {
+                do
+                {
+                    let json = try JSONSerialization.data(withJSONObject: values)
+                    let decoder = JSONDecoder()
+                    
+                    let objects = try decoder.decode([T].self, from: json)
+                    success(objects)
+                }
+                catch
+                {
+                    print(error)
+                    failure()
+                }
+            }
+            else
+            {
+                failure()
+            }
+        }
+        onFailure:
+        { error in
+            print(error)
+            failure()
+        }
+        //}
+    }
+    
     func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
     {
         /*if let object = objectFromCache(of: type, id: id)
@@ -279,7 +327,7 @@ class ObjectStore: NSObject
     }
     
     //Call this to save objects that arrive from the server
-    func serverSave<T: CoreObjectProtocol>(_ object: T)
+    func serverSave<T: CoreObjectProtocol>(_ object: T, notifyNewDataArrived: Bool = true)
     {
         //This is an object we received from the back end. Save it to the object store and post a notification that
         //this object has been updated.
@@ -293,7 +341,10 @@ class ObjectStore: NSObject
             Storage.store(object)
         }
         //print("Sending .newDataArrived notification with \(String(describing: T.self))")
-        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+        if notifyNewDataArrived
+        {
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+        }
     }
     
     //Call this to save objects that have been modified by the client

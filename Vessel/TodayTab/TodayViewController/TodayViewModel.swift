@@ -11,7 +11,7 @@ enum TodayViewSection: Equatable
 {
     case header(name: String, goals: [String])
     //case days
-    //case insights(insights: [Insight])
+    case insights(insights: [Lesson])
     //case activities
     case food(foods: [Food])
     case water(glassesNumber: Int, checkedGlasses: Int)
@@ -23,9 +23,10 @@ enum TodayViewSection: Equatable
         switch self
         {
         case .header: return 0
-        case .food: return 1
-        case .water: return 2
-        case .footer: return 3
+        case .insights: return 1
+        case .food: return 2
+        case .water: return 3
+        case .footer: return 4
         }
     }
     
@@ -34,7 +35,7 @@ enum TodayViewSection: Equatable
         switch self
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
-        //case .insights(let insights): return createInsightsSection(insights: insights)
+        case .insights(let lessons): return createInsightsSection(lessons: lessons)
         case .food(let foods):
             if foods.count > 0
             {
@@ -55,12 +56,17 @@ enum TodayViewSection: Equatable
         }
     }
     
-    func createInsightsSection(insights: [Insight]) -> [TodayViewCell]
+    func createInsightsSection(lessons: [Lesson]) -> [TodayViewCell]
     {
+        guard lessons.count > 0 else { return [] }
         var cells: [TodayViewCell] = [.sectionTitle(icon: "todayInsightsIcon", name: "Insights")]
-        for insight in insights
+        for lesson in lessons
         {
-            cells.append(.checkMarkCard(title: insight.title, subtitle: insight.subtitle, description: insight.description, backgroundImage: insight.backgroundImage, completed: insight.completedDate != nil))
+            cells.append(.checkMarkCard(title: lesson.title,
+                                        subtitle: "",
+                                        description: lesson.description,
+                                        backgroundImage: lesson.imageUrl,
+                                        completed: lesson.completedDate != nil))
         }
         return cells
     }
@@ -72,8 +78,8 @@ enum TodayViewSection: Equatable
         {
         case (.header(let lhName, let lhGoals), .header(let rhName, let rhGoals)):
             return lhName == rhName && lhGoals == rhGoals
-        /*case (.insights(let lhInsights), .insights(let rhInsights)):
-            return lhInsights == rhInsights*/
+        case (.insights(let lhInsights), .insights(let rhInsights)):
+            return lhInsights == rhInsights
         case (.food, .food):
             return true
         case (.water, .water):
@@ -100,7 +106,7 @@ enum TodayViewCell: Equatable
         switch self
         {
         case .header: return 177.0
-        case .sectionTitle: return 16.0
+        case .sectionTitle: return 32.0
         case .foodDetails(let foods):
             let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
             let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
@@ -128,10 +134,6 @@ enum TodayViewCell: Equatable
 class TodayViewModel
 {
     private var contact = Contact.main()!
-    private var insights: [Insight]
-    {
-        return [Insight(id: 0, lastUpdated: 0, title: "How Yoga Improves Sleep", subtitle: "Mood and Sleep (2 mins)", description: "Legumes have been proven in various studies to reduce your cortisol levels and improve... more", backgroundImage: "yogaImprovesSleep", completedDate: nil)]
-    }
     
     init()
     {
@@ -149,9 +151,11 @@ class TodayViewModel
     
     var sections: [TodayViewSection] {
         contact = Contact.main()!
+        let firstLesson = LessonsManager.shared.lessons.first
+        let lessons = firstLesson != nil ? [firstLesson!] : []
         return [
             .header(name: contact.first_name, goals: contact.getGoals()),
-            //.insights(insights: insights),
+            .insights(insights: lessons),
             .food(foods: contact.suggestedFoods),
             .water(glassesNumber: contact.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
             .footer
