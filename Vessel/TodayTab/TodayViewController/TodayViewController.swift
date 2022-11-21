@@ -22,7 +22,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     // MARK: - Model
     private var viewModel = TodayViewModel()
     private let resultsViewModel = ResultsTabViewModel()
-    private var didLayout = false
     private var tableViewOffset: CGFloat?
     
     @Resolved internal var analytics: Analytics
@@ -37,15 +36,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         
         //get notified when new foods, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        didLayout = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.scrollViewDidScroll(self.tableView)
-        })
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -181,28 +171,6 @@ extension TodayViewController: WaterIntakeViewDelegate
     func didCheckGlasses(_ glasses: Int)
     {
         viewModel.updateCheckedGlasses(glasses)
-    }
-}
-
-extension TodayViewController: UIScrollViewDelegate
-{
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        guard didLayout == true else { return }
-        
-        if tableViewOffset == nil
-        {
-            tableViewOffset = tableView.frame.height - tableView.contentSize.height
-        }
-        
-        if tableView.contentOffset.y <= 0
-        {
-            view.backgroundColor = .offwhite
-        }
-        else
-        {
-            view.backgroundColor = .codGray
-        }
     }
 }
 

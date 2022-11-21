@@ -386,7 +386,10 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wus-Uv-Gxu" secondAttribute="bottom" constant="40" id="xW1-8l-95m"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" selectedImage="Plan-Icon" id="DsO-Nq-qlg"/>
+                    <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" selectedImage="Plan-Icon" id="DsO-Nq-qlg">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="390" height="1079"/>
                     <connections>

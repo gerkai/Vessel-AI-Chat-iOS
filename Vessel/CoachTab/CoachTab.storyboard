@@ -109,7 +109,10 @@
                             <constraint firstItem="kfD-ig-UP7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="x6p-nm-RpO"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="SnL-3r-vhT"/>
+                    <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="SnL-3r-vhT">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="coachView" destination="kfD-ig-UP7" id="sVM-oC-MI0"/>

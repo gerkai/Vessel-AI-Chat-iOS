@@ -194,7 +194,8 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="More" image="More-Icon" id="lss-dp-Zco" userLabel="More">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="6"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="More" id="dIt-w1-6Ui"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -227,7 +228,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-lL-nB6">
-                                                    <rect key="frame" x="20" y="5.5" width="194.5" height="39.5"/>
+                                                    <rect key="frame" x="20" y="5.5" width="194.5" height="39"/>
                                                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -591,7 +592,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Us-RIu">
-                                                        <rect key="frame" x="0.0" y="27" width="335" height="53"/>
+                                                        <rect key="frame" x="0.0" y="27" width="335" height="53.666666666666657"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Permanently delete your account and associated data from all Vessel products">
@@ -894,7 +895,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82j-TV-8g7">
-                                                    <rect key="frame" x="20" y="5.5" width="290" height="39.5"/>
+                                                    <rect key="frame" x="20" y="5.5" width="290" height="39"/>
                                                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
