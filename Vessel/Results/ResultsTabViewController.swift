@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate
+class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate, UITextViewDelegate
 {
     @IBOutlet weak var chartView: ChartView!
     var initialLoad = true
     var viewModel = ResultsTabViewModel()
     @IBOutlet weak var lockoutView: UIView!
     @IBOutlet weak var testsGoalsView: TestsGoalsView!
+    @IBOutlet weak var textView: UITextView!
+    
     let defaultSelectedReagent = Reagent.ID.MAGNESIUM
     
     override func viewDidLoad()
@@ -26,11 +28,41 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         //get notified if food preferences changes (specifically ketones which changes color of ketone tile)
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
+        setupTextView()
     }
     
     deinit
     {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setupTextView()
+    {
+        //apply text and make the "learn more" portion of it underlined and tappable
+        let message = NSLocalizedString("Your wellness score is a combination of all your results. Learn more", comment: "")
+        let interactiveText = NSLocalizedString("Learn more", comment: "")
+        let linkRange = message.range(of: interactiveText)
+        let linkNSRange = NSRange(linkRange!, in: message)
+        let font = Constants.FontBodyAlt14!
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0.5 * font.lineHeight
+        let myAttribute = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.init(hex: "555553"),
+                            NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        
+        let attributedString = NSMutableAttributedString(string: message, attributes: myAttribute)
+        attributedString.addAttribute(.link, value: "https://www.vesselhealth.com", range: linkNSRange)
+        attributedString.underline(term: interactiveText)
+        textView.attributedText = attributedString
+        textView.delegate = self
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
+    {
+        let storyboard = UIStoryboard(name: "Results", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "WellnessScoreViewController") as! WellnessScoreViewController
+        vc.initWithViewModel(vm: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
+        return false
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -120,6 +152,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         return viewModel.resultForIndex(i: index)
     }
     
+    //info icon on chartView was hidden. If it stays that way, we can remove this infoTapped functionality from the app
     func ChartViewInfoTapped()
     {
         let storyboard = UIStoryboard(name: "Results", bundle: nil)

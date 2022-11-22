@@ -75,7 +75,7 @@
                         <rect key="frame" x="24" y="-37" width="62" height="37"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bix-fG-HUf">
-                                <rect key="frame" x="7.3333333333333321" y="0.0" width="47.666666666666671" height="37"/>
+                                <rect key="frame" x="19.666666666666664" y="0.0" width="22.666666666666664" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-fF-25G">
                                         <rect key="frame" x="0.0" y="0.0" width="22.666666666666668" height="37"/>
@@ -83,8 +83,8 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-W8-2Jb">
-                                        <rect key="frame" x="28.666666666666671" y="0.0" width="19" height="37"/>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-W8-2Jb">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="37"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
