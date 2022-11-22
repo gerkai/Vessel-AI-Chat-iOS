@@ -34,6 +34,10 @@ class Step: CoreObjectProtocol
     var answers: [LessonStepAnswer]
     var answerId: Int?
     var activityIds: [Int]?
+    var correctAnswerId: Int?
+    {
+        answers.first(where: { $0.correct })?.id
+    }
     
     init(id: Int, last_updated: Int, typeString: String, title: String? = nil, text: String? = nil, successText: String, imageUrl: String, isSkippable: Bool, answers: [LessonStepAnswer], answerId: Int? = nil, activityIds: [Int]? = nil)
     {
@@ -74,13 +78,19 @@ class LessonStepAnswer: CoreObjectProtocol
 
     let primaryText: String
     var secondaryText: String?
+    let isIncorrect: Bool?
+    var correct: Bool
+    {
+        isIncorrect == nil || isIncorrect == false
+    }
     
-    init(id: Int, last_updated: Int, primaryText: String, secondaryText: String?)
+    init(id: Int, last_updated: Int, primaryText: String, secondaryText: String?, isIncorrect: Bool? = nil)
     {
         self.id = id
         self.last_updated = last_updated
         self.primaryText = primaryText
         self.secondaryText = secondaryText
+        self.isIncorrect = isIncorrect
     }
     
     enum CodingKeys: String, CodingKey
@@ -89,5 +99,6 @@ class LessonStepAnswer: CoreObjectProtocol
         case last_updated
         case primaryText = "primary_text"
         case secondaryText = "secondary_text"
+        case isIncorrect = "is_incorrect"
     }
 }

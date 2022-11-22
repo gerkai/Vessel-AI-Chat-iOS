@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LessonStepView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="5jh-RI-0vk" id="RLt-gm-wGl"/>
+                <outlet property="checkImage" destination="sK0-Kw-e3W" id="5qS-bt-Ocp"/>
+                <outlet property="rootView" destination="iN0-l3-epB" id="OTN-9k-fiF"/>
+                <outlet property="titleLabel" destination="xu2-2P-suy" id="UsZ-MR-FYB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="86"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jh-RI-0vk">
+                    <rect key="frame" x="20" y="13" width="369" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xu2-2P-suy">
+                            <rect key="frame" x="36" y="21" width="39.666666666666657" height="18"/>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="QV1-Hi-GrX"/>
+                        <constraint firstItem="xu2-2P-suy" firstAttribute="centerY" secondItem="5jh-RI-0vk" secondAttribute="centerY" id="gY3-Jm-4VY"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xu2-2P-suy" secondAttribute="trailing" constant="10" id="tsb-jR-NId"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_unselected" translatesAutoresizingMaskIntoConstraints="NO" id="sK0-Kw-e3W">
+                    <rect key="frame" x="0.0" y="23" width="40" height="40"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5jh-RI-0vk" secondAttribute="trailing" id="QL6-Eo-OLP"/>
+                <constraint firstItem="sK0-Kw-e3W" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QuE-v6-ZxN"/>
+                <constraint firstItem="sK0-Kw-e3W" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WzP-ad-dX9"/>
+                <constraint firstItem="5jh-RI-0vk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZqN-JQ-VjW"/>
+                <constraint firstItem="5jh-RI-0vk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="aFv-Nz-GqP"/>
+                <constraint firstItem="xu2-2P-suy" firstAttribute="leading" secondItem="sK0-Kw-e3W" secondAttribute="trailing" constant="16" id="wJa-3m-vIy"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="66.92307692307692" y="-199.76303317535545"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkbox_unselected" width="40" height="40"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

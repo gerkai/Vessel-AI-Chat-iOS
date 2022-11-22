@@ -14,7 +14,8 @@ class Lesson: CoreObjectProtocol, Equatable
     let storage: StorageType = .cacheAndDisk
     
     let title: String
-    let description: String
+    // TODO: Remove optional once backend send this every time
+    let description: String?
     let imageUrl: String
     var completedDate: String?
     var rank: Int

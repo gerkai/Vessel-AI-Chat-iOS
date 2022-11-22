@@ -10,23 +10,30 @@ import UIKit
 class LessonsCoordinator
 {
     let lesson: Lesson
-    let steps: [Step]
-    var currentStepIndex = 0
-    
-    /*var currentStep: Step
+    var steps: [Step]
     {
-        return steps[currentStep]
-    }*/
+        lesson.steps
+    }
+    var currentStepIndex = -1
+    
+    var currentStep: Step?
+    {
+        return steps[safe: currentStepIndex]
+    }
 
-    init(lesson: Lesson, steps: [Step])
+    init(lesson: Lesson)
     {
         self.lesson = lesson
-        self.steps = steps
+    }
+    
+    func back()
+    {
+        currentStepIndex -= 1
     }
     
     func shouldShowSuccessScreen() -> Bool
     {
-        guard let step = steps[safe: currentStepIndex] else { return false }
+        guard let step = currentStep else { return false }
 
         switch step.type
         {
@@ -39,12 +46,12 @@ class LessonsCoordinator
     
     func hasCompletedLesson() -> Bool
     {
-        return steps.count == currentStepIndex - 1
+        return steps.count == currentStepIndex
     }
     
     func answerStep(answer: String, answerId: Int)
     {
-        guard let step = steps[safe: currentStepIndex] else { return }
+        guard let step = currentStep else { return }
         
         switch step.type
         {
@@ -60,15 +67,26 @@ class LessonsCoordinator
     
     func getNextStepViewController() -> UIViewController?
     {
+        currentStepIndex += 1
         if hasCompletedLesson()
         {
             return nil
         }
         else
         {
-            // TODO: Implement StepsViewControllers
-            currentStepIndex += 1
-            return nil
+            let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
+            guard let step = currentStep else { return nil }
+            
+            switch step.type
+            {
+            case .quiz:
+                let quizVC = storyboard.instantiateViewController(identifier: "QuizLessonStepViewController") as! QuizLessonStepViewController
+                quizVC.coordinator = self
+                quizVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                return quizVC
+            default:
+                return nil
+            }
         }
     }
 }

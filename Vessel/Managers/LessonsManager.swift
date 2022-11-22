@@ -33,12 +33,12 @@ class LessonsManager
         var count = 0
         for lessonRank in sortedLessons
         {
-            guard let curriculumIndex = goalsCurriculums.firstIndex(where: { curriculum in
+            /*guard let curriculumIndex = goalsCurriculums.firstIndex(where: { curriculum in
                 curriculum.lessonRanks.contains(where: { $0.id == lessonRank.id }) }),
                   let lessonIndex = goalsCurriculums[curriculumIndex].lessonRanks.firstIndex(where: { $0.id == lessonRank.id }) else { return }
-            let lessonId = goalsCurriculums[curriculumIndex].lessonIds[lessonIndex]
+            let lessonId = goalsCurriculums[curriculumIndex].lessonIds[lessonIndex]*/
             
-            ObjectStore.shared.get(type: Lesson.self, id: lessonId) { [weak self] lesson in
+            ObjectStore.shared.get(type: Lesson.self, id: lessonRank.id) { [weak self] lesson in
                 guard let self = self else { return }
                 self.lessons.append(lesson)
                 count += 1
@@ -64,7 +64,8 @@ class LessonsManager
         guard let firstLesson = lessons.first else { return }
         getLessonSteps(lesson: firstLesson) { [weak self] steps in
             guard let self = self else { return }
-            self.lessons.first!.steps = steps
+            // TODO: Remove when more types of steps are implemented
+            self.lessons.first!.steps = steps.filter({ $0.type == .quiz })
         } onFailure: {
         }
     }

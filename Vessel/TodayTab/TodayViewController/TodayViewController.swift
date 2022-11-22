@@ -155,6 +155,15 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         guard let section = viewModel.sections[safe: indexPath.section] else { return }
         switch section
         {
+        case .insights(let lessons):
+            if indexPath.row > 0
+            {
+                let row = indexPath.row - 1
+                let lesson = lessons[row]
+                let coordinator = LessonsCoordinator(lesson: lesson)
+                guard let viewController = coordinator.getNextStepViewController() else { return }
+                navigationController?.pushViewController(viewController, animated: true)
+            }
         case .food:
             if indexPath.row == 0
             {
