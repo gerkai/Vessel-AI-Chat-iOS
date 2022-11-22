@@ -332,6 +332,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-wg-JZc" userLabel="Lightening View">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6XO-eu-mbs">
                                             <rect key="frame" x="171" y="511" width="48" height="48"/>
                                         </imageView>
@@ -346,7 +350,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="Tap this button to take your first test, unlock your Today page and get personalized recommendations.">
                                                     <attributes>
-                                                        <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                        <font key="NSFont" size="16" name="NoeText"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.75" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -358,13 +362,17 @@
                                         </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="bottom" secondItem="lk1-hH-kSp" secondAttribute="bottom" id="GbV-gS-dRU"/>
+                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="top" secondItem="lk1-hH-kSp" secondAttribute="top" id="L4f-uJ-mGT"/>
                                         <constraint firstItem="wus-Uv-Gxu" firstAttribute="top" secondItem="hrY-3S-beP" secondAttribute="bottom" constant="30" id="Lio-S9-maU"/>
                                         <constraint firstItem="dg6-n9-SLw" firstAttribute="top" secondItem="6XO-eu-mbs" secondAttribute="bottom" constant="16" id="RFd-DY-hei"/>
                                         <constraint firstItem="6XO-eu-mbs" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="VCu-jw-nla"/>
                                         <constraint firstItem="hrY-3S-beP" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="leading" constant="34" id="XYZ-QO-NOW"/>
                                         <constraint firstItem="hrY-3S-beP" firstAttribute="top" secondItem="dg6-n9-SLw" secondAttribute="bottom" constant="12" id="eNL-eA-Fch"/>
                                         <constraint firstItem="dg6-n9-SLw" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="eqD-cf-EJD"/>
+                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="leading" id="hQa-WF-30p"/>
                                         <constraint firstItem="hrY-3S-beP" firstAttribute="trailing" secondItem="lk1-hH-kSp" secondAttribute="trailing" constant="-34" id="hei-fu-5DU"/>
+                                        <constraint firstAttribute="trailing" secondItem="SXu-wg-JZc" secondAttribute="trailing" id="oct-s4-WrX"/>
                                         <constraint firstItem="wus-Uv-Gxu" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="paV-cr-Wf8"/>
                                         <constraint firstItem="hrY-3S-beP" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="xqy-Ts-Q3k"/>
                                     </constraints>
