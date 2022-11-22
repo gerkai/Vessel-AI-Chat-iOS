@@ -69,8 +69,16 @@ class TestCardExistCheckingViewController: UIViewController, VesselScreenIdentif
         }
         else if selectedOption == 2
         {
-            let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
-            self.navigationController?.fadeTo(vc)
+            if Contact.main() != nil
+            {
+                //if the contact already exists (due to social login, we can go straight to Onboarding
+                OnboardingCoordinator.pushInitialViewController(to: navigationController)
+            }
+            else
+            {
+                let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
+                self.navigationController?.fadeTo(vc)
+            }
         }
         else
         {
