@@ -26,17 +26,20 @@ class WellnessScoreViewController: ResultsTabMVVMViewController
         stackView.removeArrangedSubview(lineView)
         for reagentResult in result.reagentResults
         {
-            let scoreView = ReagentScoreView()
-            let heightConstraint = NSLayoutConstraint(item: scoreView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: scoreViewHeight)
-            scoreView.addConstraints([heightConstraint])
-            scoreView.score = reagentResult.getScore()
-            let reagent = Reagent.fromID(id: reagentResult.id)
-            scoreView.nameLabel.text = reagent.name
-            scoreView.imageView.image = UIImage(named: reagent.imageName)
-            let evaluation = reagent.getEvaluation(value: reagentResult.value)
-            scoreView.levelLabel.text = evaluation.title
-            scoreView.contentView.backgroundColor = evaluation.color
-            stackView.addArrangedSubview(scoreView)
+            if let value = reagentResult.value
+            {
+                let scoreView = ReagentScoreView()
+                let heightConstraint = NSLayoutConstraint(item: scoreView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: scoreViewHeight)
+                scoreView.addConstraints([heightConstraint])
+                scoreView.score = reagentResult.getScore()
+                let reagent = Reagent.fromID(id: reagentResult.id)
+                scoreView.nameLabel.text = reagent.name
+                scoreView.imageView.image = UIImage(named: reagent.imageName)
+                let evaluation = reagent.getEvaluation(value: value)
+                scoreView.levelLabel.text = evaluation.title
+                scoreView.contentView.backgroundColor = evaluation.color
+                stackView.addArrangedSubview(scoreView)
+            }
         }
         //add the lineView back here
         stackView.addArrangedSubview(lineView)

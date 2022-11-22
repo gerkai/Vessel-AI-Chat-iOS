@@ -127,10 +127,10 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         //populate the infoView title and description text
         let result = viewModel.resultForIndex(i: cellIndex).result
         let reagent_ID = Reagent.ID(rawValue: reagentID)
-        if let reagentResult = result.getResult(id: reagent_ID!)
+        if let reagentResult = result.getResult(id: reagent_ID!), let value = reagentResult.value
         {
             let reagent = Reagent.fromID(id: reagentID)
-            if let bucketIndex = reagent.getBucketIndex(value: reagentResult.value)
+            if let bucketIndex = reagent.getBucketIndex(value: value)
             {
                 let bucket = reagent.buckets[bucketIndex]
                 resultTitleLabel.text = bucket.hint.title

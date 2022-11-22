@@ -154,11 +154,14 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
             }
             if result != nil
             {
-                if let index = reagent.getBucketIndex(value: result!.value)
+                if let value = result!.value
                 {
-                    //y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
-                    //let y = CGFloat(index) / CGFloat(numBuckets)
-                    reagentDetailsCell.setTextUnitAndYPosition(text: reagent.rangeFor(value: result!.value), unit: reagent.unit, bucket: index, numBuckets: numBuckets)
+                    if let index = reagent.getBucketIndex(value: value)
+                    {
+                        //y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
+                        //let y = CGFloat(index) / CGFloat(numBuckets)
+                        reagentDetailsCell.setTextUnitAndYPosition(text: reagent.rangeFor(value: value), unit: reagent.unit, bucket: index, numBuckets: numBuckets)
+                    }
                 }
             }
         }

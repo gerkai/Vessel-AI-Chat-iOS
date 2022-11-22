@@ -31,6 +31,7 @@ struct Result: CoreObjectProtocol, Codable
     var wellnessScore: Double
     
     let reagentResults: [ReagentResult]
+    let errors: [ReagentError]
     
     enum CodingKeys: String, CodingKey
     {
@@ -39,10 +40,11 @@ struct Result: CoreObjectProtocol, Codable
         case card_uuid
         case wellnessScore = "wellness_score"
         case reagentResults = "reagents" //should change this to reagentResults on back end
+        case errors
     }
     
     init(id: Int = 0,
-         last_updated: Int = 0, storage: StorageType = .cache, card_uuid: String = "12345", wellnessScore: Double = 0.85, insert_date: String = "", reagentResults: [ReagentResult] = [])
+         last_updated: Int = 0, storage: StorageType = .cache, card_uuid: String = "12345", wellnessScore: Double = 0.85, insert_date: String = "", reagentResults: [ReagentResult] = [], errors: [ReagentError] = [])
          
     {
         self.storage = storage
@@ -51,6 +53,7 @@ struct Result: CoreObjectProtocol, Codable
         self.last_updated = last_updated
         self.id = id
         self.card_uuid = card_uuid
+        self.errors = errors
         self.insert_date = insert_date
     }
     
@@ -96,7 +99,7 @@ struct ReagentResult: Codable
 {
     let id: Int //the id of the reagent
     //let score: Double //cw: Deprecated. Score is retrieved directly from reagent now based on value
-    let value: Double
+    var value: Double? //cw: server returns null if there was an error with this reagent
     var errorCodes: [Int]
     {
         get
@@ -130,8 +133,38 @@ struct ReagentResult: Codable
     
     func getScore() -> Double
     {
-        let reagent = Reagents[Reagent.ID(rawValue: id)!]
-        return reagent!.getScore(value: value)
+        if let value = value
+        {
+            let reagent = Reagents[Reagent.ID(rawValue: id)!]
+            return reagent!.getScore(value: value)
+        }
+        else
+        {
+            return 0
+        }
     }
+}
+
+struct ReagentError: Codable
+{
+    let slot_name: String
+    let reagent: ReagentErrorReagentInfo
+    let reagent_id: Int
+    let error_code: Int
+    let sample_error: SampleError
+}
+
+struct ReagentErrorReagentInfo: Codable
+{
+    let name: String
+    let id: Int
+}
+
+struct SampleError: Codable
+{
+    let error_type: String
+    let insert_date: String
+    let label: String
+    let error_code: Int
 }
 
