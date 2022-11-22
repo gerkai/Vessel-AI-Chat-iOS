@@ -188,31 +188,37 @@ struct Reagent
     
     //given a reagentID and a measurement value, this will return the evaluation (low, high, good, normal, elevated, etc)
     //returns .notAvailable if invalid parameter given
-    static func evaluation(id: Reagent.ID, value: Double) -> Evaluation
+    static func evaluation(id: Reagent.ID, value: Double?) -> Evaluation
     {
         var eval = Evaluation.notAvailable
         
-        if let reagent = Reagents[id]
+        if let value = value
         {
-            for bucket in reagent.buckets
+            if let reagent = Reagents[id]
             {
-                if (value >= bucket.low) && (value < bucket.high)
+                for bucket in reagent.buckets
                 {
-                    eval = bucket.evaluation
+                    if (value >= bucket.low) && (value < bucket.high)
+                    {
+                        eval = bucket.evaluation
+                    }
                 }
             }
         }
         return eval
     }
     
-    func getEvaluation(value: Double) -> Evaluation
+    func getEvaluation(value: Double?) -> Evaluation
     {
         //establish highest and lowest buckets. That way if a value is out of range, we can slam it to highest or lowest.
-        for bucket in buckets
+        if let value = value
         {
-            if (value >= bucket.low) && (value < bucket.high)
+            for bucket in buckets
             {
-                return bucket.evaluation
+                if (value >= bucket.low) && (value < bucket.high)
+                {
+                    return bucket.evaluation
+                }
             }
         }
         return Evaluation.notAvailable

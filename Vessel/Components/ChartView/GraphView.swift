@@ -72,9 +72,12 @@ class GraphView: UIView
             }
             if result != nil
             {
-                if let index = reagent.getBucketIndex(value: result!.value)
+                if let value = result!.value
                 {
-                    y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
+                    if let index = reagent.getBucketIndex(value: value)
+                    {
+                        y = CGFloat(index) * zoneHeight + (zoneHeight / 2.0)
+                    }
                 }
             }
             

@@ -62,17 +62,20 @@ class GoalDetailsViewController: UIViewController
             impactView.delegate = self
             if let reagentID = Reagent.ID(rawValue: reagentResult.id)
             {
-                let reagent = Reagents[reagentID]!
-                impactView.reagentNameLabel.text = reagent.name.capitalized
-                let evaluation = reagent.getEvaluation(value: reagentResult.value)
-                impactView.evaluationLabel.text = evaluation.title.capitalized
-                impactView.contentView.backgroundColor = evaluation.color
-                
-                let impact = reagent.impactFor(goal: goal.id)
-                impactView.numDots = impact
-                impactView.reagentId = reagentID.rawValue
-                
-                testsStackView.addArrangedSubview(impactView)
+                if let value = reagentResult.value
+                {
+                    let reagent = Reagents[reagentID]!
+                    impactView.reagentNameLabel.text = reagent.name.capitalized
+                    let evaluation = reagent.getEvaluation(value: value)
+                    impactView.evaluationLabel.text = evaluation.title.capitalized
+                    impactView.contentView.backgroundColor = evaluation.color
+                    
+                    let impact = reagent.impactFor(goal: goal.id)
+                    impactView.numDots = impact
+                    impactView.reagentId = reagentID.rawValue
+                    
+                    testsStackView.addArrangedSubview(impactView)
+                }
             }
         }
     }
