@@ -332,7 +332,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-wg-JZc" userLabel="Lightening View">
+                                        <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-wg-JZc" userLabel="Lightening View">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -377,7 +377,7 @@
                                         <constraint firstItem="hrY-3S-beP" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="xqy-Ts-Q3k"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="regular"/>
+                                <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
