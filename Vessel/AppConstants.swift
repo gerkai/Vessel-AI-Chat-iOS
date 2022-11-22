@@ -175,6 +175,7 @@ struct Constants
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
     static let FontBodyAlt14 = UIFont(name: "NoeText", size: 14.0)
     static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)
+    static let FontLearnMore10 = UIFont(name: "BananaGrotesk-Semibold", size: 10.0)!
     
     //Zendesk
     static let prodZendeskAppId = "b6273136dbc4bea26a8ad79ba27bd254d1f63c1ad9cfe7c9"

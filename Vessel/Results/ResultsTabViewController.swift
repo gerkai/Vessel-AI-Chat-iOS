@@ -52,6 +52,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         let attributedString = NSMutableAttributedString(string: message, attributes: myAttribute)
         attributedString.addAttribute(.link, value: "https://www.vesselhealth.com", range: linkNSRange)
         attributedString.underline(term: interactiveText)
+        attributedString.font(term: interactiveText, font: Constants.FontLearnMore10)
         textView.attributedText = attributedString
         textView.delegate = self
     }

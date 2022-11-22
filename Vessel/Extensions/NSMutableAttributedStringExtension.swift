@@ -20,4 +20,15 @@ extension NSMutableAttributedString
 
         addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsrange)
     }
+    
+    func font(term: String, font: UIFont)
+    {
+        guard let fontRange = string.range(of: term) else
+        {
+            return
+        }
+        let startPosition = string.distance(from: term.startIndex, to: fontRange.lowerBound)
+        let nsrange = NSRange(location: startPosition, length: term.count)
+        addAttribute(.font, value: font, range: nsrange)
+    }
 }
