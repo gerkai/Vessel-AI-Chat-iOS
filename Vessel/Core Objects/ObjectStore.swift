@@ -61,6 +61,12 @@ class ObjectStore: NSObject
         }
     }
     
+    func removeFromCache<T: CoreObjectProtocol>(_ object: T)
+    {
+        let objectName = String(describing: type(of: object))
+        cache[objectName]?.removeValue(forKey: object.id)
+    }
+    
     private func objectFromCache<T: CoreObjectProtocol>(of type: T.Type, id: Int) -> T?
     {
         let objectName = String(describing: type)

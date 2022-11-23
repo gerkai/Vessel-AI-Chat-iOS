@@ -37,8 +37,8 @@ class Contact: CoreObjectProtocol
     var last_updated: Int = 0
     var storage: StorageType = .cache
     
-    var first_name: String
-    var last_name: String
+    @NullCodable var first_name: String?
+    @NullCodable var last_name: String?
     @NullCodable var gender: String?
     var height: Double?
     var weight: Double?
@@ -132,6 +132,7 @@ class Contact: CoreObjectProtocol
     static func reset()
     {
         KeychainHelper.standard.delete(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
+        ObjectStore.shared.removeFromCache(main()!)
         MainID = 0
         SavedEmail = nil
     }

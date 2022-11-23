@@ -18,8 +18,29 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     @IBOutlet weak var confirmPasswordTextField: VesselTextField!
     @IBOutlet weak var nextButton: LoadingButton!
     
+    var initialFirstName: String = ""
+    var initialLastName: String = ""
+    var socialAuth: Bool = false
+    
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        //if contact already exists, pre-populate first and last name. Hide password fields.
+        if let contact = Contact.main()
+        {
+            firstNameTextField.text = contact.first_name
+            lastNameTextField.text = contact.last_name
+            initialFirstName = contact.first_name ?? ""
+            initialLastName = contact.last_name ?? ""
+            passwordTextField.isHidden = true
+            confirmPasswordTextField.isHidden = true
+            socialAuth = true
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -40,21 +61,39 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
         {
             if let lastName = lastNameTextField.text, lastName.isValidName()
             {
-                if let password = passwordTextField.text, password.isValidPassword()
+                if socialAuth
                 {
                     //all fields valid!
-                    if let confirmPassword = confirmPasswordTextField.text, confirmPassword == password
+                    //Update first and last name if user changed them
+                    if (initialFirstName != firstName) || (initialLastName != lastName)
                     {
-                        createContact(firstName: firstName, lastName: lastName, password: password)
+                        if let contact = Contact.main()
+                        {
+                            contact.first_name = firstName
+                            contact.last_name = lastName
+                            ObjectStore.shared.ClientSave(contact)
+                        }
                     }
-                    else
-                    {
-                        UIView.showError(text: NSLocalizedString("Passwords do not match", comment: "Error message"), detailText: "", image: nil)
-                    }
+                    OnboardingCoordinator.pushInitialViewController(to: navigationController)
                 }
                 else
                 {
-                    UIView.showError(text: "", detailText: NSLocalizedString("Password must be at least 6 characters", comment: ""), image: nil)
+                    if let password = passwordTextField.text, password.isValidPassword()
+                    {
+                        //all fields valid!
+                        if let confirmPassword = confirmPasswordTextField.text, confirmPassword == password
+                        {
+                            createContact(firstName: firstName, lastName: lastName, password: password)
+                        }
+                        else
+                        {
+                            UIView.showError(text: NSLocalizedString("Passwords do not match", comment: "Error message"), detailText: "", image: nil)
+                        }
+                    }
+                    else
+                    {
+                        UIView.showError(text: "", detailText: NSLocalizedString("Password must be at least 6 characters", comment: ""), image: nil)
+                    }
                 }
             }
             else

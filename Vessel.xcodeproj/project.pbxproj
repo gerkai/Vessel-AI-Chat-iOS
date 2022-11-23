@@ -112,6 +112,7 @@
 		3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */; };
 		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F92D09B292C0A29004795E3 /* NSMutableAttributedStringExtension.swift */; };
+		3F92D09E292DAA57004795E3 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
 		3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */; };
 		3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C679428FDEC5500BC44FA /* ScienceStudiesView.swift */; };
@@ -379,6 +380,7 @@
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
 		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F92D09B292C0A29004795E3 /* NSMutableAttributedStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringExtension.swift; sourceTree = "<group>"; };
+		3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselSegmentedControl.swift; sourceTree = "<group>"; };
 		3F9C679428FDEC5500BC44FA /* ScienceStudiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceStudiesView.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 				3F0547C027CA8DD1006E3098 /* ForgotPasswordViewController.swift */,
 				3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */,
 				3FE369EC27C9A82A00231D42 /* Login.storyboard */,
+				3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */,
 				3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */,
 				3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
@@ -1736,6 +1739,7 @@
 				3F9C679E28FE5FE700BC44FA /* PH.swift in Sources */,
 				3F9C67B028FE625100BC44FA /* Leukocyte.swift in Sources */,
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
+				3F92D09E292DAA57004795E3 /* LoginCoordinator.swift in Sources */,
 				72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */,
 				3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
