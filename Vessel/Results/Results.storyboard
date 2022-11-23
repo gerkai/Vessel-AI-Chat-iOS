@@ -585,7 +585,7 @@
         <scene sceneID="Cev-Zf-JVI">
             <objects>
                 <viewController storyboardIdentifier="ReagentDetailsViewController" id="9ai-CJ-iss" customClass="ReagentDetailsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dIt-50-OQi">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="dIt-50-OQi">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
