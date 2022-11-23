@@ -153,7 +153,7 @@ class TodayViewModel
         let firstLesson = LessonsManager.shared.lessons.first
         let lessons = showInsights && firstLesson != nil ? [firstLesson!] : []
         return [
-            .header(name: contact.first_name!, goals: contact.getGoals()),
+            .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .insights(insights: lessons),
             .food(foods: contact.suggestedFoods),
             .water(glassesNumber: contact.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact.drinkedWaterGlasses ?? 0),

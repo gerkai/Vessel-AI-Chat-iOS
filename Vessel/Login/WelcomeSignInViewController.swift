@@ -126,7 +126,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
                 { [weak self] in
                     guard let self = self else { return }
                     print("Successfully loaded contact during auto-login. Jumping to Onboarding")
-                    OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                    LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
                     //just clear the splashView after enough time for above fade to complete.
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
                     {
