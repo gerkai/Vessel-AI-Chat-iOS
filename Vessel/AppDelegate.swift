@@ -84,6 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .systemBlue
+        
+        //These were added to fix keyboard tool bar appearance in LiveChat session under coach tab (VH-4551, VH-4552)
+        UITextField.appearance().tintColor = UIColor.black
+        UITextView.appearance().tintColor = UIColor.black
+        UIToolbar.appearance().backgroundColor = Constants.vesselGreat
+        UIToolbar.appearance().tintColor = Constants.vesselBlack
     }
     
     private func initializeZendesk()
