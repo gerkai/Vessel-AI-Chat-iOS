@@ -13,6 +13,7 @@ import ChatSDK
 import ChatProvidersSDK
 import SupportSDK
 import AVFoundation
+import FirebaseRemoteConfig
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         FirebaseApp.configure()
+        RemoteConfigManager.shared.launchRemoteConfig()
         analytics.setup()
         configureAppearance()
         MediaManager.shared.initMedia()

@@ -57,6 +57,9 @@ class OnboardingCoordinator
         //MainContact is guaranteed
         let contact = Contact.main()!
         
+        // Insights Feature Flag
+        let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
+
         //set Bugsee contact information
         if let email = contact.email
         {
@@ -80,7 +83,7 @@ class OnboardingCoordinator
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
             ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self])
-            if Storage.retrieve(as: Curriculum.self).count > 0
+            if showInsights && Storage.retrieve(as: Curriculum.self).count > 0
             {
                 LessonsManager.shared.buildLessonPlan()
             }
@@ -105,6 +108,9 @@ class OnboardingCoordinator
     
         if curState == .welcome
         {
+            //Separated load plans call because an issue with stored plans not having weekdays
+            PlansManager.shared.loadPlans()
+            
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
             vc.coordinator = self
             navigationController?.fadeTo(vc)
@@ -218,8 +224,15 @@ class OnboardingCoordinator
         {
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
             ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self/*, Lesson.self, Step.self*/])
-            //Separated load plans call because an issue with stored plans not having weekdays
-            PlansManager.shared.loadPlans()
+            
+            // Insights Feature Flag
+            let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
+            
+            if showInsights && Storage.retrieve(as: Curriculum.self).count > 0
+            {
+                LessonsManager.shared.buildLessonPlan()
+            }
+            
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
             navigationController?.fadeTo(vc)

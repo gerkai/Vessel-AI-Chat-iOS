@@ -14,6 +14,7 @@ def pods
   pod 'LiveChat'
   pod 'lottie-ios'
   pod 'Mixpanel-swift'
+  pod 'FirebaseRemoteConfig'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'
   pod 'SwiftyMarkdown'

@@ -135,9 +135,8 @@ class TodayViewModel
 {
     private var contact = Contact.main()!
     
-    init()
-    {
-    }
+    // Feature flags
+    var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
     
     var numberOfGlasses: Int?
     {
@@ -152,7 +151,7 @@ class TodayViewModel
     var sections: [TodayViewSection] {
         contact = Contact.main()!
         let firstLesson = LessonsManager.shared.lessons.first
-        let lessons = firstLesson != nil ? [firstLesson!] : []
+        let lessons = showInsights && firstLesson != nil ? [firstLesson!] : []
         return [
             .header(name: contact.first_name!, goals: contact.getGoals()),
             .insights(insights: lessons),

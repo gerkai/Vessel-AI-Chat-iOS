@@ -214,6 +214,8 @@
 		7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295568128F6893E000DD006 /* ReagentFoodViewController.swift */; };
 		729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AA29011C5400EEFB65 /* ZendeskManager.swift */; };
 		729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AC2901220D00EEFB65 /* LiveChatManager.swift */; };
+		72985CFF292DD38E00E6173E /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */; };
+		72985D01292DD69500E6173E /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72985D00292DD69400E6173E /* remote_config_defaults.plist */; };
 		7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
@@ -491,6 +493,8 @@
 		7295568128F6893E000DD006 /* ReagentFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodViewController.swift; sourceTree = "<group>"; };
 		729757AA29011C5400EEFB65 /* ZendeskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZendeskManager.swift; sourceTree = "<group>"; };
 		729757AC2901220D00EEFB65 /* LiveChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatManager.swift; sourceTree = "<group>"; };
+		72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
+		72985D00292DD69400E6173E /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodTableViewCell.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
@@ -742,6 +746,7 @@
 		3F96181E27D56DE100CB37B6 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				72985D00292DD69400E6173E /* remote_config_defaults.plist */,
 				3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */,
 			);
 			path = Config;
@@ -1195,6 +1200,7 @@
 				7271DFB228FA9B4B00909A9D /* PlansManager.swift */,
 				729757AA29011C5400EEFB65 /* ZendeskManager.swift */,
 				72DB1C962907ABFD00410C2D /* WaterManager.swift */,
+				72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1442,6 +1448,7 @@
 				3F12F017287B7A8200FCC52E /* CheckmarkImageCollectionViewCell.xib in Resources */,
 				3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */,
 				3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */,
+				72985D01292DD69500E6173E /* remote_config_defaults.plist in Resources */,
 				3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */,
 				72BC2447292C93C7002F6DA2 /* Lesson.storyboard in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
@@ -1743,6 +1750,7 @@
 				72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */,
 				3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
+				72985CFF292DD38E00E6173E /* RemoteConfigManager.swift in Sources */,
 				721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */,
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,

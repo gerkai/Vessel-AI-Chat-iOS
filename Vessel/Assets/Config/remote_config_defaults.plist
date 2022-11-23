@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>flex_membership_options</key>
+  <string>{"isFlexEnabled":true,"membershipOptions":[{"title":"Daily Testing","subtitle":"30 test cards monthly","quantityLabel":"x30","price":350,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Switch to Daily","pageType":"membership_options","purchaseLink":"https://vesselhealth.com/account"},{"title":"Weekly Testing","subtitle":"4 test cards monthly","quantityLabel":"x4","price":50,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Switch to Weekly","pageType":"membership_options","purchaseLink":"https://vesselhealth.com/account"},{"title":"Monthly Testing","subtitle":"1 test card monthly","quantityLabel":"x1","price":30,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Switch to Monthly","pageType":"membership_options","purchaseLink":"https://vesselhealth.com/account"},{"title":"Flexible Testing","subtitle":"Buy test cards as needed","price":14.95,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Learn More","pageType":"membership_options"},{"title":"Flex monthly membership","price":14.95,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Buy Now","pageType":"shipping","purchaseLink":""},{"title":"Flexible Testing","price":9.95,"currencySymbol":"$","frequency":"monthly","buttonTitle":"Buy Now","pageType":"shipping","purchaseLink":""},{"title":"1 card","price":19.95,"currencySymbol":"$","pageType":"pricing_popup","purchaseLink":""},{"title":"4 cards","price":59.95,"currencySymbol":"$","pageType":"pricing_popup","purchaseLink":"https://vesselhealth.com/account"}]}</string>
+  <key>use_livechat</key>
+  <string>true</string>
+  <key>app_suggested_version</key>
+  <string>0.0.0</string>
+  <key>skip_association</key>
+  <string>ryanw@vesselhealth.com</string>
+  <key>custom_tip_image_urls</key>
+  <string>["https://media.vesselhealth.com/customTip/eat.jpg","https://media.vesselhealth.com/customTip/exercise.jpg","https://media.vesselhealth.com/customTip/pilates.jpg","https://media.vesselhealth.com/customTip/supplement.jpg","https://media.vesselhealth.com/customTip/vitamin.jpg","https://media.vesselhealth.com/customTip/walk.jpg"]</string>
+  <key>camera_vision_tester</key>
+  <string>garrettfrit5z@gmail.com,asalem@fcih1.com</string>
+  <key>lifestyle_hydration_id</key>
+  <string>5</string>
+  <key>timer_survey_v2_id</key>
+  <string></string>
+  <key>cobrowse_enabled</key>
+  <string>true</string>
+  <key>qc_calibration_emails</key>
+  <string>teseter@vesselhealth.com,test2@gmail.com,test@test.com,jesus@vesselhealth.com,ryanw@vesselhealth.com,garrettfritz@gmail.com</string>
+  <key>app_min_version</key>
+  <string>0.0.0</string>
+  <key>free_trial_period_in_days</key>
+  <string>8000</string>
+  <key>S3_BUCKET_NAME</key>
+  <string>vessel-ips-dev0-sample-images</string>
+  <key>S3_SECRET_KEY</key>
+  <string>r/h1g6XYMqFz5CkxroXUK0XS9mDV+QZWDzUr5umg</string>
+  <key>lifestyle_test_id</key>
+  <string>11</string>
+  <key>simulated_failure_id</key>
+  <string></string>
+  <key>S3_ACCESS_KEY</key>
+  <string>AKIAW42KY3LBQXWJLT6K</string>
+  <key>timer_survey_id</key>
+  <string>1</string>
+  <key>cobrowse_key</key>
+  <string>svAmyyPly47arQ</string>
+</dict>
+</plist>
