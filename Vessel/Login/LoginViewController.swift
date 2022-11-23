@@ -109,10 +109,10 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
-                                Contact.main()?.identifyAnalytics()                                
                                 self.nextButton.hideLoading()
+                                Contact.main()?.identifyAnalytics()
                                 self.analytics.log(event: .logIn(loginType: .email))
-                                OnboardingCoordinator.pushInitialViewController(to: self.navigationController)
+                                LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
                             }
                             onFailure:
                             {
@@ -171,12 +171,11 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
         else
         {
-            //navigate to start of Onboarding
             if let analyticsLoginType = AnalyticsLoginType(rawValue: loginType.rawValue)
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            OnboardingCoordinator.pushInitialViewController(to: navigationController)
+            LoginCoordinator.shared.pushLastViewController(to: navigationController)
         }
     }
     

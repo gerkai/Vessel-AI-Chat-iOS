@@ -71,8 +71,8 @@ class TestCardExistCheckingViewController: UIViewController, VesselScreenIdentif
         {
             if Contact.main() != nil
             {
-                //if the contact already exists (due to social login, we can go straight to Onboarding
-                OnboardingCoordinator.pushInitialViewController(to: navigationController)
+                //if the contact already exists (due to social login, we can go straight to Onboarding (or contact cleanup)
+                LoginCoordinator.shared.pushLastViewController(to: navigationController)
             }
             else
             {

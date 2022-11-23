@@ -148,7 +148,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
             {
                 analytics.log(event: .logIn(loginType: analyticsLoginType))
             }
-            OnboardingCoordinator.pushInitialViewController(to: navigationController)
+            LoginCoordinator.shared.pushLastViewController(to: navigationController)
         }
     }
 }

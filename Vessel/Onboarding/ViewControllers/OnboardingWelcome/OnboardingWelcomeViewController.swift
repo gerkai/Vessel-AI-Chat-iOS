@@ -30,7 +30,7 @@ class OnboardingWelcomeViewController: UIViewController, VesselScreenIdentifiabl
         
         if let contact = Contact.main()
         {
-            let localizedGreeting = String(format: NSLocalizedString("Hi %@", comment: "Greeting by first name"), contact.first_name)
+            let localizedGreeting = String(format: NSLocalizedString("Hi %@", comment: "Greeting by first name"), contact.first_name!)
             nameLabel.text = localizedGreeting
         }
     }
