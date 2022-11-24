@@ -228,7 +228,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-lL-nB6">
-                                                    <rect key="frame" x="20" y="5.5" width="194.5" height="39"/>
+                                                    <rect key="frame" x="20" y="5.5" width="194.5" height="39.5"/>
                                                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -372,17 +372,17 @@
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzF-Qx-3si">
                                 <rect key="frame" x="20" y="118" width="335" height="1072"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hnG-bi-ZWL">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="1100"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hnG-bi-ZWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="1074.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyK-uL-hlK">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="39.5"/>
                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhG-oV-LTN">
-                                                <rect key="frame" x="119.5" y="84" width="96" height="96"/>
+                                                <rect key="frame" x="119.5" y="55.5" width="96" height="96"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="NjN-rX-LzZ"/>
@@ -391,28 +391,15 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-IU-g0E" userLabel="Spacing">
-                                                <rect key="frame" x="152.5" y="196" width="30" height="20"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYR-qu-bQU" userLabel="Spacer View">
+                                                <rect key="frame" x="47.5" y="167.5" width="240" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="omv-fL-ARg"/>
+                                                    <constraint firstAttribute="height" constant="20" id="5kk-Ei-JdD"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="22"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="UDG-k4-mKD"/>
-                                                    <action selector="onChangeProfilePhoto" destination="ShQ-ux-mr3" eventType="touchUpInside" id="o43-Iv-gHg"/>
-                                                </connections>
-                                            </button>
+                                            </view>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qim-SW-Fdt" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="232" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="203.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="RvV-Ox-H5N"/>
@@ -430,7 +417,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qz-Au-XgQ" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="308" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="279.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Pdy-dc-e3s"/>
@@ -448,7 +435,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQg-Gk-hLE" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="384" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="355.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Gka-K8-nsl"/>
@@ -466,7 +453,7 @@
                                                 </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nat-E3-83a" customClass="VesselSegmentedControl" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="460" width="335" height="61"/>
+                                                <rect key="frame" x="0.0" y="431.5" width="335" height="61"/>
                                                 <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Os7-tq-6Ib"/>
@@ -476,13 +463,13 @@
                                                     <segment title="Female"/>
                                                     <segment title="Non-binary"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="selectedSegmentTintColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="onGenderControlChanged" destination="ShQ-ux-mr3" eventType="valueChanged" id="21r-WL-iQy"/>
                                                 </connections>
                                             </segmentedControl>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sda-pX-TGB" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="536" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="507.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="jVs-su-NLk"/>
@@ -500,7 +487,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uFz-cF-1ek" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="612" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="583.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Dqi-bD-GhJ"/>
@@ -518,7 +505,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Birthday" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b6L-91-2NU" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="688" width="335" height="60"/>
+                                                <rect key="frame" x="0.0" y="659.5" width="335" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="qGs-xC-D6i"/>
@@ -535,64 +522,62 @@
                                                     <outlet property="delegate" destination="ShQ-ux-mr3" id="e2a-7b-Yvj"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbY-XG-Jiy">
-                                                <rect key="frame" x="0.0" y="764" width="335" height="132"/>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7q-76-sVf" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="912" width="335" height="60"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="18l-Ba-2B3"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
-                                                <state key="normal" title="Change Password">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="22"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="4Ru-yM-87D"/>
-                                                    <action selector="onChangePassword" destination="ShQ-ux-mr3" eventType="touchUpInside" id="1Ve-3P-Mw4"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8or-rO-a9k" userLabel="Spacing">
-                                                <rect key="frame" x="152.5" y="988" width="30" height="20"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuJ-vA-fYf">
+                                                <rect key="frame" x="0.0" y="735.5" width="335" height="118"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbY-XG-Jiy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="28"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="28" id="ukQ-kz-7Xy"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7q-76-sVf" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="58" width="335" height="60"/>
+                                                        <color key="backgroundColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="18l-Ba-2B3"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                        <state key="normal" title="Change Password">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="4Ru-yM-87D"/>
+                                                            <action selector="onChangePassword" destination="ShQ-ux-mr3" eventType="touchUpInside" id="1Ve-3P-Mw4"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="tCF-jF-s1F"/>
+                                                    <constraint firstItem="o7q-76-sVf" firstAttribute="leading" secondItem="zuJ-vA-fYf" secondAttribute="leading" id="0hV-jp-de7"/>
+                                                    <constraint firstItem="QbY-XG-Jiy" firstAttribute="leading" secondItem="zuJ-vA-fYf" secondAttribute="leading" id="1wV-LH-m2w"/>
+                                                    <constraint firstItem="QbY-XG-Jiy" firstAttribute="trailing" secondItem="zuJ-vA-fYf" secondAttribute="trailing" id="Pf9-Fy-hmz"/>
+                                                    <constraint firstItem="o7q-76-sVf" firstAttribute="top" secondItem="QbY-XG-Jiy" secondAttribute="bottom" constant="30" id="gyI-fC-gZ8"/>
+                                                    <constraint firstItem="QbY-XG-Jiy" firstAttribute="top" secondItem="zuJ-vA-fYf" secondAttribute="top" id="mwL-5M-ugA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="o7q-76-sVf" secondAttribute="bottom" id="vBv-SM-pss"/>
+                                                    <constraint firstItem="o7q-76-sVf" firstAttribute="trailing" secondItem="zuJ-vA-fYf" secondAttribute="trailing" id="zcb-A4-Bl0"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="22"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="v6p-tk-Bme"/>
-                                                    <action selector="onChangeProfilePhoto" destination="ShQ-ux-mr3" eventType="touchUpInside" id="KL4-KR-3X0"/>
-                                                </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hv5-we-bOQ">
-                                                <rect key="frame" x="0.0" y="1024" width="335" height="0.0"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hv5-we-bOQ" userLabel="Delete Account View">
+                                                <rect key="frame" x="0.0" y="869.5" width="335" height="205"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Delete Vessel Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gv-IA-rme">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="27"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Vessel Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gv-IA-rme">
+                                                        <rect key="frame" x="0.0" y="34" width="335" height="27"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Us-RIu">
-                                                        <rect key="frame" x="0.0" y="27" width="335" height="53.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Us-RIu">
+                                                        <rect key="frame" x="0.0" y="77" width="335" height="46"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Permanently delete your account and associated data from all Vessel products">
@@ -605,78 +590,66 @@
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-8F-7aq" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="145" width="335" height="60"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="gvU-Af-cyV"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                        <state key="normal" title="Request to delete your account">
+                                                            <color key="titleColor" systemColor="labelColor"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="Ife-2k-zeS"/>
+                                                            <action selector="onDeleteAccount" destination="ShQ-ux-mr3" eventType="touchUpInside" id="EOb-oN-dGY"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="width" secondItem="hv5-we-bOQ" secondAttribute="width" id="2Le-bf-YYZ"/>
-                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="centerX" secondItem="hv5-we-bOQ" secondAttribute="centerX" id="4CG-Px-54s"/>
-                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="top" secondItem="hv5-we-bOQ" secondAttribute="top" id="GOr-HQ-gqM"/>
-                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="top" secondItem="5Gv-IA-rme" secondAttribute="bottom" id="few-N8-fqA"/>
-                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="centerX" secondItem="hv5-we-bOQ" secondAttribute="centerX" id="jHX-tf-nXx"/>
-                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="width" secondItem="hv5-we-bOQ" secondAttribute="width" id="oy3-js-pPs"/>
-                                                    <constraint firstAttribute="bottom" secondItem="sTC-Us-RIu" secondAttribute="bottom" id="qaj-Ax-Q9g"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="trailing" secondItem="hv5-we-bOQ" secondAttribute="trailing" id="42p-Xd-Xor"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="leading" secondItem="hv5-we-bOQ" secondAttribute="leading" id="7oh-yv-NYI"/>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="trailing" secondItem="hv5-we-bOQ" secondAttribute="trailing" id="DLC-I7-soO"/>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="top" secondItem="hv5-we-bOQ" secondAttribute="top" constant="34" id="GOr-HQ-gqM"/>
+                                                    <constraint firstItem="SJn-8F-7aq" firstAttribute="top" secondItem="sTC-Us-RIu" secondAttribute="bottom" constant="22" id="NFz-Yk-8n9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SJn-8F-7aq" secondAttribute="bottom" id="fXa-Yr-PPS"/>
+                                                    <constraint firstItem="sTC-Us-RIu" firstAttribute="top" secondItem="5Gv-IA-rme" secondAttribute="bottom" constant="16" id="few-N8-fqA"/>
+                                                    <constraint firstItem="SJn-8F-7aq" firstAttribute="trailing" secondItem="hv5-we-bOQ" secondAttribute="trailing" id="hZ8-XF-TYX"/>
+                                                    <constraint firstItem="5Gv-IA-rme" firstAttribute="leading" secondItem="hv5-we-bOQ" secondAttribute="leading" id="jAt-Fw-9U3"/>
+                                                    <constraint firstItem="SJn-8F-7aq" firstAttribute="leading" secondItem="hv5-we-bOQ" secondAttribute="leading" id="wxt-ZN-jPU"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-8F-7aq" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1040" width="335" height="60"/>
-                                                <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="gvU-Af-cyV"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
-                                                <state key="normal" title="Request to delete your account">
-                                                    <color key="titleColor" systemColor="labelColor"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="22"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="logOut:" destination="yZo-eU-bGo" eventType="touchUpInside" id="Ife-2k-zeS"/>
-                                                    <action selector="onDeleteAccount" destination="ShQ-ux-mr3" eventType="touchUpInside" id="EOb-oN-dGY"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="nat-E3-83a" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="2Ho-ve-lRZ"/>
-                                            <constraint firstItem="SJn-8F-7aq" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="3xs-YU-qNB"/>
                                             <constraint firstItem="IyK-uL-hlK" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="De0-KX-7I5"/>
                                             <constraint firstItem="b6L-91-2NU" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="H2I-qF-E4t"/>
                                             <constraint firstItem="uFz-cF-1ek" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="WIW-z3-oal"/>
                                             <constraint firstItem="hv5-we-bOQ" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="WUC-V7-vsm"/>
                                             <constraint firstItem="gQg-Gk-hLE" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="eCT-Se-sO6"/>
-                                            <constraint firstAttribute="height" constant="1100" id="fUM-6L-RpI"/>
-                                            <constraint firstItem="o7q-76-sVf" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="l2i-4v-N7Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="zuJ-vA-fYf" secondAttribute="trailing" id="fmI-WN-VE7"/>
+                                            <constraint firstItem="zuJ-vA-fYf" firstAttribute="leading" secondItem="hnG-bi-ZWL" secondAttribute="leading" id="lW7-f0-cjL"/>
                                             <constraint firstItem="qim-SW-Fdt" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="man-30-Y9e"/>
                                             <constraint firstItem="sda-pX-TGB" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="p3K-R9-e0c"/>
                                             <constraint firstItem="0qz-Au-XgQ" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="roV-yN-fej"/>
-                                            <constraint firstItem="QbY-XG-Jiy" firstAttribute="width" secondItem="hnG-bi-ZWL" secondAttribute="width" id="wvy-gX-qas"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="hnG-bi-ZWL" secondAttribute="bottom" constant="-537" id="BRF-75-N7g"/>
-                                    <constraint firstItem="hnG-bi-ZWL" firstAttribute="leading" secondItem="wzF-Qx-3si" secondAttribute="leading" id="eM5-6U-omL"/>
-                                    <constraint firstItem="hnG-bi-ZWL" firstAttribute="width" secondItem="zrT-Wg-PZy" secondAttribute="width" id="fJS-fx-orv"/>
                                     <constraint firstItem="zrT-Wg-PZy" firstAttribute="trailing" secondItem="hnG-bi-ZWL" secondAttribute="trailing" id="hiS-nP-ynN"/>
                                     <constraint firstItem="hnG-bi-ZWL" firstAttribute="top" secondItem="zrT-Wg-PZy" secondAttribute="top" id="jY1-Rf-CgF"/>
-                                    <constraint firstAttribute="trailing" secondItem="hnG-bi-ZWL" secondAttribute="trailing" id="t10-0Q-nSN"/>
                                     <constraint firstItem="hnG-bi-ZWL" firstAttribute="width" secondItem="wzF-Qx-3si" secondAttribute="width" id="tF4-w8-1yY"/>
                                     <constraint firstItem="hnG-bi-ZWL" firstAttribute="leading" secondItem="zrT-Wg-PZy" secondAttribute="leading" id="vBz-Qy-dgh"/>
-                                    <constraint firstItem="hnG-bi-ZWL" firstAttribute="top" secondItem="wzF-Qx-3si" secondAttribute="top" id="xDF-mD-Y7d"/>
                                     <constraint firstItem="hnG-bi-ZWL" firstAttribute="bottom" secondItem="zrT-Wg-PZy" secondAttribute="bottom" id="yJf-1D-TjD"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="zrT-Wg-PZy"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Mpj-aN-83S"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="BRF-75-N7g"/>
-                                        <exclude reference="eM5-6U-omL"/>
-                                        <exclude reference="t10-0Q-nSN"/>
-                                        <exclude reference="xDF-mD-Y7d"/>
-                                    </mask>
-                                </variation>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kz-tG-X19" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="50" height="50"/>
@@ -706,30 +679,22 @@
                             <constraint firstItem="0Kz-tG-X19" firstAttribute="leading" secondItem="gBq-xH-ejR" secondAttribute="leading" constant="20" id="R28-hp-bqY"/>
                             <constraint firstItem="0Kz-tG-X19" firstAttribute="top" secondItem="R3H-eA-HxZ" secondAttribute="top" constant="44" id="Swc-Tq-aDQ"/>
                             <constraint firstItem="wzF-Qx-3si" firstAttribute="width" secondItem="R3H-eA-HxZ" secondAttribute="width" constant="-40" id="jTH-h3-Hhu"/>
-                            <constraint firstItem="wzF-Qx-3si" firstAttribute="top" secondItem="gBq-xH-ejR" secondAttribute="top" constant="74" id="lRB-6o-2K6"/>
                             <constraint firstItem="wzF-Qx-3si" firstAttribute="top" secondItem="0Kz-tG-X19" secondAttribute="bottom" constant="24" id="pBP-pL-ibh"/>
                             <constraint firstItem="wzF-Qx-3si" firstAttribute="centerX" secondItem="gBq-xH-ejR" secondAttribute="centerX" id="q62-4W-7QW"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="lRB-6o-2K6"/>
-                            </mask>
-                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1254"/>
                     <connections>
                         <outlet property="birthDateTextField" destination="b6L-91-2NU" id="tGR-1e-IU1"/>
-                        <outlet property="changePasswordButton" destination="o7q-76-sVf" id="pVb-tI-XK0"/>
-                        <outlet property="changePasswordTitle" destination="QbY-XG-Jiy" id="cIS-fc-8Mm"/>
                         <outlet property="emailTextField" destination="gQg-Gk-hLE" id="0Bj-MZ-xWu"/>
                         <outlet property="genderSegmentedControl" destination="nat-E3-83a" id="wBr-DD-6Q8"/>
                         <outlet property="heightTextField" destination="sda-pX-TGB" id="Icc-HG-hou"/>
                         <outlet property="lastNameTextField" destination="0qz-Au-XgQ" id="rvr-Fg-1vZ"/>
                         <outlet property="nameTextField" destination="qim-SW-Fdt" id="iiN-Gi-goy"/>
+                        <outlet property="passwordView" destination="zuJ-vA-fYf" id="3zN-Sv-aC8"/>
                         <outlet property="profileImageButton" destination="HhG-oV-LTN" id="acK-4b-ptA"/>
                         <outlet property="scrollView" destination="wzF-Qx-3si" id="hE3-sI-6Uc"/>
-                        <outlet property="stackViewHeightConstraint" destination="fUM-6L-RpI" id="Nrt-R2-8dh"/>
                         <outlet property="weightTextField" destination="uFz-cF-1ek" id="7lv-Kl-l3d"/>
                     </connections>
                 </viewController>
@@ -895,7 +860,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82j-TV-8g7">
-                                                    <rect key="frame" x="20" y="5.5" width="290" height="39"/>
+                                                    <rect key="frame" x="20" y="5.5" width="290" height="39.5"/>
                                                     <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
