@@ -38,9 +38,8 @@ class EditProfileViewController: KeyboardFriendlyViewController, VesselScreenIde
     @IBOutlet private weak var weightTextField: VesselTextField!
     @IBOutlet private weak var birthDateTextField: VesselTextField!
     @IBOutlet private weak var profileImageButton: UIButton!
-    @IBOutlet private weak var changePasswordTitle: UILabel!
-    @IBOutlet private weak var changePasswordButton: BounceButton!
-    @IBOutlet private weak var stackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var passwordView: UIView!
+    
     private var profileImageView = UIImageView()
     
     private lazy var heightPickerView: UIPickerView =
@@ -227,9 +226,7 @@ private extension EditProfileViewController
     {
         if viewModel.shouldHidePassword
         {
-            changePasswordTitle.isHidden = true
-            changePasswordButton.isHidden = true
-            stackViewHeightConstraint.constant = 1107
+            passwordView.isHidden = true
         }
     }
     
