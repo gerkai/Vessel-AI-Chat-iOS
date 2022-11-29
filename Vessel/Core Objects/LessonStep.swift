@@ -21,11 +21,12 @@ class Step: CoreObjectProtocol
     var last_updated: Int
     let storage: StorageType = .cacheAndDisk
 
-    var type: StepType
+    var type: StepType?
     {
-        return StepType(rawValue: typeString)!
+        // There are steps with type null so I added this for dev testing
+        return StepType(rawValue: typeString ?? "")
     }
-    private let typeString: String
+    private let typeString: String?
     var title: String?
     var text: String?
     let successText: String?
@@ -42,7 +43,7 @@ class Step: CoreObjectProtocol
     
     init(id: Int,
          last_updated: Int,
-         typeString: String,
+         typeString: String?,
          title: String? = nil,
          text: String? = nil,
          successText: String?,

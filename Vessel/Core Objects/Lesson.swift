@@ -16,7 +16,7 @@ class Lesson: CoreObjectProtocol, Equatable
     let title: String
     // TODO: Remove optional once backend send this every time
     let description: String?
-    let imageUrl: String
+    let imageUrl: String?
     var completedDate: String?
     var rank: Int
     // TODO: Remove optional once backend send this every time
@@ -28,7 +28,7 @@ class Lesson: CoreObjectProtocol, Equatable
          last_updated: Int,
          title: String,
          description: String,
-         imageUrl: String,
+         imageUrl: String?,
          completedDate: String? = nil,
          rank: Int,
          activityIds: [Int]?,

@@ -41,6 +41,8 @@ class LessonsCoordinator
             return true
         case .survey, .readonly, .input:
             return false
+        default:
+            return false
         }
     }
     
@@ -51,9 +53,10 @@ class LessonsCoordinator
     
     func answerStep(answer: String, answerId: Int)
     {
-        guard let step = currentStep else { return }
+        guard let step = currentStep,
+              let type = step.type else { return }
         
-        switch step.type
+        switch type
         {
         case .input:
             // TODO: Add answer to step
@@ -66,35 +69,45 @@ class LessonsCoordinator
         }
     }
     
-    func getNextStepViewController() -> UIViewController?
+    func getNextStepViewController(state: StepViewControllerState = .answering) -> UIViewController?
     {
-        currentStepIndex += 1
-        if hasCompletedLesson()
+        if shouldShowSuccessScreen() && state == .answering
         {
-            return nil
+            let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
+            let resultsVC = storyboard.instantiateViewController(identifier: "LessonResultsViewController") as! LessonResultsViewController
+            return resultsVC
         }
         else
         {
-            let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
-            guard let step = currentStep else { return nil }
-            
-            switch step.type
+            currentStepIndex += 1
+            if hasCompletedLesson()
             {
-            case .quiz, .survey:
-                let quizVC = storyboard.instantiateViewController(identifier: "QuizSurveyLessonStepViewController") as! QuizSurveyLessonStepViewController
-                quizVC.coordinator = self
-                quizVC.viewModel = StepViewModel(step: step, lesson: lesson)
-                return quizVC
-            case .readonly:
-                let readOnlyVC = storyboard.instantiateViewController(identifier: "ReadOnlyLessonStepViewController") as! ReadOnlyLessonStepViewController
-                readOnlyVC.coordinator = self
-                readOnlyVC.viewModel = StepViewModel(step: step, lesson: lesson)
-                return readOnlyVC
-            case .input:
-                let inputVC = storyboard.instantiateViewController(identifier: "InputLessonStepViewController") as! InputLessonStepViewController
-                inputVC.coordinator = self
-                inputVC.viewModel = StepViewModel(step: step, lesson: lesson)
-                return inputVC
+                return nil
+            }
+            else
+            {
+                let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
+                guard let step = currentStep,
+                      let type = step.type else { return nil }
+
+                switch type
+                {
+                case .quiz, .survey:
+                    let quizVC = storyboard.instantiateViewController(identifier: "QuizSurveyLessonStepViewController") as! QuizSurveyLessonStepViewController
+                    quizVC.coordinator = self
+                    quizVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                    return quizVC
+                case .readonly:
+                    let readOnlyVC = storyboard.instantiateViewController(identifier: "ReadOnlyLessonStepViewController") as! ReadOnlyLessonStepViewController
+                    readOnlyVC.coordinator = self
+                    readOnlyVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                    return readOnlyVC
+                case .input:
+                    let inputVC = storyboard.instantiateViewController(identifier: "InputLessonStepViewController") as! InputLessonStepViewController
+                    inputVC.coordinator = self
+                    inputVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                    return inputVC
+                }
             }
         }
     }

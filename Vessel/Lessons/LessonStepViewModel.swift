@@ -30,11 +30,7 @@ class StepViewModel
     
     var result: StepViewResult?
     {
-        if state == .result
-        {
-            return selectedAnswerId == step.correctAnswerId ? .correct : .wrong
-        }
-        return nil
+        return selectedAnswerId == step.correctAnswerId ? .correct : .wrong
     }
     
     init(step: Step, lesson: Lesson)

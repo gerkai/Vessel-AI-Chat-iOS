@@ -184,6 +184,7 @@
 		721B6BAF289A02CB0099BC4A /* GenericAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */; };
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
 		721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */; };
+		721F7BE22935BACA00B1F501 /* LessonResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */; };
 		72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */; };
 		72332FB028EE8D94008CBA8C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAF28EE8D94008CBA8C /* Food.swift */; };
 		72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */; };
@@ -462,6 +463,7 @@
 		721B6BAE289A02CB0099BC4A /* GenericAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewModel.swift; sourceTree = "<group>"; };
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
 		721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericAlertViewController.xib; sourceTree = "<group>"; };
+		721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResultsViewController.swift; sourceTree = "<group>"; };
 		72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		72332FAF28EE8D94008CBA8C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -1227,6 +1229,7 @@
 				72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */,
 				7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */,
 				72D3C76E293216EC0009BBB0 /* InputLessonStepViewController.swift */,
+				721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1731,6 +1734,7 @@
 				3F0D389A28ECEB3F00D7C3A3 /* UIImageViewAligned.swift in Sources */,
 				3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */,
 				72F0DEE128E278ED00034088 /* TodayViewController.swift in Sources */,
+				721F7BE22935BACA00B1F501 /* LessonResultsViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
 				3F9C67A228FE60EE00BC44FA /* Ketones.swift in Sources */,

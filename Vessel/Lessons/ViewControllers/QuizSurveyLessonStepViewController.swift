@@ -9,8 +9,8 @@ import UIKit
 
 class QuizSurveyLessonStepViewController: UIViewController
 {
-    var viewModel: StepViewModel?
-    var coordinator: LessonsCoordinator?
+    var viewModel: StepViewModel!
+    var coordinator: LessonsCoordinator!
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
@@ -43,18 +43,25 @@ class QuizSurveyLessonStepViewController: UIViewController
     
     @IBAction func onBack()
     {
-        coordinator?.back()
+        coordinator.back()
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onNext()
     {
-        guard let viewModel = viewModel else { return }
-        
         if viewModel.state == .answering
         {
             if let _ = viewModel.selectedAnswerId
             {
+                if coordinator.shouldShowSuccessScreen()
+                {
+                    if let viewController = coordinator.getNextStepViewController(state: viewModel.state) as? LessonResultsViewController
+                    {
+                        viewController.imageUrl = viewModel.lesson.imageUrl
+                        viewController.success = viewModel.result == .correct
+                        navigationController?.pushViewController(viewController, animated: false)
+                    }
+                }
                 viewModel.state = .result
                 reloadUI()
             }
@@ -70,7 +77,7 @@ class QuizSurveyLessonStepViewController: UIViewController
         }
         else
         {
-            if let viewController = coordinator?.getNextStepViewController()
+            if let viewController = coordinator.getNextStepViewController(state: viewModel.state)
             {
                 navigationController?.pushViewController(viewController, animated: true)
             }
@@ -86,7 +93,6 @@ private extension QuizSurveyLessonStepViewController
 {
     func setupUI()
     {
-        guard let viewModel = viewModel else { return }
         questionLabel.text = viewModel.step.text
         titleLabel.text = viewModel.lesson.title
         setupImageView()
@@ -95,14 +101,13 @@ private extension QuizSurveyLessonStepViewController
     
     func setupImageView()
     {
-        guard let viewModel = viewModel,
-              let url = URL(string: viewModel.lesson.imageUrl) else { return }
+        guard let imageUrl = viewModel.lesson.imageUrl,
+              let url = URL(string: imageUrl) else { return }
         backgroundImageView.kf.setImage(with: url)
     }
     
     func setupStackView()
     {
-        guard let viewModel = viewModel else { return }
         for answer in viewModel.step.answers
         {
             let view = LessonStepView(frame: .zero)
@@ -116,7 +121,6 @@ private extension QuizSurveyLessonStepViewController
     
     func reloadUI()
     {
-        guard let viewModel = viewModel else { return }
         if viewModel.state == .answering
         {
             for view in stepsStackView.arrangedSubviews
@@ -132,7 +136,7 @@ private extension QuizSurveyLessonStepViewController
                 guard let view = view as? LessonStepView else { return }
                 
                 let state: LessonStepViewCheckedState
-                if viewModel.result == .correct || type == .survey
+                if viewModel.state == .result && (viewModel.result == .correct || type == .survey)
                 {
                     if view.id == viewModel.selectedAnswerId
                     {
@@ -182,7 +186,6 @@ extension QuizSurveyLessonStepViewController: LessonStepViewDelegate
 {
     func onStepSelected(id: Int)
     {
-        guard let viewModel = viewModel else { return }
         if viewModel.state == .answering
         {
             if id == viewModel.selectedAnswerId

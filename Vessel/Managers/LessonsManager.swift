@@ -28,10 +28,10 @@ class LessonsManager
         let goalsCurriculums = Storage.retrieve(as: Curriculum.self).filter({ contact.goal_ids.contains($0.goalId) })
         let lessons = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
         let filteredLessons = lessons.filter({ !$0.completed })
-        let sortedLessons = filteredLessons.sorted(by: { $0.rank < $1.rank })
+//        let sortedLessons = filteredLessons.sorted(by: { $0.rank < $1.rank })
         
         var count = 0
-        for lessonRank in sortedLessons
+        for lessonRank in filteredLessons
         {
             /*guard let curriculumIndex = goalsCurriculums.firstIndex(where: { curriculum in
                 curriculum.lessonRanks.contains(where: { $0.id == lessonRank.id }) }),
@@ -42,13 +42,13 @@ class LessonsManager
                 guard let self = self else { return }
                 self.lessons.append(lesson)
                 count += 1
-                if count == sortedLessons.count
+                if count == filteredLessons.count
                 {
                     self.onPlanBuiltComplete()
                 }
             } onFailure: {
                 count += 1
-                if count == sortedLessons.count
+                if count == filteredLessons.count
                 {
                     self.onPlanBuiltComplete()
                 }
@@ -59,11 +59,10 @@ class LessonsManager
     private func onPlanBuiltComplete()
     {
         self.lessons = self.lessons.sorted(by: { $0.rank < $1.rank })
-        
         guard let firstLesson = lessons.first else { return }
         getLessonSteps(lesson: firstLesson) { [weak self] steps in
             guard let self = self else { return }
-            self.lessons.first!.steps = steps
+            self.lessons.first!.steps = steps.filter({ $0.type != nil })
             // Remove lesson if doens't have any step and load the next one
             if self.lessons.first!.steps.count == 0
             {
@@ -75,7 +74,7 @@ class LessonsManager
                 for step in self.lessons.first!.steps
                 {
                     print("Step: \(step.text!)")
-                    print("Type: \(step.type)")
+                    print("Type: \(step.type!)")
                     print("Ansers: \(step.answers.map({ $0.primaryText }).joined(separator: ", "))")
                     print("Correct answer: \(step.answers.filter({ $0.correct }).map({ $0.primaryText }).joined(separator: ", "))")
                     print("======================================================================================================")

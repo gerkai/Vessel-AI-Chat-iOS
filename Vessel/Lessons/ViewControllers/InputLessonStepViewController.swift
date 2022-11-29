@@ -9,8 +9,8 @@ import UIKit
 
 class InputLessonStepViewController: UIViewController
 {
-    var viewModel: StepViewModel?
-    var coordinator: LessonsCoordinator?
+    var viewModel: StepViewModel!
+    var coordinator: LessonsCoordinator!
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
@@ -34,13 +34,13 @@ class InputLessonStepViewController: UIViewController
     
     @IBAction func onBack()
     {
-        coordinator?.back()
+        coordinator.back()
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onNext()
     {
-        coordinator?.answerStep(answer: textView.text ?? "", answerId: 0)
+        coordinator.answerStep(answer: textView.text ?? "", answerId: 0)
         if let viewController = coordinator?.getNextStepViewController()
         {
             navigationController?.pushViewController(viewController, animated: true)
@@ -56,7 +56,6 @@ private extension InputLessonStepViewController
 {
     func setupUI()
     {
-        guard let viewModel = viewModel else { return }
         titleLabel.text = viewModel.lesson.title
         textView.text = viewModel.step.placeholderText
         initialTextViewText = viewModel.step.placeholderText
@@ -66,14 +65,13 @@ private extension InputLessonStepViewController
     
     func setupImageView()
     {
-        guard let viewModel = viewModel,
-              let url = URL(string: viewModel.lesson.imageUrl) else { return }
+        guard let imageUrl = viewModel.lesson.imageUrl,
+              let url = URL(string: imageUrl) else { return }
         backgroundImageView.kf.setImage(with: url)
     }
     
     func setupStackView()
     {
-        guard let viewModel = viewModel else { return }
         contentTextLabel.text = viewModel.step.text
     }
 }
