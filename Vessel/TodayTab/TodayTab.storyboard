@@ -326,72 +326,14 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="S8H-4c-MEL"/>
                                 </connections>
                             </tableView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W04-cS-n7d">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lk1-hH-kSp">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-wg-JZc" userLabel="Lightening View">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="1079"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6XO-eu-mbs">
-                                            <rect key="frame" x="171" y="511" width="48" height="48"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Ready to test?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg6-n9-SLw">
-                                            <rect key="frame" x="115.66666666666667" y="575" width="158.66666666666663" height="27"/>
-                                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrY-3S-beP">
-                                            <rect key="frame" x="34" y="614" width="322" height="84"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="Tap this button to take your first test, unlock your Today page and get personalized recommendations.">
-                                                    <attributes>
-                                                        <font key="NSFont" size="16" name="NoeText"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.75" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="dottedLineWithArrow" translatesAutoresizingMaskIntoConstraints="NO" id="wus-Uv-Gxu">
-                                            <rect key="frame" x="195" y="728" width="114" height="228"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="bottom" secondItem="lk1-hH-kSp" secondAttribute="bottom" id="GbV-gS-dRU"/>
-                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="top" secondItem="lk1-hH-kSp" secondAttribute="top" id="L4f-uJ-mGT"/>
-                                        <constraint firstItem="wus-Uv-Gxu" firstAttribute="top" secondItem="hrY-3S-beP" secondAttribute="bottom" constant="30" id="Lio-S9-maU"/>
-                                        <constraint firstItem="dg6-n9-SLw" firstAttribute="top" secondItem="6XO-eu-mbs" secondAttribute="bottom" constant="16" id="RFd-DY-hei"/>
-                                        <constraint firstItem="6XO-eu-mbs" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="VCu-jw-nla"/>
-                                        <constraint firstItem="hrY-3S-beP" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="leading" constant="34" id="XYZ-QO-NOW"/>
-                                        <constraint firstItem="hrY-3S-beP" firstAttribute="top" secondItem="dg6-n9-SLw" secondAttribute="bottom" constant="12" id="eNL-eA-Fch"/>
-                                        <constraint firstItem="dg6-n9-SLw" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="eqD-cf-EJD"/>
-                                        <constraint firstItem="SXu-wg-JZc" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="leading" id="hQa-WF-30p"/>
-                                        <constraint firstItem="hrY-3S-beP" firstAttribute="trailing" secondItem="lk1-hH-kSp" secondAttribute="trailing" constant="-34" id="hei-fu-5DU"/>
-                                        <constraint firstAttribute="trailing" secondItem="SXu-wg-JZc" secondAttribute="trailing" id="oct-s4-WrX"/>
-                                        <constraint firstItem="wus-Uv-Gxu" firstAttribute="leading" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="paV-cr-Wf8"/>
-                                        <constraint firstItem="hrY-3S-beP" firstAttribute="centerX" secondItem="lk1-hH-kSp" secondAttribute="centerX" id="xqy-Ts-Q3k"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="systemUltraThinMaterial"/>
-                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="W04-cS-n7d" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="79q-Ed-Y2Q"/>
-                            <constraint firstItem="W04-cS-n7d" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="BBR-jq-LnQ"/>
                             <constraint firstItem="Wm7-rS-9QP" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="MOM-hS-pVd"/>
-                            <constraint firstItem="W04-cS-n7d" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="Otb-6I-Xoz"/>
                             <constraint firstItem="Wm7-rS-9QP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dBs-xI-BdB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Wm7-rS-9QP" secondAttribute="trailing" id="g6o-1t-Vym"/>
-                            <constraint firstItem="W04-cS-n7d" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="rl1-KS-hRE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Wm7-rS-9QP" secondAttribute="bottom" id="s4c-eg-LaK"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wus-Uv-Gxu" secondAttribute="bottom" constant="40" id="xW1-8l-95m"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" image="Plan-Icon" selectedImage="Plan-Icon" id="DsO-Nq-qlg">
@@ -401,7 +343,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="390" height="1079"/>
                     <connections>
-                        <outlet property="lockoutView" destination="W04-cS-n7d" id="GVP-et-TeT"/>
                         <outlet property="tableView" destination="Wm7-rS-9QP" id="Wiz-z9-yee"/>
                     </connections>
                 </viewController>
@@ -976,9 +917,7 @@ However, most people drink below what their body needs because it's hard to know
     <resources>
         <image name="Checkbox_beige_unselected" width="48" height="48"/>
         <image name="Plan-Icon" width="18" height="18"/>
-        <image name="dottedLineWithArrow" width="114" height="228"/>
         <image name="info-icon" width="19" height="19"/>
-        <image name="lock-icon" width="48" height="48"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="todayInsightsIcon" width="23" height="31"/>
         <image name="todayLeaves" width="167" height="147"/>

@@ -17,7 +17,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     // MARK: - UI
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var lockoutView: UIView!
     
     // MARK: - Model
     private var viewModel = TodayViewModel()
@@ -31,7 +30,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        handleLockoutView()
         resultsViewModel.refresh()
         
         //get notified when new foods, plans or results comes in from After Test Flow
@@ -41,7 +39,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        handleLockoutView()
         reloadUI()
     }
     
@@ -57,13 +54,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         if let type = notification.userInfo?["objectType"] as? String
         {
-            //if the new data is a Result then refresh the chart and tests/goals
-            if type == String(describing: Result.self)
-            {
-                resultsViewModel.refresh()
-                handleLockoutView()
-            }
-            else if type == String(describing: Food.self) || type == String(describing: Plan.self)
+            if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
                 viewModel.refreshContactSuggestedfoods()
                 reloadUI()
@@ -79,18 +70,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
                     LessonsManager.shared.buildLessonPlan()
                 }
             }
-        }
-    }
-    
-    func handleLockoutView()
-    {
-        if resultsViewModel.isEmpty
-        {
-            lockoutView.isHidden = false
-        }
-        else
-        {
-            lockoutView.isHidden = true
         }
     }
     
