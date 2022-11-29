@@ -59,14 +59,17 @@ class LessonsCoordinator
         switch type
         {
         case .input:
-            // TODO: Add answer to step
-            break
+            step.answerText = answer
+            step.questionRead = true
         case .quiz, .survey:
             step.answerId = answerId
+            step.questionRead = true
         case .readonly:
-            // TODO: Set step as read in backend, not working yet
-            break
+            step.questionRead = true
         }
+        
+        step.lessonId = lesson.id
+        ObjectStore.shared.ClientSave(step)
     }
     
     func getNextStepViewController(state: StepViewControllerState = .answering) -> UIViewController?

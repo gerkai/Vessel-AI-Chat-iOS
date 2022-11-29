@@ -57,8 +57,9 @@ private extension InputLessonStepViewController
     func setupUI()
     {
         titleLabel.text = viewModel.lesson.title
-        textView.text = viewModel.step.placeholderText
-        initialTextViewText = viewModel.step.placeholderText
+        // TODO: Uncomment when placeholder_text issue is fixed on the Backend
+//        textView.text = viewModel.step.placeholderText
+//        initialTextViewText = viewModel.step.placeholderText
         setupImageView()
         setupStackView()
     }

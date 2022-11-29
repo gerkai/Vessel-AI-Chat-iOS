@@ -53,6 +53,10 @@ class QuizSurveyLessonStepViewController: UIViewController
         {
             if let _ = viewModel.selectedAnswerId
             {
+                if let selectedAnswerId = viewModel.selectedAnswerId
+                {
+                    coordinator?.answerStep(answer: "", answerId: selectedAnswerId)
+                }
                 if coordinator.shouldShowSuccessScreen()
                 {
                     if let viewController = coordinator.getNextStepViewController(state: viewModel.state) as? LessonResultsViewController

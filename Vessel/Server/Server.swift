@@ -1029,67 +1029,6 @@ class Server: NSObject
         }
     }
     
-    // MARK: Lessons & Steps
-    /*func getLesson(lessonId: Int, onSuccess success: @escaping (Lesson) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let name = "lesson"
-        getObjects(objects: [SpecificObjectReq(type: name, id: lessonId, last_updated: 0)])
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
-            {
-                do
-                {
-                    let json = try JSONSerialization.data(withJSONObject: values.first!)
-                    let decoder = JSONDecoder()
-
-                    let object = try decoder.decode(Lesson.self, from: json)
-                    success(object)
-                }
-                catch
-                {
-                    print(error)
-                    failure(error.localizedDescription)
-                }
-            }
-            else
-            {
-                failure("Unable to get lesson with id \(lessonId)")
-            }
-        } onFailure: { error in
-            failure(error)
-        }
-    }
-    
-    func getStep(stepId: Int, onSuccess success: @escaping (Step) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        let name = "step"
-        getObjects(objects: [SpecificObjectReq(type: name, id: stepId, last_updated: 0)])
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
-            {
-                do
-                {
-                    let json = try JSONSerialization.data(withJSONObject: values.first!)
-                    let decoder = JSONDecoder()
-
-                    let object = try decoder.decode(Step.self, from: json)
-                    success(object)
-                }
-                catch
-                {
-                    print(error)
-                    failure(error.localizedDescription)
-                }
-            }
-            else
-            {
-                failure("Unable to get step with id \(stepId)")
-            }
-        } onFailure: { error in
-            failure(error)
-        }
-    }*/
-    
     // MARK: - Utils
     func allowDebugPrint() -> Bool
     {
