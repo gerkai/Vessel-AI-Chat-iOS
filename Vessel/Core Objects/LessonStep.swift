@@ -29,6 +29,7 @@ class Step: CoreObjectProtocol
     var title: String?
     var text: String?
     let successText: String?
+    var placeholderText: String?
     let imageUrl: String?
     let isSkippable: Bool
     var answers: [LessonStepAnswer]
@@ -39,7 +40,18 @@ class Step: CoreObjectProtocol
         answers.first(where: { $0.correct })?.id
     }
     
-    init(id: Int, last_updated: Int, typeString: String, title: String? = nil, text: String? = nil, successText: String, imageUrl: String, isSkippable: Bool, answers: [LessonStepAnswer], answerId: Int? = nil, activityIds: [Int]? = nil)
+    init(id: Int,
+         last_updated: Int,
+         typeString: String,
+         title: String? = nil,
+         text: String? = nil,
+         successText: String?,
+         placeholderText: String?,
+         imageUrl: String,
+         isSkippable: Bool,
+         answers: [LessonStepAnswer],
+         answerId: Int? = nil,
+         activityIds: [Int]? = nil)
     {
         self.id = id
         self.last_updated = last_updated
@@ -47,6 +59,7 @@ class Step: CoreObjectProtocol
         self.title = title
         self.text = text
         self.successText = successText
+        self.placeholderText = placeholderText
         self.imageUrl = imageUrl
         self.isSkippable = isSkippable
         self.answers = answers
@@ -62,6 +75,7 @@ class Step: CoreObjectProtocol
         case title
         case text
         case successText = "success_text"
+        case placeholderText = "placeholder_text"
         case imageUrl = "image_url"
         case isSkippable = "is_skippable"
         case answers
@@ -78,19 +92,19 @@ class LessonStepAnswer: CoreObjectProtocol
 
     let primaryText: String
     var secondaryText: String?
-    let isIncorrect: Bool?
+    private let isCorrect: Bool?
     var correct: Bool
     {
-        isIncorrect == nil || isIncorrect == false
+        isCorrect ?? true
     }
     
-    init(id: Int, last_updated: Int, primaryText: String, secondaryText: String?, isIncorrect: Bool? = nil)
+    init(id: Int, last_updated: Int, primaryText: String, secondaryText: String?, isCorrect: Bool? = nil)
     {
         self.id = id
         self.last_updated = last_updated
         self.primaryText = primaryText
         self.secondaryText = secondaryText
-        self.isIncorrect = isIncorrect
+        self.isCorrect = isCorrect
     }
     
     enum CodingKeys: String, CodingKey
@@ -99,6 +113,6 @@ class LessonStepAnswer: CoreObjectProtocol
         case last_updated
         case primaryText = "primary_text"
         case secondaryText = "secondary_text"
-        case isIncorrect = "is_incorrect"
+        case isCorrect = "is_correct"
     }
 }

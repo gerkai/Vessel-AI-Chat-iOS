@@ -700,7 +700,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AO2-wd-6dn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2510.8695652173915" y="296.65178571428572"/>
+            <point key="canvasLocation" x="2496" y="247"/>
         </scene>
         <!--Food Preferences View Controller-->
         <scene sceneID="Z5L-45-sIh">

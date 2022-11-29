@@ -47,7 +47,10 @@ class RemoteConfigManager
         {
             if remoteConfigLoadedCorrectly == true
             {
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+                DispatchQueue.main.async
+                {
+                    NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+                }
             }
         }
     }
@@ -83,6 +86,10 @@ class RemoteConfigManager
     
     func getValue(for key: RemoteConfigKey) -> Any?
     {
+        if key == .insightsFeature
+        {
+            return true
+        }
         return key.value
     }
 }

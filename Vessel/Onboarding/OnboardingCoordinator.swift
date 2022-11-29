@@ -57,9 +57,6 @@ class OnboardingCoordinator
         //MainContact is guaranteed
         let contact = Contact.main()!
         
-        // Insights Feature Flag
-        let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
-
         //set Bugsee contact information
         if let email = contact.email
         {
@@ -78,12 +75,12 @@ class OnboardingCoordinator
         }
         else
         {
-//            Storage.clear(objectType: Curriculum.self)
+            Storage.clear(objectType: Curriculum.self)
             
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
             ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self])
-            if showInsights && Storage.retrieve(as: Curriculum.self).count > 0
+            if Storage.retrieve(as: Curriculum.self).count > 0
             {
                 LessonsManager.shared.buildLessonPlan()
             }
@@ -225,10 +222,7 @@ class OnboardingCoordinator
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
             ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self/*, Lesson.self, Step.self*/])
             
-            // Insights Feature Flag
-            let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
-            
-            if showInsights && Storage.retrieve(as: Curriculum.self).count > 0
+            if Storage.retrieve(as: Curriculum.self).count > 0
             {
                 LessonsManager.shared.buildLessonPlan()
             }

@@ -212,6 +212,7 @@
 		7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7295133128F7DEC600E4E950 /* CoachTab.storyboard */; };
 		7295568028F67980000DD006 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295567F28F67980000DD006 /* Plan.swift */; };
 		7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295568128F6893E000DD006 /* ReagentFoodViewController.swift */; };
+		7296B727292F44A000162812 /* ReadOnlyLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */; };
 		729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AA29011C5400EEFB65 /* ZendeskManager.swift */; };
 		729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AC2901220D00EEFB65 /* LiveChatManager.swift */; };
 		72985CFF292DD38E00E6173E /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */; };
@@ -224,7 +225,7 @@
 		72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */; };
 		72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */; };
 		72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */; };
-		72BC2443292C936B002F6DA2 /* QuizLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2442292C936B002F6DA2 /* QuizLessonStepViewController.swift */; };
+		72BC2443292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */; };
 		72BC2445292C93B1002F6DA2 /* LessonStepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2444292C93B1002F6DA2 /* LessonStepViewModel.swift */; };
 		72BC2447292C93C7002F6DA2 /* Lesson.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72BC2446292C93C7002F6DA2 /* Lesson.storyboard */; };
 		72BC244A292CAAA0002F6DA2 /* LessonStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */; };
@@ -234,6 +235,7 @@
 		72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */; };
 		72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */; };
 		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
+		72D3C76F293216EC0009BBB0 /* InputLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D3C76E293216EC0009BBB0 /* InputLessonStepViewController.swift */; };
 		72D4FC0F287D2D0B00EA2EA3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */; };
 		72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */; };
 		72DB1C972907ABFD00410C2D /* WaterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DB1C962907ABFD00410C2D /* WaterManager.swift */; };
@@ -491,6 +493,7 @@
 		7295133128F7DEC600E4E950 /* CoachTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CoachTab.storyboard; sourceTree = "<group>"; };
 		7295567F28F67980000DD006 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		7295568128F6893E000DD006 /* ReagentFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodViewController.swift; sourceTree = "<group>"; };
+		7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyLessonStepViewController.swift; sourceTree = "<group>"; };
 		729757AA29011C5400EEFB65 /* ZendeskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZendeskManager.swift; sourceTree = "<group>"; };
 		729757AC2901220D00EEFB65 /* LiveChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatManager.swift; sourceTree = "<group>"; };
 		72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
@@ -503,7 +506,7 @@
 		72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselFooterView.swift; sourceTree = "<group>"; };
 		72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VesselFooterView.xib; sourceTree = "<group>"; };
 		72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsCoordinator.swift; sourceTree = "<group>"; };
-		72BC2442292C936B002F6DA2 /* QuizLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLessonStepViewController.swift; sourceTree = "<group>"; };
+		72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSurveyLessonStepViewController.swift; sourceTree = "<group>"; };
 		72BC2444292C93B1002F6DA2 /* LessonStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepViewModel.swift; sourceTree = "<group>"; };
 		72BC2446292C93C7002F6DA2 /* Lesson.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lesson.storyboard; sourceTree = "<group>"; };
 		72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepView.swift; sourceTree = "<group>"; };
@@ -513,6 +516,7 @@
 		72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
 		72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterIntakeView.xib; sourceTree = "<group>"; };
 		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
+		72D3C76E293216EC0009BBB0 /* InputLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLessonStepViewController.swift; sourceTree = "<group>"; };
 		72D4FC0E287D2D0B00EA2EA3 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		72D4FC10287D2EB600EA2EA3 /* MixpanelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalytics.swift; sourceTree = "<group>"; };
 		72DB1C962907ABFD00410C2D /* WaterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterManager.swift; sourceTree = "<group>"; };
@@ -1220,7 +1224,9 @@
 		72BC2441292C9357002F6DA2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				72BC2442292C936B002F6DA2 /* QuizLessonStepViewController.swift */,
+				72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */,
+				7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */,
+				72D3C76E293216EC0009BBB0 /* InputLessonStepViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1590,6 +1596,7 @@
 				72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */,
 				3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */,
 				3FE369EF27C9A88A00231D42 /* WelcomeSignInViewController.swift in Sources */,
+				7296B727292F44A000162812 /* ReadOnlyLessonStepViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
 				3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */,
@@ -1608,6 +1615,7 @@
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				72DD1FCC28F541C8006071B0 /* HydroQuizViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
+				72D3C76F293216EC0009BBB0 /* InputLessonStepViewController.swift in Sources */,
 				3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */,
 				72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
@@ -1621,7 +1629,7 @@
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
 				3F47B48B28FB20AB00D35E97 /* ResultsChartCell.swift in Sources */,
-				72BC2443292C936B002F6DA2 /* QuizLessonStepViewController.swift in Sources */,
+				72BC2443292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift in Sources */,
 				72DB1C972907ABFD00410C2D /* WaterManager.swift in Sources */,
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,

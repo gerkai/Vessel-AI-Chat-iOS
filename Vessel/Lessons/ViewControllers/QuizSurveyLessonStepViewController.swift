@@ -1,5 +1,5 @@
 //
-//  QuizLessonStepViewController.swift
+//  QuizSurveyLessonStepViewController.swift
 //  Vessel
 //
 //  Created by Nicolas Medina on 11/21/22.
@@ -7,17 +7,29 @@
 
 import UIKit
 
-class QuizLessonStepViewController: UIViewController
+class QuizSurveyLessonStepViewController: UIViewController
 {
     var viewModel: StepViewModel?
     var coordinator: LessonsCoordinator?
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var stepsStackView: UIStackView!
-    @IBOutlet weak var nextButton: BounceButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var questionLabel: UILabel!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var stepsStackView: UIStackView!
+    @IBOutlet private weak var nextButton: BounceButton!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    
+    private var type: StepType?
+    {
+        switch viewModel?.step.type
+        {
+        case .quiz, .survey:
+            return viewModel?.step.type
+        default:
+            return nil
+        }
+    }
     
     override func viewDidLoad()
     {
@@ -60,7 +72,7 @@ class QuizLessonStepViewController: UIViewController
         {
             if let viewController = coordinator?.getNextStepViewController()
             {
-                navigationController?.present(viewController, animated: true)
+                navigationController?.pushViewController(viewController, animated: true)
             }
             else
             {
@@ -70,12 +82,13 @@ class QuizLessonStepViewController: UIViewController
     }
 }
 
-private extension QuizLessonStepViewController
+private extension QuizSurveyLessonStepViewController
 {
     func setupUI()
     {
         guard let viewModel = viewModel else { return }
         questionLabel.text = viewModel.step.text
+        titleLabel.text = viewModel.lesson.title
         setupImageView()
         setupStackView()
     }
@@ -96,6 +109,9 @@ private extension QuizLessonStepViewController
             view.setup(title: answer.primaryText, id: answer.id, checkedState: .unselected, delegate: self)
             stepsStackView.addArrangedSubview(view)
         }
+        
+        stackViewHeightConstraint.constant = CGFloat((viewModel.step.answers.count * 60) + ((viewModel.step.answers.count - 1) * 16))
+        view.layoutIfNeeded()
     }
     
     func reloadUI()
@@ -116,7 +132,7 @@ private extension QuizLessonStepViewController
                 guard let view = view as? LessonStepView else { return }
                 
                 let state: LessonStepViewCheckedState
-                if viewModel.result == .correct
+                if viewModel.result == .correct || type == .survey
                 {
                     if view.id == viewModel.selectedAnswerId
                     {
@@ -162,7 +178,7 @@ private extension QuizLessonStepViewController
     }
 }
 
-extension QuizLessonStepViewController: LessonStepViewDelegate
+extension QuizSurveyLessonStepViewController: LessonStepViewDelegate
 {
     func onStepSelected(id: Int)
     {

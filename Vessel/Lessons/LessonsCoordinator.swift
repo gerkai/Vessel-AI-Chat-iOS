@@ -61,6 +61,7 @@ class LessonsCoordinator
         case .quiz, .survey:
             step.answerId = answerId
         case .readonly:
+            // TODO: Set step as read in backend, not working yet
             break
         }
     }
@@ -79,13 +80,21 @@ class LessonsCoordinator
             
             switch step.type
             {
-            case .quiz:
-                let quizVC = storyboard.instantiateViewController(identifier: "QuizLessonStepViewController") as! QuizLessonStepViewController
+            case .quiz, .survey:
+                let quizVC = storyboard.instantiateViewController(identifier: "QuizSurveyLessonStepViewController") as! QuizSurveyLessonStepViewController
                 quizVC.coordinator = self
                 quizVC.viewModel = StepViewModel(step: step, lesson: lesson)
                 return quizVC
-            default:
-                return nil
+            case .readonly:
+                let readOnlyVC = storyboard.instantiateViewController(identifier: "ReadOnlyLessonStepViewController") as! ReadOnlyLessonStepViewController
+                readOnlyVC.coordinator = self
+                readOnlyVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                return readOnlyVC
+            case .input:
+                let inputVC = storyboard.instantiateViewController(identifier: "InputLessonStepViewController") as! InputLessonStepViewController
+                inputVC.coordinator = self
+                inputVC.viewModel = StepViewModel(step: step, lesson: lesson)
+                return inputVC
             }
         }
     }
