@@ -24,6 +24,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var segmentedControl: VesselSegmentedControl!
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var tabDetailsLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
     
     var flowName: AnalyticsFlowName = .takeTestFlow
     @Resolved internal var analytics: Analytics
@@ -51,6 +52,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         super.viewDidLoad()
         setupVideo()
+        setupInsightsStackView()
         postTimerView.alpha = 0.0
         backButton.alpha = 0.0
         
@@ -64,9 +66,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
         
-        //TODO: - remove below line once insights and activites are added
-        segmentedControl.removeSegment(at: 2, animated: false)
-        
         tabDetailsLabel.text = defaultSegmentDetailsString
         
         setTimerLabel(secondsRemaining: Double(curSeconds))
@@ -78,11 +77,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         requestNotificationPermission()
         if !firstTimeAppeared
         {
-            /*segmentedControl.subviews.forEach
-            { subview in
-             // subview.backgroundColor = .white
-                print("Color: \(subview.layer.backgroundColor)")
-            }*/
             firstTimeAppeared = true
             viewModel.startTimer()
         }
@@ -200,6 +194,18 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         }
     }
     
+    func setupInsightsStackView()
+    {
+        stackView.isHidden = true
+        guard let lessons = LessonsManager.shared.lessons.first else { return }
+        for lesson in [lessons]
+        {
+            let view = CheckMarkCardView(frame: .zero)
+            view.setup(id: lesson.id, title: lesson.title, subtitle: "", description: lesson.description ?? "", backgroundImage: lesson.imageUrl, completed: lesson.completedDate != nil, delegate: self)
+            stackView.addArrangedSubview(view)
+        }
+    }
+    
     @IBAction func onBackButton()
     {
         viewModel.delegate = nil
@@ -271,23 +277,26 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     {
         switch sender.selectedSegmentIndex
         {
-            case IntroIndex:
-                tabDetailsLabel.text = defaultSegmentDetailsString
-                player2.pause()
-                playerViewController?.player = player1
-                player1.play()
-                videoView.isHidden = false
-            case TourIndex:
-                tabDetailsLabel.text = defaultSegmentDetailsString
-                player1.pause()
-                playerViewController?.player = player2
-                player2.play()
-                videoView.isHidden = false
-            default:
-                player1.pause()
-                player2.pause()
-                videoView.isHidden = true
-                tabDetailsLabel.text = insightsText()
+        case IntroIndex:
+            tabDetailsLabel.text = defaultSegmentDetailsString
+            player2.pause()
+            playerViewController?.player = player1
+            player1.play()
+            videoView.isHidden = false
+            stackView.isHidden = true
+        case TourIndex:
+            tabDetailsLabel.text = defaultSegmentDetailsString
+            player1.pause()
+            playerViewController?.player = player2
+            player2.play()
+            videoView.isHidden = false
+            stackView.isHidden = true
+        default:
+            player1.pause()
+            player2.pause()
+            videoView.isHidden = true
+            tabDetailsLabel.text = insightsText()
+            stackView.isHidden = false
         }
     }
     
@@ -361,5 +370,16 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             viewModel.delegate = nil
             removeNotification()
         }
+    }
+}
+
+extension ActivateCardViewController: CheckMarkCardViewDelegate
+{
+    func onLessonSelected(id: Int)
+    {
+        guard let lesson = LessonsManager.shared.lessons.first(where: { $0.id == id }) else { return }
+        let coordinator = LessonsCoordinator(lesson: lesson)
+        guard let viewController = coordinator.getNextStepViewController() else { return }
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

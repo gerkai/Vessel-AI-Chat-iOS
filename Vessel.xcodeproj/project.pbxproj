@@ -195,6 +195,8 @@
 		72461EEF2924AAA500A85AE5 /* Curriculum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EEE2924AAA500A85AE5 /* Curriculum.swift */; };
 		72461EF12924AD7500A85AE5 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF02924AD7500A85AE5 /* Lesson.swift */; };
 		72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF42924AE2600A85AE5 /* LessonStep.swift */; };
+		725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */; };
+		725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */; };
 		7262F9C829263206006DD849 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7262F9C729263206006DD849 /* LessonsManager.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
@@ -474,6 +476,8 @@
 		72461EEE2924AAA500A85AE5 /* Curriculum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curriculum.swift; sourceTree = "<group>"; };
 		72461EF02924AD7500A85AE5 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		72461EF42924AE2600A85AE5 /* LessonStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStep.swift; sourceTree = "<group>"; };
+		725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkCardView.swift; sourceTree = "<group>"; };
+		725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMarkCardView.xib; sourceTree = "<group>"; };
 		7262F9C729263206006DD849 /* LessonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
 		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
@@ -661,6 +665,7 @@
 				3FA6683D287F69830006166D /* TakeTestViewModel.swift */,
 				3FA6683B287F64960006166D /* TipInstructionsViewController.swift */,
 				3F15ACF3288C4AF8004716CA /* UploadingSampleViewController.swift */,
+				725F38272935EE2B00A48B3E /* Views */,
 			);
 			path = TakeTest;
 			sourceTree = "<group>";
@@ -1009,6 +1014,15 @@
 				72411CF7287E413C004A312E /* Resolved.swift */,
 			);
 			path = Resolver;
+			sourceTree = "<group>";
+		};
+		725F38272935EE2B00A48B3E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */,
+				725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		72673C4F28E807B10056C701 /* WaterDetailsViewController */ = {
@@ -1430,6 +1444,7 @@
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
+				725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */,
 				72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
@@ -1659,6 +1674,7 @@
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,

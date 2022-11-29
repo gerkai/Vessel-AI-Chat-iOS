@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Bold.otf">
+            <string>BananaGrotesk-Bold</string>
+        </array>
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckMarkCardView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundImageView" destination="R9v-e9-Zk3" id="3oO-Hq-hqT"/>
+                <outlet property="checkMark" destination="Es9-Sc-2LW" id="pRE-PN-N9E"/>
+                <outlet property="contentView" destination="XFK-jv-SZT" id="V6K-Gi-fXy"/>
+                <outlet property="descriptionLabel" destination="btS-5P-qZE" id="60n-9z-Eb8"/>
+                <outlet property="subtitleLabel" destination="KRo-h4-JaN" id="MlN-R2-ZhX"/>
+                <outlet property="titleLabel" destination="rab-g6-Bpf" id="S79-Sn-WHq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="203"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFK-jv-SZT">
+                    <rect key="frame" x="0.0" y="0.0" width="350" height="203"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTN-5N-LVc">
+                            <rect key="frame" x="22" y="0.0" width="328" height="203"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yogaImprovesSleep" translatesAutoresizingMaskIntoConstraints="NO" id="R9v-e9-Zk3">
+                                    <rect key="frame" x="0.0" y="0.0" width="328" height="203"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rab-g6-Bpf">
+                                    <rect key="frame" x="38" y="20" width="270" height="24.666666666666671"/>
+                                    <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRo-h4-JaN">
+                                    <rect key="frame" x="38" y="48.666666666666664" width="270" height="15.999999999999993"/>
+                                    <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PkU-wR-uOx">
+                                    <rect key="frame" x="0.0" y="123" width="328" height="80"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="diZ-Il-N9c">
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btS-5P-qZE">
+                                                <rect key="frame" x="20" y="20" width="288" height="40"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Description">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" size="13" name="NoeText-Book"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="btS-5P-qZE" firstAttribute="leading" secondItem="diZ-Il-N9c" secondAttribute="leading" constant="20" id="D6s-M3-NKI"/>
+                                            <constraint firstAttribute="trailing" secondItem="btS-5P-qZE" secondAttribute="trailing" constant="20" id="W9h-N1-Ssn"/>
+                                            <constraint firstItem="btS-5P-qZE" firstAttribute="top" secondItem="diZ-Il-N9c" secondAttribute="top" constant="20" symbolic="YES" id="je0-vB-gY3"/>
+                                            <constraint firstAttribute="bottom" secondItem="btS-5P-qZE" secondAttribute="bottom" constant="20" id="sSq-fg-hiq"/>
+                                        </constraints>
+                                    </view>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="V7c-on-tg0"/>
+                                    </constraints>
+                                    <blurEffect style="light"/>
+                                </visualEffectView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="KRo-h4-JaN" firstAttribute="leading" secondItem="rab-g6-Bpf" secondAttribute="leading" id="1jp-in-dgh"/>
+                                <constraint firstItem="KRo-h4-JaN" firstAttribute="trailing" secondItem="rab-g6-Bpf" secondAttribute="trailing" id="8YA-lr-4F1"/>
+                                <constraint firstItem="R9v-e9-Zk3" firstAttribute="top" secondItem="hTN-5N-LVc" secondAttribute="top" id="A21-Jn-ySm"/>
+                                <constraint firstItem="R9v-e9-Zk3" firstAttribute="leading" secondItem="hTN-5N-LVc" secondAttribute="leading" id="Jeo-mQ-lgK"/>
+                                <constraint firstItem="R9v-e9-Zk3" firstAttribute="trailing" secondItem="rab-g6-Bpf" secondAttribute="trailing" constant="20" id="NFF-kf-07S"/>
+                                <constraint firstItem="rab-g6-Bpf" firstAttribute="top" secondItem="R9v-e9-Zk3" secondAttribute="top" constant="20" id="NH7-rA-qtL"/>
+                                <constraint firstItem="KRo-h4-JaN" firstAttribute="top" secondItem="rab-g6-Bpf" secondAttribute="bottom" constant="4" id="Qa8-UV-M3x"/>
+                                <constraint firstItem="PkU-wR-uOx" firstAttribute="centerX" secondItem="R9v-e9-Zk3" secondAttribute="centerX" id="kKe-GF-T1X"/>
+                                <constraint firstItem="PkU-wR-uOx" firstAttribute="width" secondItem="R9v-e9-Zk3" secondAttribute="width" id="qox-QU-Z5K"/>
+                                <constraint firstItem="PkU-wR-uOx" firstAttribute="bottom" secondItem="R9v-e9-Zk3" secondAttribute="bottom" id="trF-gh-yJ2"/>
+                                <constraint firstAttribute="trailing" secondItem="R9v-e9-Zk3" secondAttribute="trailing" id="uH8-EL-dsj"/>
+                                <constraint firstAttribute="bottom" secondItem="R9v-e9-Zk3" secondAttribute="bottom" id="x4I-1o-Q8J"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkbox_beige_unselected" translatesAutoresizingMaskIntoConstraints="NO" id="Es9-Sc-2LW">
+                            <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="GGW-kE-uNg"/>
+                                <constraint firstAttribute="height" constant="44" id="V8B-7p-cFR"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hTN-5N-LVc" firstAttribute="leading" secondItem="Es9-Sc-2LW" secondAttribute="trailing" constant="-22" id="9vB-9E-kOA"/>
+                        <constraint firstItem="rab-g6-Bpf" firstAttribute="leading" secondItem="Es9-Sc-2LW" secondAttribute="trailing" constant="16" id="HU3-7f-Ti6"/>
+                        <constraint firstItem="hTN-5N-LVc" firstAttribute="top" secondItem="XFK-jv-SZT" secondAttribute="top" id="fdh-V1-A27"/>
+                        <constraint firstAttribute="bottom" secondItem="hTN-5N-LVc" secondAttribute="bottom" id="kYk-gD-Ngc"/>
+                        <constraint firstItem="Es9-Sc-2LW" firstAttribute="top" secondItem="hTN-5N-LVc" secondAttribute="top" constant="20" id="yCW-HB-RGU"/>
+                        <constraint firstAttribute="trailing" secondItem="hTN-5N-LVc" secondAttribute="trailing" id="yGw-zS-boh"/>
+                        <constraint firstItem="Es9-Sc-2LW" firstAttribute="leading" secondItem="XFK-jv-SZT" secondAttribute="leading" id="z4g-qG-Enq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XFK-jv-SZT" secondAttribute="trailing" id="JlN-81-poA"/>
+                <constraint firstItem="XFK-jv-SZT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h7T-bf-UKd"/>
+                <constraint firstAttribute="bottom" secondItem="XFK-jv-SZT" secondAttribute="bottom" id="hNE-xv-K76"/>
+                <constraint firstItem="XFK-jv-SZT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vlQ-u9-4ho"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="138" y="-1"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Checkbox_beige_unselected" width="48" height="48"/>
+        <image name="yogaImprovesSleep" width="314" height="203"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
