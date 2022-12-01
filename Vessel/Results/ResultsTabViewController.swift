@@ -89,10 +89,6 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         {
             initialLoad = false
         }
-        else
-        {
-            chartView.refresh()
-        }
     }
     
     @objc func foodPrefsChanged(_ notification: NSNotification)

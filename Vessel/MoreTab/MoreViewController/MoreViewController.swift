@@ -12,6 +12,7 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
+    @IBOutlet private weak var environmentLabel: UILabel!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .moreTabFlow
@@ -23,6 +24,21 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable
     {
         super.viewDidLoad()
         versionLabel.text = viewModel.versionString
+        environmentLabel.text = environment()
+    }
+    
+    func environment() -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return "Dev Environment"
+            case Constants.STAGING_INDEX:
+                return "Staging Environment"
+            default:
+                return ""
+        }
     }
     
     // MARK: - Actions
