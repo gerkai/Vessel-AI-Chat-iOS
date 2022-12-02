@@ -66,6 +66,7 @@ let OBJECT_ALL_PATH = "objects/all"
 let REAGENT_FOOD_RECOMMENDATIONS_PATH = "recommendations/food/reagent"
 let GET_PLANS_PATH = "plan"
 let ADD_NEW_SINGLE_PLAN_PATH = "plan"
+let REMOVE_SINGLE_PLAN_PATH = "plan/{plan_id}"
 let ADD_NEW_MULTIPLE_PLAN_PATH = "plan/build"
 let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
 let GET_LESSON_PATH = "lesson/{lesson_id}"
@@ -824,6 +825,42 @@ class Server: NSObject
                 failure(error)
             }
         })
+    }
+    
+    func removeSinglePlan(planId: Int, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
+    {
+//        let encoder = JSONEncoder()
+//        encoder.outputFormatting = .prettyPrinted
+//        encoder.keyEncodingStrategy = .convertToSnakeCase
+//        let data = try! encoder.encode(plan.id)
+        
+        let urlString = "\(API())\(REMOVE_SINGLE_PLAN_PATH)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
+        
+        guard let url = URL(string: finalUrlString) else
+        {
+            let error = ServerError(code: 400, description: NSLocalizedString("Unable to remove plan from contact", comment: "Server error message"))
+            failure(error)
+            return
+        }
+        
+        let request = URLRequest(url: url)
+//        request.httpBody = data
+        //send it to server
+        serverDelete(request: request)
+        {
+            print("SUCCESS")
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        } onFailure: { string in
+            print("ERROR: \(string)")
+            DispatchQueue.main.async()
+            {
+                failure(string)
+            }
+        }
     }
     
     func addMultiplePlans(plans: MultiplePlans, onSuccess success: @escaping (_ plans: [Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)

@@ -199,6 +199,7 @@
 		725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */; };
 		7262F9C829263206006DD849 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7262F9C729263206006DD849 /* LessonsManager.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
+		72692B88293717DB00A8F33C /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72692B87293717DB00A8F33C /* Tip.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
 		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
@@ -252,6 +253,8 @@
 		72F0DEE128E278ED00034088 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0DEE028E278ED00034088 /* TodayViewController.swift */; };
 		72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */; };
 		72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */; };
+		72F24C20293728B5006F6250 /* LessonStepActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F24C1F293728B5006F6250 /* LessonStepActivityView.swift */; };
+		72F24C22293729E3006F6250 /* LessonStepActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F24C21293729E3006F6250 /* LessonStepActivityView.xib */; };
 		72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDE028A361E100177898 /* MyAccountViewModel.swift */; };
 		72F3C69528A36788001E3323 /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDE28A361E100177898 /* MyAccountCell.swift */; };
 		72F3C69628A36788001E3323 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270EDDF28A361E100177898 /* MyAccountViewController.swift */; };
@@ -480,6 +483,7 @@
 		725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMarkCardView.xib; sourceTree = "<group>"; };
 		7262F9C729263206006DD849 /* LessonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
 		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
+		72692B87293717DB00A8F33C /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
@@ -536,6 +540,8 @@
 		72F0DEE028E278ED00034088 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		72F2484928A6066B00B0BE02 /* FoodPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewController.swift; sourceTree = "<group>"; };
 		72F2484B28A606B500B0BE02 /* FoodPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPreferencesViewModel.swift; sourceTree = "<group>"; };
+		72F24C1F293728B5006F6250 /* LessonStepActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepActivityView.swift; sourceTree = "<group>"; };
+		72F24C21293729E3006F6250 /* LessonStepActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepActivityView.xib; sourceTree = "<group>"; };
 		72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCheckmarkView.swift; sourceTree = "<group>"; };
 		72F3D62F28F15C60007ED9A8 /* FoodCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCheckmarkView.xib; sourceTree = "<group>"; };
 		72F41EDD289115EE005136B3 /* ChangePasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordCell.swift; sourceTree = "<group>"; };
@@ -644,6 +650,7 @@
 				3F9C679C28FE5FE700BC44FA /* Reagents */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
+				72692B87293717DB00A8F33C /* Tip.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -1253,6 +1260,8 @@
 			children = (
 				72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */,
 				72BC244B292CABC9002F6DA2 /* LessonStepView.xib */,
+				72F24C1F293728B5006F6250 /* LessonStepActivityView.swift */,
+				72F24C21293729E3006F6250 /* LessonStepActivityView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1445,6 +1454,7 @@
 				3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
 				725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */,
+				72F24C22293729E3006F6250 /* LessonStepActivityView.xib in Resources */,
 				72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */,
 				3FE369E527C9A74B00231D42 /* BananaGrotesk-Thin.otf in Resources */,
 				7206C4E328837AE6000130DA /* Main.storyboard in Resources */,
@@ -1622,6 +1632,7 @@
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
+				72692B88293717DB00A8F33C /* Tip.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
@@ -1701,6 +1712,7 @@
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */,
 				3F0547D227CAFD19006E3098 /* TestCardExistCheckingViewController.swift in Sources */,
+				72F24C20293728B5006F6250 /* LessonStepActivityView.swift in Sources */,
 				72332FB028EE8D94008CBA8C /* Food.swift in Sources */,
 				3F13A7922877BEA200C74FB9 /* Diet.swift in Sources */,
 				7262F9C829263206006DD849 /* LessonsManager.swift in Sources */,

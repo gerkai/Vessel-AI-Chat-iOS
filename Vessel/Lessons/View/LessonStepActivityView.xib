@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LessonStepActivityView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="addOrRemoveButton" destination="c7f-1T-mGx" id="ijK-mo-QPL"/>
+                <outlet property="backgroundImageView" destination="WJv-lt-93k" id="K4P-St-km2"/>
+                <outlet property="frequencyLabel" destination="Eoz-lp-nkw" id="ul9-KL-BE6"/>
+                <outlet property="rootView" destination="8Ur-vb-6Vb" id="TY0-0n-yHv"/>
+                <outlet property="titleLabel" destination="tZG-Ox-ciW" id="svQ-nb-xBH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="163"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ur-vb-6Vb">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="163"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJv-lt-93k">
+                            <rect key="frame" x="0.0" y="0.0" width="290" height="163"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZG-Ox-ciW">
+                            <rect key="frame" x="18" y="18" width="54" height="25"/>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="22"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eoz-lp-nkw">
+                            <rect key="frame" x="18.000000000000004" y="47" width="34.333333333333343" height="16"/>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPt-m0-t3v">
+                            <rect key="frame" x="18" y="97" width="254" height="48"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TFw-d7-jMW">
+                                <rect key="frame" x="0.0" y="0.0" width="254" height="48"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <blurEffect style="dark"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="22"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </visualEffectView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7f-1T-mGx">
+                            <rect key="frame" x="18" y="97" width="254" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="oWB-Tv-joz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Add to your plan"/>
+                            <connections>
+                                <action selector="onTapped" destination="-1" eventType="touchUpInside" id="tf0-i9-He3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="TPt-m0-t3v" firstAttribute="height" secondItem="c7f-1T-mGx" secondAttribute="height" id="1Ye-jj-ixV"/>
+                        <constraint firstAttribute="bottom" secondItem="c7f-1T-mGx" secondAttribute="bottom" constant="18" id="2g0-7v-CkF"/>
+                        <constraint firstItem="TPt-m0-t3v" firstAttribute="centerX" secondItem="c7f-1T-mGx" secondAttribute="centerX" id="2tS-uS-EPC"/>
+                        <constraint firstAttribute="bottom" secondItem="WJv-lt-93k" secondAttribute="bottom" id="9gy-RF-pwc"/>
+                        <constraint firstItem="WJv-lt-93k" firstAttribute="leading" secondItem="8Ur-vb-6Vb" secondAttribute="leading" id="JJE-l0-sWK"/>
+                        <constraint firstAttribute="trailing" secondItem="c7f-1T-mGx" secondAttribute="trailing" constant="18" id="JNn-tn-nty"/>
+                        <constraint firstItem="TPt-m0-t3v" firstAttribute="width" secondItem="c7f-1T-mGx" secondAttribute="width" id="L3j-e6-DjE"/>
+                        <constraint firstAttribute="width" secondItem="8Ur-vb-6Vb" secondAttribute="height" multiplier="290:163" id="Rbx-db-tYX"/>
+                        <constraint firstAttribute="width" constant="290" id="Vd6-Dn-rfK"/>
+                        <constraint firstItem="Eoz-lp-nkw" firstAttribute="top" secondItem="tZG-Ox-ciW" secondAttribute="bottom" constant="4" id="cQ6-De-c6n"/>
+                        <constraint firstItem="c7f-1T-mGx" firstAttribute="leading" secondItem="8Ur-vb-6Vb" secondAttribute="leading" constant="18" id="cph-vt-ogt"/>
+                        <constraint firstItem="tZG-Ox-ciW" firstAttribute="top" secondItem="8Ur-vb-6Vb" secondAttribute="top" constant="18" id="iTy-e7-Mcy"/>
+                        <constraint firstAttribute="trailing" secondItem="WJv-lt-93k" secondAttribute="trailing" id="iqd-7A-f99"/>
+                        <constraint firstItem="TPt-m0-t3v" firstAttribute="centerY" secondItem="c7f-1T-mGx" secondAttribute="centerY" id="k85-yJ-rLN"/>
+                        <constraint firstItem="Eoz-lp-nkw" firstAttribute="leading" secondItem="tZG-Ox-ciW" secondAttribute="leading" id="ka9-za-GzD"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tZG-Ox-ciW" secondAttribute="trailing" constant="18" id="swD-x5-lbv"/>
+                        <constraint firstItem="WJv-lt-93k" firstAttribute="top" secondItem="8Ur-vb-6Vb" secondAttribute="top" id="ux0-J5-4T6"/>
+                        <constraint firstItem="tZG-Ox-ciW" firstAttribute="leading" secondItem="8Ur-vb-6Vb" secondAttribute="leading" constant="18" id="wKf-nh-R44"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eoz-lp-nkw" secondAttribute="trailing" constant="18" id="wuh-sY-J3V"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="8Ur-vb-6Vb" secondAttribute="bottom" id="8Bh-zJ-aNK"/>
+                <constraint firstItem="8Ur-vb-6Vb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cxp-FZ-0Qk"/>
+                <constraint firstItem="8Ur-vb-6Vb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sSs-KT-TVD"/>
+                <constraint firstAttribute="trailing" secondItem="8Ur-vb-6Vb" secondAttribute="trailing" id="zTh-Fj-h1n"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="138" y="21"/>
+        </view>
+    </objects>
+</document>

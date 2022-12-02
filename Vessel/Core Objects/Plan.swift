@@ -25,7 +25,7 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: CoreObjectProtocol, Codable, Hashable
+struct Plan: CoreObjectProtocol, Hashable
 {
     let id: Int
     var last_updated: Int
@@ -46,16 +46,16 @@ struct Plan: CoreObjectProtocol, Codable, Hashable
     
     var type: PlanType = .food
     
-    internal init(id: Int = 0,
-                  last_updated: Int = 0,
-                  timeOfDay: String? = nil,
-                  dayOfWeek: [Int]? = nil,
-                  foodId: Int? = nil,
-                  reagentLifestyleRecommendationId: Int? = nil,
-                  activityId: Int? = nil,
-                  planId: Int? = nil,
-                  contactId: Int? = nil,
-                  completed: [String]? = nil)
+    init(id: Int = 0,
+         last_updated: Int = 0,
+         timeOfDay: String? = nil,
+         dayOfWeek: [Int]? = nil,
+         foodId: Int? = nil,
+         reagentLifestyleRecommendationId: Int? = nil,
+         activityId: Int? = nil,
+         planId: Int? = nil,
+         contactId: Int? = nil,
+         completed: [String]? = nil)
     {
         self.id = id
         self.last_updated = last_updated

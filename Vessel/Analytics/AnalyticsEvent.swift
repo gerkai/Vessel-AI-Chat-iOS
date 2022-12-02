@@ -15,6 +15,7 @@ enum AnalyticsEvent
     case forgotPassword
     case identification(type: AnalyticsIdentificationType)
     case accountDeleted
+    case activityAdded(activityId: Int, activityName: String)
     
     var name: String
     {
@@ -26,6 +27,7 @@ enum AnalyticsEvent
         case .forgotPassword: return "Forgot Password"
         case .identification: return "Identification"
         case .accountDeleted: return "Account Deleted"
+        case .activityAdded: return "Activity Added"
         }
     }
     
@@ -55,6 +57,9 @@ enum AnalyticsEvent
             return ["Type": identificationType.rawValue]
         case .accountDeleted:
             return [:]
+        case .activityAdded(let activityId, let activityName):
+            return ["Activity ID": activityId,
+                    "Activity Name": activityName]
         }
     }
 }

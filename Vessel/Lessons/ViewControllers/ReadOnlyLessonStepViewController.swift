@@ -17,12 +17,24 @@ class ReadOnlyLessonStepViewController: UIViewController
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var contentTextLabel: UILabel!
+    @IBOutlet private weak var planAddedViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var planAddedViewHeightConstraint: NSLayoutConstraint!
+    
+    @Resolved private var analytics: Analytics
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        planAddedViewHeightConstraint.constant = 95 + view.safeAreaInsets.top
+        planAddedViewTopConstraint.constant = -planAddedViewHeightConstraint.constant
+        view.layoutIfNeeded()
     }
     
     // MARK: - Actions
@@ -66,5 +78,78 @@ private extension ReadOnlyLessonStepViewController
     func setupStackView()
     {
         contentTextLabel.text = viewModel.step.text
+        
+        if viewModel.step.activityIds.isEmpty
+        {
+            contentStackView.arrangedSubviews.last?.removeFromSuperview()
+        }
+        else
+        {
+            let userPlans = PlansManager.shared.plans.filter({ $0.activityId != nil })
+            for activityId in viewModel.step.activityIds
+            {
+                if let activity = viewModel.lesson.activities.first(where: { $0.id == activityId })
+                {
+                    let activityView = LessonStepActivityView(frame: .zero)
+                    activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)
+                    if userPlans.contains(where: { $0.activityId == activityId })
+                    {
+                        activityView.setButtonText(addText: false)
+                    }
+                    contentStackView.addArrangedSubview(activityView)
+                }
+            }
+        }
+    }
+    
+    func setActivityButtonTitle(activityId: Int, addText: Bool)
+    {
+        let activityViews = contentStackView.arrangedSubviews.filter({ ($0 as? LessonStepActivityView) != nil }) as! [LessonStepActivityView]
+        let activityView = activityViews.first(where: { $0.activityId == activityId })
+        activityView?.setButtonText(addText: addText)
+    }
+}
+
+extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
+{
+    func onActivityAddedToPlan(activityId: Int, activityName: String)
+    {
+        let plan = Plan(activityId: activityId)
+        Server.shared.addSinglePlan(plan: plan) { [weak self] plan in
+            guard let self = self else { return }
+            self.analytics.log(event: .activityAdded(activityId: activityId, activityName: activityName))
+            PlansManager.shared.plans.append(plan)
+            self.setActivityButtonTitle(activityId: activityId, addText: false)
+            
+            self.planAddedViewTopConstraint.constant = 0
+            UIView.animate(withDuration: 0.3, delay: 0.0)
+            {
+                self.view.layoutIfNeeded()
+            } completion: { _ in
+                self.planAddedViewTopConstraint.constant = -self.planAddedViewHeightConstraint.constant
+                UIView.animate(withDuration: 0.3, delay: 2.0)
+                {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        } onFailure: { [weak self] error in
+            guard let self = self else { return }
+            self.setActivityButtonTitle(activityId: activityId, addText: true)
+        }
+    }
+    
+    func onActivityRemovedFromPlan(activityId: Int)
+    {
+        guard let plan = PlansManager.shared.plans.first(where: { $0.activityId == activityId}) else { return }
+        Server.shared.removeSinglePlan(planId: plan.id) { [weak self] in
+            guard let self = self else { return }
+            self.setActivityButtonTitle(activityId: activityId, addText: true)
+            guard let index = PlansManager.shared.plans.firstIndex(of: plan) else { return }
+            PlansManager.shared.plans.remove(at: index)
+        } onFailure: { [weak self] error in
+            guard let self = self else { return }
+            print(error)
+            self.setActivityButtonTitle(activityId: activityId, addText: false)
+        }
     }
 }

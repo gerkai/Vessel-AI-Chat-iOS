@@ -22,6 +22,29 @@ class LessonsManager
         }
     }
     
+    func getLessonActivities(lesson: Lesson, onSuccess success: @escaping (_ objects: [Tip]) -> Void, onFailure failure: @escaping () -> Void)
+    {
+        let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
+        var activityIds = lesson.activityIds
+        activityIds.append(contentsOf: stepsActivityIds)
+        let uniqueActivityIds = Array(Set(activityIds)).sorted(by: { $0 < $1 })
+
+        ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds) { objects in
+            // TODO: Remove when backend sends ids for Tips
+            let objectsWithIds = objects.map { tip in
+                if let index = objects.firstIndex(where: { $0.title == tip.title })
+                {
+                    tip.id = uniqueActivityIds[index]
+                }
+                return tip
+            }
+            
+            success(objectsWithIds)
+        } onFailure: {
+            failure()
+        }
+    }
+    
     func buildLessonPlan()
     {
         guard let contact = Contact.main() else { return }
@@ -60,6 +83,13 @@ class LessonsManager
     {
         self.lessons = self.lessons.sorted(by: { $0.rank < $1.rank })
         guard let firstLesson = lessons.first else { return }
+        
+        getLessonActivities(lesson: firstLesson) { [weak self] activities in
+            guard let self = self else { return }
+            self.lessons.first!.activities = activities
+        } onFailure: {
+        }
+        
         getLessonSteps(lesson: firstLesson) { [weak self] steps in
             guard let self = self else { return }
             self.lessons.first!.steps = steps.filter({ $0.type != nil })
@@ -71,14 +101,19 @@ class LessonsManager
             }
             else
             {
-                for step in self.lessons.first!.steps
+                if !self.lessons.first!.activityIds.isEmpty
                 {
-                    print("Step: \(step.text!)")
-                    print("Type: \(step.type!)")
-                    print("Ansers: \(step.answers.map({ $0.primaryText }).joined(separator: ", "))")
-                    print("Correct answer: \(step.answers.filter({ $0.correct }).map({ $0.primaryText }).joined(separator: ", "))")
-                    print("======================================================================================================")
+                    let readOnlyStep = Step(id: -1, last_updated: 0, typeString: "READONLY", successText: nil, imageUrl: "", isSkippable: false, answers: [], activityIds: self.lessons.first!.activityIds)
+                    self.lessons.first!.steps.append(readOnlyStep)
                 }
+//                for step in self.lessons.first!.steps
+//                {
+//                    print("Step: \(step.text!)")
+//                    print("Type: \(step.type!)")
+//                    print("Ansers: \(step.answers.map({ $0.primaryText }).joined(separator: ", "))")
+//                    print("Correct answer: \(step.answers.filter({ $0.correct }).map({ $0.primaryText }).joined(separator: ", "))")
+//                    print("======================================================================================================")
+//                }
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
             }
         } onFailure: {

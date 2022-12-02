@@ -35,7 +35,8 @@ class Step: CoreObjectProtocol
     let isSkippable: Bool
     var answers: [LessonStepAnswer]
     var answerId: Int?
-    var activityIds: [Int]?
+    // TODO: Remove hardcoded activity ids once the backend starts returning those
+    var activityIds: [Int] = [15, 18, 19]
     var correctAnswerId: Int?
     {
         answers.first(where: { $0.correct })?.id
@@ -58,7 +59,7 @@ class Step: CoreObjectProtocol
          answerText: String? = nil,
          questionRead: Bool? = nil,
          lessonId: Int? = nil,
-         activityIds: [Int]? = nil)
+         activityIds: [Int] = [])
     {
         self.id = id
         self.last_updated = last_updated
@@ -93,7 +94,8 @@ class Step: CoreObjectProtocol
         case questionRead = "question_read"
         case answerText = "answer_text"
         case lessonId = "lesson_id"
-        case activityIds = "activity_ids"
+        // TODO: Uncomment once the backend starts returning those
+//        case activityIds = "activity_ids"
     }
 }
 

@@ -19,8 +19,9 @@ class Lesson: CoreObjectProtocol, Equatable
     let imageUrl: String?
     var completedDate: String?
     var rank: Int
-    // TODO: Remove optional once backend send this every time
-    let activityIds: [Int]?
+    // TODO: Remove hardcoded activity ids once the backend starts returning those
+    var activityIds: [Int] = [15, 18, 20]
+    var activities = [Tip]()
     let stepIds: [Int]
     var steps: [Step] = []
     
@@ -31,7 +32,7 @@ class Lesson: CoreObjectProtocol, Equatable
          imageUrl: String?,
          completedDate: String? = nil,
          rank: Int,
-         activityIds: [Int]?,
+         activityIds: [Int],
          stepIds: [Int])
     {
         self.id = id
@@ -53,7 +54,8 @@ class Lesson: CoreObjectProtocol, Equatable
         case imageUrl = "image_url"
         case completedDate = "completed_date"
         case rank
-        case activityIds = "activity_ids"
+        // TODO: Uncomment once the backend starts returning those
+//        case activityIds = "activity_ids"
         case stepIds = "step_ids"
     }
     
