@@ -18,6 +18,11 @@ enum AnalyticsEvent
     case lessonStarted(lessonId: Int, lessonName: String)
     case lessonCompleted(lessonId: Int, lessonName: String)
     case activityAdded(activityId: Int, activityName: String)
+    case waterAdded
+    case waterComplete(waterAmount: Int, totalWaterAmount: Int)
+    case foodAdded(foodId: Int, foodName: String)
+    case foodShown(foodId: Int, foodName: String)
+    case foodComplete(foodId: Int, foodName: String, completed: Bool)
     
     var name: String
     {
@@ -32,6 +37,11 @@ enum AnalyticsEvent
         case .lessonStarted: return "Lesson Started"
         case .lessonCompleted: return "Lesson Completed"
         case .activityAdded: return "Activity Added"
+        case .waterAdded: return "Water Added"
+        case .waterComplete: return "Water Complete"
+        case .foodAdded: return "Food Added"
+        case .foodShown: return "Food Shown"
+        case .foodComplete: return "Food Complete"
         }
     }
     
@@ -70,6 +80,21 @@ enum AnalyticsEvent
         case .activityAdded(let activityId, let activityName):
             return ["Activity ID": activityId,
                     "Activity Name": activityName]
+        case .waterAdded:
+            return [:]
+        case .waterComplete(let waterAmount, let totalWaterAmount):
+            return ["Water Amount": waterAmount,
+                    "Total Water Amount": totalWaterAmount]
+        case .foodAdded(let foodId, let foodName):
+            return ["Food ID": foodId,
+                    "Food Name": foodName]
+        case .foodShown(let foodId, let foodName):
+            return ["Food ID": foodId,
+                    "Food Name": foodName]
+        case .foodComplete(let foodId, let foodName, let completed):
+            return ["Food ID": foodId,
+                    "Food Name": foodName,
+                    "Completed": completed]
         }
     }
 }
