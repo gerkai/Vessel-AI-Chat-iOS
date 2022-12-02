@@ -342,7 +342,13 @@ private extension EditProfileViewController
         {
             let (minFeet, _) = viewModel.getMinHeightImperial()
             
-            heightPickerView.selectRow(feet - minFeet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
+            //some old users have 0' for height. Added this to prevent crash bug
+            var heightFeet = feet
+            if heightFeet < minFeet
+            {
+                heightFeet = minFeet
+            }
+            heightPickerView.selectRow(heightFeet - minFeet, inComponent: HeightComponentImperial.feet.rawValue, animated: false)
             heightPickerView.selectRow(inches, inComponent: HeightComponentImperial.inches.rawValue, animated: false)
         }
     }
