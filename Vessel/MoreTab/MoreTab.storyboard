@@ -145,6 +145,12 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="UMb-fb-xrH"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version X.X.XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxc-iq-skC">
+                                <rect key="frame" x="10" y="747" width="97" height="16"/>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version X.X.XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqj-NK-3xT">
                                 <rect key="frame" x="307" y="747" width="97" height="16"/>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
@@ -181,15 +187,17 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hTX-5z-DmA" secondAttribute="bottom" id="Be0-cl-uw2"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eqj-NK-3xT" secondAttribute="bottom" constant="50" id="F8b-bX-MP7"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="AjI-3t-gmj" secondAttribute="bottom" id="Pz9-dE-tfG"/>
+                            <constraint firstItem="hTX-5z-DmA" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Be0-cl-uw2"/>
+                            <constraint firstItem="eqj-NK-3xT" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-50" id="F8b-bX-MP7"/>
+                            <constraint firstItem="Rxc-iq-skC" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="10" id="Iby-Ee-vso"/>
+                            <constraint firstItem="AjI-3t-gmj" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Pz9-dE-tfG"/>
                             <constraint firstItem="hTX-5z-DmA" firstAttribute="trailing" secondItem="82A-P2-6fv" secondAttribute="trailing" id="Qgi-WG-8Go"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="82A-P2-6fv" secondAttribute="bottom" id="cbE-mN-mlr"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eqj-NK-3xT" secondAttribute="trailing" constant="10" id="ehV-Yp-HMc"/>
+                            <constraint firstItem="Rxc-iq-skC" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-50" id="TWI-KR-Ls1"/>
+                            <constraint firstItem="82A-P2-6fv" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="cbE-mN-mlr"/>
+                            <constraint firstItem="eqj-NK-3xT" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" constant="-10" id="ehV-Yp-HMc"/>
                             <constraint firstItem="hTX-5z-DmA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="j4w-e8-zSi"/>
-                            <constraint firstItem="AjI-3t-gmj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="nyf-3B-VgS"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hTX-5z-DmA" secondAttribute="trailing" id="skZ-Pj-VXn"/>
+                            <constraint firstItem="AjI-3t-gmj" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="nyf-3B-VgS"/>
+                            <constraint firstItem="hTX-5z-DmA" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="skZ-Pj-VXn"/>
                             <constraint firstItem="hTX-5z-DmA" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="t3b-9u-Vsd"/>
                         </constraints>
                     </view>
@@ -200,6 +208,7 @@
                     <navigationItem key="navigationItem" title="More" id="dIt-w1-6Ui"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="environmentLabel" destination="Rxc-iq-skC" id="pWM-vh-Cmm"/>
                         <outlet property="tableView" destination="hTX-5z-DmA" id="FgJ-Nu-x7i"/>
                         <outlet property="versionLabel" destination="eqj-NK-3xT" id="YmP-eE-wll"/>
                     </connections>
