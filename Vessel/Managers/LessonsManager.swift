@@ -80,7 +80,6 @@ class LessonsManager
     
     private func loadStepsForLessons()
     {
-<<<<<<< HEAD
         if loadedLessonsCount < 4 && loadedLessonsCount <= lessons.count
         {
             guard let lesson = lessons[safe: loadedLessonsCount] else { return }
@@ -102,42 +101,6 @@ class LessonsManager
                 }
                 self.loadStepsForLessons()
             } onFailure: {
-=======
-        self.lessons = self.lessons.sorted(by: { $0.rank < $1.rank })
-        guard let firstLesson = lessons.first else { return }
-        
-        getLessonActivities(lesson: firstLesson) { [weak self] activities in
-            guard let self = self else { return }
-            self.lessons.first!.activities = activities
-        } onFailure: {
-        }
-        
-        getLessonSteps(lesson: firstLesson) { [weak self] steps in
-            guard let self = self else { return }
-            self.lessons.first!.steps = steps.filter({ $0.type != nil })
-            // Remove lesson if doens't have any step and load the next one
-            if self.lessons.first!.steps.count == 0
-            {
-                self.lessons.remove(at: 0)
-                self.onPlanBuiltComplete()
-            }
-            else
-            {
-                if !self.lessons.first!.activityIds.isEmpty
-                {
-                    let readOnlyStep = Step(id: -1, last_updated: 0, typeString: "READONLY", successText: nil, imageUrl: "", isSkippable: false, answers: [], activityIds: self.lessons.first!.activityIds)
-                    self.lessons.first!.steps.append(readOnlyStep)
-                }
-//                for step in self.lessons.first!.steps
-//                {
-//                    print("Step: \(step.text!)")
-//                    print("Type: \(step.type!)")
-//                    print("Ansers: \(step.answers.map({ $0.primaryText }).joined(separator: ", "))")
-//                    print("Correct answer: \(step.answers.filter({ $0.correct }).map({ $0.primaryText }).joined(separator: ", "))")
-//                    print("======================================================================================================")
-//                }
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
->>>>>>> a5104c8a802428e653a6bfb2766fbfa29b97f301
             }
         }
     }
