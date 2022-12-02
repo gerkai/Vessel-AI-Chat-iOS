@@ -12,6 +12,8 @@ class LessonResultsViewController: UIViewController
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var successfulLessonIcon: UIImageView!
     @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var confettiImageView: UIImageView!
+    @IBOutlet private weak var confettiTopConstraint: NSLayoutConstraint!
     
     private let successTitles = [NSLocalizedString("Nice!", comment: ""), NSLocalizedString("Well Done!", comment: ""), NSLocalizedString("Nailed it!", comment: "")]
     private let failureTitles = [NSLocalizedString("Almost", comment: ""), NSLocalizedString("So Close", comment: ""), NSLocalizedString("Not Quite", comment: "")]
@@ -39,8 +41,22 @@ class LessonResultsViewController: UIViewController
               let url = URL(string: imageUrl) else { return }
         backgroundImageView.kf.setImage(with: url)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
             self.navigationController?.popViewController(animated: true)
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        if success
+        {
+            confettiTopConstraint.constant = -view.frame.height
+            UIView.animate(withDuration: 2.0, delay: 0.0)
+            {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }

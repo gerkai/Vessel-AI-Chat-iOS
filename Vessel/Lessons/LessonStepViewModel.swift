@@ -37,5 +37,14 @@ class StepViewModel
     {
         self.step = step
         self.lesson = lesson
+        
+        if let answerId = step.answerId
+        {
+            selectedAnswerId = answerId
+        }
+        if let answer = step.answerText
+        {
+            self.answer = answer
+        }
     }
 }

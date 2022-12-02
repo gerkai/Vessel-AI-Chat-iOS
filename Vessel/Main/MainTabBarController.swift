@@ -27,21 +27,6 @@ class MainTabBarController: UITabBarController
         tabBar.items![vesselButtonIndex].isEnabled = false
         
         setTabBarItemAppearance()
-        /*
-        if #available(iOS 15.0, *)
-        {
-            tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-        }*/
-        
-        let blurEffect = UIBlurEffect(style: .light)
-        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        
-        tabBar.insertSubview(visualEffectView, at: 0)
-        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: tabBar, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0).isActive = true
         
         //remove all prior viewControllers from the navigation stack which will cause them to be deallocated.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) //provide enough time for push/fade to complete
@@ -65,6 +50,15 @@ class MainTabBarController: UITabBarController
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font: UIFont(name: "BananaGrotesk-Regular", size: 16)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key: Any], for: .normal)
+
+        if #available(iOS 15.0, *)
+        {
+            let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            tabBarAppearance.compactInlineLayoutAppearance.normal.titleTextAttributes = attributes as [NSAttributedString.Key: Any]
+            tabBarAppearance.inlineLayoutAppearance.normal.titleTextAttributes = attributes as [NSAttributedString.Key: Any]
+            tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = attributes as [NSAttributedString.Key: Any]
+        }
     }
     
     deinit

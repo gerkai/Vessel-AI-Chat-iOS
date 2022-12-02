@@ -120,13 +120,40 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
-        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let completed):
+        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
-            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: completed)
+            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: false)
+        case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
+            guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
+            cell.setup(title: title, subtitle: subtitle, description: nil, backgroundImage: backgroundImage, completed: true)
+        case .text(let text):
+            guard let cell = cell as? TodayTextCell else  { fatalError("Can't dequeue cell TodayTextCell from tableView in TodayViewController") }
+            cell.setup(text: text)
+        case .button(let text):
+            guard let cell = cell as? TodayButtonCell else  { fatalError("Can't dequeue cell TodayTextCell from tableView in TodayViewController") }
+            cell.setup(title: text, delegate: self)
+            break
         case .footer:
             break
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath?
+    {
+        guard let section = viewModel.sections[safe: indexPath.section] else { return nil }
+        switch section
+        {
+        case .insights(let lessons):
+            if indexPath.row == 2 || (indexPath.row == 3 && lessons.count == 1)
+            {
+                return nil
+            }
+        default:
+            break
+        }
+        
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
@@ -135,13 +162,34 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         switch section
         {
         case .insights(let lessons):
-            if indexPath.row > 0
+            if indexPath.row == 0
             {
-                let row = indexPath.row - 1
+                GenericAlertViewController.presentAlert(in: self, type:
+                                                            GenericAlertType.titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("An insight a day keeps the doctor away.", comment: ""), font: Constants.FontTitleMain24),
+                                                                                                 subtitle: GenericAlertLabelInfo(title: NSLocalizedString("Each day you'll get one new insight to empower you with knowledge to reach your goals.", comment: ""), font: Constants.FontBodyAlt16, alignment: .center, height: 80.0),
+                                                                                                 button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
+            }
+            else
+            {
+                // Substract title row and today insights done text row
+                let row = lessons.count > 1 && indexPath.row > 1 ? indexPath.row - 2 : indexPath.row - 1
                 let lesson = lessons[row]
                 let coordinator = LessonsCoordinator(lesson: lesson)
-                guard let viewController = coordinator.getNextStepViewController() else { return }
-                navigationController?.pushViewController(viewController, animated: true)
+                if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+                {
+                    for _ in stride(from: 0, to: index, by: 1)
+                    {
+                        guard let viewController = coordinator.getNextStepViewController() else { return }
+                        navigationController?.pushViewController(viewController, animated: false)
+                    }
+                    guard let viewController = coordinator.getNextStepViewController() else { return }
+                    navigationController?.pushViewController(viewController, animated: true)
+                }
+                else
+                {
+                    guard let viewController = coordinator.getNextStepViewController() else { return }
+                    navigationController?.pushViewController(viewController, animated: true)
+                }
             }
         case .food:
             if indexPath.row == 0
@@ -212,5 +260,14 @@ extension TodayViewController: TodayHeaderTableViewCellDelegate
         let goalID = Goal.ID(rawValue: id)!
         let vc = GoalDetailsViewController.initWith(goal: goalID, viewModel: resultsViewModel)
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension TodayViewController: TodayButtonCellDelegate
+{
+    func onButtonPressed()
+    {
+        LessonsManager.shared.unlockMoreInsights = true
+        reloadUI()
     }
 }

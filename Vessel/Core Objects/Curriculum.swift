@@ -36,7 +36,7 @@ class Curriculum: CoreObjectProtocol
     }
 }
 
-struct LessonRank: Codable
+struct LessonRank: Codable, Hashable
 {
     let id: Int
     let rank: Int

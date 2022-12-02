@@ -15,11 +15,14 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var checkMark: UIImageView!
     
-    func setup(title: String, subtitle: String, description: String, backgroundImage: String, completed: Bool)
+    func setup(title: String, subtitle: String, description: String?, backgroundImage: String, completed: Bool)
     {
         titleLabel.text = title
         subtitleLabel.text = subtitle
-        descriptionLabel.text = description
+        if let description = description
+        {
+            descriptionLabel?.text = description
+        }
         checkMark.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
         guard let url = URL(string: backgroundImage) else { return }
         backgroundImageView.kf.setImage(with: url)

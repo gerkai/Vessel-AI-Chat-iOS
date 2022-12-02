@@ -18,8 +18,10 @@ class QuizSurveyLessonStepViewController: UIViewController
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var stepsStackView: UIStackView!
     @IBOutlet private weak var nextButton: BounceButton!
-    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var stackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var progressBar: LessonStepsProgressBar!
     
+    private var progressBarSetup = false
     private var type: StepType?
     {
         switch viewModel?.step.type
@@ -34,9 +36,21 @@ class QuizSurveyLessonStepViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         setupUI()
         updateNextButton()
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        if !progressBarSetup
+        {
+            progressBarSetup = true
+            let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+            progressBar.setProgressBar(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        }
     }
     
     // MARK: - Actions
@@ -51,7 +65,7 @@ class QuizSurveyLessonStepViewController: UIViewController
     {
         if viewModel.state == .answering
         {
-            if let _ = viewModel.selectedAnswerId
+            if viewModel.selectedAnswerId != nil || viewModel.step.isSkippable
             {
                 if let selectedAnswerId = viewModel.selectedAnswerId
                 {
@@ -72,7 +86,7 @@ class QuizSurveyLessonStepViewController: UIViewController
             else
             {
                 GenericAlertViewController.presentAlert(in: self,
-                                                        type: .titleButton(text: GenericAlertLabelInfo(title: "Please make a selection to continue", font: Constants.FontTitleMain24!),
+                                                        type: .titleButton(text: GenericAlertLabelInfo(title: "Please make a selection to continue", font: Constants.FontTitleMain24),
                                                                            button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: "Got it!"),
                                                                                                           type: .dark)),
                                                         description: "",
@@ -81,13 +95,14 @@ class QuizSurveyLessonStepViewController: UIViewController
         }
         else
         {
+            viewModel.state = .answering
             if let viewController = coordinator.getNextStepViewController(state: viewModel.state)
             {
                 navigationController?.pushViewController(viewController, animated: true)
             }
             else
             {
-                print("LESSON FINISHED")
+                coordinator.finishLesson(navigationController: navigationController!)
             }
         }
     }
@@ -99,8 +114,15 @@ private extension QuizSurveyLessonStepViewController
     {
         questionLabel.text = viewModel.step.text
         titleLabel.text = viewModel.lesson.title
+        durationLabel.text = "~\(viewModel.lesson.durationString())"
         setupImageView()
         setupStackView()
+        let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+        progressBar.setup(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        if index == viewModel.lesson.steps.count - 1
+        {
+            nextButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+        }
     }
     
     func setupImageView()
@@ -127,6 +149,7 @@ private extension QuizSurveyLessonStepViewController
     {
         if viewModel.state == .answering
         {
+            questionLabel.font = Constants.FontBoldMain28
             for view in stepsStackView.arrangedSubviews
             {
                 guard let view = view as? LessonStepView else { return }
@@ -135,6 +158,8 @@ private extension QuizSurveyLessonStepViewController
         }
         else
         {
+            questionLabel.font = Constants.FontBodyMain16
+            questionLabel.text = viewModel.step.successText ?? (viewModel.result == .correct ? NSLocalizedString("Nice work! You got it right!", comment: "") : NSLocalizedString("Good try! Below is the correct answer.", comment: ""))
             for view in stepsStackView.arrangedSubviews
             {
                 guard let view = view as? LessonStepView else { return }
@@ -170,12 +195,13 @@ private extension QuizSurveyLessonStepViewController
                 view.setup(checkedState: state)
             }
         }
+        view.layoutIfNeeded()
         updateNextButton()
     }
     
     func updateNextButton()
     {
-        if let _ = viewModel?.selectedAnswerId
+        if viewModel?.selectedAnswerId != nil || viewModel.step.isSkippable
         {
             nextButton.backgroundColor = Constants.vesselBlack
         }

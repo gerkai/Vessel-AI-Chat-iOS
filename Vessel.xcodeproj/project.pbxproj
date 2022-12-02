@@ -195,6 +195,8 @@
 		72461EEF2924AAA500A85AE5 /* Curriculum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EEE2924AAA500A85AE5 /* Curriculum.swift */; };
 		72461EF12924AD7500A85AE5 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF02924AD7500A85AE5 /* Lesson.swift */; };
 		72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF42924AE2600A85AE5 /* LessonStep.swift */; };
+		725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */; };
+		725C5C052938CED9000708AA /* LessonStepsProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */; };
 		725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */; };
 		725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */; };
 		7262F9C829263206006DD849 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7262F9C729263206006DD849 /* LessonsManager.swift */; };
@@ -228,6 +230,8 @@
 		72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */; };
 		72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */; };
 		72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */; };
+		72BBD6962938284200D9EB5E /* TodayTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD6952938284200D9EB5E /* TodayTextCell.swift */; };
+		72BBD6982938285200D9EB5E /* TodayButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD6972938285200D9EB5E /* TodayButtonCell.swift */; };
 		72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */; };
 		72BC2443292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */; };
 		72BC2445292C93B1002F6DA2 /* LessonStepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2444292C93B1002F6DA2 /* LessonStepViewModel.swift */; };
@@ -479,6 +483,8 @@
 		72461EEE2924AAA500A85AE5 /* Curriculum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curriculum.swift; sourceTree = "<group>"; };
 		72461EF02924AD7500A85AE5 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		72461EF42924AE2600A85AE5 /* LessonStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStep.swift; sourceTree = "<group>"; };
+		725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepsProgressBar.swift; sourceTree = "<group>"; };
+		725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepsProgressBar.xib; sourceTree = "<group>"; };
 		725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkCardView.swift; sourceTree = "<group>"; };
 		725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMarkCardView.xib; sourceTree = "<group>"; };
 		7262F9C729263206006DD849 /* LessonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
@@ -515,6 +521,8 @@
 		72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselFooterView.swift; sourceTree = "<group>"; };
 		72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VesselFooterView.xib; sourceTree = "<group>"; };
+		72BBD6952938284200D9EB5E /* TodayTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTextCell.swift; sourceTree = "<group>"; };
+		72BBD6972938285200D9EB5E /* TodayButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayButtonCell.swift; sourceTree = "<group>"; };
 		72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsCoordinator.swift; sourceTree = "<group>"; };
 		72BC2442292C936B002F6DA2 /* QuizSurveyLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSurveyLessonStepViewController.swift; sourceTree = "<group>"; };
 		72BC2444292C93B1002F6DA2 /* LessonStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepViewModel.swift; sourceTree = "<group>"; };
@@ -1260,6 +1268,8 @@
 			children = (
 				72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */,
 				72BC244B292CABC9002F6DA2 /* LessonStepView.xib */,
+				725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */,
+				725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */,
 				72F24C1F293728B5006F6250 /* LessonStepActivityView.swift */,
 				72F24C21293729E3006F6250 /* LessonStepActivityView.xib */,
 			);
@@ -1274,6 +1284,8 @@
 				72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */,
 				72FCD54828F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift */,
 				72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */,
+				72BBD6952938284200D9EB5E /* TodayTextCell.swift */,
+				72BBD6972938285200D9EB5E /* TodayButtonCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1461,6 +1473,7 @@
 				3F15AD0B288DC896004716CA /* AfterTest.storyboard in Resources */,
 				3F47B48728FB1FAB00D35E97 /* ReagentDetailsChartCell.xib in Resources */,
 				3FE369D127C9A71D00231D42 /* Assets.xcassets in Resources */,
+				725C5C052938CED9000708AA /* LessonStepsProgressBar.xib in Resources */,
 				3FE369E227C9A74B00231D42 /* BananaGrotesk-Medium.otf in Resources */,
 				3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */,
 				3F9C679728FDEC7300BC44FA /* ScienceStudiesView.xib in Resources */,
@@ -1613,7 +1626,9 @@
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
 				3F9CB7B528C7F7410093228E /* CalibrationErrorSlideupViewController.swift in Sources */,
 				3F9C67A028FE608A00BC44FA /* Hydration.swift in Sources */,
+				72BBD6982938285200D9EB5E /* TodayButtonCell.swift in Sources */,
 				3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */,
+				72BBD6962938284200D9EB5E /* TodayTextCell.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
@@ -1772,6 +1787,7 @@
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */,
 				72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */,
+				725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,

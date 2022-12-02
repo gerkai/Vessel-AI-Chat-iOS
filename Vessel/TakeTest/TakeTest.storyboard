@@ -406,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CUP TIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqe-M5-sjK">
-                                <rect key="frame" x="169" y="438" width="66" height="20"/>
+                                <rect key="frame" x="168" y="438" width="66" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1325,6 +1325,9 @@
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CLe-DU-dYM">
                                                 <rect key="frame" x="20" y="510.5" width="374" height="233"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="233" id="hga-oO-6xU"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1345,7 +1348,7 @@
                                             <constraint firstItem="Aap-0m-GZb" firstAttribute="trailing" secondItem="Fep-gZ-ueQ" secondAttribute="trailing" constant="-30" id="Vg0-Ec-kxU"/>
                                             <constraint firstItem="TCI-W3-x2F" firstAttribute="centerX" secondItem="Fep-gZ-ueQ" secondAttribute="centerX" id="YLy-UJ-LRt"/>
                                             <constraint firstItem="CLe-DU-dYM" firstAttribute="top" secondItem="WV3-Zh-Wke" secondAttribute="bottom" constant="28" id="aYH-u4-GZU"/>
-                                            <constraint firstAttribute="bottom" secondItem="4oh-MF-Igg" secondAttribute="bottom" constant="72" id="bb1-Dv-YOW"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4oh-MF-Igg" secondAttribute="bottom" constant="72" id="bb1-Dv-YOW"/>
                                             <constraint firstItem="cu3-ID-9xI" firstAttribute="top" secondItem="TCI-W3-x2F" secondAttribute="bottom" constant="2" id="dkS-es-Wb8"/>
                                             <constraint firstItem="N2g-ms-MTJ" firstAttribute="trailing" secondItem="Fep-gZ-ueQ" secondAttribute="trailing" id="faS-kq-O2g"/>
                                             <constraint firstItem="CLe-DU-dYM" firstAttribute="width" secondItem="Fep-gZ-ueQ" secondAttribute="width" constant="-40" id="foa-vO-W4j"/>
@@ -1403,6 +1406,7 @@
                         <outlet property="progressView" destination="N2g-ms-MTJ" id="TJM-P9-Chi"/>
                         <outlet property="segmentedControl" destination="YXL-0a-d3q" id="i06-dN-LuX"/>
                         <outlet property="stackView" destination="CLe-DU-dYM" id="NWO-ep-341"/>
+                        <outlet property="stackViewHeightConstraint" destination="hga-oO-6xU" id="eUh-2N-0qW"/>
                         <outlet property="tabDetailsLabel" destination="WV3-Zh-Wke" id="b9u-SB-wCd"/>
                         <outlet property="timerLabel" destination="Wpj-03-vdP" id="qK0-hh-Dv2"/>
                         <outlet property="titleLabel" destination="TCI-W3-x2F" id="J8f-tL-b8h"/>

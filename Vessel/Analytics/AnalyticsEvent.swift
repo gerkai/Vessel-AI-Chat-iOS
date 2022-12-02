@@ -15,6 +15,8 @@ enum AnalyticsEvent
     case forgotPassword
     case identification(type: AnalyticsIdentificationType)
     case accountDeleted
+    case lessonStarted(lessonId: Int, lessonName: String)
+    case lessonCompleted(lessonId: Int, lessonName: String)
     case activityAdded(activityId: Int, activityName: String)
     
     var name: String
@@ -27,6 +29,8 @@ enum AnalyticsEvent
         case .forgotPassword: return "Forgot Password"
         case .identification: return "Identification"
         case .accountDeleted: return "Account Deleted"
+        case .lessonStarted: return "Lesson Started"
+        case .lessonCompleted: return "Lesson Completed"
         case .activityAdded: return "Activity Added"
         }
     }
@@ -57,6 +61,12 @@ enum AnalyticsEvent
             return ["Type": identificationType.rawValue]
         case .accountDeleted:
             return [:]
+        case .lessonStarted(let lessonId, let lessonName):
+            return ["Lesson ID": lessonId,
+                    "Lesson Name": lessonName]
+        case .lessonCompleted(let lessonId, let lessonName):
+            return ["Lesson ID": lessonId,
+                    "Lesson Name": lessonName]
         case .activityAdded(let activityId, let activityName):
             return ["Activity ID": activityId,
                     "Activity Name": activityName]

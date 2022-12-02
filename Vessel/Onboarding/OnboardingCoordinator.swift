@@ -76,6 +76,7 @@ class OnboardingCoordinator
         else
         {
             Storage.clear(objectType: Curriculum.self)
+            Storage.clear(objectType: Lesson.self)
             
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()

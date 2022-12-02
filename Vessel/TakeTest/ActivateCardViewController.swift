@@ -25,6 +25,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var tabDetailsLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     
     var flowName: AnalyticsFlowName = .takeTestFlow
     @Resolved internal var analytics: Analytics
@@ -48,6 +49,9 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     let InsightsIndex = 2
     let defaultSegmentDetailsString = NSLocalizedString("Your Wellness Test Card", comment: "")
     
+    // Feature flags
+    var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -66,6 +70,11 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "PlayIcon")!, string: NSLocalizedString("Tour", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 1)
         segmentedControl.setImage(UIImage.textEmbeded(image: UIImage.init(named: "InsightsIcon")!, string: NSLocalizedString("Insights", comment: "Segmented Control button title"), isImageBeforeText: true), forSegmentAt: 2)
         
+        if !showInsights
+        {
+            segmentedControl.removeSegment(at: 2, animated: false)
+        }
+        
         tabDetailsLabel.text = defaultSegmentDetailsString
         
         setTimerLabel(secondsRemaining: Double(curSeconds))
@@ -80,6 +89,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             firstTimeAppeared = true
             viewModel.startTimer()
         }
+        stackViewHeightConstraint.constant = videoView.frame.height
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -197,12 +207,23 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     func setupInsightsStackView()
     {
         stackView.isHidden = true
-        guard let lessons = LessonsManager.shared.lessons.first else { return }
-        for lesson in [lessons]
+        if showInsights
         {
-            let view = CheckMarkCardView(frame: .zero)
-            view.setup(id: lesson.id, title: lesson.title, subtitle: "", description: lesson.description ?? "", backgroundImage: lesson.imageUrl ?? "", completed: lesson.completedDate != nil, delegate: self)
-            stackView.addArrangedSubview(view)
+            let lessons = LessonsManager.shared.todayLessons
+            for lesson in lessons
+            {
+                let view = CheckMarkCardView(frame: .zero)
+                view.setup(id: lesson.id, title: lesson.title, subtitle: lesson.subtitleString(), description: lesson.description ?? "", backgroundImage: lesson.imageUrl ?? "", completed: lesson.completedDate != nil, delegate: self)
+                stackView.addArrangedSubview(view)
+            }
+            if lessons.count > 0
+            {
+                stackViewHeightConstraint.constant = CGFloat(lessons.count * 203) + CGFloat((lessons.count - 1) * 20)
+            }
+            else
+            {
+                stackViewHeightConstraint.constant = videoView.frame.height
+            }
         }
     }
     
@@ -284,6 +305,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             player1.play()
             videoView.isHidden = false
             stackView.isHidden = true
+            stackViewHeightConstraint.constant = videoView.frame.height
         case TourIndex:
             tabDetailsLabel.text = defaultSegmentDetailsString
             player1.pause()
@@ -291,13 +313,23 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             player2.play()
             videoView.isHidden = false
             stackView.isHidden = true
-        default:
+            stackViewHeightConstraint.constant = videoView.frame.height
+        case InsightsIndex:
             player1.pause()
             player2.pause()
             videoView.isHidden = true
             tabDetailsLabel.text = insightsText()
             stackView.isHidden = false
+            let lessons = LessonsManager.shared.todayLessons
+            stackViewHeightConstraint.constant = CGFloat(lessons.count * 203) + CGFloat((lessons.count - 1) * 20)
+        default:
+            player1.pause()
+            player2.pause()
+            videoView.isHidden = true
+            tabDetailsLabel.text = ""
+            stackView.isHidden = true
         }
+        view.layoutIfNeeded()
     }
     
     //MARK: - Timer Expired Notification
@@ -377,9 +409,23 @@ extension ActivateCardViewController: CheckMarkCardViewDelegate
 {
     func onLessonSelected(id: Int)
     {
-        guard let lesson = LessonsManager.shared.lessons.first(where: { $0.id == id }) else { return }
+        guard let lesson = LessonsManager.shared.todayLessons.first(where: { $0.id == id }) else { return }
         let coordinator = LessonsCoordinator(lesson: lesson)
-        guard let viewController = coordinator.getNextStepViewController() else { return }
-        navigationController?.pushViewController(viewController, animated: true)
+        
+        if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+        {
+            for _ in stride(from: 0, to: index, by: 1)
+            {
+                guard let viewController = coordinator.getNextStepViewController() else { return }
+                navigationController?.pushViewController(viewController, animated: false)
+            }
+            guard let viewController = coordinator.getNextStepViewController() else { return }
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+        else
+        {
+            guard let viewController = coordinator.getNextStepViewController() else { return }
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

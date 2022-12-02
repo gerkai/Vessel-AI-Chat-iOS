@@ -86,9 +86,18 @@ class RemoteConfigManager
     
     func getValue(for key: RemoteConfigKey) -> Any?
     {
-        if key == .insightsFeature
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
         {
-            return true
+        case Constants.DEV_INDEX, Constants.STAGING_INDEX:
+            if key == .insightsFeature
+            {
+                return true
+            }
+        case Constants.PROD_INDEX:
+            return key.value
+        default:
+            return key.value
         }
         return key.value
     }

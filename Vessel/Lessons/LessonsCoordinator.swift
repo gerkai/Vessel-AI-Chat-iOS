@@ -20,10 +20,13 @@ class LessonsCoordinator
     {
         return steps[safe: currentStepIndex]
     }
+    
+    @Resolved private var analytics: Analytics
 
     init(lesson: Lesson)
     {
         self.lesson = lesson
+        analytics.log(event: .lessonStarted(lessonId: lesson.id, lessonName: lesson.title))
     }
     
     func back()
@@ -113,5 +116,13 @@ class LessonsCoordinator
                 }
             }
         }
+    }
+    
+    func finishLesson(navigationController: UINavigationController)
+    {
+        analytics.log(event: .lessonCompleted(lessonId: lesson.id, lessonName: lesson.title))
+        lesson.completedDate = Date.serverDateFormatter.string(from: Date())
+        LessonsManager.shared.unlockMoreInsights = false
+        navigationController.popToRootViewController(animated: true)
     }
 }

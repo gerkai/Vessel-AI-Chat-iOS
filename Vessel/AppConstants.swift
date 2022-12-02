@@ -171,10 +171,12 @@ struct Constants
     static let TIPS_TO_IMPROVE = NSLocalizedString("Tips to Improve", comment: "")
     
     //Fonts
-    static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)
-    static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)
-    static let FontBodyAlt14 = UIFont(name: "NoeText", size: 14.0)
-    static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)
+    static let FontBodyMain16 = UIFont(name: "BananaGrotesk", size: 16)!
+    static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)!
+    static let FontBoldMain28 = UIFont(name: "BananaGrotesk-Bold", size: 28)!
+    static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)!
+    static let FontBodyAlt14 = UIFont(name: "NoeText", size: 14.0)!
+    static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)!
     static let FontLearnMore10 = UIFont(name: "BananaGrotesk-Semibold", size: 10.0)!
     
     //Zendesk

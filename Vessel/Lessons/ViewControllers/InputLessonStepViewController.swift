@@ -16,12 +16,14 @@ class InputLessonStepViewController: UIViewController
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
-    @IBOutlet private weak var contentTitleLabel: UILabel!
     @IBOutlet private weak var contentTextLabel: UILabel!
     @IBOutlet private weak var textView: UITextView!
     @IBOutlet private weak var charactersCountLabel: UILabel!
+    @IBOutlet private weak var progressBar: LessonStepsProgressBar!
+    @IBOutlet private weak var nextButton: BounceButton!
     
     private var initialTextViewText: String?
+    private var progressBarSetup = false
     
     override func viewDidLoad()
     {
@@ -30,6 +32,18 @@ class InputLessonStepViewController: UIViewController
         setupUI()
     }
     
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        if !progressBarSetup
+        {
+            progressBarSetup = true
+            let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+            progressBar.setProgressBar(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        }
+    }
+
     // MARK: - Actions
     
     @IBAction func onBack()
@@ -40,14 +54,26 @@ class InputLessonStepViewController: UIViewController
     
     @IBAction func onNext()
     {
-        coordinator.answerStep(answer: textView.text ?? "", answerId: 0)
-        if let viewController = coordinator?.getNextStepViewController()
+        if textView.text.count > 0 || viewModel.step.isSkippable
         {
-            navigationController?.pushViewController(viewController, animated: true)
+            coordinator.answerStep(answer: textView.text ?? "", answerId: 0)
+            if let viewController = coordinator?.getNextStepViewController()
+            {
+                navigationController?.pushViewController(viewController, animated: true)
+            }
+            else
+            {
+                coordinator.finishLesson(navigationController: navigationController!)
+            }
         }
         else
         {
-            print("LESSON FINISHED")
+            GenericAlertViewController.presentAlert(in: self,
+                                                    type: .titleButton(text: GenericAlertLabelInfo(title: "Please enter text to continue", font: Constants.FontTitleMain24),
+                                                                       button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: "Got it!"),
+                                                                                                      type: .dark)),
+                                                    description: "",
+                                                    alignment: .bottom)
         }
     }
 }
@@ -57,11 +83,17 @@ private extension InputLessonStepViewController
     func setupUI()
     {
         titleLabel.text = viewModel.lesson.title
-        // TODO: Uncomment when placeholder_text issue is fixed on the Backend
-//        textView.text = viewModel.step.placeholderText
-//        initialTextViewText = viewModel.step.placeholderText
+        durationLabel.text = "~\(viewModel.lesson.durationString())"
+        textView.text = viewModel.answer ?? viewModel.step.placeholderText
+        initialTextViewText = viewModel.step.placeholderText
         setupImageView()
         setupStackView()
+        let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+        progressBar.setup(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        if index == viewModel.lesson.steps.count - 1
+        {
+            nextButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+        }
     }
     
     func setupImageView()
@@ -74,6 +106,18 @@ private extension InputLessonStepViewController
     func setupStackView()
     {
         contentTextLabel.text = viewModel.step.text
+    }
+    
+    func updateNextButton()
+    {
+        if textView.text.count > 0 || viewModel.step.isSkippable
+        {
+            nextButton.backgroundColor = Constants.vesselBlack
+        }
+        else
+        {
+            nextButton.backgroundColor = Constants.vesselGray
+        }
     }
 }
 
@@ -114,5 +158,6 @@ extension InputLessonStepViewController: UITextViewDelegate
         {
             charactersCountLabel.text = "\(1000 - textView.text.count) \(NSLocalizedString("characters remaining", comment: ""))"
         }
+        updateNextButton()
     }
 }

@@ -24,6 +24,22 @@ class Lesson: CoreObjectProtocol, Equatable
     var activities = [Tip]()
     let stepIds: [Int]
     var steps: [Step] = []
+    // TODO: Remove harcoded values once backend send this every time
+    var goalIds: [Int] = [2, 3, 4]
+    var duration: Int = 2
+    
+    var isComplete: Bool
+    {
+        completedDate != nil
+    }
+    
+    var completedToday: Bool
+    {
+        guard let completedDate = completedDate,
+              let date = completedDate.split(separator: "T")[safe: 0] else { return false }
+        let todayDateString = Date.serverDateFormatter.string(from: Date())
+        return todayDateString == date
+    }
     
     init(id: Int,
          last_updated: Int,
@@ -32,8 +48,9 @@ class Lesson: CoreObjectProtocol, Equatable
          imageUrl: String?,
          completedDate: String? = nil,
          rank: Int,
-         activityIds: [Int],
-         stepIds: [Int])
+         stepIds: [Int],
+         goalIds: [Int],
+         duration: Int)
     {
         self.id = id
         self.last_updated = last_updated
@@ -44,6 +61,8 @@ class Lesson: CoreObjectProtocol, Equatable
         self.rank = rank
         self.activityIds = activityIds
         self.stepIds = stepIds
+        self.goalIds = goalIds
+        self.duration = duration
     }
     
     enum CodingKeys: String, CodingKey
@@ -57,6 +76,9 @@ class Lesson: CoreObjectProtocol, Equatable
         // TODO: Uncomment once the backend starts returning those
 //        case activityIds = "activity_ids"
         case stepIds = "step_ids"
+        // TODO: Uncomment once backend send this every time
+//        case goalIds = "goal_id"
+//        case duration
     }
     
     static func == (lhs: Lesson, rhs: Lesson) -> Bool
@@ -70,5 +92,32 @@ class Lesson: CoreObjectProtocol, Equatable
         && lhs.rank == rhs.rank
         && lhs.activityIds == rhs.activityIds
         && lhs.stepIds == rhs.stepIds
+        && lhs.goalIds == rhs.goalIds
+        && lhs.duration == rhs.duration
+    }
+    
+    func subtitleString() -> String
+    {
+        var goalsString = ""
+        goalIds.forEach { goalID in
+            if let key = Goal.ID(rawValue: goalID), let goalName = Goals[key]?.name
+            {
+                goalsString += goalID == goalIds.first ? "" : goalID == goalIds.last ? " and " : ", "
+                goalsString += goalName.capitalized
+            }
+        }
+        return goalsString + " (\(durationString()))"
+    }
+    
+    func durationString() -> String
+    {
+        if duration == 1
+        {
+            return NSLocalizedString("1 min", comment: "")
+        }
+        else
+        {
+            return "\(duration) \(NSLocalizedString("mins", comment: ""))"
+        }
     }
 }

@@ -30,7 +30,7 @@ class Step: CoreObjectProtocol
     var title: String?
     var text: String?
     let successText: String?
-//    var placeholderText: String?
+    var placeholderText: String?
     let imageUrl: String?
     let isSkippable: Bool
     var answers: [LessonStepAnswer]
@@ -51,7 +51,7 @@ class Step: CoreObjectProtocol
          title: String? = nil,
          text: String? = nil,
          successText: String?,
-//         placeholderText: String?,
+         placeholderText: String?,
          imageUrl: String,
          isSkippable: Bool,
          answers: [LessonStepAnswer],
@@ -67,7 +67,7 @@ class Step: CoreObjectProtocol
         self.title = title
         self.text = text
         self.successText = successText
-//        self.placeholderText = placeholderText
+        self.placeholderText = placeholderText
         self.imageUrl = imageUrl
         self.isSkippable = isSkippable
         self.answers = answers
@@ -86,7 +86,7 @@ class Step: CoreObjectProtocol
         case title
         case text
         case successText = "success_text"
-//        case placeholderText = "placeholder_text"
+        case placeholderText = "placeholder_text"
         case imageUrl = "image_url"
         case isSkippable = "is_skippable"
         case answers

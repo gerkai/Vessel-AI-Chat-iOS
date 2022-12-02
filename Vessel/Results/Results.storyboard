@@ -294,16 +294,16 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="h3w-3g-bvw">
-                                            <rect key="frame" x="171" y="276" width="48" height="48"/>
+                                            <rect key="frame" x="171" y="325" width="48" height="48"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready to test?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKr-sh-aON">
-                                            <rect key="frame" x="115.66666666666667" y="340" width="158.66666666666663" height="27"/>
+                                            <rect key="frame" x="115.66666666666667" y="389" width="158.66666666666663" height="27"/>
                                             <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JX-3J-dwr">
-                                            <rect key="frame" x="34" y="379" width="322" height="84"/>
+                                            <rect key="frame" x="34" y="428" width="322" height="84"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Tap this button to take your first test, unlock your Results page and get personalized recommendations.">
                                                     <attributes>
@@ -316,7 +316,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="dottedLineWithArrow" translatesAutoresizingMaskIntoConstraints="NO" id="G6H-qD-F3J">
-                                            <rect key="frame" x="195" y="493" width="114" height="228"/>
+                                            <rect key="frame" x="195" y="542" width="114" height="228"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -355,11 +355,10 @@
                             <constraint firstItem="PfO-L9-23m" firstAttribute="leading" secondItem="h8Q-tq-NdM" secondAttribute="leading" id="zzA-K3-1z5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" selectedImage="Results-Icon" id="L7P-9l-GVk">
+                    <tabBarItem key="tabBarItem" title="Results" image="Results-Icon" id="L7P-9l-GVk">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="6"/>
                     </tabBarItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chartView" destination="MEa-kJ-Ktt" id="5WF-d8-x8C"/>
                         <outlet property="lockoutView" destination="PfO-L9-23m" id="l46-If-Z4u"/>

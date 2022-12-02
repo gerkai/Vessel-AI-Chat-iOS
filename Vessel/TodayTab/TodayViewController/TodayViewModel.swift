@@ -62,11 +62,34 @@ enum TodayViewSection: Equatable
         var cells: [TodayViewCell] = [.sectionTitle(icon: "todayInsightsIcon", name: "Insights")]
         for lesson in lessons
         {
-            cells.append(.checkMarkCard(title: lesson.title,
-                                        subtitle: "",
-                                        description: lesson.description ?? "",
-                                        backgroundImage: lesson.imageUrl ?? "",
-                                        completed: lesson.completedDate != nil))
+            if lesson.completedDate == nil
+            {
+                cells.append(.checkMarkCard(title: lesson.title,
+                                            subtitle: lesson.subtitleString(),
+                                            description: lesson.description ?? "",
+                                            backgroundImage: lesson.imageUrl ?? ""))
+            }
+            else
+            {
+                cells.append(.foldedCheckMarkCard(title: lesson.title,
+                                                  subtitle: lesson.subtitleString(),
+                                                  backgroundImage: lesson.imageUrl ?? ""))
+                if lesson == lessons.first
+                {
+                    cells.append(.text(text: NSLocalizedString("Today's insight is done!", comment: "")))
+                }
+                if lesson == lessons.last
+                {
+                    if lessons.count == 4
+                    {
+                        cells.append(.text(text: NSLocalizedString("Come back tomorrow for more insights", comment: "")))
+                    }
+                    else
+                    {
+                        cells.append(.button(text: NSLocalizedString("Unlock More Insights", comment: "")))
+                    }
+                }
+            }
         }
         return cells
     }
@@ -98,7 +121,10 @@ enum TodayViewCell: Equatable
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food])
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
-    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, completed: Bool)
+    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String)
+    case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
+    case text(text: String)
+    case button(text: String)
     case footer
     
     var height: CGFloat
@@ -113,6 +139,9 @@ enum TodayViewCell: Equatable
             return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
         case .checkMarkCard: return 203.0
+        case .foldedCheckMarkCard: return 112.0
+        case .text: return 22.0
+        case .button: return 60.0
         case .footer: return 173.0
         }
     }
@@ -126,6 +155,9 @@ enum TodayViewCell: Equatable
         case .foodDetails: return "TodayFoodDetailsSectionCell"
         case .waterDetails: return "TodayWaterDetailsSectionCell"
         case .checkMarkCard: return "CheckmarkCardCell"
+        case .foldedCheckMarkCard: return "FoldedCheckmarkCardCell"
+        case .text: return "TodayTextCell"
+        case .button: return "TodayButtonCell"
         case .footer: return "TodayFooterCell"
         }
     }
@@ -150,8 +182,7 @@ class TodayViewModel
     
     var sections: [TodayViewSection] {
         contact = Contact.main()!
-        let firstLesson = LessonsManager.shared.lessons.first
-        let lessons = showInsights && firstLesson != nil ? [firstLesson!] : []
+        let lessons = showInsights ? LessonsManager.shared.todayLessons : []
         return [
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .insights(insights: lessons),

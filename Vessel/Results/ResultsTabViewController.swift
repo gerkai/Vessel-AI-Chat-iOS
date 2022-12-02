@@ -43,7 +43,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         let interactiveText = NSLocalizedString("Learn more", comment: "")
         let linkRange = message.range(of: interactiveText)
         let linkNSRange = NSRange(linkRange!, in: message)
-        let font = Constants.FontBodyAlt14!
+        let font = Constants.FontBodyAlt14
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 0.5 * font.lineHeight
         let myAttribute = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.init(hex: "555553"),

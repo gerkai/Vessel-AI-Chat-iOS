@@ -17,9 +17,12 @@ class ReadOnlyLessonStepViewController: UIViewController
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var contentTextLabel: UILabel!
+    @IBOutlet private weak var progressBar: LessonStepsProgressBar!
+    @IBOutlet private weak var nextButton: BounceButton!
     @IBOutlet private weak var planAddedViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var planAddedViewHeightConstraint: NSLayoutConstraint!
     
+    private var progressBarSetup = false
     @Resolved private var analytics: Analytics
     
     override func viewDidLoad()
@@ -29,6 +32,18 @@ class ReadOnlyLessonStepViewController: UIViewController
         setupUI()
     }
     
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        if !progressBarSetup
+        {
+            progressBarSetup = true
+            let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+            progressBar.setProgressBar(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -54,7 +69,7 @@ class ReadOnlyLessonStepViewController: UIViewController
         }
         else
         {
-            print("LESSON FINISHED")
+            coordinator.finishLesson(navigationController: navigationController!)
         }
     }
 }
@@ -64,8 +79,15 @@ private extension ReadOnlyLessonStepViewController
     func setupUI()
     {
         titleLabel.text = viewModel.lesson.title
+        durationLabel.text = "~\(viewModel.lesson.durationString())"
         setupImageView()
         setupStackView()
+        let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
+        progressBar.setup(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+        if index == viewModel.lesson.steps.count - 1
+        {
+            nextButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+        }
     }
     
     func setupImageView()
