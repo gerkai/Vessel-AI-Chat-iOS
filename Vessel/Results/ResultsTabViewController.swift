@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate, UITextViewDelegate
+class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate, UITextViewDelegate, ReagentDetailsViewControllerDelegate
 {
     @IBOutlet weak var chartView: ChartView!
     var initialLoad = true
@@ -16,7 +16,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     @IBOutlet weak var testsGoalsView: TestsGoalsView!
     @IBOutlet weak var textView: UITextView!
     
-    let defaultSelectedReagent = Reagent.ID.MAGNESIUM
+    var defaultSelectedReagent = Reagent.ID.MAGNESIUM
     
     override func viewDidLoad()
     {
@@ -70,9 +70,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     {
         //show lockout view if there are no test results to display
         //print("Results: viewWillAppear")
-        viewModel.refresh()
+        
         if initialLoad
         {
+            viewModel.refresh()
             testsGoalsView.setupGoals()
         }
         handleLockoutView()
@@ -149,6 +150,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         return viewModel.resultForIndex(i: index)
     }
     
+    //deprecated
     //info icon on chartView was hidden. If it stays that way, we can remove this infoTapped functionality from the app
     func ChartViewInfoTapped()
     {
@@ -194,7 +196,19 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     
     func learnMoreAboutReagent(id: Int)
     {
-        let vc = ReagentDetailsViewController.initWith(reagentID: id, viewModel: viewModel)
+        let vc = ReagentDetailsViewController.initWith(reagentID: id, viewModel: viewModel, selectedCell: chartView.selectedCell)
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func reagentSelected(id: Int)
+    {
+        defaultSelectedReagent = Reagent.ID(rawValue: id)!
+    }
+    
+    //MARK: -- reagentDetailsViewController delegates
+    func reagentDetailsChartCellSelected(cellIndex: Int)
+    {
+        chartView.preSelectCell(cellIndex: cellIndex)
     }
 }

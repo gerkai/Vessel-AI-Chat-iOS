@@ -73,6 +73,7 @@ class ResultsTabViewModel
     
     func selectResult(index: Int)
     {
+        //print("ViewModel set selected result: \(index)")
         selectedResultIndex = index
     }
 }
