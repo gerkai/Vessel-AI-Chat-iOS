@@ -98,7 +98,7 @@ extension GoalDetailsViewController: ReagentImpactViewDelegate
     
     func reagentImpactViewTappedReagent(reagentId: Int)
     {
-        let vc = ReagentDetailsViewController.initWith(reagentID: reagentId, viewModel: viewModel)
+        let vc = ReagentDetailsViewController.initWith(reagentID: reagentId, viewModel: viewModel, selectedCell: viewModel.selectedResultIndex)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
