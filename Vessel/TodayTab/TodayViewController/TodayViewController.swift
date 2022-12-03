@@ -225,7 +225,8 @@ extension TodayViewController: FoodCheckmarkViewDelegate
 {
     func checkmarkTapped(view: FoodCheckmarkView)
     {
-        guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }) else { return }
+        let foodPlans = PlansManager.shared.getFoodPlans()
+        guard let plan = foodPlans.first(where: { $0.typeId == view.food?.id }) else { return }
         
         if let food = view.food
         {

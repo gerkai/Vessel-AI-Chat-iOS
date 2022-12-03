@@ -4,7 +4,6 @@
 //
 //  Created by Nicolas Medina on 10/15/22.
 //
-// This is a temporary class made to manage foods
 
 import Foundation
 
@@ -42,25 +41,41 @@ class PlansManager
         guard let index = plans.firstIndex(where: { $0.id == planId }) else { return }
         if completed
         {
-            if plans[index].completed == nil
+            if plans[index].completed.count == 0
             {
                 plans[index].completed = [date]
             }
             else
             {
-                plans[index].completed?.append(date)
+                plans[index].completed.append(date)
             }
         }
         else
         {
-            if plans[index].completed == nil
-            {
-                plans[index].completed = []
-            }
-            else
-            {
-                plans[index].completed?.removeAll(where: { $0 == date })
-            }
+            plans[index].completed.removeAll(where: { $0 == date })
         }
+    }
+    
+    func remove(plan: Plan)
+    {
+        plans.removeAll{$0.id == plan.id}
+    }
+    
+    //returns array of only food plans
+    func getFoodPlans() -> [Plan]
+    {
+        return plans.filter({ $0.type == .food })
+    }
+    
+    //returns array of only activities
+    func getActivities() -> [Plan]
+    {
+        return plans.filter({ $0.type == .activity })
+    }
+    
+    //returns array of only reagentLifestyleRecommendations
+    func getLifestyleRecommendations() -> [Plan]
+    {
+        return plans.filter({ $0.type == .lifestyleRecommendation })
     }
 }

@@ -11,7 +11,7 @@ enum PlanType: Codable
 {
     case food
     case activity
-    case reagentLifestyleRecommendationId
+    case lifestyleRecommendation
     case suplement
 }
 
@@ -25,62 +25,60 @@ struct PlanResponse: Decodable
     }
 }
 
-struct Plan: CoreObjectProtocol, Hashable
+struct CompletionInfo: Codable
+{
+    let date: String
+    let units: Int
+}
+
+struct Plan: CoreObjectProtocol, Codable
 {
     let id: Int
     var last_updated: Int
-    let storage: StorageType = .cacheAndDisk
+    var type: PlanType = .food
+    var typeId: Int
+    var completed: [String]
+    @NullCodable var completionInfo: [CompletionInfo]?
     let timeOfDay: String?
     let dayOfWeek: [Int]?
-    let foodId: Int?
-    let reagentLifestyleRecommendationId: Int?
-    let activityId: Int?
-    let planId: Int?
-    let contactId: Int?
-    var completed: [String]?
-
+    
+    let storage: StorageType = .cacheAndDisk
+    
     var isComplete: Bool
     {
-        (completed ?? []).contains(Date.serverDateFormatter.string(from: Date()))
+        completed.contains(Date.serverDateFormatter.string(from: Date()))
     }
-    
-    var type: PlanType = .food
     
     init(id: Int = 0,
          last_updated: Int = 0,
+         type: PlanType = .food,
+         typeId: Int = 0,
+         completed: [String] = [],
+         completionInfo: [CompletionInfo]? = nil,
          timeOfDay: String? = nil,
-         dayOfWeek: [Int]? = nil,
-         foodId: Int? = nil,
-         reagentLifestyleRecommendationId: Int? = nil,
-         activityId: Int? = nil,
-         planId: Int? = nil,
-         contactId: Int? = nil,
-         completed: [String]? = nil)
+         dayOfWeek: [Int]? = nil)
+         
     {
         self.id = id
         self.last_updated = last_updated
+        self.type = type
+        self.typeId = typeId
+        self.completed = completed
+        self.completionInfo = completionInfo
         self.timeOfDay = timeOfDay
         self.dayOfWeek = dayOfWeek
-        self.foodId = foodId
-        self.reagentLifestyleRecommendationId = reagentLifestyleRecommendationId
-        self.activityId = activityId
-        self.planId = planId
-        self.contactId = contactId
-        self.completed = completed
     }
     
     enum CodingKeys: String, CodingKey
     {
         case id
         case last_updated
+        case type
+        case typeId = "type_id"
+        case completed
+        case completionInfo = "completion_info"
         case timeOfDay = "time_of_day"
         case dayOfWeek = "day_of_week"
-        case foodId = "food_id"
-        case reagentLifestyleRecommendationId = "reagent_lifestyle_recommendation_id"
-        case activityId = "activity_id"
-        case planId = "plan_id"
-        case contactId = "contact_id"
-        case completed
     }
 }
 
@@ -133,11 +131,11 @@ struct MultiplePlans: Codable
         }*/
         for foodId in foodIds ?? []
         {
-            plans.append(Plan(foodId: foodId))
+            plans.append(Plan(type: .food, typeId: foodId))
         }
         for reagentLifestyleRecommendationsId in reagentLifestyleRecommendationsIds ?? []
         {
-            plans.append(Plan(reagentLifestyleRecommendationId: reagentLifestyleRecommendationsId))
+            plans.append(Plan(type: .lifestyleRecommendation, typeId: reagentLifestyleRecommendationsId))
         }
         return plans
     }

@@ -107,14 +107,14 @@ private extension ReadOnlyLessonStepViewController
         }
         else
         {
-            let userPlans = PlansManager.shared.plans.filter({ $0.activityId != nil })
+            let userPlans = PlansManager.shared.getActivities()
             for activityId in viewModel.step.activityIds
             {
                 if let activity = viewModel.lesson.activities.first(where: { $0.id == activityId })
                 {
                     let activityView = LessonStepActivityView(frame: .zero)
                     activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)
-                    if userPlans.contains(where: { $0.activityId == activityId })
+                    if userPlans.contains(where: { $0.typeId == activityId })
                     {
                         activityView.setButtonText(addText: false)
                     }
@@ -136,7 +136,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
 {
     func onActivityAddedToPlan(activityId: Int, activityName: String)
     {
-        let plan = Plan(activityId: activityId)
+        let plan = Plan(type: .activity, typeId: activityId)
         Server.shared.addSinglePlan(plan: plan) { [weak self] plan in
             guard let self = self else { return }
             self.analytics.log(event: .activityAdded(activityId: activityId, activityName: activityName))
@@ -162,13 +162,15 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
     
     func onActivityRemovedFromPlan(activityId: Int)
     {
-        guard let plan = PlansManager.shared.plans.first(where: { $0.activityId == activityId}) else { return }
-        Server.shared.removeSinglePlan(planId: plan.id) { [weak self] in
+        guard let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activityId}) else { return }
+        Server.shared.removeSinglePlan(planId: plan.id)
+        { [weak self] in
             guard let self = self else { return }
             self.setActivityButtonTitle(activityId: activityId, addText: true)
-            guard let index = PlansManager.shared.plans.firstIndex(of: plan) else { return }
-            PlansManager.shared.plans.remove(at: index)
-        } onFailure: { [weak self] error in
+            PlansManager.shared.remove(plan: plan)
+        }
+        onFailure:
+        { [weak self] error in
             guard let self = self else { return }
             print(error)
             self.setActivityButtonTitle(activityId: activityId, addText: false)

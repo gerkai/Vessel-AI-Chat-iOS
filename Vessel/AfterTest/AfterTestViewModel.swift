@@ -562,7 +562,7 @@ class AfterTestViewModel
         
         if newSelectedFoods.count == 1
         {
-            let plan = Plan(foodId: newSelectedFoods.first!.id)
+            let plan = Plan(type: .food, typeId: newSelectedFoods.first!.id)
             Server.shared.addSinglePlan(plan: plan)
             { addedPlan in
                 PlansManager.shared.addPlans(plansToAdd: [addedPlan])
@@ -587,7 +587,7 @@ class AfterTestViewModel
     
     func refreshSelectedFoods()
     {
-        selectedFoodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
+        selectedFoodIds = PlansManager.shared.getFoodPlans().map({ $0.typeId })
     }
     
     // MARK: - Water
