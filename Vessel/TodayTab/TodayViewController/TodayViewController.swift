@@ -226,6 +226,12 @@ extension TodayViewController: FoodCheckmarkViewDelegate
     func checkmarkTapped(view: FoodCheckmarkView)
     {
         guard let plan = PlansManager.shared.plans.first(where: { $0.foodId == view.food?.id }) else { return }
+        
+        if let food = view.food
+        {
+            analytics.log(event: .foodComplete(foodId: food.id, foodName: food.title, completed: view.isChecked))
+        }
+        
         Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
         { [weak self] togglePlanData in
             guard let self = self else { return }
@@ -245,6 +251,9 @@ extension TodayViewController: FoodCheckmarkViewDelegate
         let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
         activityDetailsVC.hidesBottomBarWhenPushed = true
         activityDetailsVC.setup(food: food)
+        
+        analytics.log(event: .foodShown(foodId: food.id, foodName: food.title))
+        
         navigationController?.pushViewController(activityDetailsVC, animated: true)
     }
 }

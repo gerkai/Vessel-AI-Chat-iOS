@@ -165,6 +165,7 @@ enum TodayViewCell: Equatable
 
 class TodayViewModel
 {
+    @Resolved private var analytics: Analytics
     private var contact = Contact.main()!
     
     // Feature flags
@@ -194,6 +195,7 @@ class TodayViewModel
     
     func updateCheckedGlasses(_ glasses: Int)
     {
+        analytics.log(event: .waterComplete(waterAmount: glasses, totalWaterAmount: contact.dailyWaterIntake ?? 0))
         contact.drinkedWaterGlasses = glasses
         ObjectStore.shared.ClientSave(contact)
     }

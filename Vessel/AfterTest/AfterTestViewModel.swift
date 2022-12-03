@@ -45,6 +45,8 @@ class AfterTestViewModel
     var selectedWaterOption: Int?
     var results: [Result]!
     
+    @Resolved private var analytics: Analytics
+    
     enum AfterTestScreen
     {
         case MAG_LOW_1
@@ -553,6 +555,11 @@ class AfterTestViewModel
     
     func addFoodsToPlan(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
+        for food in newSelectedFoods
+        {
+            analytics.log(event: .foodAdded(foodId: food.id, foodName: food.foodTitle))
+        }
+        
         if newSelectedFoods.count == 1
         {
             let plan = Plan(foodId: newSelectedFoods.first!.id)
@@ -607,6 +614,7 @@ class AfterTestViewModel
             contact.dailyWaterIntake = max(dailyDrinkedGlasses, Constants.MINIMUM_WATER_INTAKE)
         }
         
+        analytics.log(event: .waterAdded)
         ObjectStore.shared.ClientSave(contact)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
