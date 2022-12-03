@@ -66,7 +66,7 @@ enum TodayViewSection: Equatable
             {
                 cells.append(.checkMarkCard(title: lesson.title,
                                             subtitle: lesson.subtitleString(),
-                                            description: lesson.description ?? "",
+                                            description: lesson.description,
                                             backgroundImage: lesson.imageUrl ?? ""))
             }
             else

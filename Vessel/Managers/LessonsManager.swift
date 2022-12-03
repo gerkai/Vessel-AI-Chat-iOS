@@ -41,21 +41,10 @@ class LessonsManager
     func getLessonActivities(lesson: Lesson, onSuccess success: @escaping (_ objects: [Tip]) -> Void, onFailure failure: @escaping () -> Void)
     {
         let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
-        var activityIds = lesson.activityIds
-        activityIds.append(contentsOf: stepsActivityIds)
-        let uniqueActivityIds = Array(Set(activityIds)).sorted(by: { $0 < $1 })
+        let uniqueActivityIds = Array(Set(stepsActivityIds)).sorted(by: { $0 < $1 })
 
         ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds) { objects in
-            // TODO: Remove when backend sends ids for Tips
-            let objectsWithIds = objects.map { tip in
-                if let index = objects.firstIndex(where: { $0.title == tip.title })
-                {
-                    tip.id = uniqueActivityIds[index]
-                }
-                return tip
-            }
-            
-            success(objectsWithIds)
+            success(objects)
         } onFailure: {
             failure()
         }
@@ -83,10 +72,12 @@ class LessonsManager
         if loadedLessonsCount < 4 && loadedLessonsCount <= lessons.count
         {
             guard let lesson = lessons[safe: loadedLessonsCount] else { return }
+            
             getLessonSteps(lesson: lesson) { [weak self] steps in
                 guard let self = self else { return }
                 self.lessons[self.loadedLessonsCount].steps = steps.filter({ $0.type != nil })
                 // Remove lesson if doens't have any step and load the next one
+                
                 if self.lessons[self.loadedLessonsCount].steps.count == 0
                 {
                     self.lessons.remove(at: self.loadedLessonsCount)
@@ -94,6 +85,11 @@ class LessonsManager
                 else
                 {
                     self.loadedLessonsCount += 1
+                    self.getLessonActivities(lesson: lesson) { activities in
+                        lesson.activities = activities
+                    } onFailure: {
+                    }
+                    
                     if lesson.completedDate == nil || self.loadedLessonsCount == 4 || self.loadedLessonsCount == self.lessons.count - 1
                     {
                         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
