@@ -39,10 +39,18 @@ extension String
         prefix(1).uppercased() + dropFirst()
     }
     
-    func makeAttributedString() -> NSMutableAttributedString
+    func makeAttributedString(fontName: String? = nil, textColor: UIColor? = nil) -> NSMutableAttributedString
     {
         var attrStr = NSMutableAttributedString()
         let md = SwiftyMarkdown(string: self)
+        if let fontName = fontName
+        {
+            md.setFontNameForAllStyles(with: fontName)
+        }
+        if let textColor = textColor
+        {
+            md.setFontColorForAllStyles(with: textColor)
+        }
         if let attributedString = md.attributedString() as? NSMutableAttributedString
         {
             attrStr = attributedString

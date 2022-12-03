@@ -14,18 +14,14 @@ class Lesson: CoreObjectProtocol, Equatable
     let storage: StorageType = .cacheAndDisk
     
     let title: String
-    // TODO: Remove optional once backend send this every time
-    let description: String?
+    let description: String
     let imageUrl: String?
     var completedDate: String?
     var rank: Int
-    // TODO: Remove hardcoded activity ids once the backend starts returning those
-    var activityIds: [Int] = [15, 18, 20]
     var activities = [Tip]()
     let stepIds: [Int]
     var steps: [Step] = []
-    // TODO: Remove harcoded values once backend send this every time
-    var goalIds: [Int] = [2, 3, 4]
+    var goalIds: [Int]
     var duration: Int = 2
     
     var isComplete: Bool
@@ -48,7 +44,6 @@ class Lesson: CoreObjectProtocol, Equatable
          imageUrl: String?,
          completedDate: String? = nil,
          rank: Int,
-         activityIds: [Int],
          stepIds: [Int],
          goalIds: [Int],
          duration: Int)
@@ -60,7 +55,6 @@ class Lesson: CoreObjectProtocol, Equatable
         self.imageUrl = imageUrl
         self.completedDate = completedDate
         self.rank = rank
-        self.activityIds = activityIds
         self.stepIds = stepIds
         self.goalIds = goalIds
         self.duration = duration
@@ -74,12 +68,9 @@ class Lesson: CoreObjectProtocol, Equatable
         case imageUrl = "image_url"
         case completedDate = "completed_date"
         case rank
-        // TODO: Uncomment once the backend starts returning those
-//        case activityIds = "activity_ids"
         case stepIds = "step_ids"
-        // TODO: Uncomment once backend send this every time
-//        case goalIds = "goal_id"
-//        case duration
+        case goalIds = "goal_ids"
+        case duration
     }
     
     static func == (lhs: Lesson, rhs: Lesson) -> Bool
@@ -91,7 +82,6 @@ class Lesson: CoreObjectProtocol, Equatable
         && lhs.imageUrl == rhs.imageUrl
         && lhs.completedDate == rhs.completedDate
         && lhs.rank == rhs.rank
-        && lhs.activityIds == rhs.activityIds
         && lhs.stepIds == rhs.stepIds
         && lhs.goalIds == rhs.goalIds
         && lhs.duration == rhs.duration

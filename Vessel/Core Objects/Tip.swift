@@ -35,8 +35,7 @@ class Tip: CoreObjectProtocol
     
     enum CodingKeys: String, CodingKey
     {
-        // TODO: Uncomment when id is returned by backend
-//        case id
+        case id
         case title
         case description
         case imageUrl = "image_url"
