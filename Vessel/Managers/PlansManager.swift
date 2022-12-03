@@ -16,11 +16,14 @@ class PlansManager
 
     func loadPlans()
     {
-        ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess: { [weak self] plans in
+        ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess:
+        { [weak self] plans in
             guard let self = self else { return }
             self.plans = plans
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-        }, onFailure: { error in
+        },
+        onFailure:
+        { error in
             print(error)
         })
     }

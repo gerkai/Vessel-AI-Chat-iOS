@@ -202,7 +202,7 @@
 		725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */; };
 		7262F9C829263206006DD849 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7262F9C729263206006DD849 /* LessonsManager.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
-		72692B88293717DB00A8F33C /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72692B87293717DB00A8F33C /* Tip.swift */; };
+		72692B88293717DB00A8F33C /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72692B87293717DB00A8F33C /* Activity.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
 		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
 		727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C07B128B742FF00039BE0 /* DebugMenuViewController.swift */; };
@@ -491,7 +491,7 @@
 		725F382A2935EFEE00A48B3E /* CheckMarkCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMarkCardView.xib; sourceTree = "<group>"; };
 		7262F9C729263206006DD849 /* LessonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
 		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
-		72692B87293717DB00A8F33C /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
+		72692B87293717DB00A8F33C /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
@@ -642,6 +642,7 @@
 		3F0547CE27CAEE3B006E3098 /* Core Objects */ = {
 			isa = PBXGroup;
 			children = (
+				72692B87293717DB00A8F33C /* Activity.swift */,
 				3F12F00A287A736600FCC52E /* Allergy.swift */,
 				3F0547CF27CAEE3B006E3098 /* Contact.swift */,
 				72461EEE2924AAA500A85AE5 /* Curriculum.swift */,
@@ -661,7 +662,6 @@
 				3F9C679C28FE5FE700BC44FA /* Reagents */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
-				72692B87293717DB00A8F33C /* Tip.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -1651,7 +1651,7 @@
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
-				72692B88293717DB00A8F33C /* Tip.swift in Sources */,
+				72692B88293717DB00A8F33C /* Activity.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
