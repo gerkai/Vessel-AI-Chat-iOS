@@ -16,7 +16,7 @@ class PlansManager
 
     func loadPlans()
     {
-        ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess:
+        loadPlans(lastUpdated: lastUpdated, onSuccess:
         { [weak self] plans in
             guard let self = self else { return }
             self.plans = plans
@@ -26,6 +26,40 @@ class PlansManager
         { error in
             print(error)
         })
+    }
+    
+    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getPlans(lastUpdated: lastUpdated)
+        { newPlans in
+            for plan in newPlans
+            {
+                ObjectStore.shared.serverSave(plan)
+            }
+            
+            //let plans = Storage.retrieve(as: Plan.self)
+            success(newPlans)
+        }
+        onFailure:
+        { error in
+            failure(error.description)
+        }
+    }
+    
+    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    {
+        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
+            for food in newFoods
+            {
+                ObjectStore.shared.serverSave(food)
+            }
+            
+            let foods = Storage.retrieve(as: Food.self)
+            
+            success(foods)
+        } onFailure: { error in
+            failure(error.description)
+        }
     }
     
     func addPlans(plansToAdd: [Plan])

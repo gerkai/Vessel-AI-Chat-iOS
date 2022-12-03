@@ -86,7 +86,7 @@ class ObjectStore: NSObject
         
         if objectType == "\(Result.self)" { return Result.self }
         else if objectType == "\(Food.self)" { return Food.self }
-        else if objectType == "\(Plan.self)" { return Plan.self }
+        else if objectType == "\(Plan.self)" { return ServerPlan.self }
         else if objectType == "\(Curriculum.self)" { return Curriculum.self }
         return nil
     }
@@ -110,10 +110,10 @@ class ObjectStore: NSObject
     
     func testFetch()
     {
-        getMostRecent(objectTypes: [Result.self, Food.self])
+        getMostRecent(objectTypes: [Result.self, Food.self], onSuccess: {}, onFailure: {})
     }
     
-    func getMostRecent(objectTypes: [CoreObjectProtocol.Type])
+    func getMostRecent(objectTypes: [CoreObjectProtocol.Type], onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
     {
         var objectReqs: [AllObjectReq] = []
         
@@ -153,6 +153,7 @@ class ObjectStore: NSObject
                     }
                 }
             }
+            success()
             //print("Got objects: \(objectDict)")
             //print(".")
         }
@@ -160,39 +161,6 @@ class ObjectStore: NSObject
         { error in
             print("Got error: \(error)")
             print(".")
-        }
-    }
-    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
-            // TODO: Uncomment when loading plans from objectStore
-            /*for plan in newPlans
-            {
-                self.serverSave(plan)
-            }*/
-            
-            //let plans = Storage.retrieve(as: Plan.self)
-            success(newPlans)
-        }
-        onFailure:
-        { error in
-            failure(error.description)
-        }
-    }
-    
-    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
-            for food in newFoods
-            {
-                self.serverSave(food)
-            }
-            
-            let foods = Storage.retrieve(as: Food.self)
-            
-            success(foods)
-        } onFailure: { error in
-            failure(error.description)
         }
     }
 
@@ -243,54 +211,32 @@ class ObjectStore: NSObject
     
     func get<T: CoreObjectProtocol>(type: T.Type, ids: [Int], onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
     {
-        /*if let object = objectFromCache(of: type, id: id)
+        //TODO: This will cause multiple /objects/get server calls if none of the objects are in the ObjectStore. CW will fix this later by batching the requests into one call.
+        var objectArray: [T] = []
+        var objectCount = 0
+        for id in ids
         {
-            success(object)
-        }
-        else if let object = Storage.retrieve(id, as: type )
-        {
-            success(object)
-        }
-        else
-        {*/
-        let name = String(describing: T.self).lowercased()
-        
-        let objects = ids.map({ SpecificObjectReq(type: name, id: $0, last_updated: 0) })
-        
-        Server.shared.getObjects(objects: objects)
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
-            {
-                do
+            get(type: type, id: id)
+            { object in
+                objectCount += 1
+                objectArray.append(object)
+                if objectArray.count == ids.count
                 {
-                    let json = try JSONSerialization.data(withJSONObject: values)
-                    let decoder = JSONDecoder()
-                    
-                    let objects = try decoder.decode([T].self, from: json)
-                    success(objects)
-                }
-                catch
-                {
-                    print(error)
-                    failure()
+                    success(objectArray)
                 }
             }
-            else
+            onFailure:
             {
+                //TODO: understand and handle possible errors
+                print("Failed to get all objects")
                 failure()
             }
         }
-        onFailure:
-        { error in
-            print(error)
-            failure()
-        }
-        //}
     }
-    
+    /*
     func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
     {
-        /*if let object = objectFromCache(of: type, id: id)
+        if let object = objectFromCache(of: type, id: id)
         {
             success(object)
         }
@@ -299,7 +245,7 @@ class ObjectStore: NSObject
             success(object)
         }
         else
-        {*/
+        {
         let name = String(describing: T.self).lowercased()
         
         Server.shared.getAllObjects(objects: [AllObjectReq(type: name, last_updated: 0)])
@@ -330,7 +276,7 @@ class ObjectStore: NSObject
             print(error)
             failure()
         }
-    }
+    }*/
     
     //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T, notifyNewDataArrived: Bool = true)

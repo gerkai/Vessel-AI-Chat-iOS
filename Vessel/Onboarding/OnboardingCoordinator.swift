@@ -75,25 +75,25 @@ class OnboardingCoordinator
         }
         else
         {
-            Storage.clear(objectType: Curriculum.self)
-            Storage.clear(objectType: Lesson.self)
-            
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
-            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self])
-            if Storage.retrieve(as: Curriculum.self).count > 0
+            
+            loadCoreObjects(onDone:
             {
-                LessonsManager.shared.buildLessonPlan()
-            }
+                if Storage.retrieve(as: Curriculum.self).count > 0
+                {
+                    LessonsManager.shared.buildLessonPlan()
+                }
+                //if gender was chosen then we can assume all demographics were populated so skip onboarding
+                //and go directly to MainTabBarController
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                navigationController?.fadeTo(vc)
+            })
             
             //Separated load plans call because an issue with stored plans not having weekdays
-            PlansManager.shared.loadPlans()
+            //PlansManager.shared.loadPlans()
             
-            //if gender was chosen then we can assume all demographics were populated so skip onboarding
-            //and go directly to MainTabBarController
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-            navigationController?.fadeTo(vc)
         }
     }
     
@@ -220,21 +220,27 @@ class OnboardingCoordinator
         }
         else
         {
-            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet. TODO: Fix
-            ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self/*, Lesson.self, Step.self*/])
-            
-            if Storage.retrieve(as: Curriculum.self).count > 0
+            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet so we wouldn't know what objects to load.
+            OnboardingCoordinator.loadCoreObjects(onDone:
             {
-                LessonsManager.shared.buildLessonPlan()
-            }
-            
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-            navigationController?.fadeTo(vc)
+                if Storage.retrieve(as: Curriculum.self).count > 0
+                {
+                    LessonsManager.shared.buildLessonPlan()
+                }
+                
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                self.navigationController?.fadeTo(vc)
+            })
             
             //save the data collected during onboarding
             saveDemographics()
         }
+    }
+    
+    static func loadCoreObjects(onDone done: @escaping () -> Void)
+    {
+        ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self], onSuccess: {done()}, onFailure: {done()})
     }
     
     init()

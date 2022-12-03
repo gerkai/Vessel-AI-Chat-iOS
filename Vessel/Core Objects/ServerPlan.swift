@@ -92,7 +92,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
                 typeID = sPlan.foodId!
             }
                 
-            var plan = Plan(id: sPlan.id, last_updated: sPlan.last_updated, type: planType, typeId: typeID, completed: sPlan.completed ?? [], timeOfDay: sPlan.timeOfDay, dayOfWeek: sPlan.dayOfWeek)
+            let plan = Plan(id: sPlan.id, last_updated: sPlan.last_updated, type: planType, typeId: typeID, completed: sPlan.completed ?? [], timeOfDay: sPlan.timeOfDay, dayOfWeek: sPlan.dayOfWeek)
             plans.append(plan)
         }
         return plans
