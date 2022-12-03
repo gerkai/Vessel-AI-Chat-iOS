@@ -99,7 +99,12 @@ private extension ReadOnlyLessonStepViewController
     
     func setupStackView()
     {
-        contentTextLabel.text = viewModel.step.text
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 12
+        
+        let mutableAttributedString = viewModel.step.text?.makeAttributedString(fontName: "BananaGrotesk-Regular", textColor: .white)
+        mutableAttributedString?.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString?.length ?? 0))
+        contentTextLabel.attributedText = mutableAttributedString
         
         if viewModel.step.activityIds.isEmpty
         {

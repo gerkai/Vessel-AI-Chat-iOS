@@ -35,8 +35,7 @@ class Step: CoreObjectProtocol
     let isSkippable: Bool
     var answers: [LessonStepAnswer]
     var answerId: Int?
-    // TODO: Remove hardcoded activity ids once the backend starts returning those
-    var activityIds: [Int] = [15, 18, 19]
+    var activityIds: [Int]
     var correctAnswerId: Int?
     {
         answers.first(where: { $0.correct })?.id
@@ -94,8 +93,7 @@ class Step: CoreObjectProtocol
         case questionRead = "question_read"
         case answerText = "answer_text"
         case lessonId = "lesson_id"
-        // TODO: Uncomment once the backend starts returning those
-//        case activityIds = "activity_ids"
+        case activityIds = "activity_ids"
     }
 }
 

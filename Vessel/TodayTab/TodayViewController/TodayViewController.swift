@@ -145,7 +145,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         switch section
         {
         case .insights(let lessons):
-            if indexPath.row == 2 || (indexPath.row == 3 && lessons.count == 1)
+            if indexPath.row == 2 || (indexPath.row == (lessons.count + 2))
             {
                 return nil
             }
