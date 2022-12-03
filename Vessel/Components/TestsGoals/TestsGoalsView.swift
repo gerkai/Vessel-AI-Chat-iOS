@@ -11,6 +11,7 @@ protocol TestsGoalsViewDelegate: AnyObject
 {
     func learnMoreAboutReagent(id: Int)
     func learnMoreAboutGoal(id: Int)
+    func reagentSelected(id: Int)
 }
 
 class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTileViewDelegate
@@ -304,6 +305,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         }
         else
         {
+            delegate?.reagentSelected(id: id)
             curvyLineView.clearCurvyLines()
             curvyLineView.animated = animated
             //unselect all other reagents

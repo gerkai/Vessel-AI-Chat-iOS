@@ -39,6 +39,8 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     var selectedCell = -1
     weak var delegate: ChartViewDelegate?
     var reagentID: Int?
+    //when the view is being initialized, the system sends several scrollViewDidScroll callbacks with the scrollView at 0.0 or at max before it eventually settles down at the correct contentOffset. This was causing us to notify delegates and post notifications with the wrong selected cell. So we disable notifications until the user actually starts scrolling the scrollView.
+    var notificationsEnabled = false
     
     //if true, this will draw the tick marks on the right side of the selected cell. Defaults to true.
     var showScaleOnSelection = true
@@ -60,18 +62,43 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         }
         else
         {
+            //reagent details has slightly wider cell in order to fit the range data
             return 110.0
         }
     }
     
     func refresh()
     {
-        //print("ChartView: refresh()")
+        //print("ChartView \(tag): refresh()")
         collectionView.reloadData()
         collectionView.contentOffset = CGPoint(x: collectionView.contentSize.width - frame.width, y: 0)
         let numCells = dataSource.chartViewNumDataPoints()
         selectedCell = numCells - 1
         NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": selectedCell, "animated": false])
+    }
+    
+    //when chartView is first loaded, we can pre-select a particular cell and this will calculate the collectionView's proper scrollView offset.
+    func preSelectCell(cellIndex: Int)
+    {
+        selectedCell = cellIndex
+        var offset = 0.0
+        let numCells = dataSource.chartViewNumDataPoints()
+        let selectionIncrement = (collectionView.contentSize.width - frame.width - 2.0) / Double(numCells - 2)
+        
+        if cellIndex == numCells - 1
+        {
+            offset = collectionView.contentSize.width - frame.width
+        }
+        else if cellIndex != 0
+        {
+            offset = 1.0 + CGFloat(cellIndex) * selectionIncrement - (selectionIncrement / 2)
+        }
+        
+        delegate?.chartViewCellSelected(cellIndex: cellIndex)
+        //print("\(tag) Preselecting offset: \(offset)")
+        collectionView.contentOffset = CGPoint(x: offset, y: 0.0)
+        //print("\(tag) ^Posting select notification for \(cellIndex)")
+        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cellIndex, "animated": true])
     }
     
     func setSelectedCell(cellIndex: Int)
@@ -80,9 +107,15 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         delegate?.chartViewCellSelected(cellIndex: cellIndex)
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    {
+        //print("ScrollView will begin dragging")
+        notificationsEnabled = true
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        //print("ScrollViewDidScroll: \(scrollView.contentOffset.x)")
+        //print("\(tag) ScrollViewDidScroll: \(scrollView.contentOffset.x)")
         let numCells = dataSource.chartViewNumDataPoints()
         if numCells != 0
         {
@@ -98,10 +131,14 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
             }
             
             //print("\(scrollView.contentOffset.x), \(scrollView.contentSize.width), \(selectionIncrement), \(cell)")
-            if selectedCell != cell
+            if notificationsEnabled
             {
-                setSelectedCell(cellIndex: cell)
-                NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell, "animated": true])
+                if selectedCell != cell
+                {
+                    setSelectedCell(cellIndex: cell)
+                   // print("\(tag) Posting select notification for \(cell)")
+                    NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cell, "animated": true])
+                }
             }
         }
     }
@@ -113,6 +150,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
+        //print("Number of items: \(dataSource.chartViewNumDataPoints())")
         return dataSource.chartViewNumDataPoints()
     }
     
@@ -165,6 +203,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
                 }
             }
         }
+        cell.parentTag = tag
         cell.tag = numCells - indexPath.row - 1
         cell.delegate = self
         cell.graphView.data = data
@@ -264,6 +303,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         }
     }
     
+    //deprecated
     func cellInfoTapped()
     {
         delegate?.ChartViewInfoTapped()

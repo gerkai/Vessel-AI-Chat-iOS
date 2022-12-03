@@ -39,7 +39,10 @@ class ScienceStudiesView: UIView
     
     deinit
     {
-        print("ScienceStudiesView DEINIT")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("ScienceStudiesView DEINIT")
+        }
     }
     
     func commonInit()

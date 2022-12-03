@@ -31,6 +31,7 @@ class ChartViewCell: UICollectionViewCell
     var animatingSelected = false
     var animatingUnselected = false
     var selectedHeightOffset = 0.0
+    var parentTag = 0
     
     override func awakeFromNib()
     {
@@ -86,6 +87,7 @@ class ChartViewCell: UICollectionViewCell
         let selectedHeight = frame.height - selectedHeightOffset
         if let cell = notification.userInfo?["cell"] as? Int
         {
+            //print("\(parentTag) Got Selected notification for cell: \(cell)")
             if cell == tag
             {
                 //animate to selected state

@@ -630,7 +630,7 @@
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-fP-yhR" customClass="ChartView" customModule="Vessel" customModuleProvider="target">
+                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-fP-yhR" customClass="ChartView" customModule="Vessel" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="390" height="360.66666666666669"/>
                                                         <subviews>
                                                             <collectionView contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="scs-5g-T77">
