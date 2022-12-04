@@ -211,54 +211,57 @@ class ObjectStore: NSObject
     
     func get<T: CoreObjectProtocol>(type: T.Type, ids: [Int], onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
     {
-        //TODO: This will cause multiple /objects/get server calls if none of the objects are in the ObjectStore. CW will fix this later by batching the requests into one call.
-        var objectArray: [T] = []
-        var objectCount = 0
+        //See which objects are in cache or storage and build SpecificObjectReq with last_updated populated
+        var objectRequests: [SpecificObjectReq] = []
+        var objects: [T] = []
+        var objectHold: [T] = [] //place to hold any found locally stored objects.
+        
+        let name = String(describing: T.self).lowercased()
         for id in ids
         {
-            get(type: type, id: id)
-            { object in
-                objectCount += 1
-                objectArray.append(object)
-                if objectArray.count == ids.count
-                {
-                    success(objectArray)
-                }
-            }
-            onFailure:
+            if let object = objectFromCache(of: type, id: id)
             {
-                //TODO: understand and handle possible errors
-                print("Failed to get all objects")
-                failure()
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
+                objectHold.append(object)
+            }
+            else if let object = Storage.retrieve(id, as: type )
+            {
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
+                objectHold.append(object)
+            }
+            else
+            {
+                //if not locally stored, set last_updated to 0 to force a load from the back end
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: 0))
             }
         }
-    }
-    /*
-    func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
-    {
-        if let object = objectFromCache(of: type, id: id)
-        {
-            success(object)
-        }
-        else if let object = Storage.retrieve(id, as: type )
-        {
-            success(object)
-        }
-        else
-        {
-        let name = String(describing: T.self).lowercased()
         
-        Server.shared.getAllObjects(objects: [AllObjectReq(type: name, last_updated: 0)])
+        //let call know immediately of any locally retrieved objects
+        success(objectHold)
+        
+        Server.shared.getObjects(objects: objectRequests)
         { objectDict in
             if let values = objectDict[name] as? [[String: Any]]
             {
                 do
                 {
-                    let json = try JSONSerialization.data(withJSONObject: values)
-                    let decoder = JSONDecoder()
-                    
-                    let objects = try decoder.decode([T].self, from: json)
-                    success(objects)
+                    for value in values
+                    {
+                        let json = try JSONSerialization.data(withJSONObject: value)
+                        let decoder = JSONDecoder()
+                        
+                        let object = try decoder.decode(T.self, from: json)
+                        objects.append(object)
+                        
+                        //if any updated objects came in, we can remove the ones we found in local storage
+                        objectHold.removeAll(where: {$0.id == object.id})
+                        
+                        //save object locally so it will load faster next time
+                        self.serverSave(object) //this will send a newDataArrived notification
+                    }
+                    //add any locally found objects that were not updated from the back end
+                    objects.append(contentsOf: objectHold)
+                    //success(objects)
                 }
                 catch
                 {
@@ -268,7 +271,7 @@ class ObjectStore: NSObject
             }
             else
             {
-                failure()
+                success(objectHold)
             }
         }
         onFailure:
@@ -276,7 +279,7 @@ class ObjectStore: NSObject
             print(error)
             failure()
         }
-    }*/
+    }
     
     //Call this to save objects that arrive from the server
     func serverSave<T: CoreObjectProtocol>(_ object: T, notifyNewDataArrived: Bool = true)

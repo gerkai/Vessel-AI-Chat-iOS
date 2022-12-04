@@ -176,7 +176,10 @@ public class Storage
             }
             catch
             {
-                fatalError(error.localizedDescription)
+                //couldn't decode the file. Delete it
+                remove(id, objectType: type)
+                return nil
+                //fatalError(error.localizedDescription)
             }
         }
         else

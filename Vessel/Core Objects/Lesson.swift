@@ -63,6 +63,7 @@ class Lesson: CoreObjectProtocol, Equatable
     enum CodingKeys: String, CodingKey
     {
         case id
+        case last_updated
         case title
         case description
         case imageUrl = "image_url"
