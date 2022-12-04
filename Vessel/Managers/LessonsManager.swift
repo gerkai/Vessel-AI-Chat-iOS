@@ -74,8 +74,7 @@ class LessonsManager
                 //get all the lessons indicated by ids[]
                 ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
                 { lessons in
-                    self.lessons.append(contentsOf: lessons)
-                    self.lessons = self.lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
+                    self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
                     self.planBuilt = true
                     self.loadStepsForLessons(onDone: {done()})
                 }
@@ -95,47 +94,30 @@ class LessonsManager
         }
     }
     
-    var recursionCount = 0
     private func loadStepsForLessons(onDone done: @escaping () -> Void)
     {
-        recursionCount += 1
-        if loadedLessonsCount < MAX_LESSONS_PER_DAY && loadedLessonsCount <= lessons.count
+        var stepIDs: [Int] = []
+        for lesson in self.lessons
         {
-            guard let lesson = lessons[safe: loadedLessonsCount] else { return }
-            
-            getLessonSteps(lesson: lesson) { [weak self] steps in
-                guard let self = self else { return }
-                self.lessons[self.loadedLessonsCount].steps = steps.filter({ $0.type != nil })
-                // Remove lesson if doens't have any step and load the next one
-                
-                if self.lessons[self.loadedLessonsCount].steps.count == 0
-                {
-                    self.lessons.remove(at: self.loadedLessonsCount)
-                }
-                else
-                {
-                    self.loadedLessonsCount += 1
-                    self.getLessonActivities(lesson: lesson)
-                    { activities in
-                        lesson.activities = activities
-                    }
-                    onFailure:
-                    {
-                    }
-                    //if lesson not completed OR the max lessons for the day have been loaded OR all possible lessons have been loaded
-                    if lesson.completedDate == nil || self.loadedLessonsCount == MAX_LESSONS_PER_DAY || self.loadedLessonsCount == self.lessons.count - 1
-                    {
-                        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
-                    }
-                }
-                self.loadStepsForLessons(onDone: {})
-            }
-            onFailure:
-            {
-            }
+            stepIDs.append(contentsOf: lesson.stepIds)
+            lesson.steps = []
         }
-        recursionCount -= 1
-        if recursionCount == 0
+        let uniqueStepIds = Array(Set(stepIDs))
+        ObjectStore.shared.get(type: Step.self, ids: uniqueStepIds)
+        { steps in
+            for lesson in self.lessons
+            {
+                for stepID in lesson.stepIds
+                {
+                    if let step = steps.filter({$0.id == stepID}).first
+                    {
+                        lesson.steps.append(step)
+                    }
+                }
+            }
+            done()
+        }
+    onFailure:
         {
             done()
         }
