@@ -42,10 +42,17 @@ class LessonsManager
     {
         let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
         let uniqueActivityIds = Array(Set(stepsActivityIds)).sorted(by: { $0 < $1 })
-
-        ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds) { objects in
-            success(objects)
-        } onFailure: {
+        
+        if uniqueActivityIds.count != 0
+        {
+            ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds) { objects in
+                success(objects)
+            } onFailure: {
+                failure()
+            }
+        }
+        else
+        {
             failure()
         }
     }

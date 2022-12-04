@@ -259,9 +259,6 @@ class ObjectStore: NSObject
                         //save object locally so it will load faster next time
                         self.serverSave(object) //this will send a newDataArrived notification
                     }
-                    //add any locally found objects that were not updated from the back end
-                    objects.append(contentsOf: objectHold)
-                    //success(objects)
                 }
                 catch
                 {
