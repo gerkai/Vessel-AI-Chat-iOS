@@ -188,7 +188,7 @@ public class Storage
         }
     }
     
-    /// Retrieve and convert structs from a all files of a given type in specified directory on disk
+    /// Retrieve and convert structs from all files of a given type in specified directory on disk
     ///
     /// - Parameters:
     ///   - type: struct type (i.e. Contact.self)
