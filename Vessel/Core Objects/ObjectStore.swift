@@ -294,7 +294,15 @@ class ObjectStore: NSObject
         }
         if object.storage == .disk || object.storage == .cacheAndDisk
         {
-            Storage.store(object)
+            //TEMPORARY if object is ServerPlan
+            if let serverPlan = object as? ServerPlan
+            {
+                Storage.store(ServerPlan.convert(serverPlan: serverPlan))
+            }
+            else //end temporary code
+            {
+                Storage.store(object)
+            }
         }
         //print("Sending .newDataArrived notification with \(String(describing: T.self))")
         if notifyNewDataArrived

@@ -73,29 +73,36 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         
         for sPlan in serverPlans
         {
-            var planType: PlanType = .food
-            var typeID = 0
-            
-            if sPlan.activityId != nil
-            {
-                planType = .activity
-                typeID = sPlan.activityId!
-            }
-            else if sPlan.reagentLifestyleRecommendationId != nil
-            {
-                planType = .lifestyleRecommendation
-                typeID = sPlan.reagentLifestyleRecommendationId!
-            }
-            else if sPlan.foodId != nil
-            {
-                planType = .food
-                typeID = sPlan.foodId!
-            }
-                
-            let plan = Plan(id: sPlan.id, last_updated: sPlan.last_updated, type: planType, typeId: typeID, completed: sPlan.completed ?? [], timeOfDay: sPlan.timeOfDay, dayOfWeek: sPlan.dayOfWeek)
-            
+            let plan = convert(serverPlan: sPlan)
             plans.append(plan)
         }
         return plans
+    }
+    
+    //convert old plan structure to new plan structure
+    static func convert(serverPlan: ServerPlan) -> Plan
+    {
+        var planType: PlanType = .food
+        var typeID = 0
+        
+        if serverPlan.activityId != nil
+        {
+            planType = .activity
+            typeID = serverPlan.activityId!
+        }
+        else if serverPlan.reagentLifestyleRecommendationId != nil
+        {
+            planType = .lifestyleRecommendation
+            typeID = serverPlan.reagentLifestyleRecommendationId!
+        }
+        else if serverPlan.foodId != nil
+        {
+            planType = .food
+            typeID = serverPlan.foodId!
+        }
+            
+        let plan = Plan(id: serverPlan.id, last_updated: serverPlan.last_updated, type: planType, typeId: typeID, completed: serverPlan.completed ?? [], timeOfDay: serverPlan.timeOfDay, dayOfWeek: serverPlan.dayOfWeek)
+
+        return plan
     }
 }

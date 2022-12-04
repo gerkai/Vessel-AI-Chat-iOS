@@ -219,6 +219,11 @@ public class Storage
             }
             //print("FILES: \(files)")
         }
+        catch CocoaError.fileReadNoSuchFile
+        {
+            //print("FILE NO SUCH FILE")
+            //do nothing. It's normal to attempt to read a file that doesn't exist yet
+        }
         catch
         {
             print(error)
