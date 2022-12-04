@@ -214,7 +214,6 @@ class ObjectStore: NSObject
         //See which objects are in cache or storage and build SpecificObjectReq with last_updated populated
         var objectRequests: [SpecificObjectReq] = []
         var objects: [T] = []
-        var objectHold: [T] = [] //place to hold any found locally stored objects.
         
         let name = String(describing: T.self).lowercased()
         for id in ids
@@ -222,12 +221,12 @@ class ObjectStore: NSObject
             if let object = objectFromCache(of: type, id: id)
             {
                 objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
-                objectHold.append(object)
+                objects.append(object)
             }
             else if let object = Storage.retrieve(id, as: type )
             {
                 objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
-                objectHold.append(object)
+                objects.append(object)
             }
             else
             {
@@ -236,8 +235,8 @@ class ObjectStore: NSObject
             }
         }
         
-        //let call know immediately of any locally retrieved objects
-        success(objectHold)
+        //let caller know immediately of any locally retrieved objects
+        success(objects)
         
         Server.shared.getObjects(objects: objectRequests)
         { objectDict in
@@ -251,10 +250,6 @@ class ObjectStore: NSObject
                         let decoder = JSONDecoder()
                         
                         let object = try decoder.decode(T.self, from: json)
-                        objects.append(object)
-                        
-                        //if any updated objects came in, we can remove the ones we found in local storage
-                        objectHold.removeAll(where: {$0.id == object.id})
                         
                         //save object locally so it will load faster next time
                         self.serverSave(object) //this will send a newDataArrived notification
@@ -265,10 +260,6 @@ class ObjectStore: NSObject
                     print(error)
                     failure()
                 }
-            }
-            else
-            {
-                success(objectHold)
             }
         }
         onFailure:
