@@ -62,7 +62,8 @@ class LessonsManager
     func buildLessonPlan(onDone done: @escaping () -> Void)
     {
         guard let contact = Contact.main() else { return }
-        let goalsCurriculums = Storage.retrieve(as: Curriculum.self).filter({ contact.goal_ids.contains($0.goalId) })
+        let allCurriculums = Storage.retrieve(as: Curriculum.self)
+        let goalsCurriculums = allCurriculums.filter({ contact.goal_ids.contains($0.goalId) })
         if goalsCurriculums.count != 0
         {
             let lessons = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())

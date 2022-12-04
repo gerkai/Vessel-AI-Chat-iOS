@@ -108,6 +108,7 @@ struct Constants
     static let AVERAGE_AGE = 37 /* determines default date picker date in onboarding */
     
     //UserDefaults Keys
+    static let KEY_DEBUG_MENU = "KEY_DEBUG_MENU"
     static let KEY_DEFAULT_LOGIN_EMAIL = "KEY_DEFAULT_LOGIN_EMAIL"
     static let KEY_DEFAULT_LOGIN_PASSWORD = "KEY_DEFAULT_LOGIN_PASSWORD"
     static let KEY_DEFAULT_WEIGHT_LBS = "KEY_DEFAULT_WEIGHT_LBS"

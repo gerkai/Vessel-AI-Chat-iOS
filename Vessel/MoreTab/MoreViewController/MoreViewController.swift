@@ -25,6 +25,11 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable
         super.viewDidLoad()
         versionLabel.text = viewModel.versionString
         environmentLabel.text = environment()
+        if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
+        {
+            viewModel.addDebugMenu()
+            tableView.reloadData()
+        }
     }
     
     func environment() -> String

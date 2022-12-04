@@ -87,6 +87,7 @@ class MoreViewModel
     
     func addDebugMenu()
     {
+        UserDefaults.standard.set(true, forKey: Constants.KEY_DEBUG_MENU)
         options.append(.debug)
     }
 }

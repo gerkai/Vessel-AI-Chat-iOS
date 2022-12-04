@@ -236,36 +236,45 @@ class ObjectStore: NSObject
         }
         
         //let caller know immediately of any locally retrieved objects
-        success(objects)
+        //success(objects)
         
-        Server.shared.getObjects(objects: objectRequests)
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
-            {
-                do
+        if objectRequests.count == 0
+        {
+            success(objects)
+        }
+        else
+        {
+            Server.shared.getObjects(objects: objectRequests)
+            { objectDict in
+                if let values = objectDict[name] as? [[String: Any]]
                 {
-                    for value in values
+                    do
                     {
-                        let json = try JSONSerialization.data(withJSONObject: value)
-                        let decoder = JSONDecoder()
-                        
-                        let object = try decoder.decode(T.self, from: json)
-                        
-                        //save object locally so it will load faster next time
-                        self.serverSave(object) //this will send a newDataArrived notification
+                        for value in values
+                        {
+                            let json = try JSONSerialization.data(withJSONObject: value)
+                            let decoder = JSONDecoder()
+                            
+                            let object = try decoder.decode(T.self, from: json)
+                            
+                            //save object locally so it will load faster next time
+                            self.serverSave(object) //this will send a newDataArrived notification
+                            objects.append(object)
+                        }
+                        success(objects)
+                    }
+                    catch
+                    {
+                        print(error)
+                        failure()
                     }
                 }
-                catch
-                {
-                    print(error)
-                    failure()
-                }
             }
-        }
         onFailure:
-        { error in
-            print(error)
-            failure()
+            { error in
+                print(error)
+                failure()
+            }
         }
     }
     

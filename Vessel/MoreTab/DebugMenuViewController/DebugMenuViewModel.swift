@@ -9,6 +9,7 @@ import Foundation
 
 enum DebugMenuOption: Int
 {
+    case debugMenu
     case resetUserFlags
     case bypassScanning
     case showDebugDrawing
@@ -25,6 +26,7 @@ enum DebugMenuOption: Int
     {
         switch self
         {
+            case .debugMenu: return "Debug Menu"
             case .resetUserFlags: return "Reset User Flags"
             case .bypassScanning: return "Bypass Scanning"
             case .showDebugDrawing: return "Show Debug Drawing"
@@ -49,6 +51,7 @@ enum DebugMenuOption: Int
     {
         switch self
         {
+            case .debugMenu: return Constants.KEY_DEBUG_MENU
             case .resetUserFlags: return nil
             case .bypassScanning: return Constants.KEY_BYPASS_SCANNING
             case .printNetworkTraffic: return Constants.KEY_PRINT_NETWORK_TRAFFIC
@@ -121,6 +124,7 @@ enum DebugMenuOption: Int
 class DebugMenuViewModel
 {
     let options: [DebugMenuOption] = [
+        .debugMenu,
         .resetUserFlags,
         .bypassScanning,
         .showDebugDrawing,
