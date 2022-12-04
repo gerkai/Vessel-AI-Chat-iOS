@@ -83,19 +83,13 @@ class OnboardingCoordinator
             //make sure our core objects are all up to date
             loadCoreObjects(onDone:
             {
-                if Storage.retrieve(as: Curriculum.self).count > 0
+                LessonsManager.shared.buildLessonPlan(onDone:
                 {
-                    LessonsManager.shared.buildLessonPlan()
-                }
-                
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-                navigationController?.fadeTo(vc)
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                    navigationController?.fadeTo(vc)
+                })
             })
-            
-            //Separated load plans call because an issue with stored plans not having weekdays
-            //PlansManager.shared.loadPlans()
-            
         }
     }
     
@@ -225,14 +219,12 @@ class OnboardingCoordinator
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet so we wouldn't know what objects to load.
             OnboardingCoordinator.loadCoreObjects(onDone:
             {
-                if Storage.retrieve(as: Curriculum.self).count > 0
+                LessonsManager.shared.buildLessonPlan(onDone:
                 {
-                    LessonsManager.shared.buildLessonPlan()
-                }
-                
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-                self.navigationController?.fadeTo(vc)
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                    self.navigationController?.fadeTo(vc)
+                })
             })
             
             //save the data collected during onboarding

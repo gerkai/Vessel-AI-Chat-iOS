@@ -17,6 +17,7 @@ enum DebugMenuOption: Int
     case relaxedScanningDistance
     case clearResults
     case clearLessons
+    case clearAllPlanData
     case useMockResults
     case showAllFoodsEveryday
     
@@ -32,6 +33,7 @@ enum DebugMenuOption: Int
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             case .clearResults: return "Clear all test results"
             case .clearLessons: return "Clear locally stored lessons"
+            case .clearAllPlanData: return "Clear plans, lessons, steps, foods, curriculum"
             case .useMockResults: return "Use mock test results"
             case .showAllFoodsEveryday: return "Show all foods everyday"
         }
@@ -55,6 +57,7 @@ enum DebugMenuOption: Int
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
             case .clearLessons: return Constants.KEY_CLEAR_LESSONS
+            case .clearAllPlanData: return Constants.KEY_CLEAR_ALL_PLAN_DATA
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
             case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
         }
@@ -82,6 +85,17 @@ enum DebugMenuOption: Int
         {
             //clear all lessons from storage
             Storage.clear(objectType: Lesson.self)
+            //force today tab to update
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+        }
+        else if self == .clearAllPlanData
+        {
+            //clear all lessons from storage
+            Storage.clear(objectType: Lesson.self)
+            Storage.clear(objectType: Plan.self)
+            Storage.clear(objectType: Step.self)
+            Storage.clear(objectType: Food.self)
+            Storage.clear(objectType: Curriculum.self)
             //force today tab to update
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
         }
@@ -115,6 +129,7 @@ class DebugMenuViewModel
         .relaxedScanningDistance,
         .clearResults,
         .clearLessons,
+        .clearAllPlanData,
         .useMockResults,
         .showAllFoodsEveryday
     ]

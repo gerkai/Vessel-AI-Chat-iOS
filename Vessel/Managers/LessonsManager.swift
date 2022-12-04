@@ -57,25 +57,45 @@ class LessonsManager
         }
     }
     
-    func buildLessonPlan()
+    func buildLessonPlan(onDone done: @escaping () -> Void)
     {
         guard let contact = Contact.main() else { return }
         let goalsCurriculums = Storage.retrieve(as: Curriculum.self).filter({ contact.goal_ids.contains($0.goalId) })
-        let lessons = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
-        let uniqueLessons = Array(Set(lessons))
-        let sortedLessons = uniqueLessons.sorted(by: { $0.rank < $1.rank })
-        
-        ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id })) { lessons in
-            self.lessons.append(contentsOf: lessons)
-            self.lessons = self.lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
-            self.planBuilt = true
-            self.loadStepsForLessons()
-        } onFailure: {
+        if goalsCurriculums.count != 0
+        {
+            let lessons = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
+            let uniqueLessons = Array(Set(lessons))
+            let sortedLessons = uniqueLessons.sorted(by: { $0.rank < $1.rank })
+            
+            if sortedLessons.count != 0
+            {
+                ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
+                { lessons in
+                    self.lessons.append(contentsOf: lessons)
+                    self.lessons = self.lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
+                    self.planBuilt = true
+                    self.loadStepsForLessons(onDone:{done()})
+                }
+                onFailure:
+                {
+                    done()
+                }
+            }
+            else
+            {
+                done()
+            }
+        }
+        else
+        {
+            done()
         }
     }
     
-    private func loadStepsForLessons()
+    var recursionCount = 0
+    private func loadStepsForLessons(onDone done: @escaping () -> Void)
     {
+        recursionCount += 1
         if loadedLessonsCount < 4 && loadedLessonsCount <= lessons.count
         {
             guard let lesson = lessons[safe: loadedLessonsCount] else { return }
@@ -102,9 +122,16 @@ class LessonsManager
                         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
                     }
                 }
-                self.loadStepsForLessons()
-            } onFailure: {
+                self.loadStepsForLessons(onDone:{})
             }
+            onFailure:
+            {
+            }
+        }
+        recursionCount -= 1
+        if recursionCount == 0
+        {
+            done()
         }
     }
 }

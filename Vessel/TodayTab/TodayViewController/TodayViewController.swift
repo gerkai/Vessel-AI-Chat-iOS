@@ -65,9 +65,9 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             }
             else if type == String(describing: Curriculum.self)
             {
-                if !LessonsManager.shared.planBuilt && Storage.retrieve(as: Curriculum.self).count > 0
+                if !LessonsManager.shared.planBuilt
                 {
-                    LessonsManager.shared.buildLessonPlan()
+                    LessonsManager.shared.buildLessonPlan(onDone: {})
                 }
             }
         }

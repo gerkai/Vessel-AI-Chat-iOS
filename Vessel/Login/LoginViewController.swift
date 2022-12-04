@@ -46,6 +46,11 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        self.nextButton.hideLoading()
+    }
+    
     @IBAction func googleAuthAction(_ sender: Any)
     {
         if Reachability.isConnectedToNetwork()
@@ -109,7 +114,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
-                                self.nextButton.hideLoading()
+                                //self.nextButton.hideLoading()
                                 Contact.main()?.identifyAnalytics()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
