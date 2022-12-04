@@ -20,6 +20,7 @@ class PlansManager
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
+    /* this isn't called by anyone
     func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
@@ -34,16 +35,16 @@ class PlansManager
         } onFailure: { error in
             failure(error.description)
         }
-    }
+    }*/
     
     func addPlans(plansToAdd: [Plan])
     {
-        /*for plan in plansToAdd
+        for plan in plansToAdd
         {
-            ObjectStore.shared.serverSave(plan)
+            ObjectStore.shared.ClientSave(plan)
         }
-        self.plans = Storage.retrieve(as: Plan.self)*/
-        self.plans.append(contentsOf: plansToAdd)
+        self.plans = Storage.retrieve(as: Plan.self)
+        //self.plans.append(contentsOf: plansToAdd)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
@@ -65,11 +66,13 @@ class PlansManager
         {
             plans[index].completed.removeAll(where: { $0 == date })
         }
+        ObjectStore.shared.ClientSave(plans[index])
     }
     
     func remove(plan: Plan)
     {
         plans.removeAll{$0.id == plan.id}
+        //TODO: Need to be able to delete plans from object store
     }
     
     //returns array of only food plans
