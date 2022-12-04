@@ -7,6 +7,8 @@
 
 import Foundation
 
+let MAX_LESSONS_PER_DAY = 4
+
 class LessonsManager
 {
     static let shared = LessonsManager()
@@ -17,7 +19,7 @@ class LessonsManager
     
     var todayLessons: [Lesson]
     {
-        let firstUncompletedIndex = min(4, lessons.firstIndex(where: { $0.completedDate == nil }) ?? 4)
+        let firstUncompletedIndex = min(MAX_LESSONS_PER_DAY, lessons.firstIndex(where: { $0.completedDate == nil }) ?? MAX_LESSONS_PER_DAY)
         let index = max(0, unlockMoreInsights ? firstUncompletedIndex : firstUncompletedIndex - 1)
         if lessons.count < index
         {
@@ -69,12 +71,13 @@ class LessonsManager
             
             if sortedLessons.count != 0
             {
+                //get all the lessons indicated by ids[]
                 ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
                 { lessons in
                     self.lessons.append(contentsOf: lessons)
                     self.lessons = self.lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
                     self.planBuilt = true
-                    self.loadStepsForLessons(onDone:{done()})
+                    self.loadStepsForLessons(onDone: {done()})
                 }
                 onFailure:
                 {
@@ -96,7 +99,7 @@ class LessonsManager
     private func loadStepsForLessons(onDone done: @escaping () -> Void)
     {
         recursionCount += 1
-        if loadedLessonsCount < 4 && loadedLessonsCount <= lessons.count
+        if loadedLessonsCount < MAX_LESSONS_PER_DAY && loadedLessonsCount <= lessons.count
         {
             guard let lesson = lessons[safe: loadedLessonsCount] else { return }
             
@@ -112,17 +115,20 @@ class LessonsManager
                 else
                 {
                     self.loadedLessonsCount += 1
-                    self.getLessonActivities(lesson: lesson) { activities in
+                    self.getLessonActivities(lesson: lesson)
+                    { activities in
                         lesson.activities = activities
-                    } onFailure: {
                     }
-                    
-                    if lesson.completedDate == nil || self.loadedLessonsCount == 4 || self.loadedLessonsCount == self.lessons.count - 1
+                    onFailure:
+                    {
+                    }
+                    //if lesson not completed OR the max lessons for the day have been loaded OR all possible lessons have been loaded
+                    if lesson.completedDate == nil || self.loadedLessonsCount == MAX_LESSONS_PER_DAY || self.loadedLessonsCount == self.lessons.count - 1
                     {
                         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
                     }
                 }
-                self.loadStepsForLessons(onDone:{})
+                self.loadStepsForLessons(onDone: {})
             }
             onFailure:
             {
