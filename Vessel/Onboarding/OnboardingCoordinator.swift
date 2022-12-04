@@ -75,17 +75,19 @@ class OnboardingCoordinator
         }
         else
         {
-            // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet.
+            //if gender was chosen then we can assume all demographics were populated so skip onboarding
+            //and go directly to MainTabBarController
+            
             WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
             
+            //make sure our core objects are all up to date
             loadCoreObjects(onDone:
             {
                 if Storage.retrieve(as: Curriculum.self).count > 0
                 {
                     LessonsManager.shared.buildLessonPlan()
                 }
-                //if gender was chosen then we can assume all demographics were populated so skip onboarding
-                //and go directly to MainTabBarController
+                
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
                 navigationController?.fadeTo(vc)

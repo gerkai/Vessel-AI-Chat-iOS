@@ -35,14 +35,13 @@ struct Plan: CoreObjectProtocol, Codable
 {
     let id: Int
     var last_updated: Int
+    let storage: StorageType = .disk
     var type: PlanType = .food
     var typeId: Int
     var completed: [String]
     @NullCodable var completionInfo: [CompletionInfo]?
     let timeOfDay: String?
     let dayOfWeek: [Int]?
-    
-    let storage: StorageType = .cacheAndDisk
     
     var isComplete: Bool
     {

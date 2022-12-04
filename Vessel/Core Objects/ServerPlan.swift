@@ -12,7 +12,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
 {
     let id: Int
     var last_updated: Int
-    let storage: StorageType = .cacheAndDisk
+    let storage: StorageType = .disk
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     let foodId: Int?

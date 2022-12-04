@@ -16,34 +16,8 @@ class PlansManager
 
     func loadPlans()
     {
-        loadPlans(lastUpdated: lastUpdated, onSuccess:
-        { [weak self] plans in
-            guard let self = self else { return }
-            self.plans = plans
-            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-        },
-        onFailure:
-        { error in
-            print(error)
-        })
-    }
-    
-    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getPlans(lastUpdated: lastUpdated)
-        { newPlans in
-            for plan in newPlans
-            {
-                ObjectStore.shared.serverSave(plan)
-            }
-            
-            //let plans = Storage.retrieve(as: Plan.self)
-            success(newPlans)
-        }
-        onFailure:
-        { error in
-            failure(error.description)
-        }
+        plans = Storage.retrieve(as: Plan.self)
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
     func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
