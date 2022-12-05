@@ -434,6 +434,7 @@ class Server: NSObject
         
         Contact.reset()
         PlansManager.shared.plans = []
+        LessonsManager.shared.clearLessons()
     }
     
     func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
