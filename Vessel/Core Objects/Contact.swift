@@ -71,17 +71,18 @@ class Contact: CoreObjectProtocol
         let dayOfWeek = Date().dayOfWeek
         
         let foodIds: [Int]
+        let foodPlans = PlansManager.shared.getFoodPlans()
         if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
         {
-            foodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
+            foodIds = foodPlans.map({ $0.typeId })
         }
         else
         {
-            foodIds = PlansManager.shared.plans.compactMap
+            foodIds = foodPlans.compactMap
             {
                 if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
                 {
-                    return $0.foodId
+                    return $0.typeId
                 }
                 return nil
             }
@@ -282,17 +283,18 @@ class Contact: CoreObjectProtocol
             let dayOfWeek = Date().dayOfWeek
             let foodIds: [Int]
             
+            let foodPlans = PlansManager.shared.getFoodPlans()
             if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
             {
-                foodIds = PlansManager.shared.plans.compactMap({ $0.foodId })
+                foodIds = foodPlans.map({ $0.typeId })
             }
             else
             {
-                foodIds = PlansManager.shared.plans.compactMap
+                foodIds = foodPlans.compactMap
                 {
                     if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
                     {
-                        return $0.foodId
+                        return $0.typeId
                     }
                     return nil
                 }

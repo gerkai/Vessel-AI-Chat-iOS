@@ -19,7 +19,7 @@ class Step: CoreObjectProtocol
 {
     let id: Int
     var last_updated: Int
-    let storage: StorageType = .cacheAndDisk
+    let storage: StorageType = .disk
 
     var type: StepType?
     {

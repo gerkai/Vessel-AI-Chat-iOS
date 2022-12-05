@@ -108,6 +108,7 @@ struct Constants
     static let AVERAGE_AGE = 37 /* determines default date picker date in onboarding */
     
     //UserDefaults Keys
+    static let KEY_DEBUG_MENU = "KEY_DEBUG_MENU"
     static let KEY_DEFAULT_LOGIN_EMAIL = "KEY_DEFAULT_LOGIN_EMAIL"
     static let KEY_DEFAULT_LOGIN_PASSWORD = "KEY_DEFAULT_LOGIN_PASSWORD"
     static let KEY_DEFAULT_WEIGHT_LBS = "KEY_DEFAULT_WEIGHT_LBS"
@@ -117,6 +118,8 @@ struct Constants
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_CLEAR_RESULTS = "KEY_CLEAR_RESULTS"
+    static let KEY_CLEAR_LESSONS = "KEY_CLEAR_LESSONS"
+    static let KEY_CLEAR_ALL_PLAN_DATA = "KEY_CLEAR_ALL_PLAN_DATA"
     static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
     static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     static let SHOW_ALL_FOODS_EVERYDAY = "SHOW_ALL_FOODS_EVERYDAY"

@@ -37,7 +37,7 @@ class LoadingButton: VesselButton
         isUserInteractionEnabled = true
         setTitle(originalButtonText, for: .normal)
         setImage(originalButtonImage, for: .normal)
-        activityIndicator.stopAnimating()
+        activityIndicator?.stopAnimating()
     }
 
     private func createActivityIndicator() -> UIActivityIndicatorView

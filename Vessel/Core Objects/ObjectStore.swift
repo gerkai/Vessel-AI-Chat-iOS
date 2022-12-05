@@ -86,7 +86,7 @@ class ObjectStore: NSObject
         
         if objectType == "\(Result.self)" { return Result.self }
         else if objectType == "\(Food.self)" { return Food.self }
-        else if objectType == "\(Plan.self)" { return Plan.self }
+        else if objectType == "\(Plan.self)" { return ServerPlan.self }
         else if objectType == "\(Curriculum.self)" { return Curriculum.self }
         return nil
     }
@@ -110,10 +110,10 @@ class ObjectStore: NSObject
     
     func testFetch()
     {
-        getMostRecent(objectTypes: [Result.self, Food.self])
+        getMostRecent(objectTypes: [Result.self, Food.self], onSuccess: {}, onFailure: {})
     }
     
-    func getMostRecent(objectTypes: [CoreObjectProtocol.Type])
+    func getMostRecent(objectTypes: [CoreObjectProtocol.Type], onSuccess success: @escaping () -> Void, onFailure failure: @escaping () -> Void)
     {
         var objectReqs: [AllObjectReq] = []
         
@@ -153,6 +153,7 @@ class ObjectStore: NSObject
                     }
                 }
             }
+            success()
             //print("Got objects: \(objectDict)")
             //print(".")
         }
@@ -160,39 +161,6 @@ class ObjectStore: NSObject
         { error in
             print("Got error: \(error)")
             print(".")
-        }
-    }
-    func loadPlans(lastUpdated: Int, onSuccess success: @escaping ([Plan]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getPlans(lastUpdated: lastUpdated) { newPlans in
-            // TODO: Uncomment when loading plans from objectStore
-            /*for plan in newPlans
-            {
-                self.serverSave(plan)
-            }*/
-            
-            //let plans = Storage.retrieve(as: Plan.self)
-            success(newPlans)
-        }
-        onFailure:
-        { error in
-            failure(error.description)
-        }
-    }
-    
-    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
-            for food in newFoods
-            {
-                self.serverSave(food)
-            }
-            
-            let foods = Storage.retrieve(as: Food.self)
-            
-            success(foods)
-        } onFailure: { error in
-            failure(error.description)
         }
     }
 
@@ -243,92 +211,74 @@ class ObjectStore: NSObject
     
     func get<T: CoreObjectProtocol>(type: T.Type, ids: [Int], onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
     {
-        /*if let object = objectFromCache(of: type, id: id)
-        {
-            success(object)
-        }
-        else if let object = Storage.retrieve(id, as: type )
-        {
-            success(object)
-        }
-        else
-        {*/
+        //See which objects are in cache or storage and build SpecificObjectReq with last_updated populated
+        var objectRequests: [SpecificObjectReq] = []
+        var objects: [T] = []
+        
         let name = String(describing: T.self).lowercased()
-        
-        let objects = ids.map({ SpecificObjectReq(type: name, id: $0, last_updated: 0) })
-        
-        Server.shared.getObjects(objects: objects)
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
+        for id in ids
+        {
+            if let object = objectFromCache(of: type, id: id)
             {
-                do
-                {
-                    let json = try JSONSerialization.data(withJSONObject: values)
-                    let decoder = JSONDecoder()
-                    
-                    let objects = try decoder.decode([T].self, from: json)
-                    success(objects)
-                }
-                catch
-                {
-                    print(error)
-                    failure()
-                }
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
+                objects.append(object)
+            }
+            else if let object = Storage.retrieve(id, as: type )
+            {
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: object.last_updated))
+                objects.append(object)
             }
             else
             {
-                failure()
+                //if not locally stored, set last_updated to 0 to force a load from the back end
+                objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: 0))
             }
         }
-        onFailure:
-        { error in
-            print(error)
-            failure()
-        }
-        //}
-    }
-    
-    func getAll<T: CoreObjectProtocol>(type: T.Type, onSuccess success: @escaping (_ objects: [T]) -> Void, onFailure failure: @escaping () -> Void)
-    {
-        /*if let object = objectFromCache(of: type, id: id)
+        
+        //let caller know immediately of any locally retrieved objects
+        //success(objects)
+        
+        if objectRequests.count == 0
         {
-            success(object)
-        }
-        else if let object = Storage.retrieve(id, as: type )
-        {
-            success(object)
+            success(objects)
         }
         else
-        {*/
-        let name = String(describing: T.self).lowercased()
-        
-        Server.shared.getAllObjects(objects: [AllObjectReq(type: name, last_updated: 0)])
-        { objectDict in
-            if let values = objectDict[name] as? [[String: Any]]
-            {
-                do
+        {
+            Server.shared.getObjects(objects: objectRequests)
+            { objectDict in
+                if let values = objectDict[name] as? [[String: Any]]
                 {
-                    let json = try JSONSerialization.data(withJSONObject: values)
-                    let decoder = JSONDecoder()
-                    
-                    let objects = try decoder.decode([T].self, from: json)
+                    do
+                    {
+                        for value in values
+                        {
+                            let json = try JSONSerialization.data(withJSONObject: value)
+                            let decoder = JSONDecoder()
+                            
+                            let object = try decoder.decode(T.self, from: json)
+                            
+                            //save object locally so it will load faster next time
+                            self.serverSave(object) //this will send a newDataArrived notification
+                            objects.append(object)
+                        }
+                        success(objects)
+                    }
+                    catch
+                    {
+                        print(error)
+                        failure()
+                    }
+                }
+                else
+                {
                     success(objects)
                 }
-                catch
-                {
-                    print(error)
-                    failure()
-                }
             }
-            else
-            {
+        onFailure:
+            { error in
+                print(error)
                 failure()
             }
-        }
-        onFailure:
-        { error in
-            print(error)
-            failure()
         }
     }
     
@@ -344,7 +294,15 @@ class ObjectStore: NSObject
         }
         if object.storage == .disk || object.storage == .cacheAndDisk
         {
-            Storage.store(object)
+            //TEMPORARY if object is ServerPlan
+            if let serverPlan = object as? ServerPlan
+            {
+                Storage.store(ServerPlan.convert(serverPlan: serverPlan))
+            }
+            else //end temporary code
+            {
+                Storage.store(object)
+            }
         }
         //print("Sending .newDataArrived notification with \(String(describing: T.self))")
         if notifyNewDataArrived

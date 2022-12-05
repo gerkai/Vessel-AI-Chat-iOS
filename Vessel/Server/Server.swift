@@ -434,6 +434,7 @@ class Server: NSObject
         
         Contact.reset()
         PlansManager.shared.plans = []
+        LessonsManager.shared.clearLessons()
     }
     
     func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
@@ -755,12 +756,13 @@ class Server: NSObject
         { dict in
             do
             {
-                guard let foodDict = dict["plan"] as? [[String: Any]] else { return }
-                let json = try JSONSerialization.data(withJSONObject: foodDict)
+                guard let planDict = dict["plan"] as? [[String: Any]] else { return }
+                let json = try JSONSerialization.data(withJSONObject: planDict)
                 let decoder = JSONDecoder()
-                let decodedPlans = try decoder.decode([Plan].self, from: json)
+                let decodedServerPlans = try decoder.decode([ServerPlan].self, from: json) //change to Plan once back end is updated
                 DispatchQueue.main.async()
                 {
+                    let decodedPlans = ServerPlan.convert(serverPlans: decodedServerPlans) //delete this line once back end is updated
                     success(decodedPlans)
                 }
             }

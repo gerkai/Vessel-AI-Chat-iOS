@@ -58,6 +58,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             print("WelcomeSignIn did load")
         }
+        
+        if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
+        {
+            showDebugButton()
+        }
     }
     
     func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
@@ -224,10 +229,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     {
         if key == lock
         {
-            //show debug button
-            debugButton.showAnimated(in: buttonStackView)
-            key.append(1)
-            key.remove(at: 0)
+            showDebugButton()
         }
         else
         {
@@ -237,6 +239,14 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             let vc = storyboard.instantiateViewController(withIdentifier: "SignupEmailCheckingViewController")
             self.navigationController?.fadeTo(vc)
         }
+    }
+    
+    func showDebugButton()
+    {
+        //show debug button
+        debugButton.showAnimated(in: buttonStackView)
+        key.append(1)
+        key.remove(at: 0)
     }
     
     func updateEnvironmentLabel(env: Int)

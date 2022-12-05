@@ -4,7 +4,6 @@
 //
 //  Created by Nicolas Medina on 10/15/22.
 //
-// This is a temporary class made to manage foods
 
 import Foundation
 
@@ -17,23 +16,17 @@ class PlansManager
 
     func loadPlans()
     {
-        ObjectStore.shared.loadPlans(lastUpdated: lastUpdated, onSuccess: { [weak self] plans in
-            guard let self = self else { return }
-            self.plans = plans
-            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-        }, onFailure: { error in
-            print(error)
-        })
+        plans = Storage.retrieve(as: Plan.self)
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
     func addPlans(plansToAdd: [Plan])
     {
-        /*for plan in plansToAdd
+        for plan in plansToAdd
         {
-            ObjectStore.shared.serverSave(plan)
+            ObjectStore.shared.ClientSave(plan)
         }
-        self.plans = Storage.retrieve(as: Plan.self)*/
-        self.plans.append(contentsOf: plansToAdd)
+        self.plans = Storage.retrieve(as: Plan.self)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
@@ -42,25 +35,43 @@ class PlansManager
         guard let index = plans.firstIndex(where: { $0.id == planId }) else { return }
         if completed
         {
-            if plans[index].completed == nil
+            if plans[index].completed.count == 0
             {
                 plans[index].completed = [date]
             }
             else
             {
-                plans[index].completed?.append(date)
+                plans[index].completed.append(date)
             }
         }
         else
         {
-            if plans[index].completed == nil
-            {
-                plans[index].completed = []
-            }
-            else
-            {
-                plans[index].completed?.removeAll(where: { $0 == date })
-            }
+            plans[index].completed.removeAll(where: { $0 == date })
         }
+        ObjectStore.shared.ClientSave(plans[index])
+    }
+    
+    func remove(plan: Plan)
+    {
+        plans.removeAll{$0.id == plan.id}
+        //TODO: Need to be able to delete plans from object store
+    }
+    
+    //returns array of only food plans
+    func getFoodPlans() -> [Plan]
+    {
+        return plans.filter({ $0.type == .food })
+    }
+    
+    //returns array of only activities
+    func getActivities() -> [Plan]
+    {
+        return plans.filter({ $0.type == .activity })
+    }
+    
+    //returns array of only reagentLifestyleRecommendations
+    func getLifestyleRecommendations() -> [Plan]
+    {
+        return plans.filter({ $0.type == .lifestyleRecommendation })
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 enum DebugMenuOption: Int
 {
+    case debugMenu
     case resetUserFlags
     case bypassScanning
     case showDebugDrawing
@@ -16,6 +17,8 @@ enum DebugMenuOption: Int
     case printInitAndDeinit
     case relaxedScanningDistance
     case clearResults
+    case clearLessons
+    case clearAllPlanData
     case useMockResults
     case showAllFoodsEveryday
     
@@ -23,6 +26,7 @@ enum DebugMenuOption: Int
     {
         switch self
         {
+            case .debugMenu: return "Debug Menu"
             case .resetUserFlags: return "Reset User Flags"
             case .bypassScanning: return "Bypass Scanning"
             case .showDebugDrawing: return "Show Debug Drawing"
@@ -30,6 +34,8 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return "Print intialization and deinitialization"
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             case .clearResults: return "Clear all test results"
+            case .clearLessons: return "Clear locally stored lessons"
+            case .clearAllPlanData: return "Clear plans, lessons, steps, foods, curriculum"
             case .useMockResults: return "Use mock test results"
             case .showAllFoodsEveryday: return "Show all foods everyday"
         }
@@ -45,6 +51,7 @@ enum DebugMenuOption: Int
     {
         switch self
         {
+            case .debugMenu: return Constants.KEY_DEBUG_MENU
             case .resetUserFlags: return nil
             case .bypassScanning: return Constants.KEY_BYPASS_SCANNING
             case .printNetworkTraffic: return Constants.KEY_PRINT_NETWORK_TRAFFIC
@@ -52,6 +59,8 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
+            case .clearLessons: return Constants.KEY_CLEAR_LESSONS
+            case .clearAllPlanData: return Constants.KEY_CLEAR_ALL_PLAN_DATA
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
             case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
         }
@@ -75,6 +84,24 @@ enum DebugMenuOption: Int
             //force today and results tabs to update and show/hide blocker view if necessary
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
         }
+        else if self == .clearLessons
+        {
+            //clear all lessons from storage
+            Storage.clear(objectType: Lesson.self)
+            //force today tab to update
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+        }
+        else if self == .clearAllPlanData
+        {
+            //clear all lessons from storage
+            Storage.clear(objectType: Lesson.self)
+            Storage.clear(objectType: Plan.self)
+            Storage.clear(objectType: Step.self)
+            Storage.clear(objectType: Food.self)
+            Storage.clear(objectType: Curriculum.self)
+            //force today tab to update
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+        }
         else if let flag = flag
         {
             if isEnabled
@@ -97,6 +124,7 @@ enum DebugMenuOption: Int
 class DebugMenuViewModel
 {
     let options: [DebugMenuOption] = [
+        .debugMenu,
         .resetUserFlags,
         .bypassScanning,
         .showDebugDrawing,
@@ -104,6 +132,8 @@ class DebugMenuViewModel
         .printInitAndDeinit,
         .relaxedScanningDistance,
         .clearResults,
+        .clearLessons,
+        .clearAllPlanData,
         .useMockResults,
         .showAllFoodsEveryday
     ]

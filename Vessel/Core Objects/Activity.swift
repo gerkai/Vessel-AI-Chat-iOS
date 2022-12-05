@@ -1,5 +1,5 @@
 //
-//  Tip.swift
+//  Activity.swift
 //  Vessel
 //
 //  Created by Nicolas Medina on 11/29/22.
@@ -11,12 +11,12 @@ class Tip: CoreObjectProtocol
 {
     var id: Int = 0
     var last_updated: Int = 0
-    let storage: StorageType = .cacheAndDisk
-    
     let title: String
     let description: String
-    let imageUrl: String
     let frequency: String
+    let imageUrl: String
+    //let smallImage: String?
+    let storage: StorageType = .cacheAndDisk
     
     init(id: Int,
          last_updated: Int,
@@ -36,9 +36,10 @@ class Tip: CoreObjectProtocol
     enum CodingKeys: String, CodingKey
     {
         case id
+        case last_updated
         case title
         case description
-        case imageUrl = "image_url"
         case frequency
+        case imageUrl = "image_url"
     }
 }

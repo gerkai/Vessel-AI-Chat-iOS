@@ -105,6 +105,11 @@ public class Storage
             }
             //print("FILES: \(files)")
         }
+        catch CocoaError.fileReadNoSuchFile
+        {
+            //print("FILE NO SUCH FILE")
+            //do nothing. It's normal to attempt to read a file that doesn't exist yet
+        }
         catch
         {
             print(error)
@@ -171,7 +176,10 @@ public class Storage
             }
             catch
             {
-                fatalError(error.localizedDescription)
+                //couldn't decode the file. Delete it
+                remove(id, objectType: type)
+                return nil
+                //fatalError(error.localizedDescription)
             }
         }
         else
@@ -180,7 +188,7 @@ public class Storage
         }
     }
     
-    /// Retrieve and convert structs from a all files of a given type in specified directory on disk
+    /// Retrieve and convert structs from all files of a given type in specified directory on disk
     ///
     /// - Parameters:
     ///   - type: struct type (i.e. Contact.self)
@@ -210,6 +218,11 @@ public class Storage
                 }
             }
             //print("FILES: \(files)")
+        }
+        catch CocoaError.fileReadNoSuchFile
+        {
+            //print("FILE NO SUCH FILE")
+            //do nothing. It's normal to attempt to read a file that doesn't exist yet
         }
         catch
         {

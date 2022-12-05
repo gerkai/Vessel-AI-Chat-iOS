@@ -49,9 +49,9 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     func updateCheckedFoods()
     {
         guard let contact = Contact.main() else { return }
-        checked = PlansManager.shared.plans.filter
+        checked = PlansManager.shared.getFoodPlans().filter
         { plan in
-            contact.suggestedFoods.contains(where: { $0.id == plan.foodId })
+            contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
         }.map({ $0.isComplete })
         
         for (i, view) in stackView.arrangedSubviews.enumerated()

@@ -11,7 +11,7 @@ class Lesson: CoreObjectProtocol, Equatable
 {
     let id: Int
     var last_updated: Int = 0
-    let storage: StorageType = .cacheAndDisk
+    let storage: StorageType = .disk
     
     let title: String
     let description: String
@@ -63,6 +63,7 @@ class Lesson: CoreObjectProtocol, Equatable
     enum CodingKeys: String, CodingKey
     {
         case id
+        case last_updated
         case title
         case description
         case imageUrl = "image_url"
