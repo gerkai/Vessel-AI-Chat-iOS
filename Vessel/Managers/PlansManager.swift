@@ -44,7 +44,6 @@ class PlansManager
             ObjectStore.shared.ClientSave(plan)
         }
         self.plans = Storage.retrieve(as: Plan.self)
-        //self.plans.append(contentsOf: plansToAdd)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
