@@ -95,6 +95,14 @@ class LessonsManager
         }
     }
     
+    func clearLessons()
+    {
+        loadedLessonsCount = 0
+        planBuilt = false
+        unlockMoreInsights = false
+        lessons = []
+    }
+    
     private func loadStepsForLessons(onDone done: @escaping () -> Void)
     {
         var stepIDs: [Int] = []
