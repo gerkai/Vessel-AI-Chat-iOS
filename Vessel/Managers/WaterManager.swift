@@ -11,7 +11,7 @@ class WaterManager
 {
     static let shared = WaterManager()
     
-    let lastOpenedDay: String = UserDefaults.standard.object(forKey: Constants.KEY_LAST_OPENED_DAY) as? String ?? ""
+    let lastOpenedDay = UserDefaults.standard.string(forKey: Constants.KEY_LAST_OPENED_DAY)
     let todayString: String = Date.serverDateFormatter.string(from: Date())
     
     func resetDrinkedWaterGlassesIfNeeded()

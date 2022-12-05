@@ -46,7 +46,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         self.nextButton.hideLoading()
     }
