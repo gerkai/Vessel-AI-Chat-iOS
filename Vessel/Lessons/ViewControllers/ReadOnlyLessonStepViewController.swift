@@ -119,7 +119,7 @@ private extension ReadOnlyLessonStepViewController
                 {
                     let activityView = LessonStepActivityView(frame: .zero)
                     activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)
-                    if userPlans.contains(where: { $0.typeId == activityId })
+                    if userPlans.contains(where: { $0.type == .activity && $0.typeId == activityId })
                     {
                         activityView.setButtonText(addText: false)
                     }

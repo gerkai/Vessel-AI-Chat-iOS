@@ -20,23 +20,6 @@ class PlansManager
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     
-    /* this isn't called by anyone
-    func loadFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
-    {
-        Server.shared.getAllFoods(lastUpdated: lastUpdated) { newFoods in
-            for food in newFoods
-            {
-                ObjectStore.shared.serverSave(food)
-            }
-            
-            let foods = Storage.retrieve(as: Food.self)
-            
-            success(foods)
-        } onFailure: { error in
-            failure(error.description)
-        }
-    }*/
-    
     func addPlans(plansToAdd: [Plan])
     {
         for plan in plansToAdd
