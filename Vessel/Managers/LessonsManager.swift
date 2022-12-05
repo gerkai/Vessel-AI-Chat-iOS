@@ -95,6 +95,33 @@ class LessonsManager
         }
     }
     
+    func resetLessonProgress()
+    {
+        //resets your lesson progress back to the beginning. Used for QA testing
+        var updatedSteps: [Step] = []
+        //go through all lessons
+        for lesson in lessons
+        {
+            //clear completion date
+            lesson.completedDate = nil
+            
+            //go through each step in this lesson
+            for step in lesson.steps
+            {
+                //if it was read by the user, mark it unread and clear its answers. Save to ObjectStore
+                if step.questionRead == true
+                {
+                    step.questionRead = false
+                    step.answers = []
+                    updatedSteps.append(step)
+                }
+            }
+        }
+        //This saves all modified steps to both local storage and the back end
+        ObjectStore.shared.ClientSave(updatedSteps)
+    }
+    
+    //called when logging out
     func clearLessons()
     {
         loadedLessonsCount = 0
