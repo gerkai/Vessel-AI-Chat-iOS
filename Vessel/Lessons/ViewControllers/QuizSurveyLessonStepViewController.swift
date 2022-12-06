@@ -58,7 +58,14 @@ class QuizSurveyLessonStepViewController: UIViewController
     @IBAction func onBack()
     {
         coordinator.back()
-        navigationController?.popViewController(animated: true)
+        if coordinator.shouldFadeBack()
+        {
+            navigationController?.fadeOut()
+        }
+        else
+        {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func onNext()

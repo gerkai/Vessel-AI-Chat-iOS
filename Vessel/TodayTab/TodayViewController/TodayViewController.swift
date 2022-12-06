@@ -188,7 +188,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 else
                 {
                     guard let viewController = coordinator.getNextStepViewController() else { return }
-                    navigationController?.fadeTo(viewController)
+                    navigationController?.pushViewController(viewController, animated: true)
                 }
             }
         case .food:

@@ -36,6 +36,11 @@ class LessonsCoordinator
         currentStepIndex -= 1
     }
     
+    func shouldFadeBack() -> Bool
+    {
+        currentStepIndex >= 0
+    }
+    
     func shouldShowSuccessScreen() -> Bool
     {
         guard let step = currentStep else { return false }

@@ -42,7 +42,7 @@ class LessonResultsViewController: UIViewController
         backgroundImageView.kf.setImage(with: url)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.fadeOut()
         })
     }
     
