@@ -17,7 +17,8 @@ enum DebugMenuOption: Int
     case printInitAndDeinit
     case relaxedScanningDistance
     case clearResults
-    case clearLessons
+    case eraseStoredLessons
+    case resetLessonProgress
     case clearAllPlanData
     case useMockResults
     case showAllFoodsEveryday
@@ -34,7 +35,8 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return "Print intialization and deinitialization"
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             case .clearResults: return "Clear all test results"
-            case .clearLessons: return "Clear locally stored lessons"
+            case .eraseStoredLessons: return "Erase locally stored lessons"
+            case .resetLessonProgress: return "Reset Lesson Progress"
             case .clearAllPlanData: return "Clear plans, lessons, steps, foods, curriculum"
             case .useMockResults: return "Use mock test results"
             case .showAllFoodsEveryday: return "Show all foods everyday"
@@ -59,7 +61,8 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
-            case .clearLessons: return Constants.KEY_CLEAR_LESSONS
+            case .eraseStoredLessons: return Constants.KEY_ERASE_STORED_LESSONS
+            case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
             case .clearAllPlanData: return Constants.KEY_CLEAR_ALL_PLAN_DATA
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
             case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
@@ -84,12 +87,16 @@ enum DebugMenuOption: Int
             //force today and results tabs to update and show/hide blocker view if necessary
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
         }
-        else if self == .clearLessons
+        else if self == .eraseStoredLessons
         {
             //clear all lessons from storage
             Storage.clear(objectType: Lesson.self)
             //force today tab to update
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+        }
+        else if self == .resetLessonProgress
+        {
+            LessonsManager.shared.resetLessonProgress()
         }
         else if self == .clearAllPlanData
         {
@@ -132,7 +139,8 @@ class DebugMenuViewModel
         .printInitAndDeinit,
         .relaxedScanningDistance,
         .clearResults,
-        .clearLessons,
+        .eraseStoredLessons,
+        .resetLessonProgress,
         .clearAllPlanData,
         .useMockResults,
         .showAllFoodsEveryday

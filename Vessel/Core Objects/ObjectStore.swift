@@ -311,7 +311,7 @@ class ObjectStore: NSObject
         }
     }
     
-    //Call this to save objects that have been modified by the client
+    //Call this to save a single object that has been modified by the client
     func ClientSave<T: CoreObjectProtocol>(_ object: T)
     {
         var newObject = object
@@ -341,6 +341,37 @@ class ObjectStore: NSObject
         onFailure:
         { result in
             UIView.showError(text: "Error", detailText: result)
+        }
+    }
+    
+    //Call this to save multiple objects that has been modified by the client
+    func ClientSave<T: CoreObjectProtocol>(_ objects: [T])
+    {
+        if objects.count != 0
+        {
+            for object in objects
+            {
+                if object.storage == .cache || object.storage == .cacheAndDisk
+                {
+                    cacheObject(object)
+                }
+                if object.storage == .disk || object.storage == .cacheAndDisk
+                {
+                    Storage.store(object)
+                }
+            }
+            
+            let name = String(describing: type(of: objects.first!)).lowercased()
+            let dict = [name: objects]
+            
+            Server.shared.saveObjects(objects: dict)
+            {
+                print("Saved \(name)")
+            }
+        onFailure:
+            { result in
+                UIView.showError(text: "Error", detailText: result)
+            }
         }
     }
     
