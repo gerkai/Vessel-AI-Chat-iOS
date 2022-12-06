@@ -30,6 +30,11 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable
             viewModel.addDebugMenu()
             tableView.reloadData()
         }
+        if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_LOG) == true
+        {
+            viewModel.addDebugLog()
+            tableView.reloadData()
+        }
     }
     
     func environment() -> String
@@ -111,9 +116,21 @@ extension MoreViewController: UITableViewDelegate
         case .backedByScience:
             openInSafari(url: "https://vesselhealth.com/pages/backed-by-science")
         case .support:
-            if viewModel.key == viewModel.lock && !viewModel.options.contains(.debug)
+            if viewModel.key == viewModel.debugMenuLock && !viewModel.options.contains(.debug)
             {
                 viewModel.addDebugMenu()
+                tableView.reloadData()
+            }
+            else if viewModel.key == viewModel.debugLogLock
+            {
+                if viewModel.options.contains(.debugLog)
+                {
+                    viewModel.removeDebugLog()
+                }
+                else
+                {
+                    viewModel.addDebugLog()
+                }
                 tableView.reloadData()
             }
             else
@@ -123,6 +140,12 @@ extension MoreViewController: UITableViewDelegate
         case .debug:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "DebugMenuViewController") as! DebugMenuViewController
+            vc.hidesBottomBarWhenPushed = false
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
+        case .debugLog:
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "LogViewController") as! LogViewController
             vc.hidesBottomBarWhenPushed = false
             navigationController?.setNavigationBarHidden(false, animated: true)
             navigationController?.pushViewController(vc, animated: true)

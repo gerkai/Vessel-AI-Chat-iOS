@@ -78,6 +78,8 @@
 		3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2498289B307A00BC539F /* CoachViewController.swift */; };
 		3F24427E293AFFBC0043E4B4 /* ServerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */; };
 		3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */; };
+		3F244286293FFAE80043E4B4 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244284293FFAE70043E4B4 /* log.swift */; };
+		3F244287293FFAE80043E4B4 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244285293FFAE70043E4B4 /* LogViewController.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */; };
 		3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB428DFA1CA00927B68 /* GraphView.swift */; };
@@ -361,6 +363,8 @@
 		3F1A2498289B307A00BC539F /* CoachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPlan.swift; sourceTree = "<group>"; };
 		3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
+		3F244284293FFAE70043E4B4 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
+		3F244285293FFAE70043E4B4 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
@@ -715,6 +719,15 @@
 				72DD1FCB28F541C8006071B0 /* HydroQuizViewController.swift */,
 			);
 			path = AfterTest;
+			sourceTree = "<group>";
+		};
+		3F244283293FFAE70043E4B4 /* Debug Log */ = {
+			isa = PBXGroup;
+			children = (
+				3F244284293FFAE70043E4B4 /* log.swift */,
+				3F244285293FFAE70043E4B4 /* LogViewController.swift */,
+			);
+			path = "Debug Log";
 			sourceTree = "<group>";
 		};
 		3F426DB228DFA1CA00927B68 /* ChartView */ = {
@@ -1077,6 +1090,7 @@
 		7282D413288F7C8200B4E26D /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				3F244283293FFAE70043E4B4 /* Debug Log */,
 				727C07B028B742E900039BE0 /* DebugMenuViewController */,
 				7270EDDD28A361CA00177898 /* ChangePasswordViewController */,
 				728B593428920A9E001C4B2A /* EditProfileViewController */,
@@ -1624,6 +1638,7 @@
 				727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */,
 				3F1A248D2891E8B600BC539F /* Result.swift in Sources */,
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
+				3F244287293FFAE80043E4B4 /* LogViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
 				3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */,
@@ -1661,6 +1676,7 @@
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
 				3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
+				3F244286293FFAE80043E4B4 /* log.swift in Sources */,
 				3F9C67B428FF011300BC44FA /* StudiesViewController.swift in Sources */,
 				3F9C67A628FE616700BC44FA /* Magnesium.swift in Sources */,
 				72BC244A292CAAA0002F6DA2 /* LessonStepView.swift in Sources */,
