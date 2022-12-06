@@ -78,19 +78,15 @@ class OnboardingCoordinator
             //if gender was chosen then we can assume all demographics were populated so skip onboarding
             //and go directly to MainTabBarController
             
-            WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
-            
             //make sure our core objects are all up to date
-            loadCoreObjects(onDone:
+            ObjectLoader.shared.loadCoreObjects(onDone:
             {
-                LessonsManager.shared.buildLessonPlan(onDone:
-                {
-                    PlansManager.shared.loadPlans()
-                    
-                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-                    navigationController?.fadeTo(vc)
-                })
+                //send splash fade notification
+                WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
+                
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                navigationController?.fadeTo(vc)
             })
         }
     }
@@ -219,14 +215,11 @@ class OnboardingCoordinator
         else
         {
             // Implemented here because in AppDelegate's didFinishLaunchingWithOptions the access token is not set up yet so we wouldn't know what objects to load.
-            OnboardingCoordinator.loadCoreObjects(onDone:
+            ObjectLoader.shared.loadCoreObjects(onDone:
             {
-                LessonsManager.shared.buildLessonPlan(onDone:
-                {
-                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-                    self.navigationController?.fadeTo(vc)
-                })
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                self.navigationController?.fadeTo(vc)
             })
             
             //save the data collected during onboarding
