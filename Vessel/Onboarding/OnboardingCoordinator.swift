@@ -72,6 +72,7 @@ class OnboardingCoordinator
             vc.coordinator = OnboardingCoordinator()
             vc.coordinator?.navigationController = navigationController
             navigationController?.fadeTo(vc)
+            NotificationCenter.default.post(name: .hideSplashScreen, object: nil, userInfo: nil)
         }
         else
         {
@@ -87,6 +88,7 @@ class OnboardingCoordinator
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
                 navigationController?.fadeTo(vc)
+                NotificationCenter.default.post(name: .hideSplashScreen, object: nil, userInfo: nil)
             })
         }
     }

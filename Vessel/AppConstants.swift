@@ -17,6 +17,7 @@ extension Notification.Name
     static let newDataArrived = Notification.Name("NewDataArrived")
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
+    static let hideSplashScreen = Notification.Name("HideSplashScreen")
 }
 
 struct Constants

@@ -785,7 +785,7 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        let data = try! encoder.encode(plan)
+        let data = try! encoder.encode(ServerPlan.convert(plan: plan))
         
         let urlString = "\(API())\(ADD_NEW_SINGLE_PLAN_PATH)"
         

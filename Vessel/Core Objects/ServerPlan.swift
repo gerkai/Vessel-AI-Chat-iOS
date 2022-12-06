@@ -10,16 +10,16 @@ import Foundation
 
 struct ServerPlan: CoreObjectProtocol, Hashable
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
-    let storage: StorageType = .disk
-    let timeOfDay: String?
-    let dayOfWeek: [Int]?
-    let foodId: Int?
-    let reagentLifestyleRecommendationId: Int?
-    let activityId: Int?
-    let planId: Int?
-    let contactId: Int?
+    var storage: StorageType = .disk
+    var timeOfDay: String?
+    var dayOfWeek: [Int]?
+    var foodId: Int?
+    var reagentLifestyleRecommendationId: Int?
+    var activityId: Int?
+    var planId: Int?
+    var contactId: Int?
     var completed: [String]?
 
     var isComplete: Bool
@@ -104,5 +104,29 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         let plan = Plan(id: serverPlan.id, last_updated: serverPlan.last_updated, type: planType, typeId: typeID, completed: serverPlan.completed ?? [], timeOfDay: serverPlan.timeOfDay, dayOfWeek: serverPlan.dayOfWeek)
 
         return plan
+    }
+    
+    static func convert(plan: Plan) -> ServerPlan
+    {
+        var serverPlan = ServerPlan()
+        
+        serverPlan.id = plan.id
+        serverPlan.last_updated = plan.last_updated
+        switch plan.type
+        {
+        case .activity:
+            serverPlan.activityId = plan.typeId
+        case .food:
+            serverPlan.foodId = plan.typeId
+        case .lifestyleRecommendation:
+            serverPlan.reagentLifestyleRecommendationId = plan.typeId
+        case .suplement:
+            print("")
+        }
+        serverPlan.dayOfWeek = plan.dayOfWeek
+        serverPlan.timeOfDay = plan.timeOfDay
+        serverPlan.completed = nil
+        
+        return serverPlan
     }
 }

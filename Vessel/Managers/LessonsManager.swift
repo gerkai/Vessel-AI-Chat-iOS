@@ -60,7 +60,10 @@ class LessonsManager
                     self.planBuilt = true
                     self.loadStepsForLessons(onDone:
                     {
-                        self.loadActivitiesForLessons(onDone: {done()})
+                        self.loadActivitiesForLessons(onDone:
+                        {
+                            done()
+                        })
                     })
                 }
                 onFailure:
@@ -181,6 +184,10 @@ class LessonsManager
             {
                 done()
             }
+        }
+        else
+        {
+            done()
         }
     }
 }
