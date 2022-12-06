@@ -39,8 +39,8 @@ class InputLessonStepViewController: UIViewController
         if !progressBarSetup
         {
             progressBarSetup = true
-            let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
-            progressBar.setProgressBar(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+            let index = viewModel.lesson.stepIds.firstIndex(of: viewModel.step.id)
+            progressBar.setProgressBar(totalSteps: viewModel.lesson.stepIds.count, progress: index ?? 0)
         }
     }
 
@@ -49,7 +49,14 @@ class InputLessonStepViewController: UIViewController
     @IBAction func onBack()
     {
         coordinator.back()
-        navigationController?.popViewController(animated: true)
+        if coordinator.shouldFadeBack()
+        {
+            navigationController?.fadeOut()
+        }
+        else
+        {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func onNext()
@@ -59,7 +66,7 @@ class InputLessonStepViewController: UIViewController
             coordinator.answerStep(answer: textView.text ?? "", answerId: 0)
             if let viewController = coordinator?.getNextStepViewController()
             {
-                navigationController?.pushViewController(viewController, animated: true)
+                navigationController?.fadeTo(viewController)
             }
             else
             {
@@ -88,9 +95,9 @@ private extension InputLessonStepViewController
         initialTextViewText = viewModel.step.placeholderText
         setupImageView()
         setupStackView()
-        let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
-        progressBar.setup(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
-        if index == viewModel.lesson.steps.count - 1
+        let index = viewModel.lesson.stepIds.firstIndex(of: viewModel.step.id)
+        progressBar.setup(totalSteps: viewModel.lesson.stepIds.count, progress: index ?? 0)
+        if index == viewModel.lesson.stepIds.count - 1
         {
             nextButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
         }
