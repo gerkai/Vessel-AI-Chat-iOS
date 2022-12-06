@@ -77,6 +77,7 @@
 		3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2496289B2A8700BC539F /* KeychainHelper.swift */; };
 		3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2498289B307A00BC539F /* CoachViewController.swift */; };
 		3F24427E293AFFBC0043E4B4 /* ServerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */; };
+		3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */; };
 		3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB428DFA1CA00927B68 /* GraphView.swift */; };
@@ -359,6 +360,7 @@
 		3F1A2496289B2A8700BC539F /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		3F1A2498289B307A00BC539F /* CoachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPlan.swift; sourceTree = "<group>"; };
+		3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				7215E9562893ADB100C22A24 /* HeightComponents.swift */,
 				72461EF02924AD7500A85AE5 /* Lesson.swift */,
 				72461EF42924AE2600A85AE5 /* LessonStep.swift */,
+				3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */,
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
 				7295567F28F67980000DD006 /* Plan.swift */,
 				3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */,
@@ -1653,6 +1656,7 @@
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
 				72692B88293717DB00A8F33C /* Activity.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
+				3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
 				3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */,
