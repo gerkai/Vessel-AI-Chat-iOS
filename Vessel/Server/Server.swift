@@ -1161,7 +1161,7 @@ class Server: NSObject
         { (data, response, error) in
             if let response = response as? HTTPURLResponse //unwrap response
             {
-                if response.statusCode == 204
+                if response.statusCode == 200
                 {
                     if allowPrint
                     {
