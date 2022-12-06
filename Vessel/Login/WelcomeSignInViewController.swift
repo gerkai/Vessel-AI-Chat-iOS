@@ -63,6 +63,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             showDebugButton()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(hideSplashScreen), name: .hideSplashScreen, object: nil)
+    }
+    
+    @objc func hideSplashScreen()
+    {
+        self.splashView.alpha = 0.0
     }
     
     func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
