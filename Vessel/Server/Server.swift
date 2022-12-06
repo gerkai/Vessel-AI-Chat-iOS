@@ -805,10 +805,10 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.data(withJSONObject: planDict)
                 let decoder = JSONDecoder()
-                let decodedPlan = try decoder.decode(Plan.self, from: json)
+                let decodedPlan = try decoder.decode(ServerPlan.self, from: json)
                 DispatchQueue.main.async()
                 {
-                    success(decodedPlan)
+                    success(ServerPlan.convert(serverPlan: decodedPlan))
                 }
             }
             catch
