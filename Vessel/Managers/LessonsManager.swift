@@ -40,25 +40,6 @@ class LessonsManager
         }
     }
     
-    func getLessonActivities(lesson: Lesson, onSuccess success: @escaping (_ objects: [Tip]) -> Void, onFailure failure: @escaping () -> Void)
-    {
-        let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
-        let uniqueActivityIds = Array(Set(stepsActivityIds)).sorted(by: { $0 < $1 })
-        
-        if uniqueActivityIds.count != 0
-        {
-            ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds) { objects in
-                success(objects)
-            } onFailure: {
-                failure()
-            }
-        }
-        else
-        {
-            failure()
-        }
-    }
-    
     func buildLessonPlan(onDone done: @escaping () -> Void)
     {
         guard let contact = Contact.main() else { return }
@@ -77,7 +58,10 @@ class LessonsManager
                 { lessons in
                     self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
                     self.planBuilt = true
-                    self.loadStepsForLessons(onDone: {done()})
+                    self.loadStepsForLessons(onDone:
+                    {
+                        self.loadActivitiesForLessons(onDone: {done()})
+                    })
                 }
                 onFailure:
                 {
@@ -121,6 +105,25 @@ class LessonsManager
         ObjectStore.shared.ClientSave(updatedSteps)
     }
     
+    func shiftLessonDaysBack()
+    {
+        //shifts lesson completed dates back one day so today becomes a new day and a new lesson will appear.
+        //go through all lessons
+        for lesson in lessons
+        {
+            if let completedDate = lesson.completedDate
+            {
+                let formatter = Date.serverDateFormatter
+                if let date = formatter.date(from: completedDate)
+                {
+                    let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+                    lesson.completedDate = Date.serverDateFormatter.string(from: dateBefore)
+                }
+            }
+        }
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+    }
+    
     //called when logging out
     func clearLessons()
     {
@@ -156,6 +159,28 @@ class LessonsManager
     onFailure:
         {
             done()
+        }
+    }
+    
+    private func loadActivitiesForLessons(onDone done: @escaping () -> Void)
+    {
+        var activityIDs: [Int] = []
+        for lesson in self.lessons
+        {
+            let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
+            activityIDs.append(contentsOf: stepsActivityIds)
+        }
+        let uniqueActivityIds = Array(Set(activityIDs))
+        if uniqueActivityIds.count != 0
+        {
+            ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds)
+            { activities in
+                done()
+            }
+            onFailure:
+            {
+                done()
+            }
         }
     }
 }

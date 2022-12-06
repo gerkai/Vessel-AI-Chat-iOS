@@ -19,6 +19,7 @@ enum DebugMenuOption: Int
     case clearResults
     case eraseStoredLessons
     case resetLessonProgress
+    case newDayForLesson
     case clearAllPlanData
     case useMockResults
     case showAllFoodsEveryday
@@ -37,6 +38,7 @@ enum DebugMenuOption: Int
             case .clearResults: return "Clear all test results"
             case .eraseStoredLessons: return "Erase locally stored lessons"
             case .resetLessonProgress: return "Reset Lesson Progress"
+            case .newDayForLesson: return "Make today a new lesson day"
             case .clearAllPlanData: return "Clear plans, lessons, steps, foods, curriculum"
             case .useMockResults: return "Use mock test results"
             case .showAllFoodsEveryday: return "Show all foods everyday"
@@ -63,6 +65,7 @@ enum DebugMenuOption: Int
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
             case .eraseStoredLessons: return Constants.KEY_ERASE_STORED_LESSONS
             case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
+            case .newDayForLesson: return Constants.KEY_NEW_LESSON_DAY
             case .clearAllPlanData: return Constants.KEY_CLEAR_ALL_PLAN_DATA
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
             case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
@@ -97,6 +100,10 @@ enum DebugMenuOption: Int
         else if self == .resetLessonProgress
         {
             LessonsManager.shared.resetLessonProgress()
+        }
+        else if self == .newDayForLesson
+        {
+            LessonsManager.shared.shiftLessonDaysBack()
         }
         else if self == .clearAllPlanData
         {
@@ -141,6 +148,7 @@ class DebugMenuViewModel
         .clearResults,
         .eraseStoredLessons,
         .resetLessonProgress,
+        .newDayForLesson,
         .clearAllPlanData,
         .useMockResults,
         .showAllFoodsEveryday

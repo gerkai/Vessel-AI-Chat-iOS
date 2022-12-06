@@ -66,12 +66,6 @@ class EditProfileViewModel
     var maxDateComponents = DateComponents()
     var maxDate = Date()
     var minDate = Date()
-    let serverDateFormatter: DateFormatter =
-    {
-        let formatter = DateFormatter()
-        formatter.dateFormat = Constants.SERVER_DATE_FORMAT
-        return formatter
-    }()
     
     let localDateFormatter: DateFormatter =
     {
@@ -253,7 +247,7 @@ class EditProfileViewModel
     {
         if let birthDate = contact?.birth_date
         {
-            guard let date = serverDateFormatter.date(from: birthDate) else { return nil }
+            guard let date = Date.serverDateFormatter.date(from: birthDate) else { return nil }
             let dateString = localDateFormatter.string(from: date).replacingOccurrences(of: "-", with: "/")
             return "\(NSLocalizedString("Born", comment: "")) \(dateString)"
         }
@@ -266,7 +260,7 @@ class EditProfileViewModel
         {
             if let birthDate = contact?.birth_date
             {
-                return serverDateFormatter.date(from: birthDate)
+                return Date.serverDateFormatter.date(from: birthDate)
             }
             return nil
         }
@@ -275,7 +269,7 @@ class EditProfileViewModel
             guard let contact = contact,
                   let newBirthDate = newValue else { return }
             contact.flags &= ~Constants.DECLINED_BIRTH_DATE
-            let newBirthDateString = serverDateFormatter.string(from: newBirthDate)
+            let newBirthDateString = Date.serverDateFormatter.string(from: newBirthDate)
             contact.birth_date = newBirthDateString
             updateContact(contact: contact)
             analytics.setUserProperty(property: "DOB", value: newBirthDateString)
