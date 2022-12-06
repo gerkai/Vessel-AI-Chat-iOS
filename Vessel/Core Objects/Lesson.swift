@@ -28,11 +28,20 @@ class Lesson: CoreObjectProtocol, Equatable
         completedDate != nil
     }
 
+   /* TODO: Switch to this function after back end gets fixed
     var completedToday: Bool
     {
         guard let completedDate = completedDate else { return false }
         let todayDateString = Date.serverDateFormatter.string(from: Date())
         return todayDateString == completedDate
+    }*/
+    
+    var completedToday: Bool
+    {
+        guard let completedDate = completedDate,
+              let date = completedDate.split(separator: "T")[safe: 0] else { return false }
+        let todayDateString = Date.serverDateFormatter.string(from: Date())
+        return todayDateString == date
     }
     
     init(id: Int,
