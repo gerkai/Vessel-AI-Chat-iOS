@@ -115,7 +115,7 @@ private extension ReadOnlyLessonStepViewController
             let userPlans = PlansManager.shared.getActivities()
             for activityId in viewModel.step.activityIds
             {
-                if let activity = viewModel.lesson.activities.first(where: { $0.id == activityId })
+                if let activity = Storage.retrieve(activityId, as: Tip.self)
                 {
                     let activityView = LessonStepActivityView(frame: .zero)
                     activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)

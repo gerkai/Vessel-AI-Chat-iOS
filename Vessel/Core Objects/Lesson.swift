@@ -18,7 +18,6 @@ class Lesson: CoreObjectProtocol, Equatable
     let imageUrl: String?
     var completedDate: String?
     var rank: Int
-    var activities = [Tip]()
     let stepIds: [Int]
     var steps: [Step] = []
     var goalIds: [Int]
@@ -28,13 +27,12 @@ class Lesson: CoreObjectProtocol, Equatable
     {
         completedDate != nil
     }
-    
+
     var completedToday: Bool
     {
-        guard let completedDate = completedDate,
-              let date = completedDate.split(separator: "T")[safe: 0] else { return false }
+        guard let completedDate = completedDate else { return false }
         let todayDateString = Date.serverDateFormatter.string(from: Date())
-        return todayDateString == date
+        return todayDateString == completedDate
     }
     
     init(id: Int,

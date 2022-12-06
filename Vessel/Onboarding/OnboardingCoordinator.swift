@@ -307,8 +307,7 @@ class OnboardingCoordinator
                     }
                     else
                     {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = Constants.SERVER_DATE_FORMAT
+                        let formatter = Date.serverDateFormatter
                         let strDate = formatter.string(from: birthdayViewModel.userBirthdate)
                         contact.birth_date = strDate
                         
