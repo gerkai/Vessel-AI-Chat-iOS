@@ -18,7 +18,9 @@ class LessonsCoordinator
     
     var currentStep: Step?
     {
-        return steps[safe: currentStepIndex]
+        guard let stepId = lesson.stepIds[safe: currentStepIndex],
+              let index = steps.firstIndex(where: { $0.id == stepId }) else { return nil }
+        return steps[index]
     }
     
     @Resolved private var analytics: Analytics

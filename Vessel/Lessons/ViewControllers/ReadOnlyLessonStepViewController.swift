@@ -39,8 +39,8 @@ class ReadOnlyLessonStepViewController: UIViewController
         if !progressBarSetup
         {
             progressBarSetup = true
-            let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
-            progressBar.setProgressBar(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
+            let index = viewModel.lesson.stepIds.firstIndex(of: viewModel.step.id)
+            progressBar.setProgressBar(totalSteps: viewModel.lesson.stepIds.count, progress: index ?? 0)
         }
     }
 
@@ -65,7 +65,7 @@ class ReadOnlyLessonStepViewController: UIViewController
         coordinator.answerStep(answer: "", answerId: 0)
         if let viewController = coordinator?.getNextStepViewController()
         {
-            navigationController?.pushViewController(viewController, animated: true)
+            navigationController?.fadeTo(viewController)
         }
         else
         {
@@ -82,9 +82,9 @@ private extension ReadOnlyLessonStepViewController
         durationLabel.text = "~\(viewModel.lesson.durationString())"
         setupImageView()
         setupStackView()
-        let index = viewModel.lesson.steps.firstIndex(where: { $0.id == viewModel.step.id })
-        progressBar.setup(totalSteps: viewModel.lesson.steps.count, progress: index ?? 0)
-        if index == viewModel.lesson.steps.count - 1
+        let index = viewModel.lesson.stepIds.firstIndex(where: { $0 == viewModel.step.id })
+        progressBar.setup(totalSteps: viewModel.lesson.stepIds.count, progress: index ?? 0)
+        if index == viewModel.lesson.stepIds.count - 1
         {
             nextButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
         }

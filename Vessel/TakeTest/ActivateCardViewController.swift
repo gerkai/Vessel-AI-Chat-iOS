@@ -420,12 +420,12 @@ extension ActivateCardViewController: CheckMarkCardViewDelegate
                 navigationController?.pushViewController(viewController, animated: false)
             }
             guard let viewController = coordinator.getNextStepViewController() else { return }
-            navigationController?.pushViewController(viewController, animated: true)
+            navigationController?.fadeTo(viewController)
         }
         else
         {
             guard let viewController = coordinator.getNextStepViewController() else { return }
-            navigationController?.pushViewController(viewController, animated: true)
+            navigationController?.fadeTo(viewController)
         }
     }
 }
