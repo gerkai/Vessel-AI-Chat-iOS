@@ -1,6 +1,5 @@
 //
 //  log.swift
-//  QuickConnect
 //
 //  Created by Carson Whitsett on 8/13/21.
 //
