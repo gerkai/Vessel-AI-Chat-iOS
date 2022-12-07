@@ -976,7 +976,7 @@
         <!--Log View Controller-->
         <scene sceneID="RoR-Hv-QVH">
             <objects>
-                <viewController storyboardIdentifier="LogViewController" id="42b-jY-Tbv" customClass="LogViewController" customModule="QuickConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogViewController" modalPresentationStyle="fullScreen" id="42b-jY-Tbv" customClass="LogViewController" customModule="QuickConnect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6lj-s8-l1b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

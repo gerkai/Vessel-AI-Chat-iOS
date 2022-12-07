@@ -7,7 +7,7 @@
 import UIKit
 import MessageUI
 
-let MAIL_RECIPIENT = "carson@dittylabs.com"
+let MAIL_RECIPIENT = "carson@vesselhealth.com"
 
 class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate
 {
@@ -35,11 +35,30 @@ class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     {
         if MFMailComposeViewController.canSendMail()
         {
+            /*
+            //UINavigationBar.appearance().tintColor = UIColor.red
+            UINavigationBar.appearance().barTintColor = UIColor.black
+            UINavigationBar.appearance().backgroundColor = Constants.vesselGood
+            //UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().clipsToBounds = true
+            UINavigationBar.appearance().prefersLargeTitles = false
+            */
+            /*let appearance = UINavigationBarAppearance()
+
+            appearance.backgroundColor = .blue
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.shadowColor = .clear
+            self.navigationController?.navigationBar.standardAppearance = appearance
+            self.navigationController?.navigationBar.compactAppearance = appearance
+            self.navigationController?.navigationBar.scrollEdgeAppearance = appearance*/
+            
             let mailComposer = MFMailComposeViewController()
-            mailComposer.delegate = self
+            mailComposer.mailComposeDelegate = self
             mailComposer.setSubject("Debug Log")
             mailComposer.setToRecipients([MAIL_RECIPIENT])
             mailComposer.setMessageBody(Log_Get(), isHTML: false)
+            mailComposer.modalPresentationStyle = .fullScreen
             present(mailComposer, animated: true)
         }
         else
@@ -55,6 +74,11 @@ class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             alertController.addAction(okAction)
             present(alertController, animated: true)
         }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+    {
+        controller.dismiss(animated: true)
     }
     
     @IBAction func clearLog()
