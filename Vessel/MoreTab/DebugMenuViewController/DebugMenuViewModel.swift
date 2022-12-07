@@ -72,8 +72,9 @@ enum DebugMenuOption: Int
         }
     }
     
-    func toggle()
+    func toggle() -> Bool
     {
+        var shouldRefresh = false
         if self == .resetUserFlags
         {
             if let main = Contact.main()
@@ -121,6 +122,10 @@ enum DebugMenuOption: Int
             if isEnabled
             {
                 UserDefaults.standard.removeObject(forKey: flag)
+                if self == .debugMenu
+                {
+                    shouldRefresh = true
+                }
             }
             else
             {
@@ -132,6 +137,7 @@ enum DebugMenuOption: Int
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
             }
         }
+        return shouldRefresh
     }
 }
 

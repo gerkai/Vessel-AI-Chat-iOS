@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
+        Log_Init()
+        Log_Load()
+        Log_Add("App did finish launching with options \(String(describing: launchOptions))")
         FirebaseApp.configure()
         RemoteConfigManager.shared.launchRemoteConfig()
         analytics.setup()
@@ -49,6 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication)
+    {
+        Log_Add("App resigning active")
+        Log_Save()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication)
+    {
+        Log_Add("App Terminating")
+        Log_Save()
     }
     
     func launchBugsee()

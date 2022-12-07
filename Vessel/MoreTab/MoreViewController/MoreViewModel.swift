@@ -19,6 +19,7 @@ enum MoreTabOptions
     case backedByScience
     case support
     case debug
+    case debugLog
     
     var icon: String
     {
@@ -37,6 +38,8 @@ enum MoreTabOptions
         case .support:
             return "supportIcon"
         case .debug:
+            return "InsightsIcon"
+        case .debugLog:
             return "InsightsIcon"
         }
     }
@@ -59,6 +62,8 @@ enum MoreTabOptions
             return NSLocalizedString("Support", comment: "")
         case .debug:
             return NSLocalizedString("Debug Menu", comment: "")
+        case .debugLog:
+            return NSLocalizedString("Debug Log", comment: "")
         }
     }
 }
@@ -75,7 +80,8 @@ class MoreViewModel
         .support
     ]
     
-    let lock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
+    let debugMenuLock = [1, 0, 0, 0, 1, 0] //this is the pattern the user must enter (1 is right button, 0 is left button)
+    let debugLogLock = [1, 0, 0, 0, 0, 1] //enter this pattern to expose the debug log
     var key = [0, 0, 0, 0, 0, 0]
     
     let versionString: String =
@@ -89,5 +95,25 @@ class MoreViewModel
     {
         UserDefaults.standard.set(true, forKey: Constants.KEY_DEBUG_MENU)
         options.append(.debug)
+    }
+    
+    func removeDebugMenu()
+    {
+        UserDefaults.standard.removeObject(forKey: Constants.KEY_DEBUG_MENU)
+        let index = options.firstIndex(of: .debug)!
+        options.remove(at: index)
+    }
+    
+    func addDebugLog()
+    {
+        UserDefaults.standard.set(true, forKey: Constants.KEY_DEBUG_LOG)
+        options.append(.debugLog)
+    }
+    
+    func removeDebugLog()
+    {
+        UserDefaults.standard.removeObject(forKey: Constants.KEY_DEBUG_LOG)
+        let index = options.firstIndex(of: .debugLog)!
+        options.remove(at: index)
     }
 }
