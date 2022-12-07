@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoreViewController: UIViewController, VesselScreenIdentifiable
+class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuViewControllerDelegate
 {
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
@@ -141,6 +141,7 @@ extension MoreViewController: UITableViewDelegate
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "DebugMenuViewController") as! DebugMenuViewController
             vc.hidesBottomBarWhenPushed = false
+            vc.delegate = self
             navigationController?.setNavigationBarHidden(false, animated: true)
             navigationController?.pushViewController(vc, animated: true)
         case .debugLog:
@@ -150,5 +151,11 @@ extension MoreViewController: UITableViewDelegate
             navigationController?.setNavigationBarHidden(false, animated: true)
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func refresh()
+    {
+        viewModel.removeDebugMenu()
+        tableView.reloadData()
     }
 }

@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol DebugMenuViewControllerDelegate: AnyObject
+{
+    func refresh()
+}
+
 class DebugMenuViewController: UIViewController, VesselScreenIdentifiable
 {
     var flowName: AnalyticsFlowName = .moreTabFlow
+    var delegate: DebugMenuViewControllerDelegate?
+    
     @Resolved internal var analytics: Analytics
     
     // MARK: - View
@@ -58,6 +65,9 @@ extension DebugMenuViewController: DebugMenuCellDelegate
     func onToggle(_ value: Bool, tag: Int)
     {
         guard let option = DebugMenuOption(rawValue: tag) else { return }
-        option.toggle()
+        if option.toggle() == true
+        {
+            delegate?.refresh()
+        }
     }
 }

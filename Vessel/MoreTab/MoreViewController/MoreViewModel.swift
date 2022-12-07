@@ -97,6 +97,13 @@ class MoreViewModel
         options.append(.debug)
     }
     
+    func removeDebugMenu()
+    {
+        UserDefaults.standard.removeObject(forKey: Constants.KEY_DEBUG_MENU)
+        let index = options.firstIndex(of: .debug)!
+        options.remove(at: index)
+    }
+    
     func addDebugLog()
     {
         UserDefaults.standard.set(true, forKey: Constants.KEY_DEBUG_LOG)
