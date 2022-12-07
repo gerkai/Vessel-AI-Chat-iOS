@@ -65,7 +65,7 @@ func Log_Add(_ text: String)
 
 func Log_Get() -> String
 {
-    var string = "Debug Log\n\n"
+    var string = "\n\n\n\n\nDebug Log\n\n"
     
     for entry in eventLog
     {

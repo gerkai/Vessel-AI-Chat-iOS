@@ -147,8 +147,6 @@ extension MoreViewController: UITableViewDelegate
         case .debugLog:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "LogViewController") as! LogViewController
-            vc.hidesBottomBarWhenPushed = false
-            navigationController?.setNavigationBarHidden(false, animated: true)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

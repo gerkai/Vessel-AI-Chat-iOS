@@ -67,4 +67,9 @@ class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     {
         Log_Clear()
     }
+    
+    @IBAction func back()
+    {
+        navigationController?.popViewController(animated: true)
+    }
 }
