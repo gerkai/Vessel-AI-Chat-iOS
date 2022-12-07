@@ -213,7 +213,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             for lesson in lessons
             {
                 let view = CheckMarkCardView(frame: .zero)
-                view.setup(id: lesson.id, title: lesson.title, subtitle: lesson.subtitleString(), description: lesson.description, backgroundImage: lesson.imageUrl ?? "", completed: lesson.completedDate != nil, delegate: self)
+                view.setup(id: lesson.id, title: lesson.title, subtitle: lesson.subtitleString(), description: lesson.description, backgroundImage: lesson.imageUrl ?? "", completed: lesson.isComplete, delegate: self)
                 stackView.addArrangedSubview(view)
             }
             if lessons.count > 0

@@ -59,17 +59,11 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
             guard let stackView = view as? UIStackView else { return }
             if let foodView = stackView.arrangedSubviews[safe: 0] as? FoodCheckmarkView
             {
-                if foodView.isChecked != checked[i * 2]
-                {
-                    foodView.isChecked = checked[i * 2]
-                }
+                foodView.isChecked = checked[i * 2]
             }
             if let foodView = stackView.arrangedSubviews[safe: 1] as? FoodCheckmarkView
             {
-                if foodView.isChecked != checked[(i * 2) + 1]
-                {
-                    foodView.isChecked = checked[(i * 2) + 1]
-                }
+                foodView.isChecked = checked[(i * 2) + 1]
             }
         }
     }

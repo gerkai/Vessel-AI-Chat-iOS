@@ -7,12 +7,18 @@
 
 import UIKit
 
+enum CheckMarkCardType
+{
+    case lesson
+    case activity
+}
+
 enum TodayViewSection: Equatable
 {
     case header(name: String, goals: [String])
     //case days
     case insights(insights: [Lesson])
-    //case activities
+    case activities(activities: [Tip])
     case food(foods: [Food])
     case water(glassesNumber: Int, checkedGlasses: Int)
     //case customize
@@ -24,9 +30,10 @@ enum TodayViewSection: Equatable
         {
         case .header: return 0
         case .insights: return 1
-        case .food: return 2
-        case .water: return 3
-        case .footer: return 4
+        case .activities: return 2
+        case .food: return 3
+        case .water: return 4
+        case .footer: return 5
         }
     }
     
@@ -36,18 +43,8 @@ enum TodayViewSection: Equatable
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         case .insights(let lessons): return createInsightsSection(lessons: lessons)
-        case .food(let foods):
-            if foods.count > 0
-            {
-                return [
-                    .sectionTitle(icon: "food-icon", name: "Food"),
-                    .foodDetails(foods: foods)
-                ]
-            }
-            else
-            {
-                return []
-            }
+        case .activities(let activities): return createActivitiesSection(activities: activities)
+        case .food(let foods): return createFoodSection(foods: foods)
         case .water(let glassesNumber, let checkedGlasses): return [
             .sectionTitle(icon: "water-icon", name: NSLocalizedString("\(glassesNumber * 8) oz Water", comment: "Water amount")),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
@@ -67,7 +64,10 @@ enum TodayViewSection: Equatable
                 cells.append(.checkMarkCard(title: lesson.title,
                                             subtitle: lesson.subtitleString(),
                                             description: lesson.description,
-                                            backgroundImage: lesson.imageUrl ?? ""))
+                                            backgroundImage: lesson.imageUrl ?? "",
+                                            isCompleted: false,
+                                            id: lesson.id,
+                                            type: .lesson))
             }
             else
             {
@@ -92,6 +92,33 @@ enum TodayViewSection: Equatable
             }
         }
         return cells
+    }
+    
+    func createActivitiesSection(activities: [Tip]) -> [TodayViewCell]
+    {
+        guard activities.count > 0 else { return [] }
+        var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities")]
+        for activity in activities
+        {
+            let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activity.id })
+            cells.append(.checkMarkCard(title: activity.title,
+                                        subtitle: activity.frequency,
+                                        description: activity.description,
+                                        backgroundImage: activity.imageUrl,
+                                        isCompleted: plan?.isComplete ?? false,
+                                        id: activity.id,
+                                        type: .activity))
+        }
+        return cells
+    }
+    
+    func createFoodSection(foods: [Food]) -> [TodayViewCell]
+    {
+        guard foods.count > 0 else { return [] }
+        return [
+            .sectionTitle(icon: "food-icon", name: "Food"),
+            .foodDetails(foods: foods)
+        ]
     }
     
     // MARK: - Equatable
@@ -121,7 +148,7 @@ enum TodayViewCell: Equatable
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food])
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
-    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String)
+    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String)
     case button(text: String)
@@ -170,6 +197,7 @@ class TodayViewModel
     
     // Feature flags
     var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
+    var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
     
     var numberOfGlasses: Int?
     {
@@ -184,9 +212,15 @@ class TodayViewModel
     var sections: [TodayViewSection] {
         contact = Contact.main()!
         let lessons = showInsights ? LessonsManager.shared.todayLessons : []
+        let plans = PlansManager.shared.getActivities()
+        let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
+            return plans.contains(where: { $0.typeId == activity.id })
+        }) : []
+        
         return [
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .insights(insights: lessons),
+            .activities(activities: activities),
             .food(foods: contact.suggestedFoods),
             .water(glassesNumber: contact.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
             .footer

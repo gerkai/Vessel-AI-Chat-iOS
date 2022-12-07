@@ -120,9 +120,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
-        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage):
+        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
-            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: false)
+            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, id: id, type: type, delegate: self)
         case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: nil, backgroundImage: backgroundImage, completed: true)
@@ -191,6 +191,26 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                     navigationController?.pushViewController(viewController, animated: true)
                 }
             }
+        case .activities(let activities):
+            if indexPath.row == 0
+            {
+                GenericAlertViewController.presentAlert(in: self, type:
+                                                            GenericAlertType.titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Build healthy habits", comment: ""), font: Constants.FontTitleMain24),
+                                                                                                 subtitle: GenericAlertLabelInfo(title: NSLocalizedString("These are the actions you can take to build the habits needed to reach your goals.", comment: ""), font: Constants.FontBodyAlt16, alignment: .center, height: 80.0),
+                                                                                                 button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
+            }
+            else
+            {
+                guard let activity = activities[safe: indexPath.row - 1] else { return }
+                let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+                let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
+                activityDetailsVC.hidesBottomBarWhenPushed = true
+                activityDetailsVC.setup(model: activity.activityDetailsModel)
+                
+                analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
+                
+                navigationController?.pushViewController(activityDetailsVC, animated: true)
+            }
         case .food:
             if indexPath.row == 0
             {
@@ -251,7 +271,7 @@ extension TodayViewController: FoodCheckmarkViewDelegate
         let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
         let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
         activityDetailsVC.hidesBottomBarWhenPushed = true
-        activityDetailsVC.setup(food: food)
+        activityDetailsVC.setup(model: food.activityDetailsModel)
         
         analytics.log(event: .foodShown(foodId: food.id, foodName: food.title))
         
@@ -279,5 +299,53 @@ extension TodayViewController: TodayButtonCellDelegate
     {
         LessonsManager.shared.unlockMoreInsights = true
         reloadUI()
+    }
+}
+
+extension TodayViewController: TodayCheckMarkCardDelegate
+{
+    func onCardChecked(id: Int, type: CheckMarkCardType)
+    {
+        if type == .activity
+        {
+            let activities = PlansManager.shared.activities
+            let activityPlans = PlansManager.shared.getActivities()
+            guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
+            
+            if let activity = activities.first(where: { $0.id == plan.typeId })
+            {
+                analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.isComplete))
+            }
+            
+            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: !plan.isComplete))
+            { [weak self] togglePlanData in
+                guard let self = self else { return }
+                PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
+                self.tableView.reloadData()
+            } onFailure: { error in
+                self.tableView.reloadData()
+            }
+        }
+        else if type == .lesson
+        {
+            let lessons = LessonsManager.shared.todayLessons
+            guard let lesson = lessons.first(where: { $0.id == id }) else { return }
+            let coordinator = LessonsCoordinator(lesson: lesson)
+            if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+            {
+                for _ in stride(from: 0, to: index, by: 1)
+                {
+                    guard let viewController = coordinator.getNextStepViewController() else { return }
+                    navigationController?.pushViewController(viewController, animated: false)
+                }
+                guard let viewController = coordinator.getNextStepViewController() else { return }
+                navigationController?.fadeTo(viewController)
+            }
+            else
+            {
+                guard let viewController = coordinator.getNextStepViewController() else { return }
+                navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
     }
 }

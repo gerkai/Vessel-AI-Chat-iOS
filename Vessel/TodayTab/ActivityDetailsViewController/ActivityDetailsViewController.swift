@@ -17,8 +17,9 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var reagentsLabel: UILabel!
-    @IBOutlet private weak var quantitiesLabel: UILabel!
+    @IBOutlet private weak var reagentsLabel: UILabel?
+    @IBOutlet private weak var quantitiesLabel: UILabel?
+    @IBOutlet private weak var reagentsStackView: UIStackView?
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
@@ -43,9 +44,9 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     }
     
     // MARK: - Initialization
-    func setup(food: Food)
+    func setup(model: ActivityDetailsModel)
     {
-        viewModel = ActivityDetailsViewModel(food: food)
+        viewModel = ActivityDetailsViewModel(model: model)
     }
     
     // MARK: - Actions
@@ -59,29 +60,22 @@ private extension ActivityDetailsViewController
 {
     func setupUI()
     {
-        headerView.backgroundColor = .backgroundRed
+        headerView.backgroundColor = .backgroundGray
         
         titleLabel.text = viewModel?.title
         subtitleLabel.text = viewModel?.subtitle
         descriptionLabel.text = viewModel?.description
-        reagentsLabel.text = viewModel?.reagents
-        quantitiesLabel.text = viewModel?.quantities
-        guard let url = viewModel?.foodImageURL else { return }
-        headerImageView.kf.setImage(with: url)
-    }
-}
-
-extension ActivityDetailsViewController: UIScrollViewDelegate
-{
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        if scrollView.contentOffset.y <= 0
+        if let reagents = viewModel?.reagents,
+           let quantities = viewModel?.quantities
         {
-            view.backgroundColor = .backgroundRed
+            reagentsLabel?.text = reagents
+            quantitiesLabel?.text = quantities
         }
         else
         {
-            view.backgroundColor = .codGray
+            reagentsStackView?.removeFromSuperview()
         }
+        guard let url = viewModel?.imageURL else { return }
+        headerImageView.kf.setImage(with: url)
     }
 }

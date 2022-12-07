@@ -152,7 +152,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
         Server.shared.addSinglePlan(plan: plan) { [weak self] plan in
             guard let self = self else { return }
             self.analytics.log(event: .activityAdded(activityId: activityId, activityName: activityName))
-            PlansManager.shared.plans.append(plan)
+            PlansManager.shared.addPlans(plansToAdd: [plan])
             self.setActivityButtonTitle(activityId: activityId, addText: false)
             
             self.planAddedViewTopConstraint.constant = 0
@@ -179,7 +179,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
         { [weak self] in
             guard let self = self else { return }
             self.setActivityButtonTitle(activityId: activityId, addText: true)
-            PlansManager.shared.remove(plan: plan)
+            PlansManager.shared.removePlans(plansToRemove: [plan])
         }
         onFailure:
         { [weak self] error in

@@ -45,6 +45,8 @@ class FoodCheckmarkView: NibLoadingView
 
             if !hasSetGestureRecognizers
             {
+                hasSetGestureRecognizers = true
+                
                 let viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onViewTapped))
                 backgroundImage.addGestureRecognizer(viewGestureRecognizer)
                 
@@ -58,19 +60,16 @@ class FoodCheckmarkView: NibLoadingView
         }
     }
     
-    var originalColor: UIColor!
     weak var delegate: FoodCheckmarkViewDelegate?
-    var isUnchecking = false
     var hasSetGestureRecognizers = false
     
     var isChecked: Bool = false
     {
         didSet
         {
-            if isUnchecking
+            if !isChecked
             {
                 self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                self.backgroundImage.backgroundColor = self.originalColor
             }
             else
             {
@@ -84,12 +83,10 @@ class FoodCheckmarkView: NibLoadingView
                     if self.isChecked == true
                     {
                         self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
-                        self.backgroundImage.backgroundColor = UIColor.white
                     }
                     else
                     {
                         self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                        self.backgroundImage.backgroundColor = self.originalColor
                     }
                     
                     UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
@@ -101,24 +98,9 @@ class FoodCheckmarkView: NibLoadingView
         }
     }
     
-    override func awakeFromNib()
-    {
-        super.awakeFromNib()
-        originalColor = backgroundImage.backgroundColor
-    }
-    
-    func checkmarkPressed()
+    private func checkmarkPressed()
     {
         isChecked = !isChecked
-    }
-    
-    func uncheck()
-    {
-        if isChecked == true
-        {
-            isUnchecking = true
-            isChecked = false
-        }
     }
     
     // MARK: - Actions

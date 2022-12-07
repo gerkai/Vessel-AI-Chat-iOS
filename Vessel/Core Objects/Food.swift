@@ -23,6 +23,42 @@ struct Food: CoreObjectProtocol, Equatable, Codable
     var nutrients: [Nutrient]
     var allergyIds: [Int]
     var dietIds: [Int]
+    
+    var activityDetailsModel: ActivityDetailsModel
+    {
+        let subtitle: String
+        let serving_quantity = servingQuantity
+        let serving_unit = servingUnit
+        if serving_quantity == Double(Int(serving_quantity))
+        {
+            subtitle = "\(Int(serving_quantity)) \(serving_unit)"
+        }
+        else
+        {
+            subtitle = "\(serving_quantity) \(serving_unit)"
+        }
+        
+        var reagents = ""
+        var quantities = ""
+        for nutrient in nutrients
+        {
+            if nutrient.quantity > 0
+            {
+                reagents.append("• \(nutrient.name)\(nutrient == nutrients.last ? "" : "\n")")
+                if nutrient.quantity < 1
+                {
+                    quantities.append("\(Int(nutrient.quantity * 1000))\(nutrient == nutrients.last ? " μg" : " μg\n")")
+                }
+                else
+                {
+                    quantities.append("\(Int(nutrient.quantity))\(nutrient == nutrients.last ? " mg" : " mg\n")")
+                }
+            }
+        }
+        
+        return ActivityDetailsModel(imageUrl: self.imageUrl, title: self.title, subtitle: subtitle, description: "", reagents: reagents, quantities: quantities)
+    }
+    
     internal init(id: Int, lastUpdated: Int, title: String, serving_quantity: Double, serving_unit: String, serving_grams: Double, popularity: Int, usda_ndb_number: Int, categories: [String]?, image_url: String)
     {
         self.id = id

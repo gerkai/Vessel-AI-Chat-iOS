@@ -17,6 +17,7 @@ enum DebugMenuOption: Int
     case printInitAndDeinit
     case relaxedScanningDistance
     case clearResults
+    case clearActivities
     case eraseStoredLessons
     case resetLessonProgress
     case newDayForLesson
@@ -36,6 +37,7 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return "Print intialization and deinitialization"
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             case .clearResults: return "Clear all test results"
+            case .clearActivities: return "Clear all activities"
             case .eraseStoredLessons: return "Erase locally stored lessons"
             case .resetLessonProgress: return "Reset Lesson Progress"
             case .newDayForLesson: return "Make today a new lesson day"
@@ -63,6 +65,7 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
             case .clearResults: return Constants.KEY_CLEAR_RESULTS
+            case .clearActivities: return Constants.KET_CLEAR_ACTIVITIES
             case .eraseStoredLessons: return Constants.KEY_ERASE_STORED_LESSONS
             case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
             case .newDayForLesson: return Constants.KEY_NEW_LESSON_DAY
@@ -90,6 +93,16 @@ enum DebugMenuOption: Int
             Storage.clear(objectType: Result.self)
             //force today and results tabs to update and show/hide blocker view if necessary
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
+        }
+        else if self == .clearActivities
+        {
+            let activities = PlansManager.shared.getActivities()
+            
+            for activity in activities
+            {
+                Storage.remove(activity.id, objectType: Plan.self)
+            }
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }
         else if self == .eraseStoredLessons
         {
@@ -152,6 +165,7 @@ class DebugMenuViewModel
         .printInitAndDeinit,
         .relaxedScanningDistance,
         .clearResults,
+        .clearActivities,
         .eraseStoredLessons,
         .resetLessonProgress,
         .newDayForLesson,

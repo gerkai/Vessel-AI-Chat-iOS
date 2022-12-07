@@ -130,6 +130,7 @@ class LessonsCoordinator
         analytics.log(event: .lessonCompleted(lessonId: lesson.id, lessonName: lesson.title))
         lesson.completedDate = Date.serverDateFormatter.string(from: Date())
         LessonsManager.shared.unlockMoreInsights = false
+        ObjectStore.shared.serverSave(lesson)
         navigationController.popToRootViewController(animated: true)
     }
 }

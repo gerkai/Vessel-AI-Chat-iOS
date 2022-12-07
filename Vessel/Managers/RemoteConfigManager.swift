@@ -11,7 +11,8 @@ import FirebaseRemoteConfig
 enum RemoteConfigKey
 {
     case insightsFeature
-
+    case activitiesFeature
+    
     static var allKeys: [String]
     {
         return [RemoteConfigKey.insightsFeature.key]
@@ -23,6 +24,8 @@ enum RemoteConfigKey
         {
         case .insightsFeature:
             return "insights_feature"
+        case .activitiesFeature:
+            return "activities_feature"
         }
     }
     
@@ -30,7 +33,7 @@ enum RemoteConfigKey
     {
         switch self
         {
-        case .insightsFeature:
+        case .insightsFeature, .activitiesFeature:
             return RemoteConfig.remoteConfig()[key].boolValue
         }
     }
@@ -91,6 +94,10 @@ class RemoteConfigManager
         {
         case Constants.DEV_INDEX, Constants.STAGING_INDEX:
             if key == .insightsFeature
+            {
+                return true
+            }
+            else if key == .activitiesFeature
             {
                 return true
             }
