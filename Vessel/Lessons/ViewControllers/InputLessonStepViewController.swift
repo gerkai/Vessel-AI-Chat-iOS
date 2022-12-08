@@ -30,6 +30,8 @@ class InputLessonStepViewController: UIViewController
         super.viewDidLoad()
 
         setupUI()
+        backgroundImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onBackgroundTapped)))
+        contentStackView.arrangedSubviews.first?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onBackgroundTapped)))
     }
     
     override func viewDidLayoutSubviews()
@@ -125,6 +127,12 @@ private extension InputLessonStepViewController
         {
             nextButton.backgroundColor = Constants.vesselGray
         }
+    }
+    
+    @objc
+    func onBackgroundTapped(gestureRecognizer: UIGestureRecognizer)
+    {
+        textView.resignFirstResponder()
     }
 }
 
