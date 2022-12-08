@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChartViewCellDelegate
+protocol ChartViewCellDelegate: AnyObject
 {
     func cellTapped(id: Int)
     func cellInfoTapped()
@@ -26,7 +26,7 @@ class ChartViewCell: UICollectionViewCell
     @IBOutlet weak var dayLabel: UILabel!
     
     var score: CGFloat = 0.0 //This variable is overridden in ResultsChartCell and ReagentDetailsChartCell classes
-    var delegate: ChartViewCellDelegate?
+    weak var delegate: ChartViewCellDelegate?
     var originalHeight: Double!
     var animatingSelected = false
     var animatingUnselected = false
@@ -35,7 +35,10 @@ class ChartViewCell: UICollectionViewCell
     
     override func awakeFromNib()
     {
-        //print("CELL: awakeFromNib")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("CELL: awakeFromNib")
+        }
         super.awakeFromNib()
         originalHeight = infoHeight.constant
         NotificationCenter.default.addObserver(self, selector: #selector(self.selected(_:)), name: .selectChartViewCell, object: nil)
@@ -43,6 +46,10 @@ class ChartViewCell: UICollectionViewCell
     
     deinit
     {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("CELL: deinit")
+        }
         NotificationCenter.default.removeObserver(self)
     }
     

@@ -7,11 +7,6 @@
 
 import UIKit
 
-extension Notification.Name
-{
-    static let selectChartViewCell = Notification.Name("SelectChartViewCell")
-}
-
 protocol ChartViewDataSource: AnyObject
 {
     func chartViewNumDataPoints() -> Int
@@ -48,10 +43,38 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     override func awakeFromNib()
     {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📗 awakeFromNib \(self)")
+        }
         collectionView.registerFromNib(ResultsChartCell.self)
         collectionView.registerFromNib(ReagentDetailsChartCell.self)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.selected(_:)), name: .selectChartViewCell, object: nil)
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("📘 deinit \(self)")
+        }
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func selected(_ notification: NSNotification)
+    {
+        if let cell = notification.userInfo?["cell"] as? Int
+        {
+            //if my selectedCell doesn't match notification cell then move to the notification cell
+            if cell != selectedCell
+            {
+                preSelectCell(cellIndex: cell)
+            }
+        }
     }
     
     func cellWidth() -> CGFloat
@@ -97,8 +120,6 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         delegate?.chartViewCellSelected(cellIndex: cellIndex)
         //print("\(tag) Preselecting offset: \(offset)")
         collectionView.contentOffset = CGPoint(x: offset, y: 0.0)
-        //print("\(tag) ^Posting select notification for \(cellIndex)")
-        NotificationCenter.default.post(name: .selectChartViewCell, object: nil, userInfo: ["cell": cellIndex, "animated": true])
     }
     
     func setSelectedCell(cellIndex: Int)
