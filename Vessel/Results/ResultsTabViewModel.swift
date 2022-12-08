@@ -65,10 +65,15 @@ class ResultsTabViewModel
         return (results[i], i == selectedResultIndex)
     }
     
-    func selectedResult() -> Result
+    func selectedResult() -> Result?
     {
-        print("selected result last_updated: \(results[selectedResultIndex].last_updated)")
-        return results[selectedResultIndex]
+        var result: Result?
+        if results.count != 0
+        {
+            print("selected result last_updated: \(results[selectedResultIndex].last_updated)")
+            result = results[selectedResultIndex]
+        }
+        return result
     }
     
     func selectResult(index: Int)
