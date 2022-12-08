@@ -97,10 +97,22 @@ class Lesson: CoreObjectProtocol, Equatable
     func subtitleString() -> String
     {
         var goalsString = ""
-        goalIds.forEach { goalID in
+        
+        //only interested in the goal(s) I signed up for so filter out the rest
+        var myGoalIds: [Int] = []
+        let contact = Contact.main()!
+        for id in goalIds
+        {
+            if contact.goal_ids.contains(id)
+            {
+                myGoalIds.append(id)
+            }
+        }
+        
+        myGoalIds.forEach { goalID in
             if let key = Goal.ID(rawValue: goalID), let goalName = Goals[key]?.name
             {
-                goalsString += goalID == goalIds.first ? "" : goalID == goalIds.last ? " and " : ", "
+                goalsString += goalID == myGoalIds.first ? "" : goalID == myGoalIds.last ? " and " : ", "
                 goalsString += goalName.capitalized
             }
         }
