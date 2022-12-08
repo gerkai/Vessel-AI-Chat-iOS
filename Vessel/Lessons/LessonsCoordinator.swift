@@ -10,17 +10,16 @@ import UIKit
 class LessonsCoordinator
 {
     let lesson: Lesson
-    var steps: [Step]
-    {
-        lesson.steps
-    }
     var currentStepIndex = -1
     
     var currentStep: Step?
     {
-        guard let stepId = lesson.stepIds[safe: currentStepIndex],
-              let index = steps.firstIndex(where: { $0.id == stepId }) else { return nil }
-        return steps[index]
+        if let stepIndex = lesson.stepIds[safe: currentStepIndex]
+        {
+            let step = ObjectStore.shared.quickGet(type: Step.self, id: stepIndex)
+            return step
+        }
+        return nil
     }
     
     @Resolved private var analytics: Analytics
@@ -58,7 +57,7 @@ class LessonsCoordinator
     
     func hasCompletedLesson() -> Bool
     {
-        return steps.count == currentStepIndex
+        return lesson.stepIds.count == currentStepIndex
     }
     
     func answerStep(answer: String, answerId: Int)

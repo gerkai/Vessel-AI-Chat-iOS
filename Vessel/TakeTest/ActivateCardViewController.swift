@@ -412,7 +412,7 @@ extension ActivateCardViewController: CheckMarkCardViewDelegate
         guard let lesson = LessonsManager.shared.todayLessons.first(where: { $0.id == id }) else { return }
         let coordinator = LessonsCoordinator(lesson: lesson)
         
-        if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+        if let index = lesson.indexOfFirstUnreadStep()
         {
             for _ in stride(from: 0, to: index, by: 1)
             {

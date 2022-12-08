@@ -36,17 +36,15 @@ class LessonsManager
         }
     }
     
-    func getLessonSteps(lesson: Lesson, onSuccess success: @escaping (_ objects: [Step]) -> Void, onFailure failure: @escaping () -> Void)
+    func refreshLessonPlan()
     {
-        ObjectStore.shared.get(type: Step.self, ids: lesson.stepIds) { objects in
-           success(objects)
-        } onFailure: {
-            failure()
-        }
+        let lessons = Storage.retrieve(as: Lesson.self)
+        self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
     }
     
     func buildLessonPlan(onDone done: @escaping () -> Void)
     {
+        Log_Add("buildLessonPlan()")
         guard let contact = Contact.main() else { return }
         let allCurriculums = Storage.retrieve(as: Curriculum.self)
         let goalsCurriculums = allCurriculums.filter({ contact.goal_ids.contains($0.goalId) })
@@ -59,6 +57,7 @@ class LessonsManager
             if sortedLessons.count != 0
             {
                 //get all the lessons indicated by ids[]
+                print("GET LESSONS") //will remove once login data loading is speedy
                 ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
                 { lessons in
                     self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
@@ -98,14 +97,20 @@ class LessonsManager
             lesson.completedDate = nil
             
             //go through each step in this lesson
-            for step in lesson.steps
+            for stepID in lesson.stepIds
             {
-                //if it was read by the user, mark it unread and clear its answers. Save to ObjectStore
-                if step.questionRead == true
+                ObjectStore.shared.get(type: Step.self, id: stepID)
+                { step in
+                    //if it was read by the user, mark it unread and clear its answers. Save to ObjectStore
+                    if step.questionRead == true
+                    {
+                        step.questionRead = false
+                        step.answers = []
+                        updatedSteps.append(step)
+                    }
+                }
+                onFailure:
                 {
-                    step.questionRead = false
-                    step.answers = []
-                    updatedSteps.append(step)
                 }
             }
         }
@@ -126,9 +131,13 @@ class LessonsManager
                 {
                     let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)!
                     lesson.completedDate = Date.serverDateFormatter.string(from: dateBefore)
+                    
+                    Storage.store(lesson)
                 }
             }
         }
+        Log_Add("LessonsManager: shiftLessonDaysBack() - post .newDataArrived: Lesson")
+        refreshLessonPlan()
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
     }
     
@@ -147,21 +156,10 @@ class LessonsManager
         for lesson in self.lessons
         {
             stepIDs.append(contentsOf: lesson.stepIds)
-            lesson.steps = []
         }
         let uniqueStepIds = Array(Set(stepIDs))
         ObjectStore.shared.get(type: Step.self, ids: uniqueStepIds)
         { steps in
-            for lesson in self.lessons
-            {
-                for stepID in lesson.stepIds
-                {
-                    if let step = steps.filter({$0.id == stepID}).first
-                    {
-                        lesson.steps.append(step)
-                    }
-                }
-            }
             done()
         }
     onFailure:
@@ -173,10 +171,21 @@ class LessonsManager
     private func loadActivitiesForLessons(onDone done: @escaping () -> Void)
     {
         var activityIDs: [Int] = []
+        var stepIDs: [Int] = []
         for lesson in self.lessons
         {
-            let stepsActivityIds = lesson.steps.map({ $0.activityIds }).joined()
-            activityIDs.append(contentsOf: stepsActivityIds)
+            stepIDs.append(contentsOf: lesson.stepIds)
+        }
+        let uniqueStepIds = Array(Set(stepIDs))
+        for stepID in uniqueStepIds
+        {
+            ObjectStore.shared.get(type: Step.self, id: stepID)
+            { step in
+                activityIDs.append(contentsOf: step.activityIds)
+            }
+            onFailure:
+            {
+            }
         }
         let uniqueActivityIds = Array(Set(activityIDs))
         if uniqueActivityIds.count != 0
@@ -203,10 +212,8 @@ class LessonsManager
         
         if todayString != lastOpenedDay
         {
-            buildLessonPlan
-            {
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
-            }
+            refreshLessonPlan()
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
         }
     }
     
