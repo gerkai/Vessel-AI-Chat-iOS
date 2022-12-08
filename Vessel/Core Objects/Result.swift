@@ -147,11 +147,11 @@ struct ReagentResult: Codable
 
 struct ReagentError: Codable
 {
-    let slot_name: String
-    let reagent: ReagentErrorReagentInfo
-    let reagent_id: Int
+    let slot_name: String?
+    let reagent: ReagentErrorReagentInfo?
+    let reagent_id: Int?
     let error_code: Int
-    let sample_error: SampleError
+    let sample_error: SampleError?
 }
 
 struct ReagentErrorReagentInfo: Codable

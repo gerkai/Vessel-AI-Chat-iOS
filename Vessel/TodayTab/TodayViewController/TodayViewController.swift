@@ -54,6 +54,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         if let type = notification.userInfo?["objectType"] as? String
         {
+            Log_Add("Today Page: dataUpdated: \(type)")
             if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
                 viewModel.refreshContactSuggestedfoods()
@@ -175,7 +176,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 let row = lessons.count > 1 && indexPath.row > 1 ? indexPath.row - 2 : indexPath.row - 1
                 let lesson = lessons[row]
                 let coordinator = LessonsCoordinator(lesson: lesson)
-                if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+                if let index = lesson.indexOfFirstUnreadStep()
                 {
                     for _ in stride(from: 0, to: index, by: 1)
                     {
@@ -331,7 +332,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             let lessons = LessonsManager.shared.todayLessons
             guard let lesson = lessons.first(where: { $0.id == id }) else { return }
             let coordinator = LessonsCoordinator(lesson: lesson)
-            if let index = lesson.steps.firstIndex(where: { $0.questionRead == nil }), lesson.steps.first?.questionRead != nil
+            if let index = lesson.indexOfFirstUnreadStep()
             {
                 for _ in stride(from: 0, to: index, by: 1)
                 {

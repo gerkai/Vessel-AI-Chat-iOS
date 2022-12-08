@@ -164,6 +164,21 @@ class ObjectStore: NSObject
         }
     }
 
+    //if we know the object is in local storage, this will retrieve it. If it happens to not be in local storage
+    //nil will be returned
+    func quickGet<T: CoreObjectProtocol>(type: T.Type, id: Int) -> T?
+    {
+        if let object = objectFromCache(of: type, id: id)
+        {
+            return object
+        }
+        else if let object = Storage.retrieve(id, as: type )
+        {
+            return object
+        }
+        return nil
+    }
+    
     func get<T: CoreObjectProtocol>(type: T.Type, id: Int, onSuccess success: @escaping (_ object: T) -> Void, onFailure failure: @escaping () -> Void)
     {
         if let object = objectFromCache(of: type, id: id)
@@ -307,6 +322,7 @@ class ObjectStore: NSObject
         //print("Sending .newDataArrived notification with \(String(describing: T.self))")
         if notifyNewDataArrived
         {
+            Log_Add("ObjectStore: serverSave() - post .newDataArrived: \(String(describing: T.self))")
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
         }
     }
