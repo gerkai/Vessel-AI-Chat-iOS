@@ -159,7 +159,7 @@ enum TodayViewCell: Equatable
         switch self
         {
         case .header: return 177.0
-        case .sectionTitle: return 32.0
+        case .sectionTitle: return 56.0
         case .foodDetails(let foods):
             let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
             let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
