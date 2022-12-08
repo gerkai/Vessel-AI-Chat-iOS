@@ -22,10 +22,10 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     private let avPhotoOutput = AVCapturePhotoOutput()
     var previewLayer: AVCaptureVideoPreviewLayer!
     var captureResolution: CGSize = CGSize()
-    var goodAlignmentFrameCounter = 0
     var processingPhoto = false
     weak var clearTimer: Timer?
     var clearTimerCount = 0
+    var holdStillTime: CFTimeInterval?
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .takeTestFlow
@@ -44,23 +44,20 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             drawingView.showDebugDrawing = true
         }
         
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera], mediaType: AVMediaType.video, position: .back)
+        /*let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera], mediaType: AVMediaType.video, position: .back)
         if let captureDevice = deviceDiscoverySession.devices.first
         {
             avCaptureDevice = captureDevice
-            Log_Add("capture device First: \(captureDevice)")
         }
         else
-        {
+        {*/
             avCaptureDevice = AVCaptureDevice.default(for: .video)
-            Log_Add("capture device Default: \(String(describing: avCaptureDevice))")
-        }
+        //}
 
         if let videoCaptureDevice = avCaptureDevice
         {
             guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else{ return }
             
-            Log_Add("Trying to lock near autofocus range")
             do
             {
                 try videoCaptureDevice.lockForConfiguration()
@@ -68,17 +65,11 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
                 if (videoCaptureDevice.isAutoFocusRangeRestrictionSupported)
                 {
                     videoCaptureDevice.autoFocusRangeRestriction = .near
-                    Log_Add("Successful")
-                }
-                else
-                {
-                    Log_Add("Unsuccessful")
                 }
                 videoCaptureDevice.unlockForConfiguration()
             }
             catch
             {
-                Log_Add("Failed")
             }
             
             if (captureSession.canAddInput(videoInput))
@@ -95,7 +86,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
             if (captureSession.canAddOutput(metadataOutput))
             {
-                Log_Add("Adding QR metada output")
                 captureSession.addOutput(metadataOutput)
 
                 metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -103,7 +93,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             }
             else
             {
-                Log_Add("QR Metadata failed")
                 failed()
                 return
             }
@@ -299,37 +288,41 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             {
                 noticeLabel.text = NSLocalizedString("Move further away", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
-                goodAlignmentFrameCounter = 0
+                holdStillTime = nil
             }
             else if isCloseEnough < 0
             {
                 noticeLabel.text = NSLocalizedString("Move closer", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
-                goodAlignmentFrameCounter = 0
+                holdStillTime = nil
             }
             else if isOnScreen == false
             {
                 noticeLabel.text = NSLocalizedString("Make sure entire card is in rectangle", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
-                goodAlignmentFrameCounter = 0
+                holdStillTime = nil
             }
             else
             {
                 noticeLabel.text = ""
                 noticeLabel.backgroundColor = .clear
                 cameraView.backgroundColor = .green
-                
-                goodAlignmentFrameCounter += 1
-                if goodAlignmentFrameCounter > 30 //subjective
+                if holdStillTime == nil
                 {
-                    Log_Add("HOLD STILL")
+                    holdStillTime = CACurrentMediaTime()
+                }
+                
+                let timeDelta = CACurrentMediaTime() - holdStillTime!
+                
+                if timeDelta > 1.0 //subjective
+                {
                     noticeLabel.text = NSLocalizedString("Card detected, hold still", comment: "Card placement instructions for user")
                     noticeLabel.backgroundColor = Constants.vesselGreat
-                    if goodAlignmentFrameCounter > 75 //subjective
+                    if timeDelta > 2.0 //subjective
                     {
                         noticeLabel.text = ""
-                        goodAlignmentFrameCounter = 0
-                        Log_Add("SNAP!")
+                        holdStillTime = nil
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
                         {
                             self.captureCard()
@@ -342,7 +335,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
     func captureCard()
     {
-        Log_Add("captureCard()")
         if let availableRawFormat = self.avPhotoOutput.availableRawPhotoPixelFormatTypes.first
         {
             processingPhoto = true
@@ -363,28 +355,21 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
             photoSettings.flashMode = .off
             photoSettings.isHighResolutionPhotoEnabled = false
         }
-        else
-        {
-            Log_Add("*** NO availble RAW format for this device")
-        }
     }
     
     //MARK: - AVCapturePhotoCapture Delegate
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?)
     {
-        Log_Add("DID FINISH PROCESSING PHOTO. Error: \(String(describing: error)), output: \(output), photo: \(photo)")
         print("DID FINISH PROCESSING PHOTO. Error: \(String(describing: error)), output: \(output), photo: \(photo)")
         if error == nil
         {
             if photo.isRawPhoto
             {
-                Log_Add("Processing Raw Photo")
                 print("Processing Raw Photo")
                 viewModel.photo = photo
             }
             else
             {
-                Log_Add("Processing Regular Photo")
                 print("Processing Regular Photo")
                 if let compressedImageData = photo.fileDataRepresentation()
                 {
@@ -394,14 +379,12 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         }
         else
         {
-            Log_Add("Photo Processing Error: \(String(describing: error))")
             print("Photo Processing Error: \(String(describing: error))")
         }
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
-        Log_Add("DID FINISH CAPTURE")
         print("DID FINISH CAPTURE")
         if error == nil
         {
@@ -421,7 +404,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         }
         else
         {
-            Log_Add("Photo Capture Error: \(String(describing: error))")
             print("Photo Capture Error: \(String(describing: error))")
         }
     }
