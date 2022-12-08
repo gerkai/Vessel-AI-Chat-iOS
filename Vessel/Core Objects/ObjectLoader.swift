@@ -16,6 +16,7 @@ class ObjectLoader: NSObject
     
     func loadCoreObjects(onDone done: @escaping () -> Void)
     {
+        Log_Add("LoadCoreObjects(Result, Food, Curriculum, Plan)")
         ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self], onSuccess: 
         {
             LessonsManager.shared.buildLessonPlan(onDone:

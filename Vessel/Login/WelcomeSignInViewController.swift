@@ -21,14 +21,18 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     @IBOutlet private weak var splashView: UIView!
     @IBOutlet private weak var animationContainerView: UIView!
     @IBOutlet private weak var vesselLogoImageView: UIImageView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     var timer: Timer!
+    var activityTimer: Timer!
+    
     var animationView: LottieAnimationView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
     
     let labelRefreshInterval = 2.0 //Seconds
+    let activityIndicatorAppearanceInterval = 4.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
     let goals = [NSLocalizedString("focus", comment: ""),
@@ -107,6 +111,8 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         updateEnvironmentLabel(env: savedEnvironment)
         timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
+        
+        activityTimer = Timer.scheduledTimer(timeInterval: activityIndicatorAppearanceInterval, target: self, selector: #selector(showActivityIndicator), userInfo: nil, repeats: false)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -178,6 +184,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             goalIndex = 0
         }
+    }
+    
+    @objc func showActivityIndicator()
+    {
+        activityIndicatorView.startAnimating()
     }
     
     @IBAction func onLeftButton()

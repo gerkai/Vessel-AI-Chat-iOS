@@ -52,6 +52,7 @@ class RemoteConfigManager
             {
                 DispatchQueue.main.async
                 {
+                    Log_Add("RemoteConfigManager: remoteConfigLoadedCorrectly() - post .newDataArrived: Lesson")
                     NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
                 }
             }

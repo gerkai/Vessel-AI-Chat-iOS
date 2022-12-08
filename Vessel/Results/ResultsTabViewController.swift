@@ -102,6 +102,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         //print("Results: Data Updated")
         if let type = notification.userInfo?["objectType"] as? String
         {
+            Log_Add("Results Page: dataUpdated: \(type)")
             //if the new data is a Result then refresh the chart and tests/goals
             if type == String(describing: Result.self)
             {

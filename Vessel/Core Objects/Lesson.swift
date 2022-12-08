@@ -11,7 +11,7 @@ class Lesson: CoreObjectProtocol, Equatable
 {
     let id: Int
     var last_updated: Int = 0
-    let storage: StorageType = .disk
+    let storage: StorageType = .cacheAndDisk
     
     let title: String
     let description: String
@@ -19,7 +19,6 @@ class Lesson: CoreObjectProtocol, Equatable
     var completedDate: String?
     var rank: Int
     let stepIds: [Int]
-    var steps: [Step] = []
     var goalIds: [Int]
     var duration: Int = 2
     
@@ -118,5 +117,20 @@ class Lesson: CoreObjectProtocol, Equatable
         {
             return "\(duration) \(NSLocalizedString("mins", comment: ""))"
         }
+    }
+    
+    func indexOfFirstUnreadStep() -> Int?
+    {
+        var index = 0
+        for stepID in stepIds
+        {
+            let step = ObjectStore.shared.quickGet(type: Step.self, id: stepID)
+            if step?.questionRead == true
+            {
+                return index
+            }
+            index += 1
+        }
+        return nil
     }
 }

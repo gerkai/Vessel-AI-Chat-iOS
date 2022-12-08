@@ -20,6 +20,7 @@ class PlansManager
         plans = Storage.retrieve(as: Plan.self)
         loadActivitiesForPlans
         {
+            Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }
     }
@@ -53,6 +54,7 @@ class PlansManager
         {
             loadActivitiesForPlans
             {
+                Log_Add("PlansManager: addPlans() - post .newDataArrived: Plan")
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
@@ -71,6 +73,7 @@ class PlansManager
         {
             loadActivitiesForPlans
             {
+                Log_Add("PlansManager: removePlans() - post .newDataArrived: Plan")
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
@@ -106,6 +109,7 @@ class PlansManager
         {
             loadActivitiesForPlans
             {
+                Log_Add("PlansManager: remove() - post .newDataArrived: Plan")
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
