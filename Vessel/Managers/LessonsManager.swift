@@ -5,7 +5,7 @@
 //  Created by Nicolas Medina on 11/17/22.
 //
 
-import Foundation
+import UIKit
 
 let MAX_LESSONS_PER_DAY = 4
 
@@ -16,6 +16,11 @@ class LessonsManager
     var planBuilt = false
     var unlockMoreInsights = false
     var loadedLessonsCount = 0
+    
+    init()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: UIApplication.significantTimeChangeNotification, object: nil)
+    }
     
     var todayLessons: [Lesson]
     {
@@ -126,10 +131,13 @@ class LessonsManager
                 {
                     let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)!
                     lesson.completedDate = Date.serverDateFormatter.string(from: dateBefore)
+                    
+                    Storage.store(lesson)
                 }
             }
         }
         Log_Add("LessonsManager: shiftLessonDaysBack() - post .newDataArrived: Lesson")
+        refreshLessonPlan()
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
     }
     
@@ -195,5 +203,24 @@ class LessonsManager
         {
             done()
         }
+    }
+    
+    func buildLessonPlanIfNeeded()
+    {
+        let lastOpenedDay = UserDefaults.standard.string(forKey: Constants.KEY_LAST_OPENED_DAY)
+        let todayString: String = Date.serverDateFormatter.string(from: Date())
+        
+        if todayString != lastOpenedDay
+        {
+            refreshLessonPlan()
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
+        }
+    }
+    
+    @objc
+    func dayChanged(_ notification: Notification)
+    {
+        WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
+        LessonsManager.shared.buildLessonPlanIfNeeded()
     }
 }
