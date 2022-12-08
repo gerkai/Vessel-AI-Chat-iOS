@@ -305,6 +305,15 @@ extension TodayViewController: TodayButtonCellDelegate
 
 extension TodayViewController: TodayCheckMarkCardDelegate
 {
+    func canUncheckCard(type: CheckMarkCardType) -> Bool
+    {
+        if type == .activity
+        {
+            return false
+        }
+        return true
+    }
+    
     func onCardChecked(id: Int, type: CheckMarkCardType)
     {
         if type == .activity

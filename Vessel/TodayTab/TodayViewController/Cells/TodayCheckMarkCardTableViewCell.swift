@@ -10,6 +10,7 @@ import UIKit
 protocol TodayCheckMarkCardDelegate: AnyObject
 {
     func onCardChecked(id: Int, type: CheckMarkCardType)
+    func canUncheckCard(type: CheckMarkCardType) -> Bool
 }
 
 class TodayCheckMarkCardTableViewCell: UITableViewCell
@@ -86,18 +87,24 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
         backgroundImageView.kf.setImage(with: url)
     }
     
-    private func checkmarkPressed()
-    {
-        isChecked = !isChecked
-    }
-    
     @objc
     func onCheckMarkSelected(gestureRecognizer: UIGestureRecognizer)
     {
         guard let id = id,
               let type = type,
               let delegate = delegate else { return }
-        checkmarkPressed()
-        delegate.onCardChecked(id: id, type: type)
+        if isChecked == false
+        {
+            isChecked = true
+            delegate.onCardChecked(id: id, type: type)
+        }
+        else
+        {
+            if delegate.canUncheckCard(type: type)
+            {
+                isChecked = false
+                delegate.onCardChecked(id: id, type: type)
+            }
+        }
     }
 }
