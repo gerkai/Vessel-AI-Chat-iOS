@@ -80,7 +80,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         let numResults = viewModel.numberOfResults()
         if numResults != 0 && initialLoad
         {
-            testsGoalsView.setupReagents(forResult: viewModel.selectedResult(), selectedReagentID: .MAGNESIUM)
+            testsGoalsView.setupReagents(forResult: viewModel.selectedResult()!, selectedReagentID: .MAGNESIUM)
         }
     }
     

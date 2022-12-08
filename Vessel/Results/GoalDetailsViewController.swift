@@ -40,42 +40,86 @@ class GoalDetailsViewController: UIViewController
         subtitleLabel.text = NSLocalizedString("Tests that affect \(goal.name.lowercased())", comment: "Goal details subtitle")
         
         testsStackView.removeAllArrangedSubviews() //remove placeholder view
-        let result = viewModel.selectedResult()
-        
-        let filteredReagentResults = result.reagentResults.filter({ Reagent.ID(rawValue: $0.id) != nil })
-        let sortedReagentResults = filteredReagentResults.sorted(by: { (firstReagentResult, secondReagentResult) in
-            if let firstReagentID = Reagent.ID(rawValue: firstReagentResult.id),
-               let secondReagentID = Reagent.ID(rawValue: secondReagentResult.id),
-               let firstReagent = Reagents[firstReagentID],
-               let secondReagent = Reagents[secondReagentID]
-            {
-                return firstReagent.impactFor(goal: goal.id) > secondReagent.impactFor(goal: goal.id)
-            }
-            return false
-        })
-        
-        for reagentResult in sortedReagentResults
+        if let result = viewModel.selectedResult()
         {
-            let impactView = ReagentImpactView()
-            let heightConstraint = NSLayoutConstraint(item: impactView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 46)
-            impactView.addConstraints([heightConstraint])
-            impactView.delegate = self
-            if let reagentID = Reagent.ID(rawValue: reagentResult.id)
-            {
-                if let value = reagentResult.value
+            let filteredReagentResults = result.reagentResults.filter({ Reagent.ID(rawValue: $0.id) != nil })
+            let sortedReagentResults = filteredReagentResults.sorted(by: { (firstReagentResult, secondReagentResult) in
+                if let firstReagentID = Reagent.ID(rawValue: firstReagentResult.id),
+                   let secondReagentID = Reagent.ID(rawValue: secondReagentResult.id),
+                   let firstReagent = Reagents[firstReagentID],
+                   let secondReagent = Reagents[secondReagentID]
                 {
-                    let reagent = Reagents[reagentID]!
-                    impactView.reagentNameLabel.text = reagent.name.capitalized
-                    let evaluation = reagent.getEvaluation(value: value)
-                    impactView.evaluationLabel.text = evaluation.title.capitalized
-                    impactView.contentView.backgroundColor = evaluation.color
-                    
-                    let impact = reagent.impactFor(goal: goal.id)
-                    impactView.numDots = impact
-                    impactView.reagentId = reagentID.rawValue
-                    
-                    testsStackView.addArrangedSubview(impactView)
+                    return firstReagent.impactFor(goal: goal.id) > secondReagent.impactFor(goal: goal.id)
                 }
+                return false
+            })
+                
+            for reagentResult in sortedReagentResults
+            {
+                let impactView = ReagentImpactView()
+                let heightConstraint = NSLayoutConstraint(item: impactView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 46)
+                impactView.addConstraints([heightConstraint])
+                impactView.delegate = self
+                if let reagentID = Reagent.ID(rawValue: reagentResult.id)
+                {
+                    if let value = reagentResult.value
+                    {
+                        let reagent = Reagents[reagentID]!
+                        impactView.reagentNameLabel.text = reagent.name.capitalized
+                        let evaluation = reagent.getEvaluation(value: value)
+                        impactView.evaluationLabel.text = evaluation.title.capitalized
+                        impactView.contentView.backgroundColor = evaluation.color
+                        
+                        let impact = reagent.impactFor(goal: goal.id)
+                        impactView.numDots = impact
+                        impactView.reagentId = reagentID.rawValue
+                        
+                        testsStackView.addArrangedSubview(impactView)
+                    }
+                }
+            }
+        }
+        else
+        {
+            //Show generic all-green reagents and impacts
+            
+            //get list of all reagents
+            var reagentIDs: [Reagent.ID] = []
+            for reagentID in Reagents
+            {
+                reagentIDs.append(reagentID.key)
+            }
+            //sort by impact for this goal
+            let sortedReagentIDs = reagentIDs.sorted(by:
+            { (firstReagentResult, secondReagentResult) in
+                if let firstReagentID = Reagent.ID(rawValue: firstReagentResult.rawValue),
+                   let secondReagentID = Reagent.ID(rawValue: secondReagentResult.rawValue),
+                   let firstReagent = Reagents[firstReagentID],
+                   let secondReagent = Reagents[secondReagentID]
+                {
+                    return firstReagent.impactFor(goal: goal.id) > secondReagent.impactFor(goal: goal.id)
+                }
+                else
+                {
+                    return false
+                }
+            })
+            for reagentID in sortedReagentIDs
+            {
+                let impactView = ReagentImpactView()
+                let heightConstraint = NSLayoutConstraint(item: impactView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 46)
+                impactView.addConstraints([heightConstraint])
+                impactView.delegate = self
+                let reagent = Reagents[reagentID]!
+                impactView.reagentNameLabel.text = reagent.name.capitalized
+                impactView.evaluationLabel.text = ""
+                impactView.contentView.backgroundColor = Constants.vesselGood
+                        
+                let impact = reagent.impactFor(goal: goal.id)
+                impactView.numDots = impact
+                impactView.reagentId = reagentID.rawValue
+                        
+                testsStackView.addArrangedSubview(impactView)
             }
         }
     }
