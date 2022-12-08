@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol ReagentDetailsViewControllerDelegate: AnyObject
-{
-    func reagentDetailsChartCellSelected(cellIndex: Int)
-}
-
 class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, ChartViewDataSource, ChartViewDelegate, ScienceStudiesViewDelegate
 {
     @IBOutlet weak var scrollView: UIScrollView!
@@ -26,7 +21,6 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBOutlet weak var tipsStackView: UIStackView!
     @IBOutlet weak var infoView: UIView!
     
-    weak var delegate: ReagentDetailsViewControllerDelegate?
     var reagentID: Int!
     var viewModel: ResultsTabViewModel!
     
@@ -65,6 +59,8 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     deinit
     {
         viewModel = nil
+        chartView.delegate = nil
+        chartView.dataSource = nil
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("📘 deinit \(self)")
@@ -76,7 +72,6 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         //print("ReagentDetailsViewController viewWillAppear()")
         super.viewWillAppear(animated)
         //force the chartView to lay itself out immediately. This allows us to scroll to an initial contentOffset
-        //print("chartView.layoutIfNeeded()")
         chartView.layoutIfNeeded()
         //all UI is performed on main thread. Dispatching the below on the main thread ensures chartView completed its layout before preSelectCell is called.
         DispatchQueue.main.async
@@ -88,7 +83,6 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     @IBAction func back()
     {
         navigationController?.popViewController(animated: true)
-        delegate?.reagentDetailsChartCellSelected(cellIndex: chartView.selectedCell)
     }
     
     /*func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -145,9 +139,6 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     
     func chartViewCellSelected(cellIndex: Int)
     {
-        //let delegate know we selected a new cell. That way it can keep its chart synced
-        delegate?.reagentDetailsChartCellSelected(cellIndex: cellIndex)
-        
         viewModel.selectResult(index: cellIndex)
         //populate the infoView title and description text
         let result = viewModel.resultForIndex(i: cellIndex).result

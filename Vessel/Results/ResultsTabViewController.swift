@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate, UITextViewDelegate, ReagentDetailsViewControllerDelegate
+class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartViewDelegate, TestsGoalsViewDelegate, UITextViewDelegate
 {
     @IBOutlet weak var chartView: ChartView!
     var initialLoad = true
@@ -198,18 +198,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     func learnMoreAboutReagent(id: Int)
     {
         let vc = ReagentDetailsViewController.initWith(reagentID: id, viewModel: viewModel, selectedCell: chartView.selectedCell)
-        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func reagentSelected(id: Int)
     {
         defaultSelectedReagent = Reagent.ID(rawValue: id)!
-    }
-    
-    //MARK: -- reagentDetailsViewController delegates
-    func reagentDetailsChartCellSelected(cellIndex: Int)
-    {
-        chartView.preSelectCell(cellIndex: cellIndex)
     }
 }

@@ -18,6 +18,7 @@ extension Notification.Name
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
     static let hideSplashScreen = Notification.Name("HideSplashScreen")
+    static let selectChartViewCell = Notification.Name("SelectChartViewCell") //so all charts can by in sync
 }
 
 struct Constants
