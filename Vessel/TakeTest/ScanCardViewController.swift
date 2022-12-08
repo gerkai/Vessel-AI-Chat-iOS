@@ -43,16 +43,8 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             drawingView.showDebugDrawing = true
         }
-        
-        /*let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera], mediaType: AVMediaType.video, position: .back)
-        if let captureDevice = deviceDiscoverySession.devices.first
-        {
-            avCaptureDevice = captureDevice
-        }
-        else
-        {*/
-            avCaptureDevice = AVCaptureDevice.default(for: .video)
-        //}
+
+        avCaptureDevice = AVCaptureDevice.default(for: .video)
 
         if let videoCaptureDevice = avCaptureDevice
         {
