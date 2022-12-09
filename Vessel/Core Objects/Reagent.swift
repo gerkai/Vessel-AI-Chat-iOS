@@ -172,7 +172,7 @@ struct Reagent
         case VITAMIN_B7 = 11
         case CALCIUM = 18
         case NITRITE = 21
-        case LEUKOCYTE = 22
+        //case LEUKOCYTE = 22
         case SODIUM = 23
     }
     var name: String
@@ -336,6 +336,6 @@ let Reagents: [Reagent.ID: Reagent] =
     Reagent.ID.VITAMIN_B7: VitaminB7,
     Reagent.ID.CALCIUM: Calcium,
     Reagent.ID.NITRITE: Nitrite,
-    Reagent.ID.LEUKOCYTE: Leukocyte,
+    //Reagent.ID.LEUKOCYTE: Leukocyte,
     Reagent.ID.SODIUM: Sodium
 ]
