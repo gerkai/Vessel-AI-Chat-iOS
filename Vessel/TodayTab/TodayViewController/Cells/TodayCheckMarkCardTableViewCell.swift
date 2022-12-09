@@ -24,37 +24,40 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
     var id: Int?
     var type: CheckMarkCardType?
     weak var delegate: TodayCheckMarkCardDelegate?
-    
+    var allowDidSet = false
     var isUnchecking = false
     var isChecked: Bool = false
     {
         didSet
         {
-            if !isChecked
+            if allowDidSet
             {
-                self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-            }
-            else
-            {
-                //animate checkmark
-                UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
+                if !isChecked
                 {
-                    self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
                 }
-                completion:
-                { completed in
-                    if self.isChecked == true
-                    {
-                        self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
-                    }
-                    else
-                    {
-                        self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                    }
-                    
+                else
+                {
+                    //animate checkmark
                     UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
                     {
-                        self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    }
+                completion:
+                    { completed in
+                        if self.isChecked == true
+                        {
+                            self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
+                        }
+                        else
+                        {
+                            self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
+                        }
+                        
+                        UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
+                        {
+                            self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        }
                     }
                 }
             }
@@ -83,6 +86,8 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
         
         checkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCheckMarkSelected)))
         
+        isChecked = completed
+        allowDidSet = true
         guard let url = URL(string: backgroundImage) else { return }
         backgroundImageView.kf.setImage(with: url)
     }
