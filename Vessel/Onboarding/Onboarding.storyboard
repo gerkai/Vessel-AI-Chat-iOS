@@ -876,7 +876,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="vLR-yY-gw3">
                                 <rect key="frame" x="40" y="0.0" width="374" height="896"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9Q-7E-t7c" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9Q-7E-t7c" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
                                 <rect key="frame" x="30" y="768" width="354" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -892,7 +892,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="onNextTapped" destination="2bO-GG-VGr" eventType="touchUpInside" id="AxC-eT-2nd"/>
                                     <action selector="onNextTapped" destination="wDZ-2H-aXq" eventType="touchUpInside" id="yEv-lK-DyT"/>
                                 </connections>
                             </button>
@@ -958,6 +957,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="R9Q-7E-t7c" id="Jtm-DW-TBE"/>
                         <outlet property="titleLabel" destination="egO-5e-4OX" id="vyk-21-jdT"/>
                     </connections>
                 </viewController>

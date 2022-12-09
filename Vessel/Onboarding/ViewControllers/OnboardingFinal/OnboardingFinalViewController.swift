@@ -11,6 +11,7 @@ class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - Views
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var nextButton: LoadingButton!
     
     // MARK: - Logic
     var mainGoal: Int?
@@ -46,6 +47,7 @@ class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
     
     @IBAction func onNextTapped()
     {
+        nextButton.showLoading()
         coordinator?.pushNextViewController()
     }
     
