@@ -123,6 +123,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
         animateBouncyViews()
         animateBackgroundColor()
     }

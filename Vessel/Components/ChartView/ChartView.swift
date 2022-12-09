@@ -45,7 +45,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📗 awakeFromNib \(self)")
+            print("📖 awakeFromNib \(self)")
         }
         collectionView.registerFromNib(ResultsChartCell.self)
         collectionView.registerFromNib(ReagentDetailsChartCell.self)

@@ -15,6 +15,8 @@ protocol UploadErrorSlideupViewControllerDelegate
 class UploadErrorSlideupViewController: SlideupViewController
 {
     var delegate: UploadErrorSlideupViewControllerDelegate?
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     @IBAction func tryAgain()
     {

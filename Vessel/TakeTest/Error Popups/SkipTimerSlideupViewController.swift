@@ -15,7 +15,8 @@ protocol SkipTimerSlideupViewControllerDelegate
 class SkipTimerSlideupViewController: SlideupViewController
 {
     var canceling = false
-    
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     var delegate: SkipTimerSlideupViewControllerDelegate?
     
     @IBAction func onContinue()

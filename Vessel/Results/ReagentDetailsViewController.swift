@@ -38,7 +38,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📗 did load \(self)")
+            print("📖 did load \(self)")
         }
         super.viewDidLoad()
         

@@ -7,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate, VesselScreenIdentifiable
+class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutputObjectsDelegate, DrawingViewDelegate, AVCapturePhotoCaptureDelegate, UploadingSampleViewControllerDelegate
 {
     @IBOutlet weak var drawingView: DrawingView!
     @IBOutlet weak var cameraView: UIView!
@@ -26,9 +26,6 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     weak var clearTimer: Timer?
     var clearTimerCount = 0
     var holdStillTime: CFTimeInterval?
-    
-    @Resolved internal var analytics: Analytics
-    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {
@@ -117,6 +114,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
         clearTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
@@ -377,6 +375,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
+        analytics.log(event: .capturedCard)
         print("DID FINISH CAPTURE")
         if error == nil
         {

@@ -15,6 +15,8 @@ protocol CropFailureSlideupViewControllerDelegate
 class CropFailureSlideupViewController: SlideupViewController
 {
     var delegate: CropFailureSlideupViewControllerDelegate?
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     @IBAction func tryAgain()
     {

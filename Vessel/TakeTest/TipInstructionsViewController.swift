@@ -8,14 +8,12 @@
 
 import UIKit
 
-class TipInstructionsViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
+class TipInstructionsViewController: TakeTestMVVMViewController
 {
     @IBOutlet private weak var peeView: UIView!
     @IBOutlet private weak var cupView: UIView!
     @IBOutlet private weak var segmentedControl: VesselSegmentedControl!
     
-    @Resolved internal var analytics: Analytics
-    let flowName: AnalyticsFlowName = .takeTestFlow
     var associatedValue: String?
     {
         if segmentedControl.selectedSegmentIndex == 0
