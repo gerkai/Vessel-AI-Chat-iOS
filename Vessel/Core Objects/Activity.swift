@@ -18,11 +18,6 @@ class Tip: CoreObjectProtocol
     //let smallImage: String?
     let storage: StorageType = .cacheAndDisk
     
-    var activityDetailsModel: ActivityDetailsModel
-    {
-        return ActivityDetailsModel(imageUrl: imageUrl, title: title, subtitle: frequency, description: description, reagents: nil, quantities: nil)
-    }
-    
     init(id: Int,
          last_updated: Int,
          title: String,
@@ -46,5 +41,10 @@ class Tip: CoreObjectProtocol
         case description
         case frequency
         case imageUrl = "image_url"
+    }
+    
+    func getActivityDetailsModel(planId: Int) -> ActivityDetailsModel
+    {
+        return ActivityDetailsModel(id: planId, imageUrl: imageUrl, title: title, subtitle: frequency, description: description, reagents: nil, quantities: nil)
     }
 }

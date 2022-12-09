@@ -20,6 +20,7 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var reagentsLabel: UILabel?
     @IBOutlet private weak var quantitiesLabel: UILabel?
     @IBOutlet private weak var reagentsStackView: UIStackView?
+    @IBOutlet private weak var removeFromPlanButton: BounceButton!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
@@ -53,6 +54,24 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBAction func onBack()
     {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onRemovePlan()
+    {
+        guard let viewModel = viewModel else { return }
+        removeFromPlanButton.isEnabled = false
+        Server.shared.removeSinglePlan(planId: viewModel.id)
+        {
+            self.removeFromPlanButton.isEnabled = true
+            self.navigationController?.popViewController(animated: true)
+            guard let plan = PlansManager.shared.plans.first(where: { $0.id == viewModel.id }) else { return }
+            PlansManager.shared.removePlans(plansToRemove: [plan])
+        }
+        onFailure:
+        { error in
+            self.removeFromPlanButton.isEnabled = true
+        }
+
     }
 }
 
