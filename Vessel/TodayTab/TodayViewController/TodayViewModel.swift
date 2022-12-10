@@ -20,7 +20,7 @@ enum TodayViewSection: Equatable
     case insights(insights: [Lesson])
     case activities(activities: [Tip])
     case food(foods: [Food])
-    case water(glassesNumber: Int?, checkedGlasses: Int?)
+    case water(glassesNumber: Int?, checkedGlasses: Int)
     //case customize
     case footer
     
@@ -118,9 +118,9 @@ enum TodayViewSection: Equatable
         ]
     }
     
-    func createWaterSection(glassesNumber: Int?, checkedGlasses: Int?) -> [TodayViewCell]
+    func createWaterSection(glassesNumber: Int?, checkedGlasses: Int) -> [TodayViewCell]
     {
-        guard let glassesNumber = glassesNumber, let checkedGlasses = checkedGlasses else { return [] }
+        guard let glassesNumber = glassesNumber else { return [] }
         return [
             .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount"))"),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
@@ -228,7 +228,7 @@ class TodayViewModel
             .insights(insights: lessons),
             .activities(activities: activities),
             .food(foods: contact.suggestedFoods),
-            .water(glassesNumber: contact.dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses),
+            .water(glassesNumber: contact.dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
             .footer
         ]
     }
