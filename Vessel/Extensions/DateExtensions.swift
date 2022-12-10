@@ -16,6 +16,41 @@ extension Date
         return formatter
     }()
     
+    static var isoLocalDateFormatter: DateFormatter =
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.ISO_DATE_FORMAT
+        formatter.calendar = Calendar.current
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }()
+    
+    static var isoUTCDateFormatter: DateFormatter =
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.ISO_DATE_FORMAT
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        return formatter
+    }()
+    
+    static func localToUTC(dateStr: String) -> String?
+    {
+        if let date = isoLocalDateFormatter.date(from: dateStr)
+        {
+            return isoUTCDateFormatter.string(from: date)
+        }
+        return nil
+    }
+
+    static func utcToLocal(dateStr: String) -> String?
+    {
+        if let date = isoUTCDateFormatter.date(from: dateStr)
+        {
+            return isoLocalDateFormatter.string(from: date)
+        }
+        return nil
+    }
+
     // [0 to 6] -> (Monday to Sunday)
     var dayOfWeek: Int?
     {
@@ -126,6 +161,11 @@ extension Date
         }*/
 
         return vesselDate?.convertToLocalTime(fromTimeZone: "UTC")
+    }
+    
+    static func isSameDay(date1: Date, date2: Date) -> Bool
+    {
+        return Calendar.current.isDate(date1, inSameDayAs: date2)
     }
     
     func convertToLocalTime(fromTimeZone timeZoneAbbreviation: String) -> Date?

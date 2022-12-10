@@ -26,21 +26,14 @@ class Lesson: CoreObjectProtocol, Equatable
     {
         completedDate != nil
     }
-
-   /* TODO: Switch to this function after back end gets fixed
-    var completedToday: Bool
-    {
-        guard let completedDate = completedDate else { return false }
-        let todayDateString = Date.serverDateFormatter.string(from: Date())
-        return todayDateString == completedDate
-    }*/
     
     var completedToday: Bool
     {
-        guard let completedDate = completedDate,
-              let date = completedDate.split(separator: "T")[safe: 0] else { return false }
-        let todayDateString = Date.serverDateFormatter.string(from: Date())
-        return todayDateString == date
+        guard let completedDateString = completedDate,
+              let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
+              let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString) else { return false }
+
+        return Date.isSameDay(date1: completedDate, date2: Date())
     }
     
     init(id: Int,

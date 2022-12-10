@@ -36,6 +36,12 @@ class LessonsManager
         }
     }
     
+    var nextLesson: Lesson?
+    {
+        guard let firstUncompletedIndex = lessons.firstIndex(where: { $0.completedDate == nil }) else { return nil }
+        return lessons[safe: firstUncompletedIndex]
+    }
+    
     func refreshLessonPlan()
     {
         let lessons = Storage.retrieve(as: Lesson.self)
@@ -124,16 +130,13 @@ class LessonsManager
         //go through all lessons
         for lesson in lessons
         {
-            if let completedDate = lesson.completedDate
+            if let completedDate = lesson.completedDate,
+               let completedLocalDateString = Date.utcToLocal(dateStr: completedDate),
+               let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString)
             {
-                let formatter = Date.serverDateFormatter
-                if let date = formatter.date(from: completedDate)
-                {
-                    let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)!
-                    lesson.completedDate = Date.serverDateFormatter.string(from: dateBefore)
-                    
-                    Storage.store(lesson)
-                }
+                let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: completedDate)!
+                lesson.completedDate = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: dateBefore))
+                Storage.store(lesson)
             }
         }
         Log_Add("LessonsManager: shiftLessonDaysBack() - post .newDataArrived: Lesson")

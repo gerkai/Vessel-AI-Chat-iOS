@@ -75,7 +75,7 @@ enum TodayViewSection: Equatable
                 {
                     cells.append(.text(text: NSLocalizedString("Today's insight is done!", comment: "")))
                 }
-                if lesson == lessons.last
+                if lesson == lessons.last && LessonsManager.shared.nextLesson != nil
                 {
                     if lessons.count == 4
                     {

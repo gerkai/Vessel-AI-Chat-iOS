@@ -97,7 +97,7 @@ private extension InputLessonStepViewController
         initialTextViewText = viewModel.step.placeholderText
         setupImageView()
         setupStackView()
-        let index = viewModel.lesson.stepIds.firstIndex(of: viewModel.step.id)
+        let index = viewModel.lesson.stepIds.firstIndex(where: { $0 == viewModel.step.id })
         progressBar.setup(totalSteps: viewModel.lesson.stepIds.count, progress: index ?? 0)
         if index == viewModel.lesson.stepIds.count - 1
         {

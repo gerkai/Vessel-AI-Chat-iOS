@@ -95,6 +95,7 @@ struct Constants
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"
     static let PRESENTATION_DATE_FORMAT = "dd MM yyyy"
+    static let ISO_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
     
     //demographics
     static let GENDER_MALE = "m"

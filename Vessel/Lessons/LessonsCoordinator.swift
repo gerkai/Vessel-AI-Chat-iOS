@@ -127,7 +127,7 @@ class LessonsCoordinator
     func finishLesson(navigationController: UINavigationController)
     {
         analytics.log(event: .lessonCompleted(lessonId: lesson.id, lessonName: lesson.title))
-        lesson.completedDate = Date.serverDateFormatter.string(from: Date())
+        lesson.completedDate = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
         LessonsManager.shared.unlockMoreInsights = false
         ObjectStore.shared.serverSave(lesson)
         navigationController.popToRootViewController(animated: true)
