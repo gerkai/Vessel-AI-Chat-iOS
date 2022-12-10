@@ -61,6 +61,11 @@ class ObjectStore: NSObject
         }
     }
     
+    func clearCache()
+    {
+        cache = [:]
+    }
+    
     func removeFromCache<T: CoreObjectProtocol>(_ object: T)
     {
         let objectName = String(describing: type(of: object))

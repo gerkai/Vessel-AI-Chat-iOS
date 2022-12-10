@@ -419,6 +419,7 @@ class Server: NSObject
     
     func logOut()
     {
+        ObjectStore.shared.clearCache()
         print("logout() deleting keychain tokens")
         if accessToken != nil
         {

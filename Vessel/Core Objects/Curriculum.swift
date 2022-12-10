@@ -11,7 +11,7 @@ class Curriculum: CoreObjectProtocol
 {
     let id: Int
     var last_updated: Int
-    let storage: StorageType = .disk
+    let storage: StorageType = .cacheAndDisk
     
     var goalId: Int
     var lessonIds: [Int]
