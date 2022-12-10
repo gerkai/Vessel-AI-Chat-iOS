@@ -133,7 +133,6 @@ class Contact: CoreObjectProtocol
     static func reset()
     {
         KeychainHelper.standard.delete(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
-        ObjectStore.shared.removeFromCache(main()!)
         MainID = 0
         SavedEmail = nil
     }
