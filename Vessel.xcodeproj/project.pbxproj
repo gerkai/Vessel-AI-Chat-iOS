@@ -80,6 +80,8 @@
 		3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */; };
 		3F244286293FFAE80043E4B4 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244284293FFAE70043E4B4 /* log.swift */; };
 		3F244287293FFAE80043E4B4 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244285293FFAE70043E4B4 /* LogViewController.swift */; };
+		3F28232A2944021200CB3844 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2823292944021200CB3844 /* SplashView.swift */; };
+		3F28232C2944022500CB3844 /* SplashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F28232B2944022500CB3844 /* SplashView.xib */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
 		3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */; };
 		3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB428DFA1CA00927B68 /* GraphView.swift */; };
@@ -365,6 +367,8 @@
 		3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
 		3F244284293FFAE70043E4B4 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
 		3F244285293FFAE70043E4B4 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		3F2823292944021200CB3844 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		3F28232B2944022500CB3844 /* SplashView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashView.xib; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
@@ -730,6 +734,15 @@
 			path = "Debug Log";
 			sourceTree = "<group>";
 		};
+		3F2823282944021200CB3844 /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				3F2823292944021200CB3844 /* SplashView.swift */,
+				3F28232B2944022500CB3844 /* SplashView.xib */,
+			);
+			path = SplashView;
+			sourceTree = "<group>";
+		};
 		3F426DB228DFA1CA00927B68 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1002,7 @@
 				3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */,
 				3F9C67B528FF1C3900BC44FA /* SourceInfoView.swift */,
 				3F9C67B728FF1C4E00BC44FA /* SourceInfoView.xib */,
+				3F2823282944021200CB3844 /* SplashView */,
 				3F59A18128E28715005E5F46 /* TestsGoals */,
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
 				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
@@ -1485,6 +1499,7 @@
 				3F12F040287CDA1400FCC52E /* Login.storyboard in Resources */,
 				3F426DBA28DFA1CA00927B68 /* ResultsChartCell.xib in Resources */,
 				3FE369E727C9A74B00231D42 /* NoeText.otf in Resources */,
+				3F28232C2944022500CB3844 /* SplashView.xib in Resources */,
 				725F382B2935EFEE00A48B3E /* CheckMarkCardView.xib in Resources */,
 				72F24C22293729E3006F6250 /* LessonStepActivityView.xib in Resources */,
 				72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */,
@@ -1724,6 +1739,7 @@
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
+				3F28232A2944021200CB3844 /* SplashView.swift in Sources */,
 				725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */,
