@@ -118,6 +118,8 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                 
                 Server.shared.getTokens(isGoogle: self.loginType == .google, onSuccess:
                 {
+                    //print("Social Auth: Sending SHOW SPLASH notification")
+                    NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": true])
                     self.dismiss(animated: true)
                     {
                         self.loadContact()
@@ -126,6 +128,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                 onFailure:
                 {string in
                     UIView.showError(text: NSLocalizedString("Oops, Something went wrong", comment: "Server Error"), detailText: "\(String(describing: string))", image: nil)
+                    self.dismiss(animated: true)
                 })
             }
             decisionHandler(.cancel)

@@ -169,6 +169,8 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             {
                 analytics.log(event: .signUp(loginType: analyticsLoginType))
             }
+            //hide the splash screen as we have more login screens to flow through
+            NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
             self.navigationController?.pushViewController(vc, animated: true)
