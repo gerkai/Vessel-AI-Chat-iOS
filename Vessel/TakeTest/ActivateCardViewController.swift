@@ -11,7 +11,7 @@
 import UIKit
 import AVKit
 
-class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate, VesselScreenIdentifiable
+class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelDelegate, SkipTimerSlideupViewControllerDelegate
 {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var preTimerView: UIView!
@@ -26,9 +26,6 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     @IBOutlet weak var tabDetailsLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
-    
-    var flowName: AnalyticsFlowName = .takeTestFlow
-    @Resolved internal var analytics: Analytics
     
     private var playerViewController: AVPlayerViewController?
 #if LOOP_VIDEOS
@@ -82,6 +79,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
         viewModel.delegate = self
         requestNotificationPermission()
         if !firstTimeAppeared
@@ -398,6 +396,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         skipTimerSlideupVC = nil
         if proceedToSkip
         {
+            analytics.log(event: .skipCaptureTimer)
             viewModel.skipTimer()
             viewModel.delegate = nil
             removeNotification()

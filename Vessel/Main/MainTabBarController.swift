@@ -13,6 +13,7 @@ class MainTabBarController: UITabBarController
     let vesselButtonIndex = 2
     let takeTestViewModel = TakeTestViewModel()
     private var vesselButton: BounceButton?
+    @Resolved internal var analytics: Analytics
     
     override func viewDidLoad()
     {
@@ -172,6 +173,7 @@ class MainTabBarController: UITabBarController
         }
         else
         {
+            analytics.log(event: .dontForgetShown)
             GenericAlertViewController.presentAlert(in: self,
                                                     type: .imageTitleSubtitleHorizontalButtons(image: UIImage(named: "VesselButton")!,
                                                                                                title: GenericAlertLabelInfo(title: NSLocalizedString("Don't forget, test right after waking up.", comment: "")),

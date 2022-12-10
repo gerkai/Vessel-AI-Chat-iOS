@@ -16,6 +16,8 @@ protocol AlreadyScannedSlideupViewControllerDelegate
 class AlreadyScannedSlideupViewController: SlideupViewController
 {
     var delegate: AlreadyScannedSlideupViewControllerDelegate?
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     @IBAction func chatWithSupport()
     {

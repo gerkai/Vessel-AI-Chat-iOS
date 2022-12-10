@@ -7,13 +7,10 @@
 
 import UIKit
 
-class CupTipViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
+class CupTipViewController: TakeTestMVVMViewController
 {
     @IBOutlet weak var hideTipSelectorView: SelectionCheckmarkView!
     @IBOutlet weak var mainStackView: UIStackView!
-    
-    @Resolved internal var analytics: Analytics
-    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {

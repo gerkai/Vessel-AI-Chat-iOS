@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ScanningDropletsTipViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
+class ScanningDropletsTipViewController: TakeTestMVVMViewController
 {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var hideTipSelectorView: SelectionCheckmarkView!
-    
-    @Resolved internal var analytics: Analytics
-    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {

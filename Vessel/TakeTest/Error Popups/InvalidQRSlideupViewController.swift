@@ -15,6 +15,8 @@ protocol InvalidQRSlideupViewControllerDelegate
 class InvalidQRSlideupViewController: SlideupViewController
 {
     var delegate: InvalidQRSlideupViewControllerDelegate?
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     @IBAction func tryAgain()
     {

@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class CaptureIntroViewController: TakeTestMVVMViewController, VesselScreenIdentifiable
+class CaptureIntroViewController: TakeTestMVVMViewController
 {
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -19,9 +19,6 @@ class CaptureIntroViewController: TakeTestMVVMViewController, VesselScreenIdenti
     var looper: AVPlayerLooper?
 #endif
     private var videoThumbImage: UIImageView?
-    
-    @Resolved internal var analytics: Analytics
-    let flowName: AnalyticsFlowName = .takeTestFlow
     
     override func viewDidLoad()
     {

@@ -87,6 +87,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
         splashView.playAnimation()
     }
     

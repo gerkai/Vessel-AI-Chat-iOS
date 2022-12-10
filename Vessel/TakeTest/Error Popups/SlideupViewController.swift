@@ -24,6 +24,7 @@ class SlideupViewController: UIViewController
     
     override func viewDidAppear(_ animated: Bool)
     {
+        super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
         {
             self.darkenView.alpha = 1.0

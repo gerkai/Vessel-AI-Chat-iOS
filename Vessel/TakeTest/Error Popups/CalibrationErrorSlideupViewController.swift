@@ -15,6 +15,8 @@ protocol CalibrationErrorSlideupViewControllerDelegate
 class CalibrationErrorSlideupViewController: SlideupViewController
 {
     var delegate: CalibrationErrorSlideupViewControllerDelegate?
+    var flowName: AnalyticsFlowName = .takeTestFlow
+    @Resolved internal var analytics: Analytics
     
     @IBAction func customerSupport()
     {
