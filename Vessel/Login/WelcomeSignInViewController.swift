@@ -207,6 +207,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     {
         if key == lock
         {
+            UserDefaults.standard.set(true, forKey: Constants.KEY_DEBUG_MENU)
             showDebugButton()
         }
         else
