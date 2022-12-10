@@ -497,7 +497,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
             ReagentResult(id: 1, score: 1.0, value: 5.5, errorCodes: []), //pH
             ReagentResult(id: 3, score: 0.0, value: 0.0, errorCodes: []), //Ketones
             ReagentResult(id: 4, score: 0.2, value: 150.0, errorCodes: []), //Vitamin C
-            ReagentResult(id: 2, score: 0.6, value: 1.03, errorCodes: []), //Hydration
+            ReagentResult(id: 2, score: 0.6, value: 1.0015, errorCodes: []), //Hydration
             ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: []), //Magnesium
             ReagentResult(id: 21, score: 1.0, value: 0.50, errorCodes: []) //Nitrite
         ])

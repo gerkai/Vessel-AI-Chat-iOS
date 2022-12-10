@@ -17,9 +17,9 @@ enum PlanType: Codable
 
 struct PlanResponse: Decodable
 {
-    let plans: [Plan]
+    let plans: [ServerPlan]
     
-    internal init(plans: [Plan])
+    internal init(plans: [ServerPlan])
     {
         self.plans = plans
     }

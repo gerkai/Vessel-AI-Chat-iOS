@@ -305,6 +305,10 @@ class AfterTestViewModel
             contactFlags |= Constants.SAW_TESTING_REMINDER
             //screens.append(.TEST_REMINDER)
         }
+        if !screens.contains(.HYDRO_LOW_3) && contact.flags & Constants.SAW_HYDRATION_LOW_INFO == 0 && contact.flags & Constants.SAW_HYDRATION_HIGH_INFO == 0
+        {
+            screens.append(.HYDRO_HIGH_4)
+        }
     }
     
     //MARK: - navigation

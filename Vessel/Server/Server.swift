@@ -894,7 +894,7 @@ class Server: NSObject
                 
                 DispatchQueue.main.async()
                 {
-                    success(multiplePlansResponse.plans)
+                    success(ServerPlan.convert(serverPlans: multiplePlansResponse.plans))
                 }
             }
             catch

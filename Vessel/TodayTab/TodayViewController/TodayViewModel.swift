@@ -20,7 +20,7 @@ enum TodayViewSection: Equatable
     case insights(insights: [Lesson])
     case activities(activities: [Tip])
     case food(foods: [Food])
-    case water(glassesNumber: Int, checkedGlasses: Int)
+    case water(glassesNumber: Int?, checkedGlasses: Int?)
     //case customize
     case footer
     
@@ -45,10 +45,7 @@ enum TodayViewSection: Equatable
         case .insights(let lessons): return createInsightsSection(lessons: lessons)
         case .activities(let activities): return createActivitiesSection(activities: activities)
         case .food(let foods): return createFoodSection(foods: foods)
-        case .water(let glassesNumber, let checkedGlasses): return [
-            .sectionTitle(icon: "water-icon", name: NSLocalizedString("\(glassesNumber * 8) oz Water", comment: "Water amount")),
-            .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
-        ]
+        case .water(let glassesNumber, let checkedGlasses): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
         case .footer: return [.footer]
         }
     }
@@ -118,6 +115,15 @@ enum TodayViewSection: Equatable
         return [
             .sectionTitle(icon: "food-icon", name: "Food"),
             .foodDetails(foods: foods)
+        ]
+    }
+    
+    func createWaterSection(glassesNumber: Int?, checkedGlasses: Int?) -> [TodayViewCell]
+    {
+        guard let glassesNumber = glassesNumber, let checkedGlasses = checkedGlasses else { return [] }
+        return [
+            .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount"))"),
+            .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
         ]
     }
     
@@ -222,7 +228,7 @@ class TodayViewModel
             .insights(insights: lessons),
             .activities(activities: activities),
             .food(foods: contact.suggestedFoods),
-            .water(glassesNumber: contact.dailyWaterIntake ?? Constants.MINIMUM_WATER_INTAKE, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
+            .water(glassesNumber: contact.dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses),
             .footer
         ]
     }

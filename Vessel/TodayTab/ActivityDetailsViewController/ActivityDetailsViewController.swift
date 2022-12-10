@@ -71,7 +71,6 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
         { error in
             self.removeFromPlanButton.isEnabled = true
         }
-
     }
 }
 
