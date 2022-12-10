@@ -10,29 +10,22 @@
 //  reveal a new Debug button.
 
 import UIKit
-import Lottie
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate, SplashViewDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
     @IBOutlet private weak var environmentLabel: UILabel!
     @IBOutlet private weak var buttonStackView: UIStackView!
-    @IBOutlet private weak var splashView: UIView!
-    @IBOutlet private weak var animationContainerView: UIView!
+    @IBOutlet private weak var splashView: SplashView!
     @IBOutlet private weak var vesselLogoImageView: UIImageView!
-    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     var timer: Timer!
-    var activityTimer: Timer!
-    
-    var animationView: LottieAnimationView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
     
     let labelRefreshInterval = 2.0 //Seconds
-    let activityIndicatorAppearanceInterval = 4.0 //Seconds
     
     //these are the words that animate under "In pursuit of better"
     let goals = [NSLocalizedString("focus", comment: ""),
@@ -54,10 +47,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        splashView.delegate = self
         
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
+        splashView.set(visible: true)
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("WelcomeSignIn did load")
@@ -67,35 +62,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             showDebugButton()
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(hideSplashScreen), name: .hideSplashScreen, object: nil)
-    }
-    
-    @objc func hideSplashScreen()
-    {
-        self.splashView.alpha = 0.0
     }
     
     func onAlertDismissed(_ alert: GenericAlertViewController, alertDescription: String)
     {
         //try connecting to the internet again.
         checkInternet()
-    }
-    
-    func playAnimation()
-    {
-        animationView = .init(name: "splash_animation")
-        animationView!.frame = animationContainerView.bounds
-        animationView!.contentMode = .scaleAspectFit
-        animationView!.loopMode = .playOnce
-        animationView!.animationSpeed = 1.0
-        animationContainerView.addSubview(animationView!)
-        animationView!.play
-        {(isFinished) in
-            if isFinished
-            {
-                self.checkInternet()
-            }
-        }
     }
     
     deinit
@@ -111,14 +83,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         let savedEnvironment = UserDefaults.standard.integer(forKey: Constants.environmentKey)
         updateEnvironmentLabel(env: savedEnvironment)
         timer = Timer.scheduledTimer(timeInterval: labelRefreshInterval, target: self, selector: #selector(updateGoals), userInfo: nil, repeats: true)
-        
-        activityTimer = Timer.scheduledTimer(timeInterval: activityIndicatorAppearanceInterval, target: self, selector: #selector(showActivityIndicator), userInfo: nil, repeats: false)
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        playAnimation()
+        splashView.playAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -185,11 +155,6 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             goalIndex = 0
         }
-    }
-    
-    @objc func showActivityIndicator()
-    {
-        activityIndicatorView.startAnimating()
     }
     
     @IBAction func onLeftButton()
@@ -280,5 +245,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     func didChangeEnvironment(env: Int)
     {
         updateEnvironmentLabel(env: env)
+    }
+    
+    //MARK: - SplashView delegates
+    func splashAnimationFinished()
+    {
+        checkInternet()
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct ActivityDetailsModel
 {
+    let id: Int
     let imageUrl: String
     let title: String
     let subtitle: String
@@ -29,6 +30,11 @@ class ActivityDetailsViewModel
     }
     
     // MARK: - Public properties
+    var id: Int
+    {
+        object.id
+    }
+    
     var imageURL: URL?
     {
         URL(string: object.imageUrl)

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashView" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicatorView" destination="5gi-dh-mB7" id="Nbd-BZ-uxx"/>
+                <outlet property="animationContainerView" destination="ksE-8s-ouE" id="vhZ-rs-nDm"/>
+                <outlet property="contentView" destination="JRM-Fb-RAn" id="eVq-lt-Eq4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRM-Fb-RAn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ksE-8s-ouE">
+                            <rect key="frame" x="87.666666666666686" y="203.66666666666663" width="200" height="260"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="42g-tU-yar"/>
+                                <constraint firstAttribute="height" constant="260" id="5U5-wU-DZf"/>
+                            </constraints>
+                        </view>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="5gi-dh-mB7">
+                            <rect key="frame" x="169" y="541" width="37" height="37"/>
+                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="5gi-dh-mB7" secondAttribute="bottom" constant="89" id="MH4-KZ-tqK"/>
+                        <constraint firstItem="ksE-8s-ouE" firstAttribute="centerY" secondItem="JRM-Fb-RAn" secondAttribute="centerY" id="Uyg-w0-RMa"/>
+                        <constraint firstItem="ksE-8s-ouE" firstAttribute="centerX" secondItem="JRM-Fb-RAn" secondAttribute="centerX" id="er5-Oj-shN"/>
+                        <constraint firstItem="5gi-dh-mB7" firstAttribute="centerX" secondItem="JRM-Fb-RAn" secondAttribute="centerX" id="urm-cD-AmQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="JRM-Fb-RAn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Ow-6H-yRa"/>
+                <constraint firstItem="JRM-Fb-RAn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LOj-8g-IIN"/>
+                <constraint firstItem="JRM-Fb-RAn" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="Lmo-p6-BdY"/>
+                <constraint firstItem="JRM-Fb-RAn" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="kiv-o9-V0b"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="-11"/>
+        </view>
+    </objects>
+</document>

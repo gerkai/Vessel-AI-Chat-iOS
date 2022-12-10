@@ -202,12 +202,12 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                guard let activity = activities[safe: indexPath.row - 1] else { return }
+                guard let activity = activities[safe: indexPath.row - 1],
+                      let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activity.id }) else { return }
                 let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                 let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
                 activityDetailsVC.hidesBottomBarWhenPushed = true
-                activityDetailsVC.setup(model: activity.activityDetailsModel)
-                
+                activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id))
                 analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
                 
                 navigationController?.pushViewController(activityDetailsVC, animated: true)
@@ -268,11 +268,12 @@ extension TodayViewController: FoodCheckmarkViewDelegate
     
     func checkmarkViewTapped(view: FoodCheckmarkView)
     {
-        guard let food = view.food else { return }
+        guard let food = view.food,
+        let plan = PlansManager.shared.getFoodPlans().first(where: { $0.typeId == food.id }) else { return }
         let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
         let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
         activityDetailsVC.hidesBottomBarWhenPushed = true
-        activityDetailsVC.setup(model: food.activityDetailsModel)
+        activityDetailsVC.setup(model: food.getActivityDetailsModel(planId: plan.id))
         
         analytics.log(event: .foodShown(foodId: food.id, foodName: food.title))
         
