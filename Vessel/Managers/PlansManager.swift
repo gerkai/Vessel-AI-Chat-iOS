@@ -77,6 +77,10 @@ class PlansManager
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
+        if plansToRemove.contains(where: {  $0.type == .food })
+        {
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
+        }
     }
     
     func togglePlanCompleted(planId: Int, date: String, completed: Bool)
