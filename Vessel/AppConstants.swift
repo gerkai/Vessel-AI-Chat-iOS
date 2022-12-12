@@ -30,7 +30,7 @@ struct Constants
     static let zenDeskSupportURL = "https://vesselhealth.zendesk.com/hc/en-us"
     
     //media
-    static let mediaPath = "https://dittylabs.com/temp/vessel"
+    static let mediaPath = "https://media.vesselhealth.com"
     static let testCardTutorialVideo = "test_card_tutorial.mp4"
     static let timerFirstVideo = "timer_first_video.mp4"
     static let timerSecondVideo = "timer_second_video.mp4"
