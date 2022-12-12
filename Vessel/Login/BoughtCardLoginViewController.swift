@@ -16,7 +16,7 @@ struct BoughtCardLoginForm
 
 struct BoughtCardLoginValidator
 {
-    func validateForm(form: BoughtCardLoginForm) ->(isValid: Bool, error: String?)
+    func validateForm(form: BoughtCardLoginForm) -> (isValid: Bool, error: String?)
     {
         guard let email = form.email?.trimmingCharacters(in: .whitespacesAndNewlines), email.count > 0, email.isValidEmail() else
         {
