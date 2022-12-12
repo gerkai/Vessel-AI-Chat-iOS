@@ -61,7 +61,7 @@ class MediaManager: NSObject
         }
     }
     
-    func downloadMedia(fileName: String, completion: @escaping (_ success: Bool, _ error: Error?) ->())
+    func downloadMedia(fileName: String, completion: @escaping (_ success: Bool, _ error: Error?) -> ())
     {
         if let path = URL(string: Constants.mediaPath + "/" + fileName)
         {
