@@ -13,8 +13,9 @@ enum AnalyticsEvent
     case activityAdded(activityId: Int, activityName: String)
     case activityComplete(activityId: Int, activityName: String, completed: Bool)
     case activityShown(activityId: Int, activityName: String)
-    case capturedCard
-    case cardScanningStarted
+    case cancelButtonTapped
+    case cameraOpened
+    case continuePastTimer
     case dontForgetShown
     case foodAdded(foodId: Int, foodName: String)
     case foodComplete(foodId: Int, foodName: String, completed: Bool)
@@ -24,9 +25,14 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
+    case sampleImageCaptured
+    case sampleImageConfirmed
     case scanError(errorString: String)
     case signUp(loginType: AnalyticsLoginType)
     case skipCaptureTimer
+    case startCaptureTimer
+    case testTaken
+    case vButtonTapped
     case viewedPage(screenName: String, flowName: AnalyticsFlowName, associatedValue: String? = nil)
     case waterAdded
     case waterComplete(waterAmount: Int, totalWaterAmount: Int)
@@ -39,8 +45,9 @@ enum AnalyticsEvent
         case .activityAdded: return "Activity Added"
         case .activityComplete: return "Activity Complete"
         case .activityShown: return "Activity Shown"
-        case .capturedCard: return "Captured Card"
-        case .cardScanningStarted: return "Card Scanning Started"
+        case .cancelButtonTapped: return "CANCEL TAKE TEST"
+        case .cameraOpened: return "CAMERA OPENED"
+        case .continuePastTimer: return "CONTINUE PAST TIMER"
         case .dontForgetShown: return "Don't Forget Popup Shown"
         case .foodAdded: return "Food Added"
         case .foodComplete: return "Food Complete"
@@ -50,9 +57,14 @@ enum AnalyticsEvent
         case .lessonCompleted: return "Lesson Completed"
         case .lessonStarted: return "Lesson Started"
         case .logIn: return "Log In"
-        case .scanError: return "Scan Error"
+        case .sampleImageCaptured: return "SAMPLE IMAGE CAPTURED"
+        case .sampleImageConfirmed: return "SAMPLE IMAGE CONFIRMED"
+        case .scanError: return "SCAN ERROR"
         case .signUp: return "Sign Up"
-        case .skipCaptureTimer: return "Skip Capture Timer"
+        case .skipCaptureTimer: return "SKIP TIMER"
+        case .startCaptureTimer: return "START TIMER"
+        case .testTaken: return "TEST TAKEN"
+        case .vButtonTapped: return "TAKE TEST V BUTTON"
         case .viewedPage: return "Viewed Page"
         case .waterAdded: return "Water Added"
         case .waterComplete: return "Water Complete"
@@ -75,9 +87,11 @@ enum AnalyticsEvent
         case .activityShown(let activityId, let activityName):
             return ["Activity ID": activityId,
                     "Activity Name": activityName]
-        case .capturedCard:
+        case .cancelButtonTapped:
             return [:]
-        case .cardScanningStarted:
+        case .cameraOpened:
+            return [:]
+        case .continuePastTimer:
             return [:]
         case .dontForgetShown:
             return [:]
@@ -103,11 +117,21 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
+        case .sampleImageCaptured:
+            return [:]
+        case .sampleImageConfirmed:
+            return [:]
         case .scanError(let errorString):
             return ["Error Type:": errorString]
         case .signUp(let loginType):
             return ["Login Type": loginType.rawValue]
         case .skipCaptureTimer:
+            return [:]
+        case .startCaptureTimer:
+            return [:]
+        case .testTaken:
+            return [:]
+        case .vButtonTapped:
             return [:]
         case .viewedPage(let screenName, let flowName, let associatedValue):
             if let associatedValue = associatedValue

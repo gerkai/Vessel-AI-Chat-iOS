@@ -153,16 +153,7 @@ class MainTabBarController: UITabBarController
     
     @objc func vesselButtonPressed()
     {
-        /*
-        let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ResultsNavController") as! UINavigationController
-        let root = vc.viewControllers[0] as! ResultsViewController
-        root.mockTestResult()
-        //self.viewModel.uploadingFinished()
-        //self.navigationController?.pushViewController(vc, animated: true)
-        self.present(vc, animated: true)
-        //self.navigationController?.pushViewController(vc, animated: true)
-        */
+        analytics.log(event: .vButtonTapped)
         if isWithinTestingWindow()
         {
             //allow enough time for Vessel button to finish animating
@@ -264,6 +255,10 @@ extension MainTabBarController: GenericAlertDelegate
             {
                 self.segueToNextVC()
             }
+        }
+        else
+        {
+            analytics.log(event: .cancelButtonTapped)
         }
     }
 }

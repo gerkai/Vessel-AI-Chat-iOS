@@ -241,6 +241,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     @IBAction func onSkipButton()
     {
+        analytics.log(event: .skipCaptureTimer)
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SkipTimerSlideupViewController") as! SkipTimerSlideupViewController
         vc.delegate = self
@@ -396,7 +397,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         skipTimerSlideupVC = nil
         if proceedToSkip
         {
-            analytics.log(event: .skipCaptureTimer)
+            analytics.log(event: .continuePastTimer)
             viewModel.skipTimer()
             viewModel.delegate = nil
             removeNotification()

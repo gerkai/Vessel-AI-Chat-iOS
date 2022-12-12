@@ -202,6 +202,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onLooksGood()
     {
+        analytics.log(event: .sampleImageConfirmed)
         UIApplication.shared.isIdleTimerDisabled = false
         let vc = viewModel.nextViewController()
         
@@ -375,7 +376,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
-        analytics.log(event: .capturedCard)
+        analytics.log(event: .sampleImageCaptured)
         print("DID FINISH CAPTURE")
         if error == nil
         {
