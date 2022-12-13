@@ -98,13 +98,22 @@ enum TodayViewSection: Equatable
         for activity in activities
         {
             let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activity.id })
-            cells.append(.checkMarkCard(title: activity.title,
-                                        subtitle: activity.frequency,
-                                        description: activity.description,
-                                        backgroundImage: activity.imageUrl,
-                                        isCompleted: plan?.isComplete ?? false,
-                                        id: activity.id,
-                                        type: .activity))
+            if (plan?.completed ?? []).contains(Date.serverDateFormatter.string(from: Date()))
+            {
+                cells.append(.foldedCheckMarkCard(title: activity.title,
+                                                  subtitle: "",
+                                                  backgroundImage: activity.imageUrl))
+            }
+            else
+            {
+                cells.append(.checkMarkCard(title: activity.title,
+                                            subtitle: activity.frequency,
+                                            description: activity.description,
+                                            backgroundImage: activity.imageUrl,
+                                            isCompleted: plan?.isComplete ?? false,
+                                            id: activity.id,
+                                            type: .activity))
+            }
         }
         return cells
     }
