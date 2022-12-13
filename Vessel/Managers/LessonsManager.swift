@@ -26,7 +26,7 @@ class LessonsManager
     {
         let firstUncompletedIndex = min(MAX_LESSONS_PER_DAY, lessons.firstIndex(where: { $0.completedDate == nil }) ?? MAX_LESSONS_PER_DAY)
         let index = max(0, unlockMoreInsights ? firstUncompletedIndex : firstUncompletedIndex - 1)
-        if lessons.count < index
+        if lessons.count <= index
         {
             return lessons
         }
