@@ -59,6 +59,11 @@ class CheckMarkCardView: UIView
         backgroundImageView.kf.setImage(with: url)
     }
     
+    public func setCompleted(completed: Bool)
+    {
+        checkMark.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
+    }
+    
     @objc
     private func onInsightSelected(gestureRecognizer: UITapGestureRecognizer)
     {

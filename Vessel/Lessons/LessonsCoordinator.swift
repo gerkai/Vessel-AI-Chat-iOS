@@ -12,6 +12,8 @@ class LessonsCoordinator
     let lesson: Lesson
     var currentStepIndex = -1
     
+    var startViewController: UIViewController?
+    
     var currentStep: Step?
     {
         if let stepIndex = lesson.stepIds[safe: currentStepIndex]
@@ -81,8 +83,13 @@ class LessonsCoordinator
         ObjectStore.shared.ClientSave(step)
     }
     
-    func getNextStepViewController(state: StepViewControllerState = .answering) -> UIViewController?
+    func getNextStepViewController(state: StepViewControllerState = .answering, startViewController: UIViewController? = nil) -> UIViewController?
     {
+        if let startViewController = startViewController
+        {
+            self.startViewController = startViewController
+        }
+        
         if shouldShowSuccessScreen() && state == .answering
         {
             let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
@@ -130,6 +137,14 @@ class LessonsCoordinator
         lesson.completedDate = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
         LessonsManager.shared.unlockMoreInsights = false
         ObjectStore.shared.serverSave(lesson)
-        navigationController.popToRootViewController(animated: true)
+        
+        if let startViewController = startViewController
+        {
+            navigationController.popToViewController(startViewController, animated: true)
+        }
+        else
+        {
+            navigationController.popToRootViewController(animated: true)
+        }
     }
 }

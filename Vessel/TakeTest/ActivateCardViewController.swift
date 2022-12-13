@@ -87,13 +87,23 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
             firstTimeAppeared = true
             viewModel.startTimer()
         }
-        stackViewHeightConstraint.constant = videoView.frame.height
+        if segmentedControl.selectedSegmentIndex != InsightsIndex
+        {
+            stackViewHeightConstraint.constant = videoView.frame.height
+        }
+        else
+        {
+            updateInsightsStackView()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        playerViewController?.player?.play()
+        if segmentedControl.selectedSegmentIndex != InsightsIndex
+        {
+            playerViewController?.player?.play()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -213,6 +223,27 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
                 let view = CheckMarkCardView(frame: .zero)
                 view.setup(id: lesson.id, title: lesson.title, subtitle: lesson.subtitleString(), description: lesson.description, backgroundImage: lesson.imageUrl ?? "", completed: lesson.isComplete, delegate: self)
                 stackView.addArrangedSubview(view)
+            }
+            if lessons.count > 0
+            {
+                stackViewHeightConstraint.constant = CGFloat(lessons.count * 203) + CGFloat((lessons.count - 1) * 20)
+            }
+            else
+            {
+                stackViewHeightConstraint.constant = videoView.frame.height
+            }
+        }
+    }
+    
+    func updateInsightsStackView()
+    {
+        if showInsights
+        {
+            let lessons = LessonsManager.shared.todayLessons
+            for cardView in stackView.arrangedSubviews as? [CheckMarkCardView] ?? []
+            {
+                guard let lesson = lessons.first(where: { $0.id == cardView.id }) else { return }
+                cardView.setCompleted(completed: lesson.isComplete)
             }
             if lessons.count > 0
             {
@@ -416,15 +447,15 @@ extension ActivateCardViewController: CheckMarkCardViewDelegate
         {
             for _ in stride(from: 0, to: index, by: 1)
             {
-                guard let viewController = coordinator.getNextStepViewController() else { return }
+                guard let viewController = coordinator.getNextStepViewController(startViewController: self) else { return }
                 navigationController?.pushViewController(viewController, animated: false)
             }
-            guard let viewController = coordinator.getNextStepViewController() else { return }
+            guard let viewController = coordinator.getNextStepViewController(startViewController: self) else { return }
             navigationController?.fadeTo(viewController)
         }
         else
         {
-            guard let viewController = coordinator.getNextStepViewController() else { return }
+            guard let viewController = coordinator.getNextStepViewController(startViewController: self) else { return }
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
