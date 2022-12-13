@@ -19,7 +19,7 @@ let Leukocyte = Reagent(
             hint: TitleDescription(
                 title: NSLocalizedString("PLACEHOLDER TEXT - POSITIVE LEUKOCYTE", comment: ""),
                 description: NSLocalizedString("PLACEHOLDER DESCRIPTION - POSITIVE LEUKOCYTE", comment: ""))),
-        Bucket(low: 0.0, high: 60.0, score: 0.0, evaluation: .notDetected,
+        Bucket(low: 0.0, high: 60.0, score: 0.0, evaluation: .normal,
             hint: TitleDescription(title: NSLocalizedString("PLACEHOLDER TEXT - NEGATIVE LEUKOCYTE", comment: ""),
             description: NSLocalizedString("PLACEHOLDER DESCRIPTION FOR NEGATIVE LEUKOCYTE", comment: "")))],
     goalImpacts: [],
