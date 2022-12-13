@@ -53,7 +53,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     {
         super.viewDidLoad()
         uploadImage()
-        analytics.log(event: .cardScanningStarted)
+        analytics.log(event: .cameraOpened)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -190,6 +190,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         self.percentLabel.text = ""
         if retryCount >= maxRetryCount
         {
+            analytics.log(event: .scanError(errorString: "TIMEOUT"))
             showOtherErrorPopup()
             retryCount = 0
             return
@@ -203,6 +204,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     {
         Server.shared.getScore(sampleID: sampleUUID)
         { testResult in
+            self.analytics.log(event: .testTaken)
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
             vc.testResult = testResult
@@ -245,7 +247,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func showCropFailurePopup()
     {
-        analytics.log(event: .scanError(errorString: "Card Crop Failure"))
+        analytics.log(event: .scanError(errorString: "CROP FAILURE"))
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CropFailureSlideupViewController") as! CropFailureSlideupViewController
         vc.delegate = self
@@ -254,7 +256,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func showAlreadyScannedPopup()
     {
-        analytics.log(event: .scanError(errorString: "Card Already Scanned"))
+        analytics.log(event: .scanError(errorString: "CARD ALREADY SCANNED"))
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AlreadyScannedSlideupViewController") as! AlreadyScannedSlideupViewController
         vc.delegate = self
@@ -263,7 +265,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func showCalibrationError(statusCode: Int)
     {
-        analytics.log(event: .scanError(errorString: "Card Calibration Error"))
+        analytics.log(event: .scanError(errorString: "CALIBRATION"))
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CalibrationErrorSlideupViewController") as! CalibrationErrorSlideupViewController
         vc.delegate = self
@@ -272,7 +274,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func showInvalidQRCodePopup()
     {
-        analytics.log(event: .scanError(errorString: "Card Invalid QR Code"))
+        analytics.log(event: .scanError(errorString: "BAD QR CODE"))
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "InvalidQRSlideupViewController") as! InvalidQRSlideupViewController
         vc.delegate = self
@@ -281,7 +283,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
     
     private func showOtherErrorPopup()
     {
-        analytics.log(event: .scanError(errorString: "Card Other Error"))
+        analytics.log(event: .scanError(errorString: "UNABLE TO UPLOAD"))
         let storyboard = UIStoryboard(name: "TakeTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UploadErrorSlideupViewController") as! UploadErrorSlideupViewController
         vc.delegate = self

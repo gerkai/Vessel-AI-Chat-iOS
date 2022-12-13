@@ -146,6 +146,7 @@ class CaptureIntroViewController: TakeTestMVVMViewController
     
     @IBAction func startTimerSelected(_ sender: Any)
     {
+        analytics.log(event: .startCaptureTimer)
         let vc = viewModel.nextViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
