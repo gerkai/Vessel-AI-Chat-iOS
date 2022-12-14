@@ -72,21 +72,7 @@ class Contact: CoreObjectProtocol
         
         let foodIds: [Int]
         let foodPlans = PlansManager.shared.getFoodPlans()
-        if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
-        {
-            foodIds = foodPlans.map({ $0.typeId })
-        }
-        else
-        {
-            foodIds = foodPlans.compactMap
-            {
-                if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
-                {
-                    return $0.typeId
-                }
-                return nil
-            }
-        }
+        foodIds = foodPlans.map({ $0.typeId })
         
         let foods: [Food] = foodIds.compactMap({ foodId in
             return storedFoods.first(where: { $0.id == foodId })
@@ -279,25 +265,10 @@ class Contact: CoreObjectProtocol
         suggestedFoods =
         {
             let storedFoods = Storage.retrieve(as: Food.self)
-            let dayOfWeek = Date().dayOfWeek
             let foodIds: [Int]
             
             let foodPlans = PlansManager.shared.getFoodPlans()
-            if UserDefaults.standard.bool(forKey: Constants.SHOW_ALL_FOODS_EVERYDAY)
-            {
-                foodIds = foodPlans.map({ $0.typeId })
-            }
-            else
-            {
-                foodIds = foodPlans.compactMap
-                {
-                    if let dayOfWeek = dayOfWeek, $0.dayOfWeek?.contains(dayOfWeek) ?? false
-                    {
-                        return $0.typeId
-                    }
-                    return nil
-                }
-            }
+            foodIds = foodPlans.map({ $0.typeId })
             
             let foods: [Food] = foodIds.compactMap({ foodId in
                 return storedFoods.first(where: { $0.id == foodId })

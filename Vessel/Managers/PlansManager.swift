@@ -12,8 +12,6 @@ class PlansManager
     static let shared = PlansManager()
     var plans = [Plan]()
     var activities = [Tip]()
-    // Commented out to fix a bug where the plans would not arrive from the server after completing
-    let lastUpdated = 1//Storage.newestLastUpdatedFor(type: Plan.self)
 
     func loadPlans()
     {

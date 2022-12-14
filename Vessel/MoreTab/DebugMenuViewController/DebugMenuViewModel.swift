@@ -29,7 +29,6 @@ enum DebugMenuOption: Int
     case resetLessonProgress
     case newDayForLesson
     case useMockResults
-    case showAllFoodsEveryday
     
     var title: String
     {
@@ -55,7 +54,6 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return "Reset Lesson Progress"
             case .newDayForLesson: return "Make today a new lesson day"
             case .useMockResults: return "Use mock test results"
-            case .showAllFoodsEveryday: return "Show all foods everyday"
         }
     }
     
@@ -87,7 +85,6 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
             case .newDayForLesson: return Constants.KEY_NEW_LESSON_DAY
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
-            case .showAllFoodsEveryday: return Constants.SHOW_ALL_FOODS_EVERYDAY
         }
     }
     
@@ -213,7 +210,6 @@ class DebugMenuViewModel
         .eraseSteps,
         .resetLessonProgress,
         .newDayForLesson,
-        .useMockResults,
-        .showAllFoodsEveryday
+        .useMockResults
     ]
 }
