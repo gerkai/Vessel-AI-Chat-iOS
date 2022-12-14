@@ -86,6 +86,16 @@ class OnboardingCoordinator
                 //send splash fade notification
                 WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
                 
+                // TODO: Remove later, just for testing purposes
+                //Print current progress for last week
+                print("LAST WEEK PROGRESS WAS:")
+                let progress = PlansManager.shared.getLastWeekPlansProgress()
+                let dates = progress.keys.sorted(by: { $0 < $1 })
+                for date in dates
+                {
+                    print("\(date): \(progress[date] ?? 0.0)")
+                }
+                
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
                 navigationController?.fadeTo(vc)

@@ -12,7 +12,7 @@ class PlansManager
     static let shared = PlansManager()
     var plans = [Plan]()
     var activities = [Tip]()
-
+    
     func loadPlans()
     {
         plans = Storage.retrieve(as: Plan.self)
@@ -34,7 +34,7 @@ class PlansManager
                 self.activities = activities
                 done()
             }
-            onFailure:
+        onFailure:
             {
                 done()
             }
@@ -116,7 +116,7 @@ class PlansManager
             }
         }
     }
-        
+    
     //returns array of only food plans
     func getFoodPlans() -> [Plan]
     {
@@ -133,5 +133,71 @@ class PlansManager
     func getLifestyleRecommendations() -> [Plan]
     {
         return plans.filter({ $0.type == .lifestyleRecommendation })
+    }
+}
+
+// MARK: - Gamification
+
+extension PlansManager
+{
+    func getLastWeekPlansProgress() -> [String: Double]
+    {
+        var progress = [String: Double]()
+        let currentDate = Date()
+        var offset = -6
+        var startDate = Calendar.current.date(byAdding: .day, value: offset, to: currentDate) ?? Date()
+        while offset <= 0
+        {
+            let dateString = Date.serverDateFormatter.string(from: startDate)
+            progress[dateString] = calculateProgressFor(date: dateString)
+            offset += 1
+            startDate = Calendar.current.date(byAdding: .day, value: offset, to: currentDate) ?? Date()
+        }
+        return progress
+    }
+    
+    // Given a certain date in server format calculate the progress for this date and returns it in a value from 0 to 1
+    func calculateProgressFor(date: String) -> Double
+    {
+        // Feature flags
+        let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
+        let showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
+
+        var progress: Double = 0.0
+        var parts: Double = 0.0
+        
+        // Activities
+        let activities = getActivities()
+        if showActivites && !activities.isEmpty
+        {
+            parts += 1
+            progress += Double(activities.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
+        }
+        
+        // Foods
+        let foods = getFoodPlans()
+        if !foods.isEmpty
+        {
+            parts += 1
+            progress += foods.contains(where: { $0.completed.contains(date) }) ? 1.0 : 0.0
+        }
+        
+        // Insights
+        if showInsights && !LessonsManager.shared.lessonsCompleted()
+        {
+            parts += 1
+            let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(date: date)
+            progress += completedLessonsCount > 0 ? 1.0 : 0.0
+        }
+        
+        // Water
+        if let contact = Contact.main(), let waterActivity = PlansManager.shared.getLifestyleRecommendations().filter({ $0.typeId == 5}).first, let dailyWaterIntake = contact.dailyWaterIntake
+        {
+            parts += 1
+            let amount = waterActivity.completionInfo?.first(where: { $0.date == date })?.units
+            progress += Double(amount ?? 0) / Double(dailyWaterIntake)
+        }
+        
+        return progress / parts
     }
 }

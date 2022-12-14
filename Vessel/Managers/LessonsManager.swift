@@ -220,6 +220,23 @@ class LessonsManager
         }
     }
     
+    func getLessonsCompletedOn(date: String) -> Int
+    {
+        return lessons.filter({ $0.completedDate != nil }).map({ $0.completedDate }).filter { completedDate in
+            guard let completedDateString = completedDate,
+                  let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
+                  let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString),
+                  let date = Date.serverDateFormatter.date(from: date) else { return false }
+
+            return Date.isSameDay(date1: completedDate, date2: date)
+        }.count
+    }
+    
+    func lessonsCompleted() -> Bool
+    {
+        return (lessons.last?.isComplete ?? false) && !(lessons.last?.completedToday ?? true)
+    }
+    
     @objc
     func dayChanged(_ notification: Notification)
     {
