@@ -33,7 +33,6 @@ class ReagentFoodViewController: AfterTestMVVMViewController
                 guard let self = self else { return }
                 self.tableView.reloadData()
                 self.updateSubtitle()
-                self.updateNextButton()
             }
             onFailure:
             { error in
@@ -44,29 +43,9 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         let inset = UIEdgeInsets(top: 28, left: 0, bottom: 0, right: 0)
         self.tableView.contentInset = inset
         
-        updateNextButton()
         viewModel.newSelectedFoods = []
     }
-    
-    // MARK: - UI
-    func updateNextButton()
-    {
-        let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
-            { (selectedFoodId) in
-                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
-            }
-        )
         
-        if viewModel.newSelectedFoods.count > 0 || (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
-        {
-            nextButton.backgroundColor = Constants.vesselBlack
-        }
-        else
-        {
-            nextButton.backgroundColor = Constants.vesselGray
-        }
-    }
-    
     func updateSubtitle()
     {
         let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
@@ -101,24 +80,20 @@ class ReagentFoodViewController: AfterTestMVVMViewController
             }
         )
 
-        if viewModel.newSelectedFoods.count > 0
+        if (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count) || viewModel.newSelectedFoods.count == 0
+        {
+            nextScreen()
+        }
+        else if viewModel.newSelectedFoods.count > 0
         {
             nextButton.isEnabled = false
             nextButton.backgroundColor = Constants.vesselGray
-
+            
             addFoodsToPlan
             {
                 self.nextButton.isEnabled = true
                 self.nextButton.backgroundColor = Constants.vesselBlack
             }
-        }
-        else if (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
-        {
-            nextScreen()
-        }
-        else
-        {
-            UIView.showError(text: "", detailText: NSLocalizedString("Please select at least one food", comment: ""))
         }
     }
 }
@@ -183,6 +158,5 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
             viewModel.newSelectedFoods.append(food)
         }
         tableView.reloadData()
-        updateNextButton()
     }
 }
