@@ -198,6 +198,13 @@ extension PlansManager
             progress += Double(amount ?? 0) / Double(dailyWaterIntake)
         }
         
-        return progress / parts
+        if parts == 0
+        {
+            return 0.0
+        }
+        else
+        {
+            return progress / parts
+        }
     }
 }

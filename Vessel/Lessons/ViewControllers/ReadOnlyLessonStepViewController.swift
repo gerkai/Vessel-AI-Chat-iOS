@@ -16,7 +16,7 @@ class ReadOnlyLessonStepViewController: UIViewController
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
-    @IBOutlet private weak var contentTextLabel: UILabel!
+    @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var progressBar: LessonStepsProgressBar!
     @IBOutlet private weak var nextButton: BounceButton!
     @IBOutlet private weak var planAddedViewTopConstraint: NSLayoutConstraint!
@@ -109,9 +109,19 @@ private extension ReadOnlyLessonStepViewController
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 12
         
+        contentTextView.isScrollEnabled = false
         let mutableAttributedString = viewModel.step.text?.makeAttributedString(fontName: "BananaGrotesk-Regular", textColor: .white)
         mutableAttributedString?.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString?.length ?? 0))
-        contentTextLabel.attributedText = mutableAttributedString
+        
+        contentTextView.linkTextAttributes =
+        [
+            .foregroundColor: UIColor.systemBlue,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        
+        contentTextView.attributedText = mutableAttributedString
+        
+        contentStackView.layoutIfNeeded()
         
         if viewModel.step.activityIds.isEmpty
         {
