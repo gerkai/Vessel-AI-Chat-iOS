@@ -12,6 +12,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     @IBOutlet weak var googleAuthButton: UIButton!
     @IBOutlet weak var appleAuthButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var nextButton: LoadingButton!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .loginFlow
@@ -81,6 +82,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         {
             if Reachability.isConnectedToNetwork()
             {
+                nextButton.showLoading()
                 Server.shared.contactExists(email: email)
                 { exists in
                     let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -90,6 +92,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
                         let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                         vc.prepopulatedEmail = email
                         self.navigationController?.pushViewController(vc, animated: true)
+                        self.nextButton.hideLoading()
                     }
                     else
                     {
@@ -99,6 +102,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
                         //navigate to TestCardExistCheckingViewController
                         let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
                         self.navigationController?.pushViewController(vc, animated: true)
+                        self.nextButton.hideLoading()
                     }
                 }
                 onFailure:
