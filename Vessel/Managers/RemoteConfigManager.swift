@@ -12,6 +12,8 @@ enum RemoteConfigKey
 {
     case insightsFeature
     case activitiesFeature
+    case foodFeature
+    case waterFeature
     
     static var allKeys: [String]
     {
@@ -26,6 +28,10 @@ enum RemoteConfigKey
             return "insights_feature"
         case .activitiesFeature:
             return "activities_feature"
+        case .foodFeature:
+            return "food_feature"
+        case .waterFeature:
+            return "water_feature"
         }
     }
     
@@ -33,7 +39,7 @@ enum RemoteConfigKey
     {
         switch self
         {
-        case .insightsFeature, .activitiesFeature:
+        case .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature:
             return RemoteConfig.remoteConfig()[key].boolValue
         }
     }
@@ -94,12 +100,15 @@ class RemoteConfigManager
         switch index
         {
         case Constants.DEV_INDEX, Constants.STAGING_INDEX:
-            if key == .insightsFeature
+            switch key
             {
+            case .insightsFeature:
                 return true
-            }
-            else if key == .activitiesFeature
-            {
+            case .activitiesFeature:
+                return true
+            case .foodFeature:
+                return true
+            case .waterFeature:
                 return true
             }
         case Constants.PROD_INDEX:
@@ -107,6 +116,5 @@ class RemoteConfigManager
         default:
             return key.value
         }
-        return key.value
     }
 }

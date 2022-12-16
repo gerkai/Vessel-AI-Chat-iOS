@@ -213,6 +213,8 @@ class TodayViewModel
     // Feature flags
     var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
     var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
+    var showFoods: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
+    var showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
     
     var numberOfGlasses: Int?
     {
@@ -231,13 +233,15 @@ class TodayViewModel
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return plans.contains(where: { $0.typeId == activity.id })
         }) : []
+        let foods = showFoods ? contact.suggestedFoods : []
+        let dailyWaterIntake = showWater ? contact.dailyWaterIntake : nil
         
         return [
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .insights(insights: lessons),
             .activities(activities: activities),
-            .food(foods: contact.suggestedFoods),
-            .water(glassesNumber: contact.dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
+            .food(foods: foods),
+            .water(glassesNumber: dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
             .footer
         ]
     }
