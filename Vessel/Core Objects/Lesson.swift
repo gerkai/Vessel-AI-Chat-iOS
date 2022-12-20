@@ -41,7 +41,7 @@ class Lesson: CoreObjectProtocol, Equatable
          title: String,
          description: String,
          imageUrl: String?,
-         completedDate: String? = nil,
+         completedDate: String?,
          rank: Int,
          stepIds: [Int],
          goalIds: [Int],

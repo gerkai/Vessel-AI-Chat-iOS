@@ -114,13 +114,13 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             cell.setup(name: name, goals: goals, delegate: self)
         case .progressDays(let progress):
             guard let cell = cell as? TodayProgressDaysCell else { fatalError("Can't dequeue cell TodayProgressDaysCell from tableView in TodayViewController") }
-            cell.setup(progress: progress)
+            cell.setup(progress: progress, selectedDay: viewModel.selectedDate, delegate: self)
         case .sectionTitle(let icon, let name):
             guard let cell = cell as? TodaySectionTitleTableViewCell else { fatalError("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController") }
             cell.setup(iconName: icon, title: name)
-        case .foodDetails(let foods):
+        case .foodDetails(let foods, let selectedDate):
             guard let cell = cell as? TodayFoodDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayFoodDetailsSectionTableViewCell from tableView in TodayViewController") }
-            cell.setup(foods: foods, delegate: self)
+            cell.setup(foods: foods, selectedDate: selectedDate, delegate: self)
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
@@ -145,10 +145,11 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath?
     {
+        guard viewModel.isToday else { return indexPath }
         guard let section = viewModel.sections[safe: indexPath.section] else { return nil }
         switch section
         {
-        case .insights(let lessons):
+        case .insights(let lessons, _):
             if indexPath.row == 2 || (indexPath.row == (lessons.count + 2))
             {
                 return nil
@@ -165,7 +166,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         guard let section = viewModel.sections[safe: indexPath.section] else { return }
         switch section
         {
-        case .insights(let lessons):
+        case .insights(let lessons, _):
             if indexPath.row == 0
             {
                 GenericAlertViewController.presentAlert(in: self, type:
@@ -176,26 +177,26 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             else
             {
                 // Substract title row and today insights done text row
-                let row = lessons.count > 1 && indexPath.row > 1 ? indexPath.row - 2 : indexPath.row - 1
+                let row = lessons.count > 1 && indexPath.row > 1 && viewModel.isToday ? indexPath.row - 2 : indexPath.row - 1
                 let lesson = lessons[row]
                 let coordinator = LessonsCoordinator(lesson: lesson)
                 if let index = lesson.indexOfFirstUnreadStep()
                 {
                     for _ in stride(from: 0, to: index, by: 1)
                     {
-                        guard let viewController = coordinator.getNextStepViewController() else { return }
+                        guard let viewController = coordinator.getNextStepViewController(shouldSave: false) else { return }
                         navigationController?.pushViewController(viewController, animated: false)
                     }
-                    guard let viewController = coordinator.getNextStepViewController() else { return }
+                    guard let viewController = coordinator.getNextStepViewController(shouldSave: false) else { return }
                     navigationController?.fadeTo(viewController)
                 }
                 else
                 {
-                    guard let viewController = coordinator.getNextStepViewController() else { return }
+                    guard let viewController = coordinator.getNextStepViewController(shouldSave: viewModel.isToday) else { return }
                     navigationController?.pushViewController(viewController, animated: true)
                 }
             }
-        case .activities(let activities):
+        case .activities(let activities, _):
             if indexPath.row == 0
             {
                 GenericAlertViewController.presentAlert(in: self, type:
@@ -227,7 +228,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
             waterDetailsVC.hidesBottomBarWhenPushed = true
-            waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses ?? 0
+            waterDetailsVC.drinkedWaterGlasses = viewModel.drinkedWaterGlasses
             waterDetailsVC.numberOfGlasses = viewModel.numberOfGlasses ?? Constants.MINIMUM_WATER_INTAKE
             waterDetailsVC.waterIntakeViewDelegate = self
             navigationController?.pushViewController(waterDetailsVC, animated: true)
@@ -257,14 +258,14 @@ extension TodayViewController: FoodCheckmarkViewDelegate
             analytics.log(event: .foodComplete(foodId: food.id, foodName: food.title, completed: view.isChecked))
         }
         
-        Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: view.isChecked))
+        Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: view.isChecked))
         { [weak self] togglePlanData in
             guard let self = self else { return }
             PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: []).sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
+            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
         } onFailure: { error in
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: []).sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
+            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
         }
     }
@@ -328,10 +329,10 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             
             if let activity = activities.first(where: { $0.id == plan.typeId })
             {
-                analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.isComplete))
+                analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
             }
             
-            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: Date(), completed: !plan.isComplete))
+            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
             { [weak self] togglePlanData in
                 guard let self = self else { return }
                 PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
@@ -361,5 +362,14 @@ extension TodayViewController: TodayCheckMarkCardDelegate
                 navigationController?.pushViewController(viewController, animated: true)
             }
         }
+    }
+}
+
+extension TodayViewController: ProgressDayViewDelegate
+{
+    func onProgressDayTapped(date: String)
+    {
+        viewModel.selectedDate = date
+        tableView.reloadData()
     }
 }

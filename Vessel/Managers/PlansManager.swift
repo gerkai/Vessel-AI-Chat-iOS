@@ -186,12 +186,12 @@ extension PlansManager
         if showInsights && !LessonsManager.shared.lessonsCompleted()
         {
             parts += 1
-            let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date)
+            let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date).count
             progress += completedLessonsCount > 0 ? 1.0 : 0.0
         }
         
         // Water
-        if let contact = Contact.main(), let waterActivity = PlansManager.shared.getLifestyleRecommendations().filter({ $0.typeId == 5}).first, let dailyWaterIntake = contact.dailyWaterIntake
+        if let contact = Contact.main(), let waterActivity = getWaterPlan(), let dailyWaterIntake = contact.dailyWaterIntake
         {
             parts += 1
             let amount = waterActivity.completionInfo?.first(where: { $0.date == date })?.units
@@ -214,16 +214,33 @@ extension PlansManager
 {
     func getWaterPlan() -> Plan?
     {
-        return PlansManager.shared.getLifestyleRecommendations().first(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID })
+        return getLifestyleRecommendations().first(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID })
     }
     
-    func setValueToWaterPlan(value: Int)
+    func setValueToWaterPlan(value: Int, date: String)
     {
-        let todayString = Date.serverDateFormatter.string(from: Date())
-        guard let plan = getWaterPlan(),
-              let completionInfoIndex = plan.completionInfo?.firstIndex(where: { $0.date == todayString }) else { return }
-        var waterPlan = plan
-        waterPlan.completionInfo![completionInfoIndex].units = value
-        ObjectStore.shared.ClientSave(waterPlan)
+        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .lifestyleRecommendation }) else { return }
+        if let completionInfoIndex = plans[waterPlanIndex].completionInfo?.firstIndex(where: { $0.date == date })
+        {
+            plans[waterPlanIndex].completionInfo![completionInfoIndex].units = value
+        }
+        else if plans[waterPlanIndex].completionInfo != nil
+        {
+            plans[waterPlanIndex].completionInfo!.append(CompletionInfo(date: date, units: value))
+        }
+        else
+        {
+            plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value)]
+        }
+        
+        ObjectStore.shared.ClientSave(plans[waterPlanIndex])
+        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
+    }
+    
+    func resetDrinkedWaterGlasses(date: String)
+    {
+        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .lifestyleRecommendation }),
+              plans[waterPlanIndex].completionInfo?.first(where: { $0.date == date }) == nil else { return }
+        plans[waterPlanIndex].completionInfo?.append(CompletionInfo(date: date, units: 0))
     }
 }

@@ -88,11 +88,11 @@ struct TogglePlanData: Codable
     let programDay: Int?
     let completed: Bool
     
-    internal init(isDeleted: Bool? = nil, date: Date, programDay: Int? = nil, completed: Bool)
+    internal init(isDeleted: Bool? = nil, date: String, programDay: Int? = nil, completed: Bool)
     {
         self.isDeleted = isDeleted
 
-        self.date = Date.serverDateFormatter.string(from: date)
+        self.date = date
         self.programDay = programDay
         self.completed = completed
     }

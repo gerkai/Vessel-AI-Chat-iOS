@@ -13,6 +13,7 @@ class LessonsCoordinator
     var currentStepIndex = -1
     
     var startViewController: UIViewController?
+    var shouldSave = true
     
     var currentStep: Step?
     {
@@ -80,11 +81,18 @@ class LessonsCoordinator
         }
         
         step.lessonId = lesson.id
-        ObjectStore.shared.ClientSave(step)
+        if shouldSave
+        {
+            ObjectStore.shared.ClientSave(step)
+        }
     }
     
-    func getNextStepViewController(state: StepViewControllerState = .answering, startViewController: UIViewController? = nil) -> UIViewController?
+    func getNextStepViewController(state: StepViewControllerState = .answering, startViewController: UIViewController? = nil, shouldSave: Bool? = nil) -> UIViewController?
     {
+        if let shouldSave = shouldSave
+        {
+            self.shouldSave = shouldSave
+        }
         if let startViewController = startViewController
         {
             self.startViewController = startViewController
@@ -134,9 +142,12 @@ class LessonsCoordinator
     func finishLesson(navigationController: UINavigationController)
     {
         analytics.log(event: .lessonCompleted(lessonId: lesson.id, lessonName: lesson.title))
-        lesson.completedDate = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
-        LessonsManager.shared.unlockMoreInsights = false
-        ObjectStore.shared.serverSave(lesson)
+        if shouldSave
+        {
+            lesson.completedDate = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
+            LessonsManager.shared.unlockMoreInsights = false
+            ObjectStore.shared.serverSave(lesson)
+        }
         
         if let startViewController = startViewController
         {

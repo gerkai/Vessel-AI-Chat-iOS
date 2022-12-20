@@ -85,6 +85,7 @@ class OnboardingCoordinator
             {
                 //send splash fade notification
                 WaterManager.shared.createWaterPlanIfNeeded()
+                WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
                 
                 // TODO: Remove later, just for testing purposes
                 //Print current progress for last week
