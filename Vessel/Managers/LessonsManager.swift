@@ -220,15 +220,15 @@ class LessonsManager
         }
     }
     
-    func getLessonsCompletedOn(date: String) -> Int
+    func getLessonsCompletedOn(dateString: String) -> Int
     {
         return lessons.filter({ $0.completedDate != nil }).map({ $0.completedDate }).filter { completedDate in
             guard let completedDateString = completedDate,
                   let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
                   let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString),
-                  let date = Date.serverDateFormatter.date(from: date) else { return false }
-
-            return Date.isSameDay(date1: completedDate, date2: date)
+                  let date = Date.serverDateFormatter.date(from: dateString) else { return false }
+            
+            return Date.isSameDay(date1: completedDate, date2: date.convertToLocalTime(fromTimeZone: "UTC")!)
         }.count
     }
     

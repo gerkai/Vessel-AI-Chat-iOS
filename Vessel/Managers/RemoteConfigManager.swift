@@ -10,6 +10,7 @@ import FirebaseRemoteConfig
 
 enum RemoteConfigKey
 {
+    case progressDaysFeature
     case insightsFeature
     case activitiesFeature
     case foodFeature
@@ -24,6 +25,8 @@ enum RemoteConfigKey
     {
         switch self
         {
+        case .progressDaysFeature:
+            return "progress_days_feature"
         case .insightsFeature:
             return "insights_feature"
         case .activitiesFeature:
@@ -39,7 +42,7 @@ enum RemoteConfigKey
     {
         switch self
         {
-        case .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature:
+        case .progressDaysFeature, .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature:
             return RemoteConfig.remoteConfig()[key].boolValue
         }
     }
@@ -66,7 +69,6 @@ class RemoteConfigManager
     }
     
     private let remoteConfig = RemoteConfig.remoteConfig()
-//    private var values = UserDefaults.standard.object(forKey: Constants.RC_STATUS) as? [String: Any]
 
     func launchRemoteConfig()
     {
@@ -89,8 +91,6 @@ class RemoteConfigManager
                 print("Config not fetched")
                 print("Error: \(error?.localizedDescription ?? "No error available.")")
             }
-            // Needded if we want to load something urgent at startup
-//            self.displayWelcome()
         }
     }
     
@@ -102,6 +102,8 @@ class RemoteConfigManager
         case Constants.DEV_INDEX, Constants.STAGING_INDEX:
             switch key
             {
+            case .progressDaysFeature:
+                return true
             case .insightsFeature:
                 return true
             case .activitiesFeature:

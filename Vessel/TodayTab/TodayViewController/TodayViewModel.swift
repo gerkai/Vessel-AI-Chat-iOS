@@ -16,7 +16,7 @@ enum CheckMarkCardType
 enum TodayViewSection: Equatable
 {
     case header(name: String, goals: [String])
-    //case days
+    case progressDays(progress: [String: Double])
     case insights(insights: [Lesson])
     case activities(activities: [Tip])
     case food(foods: [Food])
@@ -29,11 +29,12 @@ enum TodayViewSection: Equatable
         switch self
         {
         case .header: return 0
-        case .insights: return 1
-        case .activities: return 2
-        case .food: return 3
-        case .water: return 4
-        case .footer: return 5
+        case .progressDays: return 1
+        case .insights: return 2
+        case .activities: return 3
+        case .food: return 4
+        case .water: return 5
+        case .footer: return 6
         }
     }
     
@@ -42,12 +43,21 @@ enum TodayViewSection: Equatable
         switch self
         {
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
+        case .progressDays(let progress): return createProgressDaySection(progress: progress)
         case .insights(let lessons): return createInsightsSection(lessons: lessons)
         case .activities(let activities): return createActivitiesSection(activities: activities)
         case .food(let foods): return createFoodSection(foods: foods)
         case .water(let glassesNumber, let checkedGlasses): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
         case .footer: return [.footer]
         }
+    }
+    
+    func createProgressDaySection(progress: [String: Double]) -> [TodayViewCell]
+    {
+        guard progress.count > 0 else { return [] }
+        return [
+            .progressDays(progress: progress)
+        ]
     }
     
     func createInsightsSection(lessons: [Lesson]) -> [TodayViewCell]
@@ -160,6 +170,7 @@ enum TodayViewSection: Equatable
 enum TodayViewCell: Equatable
 {
     case header(name: String, goals: [String])
+    case progressDays(progress: [String: Double])
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food])
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
@@ -174,6 +185,7 @@ enum TodayViewCell: Equatable
         switch self
         {
         case .header: return 177.0
+        case .progressDays: return 32.0
         case .sectionTitle: return 56.0
         case .foodDetails(let foods):
             let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
@@ -193,6 +205,7 @@ enum TodayViewCell: Equatable
         switch self
         {
         case .header: return "TodayHeaderCell"
+        case .progressDays: return "TodayProgressDaysCell"
         case .sectionTitle: return "TodaySectionTitleCell"
         case .foodDetails: return "TodayFoodDetailsSectionCell"
         case .waterDetails: return "TodayWaterDetailsSectionCell"
@@ -211,6 +224,7 @@ class TodayViewModel
     private var contact = Contact.main()!
     
     // Feature flags
+    var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
     var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
     var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
     var showFoods: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
@@ -228,6 +242,7 @@ class TodayViewModel
     
     var sections: [TodayViewSection] {
         contact = Contact.main()!
+        let progressDays: [String: Double] = showProgressDays ? PlansManager.shared.getLastWeekPlansProgress() : [:]
         let lessons = showInsights ? LessonsManager.shared.todayLessons : []
         let plans = PlansManager.shared.getActivities()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
@@ -238,6 +253,7 @@ class TodayViewModel
         
         return [
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
+            .progressDays(progress: progressDays),
             .insights(insights: lessons),
             .activities(activities: activities),
             .food(foods: foods),

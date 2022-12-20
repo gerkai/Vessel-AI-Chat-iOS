@@ -9,6 +9,14 @@ import Foundation
 
 extension Date
 {
+    static var dayInitialFormatter: DateFormatter =
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.DAY_INITIAL_DATE_FORMAT
+        formatter.locale = Locale.init(identifier: "en_US")
+        return formatter
+    }()
+    
     static var serverDateFormatter: DateFormatter =
     {
         let formatter = DateFormatter()

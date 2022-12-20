@@ -33,7 +33,7 @@ class Lesson: CoreObjectProtocol, Equatable
               let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
               let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString) else { return false }
 
-        return Date.isSameDay(date1: completedDate, date2: Date())
+        return Date.isSameDay(date1: completedDate, date2: Date().convertToLocalTime(fromTimeZone: "UTC")!)
     }
     
     init(id: Int,

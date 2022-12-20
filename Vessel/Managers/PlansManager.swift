@@ -186,7 +186,7 @@ extension PlansManager
         if showInsights && !LessonsManager.shared.lessonsCompleted()
         {
             parts += 1
-            let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(date: date)
+            let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date)
             progress += completedLessonsCount > 0 ? 1.0 : 0.0
         }
         

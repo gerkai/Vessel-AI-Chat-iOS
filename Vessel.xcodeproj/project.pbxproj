@@ -236,6 +236,8 @@
 		72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */; };
 		72B3B9F328ECEBC30060A6E8 /* VesselFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */; };
 		72B3B9F528ECEBDF0060A6E8 /* VesselFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */; };
+		72B5C9F5294C134500032818 /* ProgressDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B5C9F4294C134500032818 /* ProgressDayView.swift */; };
+		72B5C9F7294C135500032818 /* ProgressDayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B5C9F6294C135500032818 /* ProgressDayView.xib */; };
 		72BBD6962938284200D9EB5E /* TodayTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD6952938284200D9EB5E /* TodayTextCell.swift */; };
 		72BBD6982938285200D9EB5E /* TodayButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD6972938285200D9EB5E /* TodayButtonCell.swift */; };
 		72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */; };
@@ -246,6 +248,7 @@
 		72BC244C292CABC9002F6DA2 /* LessonStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72BC244B292CABC9002F6DA2 /* LessonStepView.xib */; };
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
+		72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */; };
 		72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */; };
 		72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */; };
 		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
@@ -533,6 +536,8 @@
 		72B2E79728B9B3BC005AA536 /* ItemPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreferencesViewModel.swift; sourceTree = "<group>"; };
 		72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesselFooterView.swift; sourceTree = "<group>"; };
 		72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VesselFooterView.xib; sourceTree = "<group>"; };
+		72B5C9F4294C134500032818 /* ProgressDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDayView.swift; sourceTree = "<group>"; };
+		72B5C9F6294C135500032818 /* ProgressDayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressDayView.xib; sourceTree = "<group>"; };
 		72BBD6952938284200D9EB5E /* TodayTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTextCell.swift; sourceTree = "<group>"; };
 		72BBD6972938285200D9EB5E /* TodayButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayButtonCell.swift; sourceTree = "<group>"; };
 		72BC243F2928D48C002F6DA2 /* LessonsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsCoordinator.swift; sourceTree = "<group>"; };
@@ -543,6 +548,7 @@
 		72BC244B292CABC9002F6DA2 /* LessonStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepView.xib; sourceTree = "<group>"; };
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayProgressDaysCell.swift; sourceTree = "<group>"; };
 		72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
 		72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterIntakeView.xib; sourceTree = "<group>"; };
 		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -990,6 +996,8 @@
 				3F12F057287E532200FCC52E /* KeyboardFriendlyViewController.swift */,
 				3F0547B427C9E82B006E3098 /* LoadingButton.swift */,
 				3F12F050287E1CDE00FCC52E /* NibLoadingView.swift */,
+				72B5C9F4294C134500032818 /* ProgressDayView.swift */,
+				72B5C9F6294C135500032818 /* ProgressDayView.xib */,
 				3FF8C571290367EB001643C1 /* ReagentImpactView.swift */,
 				3FF8C573290367FC001643C1 /* ReagentImpactView.xib */,
 				3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */,
@@ -1320,6 +1328,7 @@
 				72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */,
 				72BBD6952938284200D9EB5E /* TodayTextCell.swift */,
 				72BBD6972938285200D9EB5E /* TodayButtonCell.swift */,
+				72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1491,6 +1500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B5C9F7294C135500032818 /* ProgressDayView.xib in Resources */,
 				3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */,
 				3F4A989B291AB7960031B8B8 /* splash_animation.json in Resources */,
 				3F59A18928E28715005E5F46 /* ReagentLearnMoreTileView.xib in Resources */,
@@ -1684,6 +1694,7 @@
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
+				72B5C9F5294C134500032818 /* ProgressDayView.swift in Sources */,
 				72692B88293717DB00A8F33C /* Activity.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */,
@@ -1735,6 +1746,7 @@
 				3F47B48628FB1FAB00D35E97 /* ReagentDetailsChartCell.swift in Sources */,
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
+				72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */,
 				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,

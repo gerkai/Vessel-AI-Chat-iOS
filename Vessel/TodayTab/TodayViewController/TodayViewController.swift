@@ -112,6 +112,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .header(let name, let goals):
             guard let cell = cell as? TodayHeaderTableViewCell else { fatalError("Can't dequeue cell TodayHeaderTableViewCell from tableView in TodayViewController") }
             cell.setup(name: name, goals: goals, delegate: self)
+        case .progressDays(let progress):
+            guard let cell = cell as? TodayProgressDaysCell else { fatalError("Can't dequeue cell TodayProgressDaysCell from tableView in TodayViewController") }
+            cell.setup(progress: progress)
         case .sectionTitle(let icon, let name):
             guard let cell = cell as? TodaySectionTitleTableViewCell else { fatalError("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController") }
             cell.setup(iconName: icon, title: name)
