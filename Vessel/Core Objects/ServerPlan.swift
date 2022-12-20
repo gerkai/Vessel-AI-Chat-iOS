@@ -21,6 +21,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
     var planId: Int?
     var contactId: Int?
     var completed: [String]?
+    var completionInfo: [CompletionInfo]?
 
     var isComplete: Bool
     {
@@ -38,7 +39,8 @@ struct ServerPlan: CoreObjectProtocol, Hashable
          activityId: Int? = nil,
          planId: Int? = nil,
          contactId: Int? = nil,
-         completed: [String]? = nil)
+         completed: [String]? = nil,
+         completionInfo: [CompletionInfo]? = nil)
     {
         self.id = id
         self.last_updated = last_updated
@@ -50,6 +52,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         self.planId = planId
         self.contactId = contactId
         self.completed = completed
+        self.completionInfo = completionInfo
     }
     
     enum CodingKeys: String, CodingKey
@@ -64,6 +67,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         case planId = "plan_id"
         case contactId = "contact_id"
         case completed
+        case completionInfo = "completion_info"
     }
     
     //convert old plan structure to new plan structure
@@ -101,7 +105,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
             typeID = serverPlan.foodId!
         }
             
-        let plan = Plan(id: serverPlan.id, last_updated: serverPlan.last_updated, type: planType, typeId: typeID, completed: serverPlan.completed ?? [], timeOfDay: serverPlan.timeOfDay, dayOfWeek: serverPlan.dayOfWeek)
+        let plan = Plan(id: serverPlan.id, last_updated: serverPlan.last_updated, type: planType, typeId: typeID, completed: serverPlan.completed ?? [], completionInfo: serverPlan.completionInfo, timeOfDay: serverPlan.timeOfDay, dayOfWeek: serverPlan.dayOfWeek)
 
         return plan
     }
@@ -116,9 +120,12 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         {
         case .activity:
             serverPlan.activityId = plan.typeId
+            serverPlan.type = .activity
         case .food:
             serverPlan.foodId = plan.typeId
+            serverPlan.type = .food
         case .lifestyleRecommendation:
+            serverPlan.type = .lifestyleRecommendation
             serverPlan.reagentLifestyleRecommendationId = plan.typeId
         case .suplement:
             print("")
@@ -126,6 +133,7 @@ struct ServerPlan: CoreObjectProtocol, Hashable
         serverPlan.dayOfWeek = plan.dayOfWeek
         serverPlan.timeOfDay = plan.timeOfDay
         serverPlan.completed = nil
+        serverPlan.completionInfo = plan.completionInfo
         
         return serverPlan
     }

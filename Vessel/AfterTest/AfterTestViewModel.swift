@@ -620,6 +620,8 @@ class AfterTestViewModel
         
         analytics.log(event: .waterAdded)
         ObjectStore.shared.ClientSave(contact)
+        WaterManager.shared.createWaterPlanIfNeeded()
+        
         Log_Add("setDailyWaterIntake() - post .newDataArrived: Plan")
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }

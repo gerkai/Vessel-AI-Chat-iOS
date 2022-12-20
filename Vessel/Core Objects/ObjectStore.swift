@@ -350,18 +350,37 @@ class ObjectStore: NSObject
             Storage.store(newObject)
         }
 
-        let objectArray = [newObject]
-        let name = String(describing: type(of: newObject)).lowercased()
-        let dict = [name: objectArray]
-        
-        //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
-        Server.shared.saveObjects(objects: dict)
+        if let plan = newObject as? Plan
         {
-            print("Saved \(name)")
+            let objectArray = [ServerPlan.convert(plan: plan)]
+            let dict = ["plan": objectArray]
+            
+            //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+            Server.shared.saveObjects(objects: dict)
+            {
+                print("Saved \("plan")")
+            }
+            onFailure:
+            { result in
+                UIView.showError(text: "Error", detailText: result)
+            }
         }
-        onFailure:
-        { result in
-            UIView.showError(text: "Error", detailText: result)
+        else
+        {
+            let objectArray = [newObject]
+            
+            let name = String(describing: type(of: newObject)).lowercased()
+            let dict = [name: objectArray]
+            
+            //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
+            Server.shared.saveObjects(objects: dict)
+            {
+                print("Saved \(name)")
+            }
+            onFailure:
+            { result in
+                UIView.showError(text: "Error", detailText: result)
+            }
         }
     }
     

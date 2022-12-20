@@ -223,7 +223,7 @@ class TodayViewModel
     
     var drinkedWaterGlasses: Int?
     {
-        contact.drinkedWaterGlasses
+        WaterManager.shared.drinkedWaterGlasses
     }
     
     var sections: [TodayViewSection] {
@@ -241,7 +241,7 @@ class TodayViewModel
             .insights(insights: lessons),
             .activities(activities: activities),
             .food(foods: foods),
-            .water(glassesNumber: dailyWaterIntake, checkedGlasses: contact.drinkedWaterGlasses ?? 0),
+            .water(glassesNumber: dailyWaterIntake, checkedGlasses: WaterManager.shared.drinkedWaterGlasses),
             .footer
         ]
     }
@@ -249,7 +249,7 @@ class TodayViewModel
     func updateCheckedGlasses(_ glasses: Int)
     {
         analytics.log(event: .waterComplete(waterAmount: glasses, totalWaterAmount: contact.dailyWaterIntake ?? 0))
-        contact.drinkedWaterGlasses = glasses
+        WaterManager.shared.drinkedWaterGlasses = glasses
         ObjectStore.shared.ClientSave(contact)
     }
     

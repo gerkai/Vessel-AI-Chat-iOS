@@ -25,10 +25,10 @@ struct PlanResponse: Decodable
     }
 }
 
-struct CompletionInfo: Codable
+struct CompletionInfo: Codable, Equatable, Hashable
 {
     let date: String
-    let units: Int
+    var units: Int
 }
 
 struct Plan: CoreObjectProtocol, Codable
@@ -39,7 +39,7 @@ struct Plan: CoreObjectProtocol, Codable
     var type: PlanType = .food
     var typeId: Int
     var completed: [String]
-    @NullCodable var completionInfo: [CompletionInfo]?
+    var completionInfo: [CompletionInfo]?
     let timeOfDay: String?
     let dayOfWeek: [Int]?
     

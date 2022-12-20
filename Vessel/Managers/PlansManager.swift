@@ -208,3 +208,22 @@ extension PlansManager
         }
     }
 }
+
+// MARK: - Water Logic
+extension PlansManager
+{
+    func getWaterPlan() -> Plan?
+    {
+        return PlansManager.shared.getLifestyleRecommendations().first(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID })
+    }
+    
+    func setValueToWaterPlan(value: Int)
+    {
+        let todayString = Date.serverDateFormatter.string(from: Date())
+        guard let plan = getWaterPlan(),
+              let completionInfoIndex = plan.completionInfo?.firstIndex(where: { $0.date == todayString }) else { return }
+        var waterPlan = plan
+        waterPlan.completionInfo![completionInfoIndex].units = value
+        ObjectStore.shared.ClientSave(waterPlan)
+    }
+}

@@ -84,7 +84,7 @@ class OnboardingCoordinator
             ObjectLoader.shared.loadCoreObjects(onDone:
             {
                 //send splash fade notification
-                WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
+                WaterManager.shared.createWaterPlanIfNeeded()
                 
                 // TODO: Remove later, just for testing purposes
                 //Print current progress for last week

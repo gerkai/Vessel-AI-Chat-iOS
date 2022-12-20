@@ -63,7 +63,6 @@ class Contact: CoreObjectProtocol
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
     var dailyWaterIntake: Int?
-    var drinkedWaterGlasses: Int?
     
     lazy var suggestedFoods: [Food] =
     {
@@ -139,8 +138,7 @@ class Contact: CoreObjectProtocol
          goal_ids: [Int] = [],
          expert_id: Int? = nil,
          loginType: LoginType? = nil,
-         dailyWaterIntake: Int? = nil,
-         drinkedWaterGlasses: Int? = nil
+         dailyWaterIntake: Int? = nil
     )
     {
         self.id = id
@@ -160,7 +158,6 @@ class Contact: CoreObjectProtocol
         self.expert_id = expert_id
         self.loginType = loginType
         self.dailyWaterIntake = dailyWaterIntake
-        self.drinkedWaterGlasses = drinkedWaterGlasses
     }
     
     init(_ contact: Contact)
@@ -182,7 +179,6 @@ class Contact: CoreObjectProtocol
         self.expert_id = contact.expert_id
         self.loginType = contact.loginType
         self.dailyWaterIntake = contact.dailyWaterIntake
-        self.drinkedWaterGlasses = contact.drinkedWaterGlasses
     }
     
     var fullName: String
@@ -230,7 +226,6 @@ class Contact: CoreObjectProtocol
         case email
         case expert_id
         case dailyWaterIntake = "daily_water_intake_glasses"
-        case drinkedWaterGlasses = "drinked_water_glasses"
     }
     
     func replaceEmptyDietsAndAllergies() -> Contact
