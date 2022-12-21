@@ -48,12 +48,23 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         
         if contact.flags & Constants.SAW_INSIGHT_POPUP == 0
         {
-            let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "InsightsPopupViewController") as! InsightsPopupViewController
+            let vc = InsightsPopupViewController.create()
             self.present(vc, animated: false)
             
             contact.flags |= Constants.SAW_INSIGHT_POPUP
             ObjectStore.shared.ClientSave(contact)
+        }
+        else if contact.flags & Constants.SAW_ACTIVITY_POPUP == 0
+        {
+            let plans = PlansManager.shared.getActivities()
+            if plans.count != 0
+            {
+                let vc = ActivityPopupViewController.createWith(plan: plans.first!)
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_ACTIVITY_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
         }
     }
     

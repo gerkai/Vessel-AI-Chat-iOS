@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol InsightsPopupViewControllerDelegate
-{
-}
-
 class InsightsPopupViewController: PopupViewController
 {
     @IBOutlet weak var lessonView: UIView!
@@ -18,7 +14,14 @@ class InsightsPopupViewController: PopupViewController
     @IBOutlet weak var lessonSubtitle: UILabel!
     @IBOutlet weak var lessonDescription: UILabel!
     @IBOutlet weak var lessonImageView: UIImageView!
-    var delegate: InsightsPopupViewControllerDelegate?
+    
+    static func create() -> InsightsPopupViewController
+    {
+        let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "InsightsPopupViewController") as! InsightsPopupViewController
+        
+        return vc
+    }
     
     override func viewDidLoad()
     {
