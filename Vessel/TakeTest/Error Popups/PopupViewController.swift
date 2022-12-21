@@ -26,6 +26,7 @@ class PopupViewController: UIViewController
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut)
         {
+            self.appearAnimations()
             self.darkenView.alpha = 1.0
             self.popupView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             self.view.layoutIfNeeded()
@@ -34,7 +35,7 @@ class PopupViewController: UIViewController
         { _ in
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut)
             {
-                self.popupView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.popupView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.view.layoutIfNeeded()
             }
             completion:
@@ -47,6 +48,7 @@ class PopupViewController: UIViewController
     {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseIn)
         {
+            self.dismissAnimations()
             self.darkenView.alpha = 0.0
             self.popupView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
             self.view.layoutIfNeeded()
@@ -56,5 +58,14 @@ class PopupViewController: UIViewController
             self.dismiss(animated: false)
             done()
         }
+    }
+    
+    //subclass can override these to perform additional animations during appear and disappear phases
+    func appearAnimations()
+    {
+    }
+    
+    func dismissAnimations()
+    {
     }
 }
