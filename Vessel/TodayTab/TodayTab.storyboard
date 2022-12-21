@@ -1328,18 +1328,27 @@ However, most people drink below what their body needs because it's hard to know
                                     </mask>
                                 </variation>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointer-finger" translatesAutoresizingMaskIntoConstraints="NO" id="bjE-X8-S6L">
+                                <rect key="frame" x="171.66666666666666" y="506" width="47" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="jbr-vf-cnY"/>
+                                    <constraint firstAttribute="height" constant="71" id="ouG-JP-yeu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BWc-DG-exJ"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZsB-eX-Vse" firstAttribute="top" secondItem="huO-PB-jH7" secondAttribute="top" id="1uz-qS-z7Y"/>
                             <constraint firstItem="Q5I-kW-lWE" firstAttribute="bottom" secondItem="huO-PB-jH7" secondAttribute="bottom" id="91y-18-0Xp"/>
+                            <constraint firstItem="bjE-X8-S6L" firstAttribute="centerX" secondItem="huO-PB-jH7" secondAttribute="centerX" id="AWw-nT-KXp"/>
                             <constraint firstItem="Q5I-kW-lWE" firstAttribute="top" secondItem="huO-PB-jH7" secondAttribute="top" id="EHJ-DD-tiv"/>
                             <constraint firstItem="ZsB-eX-Vse" firstAttribute="leading" secondItem="huO-PB-jH7" secondAttribute="leading" id="Jry-Dl-NMe"/>
                             <constraint firstItem="ZsB-eX-Vse" firstAttribute="bottom" secondItem="huO-PB-jH7" secondAttribute="bottom" id="Kfx-Sf-Dd0"/>
+                            <constraint firstItem="bjE-X8-S6L" firstAttribute="top" secondItem="Xt8-On-wfA" secondAttribute="bottom" constant="-24" id="PCu-IK-Adk"/>
                             <constraint firstItem="ZsB-eX-Vse" firstAttribute="trailing" secondItem="huO-PB-jH7" secondAttribute="trailing" id="Vvd-ni-c3W"/>
                             <constraint firstItem="Q5I-kW-lWE" firstAttribute="trailing" secondItem="huO-PB-jH7" secondAttribute="trailing" id="cuH-5C-wKe"/>
-                            <constraint firstItem="Xt8-On-wfA" firstAttribute="leading" secondItem="BWc-DG-exJ" secondAttribute="leading" constant="20" id="dqt-1w-BbV"/>
+                            <constraint firstItem="Xt8-On-wfA" firstAttribute="leading" secondItem="huO-PB-jH7" secondAttribute="leading" constant="20" id="dqt-1w-BbV"/>
                             <constraint firstItem="Xt8-On-wfA" firstAttribute="top" secondItem="ftw-cw-4dF" secondAttribute="bottom" constant="16" id="ebq-15-I5b"/>
                             <constraint firstItem="ftw-cw-4dF" firstAttribute="leading" secondItem="huO-PB-jH7" secondAttribute="leading" constant="20" id="glb-B2-fXl"/>
                             <constraint firstItem="ftw-cw-4dF" firstAttribute="top" secondItem="BWc-DG-exJ" secondAttribute="top" constant="110" id="h2b-nx-447"/>
@@ -1355,6 +1364,7 @@ However, most people drink below what their body needs because it's hard to know
                         <outlet property="lessonSubtitle" destination="Xjd-LP-qVg" id="aj3-XS-Wmw"/>
                         <outlet property="lessonTitle" destination="29g-Pk-ysb" id="TLC-4w-3tq"/>
                         <outlet property="lessonView" destination="Xt8-On-wfA" id="H3P-pP-cUG"/>
+                        <outlet property="pointerFinger" destination="bjE-X8-S6L" id="X0d-yJ-QUJ"/>
                         <outlet property="popupView" destination="ftw-cw-4dF" id="cVQ-iM-77P"/>
                     </connections>
                 </viewController>
@@ -1571,6 +1581,7 @@ However, most people drink below what their body needs because it's hard to know
         <image name="Plan-Icon" width="18" height="18"/>
         <image name="close-icon" width="10" height="10"/>
         <image name="info-icon" width="19" height="19"/>
+        <image name="pointer-finger" width="47" height="71"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="todayInsightsIcon" width="23" height="31"/>
         <image name="todayLeaves" width="167" height="147"/>
