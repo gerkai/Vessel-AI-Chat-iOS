@@ -118,6 +118,16 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             NSLayoutConstraint(item: congratulationsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 462.0)
         ])
         
+        let numberOfActivities = PlansManager.shared.getActivities().count
+        let numberOfFoods = Contact.main()?.suggestedFoods.count ?? 0
+        let totalWaterAmount = Contact.main()?.dailyWaterIntake ?? 0
+        let completedInsights = LessonsManager.shared.getLessonsCompletedOn(dateString: todayString).count
+        analytics.log(event: .everythingComplete(date: todayString,
+                                                 numberOfActivities: numberOfActivities,
+                                                 numberOfFoods: numberOfFoods,
+                                                 totalWaterAmount: totalWaterAmount,
+                                                 completedInsights: completedInsights))
+        
         GenericAlertViewController.presentAlert(in: self,
                                                 type: .customViewButton(view: congratulationsView, button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Ask Your Health Coach", comment: "")), type: .dark)),
                                                 description: GenericAlertViewController.GAMIFICATION_CONGRATULATIONS_ALERT,

@@ -17,6 +17,7 @@ enum AnalyticsEvent
     case cameraOpened
     case continuePastTimer
     case dontForgetShown
+    case everythingComplete(date: String, numberOfActivities: Int, numberOfFoods: Int, totalWaterAmount: Int, completedInsights: Int)
     case foodAdded(foodId: Int, foodName: String)
     case foodComplete(foodId: Int, foodName: String, completed: Bool)
     case foodShown(foodId: Int, foodName: String)
@@ -49,6 +50,7 @@ enum AnalyticsEvent
         case .cameraOpened: return "CAMERA OPENED"
         case .continuePastTimer: return "CONTINUE PAST TIMER"
         case .dontForgetShown: return "Don't Forget Popup Shown"
+        case .everythingComplete: return "Everything Complete"
         case .foodAdded: return "Food Added"
         case .foodComplete: return "Food Complete"
         case .foodShown: return "Food Shown"
@@ -95,6 +97,12 @@ enum AnalyticsEvent
             return [:]
         case .dontForgetShown:
             return [:]
+        case .everythingComplete(let date, let numberOfActivities, let numberOfFoods, let totalWaterAmount, let completedInsights):
+            return ["Date": date,
+                    "Number of Activities": numberOfActivities,
+                    "Number of Foods": numberOfFoods,
+                    "Total Water Amount": totalWaterAmount,
+                    "Completed Insights": completedInsights]
         case .foodAdded(let foodId, let foodName):
             return ["Food ID": foodId,
                     "Food Name": foodName]
