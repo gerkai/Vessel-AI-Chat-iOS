@@ -87,7 +87,7 @@ PODS:
   - IQKeyboardManagerSwift (6.5.10)
   - Kingfisher (7.4.1)
   - LiveChat (2.0.24)
-  - lottie-ios (4.0.1)
+  - lottie-ios (3.5.0)
   - Mixpanel-swift (4.0.2):
     - Mixpanel-swift/Complete (= 4.0.2)
   - Mixpanel-swift/Complete (4.0.2)
@@ -134,7 +134,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (~> 6.5)
   - Kingfisher
   - LiveChat
-  - lottie-ios
+  - lottie-ios (= 3.5.0)
   - Mixpanel-swift
   - SwiftEntryKit (= 1.2.3)
   - SwiftLint
@@ -196,7 +196,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   LiveChat: 63028afb59c57ae6771d59838b1097def6e560ed
-  lottie-ios: 54d22edf55b839f0929cabbfe609c9aa548b1145
+  lottie-ios: c55158d67d0629a260625cc2ded2052b829e3c3e
   Mixpanel-swift: 91fc28834402720682f4cce760e95571fbb388c3
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
@@ -216,6 +216,6 @@ SPEC CHECKSUMS:
   ZendeskSupportProvidersSDK: 685b5d185af47ced0ec40564ec46355c838bbd06
   ZendeskSupportSDK: 92e6f9d334e81e9186f8a17583862350460a5393
 
-PODFILE CHECKSUM: 98bd333e4c98e9aef92e818611a97400c648321b
+PODFILE CHECKSUM: 3057b82dc0eb1da338085ad1dc685004c8abc202
 
 COCOAPODS: 1.11.2

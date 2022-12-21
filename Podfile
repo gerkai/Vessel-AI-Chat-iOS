@@ -12,7 +12,7 @@ def pods
   pod 'IQKeyboardManagerSwift', '~> 6.5'
   pod 'Kingfisher'
   pod 'LiveChat'
-  pod 'lottie-ios'
+  pod 'lottie-ios', '3.5.0'
   pod 'Mixpanel-swift'
   pod 'FirebaseRemoteConfig'
   pod 'SwiftEntryKit', '1.2.3'
