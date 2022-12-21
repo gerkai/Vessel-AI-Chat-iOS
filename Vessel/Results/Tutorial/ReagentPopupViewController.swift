@@ -9,49 +9,43 @@ import UIKit
 
 class ReagentPopupViewController: PopupViewController
 {
-    @IBOutlet weak var activityView: UIView!
-    @IBOutlet weak var activityTitle: UILabel!
-    @IBOutlet weak var activitySubtitle: UILabel!
-    @IBOutlet weak var activityDescription: UILabel!
-    @IBOutlet weak var activityImageView: UIImageView!
-    var plan: Plan!
+    @IBOutlet weak var reagentTileView: ReagentLearnMoreTileView!
+    weak var sourceTile: ReagentLearnMoreTileView!
     
-    static func createWith(plan: Plan) -> ReagentPopupViewController
+    static func createWith(reagentTile: ReagentLearnMoreTileView) -> ReagentPopupViewController
     {
         let storyboard = UIStoryboard(name: "Results", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ReagentPopupViewController") as! ReagentPopupViewController
-        vc.plan = plan
+        vc.sourceTile = reagentTile
         
         return vc
     }
     
     override func viewDidLoad()
     {
-        ObjectStore.shared.get(type: Tip.self, id: plan.typeId)
-        { activity in
-            self.activityTitle.text = activity.title
-            self.activitySubtitle.text = ""
-            if let url = URL(string: activity.imageUrl)
-            {
-                self.activityImageView.kf.setImage(with: url)
-            }
-            self.activityDescription.text = activity.description
-            self.activityView.alpha = 0.0
-        }
-        onFailure:
-        {
-            self.activityView.isHidden = true
-        }
+        reagentTileView.alpha = 0.0
+        reagentTileView.frame = sourceTile.frame
+        reagentTileView.imageView.image = sourceTile.imageView.image
+        reagentTileView.titleLabel.text = sourceTile.titleLabel.text
+        reagentTileView.subtextLabel.text = sourceTile.subtextLabel.text
+        reagentTileView.learnMoreView.isHidden = sourceTile.learnMoreView.isHidden
+        reagentTileView.contentView.backgroundColor = sourceTile.contentView.backgroundColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        let frame = sourceTile.superview!.convert(sourceTile.frame, to: self.view)
+        reagentTileView.frame = frame
     }
     
     override func appearAnimations()
     {
-        self.activityView.alpha = 1.0
+        self.reagentTileView.alpha = 1.0
     }
     
     override func dismissAnimations()
     {
-        self.activityView.alpha = 0.0
+        self.reagentTileView.alpha = 0.0
     }
     
     @IBAction func gotIt()

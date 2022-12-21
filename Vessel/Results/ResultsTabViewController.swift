@@ -78,6 +78,18 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 contact.flags |= Constants.SAW_WELLNESS_POPUP
                 ObjectStore.shared.ClientSave(contact)
             }
+            else if contact.flags & Constants.SAW_REAGENT_POPUP == 0,
+                        let selectedTile = testsGoalsView.selectedReagentTile()
+            {
+                let vc = ReagentPopupViewController.createWith(reagentTile: selectedTile)
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_REAGENT_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
+            else if contact.flags & Constants.SAW_COACH_POPUP == 0
+            {
+            }
         }
     }
     
