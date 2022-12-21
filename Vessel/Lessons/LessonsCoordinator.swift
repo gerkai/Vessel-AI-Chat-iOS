@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol LessonsCoordinatorDelegate: AnyObject
+{
+    func onLessonFinished()
+}
+
 class LessonsCoordinator
 {
     let lesson: Lesson
@@ -14,6 +19,8 @@ class LessonsCoordinator
     
     var startViewController: UIViewController?
     var shouldSave = true
+    
+    weak var delegate: LessonsCoordinatorDelegate?
     
     var currentStep: Step?
     {
@@ -152,10 +159,12 @@ class LessonsCoordinator
         if let startViewController = startViewController
         {
             navigationController.popToViewController(startViewController, animated: true)
+            delegate?.onLessonFinished()
         }
         else
         {
             navigationController.popToRootViewController(animated: true)
+            delegate?.onLessonFinished()
         }
     }
 }

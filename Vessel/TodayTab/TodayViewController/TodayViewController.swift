@@ -79,6 +79,26 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         print("Today Tab: reloadUI")
         tableView.reloadData()
     }
+    
+    func showGamificationCongratulationsViewIfNeeded()
+    {
+        let todayString = Date.serverDateFormatter.string(from: Date())
+        let todayProgress = PlansManager.shared.calculateProgressFor(date: todayString)
+        guard viewModel.isToday && todayProgress == 1.0 else { return }
+        
+        let congratulationsView = GamificationCongratulationsView()
+        congratulationsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: congratulationsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 462.0)
+        ])
+        
+        GenericAlertViewController.presentAlert(in: self,
+                                                type: .customViewButton(view: congratulationsView, button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Ask Your Health Coach", comment: "")), type: .dark)),
+                                                description: GenericAlertViewController.GAMIFICATION_CONGRATULATIONS_ALERT,
+                                                showCloseButton: true,
+                                                showConfetti: true,
+                                                delegate: self)
+    }
 }
 
 extension TodayViewController: UITableViewDelegate, UITableViewDataSource
@@ -180,6 +200,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 let row = lessons.count > 1 && indexPath.row > 1 && viewModel.isToday ? indexPath.row - 2 : indexPath.row - 1
                 let lesson = lessons[row]
                 let coordinator = LessonsCoordinator(lesson: lesson)
+                coordinator.delegate = self
                 if let index = lesson.indexOfFirstUnreadStep()
                 {
                     for _ in stride(from: 0, to: index, by: 1)
@@ -243,6 +264,7 @@ extension TodayViewController: WaterIntakeViewDelegate
     func didCheckGlasses(_ glasses: Int)
     {
         viewModel.updateCheckedGlasses(glasses)
+        showGamificationCongratulationsViewIfNeeded()
     }
 }
 
@@ -264,6 +286,7 @@ extension TodayViewController: FoodCheckmarkViewDelegate
             PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
+            self.showGamificationCongratulationsViewIfNeeded()
         } onFailure: { error in
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
@@ -337,6 +360,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
                 guard let self = self else { return }
                 PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
                 self.tableView.reloadData()
+                self.showGamificationCongratulationsViewIfNeeded()
             } onFailure: { error in
                 self.tableView.reloadData()
             }
@@ -346,6 +370,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             let lessons = LessonsManager.shared.todayLessons
             guard let lesson = lessons.first(where: { $0.id == id }) else { return }
             let coordinator = LessonsCoordinator(lesson: lesson)
+            coordinator.delegate = self
             if let index = lesson.indexOfFirstUnreadStep()
             {
                 for _ in stride(from: 0, to: index, by: 1)
@@ -371,5 +396,24 @@ extension TodayViewController: ProgressDayViewDelegate
     {
         viewModel.selectedDate = date
         tableView.reloadData()
+    }
+}
+
+extension TodayViewController: LessonsCoordinatorDelegate
+{
+    func onLessonFinished()
+    {
+        showGamificationCongratulationsViewIfNeeded()
+    }
+}
+
+extension TodayViewController: GenericAlertDelegate
+{
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
+    {
+        if alertDescription == GenericAlertViewController.GAMIFICATION_CONGRATULATIONS_ALERT
+        {
+            tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
+        }
     }
 }

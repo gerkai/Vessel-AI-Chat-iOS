@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "planCompletedIcon.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

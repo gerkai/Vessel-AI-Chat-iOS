@@ -11,6 +11,7 @@ class GenericAlertViewController: UIViewController
 {
     // MARK: - Alerts Constants
     static let DELETE_ACCOUNT_ALERT = "DeleteAccountAlert"
+    static let GAMIFICATION_CONGRATULATIONS_ALERT = "GamificationCongratulationsAlert"
     
     private struct Constants
     {
@@ -27,6 +28,7 @@ class GenericAlertViewController: UIViewController
                              animation: GenericAlertAnimation = .popUp,
                              shouldCloseWhenButtonTapped: Bool = true,
                              shouldCloseWhenTappedOutside: Bool = true,
+                             showConfetti: Bool = false,
                              delegate: GenericAlertDelegate? = nil)
     {
         let viewModel = GenericAlertViewModel(type: type,
@@ -36,7 +38,8 @@ class GenericAlertViewController: UIViewController
                                               alignment: alignment,
                                               animation: animation,
                                               shouldCloseWhenButtonTapped: shouldCloseWhenButtonTapped,
-                                              shouldCloseWhenTappedOutside: shouldCloseWhenTappedOutside)
+                                              shouldCloseWhenTappedOutside: shouldCloseWhenTappedOutside,
+                                              showConfetti: showConfetti)
         let alert = GenericAlertViewController(viewModel: viewModel)
         alert.modalPresentationStyle = .overFullScreen
         let bounds = viewController.view.frame
@@ -64,6 +67,8 @@ class GenericAlertViewController: UIViewController
     @IBOutlet private var alertViewBottomSpacingConstraint: NSLayoutConstraint!
     @IBOutlet private var buttons: [BounceButton]!
     @IBOutlet private weak var horizontalButtonsStackView: UIStackView!
+    @IBOutlet private weak var confettiImageView: UIImageView!
+    @IBOutlet private weak var confettiTopConstraint: NSLayoutConstraint!
     
     // MARK: Model
     private var viewModel: GenericAlertViewModel!
@@ -186,6 +191,20 @@ class GenericAlertViewController: UIViewController
                     self.alertViewBottomSpacingConstraint.priority = .init(rawValue: 900)
                     self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                 }
+            }
+        }
+        
+        if viewModel.showConfetti
+        {
+            confettiTopConstraint.constant = view.window?.windowScene?.windows.first?.frame.height ?? 0
+            UIView.animate(withDuration: 2.0, delay: 0.0)
+            {
+                self.view.layoutIfNeeded()
+            }
+        completion:
+            { completed in
+                self.confettiTopConstraint.constant = -400
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -563,7 +582,6 @@ private extension GenericAlertViewController
     {
         stackView.insertArrangedSubview(view, at: stackView.arrangedSubviews.count - 1)
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 60.0),
             view.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1.0)
         ])
     }

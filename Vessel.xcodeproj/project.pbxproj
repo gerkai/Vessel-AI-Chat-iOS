@@ -201,6 +201,7 @@
 		72461EEF2924AAA500A85AE5 /* Curriculum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EEE2924AAA500A85AE5 /* Curriculum.swift */; };
 		72461EF12924AD7500A85AE5 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF02924AD7500A85AE5 /* Lesson.swift */; };
 		72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF42924AE2600A85AE5 /* LessonStep.swift */; };
+		725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BD180295299A900D266E9 /* GamificationCongratulationsDayView.swift */; };
 		725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */; };
 		725C5C052938CED9000708AA /* LessonStepsProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */; };
 		725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */; };
@@ -249,6 +250,8 @@
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
 		72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */; };
+		72CAA0802952659600B2B848 /* GamificationCongratulationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CAA07F2952659600B2B848 /* GamificationCongratulationsView.swift */; };
+		72CAA082295265C100B2B848 /* GamificationCongratulationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CAA081295265C100B2B848 /* GamificationCongratulationsView.xib */; };
 		72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */; };
 		72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */; };
 		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
@@ -498,6 +501,7 @@
 		72461EEE2924AAA500A85AE5 /* Curriculum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curriculum.swift; sourceTree = "<group>"; };
 		72461EF02924AD7500A85AE5 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		72461EF42924AE2600A85AE5 /* LessonStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStep.swift; sourceTree = "<group>"; };
+		725BD180295299A900D266E9 /* GamificationCongratulationsDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationCongratulationsDayView.swift; sourceTree = "<group>"; };
 		725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepsProgressBar.swift; sourceTree = "<group>"; };
 		725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepsProgressBar.xib; sourceTree = "<group>"; };
 		725F38282935EFDE00A48B3E /* CheckMarkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkCardView.swift; sourceTree = "<group>"; };
@@ -549,6 +553,8 @@
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayProgressDaysCell.swift; sourceTree = "<group>"; };
+		72CAA07F2952659600B2B848 /* GamificationCongratulationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationCongratulationsView.swift; sourceTree = "<group>"; };
+		72CAA081295265C100B2B848 /* GamificationCongratulationsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamificationCongratulationsView.xib; sourceTree = "<group>"; };
 		72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
 		72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterIntakeView.xib; sourceTree = "<group>"; };
 		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -1333,6 +1339,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		72CAA07E2952651800B2B848 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72CAA07F2952659600B2B848 /* GamificationCongratulationsView.swift */,
+				72CAA081295265C100B2B848 /* GamificationCongratulationsView.xib */,
+				725BD180295299A900D266E9 /* GamificationCongratulationsDayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		72D4FC0D287D2CD400EA2EA3 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1376,6 +1392,7 @@
 		72F0DEDF28E2788B00034088 /* TodayViewController */ = {
 			isa = PBXGroup;
 			children = (
+				72CAA07E2952651800B2B848 /* Views */,
 				72C721DA28E2B809003FB61A /* Cells */,
 				72F0DEE028E278ED00034088 /* TodayViewController.swift */,
 				72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */,
@@ -1524,6 +1541,7 @@
 				3F9C679728FDEC7300BC44FA /* ScienceStudiesView.xib in Resources */,
 				7282D415288F7CA400B4E26D /* MoreTab.storyboard in Resources */,
 				3F426DC128DFA33200927B68 /* Results.storyboard in Resources */,
+				72CAA082295265C100B2B848 /* GamificationCongratulationsView.xib in Resources */,
 				7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */,
 				72F3D63028F15C60007ED9A8 /* FoodCheckmarkView.xib in Resources */,
 				3F12F003287A068D00FCC52E /* CheckmarkCollectionViewCell.xib in Resources */,
@@ -1667,6 +1685,7 @@
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
 				3F59A15828DFD750005E5F46 /* WellnessScoreViewController.swift in Sources */,
+				72CAA0802952659600B2B848 /* GamificationCongratulationsView.swift in Sources */,
 				3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */,
 				72411CF1287E0715004A312E /* AnalyticsEvent.swift in Sources */,
 				3F0D387628E3533300D7C3A3 /* CurvyLineView.swift in Sources */,
@@ -1747,6 +1766,7 @@
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */,
+				725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */,
 				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
@@ -2041,7 +2061,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2076,7 +2096,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

@@ -20,10 +20,11 @@ class ProgressDayView: UIView
     @IBOutlet private weak var backgroundBorderView: UIView!
     @IBOutlet private weak var backgroundView: UIView!
     
-    var progressLyr: CAShapeLayer?
-    var pathDrawn = false
-    var dateString = ""
-    weak var delegate: ProgressDayViewDelegate?
+    private var progress: Double = 0
+    private var progressLyr: CAShapeLayer?
+    private var pathDrawn = false
+    private var dateString = ""
+    private weak var delegate: ProgressDayViewDelegate?
     
     // MARK: - Initializers
     override init(frame: CGRect)
@@ -50,19 +51,27 @@ class ProgressDayView: UIView
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onViewTapped)))
     }
     
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        contentView.layoutSubviews()
+        makeBorderPath(progress: progress)
+    }
+    
     func setup(dateString: String, progress: Double, isSelectedDay: Bool, delegate: ProgressDayViewDelegate?)
     {
         self.dateString = dateString
         self.delegate = delegate
+        self.progress = progress
         guard let date = Date.serverDateFormatter.date(from: dateString) else { return }
-        backgroundView.layer.cornerRadius = backgroundBorderView.frame.width * 0.29
+        backgroundView.layer.cornerRadius = backgroundBorderView.frame.width * 0.30
         backgroundView.layer.masksToBounds = true
 
-        makeBorderPath(progress: progress)
         currentDayPointLabel.isHidden = !isSelectedDay
         dayLabel.text = Date.dayInitialFormatter.string(from: date)
         backgroundView.backgroundColor = progress == 1.0 ? .black : UIColor.backgroundGray
         dayLabel.textColor = progress == 1.0 ? .white : .black
+        makeBorderPath(progress: progress)
     }
     
     func makeBorderPath(progress: Double)

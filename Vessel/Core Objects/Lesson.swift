@@ -30,8 +30,7 @@ class Lesson: CoreObjectProtocol, Equatable
     var completedToday: Bool
     {
         guard let completedDateString = completedDate,
-              let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
-              let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString) else { return false }
+              let completedDate = Date.isoUTCDateFormatter.date(from: completedDateString) else { return false }
 
         return Date.isSameDay(date1: completedDate, date2: Date().convertToLocalTime(fromTimeZone: "UTC")!)
     }

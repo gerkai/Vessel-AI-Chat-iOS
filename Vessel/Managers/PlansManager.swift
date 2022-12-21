@@ -137,7 +137,6 @@ class PlansManager
 }
 
 // MARK: - Gamification
-
 extension PlansManager
 {
     func getLastWeekPlansProgress() -> [String: Double]
@@ -206,6 +205,45 @@ extension PlansManager
         {
             return progress / parts
         }
+    }
+    
+    func calculateWeekStreak() -> Int
+    {
+        let progress = getLastWeekPlansProgress()
+        var maxStreak = 0
+        var currentStreak = 0
+        for day in progress.keys.sorted(by: { $0 < $1 })
+        {
+            if progress[day] == 1.0
+            {
+                currentStreak += 1
+            }
+            else
+            {
+                currentStreak = 0
+            }
+            if currentStreak > maxStreak
+            {
+                maxStreak = currentStreak
+            }
+        }
+        return maxStreak
+    }
+    
+    func allCompletedDaysCount() -> Int
+    {
+        let completedDates = Array<String>(plans.map({ $0.completed }).joined())
+        let uniqueDates = Array(Set(completedDates)).sorted(by: { $0 < $1 })
+        
+        var completeDays = 0
+        for date in uniqueDates
+        {
+            if calculateProgressFor(date: date) == 1.0
+            {
+                completeDays += 1
+            }
+        }
+        return completeDays
     }
 }
 

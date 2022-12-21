@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,6 +20,8 @@
                 <outlet property="alertViewTopSpacingConstraint" destination="fJd-tG-ZKl" id="UuP-qi-eK4"/>
                 <outlet property="backgroundBlur" destination="3gf-z7-ROM" id="NzZ-y8-4hV"/>
                 <outlet property="closeButton" destination="4NE-53-Nrz" id="9dq-FZ-uct"/>
+                <outlet property="confettiImageView" destination="wj8-Qp-rOn" id="S7o-Xd-vOZ"/>
+                <outlet property="confettiTopConstraint" destination="e3s-vz-wbg" id="zSU-Yb-Ct7"/>
                 <outlet property="contentView" destination="gOd-Vd-cxs" id="4WO-gU-3Xx"/>
                 <outlet property="horizontalButtonsStackView" destination="ChY-c5-i11" id="tHR-Fi-t72"/>
                 <outlet property="imageView" destination="nb7-sA-JDX" id="EQr-Px-gcX"/>
@@ -151,16 +153,22 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Confetti" translatesAutoresizingMaskIntoConstraints="NO" id="wj8-Qp-rOn">
+                            <rect key="frame" x="12" y="-400" width="390" height="452"/>
+                        </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="3gf-z7-ROM" firstAttribute="top" secondItem="gOd-Vd-cxs" secondAttribute="top" id="4qI-UJ-sOz"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Zpw-CR-ud5" secondAttribute="bottom" id="D1Q-gx-572"/>
                         <constraint firstAttribute="bottom" secondItem="3gf-z7-ROM" secondAttribute="bottom" id="Fm1-0M-YJe"/>
+                        <constraint firstItem="wj8-Qp-rOn" firstAttribute="width" secondItem="gOd-Vd-cxs" secondAttribute="width" multiplier="0.942029" id="I84-f8-hyx"/>
                         <constraint firstItem="3gf-z7-ROM" firstAttribute="leading" secondItem="gOd-Vd-cxs" secondAttribute="leading" id="YIf-CS-KOT"/>
+                        <constraint firstItem="wj8-Qp-rOn" firstAttribute="top" secondItem="gOd-Vd-cxs" secondAttribute="top" constant="-400" id="e3s-vz-wbg"/>
                         <constraint firstItem="Zpw-CR-ud5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gOd-Vd-cxs" secondAttribute="top" id="fJd-tG-ZKl"/>
                         <constraint firstAttribute="trailing" secondItem="3gf-z7-ROM" secondAttribute="trailing" id="hSW-V2-Ozv"/>
                         <constraint firstItem="Zpw-CR-ud5" firstAttribute="centerY" secondItem="gOd-Vd-cxs" secondAttribute="centerY" id="kaC-II-AUz"/>
                         <constraint firstAttribute="trailing" secondItem="Zpw-CR-ud5" secondAttribute="trailing" constant="20" id="nas-jy-Osv"/>
+                        <constraint firstItem="wj8-Qp-rOn" firstAttribute="centerX" secondItem="gOd-Vd-cxs" secondAttribute="centerX" id="vD6-LP-l3d"/>
                         <constraint firstItem="Zpw-CR-ud5" firstAttribute="leading" secondItem="gOd-Vd-cxs" secondAttribute="leading" constant="20" id="yXf-NO-Z3M"/>
                     </constraints>
                 </view>
@@ -179,6 +187,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Confetti" width="375" height="452"/>
         <image name="square_close_button" width="50" height="50"/>
     </resources>
 </document>

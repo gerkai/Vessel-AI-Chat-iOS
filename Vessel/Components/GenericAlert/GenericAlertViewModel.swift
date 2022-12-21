@@ -111,6 +111,7 @@ class GenericAlertViewModel
     var animation: GenericAlertAnimation
     var shouldCloseWhenButtonTapped: Bool
     var shouldCloseWhenTappedOutside: Bool
+    var showConfetti: Bool
     
     init(type: GenericAlertType,
          description: String = "",
@@ -119,7 +120,8 @@ class GenericAlertViewModel
          alignment: GenericAlertAlignment = .center,
          animation: GenericAlertAnimation = .popUp,
          shouldCloseWhenButtonTapped: Bool = true,
-         shouldCloseWhenTappedOutside: Bool = true)
+         shouldCloseWhenTappedOutside: Bool = true,
+         showConfetti: Bool = false)
     {
         self.type = type
         self.description = description
@@ -129,5 +131,6 @@ class GenericAlertViewModel
         self.animation = animation 
         self.shouldCloseWhenButtonTapped = shouldCloseWhenButtonTapped
         self.shouldCloseWhenTappedOutside = shouldCloseWhenTappedOutside
+        self.showConfetti = showConfetti
     }
 }
