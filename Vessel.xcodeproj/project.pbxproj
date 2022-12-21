@@ -149,6 +149,7 @@
 		3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B228C7F7410093228E /* PopupViewController.swift */; };
 		3F9CB7BA28C7F7410093228E /* SlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7B328C7F7410093228E /* SlideupViewController.swift */; };
 		3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */; };
+		3F9D6D832952811000664EA8 /* CongratsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D822952811000664EA8 /* CongratsPopupViewController.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
@@ -440,6 +441,7 @@
 		3F9CB7B228C7F7410093228E /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7B328C7F7410093228E /* SlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideupViewController.swift; sourceTree = "<group>"; };
 		3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipTimerSlideupViewController.swift; sourceTree = "<group>"; };
+		3F9D6D822952811000664EA8 /* CongratsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsPopupViewController.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
@@ -847,6 +849,14 @@
 				3F9CB7AF28C7F7410093228E /* UploadErrorSlideupViewController.swift */,
 			);
 			path = "Error Popups";
+			sourceTree = "<group>";
+		};
+		3F9D6D812952811000664EA8 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				3F9D6D822952811000664EA8 /* CongratsPopupViewController.swift */,
+			);
+			path = Tutorial;
 			sourceTree = "<group>";
 		};
 		3FE3699327C9A07E00231D42 = {
@@ -1367,6 +1377,7 @@
 			children = (
 				72332FAC28EE88F7008CBA8C /* ActivityDetailsViewController */,
 				72F0DEDF28E2788B00034088 /* TodayViewController */,
+				3F9D6D812952811000664EA8 /* Tutorial */,
 				72673C4F28E807B10056C701 /* WaterDetailsViewController */,
 				72E7FEC228F5CE3500F1A372 /* TodayTab.storyboard */,
 			);
@@ -1864,6 +1875,7 @@
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
 				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
 				3F9C67B228FE627B00BC44FA /* Sodium.swift in Sources */,
+				3F9D6D832952811000664EA8 /* CongratsPopupViewController.swift in Sources */,
 				72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */,
 				3F87B95F27D2C41C00D589F7 /* Storage.swift in Sources */,
 				3F59A15E28DFF269005E5F46 /* ReagentScoreView.swift in Sources */,
