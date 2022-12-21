@@ -72,20 +72,36 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         setupReagents(forResult: result, selectedReagentID: selectedReagentID)
     }
     
+    func selectedReagentTile() -> ReagentLearnMoreTileView?
+    {
+        var result = testsStackView.arrangedSubviews.first as? ReagentLearnMoreTileView
+        let views = testsStackView.arrangedSubviews as! [ReagentLearnMoreTileView]
+        for view in views
+        {
+            if view.isSelected == true
+            {
+                result = view
+            }
+        }
+        return result
+    }
+    
     func setupReagents(forResult result: Result, selectedReagentID: Reagent.ID)
     {
         testsStackView.removeAllArrangedSubviews()
         
-        //add reagent tiles. Select the one that matches selectedReagentID
-        for reagentResult in result.reagentResults
+        //add reagent tiles in the order specified by the Reagents array. Select the one that matches selectedReagentID
+        for reagentID in ReagentOrder
         {
-            if let reagentID = Reagent.ID(rawValue: reagentResult.id)
+            print("REAGENT ID: \(reagentID)")
+            let id = reagentID.rawValue
+            if let reagentResult = result.reagentResults.first(where: { $0.id == id })
             {
                 let reagentView = ReagentLearnMoreTileView()
-                reagentView.tag = reagentID.rawValue
+                reagentView.tag = id
                 let evaluation = Reagent.evaluation(id: reagentID, value: reagentResult.value)
                 reagentView.contentView.backgroundColor = evaluation.color
-                reagentView.titleLabel.text = Reagents[reagentID]?.name
+                reagentView.titleLabel.text = Reagents[reagentID]!.name
                 reagentView.subtextLabel.text = evaluation.title.capitalized
                 reagentView.imageView.image = UIImage(named: Reagents[reagentID]!.imageName)
                 reagentView.delegate = self

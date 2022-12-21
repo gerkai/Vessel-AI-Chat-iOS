@@ -324,7 +324,7 @@ struct Reagent
     }
 }
 
-//Here are the reagents used by the app
+//Here are the reagents used by the app.
 let Reagents: [Reagent.ID: Reagent] =
 [
     Reagent.ID.PH: PH,
@@ -338,4 +338,20 @@ let Reagents: [Reagent.ID: Reagent] =
     Reagent.ID.NITRITE: Nitrite,
     //Reagent.ID.LEUKOCYTE: Leukocyte,
     Reagent.ID.SODIUM: Sodium
+]
+
+//This array defines the order reagents will appear in the Results tab
+let ReagentOrder: [Reagent.ID] =
+[
+    Reagent.ID.MAGNESIUM,
+    Reagent.ID.VITAMIN_C,
+    Reagent.ID.HYDRATION,
+    Reagent.ID.SODIUM,
+    Reagent.ID.CALCIUM,
+    Reagent.ID.NITRITE,
+    Reagent.ID.PH,
+    Reagent.ID.KETONES_A,
+    Reagent.ID.CORTISOL,
+    Reagent.ID.VITAMIN_B7
+    //Reagent.ID.LEUKOCYTE
 ]

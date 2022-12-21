@@ -42,6 +42,32 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         reloadUI()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        guard let contact = Contact.main() else { return }
+        
+        if contact.flags & Constants.SAW_INSIGHT_POPUP == 0
+        {
+            let vc = InsightsPopupViewController.create()
+            self.present(vc, animated: false)
+            
+            contact.flags |= Constants.SAW_INSIGHT_POPUP
+            ObjectStore.shared.ClientSave(contact)
+        }
+        else if contact.flags & Constants.SAW_ACTIVITY_POPUP == 0
+        {
+            let plans = PlansManager.shared.getActivities()
+            if plans.count != 0
+            {
+                let vc = ActivityPopupViewController.createWith(plan: plans.first!)
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_ACTIVITY_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func onTakeATest()
     {

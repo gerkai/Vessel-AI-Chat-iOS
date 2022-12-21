@@ -28,33 +28,13 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         //get notified if food preferences changes (specifically ketones which changes color of ketone tile)
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
-        setupTextView()
+        textView.attributedText = viewModel.wellnessText()
+        textView.delegate = self
     }
     
     deinit
     {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    func setupTextView()
-    {
-        //apply text and make the "learn more" portion of it underlined and tappable
-        let message = NSLocalizedString("Your wellness score is a combination of all your results. Learn more", comment: "")
-        let interactiveText = NSLocalizedString("Learn more", comment: "")
-        let linkRange = message.range(of: interactiveText)
-        let linkNSRange = NSRange(linkRange!, in: message)
-        let font = Constants.FontBodyAlt14
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 0.5 * font.lineHeight
-        let myAttribute = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.init(hex: "555553"),
-                            NSAttributedString.Key.paragraphStyle: paragraphStyle]
-        
-        let attributedString = NSMutableAttributedString(string: message, attributes: myAttribute)
-        attributedString.addAttribute(.link, value: "https://www.vesselhealth.com", range: linkNSRange)
-        attributedString.underline(term: interactiveText)
-        attributedString.font(term: interactiveText, font: Constants.FontLearnMore10)
-        textView.attributedText = attributedString
-        textView.delegate = self
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
@@ -69,18 +49,52 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     override func viewWillAppear(_ animated: Bool)
     {
         //show lockout view if there are no test results to display
-        //print("Results: viewWillAppear")
         
         if initialLoad
         {
             viewModel.refresh()
             testsGoalsView.setupGoals()
         }
-        handleLockoutView()
+        
         let numResults = viewModel.numberOfResults()
-        if numResults != 0 && initialLoad
+        if numResults == 0
         {
-            testsGoalsView.setupReagents(forResult: viewModel.selectedResult()!, selectedReagentID: .MAGNESIUM)
+            lockoutView.isHidden = false
+        }
+        else
+        {
+            lockoutView.isHidden = true
+            if initialLoad
+            {
+                testsGoalsView.setupReagents(forResult: viewModel.selectedResult()!, selectedReagentID: .MAGNESIUM)
+            }
+            guard let contact = Contact.main() else { return }
+            
+            if contact.flags & Constants.SAW_WELLNESS_POPUP == 0
+            {
+                let vc = WellnessPopupViewController.createWith(viewModel: viewModel)
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_WELLNESS_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
+            else if contact.flags & Constants.SAW_REAGENT_POPUP == 0,
+                        let selectedTile = testsGoalsView.selectedReagentTile()
+            {
+                let vc = ReagentPopupViewController.createWith(reagentTile: selectedTile)
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_REAGENT_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
+            else if contact.flags & Constants.SAW_COACH_POPUP == 0
+            {
+                let vc = CoachPopupViewController.create()
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_COACH_POPUP
+                ObjectStore.shared.ClientSave(contact)
+            }
         }
     }
     

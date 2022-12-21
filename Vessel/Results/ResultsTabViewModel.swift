@@ -5,7 +5,7 @@
 //  Created by Carson Whitsett on 9/24/22.
 //
 
-import Foundation
+import UIKit
 
 class ResultsTabViewModel
 {
@@ -80,5 +80,28 @@ class ResultsTabViewModel
     {
         //print("ViewModel set selected result: \(index)")
         selectedResultIndex = index
+    }
+    
+    func wellnessText(activeLink: Bool = true) -> NSAttributedString
+    {
+        //apply text and make the "learn more" portion of it underlined and tappable
+        let message = NSLocalizedString("Your wellness score is a combination of all your results. Learn more", comment: "")
+        let interactiveText = NSLocalizedString("Learn more", comment: "")
+        let linkRange = message.range(of: interactiveText)
+        let linkNSRange = NSRange(linkRange!, in: message)
+        let font = Constants.FontBodyAlt14
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0.5 * font.lineHeight
+        let myAttribute = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.init(hex: "555553"),
+                            NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        
+        let attributedString = NSMutableAttributedString(string: message, attributes: myAttribute)
+        if activeLink
+        {
+            attributedString.addAttribute(.link, value: "https://www.vesselhealth.com", range: linkNSRange)
+        }
+        attributedString.underline(term: interactiveText)
+        attributedString.font(term: interactiveText, font: Constants.FontLearnMore10)
+        return attributedString
     }
 }
