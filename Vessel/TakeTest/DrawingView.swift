@@ -39,7 +39,7 @@ protocol DrawingViewDelegate
 {
     //isCloseEnough = -1 if too far away or 1 if too near. 0 if just right.
     //isOnScreen = true if all four fiducials are on screen
-    func drawingStatus(isOnScreen: Bool, isCloseEnough: Int)
+    func drawingStatus(isOnScreen: Bool, isCloseEnough: Int, upsideDown: Bool)
 }
 
 class DrawingView: UIView
@@ -204,8 +204,15 @@ class DrawingView: UIView
                     isCloseEnough = 0
                 }
                 
+                //report if card is upside down
+                var upsideDown = false
+                if pointA.y > pointD.y && pointB.y > pointC.y
+                {
+                    upsideDown = true
+                }
+                
                 //draw outline of valid scan area
-                if isOnScreen && isCloseEnough == 0
+                if isOnScreen && isCloseEnough == 0 && upsideDown == false
                 {
                     context.setStrokeColor(UIColor.green.cgColor)
                 }
@@ -216,7 +223,7 @@ class DrawingView: UIView
                 context.addRect(validArea)
                 context.strokePath()
                 
-                delegate?.drawingStatus(isOnScreen: isOnScreen, isCloseEnough: isCloseEnough)
+                delegate?.drawingStatus(isOnScreen: isOnScreen, isCloseEnough: isCloseEnough, upsideDown: upsideDown)
             }
             else
             {
