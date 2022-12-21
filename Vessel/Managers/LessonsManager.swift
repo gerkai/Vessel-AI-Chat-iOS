@@ -22,30 +22,30 @@ class LessonsManager
         NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: UIApplication.significantTimeChangeNotification, object: nil)
     }
     
-    var todayLessons: [Lesson]
-    {
-        let firstUncompletedIndex = min(MAX_LESSONS_PER_DAY, lessons.firstIndex(where: { $0.completedDate == nil }) ?? MAX_LESSONS_PER_DAY)
-        let index = max(0, unlockMoreInsights ? firstUncompletedIndex : firstUncompletedIndex - 1)
-        if lessons.count <= index
-        {
-            return lessons
-        }
-        else
-        {
-            return Array<Lesson>(lessons[0...index])
-        }
-    }
-    
     var nextLesson: Lesson?
     {
         guard let firstUncompletedIndex = lessons.firstIndex(where: { $0.completedDate == nil }) else { return nil }
         return lessons[safe: firstUncompletedIndex]
     }
     
+    var todayLessons: [Lesson]
+    {
+        guard let firstUncompletedIndex = lessons.firstIndex(where: { $0.completedDate == nil || $0.completedToday }) else { return [] }
+        let completedToday = min(MAX_LESSONS_PER_DAY, lessons.filter({ $0.completedToday }).count)
+        if lessons.count <= firstUncompletedIndex
+        {
+            return lessons
+        }
+        else
+        {
+            return Array<Lesson>(lessons[firstUncompletedIndex...(firstUncompletedIndex + completedToday + (unlockMoreInsights ? 1 : 0))])
+        }
+    }
+    
     func refreshLessonPlan()
     {
         let lessons = Storage.retrieve(as: Lesson.self)
-        self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
+        self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank })
     }
     
     func buildLessonPlan(onDone done: @escaping () -> Void)
@@ -66,7 +66,7 @@ class LessonsManager
                 print("GET LESSONS") //will remove once login data loading is speedy
                 ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
                 { lessons in
-                    self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank }).filter({ !$0.isComplete || $0.completedToday })
+                    self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank })
                     self.planBuilt = true
                     self.loadStepsForLessons(onDone:
                     {
@@ -220,16 +220,16 @@ class LessonsManager
         }
     }
     
-    func getLessonsCompletedOn(dateString: String) -> Int
+    func getLessonsCompletedOn(dateString: String) -> [Lesson]
     {
-        return lessons.filter({ $0.completedDate != nil }).map({ $0.completedDate }).filter { completedDate in
-            guard let completedDateString = completedDate,
+        return lessons.filter({ $0.completedDate != nil }).filter { lesson in
+            guard let completedDateString = lesson.completedDate,
                   let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
                   let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString),
                   let date = Date.serverDateFormatter.date(from: dateString) else { return false }
             
             return Date.isSameDay(date1: completedDate, date2: date.convertToLocalTime(fromTimeZone: "UTC")!)
-        }.count
+        }
     }
     
     func lessonsCompleted() -> Bool

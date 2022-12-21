@@ -13,10 +13,12 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     private var foods: [Food] = []
     private var checked: [Bool] = []
     private weak var delegate: FoodCheckmarkViewDelegate?
+    var selectedDate: String = ""
     
-    func setup(foods: [Food], delegate: FoodCheckmarkViewDelegate)
+    func setup(foods: [Food], selectedDate: String, delegate: FoodCheckmarkViewDelegate)
     {
         self.foods = foods
+        self.selectedDate = selectedDate
         stackView.removeAllArrangedSubviews()
         
         for (i, food) in foods.enumerated()
@@ -52,7 +54,7 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
         checked = PlansManager.shared.getFoodPlans().filter
         { plan in
             contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
-        }.map({ $0.isComplete })
+        }.map({ $0.completed.contains(selectedDate) })
         
         for (i, view) in stackView.arrangedSubviews.enumerated()
         {

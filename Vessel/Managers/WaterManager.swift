@@ -17,31 +17,32 @@ class WaterManager
         Date.serverDateFormatter.string(from: Date())
     }
     
-    var drinkedWaterGlasses: Int
+    func getDrinkedWaterGlasses(date: String) -> Int
     {
-        get
-        {
-            guard let waterPlan = PlansManager.shared.getWaterPlan(),
-                  let completionInfo = waterPlan.completionInfo?.first(where: { $0.date == todayString }) else { return 0 }
-            return completionInfo.units
-        }
-        set (value)
-        {
-            PlansManager.shared.setValueToWaterPlan(value: value)
-        }
+        guard let waterPlan = PlansManager.shared.getWaterPlan(),
+              let completionInfo = waterPlan.completionInfo?.first(where: { $0.date == date }) else { return 0 }
+        return completionInfo.units
+    }
+    
+    func setDrinkedWaterGlasses(value: Int, date: String)
+    {
+        PlansManager.shared.setValueToWaterPlan(value: value, date: date)
     }
     
     func resetDrinkedWaterGlassesIfNeeded()
     {
-        guard let plan = PlansManager.shared.getWaterPlan() else
+        guard let _ = PlansManager.shared.getWaterPlan() else
         {
             createWaterPlanIfNeeded()
             return
         }
-        var waterPlan = plan
-        guard waterPlan.completionInfo?.first(where: { $0.date == todayString }) == nil else { return }
-        waterPlan.completionInfo?.append(CompletionInfo(date: todayString, units: 0))
-        ObjectStore.shared.ClientSave(waterPlan)
+        let lastOpenedDay = UserDefaults.standard.string(forKey: Constants.KEY_LAST_OPENED_DAY)
+        let todayString: String = Date.serverDateFormatter.string(from: Date())
+        
+        if todayString != lastOpenedDay
+        {
+            PlansManager.shared.resetDrinkedWaterGlasses(date: todayString)
+        }
     }
     
     func createWaterPlanIfNeeded()

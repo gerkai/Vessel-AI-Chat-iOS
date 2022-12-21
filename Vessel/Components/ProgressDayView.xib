@@ -31,33 +31,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="42" height="48"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWY-dm-Y79">
-                            <rect key="frame" x="1" y="1" width="40" height="40"/>
+                            <rect key="frame" x="2" y="2" width="38" height="38"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="4tj-xY-IVb"/>
-                                <constraint firstAttribute="width" constant="40" id="KL0-zX-MPr"/>
+                                <constraint firstAttribute="width" secondItem="JWY-dm-Y79" secondAttribute="height" multiplier="1:1" id="s8S-FX-gyy"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <integer key="value" value="13"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qR-CK-cNP">
-                            <rect key="frame" x="3" y="3" width="36" height="36"/>
+                            <rect key="frame" x="4" y="4" width="34" height="34"/>
                             <color key="backgroundColor" red="0.83137254901960778" green="0.79607843137254897" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="36" id="AYz-G6-Pqv"/>
-                                <constraint firstAttribute="height" constant="36" id="W3o-bm-dRc"/>
+                                <constraint firstAttribute="width" secondItem="4qR-CK-cNP" secondAttribute="height" multiplier="1:1" id="uig-Z4-6b8"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <integer key="value" value="11"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxW-gr-4sM">
-                            <rect key="frame" x="17.333333333333332" y="14.333333333333336" width="7.6666666666666679" height="13.666666666666664"/>
+                            <rect key="frame" x="17.666666666666668" y="14" width="7" height="14"/>
                             <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -73,12 +61,16 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="e3b-Lc-hgx" secondAttribute="bottom" constant="-14" id="2Gt-ey-3Wh"/>
                         <constraint firstItem="JWY-dm-Y79" firstAttribute="centerX" secondItem="KoV-3n-ONc" secondAttribute="centerX" id="4CT-Em-z6q"/>
-                        <constraint firstItem="JWY-dm-Y79" firstAttribute="top" secondItem="KoV-3n-ONc" secondAttribute="top" constant="1" id="Whh-eK-HG8"/>
+                        <constraint firstAttribute="trailing" secondItem="JWY-dm-Y79" secondAttribute="trailing" constant="2" id="7xG-0E-41M"/>
+                        <constraint firstItem="JWY-dm-Y79" firstAttribute="leading" secondItem="KoV-3n-ONc" secondAttribute="leading" constant="2" id="LGZ-5I-uGC"/>
+                        <constraint firstAttribute="trailing" secondItem="4qR-CK-cNP" secondAttribute="trailing" constant="4" id="M8v-1h-ohl"/>
+                        <constraint firstItem="JWY-dm-Y79" firstAttribute="top" secondItem="KoV-3n-ONc" secondAttribute="top" constant="2" id="Whh-eK-HG8"/>
                         <constraint firstItem="XxW-gr-4sM" firstAttribute="centerY" secondItem="4qR-CK-cNP" secondAttribute="centerY" id="XU6-Zh-HGC"/>
                         <constraint firstItem="4qR-CK-cNP" firstAttribute="centerX" secondItem="KoV-3n-ONc" secondAttribute="centerX" id="XsN-Jc-xfv"/>
                         <constraint firstItem="e3b-Lc-hgx" firstAttribute="centerX" secondItem="KoV-3n-ONc" secondAttribute="centerX" id="i4A-Wk-dQs"/>
                         <constraint firstItem="XxW-gr-4sM" firstAttribute="centerX" secondItem="4qR-CK-cNP" secondAttribute="centerX" id="lXh-Xs-yja"/>
-                        <constraint firstItem="4qR-CK-cNP" firstAttribute="top" secondItem="KoV-3n-ONc" secondAttribute="top" constant="3" id="rk9-no-e46"/>
+                        <constraint firstItem="4qR-CK-cNP" firstAttribute="leading" secondItem="KoV-3n-ONc" secondAttribute="leading" constant="4" id="oqk-4n-4ev"/>
+                        <constraint firstItem="4qR-CK-cNP" firstAttribute="top" secondItem="KoV-3n-ONc" secondAttribute="top" constant="4" id="rk9-no-e46"/>
                     </constraints>
                 </view>
             </subviews>

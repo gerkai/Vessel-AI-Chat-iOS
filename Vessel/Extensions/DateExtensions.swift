@@ -13,7 +13,7 @@ extension Date
     {
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.DAY_INITIAL_DATE_FORMAT
-        formatter.locale = Locale.init(identifier: "en_US")
+        formatter.locale = Locale(identifier: "en_US")
         return formatter
     }()
     
