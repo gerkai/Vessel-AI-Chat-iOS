@@ -1,5 +1,5 @@
 //
-//  CongratsPopupViewController.swift
+//  InsightsPopupViewController.swift
 //  Vessel
 //
 //  Created by Carson Whitsett on 9/6/22.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol CongratsPopupViewControllerDelegate
+protocol InsightsPopupViewControllerDelegate
 {
 
 }
 
-class CongratsPopupViewController: PopupViewController
+class InsightsPopupViewController: PopupViewController
 {
-    var delegate: CongratsPopupViewControllerDelegate?
+    var delegate: InsightsPopupViewControllerDelegate?
     
     @IBAction func scanNewCard()
     {

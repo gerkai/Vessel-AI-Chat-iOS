@@ -42,6 +42,16 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         reloadUI()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        guard let contact = Contact.main() else { return }
+        
+        if contact.flags & Constants.SAW_INSIGHT_POPUP == 0
+        {
+            
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func onTakeATest()
     {

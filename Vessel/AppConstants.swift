@@ -158,6 +158,7 @@ struct Constants
     static let SAW_CORTISOL_LOW_INFO        = 0x00008000
     static let SAW_CORTISOL_HIGH_INFO       = 0x00010000
     static let SAW_TESTING_REMINDER         = 0x00020000
+    static let SAW_INSIGHT_POPUP            = 0x00040000
     
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
