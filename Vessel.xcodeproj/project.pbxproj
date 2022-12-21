@@ -151,6 +151,9 @@
 		3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */; };
 		3F9D6D832952811000664EA8 /* InsightsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D822952811000664EA8 /* InsightsPopupViewController.swift */; };
 		3F9D6D852953432700664EA8 /* ActivityPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D842953432700664EA8 /* ActivityPopupViewController.swift */; };
+		3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */; };
+		3F9D6D8A2953612100664EA8 /* CoachPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */; };
+		3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
@@ -444,6 +447,9 @@
 		3F9CB7BB28C7F7D10093228E /* SkipTimerSlideupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipTimerSlideupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D822952811000664EA8 /* InsightsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D842953432700664EA8 /* ActivityPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPopupViewController.swift; sourceTree = "<group>"; };
+		3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WellnessPopupViewController.swift; sourceTree = "<group>"; };
+		3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPopupViewController.swift; sourceTree = "<group>"; };
+		3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentPopupViewController.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
@@ -781,6 +787,7 @@
 				3F59A16128DFFB67005E5F46 /* ResultsTabMVVMViewController.swift */,
 				3F59A15F28DFFA65005E5F46 /* ResultsTabViewModel.swift */,
 				3F9C67B328FF011300BC44FA /* StudiesViewController.swift */,
+				3F9D6D862953612100664EA8 /* Tutorial */,
 				3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */,
 			);
 			path = Results;
@@ -858,6 +865,16 @@
 			children = (
 				3F9D6D842953432700664EA8 /* ActivityPopupViewController.swift */,
 				3F9D6D822952811000664EA8 /* InsightsPopupViewController.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		3F9D6D862953612100664EA8 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */,
+				3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */,
+				3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -1818,6 +1835,7 @@
 				72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */,
 				72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
+				3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
@@ -1846,6 +1864,7 @@
 				721F7BE22935BACA00B1F501 /* LessonResultsViewController.swift in Sources */,
 				3F0547B927C9EAAB006E3098 /* UITextFieldExtensions.swift in Sources */,
 				3F12F04E287DD61400FCC52E /* IconCheckmarkView.swift in Sources */,
+				3F9D6D8A2953612100664EA8 /* CoachPopupViewController.swift in Sources */,
 				3F9C67A228FE60EE00BC44FA /* Ketones.swift in Sources */,
 				3F9C67A828FE61A200BC44FA /* Cortisol.swift in Sources */,
 				72F3D62E28F15C54007ED9A8 /* FoodCheckmarkView.swift in Sources */,
@@ -1862,6 +1881,7 @@
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
+				3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */,
 				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
 				729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,

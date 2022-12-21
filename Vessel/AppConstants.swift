@@ -160,6 +160,9 @@ struct Constants
     static let SAW_TESTING_REMINDER         = 0x00020000
     static let SAW_INSIGHT_POPUP            = 0x00040000
     static let SAW_ACTIVITY_POPUP           = 0x00080000
+    static let SAW_WELLNESS_POPUP           = 0x00100000
+    static let SAW_COACH_POPUP              = 0x00200000
+    static let SAW_REAGENT_POPUP            = 0x00400000
     
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
