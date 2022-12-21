@@ -270,12 +270,19 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     }
     
     //MARK: - DrawingView delegates
-    func drawingStatus(isOnScreen: Bool, isCloseEnough: Int)
+    func drawingStatus(isOnScreen: Bool, isCloseEnough: Int, upsideDown: Bool)
     {
         if !processingPhoto
         {
             noticeLabel.backgroundColor = .white
-            if isCloseEnough > 0
+            if upsideDown == true
+            {
+                noticeLabel.text = NSLocalizedString("Card is upside down", comment: "Card placement instructions for user")
+                cameraView.backgroundColor = .red
+                noticeLabel.backgroundColor = Constants.vesselPoor
+                holdStillTime = nil
+            }
+            else if isCloseEnough > 0
             {
                 noticeLabel.text = NSLocalizedString("Move further away", comment: "Card placement instructions for user")
                 cameraView.backgroundColor = .red
