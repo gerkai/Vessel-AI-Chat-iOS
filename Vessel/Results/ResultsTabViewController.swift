@@ -89,6 +89,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             }
             else if contact.flags & Constants.SAW_COACH_POPUP == 0
             {
+                let vc = CoachPopupViewController.create()
+                self.present(vc, animated: false)
+                
+                contact.flags |= Constants.SAW_COACH_POPUP
+                ObjectStore.shared.ClientSave(contact)
             }
         }
     }

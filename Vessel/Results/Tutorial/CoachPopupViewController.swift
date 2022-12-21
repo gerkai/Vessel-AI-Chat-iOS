@@ -9,11 +9,7 @@ import UIKit
 
 class CoachPopupViewController: PopupViewController
 {
-    @IBOutlet weak var lessonView: UIView!
-    @IBOutlet weak var lessonTitle: UILabel!
-    @IBOutlet weak var lessonSubtitle: UILabel!
-    @IBOutlet weak var lessonDescription: UILabel!
-    @IBOutlet weak var lessonImageView: UIImageView!
+    @IBOutlet weak var coachView: UIView!
     @IBOutlet weak var pointerFinger: UIImageView!
     
     static func create() -> CoachPopupViewController
@@ -26,32 +22,17 @@ class CoachPopupViewController: PopupViewController
     
     override func viewDidLoad()
     {
-        if let lesson = LessonsManager.shared.nextLesson
-        {
-            lessonTitle.text = lesson.title
-            lessonSubtitle.text = lesson.subtitleString()
-            if let url = URL(string: lesson.imageUrl ?? "")
-            {
-                lessonImageView.kf.setImage(with: url)
-            }
-            lessonDescription.text = lesson.description
-            lessonView.alpha = 0.0
-            pointerFinger.alpha = 0.0
-        }
-        else
-        {
-            lessonView.isHidden = true
-        }
+        coachView.alpha = 0.0
     }
     override func appearAnimations()
     {
-        self.lessonView.alpha = 1.0
+        self.coachView.alpha = 1.0
         self.pointerFinger.alpha = 1.0
     }
     
     override func dismissAnimations()
     {
-        self.lessonView.alpha = 0.0
+        self.coachView.alpha = 0.0
         self.pointerFinger.alpha = 0.0
     }
     
