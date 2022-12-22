@@ -32,7 +32,7 @@ class Lesson: CoreObjectProtocol, Equatable
         guard let completedDateString = completedDate,
               let completedDate = Date.isoUTCDateFormatter.date(from: completedDateString) else { return false }
 
-        return Date.isSameDay(date1: completedDate, date2: Date().convertToLocalTime(fromTimeZone: "UTC")!)
+        return Date.isSameDay(date1: completedDate, date2: Date()/*.convertToLocalTime(fromTimeZone: "UTC")!*/)
     }
     
     init(id: Int,

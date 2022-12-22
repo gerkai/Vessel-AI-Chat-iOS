@@ -224,11 +224,10 @@ class LessonsManager
     {
         return lessons.filter({ $0.completedDate != nil }).filter { lesson in
             guard let completedDateString = lesson.completedDate,
-                  let completedLocalDateString = Date.utcToLocal(dateStr: completedDateString),
-                  let completedDate = Date.isoUTCDateFormatter.date(from: completedLocalDateString),
+                  let completedDate = Date.isoUTCDateFormatter.date(from: completedDateString),
                   let date = Date.serverDateFormatter.date(from: dateString) else { return false }
             
-            return Date.isSameDay(date1: completedDate, date2: date.convertToLocalTime(fromTimeZone: "UTC")!)
+            return Date.isSameDay(date1: completedDate, date2: date)
         }
     }
     
