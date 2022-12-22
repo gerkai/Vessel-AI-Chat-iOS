@@ -32,13 +32,14 @@ class LessonsManager
     {
         guard let firstUncompletedIndex = lessons.firstIndex(where: { $0.completedDate == nil || $0.completedToday }) else { return [] }
         let completedToday = min(MAX_LESSONS_PER_DAY, lessons.filter({ $0.completedToday }).count)
+        let lastIndex = max(firstUncompletedIndex, (firstUncompletedIndex + completedToday + (unlockMoreInsights ? 0 : -1 )))
         if lessons.count <= firstUncompletedIndex
         {
             return lessons
         }
         else
         {
-            return Array<Lesson>(lessons[firstUncompletedIndex...(firstUncompletedIndex + completedToday + (unlockMoreInsights ? 0 : -1 ))])
+            return Array<Lesson>(lessons[firstUncompletedIndex...lastIndex])
         }
     }
     
