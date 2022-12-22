@@ -112,6 +112,17 @@ class MainTabBarController: UITabBarController
             view.addSubview(button)
             tabBar.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
             tabBar.topAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
+            
+            //if there have been no tests taken yet, default to the results tab
+            var results: [Result] = Storage.retrieve(as: Result.self)
+            if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+            {
+                results = mockResults
+            }
+            if results.count == 0
+            {
+                self.selectedIndex = Constants.TAB_BAR_RESULTS_INDEX
+            }
         }
     }
     
