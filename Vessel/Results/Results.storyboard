@@ -1548,13 +1548,18 @@
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.79703021523178808" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="I4D-Af-fWO" firstAttribute="top" secondItem="RqG-tf-tEA" secondAttribute="top" id="3LK-XW-XeR"/>
                                     <constraint firstAttribute="trailing" secondItem="I4D-Af-fWO" secondAttribute="trailing" id="F9D-Lx-2qm"/>
                                     <constraint firstAttribute="bottom" secondItem="I4D-Af-fWO" secondAttribute="bottom" id="QOj-jT-UOb"/>
                                     <constraint firstItem="I4D-Af-fWO" firstAttribute="leading" secondItem="RqG-tf-tEA" secondAttribute="leading" id="qiH-sk-MKI"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="I4D-Af-fWO"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tck-R1-S2G">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -1702,13 +1707,18 @@
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.80041908112582782" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PCK-ag-a2Q" secondAttribute="bottom" id="0qn-1F-ZEQ"/>
                                     <constraint firstItem="PCK-ag-a2Q" firstAttribute="leading" secondItem="UmQ-os-Vh3" secondAttribute="leading" id="3AA-y3-iAP"/>
                                     <constraint firstAttribute="trailing" secondItem="PCK-ag-a2Q" secondAttribute="trailing" id="6xp-ti-VNE"/>
                                     <constraint firstItem="PCK-ag-a2Q" firstAttribute="top" secondItem="UmQ-os-Vh3" secondAttribute="top" id="HcN-7n-tgB"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="PCK-ag-a2Q"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chn-tc-lOX">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -1862,13 +1872,18 @@
                                         <blurEffect style="systemUltraThinMaterialDark"/>
                                     </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.79653870033112584" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ZRh-xy-jMG" firstAttribute="leading" secondItem="7NR-LP-gwA" secondAttribute="leading" id="a0C-2a-YYM"/>
                                     <constraint firstItem="ZRh-xy-jMG" firstAttribute="top" secondItem="7NR-LP-gwA" secondAttribute="top" id="iYY-DO-Asb"/>
                                     <constraint firstAttribute="bottom" secondItem="ZRh-xy-jMG" secondAttribute="bottom" id="lZ3-YV-4TW"/>
                                     <constraint firstAttribute="trailing" secondItem="ZRh-xy-jMG" secondAttribute="trailing" id="vMQ-aK-KfO"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="ZRh-xy-jMG"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fy-3C-mf3">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
