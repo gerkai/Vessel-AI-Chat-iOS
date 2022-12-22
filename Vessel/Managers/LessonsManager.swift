@@ -38,7 +38,7 @@ class LessonsManager
         }
         else
         {
-            return Array<Lesson>(lessons[firstUncompletedIndex...(firstUncompletedIndex + completedToday + (unlockMoreInsights ? 1 : 0))])
+            return Array<Lesson>(lessons[firstUncompletedIndex...(firstUncompletedIndex + completedToday + (unlockMoreInsights ? 0 : -1 ))])
         }
     }
     
