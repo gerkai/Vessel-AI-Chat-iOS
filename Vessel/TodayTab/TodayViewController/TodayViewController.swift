@@ -23,6 +23,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     private let resultsViewModel = ResultsTabViewModel()
     private var tableViewOffset: CGFloat?
     
+    private var lastDayProgress: Double = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
+
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
     
@@ -110,6 +112,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         let todayString = Date.serverDateFormatter.string(from: Date())
         let todayProgress = PlansManager.shared.calculateProgressFor(date: todayString)
+        guard lastDayProgress != todayProgress else { return }
+        lastDayProgress = todayProgress
         guard viewModel.isToday && todayProgress == 1.0 else { return }
         
         let congratulationsView = GamificationCongratulationsView()

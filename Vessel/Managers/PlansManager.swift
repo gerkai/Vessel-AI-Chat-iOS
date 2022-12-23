@@ -182,7 +182,7 @@ extension PlansManager
         }
         
         // Insights
-        if showInsights && !LessonsManager.shared.lessonsCompleted()
+        if showInsights// && !LessonsManager.shared.lessonsCompleted()
         {
             parts += 1
             let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date).count
