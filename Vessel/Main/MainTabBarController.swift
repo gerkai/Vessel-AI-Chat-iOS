@@ -10,6 +10,7 @@ import UIKit
 class MainTabBarController: UITabBarController
 {
     var didLayout = false
+    var firstLaunch = true
     let vesselButtonIndex = 2
     let takeTestViewModel = TakeTestViewModel()
     private var vesselButton: BounceButton?
@@ -81,15 +82,20 @@ class MainTabBarController: UITabBarController
     
     override func viewWillAppear(_ animated: Bool)
     {
-        //if there have been no tests taken yet, default to the results tab
-        var results: [Result] = Storage.retrieve(as: Result.self)
-        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+        if firstLaunch == true
         {
-            results = mockResults
-        }
-        if results.count == 0
-        {
-            self.selectedIndex = Constants.TAB_BAR_RESULTS_INDEX
+            firstLaunch = false
+            
+            //if there have been no tests taken yet, default to the results tab
+            var results: [Result] = Storage.retrieve(as: Result.self)
+            if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+            {
+                results = mockResults
+            }
+            if results.count == 0
+            {
+                self.selectedIndex = Constants.TAB_BAR_RESULTS_INDEX
+            }
         }
     }
     
