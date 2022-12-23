@@ -1177,28 +1177,7 @@ However, most people drink below what their body needs because it's hard to know
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5I-kW-lWE">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQT-a6-B0L">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AfL-A7-uGg">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                        <blurEffect style="systemUltraThinMaterialDark"/>
-                                    </visualEffectView>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.79599544701986757" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="jQT-a6-B0L" firstAttribute="leading" secondItem="Q5I-kW-lWE" secondAttribute="leading" id="Brb-JY-k9Q"/>
-                                    <constraint firstAttribute="trailing" secondItem="jQT-a6-B0L" secondAttribute="trailing" id="I40-ax-NIu"/>
-                                    <constraint firstAttribute="bottom" secondItem="jQT-a6-B0L" secondAttribute="bottom" id="UKR-1R-lKz"/>
-                                    <constraint firstItem="jQT-a6-B0L" firstAttribute="top" secondItem="Q5I-kW-lWE" secondAttribute="top" id="b6B-cq-ePO"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="jQT-a6-B0L"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsB-eX-Vse">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -1388,28 +1367,7 @@ However, most people drink below what their body needs because it's hard to know
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-cT-nCp">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-zX-Tlk">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RKn-0z-1GZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                        <blurEffect style="systemUltraThinMaterialDark"/>
-                                    </visualEffectView>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.79938431291390732" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="dVb-zX-Tlk" firstAttribute="leading" secondItem="sgm-cT-nCp" secondAttribute="leading" id="9gN-zO-Nrs"/>
-                                    <constraint firstItem="dVb-zX-Tlk" firstAttribute="top" secondItem="sgm-cT-nCp" secondAttribute="top" id="EOb-bx-ej0"/>
-                                    <constraint firstAttribute="bottom" secondItem="dVb-zX-Tlk" secondAttribute="bottom" id="RWO-ZI-EjA"/>
-                                    <constraint firstAttribute="trailing" secondItem="dVb-zX-Tlk" secondAttribute="trailing" id="dIL-cw-L9e"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="dVb-zX-Tlk"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vy3-Mf-GWz">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
