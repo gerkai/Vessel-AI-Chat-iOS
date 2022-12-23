@@ -23,8 +23,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     private let resultsViewModel = ResultsTabViewModel()
     private var tableViewOffset: CGFloat?
     
-    private var lastDayProgress: Double = 0.0
-    
+    private var lastDayProgress: Double = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
+
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
     
