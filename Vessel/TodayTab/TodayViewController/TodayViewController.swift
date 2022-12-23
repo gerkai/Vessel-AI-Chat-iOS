@@ -58,12 +58,20 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         }
         else if contact.flags & Constants.SAW_ACTIVITY_POPUP == 0
         {
+            //show the "Congrats for adding your first activity" popup but only if they haven't seen it
+            //yet and only if the first activity was added today (VH-5081)
             let plans = PlansManager.shared.getActivities()
             if plans.count != 0
             {
-                let vc = ActivityPopupViewController.createWith(plan: plans.first!)
-                self.present(vc, animated: false)
-                
+                let plan = plans.first!
+                if let date = Date.from(vesselTime: plan.last_updated)
+                {
+                    if Calendar.current.isDateInToday(date)
+                    {
+                        let vc = ActivityPopupViewController.createWith(plan: plans.first!)
+                        self.present(vc, animated: false)
+                    }
+                }
                 contact.flags |= Constants.SAW_ACTIVITY_POPUP
                 ObjectStore.shared.ClientSave(contact)
             }
