@@ -236,6 +236,7 @@
 		72985CFF292DD38E00E6173E /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */; };
 		72985D01292DD69500E6173E /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72985D00292DD69400E6173E /* remote_config_defaults.plist */; };
 		7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */; };
+		729EE03D295696FF00183922 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729EE03C295696FF00183922 /* UIScreenExtension.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
 		72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */; };
@@ -544,6 +545,7 @@
 		72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
 		72985D00292DD69400E6173E /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodTableViewCell.swift; sourceTree = "<group>"; };
+		729EE03C295696FF00183922 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewModel.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
 				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
+				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1806,6 +1809,7 @@
 				725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */,
+				729EE03D295696FF00183922 /* UIScreenExtension.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,

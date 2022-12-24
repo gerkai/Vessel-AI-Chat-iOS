@@ -159,12 +159,16 @@ class LessonsCoordinator
         if let startViewController = startViewController
         {
             navigationController.popToViewController(startViewController, animated: true)
-            delegate?.onLessonFinished()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.delegate?.onLessonFinished()
+            })
         }
         else
         {
             navigationController.popToRootViewController(animated: true)
-            delegate?.onLessonFinished()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.delegate?.onLessonFinished()
+            })
         }
     }
 }

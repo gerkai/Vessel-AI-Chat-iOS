@@ -67,7 +67,6 @@ class Contact: CoreObjectProtocol
     lazy var suggestedFoods: [Food] =
     {
         let storedFoods = Storage.retrieve(as: Food.self)
-        let dayOfWeek = Date().dayOfWeek
         
         let foodIds: [Int]
         let foodPlans = PlansManager.shared.getFoodPlans()

@@ -243,4 +243,14 @@ class LessonsManager
         WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
         LessonsManager.shared.buildLessonPlanIfNeeded()
     }
+    
+    func completedLessonsDates() -> [String]
+    {
+        return lessons.compactMap
+        {
+            guard let completedDateString = $0.completedDate,
+                  let completedDate = Date.isoUTCDateFormatter.date(from: completedDateString) else { return nil }
+            return Date.serverDateFormatter.string(from: completedDate)
+        }
+    }
 }

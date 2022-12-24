@@ -12,7 +12,7 @@ class Tip: CoreObjectProtocol
     var id: Int = 0
     var last_updated: Int = 0
     let title: String
-    let description: String
+    let description: String?
     let frequency: String
     let imageUrl: String
     //let smallImage: String?
@@ -21,7 +21,7 @@ class Tip: CoreObjectProtocol
     init(id: Int,
          last_updated: Int,
          title: String,
-         description: String,
+         description: String?,
          imageUrl: String,
          frequency: String)
     {
@@ -45,6 +45,6 @@ class Tip: CoreObjectProtocol
     
     func getActivityDetailsModel(planId: Int) -> ActivityDetailsModel
     {
-        return ActivityDetailsModel(id: planId, imageUrl: imageUrl, title: title, subtitle: frequency, description: description, reagents: nil, quantities: nil)
+        return ActivityDetailsModel(id: planId, imageUrl: imageUrl, title: title, subtitle: frequency, description: description ?? "", reagents: nil, quantities: nil)
     }
 }

@@ -253,15 +253,15 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 {
                     for _ in stride(from: 0, to: index, by: 1)
                     {
-                        guard let viewController = coordinator.getNextStepViewController(shouldSave: false) else { return }
+                        guard let viewController = coordinator.getNextStepViewController() else { return }
                         navigationController?.pushViewController(viewController, animated: false)
                     }
-                    guard let viewController = coordinator.getNextStepViewController(shouldSave: false) else { return }
+                    guard let viewController = coordinator.getNextStepViewController() else { return }
                     navigationController?.fadeTo(viewController)
                 }
                 else
                 {
-                    guard let viewController = coordinator.getNextStepViewController(shouldSave: viewModel.isToday) else { return }
+                    guard let viewController = coordinator.getNextStepViewController(shouldSave: viewModel.isToday && lesson.completedDate == nil) else { return }
                     navigationController?.pushViewController(viewController, animated: true)
                 }
             }
@@ -451,7 +451,7 @@ extension TodayViewController: LessonsCoordinatorDelegate
 {
     func onLessonFinished()
     {
-        showGamificationCongratulationsViewIfNeeded()
+        self.showGamificationCongratulationsViewIfNeeded()
     }
 }
 

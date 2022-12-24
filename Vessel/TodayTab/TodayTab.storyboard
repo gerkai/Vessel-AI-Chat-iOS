@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -80,35 +80,35 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="IPN-On-Gqc">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IPN-On-Gqc">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="48"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Pa-2tC" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42.333333333333336" height="48"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="45.666666666666664" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ze4-Vn-hoj" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="51.333333333333329" y="0.0" width="42.333333333333329" height="48"/>
+                                                            <rect key="frame" x="50.666666666666671" y="0.0" width="45.666666666666671" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNa-0O-Agz" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="102.66666666666667" y="0.0" width="42.333333333333329" height="48"/>
+                                                            <rect key="frame" x="101.33333333333333" y="0.0" width="45.666666666666671" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDO-Pu-4ME" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="154" y="0.0" width="42" height="48"/>
+                                                            <rect key="frame" x="152" y="0.0" width="46" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-WE-OI1" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="205" y="0.0" width="42.333333333333343" height="48"/>
+                                                            <rect key="frame" x="203" y="0.0" width="45.666666666666657" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-hH-rG8" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="256.33333333333331" y="0.0" width="42.333333333333314" height="48"/>
+                                                            <rect key="frame" x="253.66666666666666" y="0.0" width="45.666666666666657" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YG4-25-TLn" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
-                                                            <rect key="frame" x="307.66666666666669" y="0.0" width="42.333333333333314" height="48"/>
+                                                            <rect key="frame" x="304.33333333333331" y="0.0" width="45.666666666666686" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>

@@ -161,28 +161,33 @@ extension PlansManager
         // Feature flags
         let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
         let showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
+        let showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
+        let showFood: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
 
         var progress: Double = 0.0
         var parts: Double = 0.0
         
         // Activities
-        let activities = getActivities()
+        let activityPlans = getActivities()
+        let activities = showActivites ? activities.filter({ activity in
+            return plans.contains(where: { $0.typeId == activity.id })
+        }) : []
         if showActivites && !activities.isEmpty
         {
             parts += 1
-            progress += Double(activities.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
+            progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
         }
         
         // Foods
         let foods = getFoodPlans()
-        if !foods.isEmpty
+        if showFood && !foods.isEmpty && !Contact.main()!.suggestedFoods.isEmpty
         {
             parts += 1
             progress += foods.contains(where: { $0.completed.contains(date) }) ? 1.0 : 0.0
         }
         
         // Insights
-        if showInsights// && !LessonsManager.shared.lessonsCompleted()
+        if showInsights
         {
             parts += 1
             let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date).count
@@ -190,7 +195,7 @@ extension PlansManager
         }
         
         // Water
-        if let contact = Contact.main(), let waterActivity = getWaterPlan(), let dailyWaterIntake = contact.dailyWaterIntake
+        if let contact = Contact.main(), let waterActivity = getWaterPlan(), let dailyWaterIntake = contact.dailyWaterIntake, showWater
         {
             parts += 1
             let amount = waterActivity.completionInfo?.first(where: { $0.date == date })?.units
@@ -232,7 +237,11 @@ extension PlansManager
     
     func allCompletedDaysCount() -> Int
     {
-        let completedDates = Array<String>(plans.map({ $0.completed }).joined())
+        let completedPlanDates = Array<String>(plans.map({ $0.completed }).joined())
+        let completedLessonsDates = LessonsManager.shared.completedLessonsDates()
+        var completedDates = [String]()
+        completedDates.append(contentsOf: completedPlanDates)
+        completedDates.append(contentsOf: completedLessonsDates)
         let uniqueDates = Array(Set(completedDates)).sorted(by: { $0 < $1 })
         
         var completeDays = 0

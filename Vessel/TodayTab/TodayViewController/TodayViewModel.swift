@@ -121,7 +121,7 @@ enum TodayViewSection: Equatable
             {
                 cells.append(.checkMarkCard(title: activity.title,
                                             subtitle: activity.frequency,
-                                            description: activity.description,
+                                            description: activity.description ?? "",
                                             backgroundImage: activity.imageUrl,
                                             isCompleted: false,
                                             id: activity.id,
@@ -185,10 +185,20 @@ enum TodayViewCell: Equatable
     
     var height: CGFloat
     {
+        let progressDaysHeight: CGFloat
+        switch UIScreen.main.getScreenSize()
+        {
+        case .large:
+            progressDaysHeight = 49.0
+        case .mid:
+            progressDaysHeight = 40.0
+        case .small:
+            progressDaysHeight = 38.0
+        }
         switch self
         {
         case .header: return 177.0
-        case .progressDays: return 48.0
+        case .progressDays: return progressDaysHeight
         case .sectionTitle: return 56.0
         case .foodDetails(let foods, _):
             let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
