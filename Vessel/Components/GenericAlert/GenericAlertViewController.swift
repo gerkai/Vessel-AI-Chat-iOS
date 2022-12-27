@@ -82,6 +82,7 @@ class GenericAlertViewController: UIViewController
     // MARK: Flags
     private var alertSetup = false
     private var alertPresented = false
+    private var layedOut = false
     
     // MARK: Initializers
     init(viewModel: GenericAlertViewModel)
@@ -108,6 +109,31 @@ class GenericAlertViewController: UIViewController
     }
     
     // MARK: - UIViewController Lifecycle
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        if !layedOut && alertPresented
+        {
+            layedOut = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                if self.viewModel.showConfetti
+                {
+                    self.confettiTopConstraint.constant = self.view.window?.windowScene?.windows.first?.frame.height ?? 0
+                    UIView.animate(withDuration: 2.0, delay: 0.0)
+                    {
+                        self.view.layoutIfNeeded()
+                    }
+                completion:
+                    { completed in
+                        self.confettiTopConstraint.constant = -400
+                        self.view.layoutIfNeeded()
+                    }
+                }
+            })
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -191,20 +217,6 @@ class GenericAlertViewController: UIViewController
                     self.alertViewBottomSpacingConstraint.priority = .init(rawValue: 900)
                     self.delegate?.onAlertPresented?(self, alertDescription: self.viewModel.description)
                 }
-            }
-        }
-        
-        if viewModel.showConfetti
-        {
-            confettiTopConstraint.constant = view.window?.windowScene?.windows.first?.frame.height ?? 0
-            UIView.animate(withDuration: 2.0, delay: 0.0)
-            {
-                self.view.layoutIfNeeded()
-            }
-        completion:
-            { completed in
-                self.confettiTopConstraint.constant = -400
-                self.view.layoutIfNeeded()
             }
         }
     }

@@ -245,6 +245,8 @@ class TodayViewModel
     private var showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
     
     var selectedDate: String = Date.serverDateFormatter.string(from: Date())
+    var lastWeekProgress: [String: Double] = PlansManager.shared.getLastWeekPlansProgress()
+    var lastDayProgress: Double = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
     
     var numberOfGlasses: Int?
     {
@@ -263,7 +265,7 @@ class TodayViewModel
     
     var sections: [TodayViewSection] {
         contact = Contact.main()!
-        let progressDays: [String: Double] = showProgressDays ? PlansManager.shared.getLastWeekPlansProgress() : [:]
+        let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
         let plans = PlansManager.shared.getActivities()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
@@ -292,5 +294,10 @@ class TodayViewModel
     func refreshContactSuggestedfoods()
     {
         contact.refreshSuggestedFoods()
+    }
+    
+    func refreshLastWeekProgress()
+    {
+        lastWeekProgress = PlansManager.shared.getLastWeekPlansProgress()
     }
 }

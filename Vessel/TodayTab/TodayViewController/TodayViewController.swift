@@ -22,8 +22,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     private var viewModel = TodayViewModel()
     private let resultsViewModel = ResultsTabViewModel()
     private var tableViewOffset: CGFloat?
-    
-    private var lastDayProgress: Double = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
 
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
@@ -93,11 +91,13 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             Log_Add("Today Page: dataUpdated: \(type)")
             if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
+                viewModel.refreshLastWeekProgress()
                 viewModel.refreshContactSuggestedfoods()
                 reloadUI()
             }
             else if type == String(describing: Lesson.self)
             {
+                viewModel.refreshLastWeekProgress()
                 reloadUI()
             }
             else if type == String(describing: Curriculum.self)
@@ -120,8 +120,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     {
         let todayString = Date.serverDateFormatter.string(from: Date())
         let todayProgress = PlansManager.shared.calculateProgressFor(date: todayString)
-        guard lastDayProgress != todayProgress else { return }
-        lastDayProgress = todayProgress
+        guard viewModel.lastDayProgress != todayProgress else { return }
+        viewModel.lastDayProgress = todayProgress
         guard viewModel.isToday && todayProgress == 1.0 else { return }
         
         let congratulationsView = GamificationCongratulationsView()
