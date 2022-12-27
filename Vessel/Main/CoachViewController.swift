@@ -12,6 +12,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
 {
     // MARK: - View
     @IBOutlet weak var coachView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Model
     var flowName: AnalyticsFlowName = .coachTabFlow
@@ -22,13 +23,16 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         super.viewDidLoad()
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCoachViewTapped))
-        coachView.addGestureRecognizer(gestureRecognizer)
+        let gestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(onLaunchChat))
+        coachView.addGestureRecognizer(gestureRecognizer1)
+        
+        let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(onLaunchChat))
+        imageView.addGestureRecognizer(gestureRecognizer2)
     }
     
     // MARK: - Actions
     @objc
-    func onCoachViewTapped(gestureRecognizer: UIGestureRecognizer)
+    func onLaunchChat(gestureRecognizer: UIGestureRecognizer)
     {
         LiveChatManager.shared.navigateToLiveChat(in: self)
     }

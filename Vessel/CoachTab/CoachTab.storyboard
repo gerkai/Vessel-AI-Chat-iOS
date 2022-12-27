@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -95,16 +95,22 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coach-chat" translatesAutoresizingMaskIntoConstraints="NO" id="Uzw-PT-ZCZ">
+                                <rect key="frame" x="0.0" y="388" width="390" height="393"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kfD-ig-UP7" secondAttribute="trailing" constant="20" id="27z-gA-2k1"/>
                             <constraint firstItem="1e2-hX-4nj" firstAttribute="top" secondItem="q2A-CN-neQ" secondAttribute="bottom" constant="9" id="2dC-wP-a6y"/>
+                            <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OaS-Jc-7oQ"/>
                             <constraint firstItem="q2A-CN-neQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RLY-zW-lxt"/>
                             <constraint firstItem="kfD-ig-UP7" firstAttribute="top" secondItem="1e2-hX-4nj" secondAttribute="bottom" constant="28" id="SxQ-xb-dGK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1e2-hX-4nj" secondAttribute="trailing" constant="20" id="VvS-bD-b0Y"/>
+                            <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="20" id="gW5-Gg-ghq"/>
                             <constraint firstItem="1e2-hX-4nj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="hxy-FD-Eee"/>
+                            <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="n93-xk-zlq"/>
                             <constraint firstItem="q2A-CN-neQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="syM-Nl-xgm"/>
                             <constraint firstItem="kfD-ig-UP7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="x6p-nm-RpO"/>
                         </constraints>
@@ -116,16 +122,18 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="coachView" destination="kfD-ig-UP7" id="sVM-oC-MI0"/>
+                        <outlet property="imageView" destination="Uzw-PT-ZCZ" id="eZ8-AS-XNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="-17"/>
+            <point key="canvasLocation" x="136.92307692307691" y="-17.061611374407583"/>
         </scene>
     </scenes>
     <resources>
         <image name="Coach-icon" width="28" height="16"/>
         <image name="coach" width="40" height="40"/>
+        <image name="coach-chat" width="487" height="393"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
