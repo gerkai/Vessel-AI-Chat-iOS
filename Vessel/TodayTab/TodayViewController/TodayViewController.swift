@@ -163,7 +163,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        viewModel.sections[indexPath.section].cells[indexPath.row].height + (viewModel.sections[indexPath.section] == viewModel.sections.last ? max(0.0, tableViewOffset ?? 0.0) : ViewConstants.TABLE_VIEW_SPACING)
+        viewModel.sections[safe: indexPath.section]?.cells[safe: indexPath.row]?.height ?? 0.0 + (viewModel.sections[indexPath.section] == viewModel.sections.last ? max(0.0, tableViewOffset ?? 0.0) : ViewConstants.TABLE_VIEW_SPACING)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
