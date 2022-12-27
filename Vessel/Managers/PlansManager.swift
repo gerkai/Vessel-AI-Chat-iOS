@@ -39,6 +39,10 @@ class PlansManager
                 done()
             }
         }
+        else
+        {
+            done()
+        }
     }
     
     func addPlans(plansToAdd: [Plan])
