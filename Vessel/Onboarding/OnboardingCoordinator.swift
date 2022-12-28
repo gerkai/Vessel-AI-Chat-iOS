@@ -251,7 +251,7 @@ class OnboardingCoordinator
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("Init Onboarding Coordinator")
+            print("❇️ \(self)")
         }
     }
     
@@ -259,7 +259,7 @@ class OnboardingCoordinator
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("Dealloc Onboarding Coordinator")
+            print("❌ \(self)")
         }
     }
     

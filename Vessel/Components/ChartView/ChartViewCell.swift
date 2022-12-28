@@ -37,7 +37,7 @@ class ChartViewCell: UICollectionViewCell
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("CELL: awakeFromNib")
+            print("✳️ \(self)")
         }
         super.awakeFromNib()
         originalHeight = infoHeight.constant
@@ -48,7 +48,7 @@ class ChartViewCell: UICollectionViewCell
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("CELL: deinit")
+            print("❌ \(self)")
         }
         NotificationCenter.default.removeObserver(self)
     }

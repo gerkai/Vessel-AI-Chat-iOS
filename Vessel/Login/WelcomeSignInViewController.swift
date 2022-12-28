@@ -55,7 +55,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         splashView.set(visible: true)
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("WelcomeSignIn did load")
+            print("❇️ \(self)")
         }
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
@@ -74,7 +74,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("WelcomeSignIn deinit")
+            print("❌ \(self)")
         }
     }
     

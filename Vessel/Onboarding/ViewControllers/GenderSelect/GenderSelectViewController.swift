@@ -26,9 +26,17 @@ class GenderSelectViewController: UIViewController, VesselScreenIdentifiable
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📖 did load \(self)")
+            print("❇️ \(self)")
         }
         setupUI()
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

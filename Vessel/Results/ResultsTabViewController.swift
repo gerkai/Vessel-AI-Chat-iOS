@@ -30,10 +30,18 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         NotificationCenter.default.addObserver(self, selector: #selector(self.foodPrefsChanged(_:)), name: .foodPreferencesChangedNotification, object: nil)
         textView.attributedText = viewModel.wellnessText()
         textView.delegate = self
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
     }
     
     deinit
     {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
         NotificationCenter.default.removeObserver(self)
     }
     

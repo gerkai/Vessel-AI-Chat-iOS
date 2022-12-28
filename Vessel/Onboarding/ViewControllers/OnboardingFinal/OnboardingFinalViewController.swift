@@ -27,7 +27,7 @@ class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📖 did load \(self)")
+            print("❇️ \(self)")
         }
     }
     
@@ -35,7 +35,7 @@ class OnboardingFinalViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

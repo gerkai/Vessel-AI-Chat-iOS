@@ -34,7 +34,7 @@ class ItemPreferencesViewModel
         hideBackground = false
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("✅ init \(self)")
+            print("✳️ \(self)")
         }
     }
     
@@ -42,7 +42,7 @@ class ItemPreferencesViewModel
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("❌ deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

@@ -25,7 +25,7 @@ class OnboardingWelcomeViewController: UIViewController, VesselScreenIdentifiabl
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📗 did load \(self)")
+            print("❇️ \(self)")
         }
         
         if let contact = Contact.main()
@@ -39,7 +39,7 @@ class OnboardingWelcomeViewController: UIViewController, VesselScreenIdentifiabl
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

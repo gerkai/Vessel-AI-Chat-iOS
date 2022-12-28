@@ -22,6 +22,23 @@ class TodayHeaderTableViewCell: UITableViewCell
     
     weak var delegate: TodayHeaderTableViewCellDelegate?
 
+    required init?(coder: NSCoder)
+    {
+        super.init(coder: coder)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
+    }
+    
     // MARK: - Methods
     func setup(name: String, goals: [String], delegate: TodayHeaderTableViewCellDelegate)
     {
