@@ -44,7 +44,7 @@ enum WaterIntakeViewType
     }
     
     var waterIntakeViewType: WaterIntakeViewType = .normal
-    var delegate: WaterIntakeViewDelegate?
+    weak var delegate: WaterIntakeViewDelegate?
     
     override var intrinsicContentSize: CGSize
     {

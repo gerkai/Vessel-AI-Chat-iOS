@@ -20,13 +20,17 @@ class KeyboardFriendlyViewController: UIViewController
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
     }
     
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

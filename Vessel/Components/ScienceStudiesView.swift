@@ -41,7 +41,7 @@ class ScienceStudiesView: UIView
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("ScienceStudiesView DEINIT")
+            print("❌ \(self)")
         }
     }
     
@@ -54,6 +54,10 @@ class ScienceStudiesView: UIView
         self.backgroundColor = .clear
         goalLabel.text = goal
         studiesLabel.text = numStudies
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✳️ \(self)")
+        }
     }
     
     @IBAction func buttonPressed()

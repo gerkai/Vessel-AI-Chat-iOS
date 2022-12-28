@@ -44,6 +44,18 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         {
             instructionsLabel.isHidden = true
         }
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool)

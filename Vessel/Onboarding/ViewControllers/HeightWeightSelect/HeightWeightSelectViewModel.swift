@@ -12,11 +12,19 @@ class HeightWeightSelectViewModel
     lazy var userHeight: Double = Double(Constants.DEFAULT_HEIGHT - (isMetric ? 0 : Constants.MIN_HEIGHT_METRIC))
     var userWeight: Double?
     
+    init()
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✳️ \(self)")
+        }
+    }
+    
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

@@ -66,13 +66,17 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
            _ in self.onTick()
         }
         showRanges()
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
     }
     
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("ResultsViewController deinit")
+            print("❌ \(self)")
         }
     }
     

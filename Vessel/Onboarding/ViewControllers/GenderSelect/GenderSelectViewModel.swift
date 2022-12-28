@@ -11,11 +11,19 @@ class GenderSelectViewModel
 {
     var userGender: Int?
 
+    init()
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✳️ \(self)")
+        }
+    }
+    
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

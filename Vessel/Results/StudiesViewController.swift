@@ -28,7 +28,7 @@ class StudiesViewController: UIViewController, SourceInfoViewDelegate
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📖 did load \(self)")
+            print("❇️ \(self)")
         }
         let reagent = Reagents[reagentID]!
         let goal = Goals[goalID]!
@@ -50,7 +50,7 @@ class StudiesViewController: UIViewController, SourceInfoViewDelegate
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

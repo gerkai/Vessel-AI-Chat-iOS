@@ -19,11 +19,19 @@ class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         logView.text = Log_Get()
         NotificationCenter.default.addObserver(self, selector: #selector(GotLogUpdate(notification:)), name: Notification.Name.LOG_UPDATED_NOTIFICATION, object: nil)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
     }
     
     deinit
     {
         NotificationCenter.default.removeObserver(self)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
     }
     
     @objc func GotLogUpdate(notification: NSNotification)

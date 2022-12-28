@@ -263,7 +263,8 @@ class TodayViewModel
         return selectedDate == Date.serverDateFormatter.string(from: Date())
     }
     
-    var sections: [TodayViewSection] {
+    var sections: [TodayViewSection]
+    {
         contact = Contact.main()!
         let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
@@ -283,6 +284,22 @@ class TodayViewModel
             .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses),
             .footer
         ]
+    }
+    
+    init()
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
     }
     
     func updateCheckedGlasses(_ glasses: Int)

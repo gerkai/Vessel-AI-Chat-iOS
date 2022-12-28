@@ -50,6 +50,10 @@ class DebugViewController: UIViewController, UITextFieldDelegate, VesselScreenId
         {
             defaultWeightTextField.text = weight
         }
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
     }
     
     deinit
@@ -57,6 +61,10 @@ class DebugViewController: UIViewController, UITextFieldDelegate, VesselScreenId
         if environmentControl.selectedSegmentIndex != savedEnvironment
         {
             UserDefaults.standard.set(environmentControl.selectedSegmentIndex, forKey: Constants.environmentKey)
+        }
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
         }
     }
     

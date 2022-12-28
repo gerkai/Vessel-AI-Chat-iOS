@@ -22,7 +22,7 @@ class MainTabBarController: UITabBarController
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("MainTabBarController did load")
+            print("❇️ \(self)")
         }
         //disable the tab bar's center button. We'll add our own.
         //(if we leave it enabled, user could tap below Vessel button and trigger a screen transition)
@@ -67,7 +67,7 @@ class MainTabBarController: UITabBarController
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
         NotificationCenter.default.removeObserver(self)
     }

@@ -38,7 +38,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📖 did load \(self)")
+            print("❇️ \(self)")
         }
         super.viewDidLoad()
         
@@ -63,7 +63,7 @@ class ReagentDetailsViewController: UIViewController, UIScrollViewDelegate, Char
         chartView.dataSource = nil
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📘 deinit \(self)")
+            print("❌ \(self)")
         }
     }
     

@@ -124,11 +124,19 @@ class TakeTestViewModel
         return vc
     }
     
+    init()
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✳️ \(self)")
+        }
+    }
+    
     deinit
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
-            print("📕: Take Test View Model deinit")
+            print("❌ \(self)")
         }
     }
     
