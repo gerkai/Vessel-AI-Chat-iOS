@@ -129,8 +129,12 @@ class Lesson: CoreObjectProtocol, Equatable
         for stepID in stepIds
         {
             let step = ObjectStore.shared.quickGet(type: Step.self, id: stepID)
-            if (step?.questionRead == false || step?.questionRead == nil) && index != 0
+            if step?.questionRead == false || step?.questionRead == nil
             {
+                if index == 0
+                {
+                    return nil
+                }
                 return index
             }
             index += 1
