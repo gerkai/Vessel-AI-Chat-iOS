@@ -28,6 +28,19 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
         
         let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(onLaunchChat))
         imageView.addGestureRecognizer(gestureRecognizer2)
+        
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
+    }
+    
+    deinit
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
     }
     
     // MARK: - Actions
