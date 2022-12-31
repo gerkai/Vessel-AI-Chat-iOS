@@ -15,10 +15,10 @@ protocol ProgressDayViewDelegate: AnyObject
 class ProgressDayView: UIView
 {
     @IBOutlet private weak var dayLabel: UILabel!
-    @IBOutlet private weak var currentDayPointLabel: UILabel!
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var backgroundBorderView: UIView!
     @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var dotView: UIView!
     
     private var progress: Double = 0
     private var progressLyr: CAShapeLayer?
@@ -67,7 +67,7 @@ class ProgressDayView: UIView
         backgroundView.layer.cornerRadius = backgroundBorderView.frame.width * 0.30
         backgroundView.layer.masksToBounds = true
 
-        currentDayPointLabel.isHidden = !isSelectedDay
+        dotView.isHidden = !isSelectedDay
         dayLabel.text = Date.dayInitialFormatter.string(from: date)
         backgroundView.backgroundColor = progress == 1.0 ? .black : UIColor.backgroundGray
         dayLabel.textColor = progress == 1.0 ? .white : .black
