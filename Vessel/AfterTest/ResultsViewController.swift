@@ -14,7 +14,7 @@ struct Color
     var blue: CGFloat
 }
 
-class ResultsViewController: UIViewController, VesselScreenIdentifiable
+class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var wellnessScoreLabel: UILabel!
     @IBOutlet weak var wellnessCard: UIView!
@@ -43,7 +43,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     let tickTime = 0.05
     var tickCounter = 0.0
     var referenceDate: Date!
-    var viewModel: AfterTestViewModel!
+    var rootViewModel: AfterTestViewModel!
     
     var numTiles = 10
     var curTile = 0
@@ -54,7 +54,8 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        viewModel = AfterTestViewModel(testResult: testResult)
+        rootViewModel = AfterTestViewModel(testResult: testResult)
+        viewModel = rootViewModel
         referenceDate = Date()
         evaluationLabel.alpha = 0.0
         wellnessCardSubtextLabel.alpha = 0.0
@@ -475,20 +476,7 @@ class ResultsViewController: UIViewController, VesselScreenIdentifiable
         }
         else
         {
-            let result = viewModel.nextViewControllerData()
-            if result.transition == .dismiss
-            {
-                //also called in AfterTestMVVMViewController
-                NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
-                dismiss(animated: true)
-            }
-            else
-            {
-                let vc = ReagentInfoViewController.initWith(viewModel: viewModel, result: result)
-                vc.transition = result.transition
-                
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            nextScreen()
         }
     }
     

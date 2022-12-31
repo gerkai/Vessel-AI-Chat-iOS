@@ -11,7 +11,6 @@ enum ScreenTransistion
 {
     case fade
     case push
-    case dismiss
 }
 
 class AfterTestMVVMViewController: UIViewController
@@ -61,65 +60,54 @@ class AfterTestMVVMViewController: UIViewController
         }
     }
     
+    func setTransitionAndNavigate(vc: AfterTestMVVMViewController, transition: ScreenTransistion )
+    {
+        vc.transition = transition
+        vc.backTransition = self.transition
+        if transition == .fade
+        {
+            navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func nextScreen()
     {
         let result = viewModel.nextViewControllerData()
-        if result.isHydroQuiz
+        if result.type == .hydroQuiz
         {
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HydroQuizViewController") as! HydroQuizViewController
             vc.viewModel = viewModel
-            vc.transition = result.transition
-            vc.backTransition = self.transition
-            
-            if transition == .fade
-            {
-                navigationController?.fadeTo(vc)
-            }
-            else
-            {
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
-        else if result.isReagentFood
+        else if result.type == .reagentFood
         {
             let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ReagentFoodViewController") as! ReagentFoodViewController
             vc.viewModel = viewModel
             vc.titleText = result.title
             vc.reagentId = result.reagentId
-            vc.transition = result.transition
-            vc.backTransition = self.transition
-            
-            if transition == .fade
-            {
-                navigationController?.fadeTo(vc)
-            }
-            else
-            {
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
-        else if result.transition == .dismiss
+        else if result.type == .reagentInfo
+        {
+            let vc = ReagentInfoViewController.initWith(viewModel: viewModel, result: result)
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
+        }
+        else if result.type == .fuelPrompt
+        {
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel)
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
+        }
+        else if result.type == .dismiss
         {
             //also called in ResultsViewController
             NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
             dismiss(animated: true)
-        }
-        else
-        {
-            let vc = ReagentInfoViewController.initWith(viewModel: viewModel, result: result)
-            vc.transition = result.transition
-            vc.backTransition = self.transition
-            
-            if transition == .fade
-            {
-                navigationController?.fadeTo(vc)
-            }
-            else
-            {
-                navigationController?.pushViewController(vc, animated: true)
-            }
         }
     }
     
