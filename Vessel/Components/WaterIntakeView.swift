@@ -18,7 +18,7 @@ enum WaterIntakeViewType
     case green
 }
 
-@IBDesignable class WaterIntakeView: UIView
+class WaterIntakeView: UIView
 {
     // MARK: - View
     @IBOutlet private var contentView: UIView!

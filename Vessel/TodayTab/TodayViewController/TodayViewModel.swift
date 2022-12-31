@@ -186,14 +186,14 @@ enum TodayViewCell: Equatable
     var height: CGFloat
     {
         let progressDaysHeight: CGFloat
-        switch UIScreen.main.getScreenSize()
+        switch UIScreen.main.getScreenWidth()
         {
         case .large:
-            progressDaysHeight = 49.0
+            progressDaysHeight = 104.0
         case .mid:
-            progressDaysHeight = 40.0
+            progressDaysHeight = 80.0
         case .small:
-            progressDaysHeight = 38.0
+            progressDaysHeight = 74.0
         }
         switch self
         {

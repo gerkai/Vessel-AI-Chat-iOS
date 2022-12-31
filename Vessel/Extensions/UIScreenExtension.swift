@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ScreenSize
+enum ScreenWidth
 {
     case small
     case mid
@@ -16,7 +16,7 @@ enum ScreenSize
 
 extension UIScreen
 {
-    func getScreenSize() -> ScreenSize
+    func getScreenWidth() -> ScreenWidth
     {
         if bounds.width <= 375
         {
