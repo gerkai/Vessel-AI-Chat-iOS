@@ -54,13 +54,19 @@ class SplashView: UIView
         animationView!.loopMode = .playOnce
         animationView!.animationSpeed = 1.0
         animationContainerView.addSubview(animationView!)
-        print("✳️ \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("✳️ \(self)")
+        }
         startActivityTimer()
     }
     
     deinit
     {
-        print("❌ \(self)")
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❌ \(self)")
+        }
         NotificationCenter.default.removeObserver(self)
     }
     

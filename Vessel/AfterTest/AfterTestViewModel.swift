@@ -11,22 +11,29 @@ import Foundation
 
 struct AfterTestViewControllerData
 {
+    enum AfterTestScreenType
+    {
+        case reagentInfo
+        case hydroQuiz
+        case reagentFood
+        case fuelPrompt
+        case dismiss
+    }
+    
     let title: String
     let details: String
     let imageName: String
     let transition: ScreenTransistion
-    let isHydroQuiz: Bool
-    let isReagentFood: Bool
+    let type: AfterTestScreenType
     let reagentId: Int?
     
-    internal init(_ title: String, _ details: String, _ imageName: String, _ transition: ScreenTransistion, _ isHydroQuiz: Bool = false, _ isReagentFood: Bool = false, reagentId: Int? = nil)
+    internal init(_ title: String, _ details: String, _ imageName: String, _ transition: ScreenTransistion, _ type: AfterTestScreenType = .reagentInfo, reagentId: Int? = nil)
     {
         self.title = title
         self.details = details
         self.imageName = imageName
         self.transition = transition
-        self.isHydroQuiz = isHydroQuiz
-        self.isReagentFood = isReagentFood
+        self.type = type
         self.reagentId = reagentId
     }
 }
@@ -44,6 +51,7 @@ class AfterTestViewModel
     var isHydroLow: Bool = true
     var selectedWaterOption: Int?
     var results: [Result]!
+    var hasSupplementPlan = false
     
     @Resolved private var analytics: Analytics
     
@@ -94,6 +102,7 @@ class AfterTestViewModel
         case CORT_HIGH_2
         //case CORT_HIGH_3
         //case TEST_REMINDER
+        case FUEL_PROMPT
     }
     
     init(testResult: Result)
@@ -107,6 +116,15 @@ class AfterTestViewModel
         else
         {
             results = Storage.retrieve(as: Result.self)
+        }
+        //find out if user already is enrolled in a supplement plan or not.
+        Server.shared.getFuel()
+        { result in
+            self.hasSupplementPlan = result
+        }
+        onFailure:
+        { error in
+            print("ERROR: \(String(describing: error))")
         }
     }
     
@@ -147,6 +165,19 @@ class AfterTestViewModel
             }
         }
         return goodResults
+    }
+    
+    private func totalResults() -> Int
+    {
+        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
+        {
+            results = mockResults
+        }
+        else
+        {
+            results = Storage.retrieve(as: Result.self)
+        }
+        return results.count
     }
     
     func calculateTotalScreens()
@@ -305,9 +336,18 @@ class AfterTestViewModel
             contactFlags |= Constants.SAW_TESTING_REMINDER
             //screens.append(.TEST_REMINDER)
         }
+        //if we're not already showing hydro quiz and user hasn't ever seen hydro quiz then show hydro quiz
         if !screens.contains(.HYDRO_LOW_3) && !screens.contains(.HYDRO_HIGH_4) && contact.flags & Constants.SAW_HYDRATION_LOW_INFO == 0 && contact.flags & Constants.SAW_HYDRATION_HIGH_INFO == 0
         {
             screens.append(.HYDRO_HIGH_4)
+        }
+        //show fuel prompt if user isn't already enrolled and they have at least 3 test results
+        if hasSupplementPlan == false
+        {
+            if totalResults() >= 3
+            {
+                screens.append(.FUEL_PROMPT)
+            }
         }
     }
     
@@ -346,7 +386,7 @@ class AfterTestViewModel
                                                    "Magnesium-top-right",
                                                    .fade)
             case .MAG_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Magnesium", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.MAGNESIUM.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Magnesium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.MAGNESIUM.rawValue)
                 
             case .SOD_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Sodium Levels are High", comment: ""),
@@ -380,7 +420,7 @@ class AfterTestViewModel
                                                    "Calcium-top-right",
                                                    .fade)
             case .CAL_LOW_4:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Calcium", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.CALCIUM.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Calcium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.CALCIUM.rawValue)
                 
             case .VIT_C_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Vitamin C Level is Low", comment: ""),
@@ -393,7 +433,7 @@ class AfterTestViewModel
                                                    "VitaminC-top-right",
                                                    .fade)
             case .VIT_C_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Vitamin C", comment: ""), "", "", .fade, false, true, reagentId: Reagent.ID.VITAMIN_C.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Vitamin C", comment: ""), "", "", .fade, /*false, true*/.reagentFood, reagentId: Reagent.ID.VITAMIN_C.rawValue)
             case .VIT_C_LOW_4:
                 return AfterTestViewControllerData(NSLocalizedString("What About a Vitamin C Supplement?", comment: ""),
                                                    NSLocalizedString("Vitamin C supplementation can be a great way to boost your overall levels. In addition to consuming vitamin C rich foods, your Vessel fuel supplement plan will contain vitamin C. Through food and supplementation intake, you can expect to see improvements in your Vitamin C results, and feel the benefits within a few weeks!", comment: ""),
@@ -411,7 +451,7 @@ class AfterTestViewModel
                                                    "pH-top-right",
                                                    .fade)
             case .PH_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Alkaline Foods for Increased PH", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.PH
+                return AfterTestViewControllerData(NSLocalizedString("Alkaline Foods for Increased PH", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.PH
                     .rawValue)
                 
             case .PH_HIGH_1:
@@ -442,7 +482,7 @@ class AfterTestViewModel
                                                    .fade)
             case .HYDRO_LOW_3:
                 isHydroLow = true
-                return AfterTestViewControllerData("", "", "", .push, true)
+                return AfterTestViewControllerData("", "", "", .push, .hydroQuiz)
                 
             case .HYDRO_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Hydration is High", comment: ""),
@@ -461,7 +501,7 @@ class AfterTestViewModel
                                                    .fade)
             case .HYDRO_HIGH_4:
                 isHydroLow = false
-                return AfterTestViewControllerData("", "", "", .push, true)
+                return AfterTestViewControllerData("", "", "", .push, .hydroQuiz)
                 
             case .KETO_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are Low", comment: ""),
@@ -479,7 +519,7 @@ class AfterTestViewModel
                                                    "Ketones-top-right",
                                                    .fade)
             case .KETO_LOW_4:
-                return AfterTestViewControllerData(NSLocalizedString("Foods to Boost Ketones", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.KETONES_A.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods to Boost Ketones", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
                 
             case .KETO_ELEVATED_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are Elevated", comment: ""),
@@ -487,7 +527,7 @@ class AfterTestViewModel
                                                    "Ketones-top-right",
                                                    .fade)
             case .KETO_ELEVATED_2:
-                return AfterTestViewControllerData(NSLocalizedString("Foods to Maintain Ketones ", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.KETONES_A.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods to Maintain Ketones ", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
                 
             case .KETO_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are High", comment: ""),
@@ -511,7 +551,7 @@ class AfterTestViewModel
                                                    "B7-top-right",
                                                    .push)
             case .B7_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Biotin", comment: ""), "", "", .push, false, true, reagentId: Reagent.ID.VITAMIN_B7.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Biotin", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.VITAMIN_B7.rawValue)
                 
             case .CORT_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Cortisol Levels are Low", comment: ""),
@@ -534,6 +574,8 @@ class AfterTestViewModel
                                                    NSLocalizedString("High cortisol may be a signal that your stress levels are elevated. Stress can be physical, emotional, psychological, environmental, infectious, or any combination. By addressing life stressors, diet, sleep, and supplementation you should notice a change in cortisol levels within a few weeks to a few months.", comment: ""),
                                                    "Cortisol-top-right",
                                                    .push)
+            case .FUEL_PROMPT:
+                return AfterTestViewControllerData("", "", "", .push, .fuelPrompt)
             }
         }
         currentScreen -= 1
@@ -542,7 +584,7 @@ class AfterTestViewModel
         Contact.main()!.flags |= contactFlags
         ObjectStore.shared.ClientSave(Contact.main()!)
         
-        return AfterTestViewControllerData("", "", "", .dismiss)
+        return AfterTestViewControllerData("", "", "", .push, .dismiss)
     }
     
     // MARK: - Food

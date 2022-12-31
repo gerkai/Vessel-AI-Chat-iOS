@@ -21,7 +21,7 @@ extension String
     
     func isValidName() -> Bool
     {
-        return count > 0 && self.isLettersOnly
+        return count > 0 && self.isLettersAndSpacesOnly
     }
     
     func isValidPassword() -> Bool
@@ -29,9 +29,10 @@ extension String
         count >= Constants.MinimumPasswordLength
     }
     
-    var isLettersOnly: Bool
+    var isLettersAndSpacesOnly: Bool
     {
-        return !isEmpty && range(of: "[^a-zA-Z]", options: .regularExpression) == nil
+        //returns true if string only contains letters (or spaces)
+        return !isEmpty && range(of: "[^a-zA-Z ]", options: .regularExpression) == nil
     }
 
     var firstUppercased: String

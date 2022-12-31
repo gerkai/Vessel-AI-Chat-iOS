@@ -154,11 +154,13 @@
 		3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */; };
 		3F9D6D8A2953612100664EA8 /* CoachPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */; };
 		3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */; };
+		3F9D6D8E295D113400664EA8 /* GetSupplementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D6D8D295D113400664EA8 /* GetSupplementsViewController.swift */; };
 		3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */; };
 		3FA6683C287F64960006166D /* TipInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683B287F64960006166D /* TipInstructionsViewController.swift */; };
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
 		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
+		3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -454,11 +456,13 @@
 		3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WellnessPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentPopupViewController.swift; sourceTree = "<group>"; };
+		3F9D6D8D295D113400664EA8 /* GetSupplementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupplementsViewController.swift; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
+		3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelInfo.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -739,13 +743,14 @@
 			isa = PBXGroup;
 			children = (
 				7299878128F68E4E0010C8D4 /* Cells */,
-				3F15AD08288DC87C004716CA /* ResultsViewController.swift */,
-				3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */,
-				3F1A24922893479500BC539F /* ReagentInfoViewController.swift */,
-				3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */,
 				3F15AD0A288DC896004716CA /* AfterTest.storyboard */,
-				7295568128F6893E000DD006 /* ReagentFoodViewController.swift */,
+				3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */,
+				3F1A248E28932D2D00BC539F /* AfterTestViewModel.swift */,
+				3F9D6D8D295D113400664EA8 /* GetSupplementsViewController.swift */,
 				72DD1FCB28F541C8006071B0 /* HydroQuizViewController.swift */,
+				7295568128F6893E000DD006 /* ReagentFoodViewController.swift */,
+				3F1A24922893479500BC539F /* ReagentInfoViewController.swift */,
+				3F15AD08288DC87C004716CA /* ResultsViewController.swift */,
 			);
 			path = AfterTest;
 			sourceTree = "<group>";
@@ -888,6 +893,14 @@
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
+		3FD3BDBA295FB80D00AEF9C3 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		3FE3699327C9A07E00231D42 = {
 			isa = PBXGroup;
 			children = (
@@ -928,6 +941,7 @@
 				7206C4DD28837AE6000130DA /* Main */,
 				72BC243D2928D1C3002F6DA2 /* Managers */,
 				7282D413288F7C8200B4E26D /* MoreTab */,
+				3FD3BDBA295FB80D00AEF9C3 /* Objects */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3F426DBD28DFA2FF00927B68 /* Results */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
@@ -1742,6 +1756,7 @@
 				7296B727292F44A000162812 /* ReadOnlyLessonStepViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
+				3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */,
 				3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */,
 				728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */,
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
@@ -1860,6 +1875,7 @@
 				72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */,
+				3F9D6D8E295D113400664EA8 /* GetSupplementsViewController.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
@@ -2101,7 +2117,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2136,7 +2152,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

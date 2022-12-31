@@ -166,6 +166,7 @@ class ObjectStore: NSObject
         { error in
             print("Got error: \(error)")
             print(".")
+            failure()
         }
     }
 
@@ -254,9 +255,6 @@ class ObjectStore: NSObject
                 objectRequests.append(SpecificObjectReq(type: name, id: id, last_updated: 0))
             }
         }
-        
-        //let caller know immediately of any locally retrieved objects
-        //success(objects)
         
         if objectRequests.count == 0
         {

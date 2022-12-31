@@ -10,6 +10,9 @@
 import Foundation
 import Security
 
+//set this to a valid contact ID to login as that contact ID
+let contact_id_override = 0
+
 // MARK: - PATHS
 let ENDPOINT_ROOT = "v3/"
 
@@ -44,6 +47,7 @@ let CONTACT_ID_KEY = "contact_id"
 let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
+let FUEL_QUIZ_PATH = "pages/fuel-landing/?preview_theme_id=131922690234"
 
 //Endpoints
 let SERVER_FORGOT_PASSWORD_PATH = "auth/forgot-password"
@@ -53,6 +57,7 @@ let APPLE_RETRIEVE_PATH = "auth/apple/retrieve"
 let GOOGLE_LOGIN_PATH = "auth/google/login"
 let GOOGLE_RETRIEVE_PATH = "auth/google/retrieve"
 let REFRESH_TOKEN_PATH = "auth/refresh-token"
+let MULTIPASS_PATH = "auth/multipass"
 let CONTACT_PATH = "contact"
 let CONTACT_CREATE_PATH = "contact/create"
 let CONTACT_EXISTS_PATH = "contact/exists"
@@ -71,6 +76,7 @@ let ADD_NEW_MULTIPLE_PLAN_PATH = "plan/build"
 let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
 let GET_LESSON_PATH = "lesson/{lesson_id}"
 let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_response_id}"
+let USER_HAS_FUEL_PATH = "fuel"
 
 // MARK: - Structs
 struct CardAssociation
@@ -245,17 +251,28 @@ class Server: NSObject
     
     func login(email: String, password: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
-        var dictPostBody = [String: String]()
+        var dictPostBody = [String: Any]()
         dictPostBody["email"] = email
         dictPostBody["password"] = password
+        if contact_id_override != 0
+        {
+            dictPostBody["contact_id_override"] = contact_id_override
+        }
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(SERVER_LOGIN_PATH)")
         { object in
             if let accessToken = object[ACCESS_TOKEN_KEY] as? String,
-                let refreshToken = object[REFRESH_TOKEN_KEY] as? String,
-                let mainContactID = object[CONTACT_ID_KEY] as? Int
+                let refreshToken = object[REFRESH_TOKEN_KEY] as? String
+                
             {
-                Contact.MainID = mainContactID
+                if let mainContactID = object[CONTACT_ID_KEY] as? Int
+                {
+                    Contact.MainID = mainContactID
+                }
+                else
+                {
+                    Contact.MainID = dictPostBody["contact_id_override"] as! Int
+                }
                 
                 self.accessToken = accessToken
                 self.refreshToken = refreshToken
@@ -264,7 +281,7 @@ class Server: NSObject
                 KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
                 let refreshData = Data(refreshToken.utf8)
                 KeychainHelper.standard.save(refreshData, service: REFRESH_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-                let string = "\(mainContactID)"
+                let string = "\(Contact.MainID)"
                 KeychainHelper.standard.save(string, service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
                 
                 DispatchQueue.main.async()
@@ -494,6 +511,29 @@ class Server: NSObject
                 failure(NSLocalizedString("Server Error", comment: ""))
             }
         })
+    }
+    
+    func multipassURL(path: String, onSuccess success: @escaping (_ url: String) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
+    {
+        var dictPostBody = [String: String]()
+        dictPostBody["path"] = path
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(MULTIPASS_PATH)")
+        { object in
+            if let multipass_url = object["multipass_url"] as? String
+            {
+                success(multipass_url)
+            }
+            else
+            {
+                failure("\(object)")
+            }
+        }
+        onFailure:
+        { message in
+            print("Multipass server error: \(message)")
+            failure(message)
+        }
     }
     
     //MARK: Contact
@@ -1069,6 +1109,64 @@ class Server: NSObject
         }
     }
     
+    //MARK:  Fuel
+    func getFuel(onSuccess success: @escaping (_ hasFuel: Bool) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
+        let request = Server.shared.GenerateRequest(urlString: urlString)!
+        
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Any]
+                {
+                    if let hasFuel = object["is_active"] as? Bool
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            success(hasFuel)
+                        }
+                    }
+                    else
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            failure(self.fuelError())
+                        }
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async()
+                    {
+                        failure(self.fuelError())
+                    }
+                }
+            }
+            catch
+            {
+                DispatchQueue.main.async()
+                {
+                    failure(self.fuelError())
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        }
+    }
+    
+    func fuelError() -> NSError
+    {
+        let error = NSError.init(domain: "", code: 1000, userInfo: ["message": NSLocalizedString("Unable to get fuel", comment: "Server error message")])
+        return error
+    }
     // MARK: - Utils
     func allowDebugPrint() -> Bool
     {
@@ -1279,7 +1377,7 @@ class Server: NSObject
         }.resume()
     }
     
-    private func postToServer(dictBody: [String: String], url: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
+    private func postToServer(dictBody: [String: Any], url: String, onSuccess success: @escaping (_ object: [String: Any]) -> Void, onFailure failure: @escaping (_ message: String) -> Void)
     {
         do
         {
