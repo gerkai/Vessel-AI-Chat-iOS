@@ -75,7 +75,6 @@
 		3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */; };
 		3F1A24932893479500BC539F /* ReagentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A24922893479500BC539F /* ReagentInfoViewController.swift */; };
 		3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2496289B2A8700BC539F /* KeychainHelper.swift */; };
-		3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2498289B307A00BC539F /* CoachViewController.swift */; };
 		3F24427E293AFFBC0043E4B4 /* ServerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */; };
 		3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */; };
 		3F244286293FFAE80043E4B4 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244284293FFAE70043E4B4 /* log.swift */; };
@@ -161,6 +160,7 @@
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
 		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
 		3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */; };
+		3FD3BDBE2960A88A00AEF9C3 /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -376,7 +376,6 @@
 		3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3F1A24922893479500BC539F /* ReagentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentInfoViewController.swift; sourceTree = "<group>"; };
 		3F1A2496289B2A8700BC539F /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
-		3F1A2498289B307A00BC539F /* CoachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPlan.swift; sourceTree = "<group>"; };
 		3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
 		3F244284293FFAE70043E4B4 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
@@ -463,6 +462,7 @@
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
 		3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelInfo.swift; sourceTree = "<group>"; };
+		3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1081,7 +1081,6 @@
 			isa = PBXGroup;
 			children = (
 				7206C4DE28837AE6000130DA /* MainTabBarController.swift */,
-				3F1A2498289B307A00BC539F /* CoachViewController.swift */,
 				7206C4E028837AE6000130DA /* Main.storyboard */,
 			);
 			path = Main;
@@ -1200,6 +1199,7 @@
 			isa = PBXGroup;
 			children = (
 				7295133128F7DEC600E4E950 /* CoachTab.storyboard */,
+				3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */,
 			);
 			path = CoachTab;
 			sourceTree = "<group>";
@@ -1845,6 +1845,7 @@
 				3F9C67A428FE613700BC44FA /* VitaminC.swift in Sources */,
 				72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */,
 				72461EF12924AD7500A85AE5 /* Lesson.swift in Sources */,
+				3FD3BDBE2960A88A00AEF9C3 /* CoachViewController.swift in Sources */,
 				3F15AD09288DC87C004716CA /* ResultsViewController.swift in Sources */,
 				3F87B96E27D429E000D589F7 /* GenderSelectViewController.swift in Sources */,
 				3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */,
@@ -1879,7 +1880,6 @@
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
-				3F1A2499289B307A00BC539F /* CoachViewController.swift in Sources */,
 				7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */,
 				7282D42F289050D800B4E26D /* MoreTabCell.swift in Sources */,
 				3F4A989929198EED0031B8B8 /* AutoSizedCollectionView.swift in Sources */,

@@ -5,15 +5,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="BananaGrotesk-Bold.otf">
             <string>BananaGrotesk-Bold</string>
         </array>
-        <array key="NoeText-Book.otf">
-            <string>NoeText-Book</string>
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -25,8 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-CN-neQ">
-                                <rect key="frame" x="20" y="107" width="304" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-CN-neQ">
+                                <rect key="frame" x="30" y="77" width="330" height="40"/>
                                 <string key="text">Your Health Coach
 </string>
                                 <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
@@ -34,85 +33,56 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1e2-hX-4nj">
-                                <rect key="frame" x="20" y="156" width="350" height="84"/>
+                                <rect key="frame" x="30" y="136" width="330" height="84"/>
                                 <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Vessel certified nutritionists are ready to help you reach your wellness goals.
-</string>
+                                    <fragment content="Enjoy unlimited messaging with Vessel certified nutritionists. It's included with your membership.">
                                         <attributes>
-                                            <color key="NSColor" red="0.086274509803921567" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="16" name="NoeText-Book"/>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="NoeText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfD-ig-UP7">
-                                <rect key="frame" x="20" y="268" width="350" height="72"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coach" translatesAutoresizingMaskIntoConstraints="NO" id="24N-M3-mRI">
-                                        <rect key="frame" x="16" y="16" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="HwG-Gx-fiN"/>
-                                            <constraint firstAttribute="height" constant="40" id="OEo-yO-CmN"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your 1:1 coach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6u-Re-FgC">
-                                        <rect key="frame" x="76" y="27" width="103" height="18"/>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEA-2O-oCK">
-                                        <rect key="frame" x="324" y="16" width="10" height="18"/>
-                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-cV-hAC">
-                                        <rect key="frame" x="272.33333333333331" y="42" width="61.666666666666686" height="14"/>
-                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="14"/>
-                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coach-chat" translatesAutoresizingMaskIntoConstraints="NO" id="Uzw-PT-ZCZ">
+                                <rect key="frame" x="0.0" y="240" width="390" height="306"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22L-7i-Hbx" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="652" width="350" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="p6u-Re-FgC" firstAttribute="centerY" secondItem="kfD-ig-UP7" secondAttribute="centerY" id="55d-Kg-SBc"/>
-                                    <constraint firstItem="24N-M3-mRI" firstAttribute="leading" secondItem="kfD-ig-UP7" secondAttribute="leading" constant="16" id="7pA-vp-ehf"/>
-                                    <constraint firstItem="24N-M3-mRI" firstAttribute="centerY" secondItem="kfD-ig-UP7" secondAttribute="centerY" id="80j-6Q-M2g"/>
-                                    <constraint firstItem="GEA-2O-oCK" firstAttribute="top" secondItem="kfD-ig-UP7" secondAttribute="top" constant="16" id="A1s-4l-LvA"/>
-                                    <constraint firstAttribute="height" constant="72" id="MtJ-5g-XK2"/>
-                                    <constraint firstAttribute="trailing" secondItem="GEA-2O-oCK" secondAttribute="trailing" constant="16" id="agN-1l-cn5"/>
-                                    <constraint firstAttribute="trailing" secondItem="m2l-cV-hAC" secondAttribute="trailing" constant="16" id="p81-eh-rtU"/>
-                                    <constraint firstAttribute="bottom" secondItem="m2l-cV-hAC" secondAttribute="bottom" constant="16" id="uYU-nL-Ngk"/>
-                                    <constraint firstItem="p6u-Re-FgC" firstAttribute="leading" secondItem="24N-M3-mRI" secondAttribute="trailing" constant="20" id="xSJ-qG-TMd"/>
+                                    <constraint firstAttribute="height" constant="60" id="zUW-ia-smt"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Ask Your Coach">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="24"/>
+                                        <integer key="value" value="22"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </view>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coach-chat" translatesAutoresizingMaskIntoConstraints="NO" id="Uzw-PT-ZCZ">
-                                <rect key="frame" x="0.0" y="388" width="390" height="393"/>
-                            </imageView>
+                                <connections>
+                                    <action selector="onLaunchChat" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aq5-YY-mdf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kfD-ig-UP7" secondAttribute="trailing" constant="20" id="27z-gA-2k1"/>
-                            <constraint firstItem="1e2-hX-4nj" firstAttribute="top" secondItem="q2A-CN-neQ" secondAttribute="bottom" constant="9" id="2dC-wP-a6y"/>
+                            <constraint firstItem="1e2-hX-4nj" firstAttribute="top" secondItem="q2A-CN-neQ" secondAttribute="bottom" constant="19" id="2dC-wP-a6y"/>
+                            <constraint firstItem="22L-7i-Hbx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="HQv-PP-VyR"/>
+                            <constraint firstItem="22L-7i-Hbx" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-20" id="Nte-8l-A8e"/>
                             <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OaS-Jc-7oQ"/>
-                            <constraint firstItem="q2A-CN-neQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RLY-zW-lxt"/>
-                            <constraint firstItem="kfD-ig-UP7" firstAttribute="top" secondItem="1e2-hX-4nj" secondAttribute="bottom" constant="28" id="SxQ-xb-dGK"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1e2-hX-4nj" secondAttribute="trailing" constant="20" id="VvS-bD-b0Y"/>
-                            <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="20" id="gW5-Gg-ghq"/>
-                            <constraint firstItem="1e2-hX-4nj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="hxy-FD-Eee"/>
+                            <constraint firstItem="q2A-CN-neQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="RLY-zW-lxt"/>
+                            <constraint firstItem="1e2-hX-4nj" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-30" id="Yno-Tr-qNp"/>
+                            <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="top" secondItem="1e2-hX-4nj" secondAttribute="bottom" constant="20" id="gW5-Gg-ghq"/>
+                            <constraint firstItem="q2A-CN-neQ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-30" id="h74-14-esd"/>
+                            <constraint firstItem="1e2-hX-4nj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="hxy-FD-Eee"/>
+                            <constraint firstItem="22L-7i-Hbx" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-49" id="jcZ-QK-iSw"/>
                             <constraint firstItem="Uzw-PT-ZCZ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="n93-xk-zlq"/>
-                            <constraint firstItem="q2A-CN-neQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="syM-Nl-xgm"/>
-                            <constraint firstItem="kfD-ig-UP7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="x6p-nm-RpO"/>
+                            <constraint firstItem="q2A-CN-neQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="syM-Nl-xgm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Coach" image="Coach-icon" id="SnL-3r-vhT">
@@ -121,7 +91,6 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="coachView" destination="kfD-ig-UP7" id="sVM-oC-MI0"/>
                         <outlet property="imageView" destination="Uzw-PT-ZCZ" id="eZ8-AS-XNc"/>
                     </connections>
                 </viewController>
@@ -132,10 +101,6 @@
     </scenes>
     <resources>
         <image name="Coach-icon" width="28" height="16"/>
-        <image name="coach" width="40" height="40"/>
-        <image name="coach-chat" width="487" height="393"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="coach-chat" width="370" height="306"/>
     </resources>
 </document>
