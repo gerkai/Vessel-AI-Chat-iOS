@@ -25,7 +25,7 @@ class PlansManager
     
     private func loadActivitiesForPlans(onDone done: @escaping () -> Void)
     {
-        let activityIDs = self.getActivities().map({ $0.typeId })
+        let activityIDs = self.getActivityPlans().map({ $0.typeId })
         let uniqueActivityIds = Array(Set(activityIDs))
         if uniqueActivityIds.count != 0
         {
@@ -85,10 +85,10 @@ class PlansManager
         }
     }
     
-    func togglePlanCompleted(planId: Int, date: String, completed: Bool)
+    func setPlanCompleted(planId: Int, date: String, isComplete: Bool)
     {
         guard let index = plans.firstIndex(where: { $0.id == planId }) else { return }
-        if completed
+        if isComplete
         {
             if plans[index].completed.count == 0
             {
@@ -128,13 +128,13 @@ class PlansManager
     }
     
     //returns array of only activities
-    func getActivities() -> [Plan]
+    func getActivityPlans() -> [Plan]
     {
         return plans.filter({ $0.type == .activity })
     }
     
     //returns array of only reagentLifestyleRecommendations
-    func getLifestyleRecommendations() -> [Plan]
+    func getLifestyleRecommendationPlans() -> [Plan]
     {
         return plans.filter({ $0.type == .lifestyleRecommendation })
     }
@@ -172,14 +172,17 @@ extension PlansManager
         var parts: Double = 0.0
         
         // Activities
-        let activityPlans = getActivities()
-        let activities = showActivites ? activities.filter({ activity in
-            return plans.contains(where: { $0.typeId == activity.id })
-        }) : []
-        if showActivites && !activities.isEmpty
+        let activityPlans = getActivityPlans()
+        if showActivites
         {
-            parts += 1
-            progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
+            let activities = activities.filter({ activity in
+                return plans.contains(where: { $0.typeId == activity.id })
+            })
+            if !activities.isEmpty
+            {
+                parts += 1
+                progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
+            }
         }
         
         // Foods
@@ -265,7 +268,7 @@ extension PlansManager
 {
     func getWaterPlan() -> Plan?
     {
-        return getLifestyleRecommendations().first(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID })
+        return getLifestyleRecommendationPlans().first(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID })
     }
     
     func setValueToWaterPlan(value: Int, date: String)
@@ -284,7 +287,7 @@ extension PlansManager
             plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value)]
         }
         
-        ObjectStore.shared.ClientSave(plans[waterPlanIndex])
+        ObjectStore.shared.clientSave(plans[waterPlanIndex])
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
     

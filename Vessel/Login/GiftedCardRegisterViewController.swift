@@ -71,7 +71,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
                         {
                             contact.first_name = firstName
                             contact.last_name = lastName
-                            ObjectStore.shared.ClientSave(contact)
+                            ObjectStore.shared.clientSave(contact)
                         }
                     }
                     OnboardingCoordinator.pushInitialViewController(to: navigationController)

@@ -36,6 +36,7 @@ class Contact: CoreObjectProtocol
     var id: Int
     var last_updated: Int = 0
     var storage: StorageType = .cache
+    var hasFuel = false
     
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
@@ -92,25 +93,6 @@ class Contact: CoreObjectProtocol
             mainContact.allergy_ids = [Allergy.ID.NONE.rawValue]
         }
         return mainContact
-    }
-    
-    static func mockContact() -> Contact
-    {
-        return Contact(id: 0,
-                       lastUpdated: 0,
-                       firstName: "Nicolas",
-                       lastName: "Medina",
-                       gender: "m",
-                       height: 182,
-                       weight: 155,
-                       birthDate: "1991-10-31",
-                       email: "nicolas@vesselhealth.com",
-                       flags: 0,
-                       enrolled_program_ids: [],
-                       diet_ids: [],
-                       allergy_ids: [],
-                       goal_ids: [],
-                       expert_id: 0)
     }
     
     //call when logging out
@@ -205,6 +187,18 @@ class Contact: CoreObjectProtocol
             }
         }
         return false
+    }
+    
+    func getFuelStatus()
+    {
+        Server.shared.getFuel()
+        { result in
+            self.hasFuel = result
+        }
+        onFailure:
+        { error in
+            print("ERROR: \(String(describing: error))")
+        }
     }
     
     enum CodingKeys: String, CodingKey

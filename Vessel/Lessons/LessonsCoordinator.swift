@@ -90,7 +90,7 @@ class LessonsCoordinator
         step.lessonId = lesson.id
         if shouldSave
         {
-            ObjectStore.shared.ClientSave(step)
+            ObjectStore.shared.clientSave(step)
         }
     }
     

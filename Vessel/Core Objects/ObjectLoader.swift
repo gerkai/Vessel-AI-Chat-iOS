@@ -19,6 +19,7 @@ class ObjectLoader: NSObject
         Log_Add("LoadCoreObjects(Result, Food, Curriculum, Plan)")
         ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self], onSuccess: 
         {
+            Contact.main()!.getFuelStatus()
             LessonsManager.shared.buildLessonPlan(onDone:
             {
                 PlansManager.shared.loadPlans()

@@ -11,7 +11,6 @@ class EditProfileViewModel
 {
     // MARK: - Private variables
     private let contact = Contact.main()
-    //private let contact: Contact.mockContact()
     
     // MARK: - Height PickerView
     var isMetric: Bool
@@ -292,7 +291,7 @@ private extension EditProfileViewModel
 {
     func updateContact(contact: Contact)
     {
-        ObjectStore.shared.ClientSave(contact)
+        ObjectStore.shared.clientSave(contact)
         onModelChanged?()
     }
     

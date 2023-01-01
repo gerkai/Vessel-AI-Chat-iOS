@@ -110,7 +110,7 @@ enum TodayViewSection: Equatable
         var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities")]
         for activity in activities
         {
-            let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activity.id })
+            let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
             if (plan?.completed ?? []).contains(selectedDate)
             {
                 cells.append(.foldedCheckMarkCard(title: activity.title,
@@ -268,7 +268,7 @@ class TodayViewModel
         contact = Contact.main()!
         let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
-        let plans = PlansManager.shared.getActivities()
+        let plans = PlansManager.shared.getActivityPlans()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return plans.contains(where: { $0.typeId == activity.id })
         }) : []

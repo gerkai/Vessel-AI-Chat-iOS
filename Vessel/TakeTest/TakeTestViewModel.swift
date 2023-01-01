@@ -166,7 +166,7 @@ class TakeTestViewModel
         {
             contact.flags &= ~Constants.HIDE_PEE_TIPS
         }
-        ObjectStore.shared.ClientSave(contact)
+        ObjectStore.shared.clientSave(contact)
     }
     
     func hideDropletTips(shouldHide: Bool)
@@ -180,7 +180,7 @@ class TakeTestViewModel
         {
             contact.flags &= ~Constants.HIDE_DROPLET_TIPS
         }
-        ObjectStore.shared.ClientSave(contact)
+        ObjectStore.shared.clientSave(contact)
     }
     
     func startTimer()

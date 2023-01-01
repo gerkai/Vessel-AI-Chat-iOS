@@ -84,7 +84,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 self.present(vc, animated: false)
                 
                 contact.flags |= Constants.SAW_WELLNESS_POPUP
-                ObjectStore.shared.ClientSave(contact)
+                ObjectStore.shared.clientSave(contact)
             }
             else if contact.flags & Constants.SAW_REAGENT_POPUP == 0,
                         let selectedTile = testsGoalsView.selectedReagentTile()
@@ -93,7 +93,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 self.present(vc, animated: false)
                 
                 contact.flags |= Constants.SAW_REAGENT_POPUP
-                ObjectStore.shared.ClientSave(contact)
+                ObjectStore.shared.clientSave(contact)
             }
             else if contact.flags & Constants.SAW_COACH_POPUP == 0
             {
@@ -101,7 +101,7 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 self.present(vc, animated: false)
                 
                 contact.flags |= Constants.SAW_COACH_POPUP
-                ObjectStore.shared.ClientSave(contact)
+                ObjectStore.shared.clientSave(contact)
             }
         }
     }

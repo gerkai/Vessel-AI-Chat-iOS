@@ -331,7 +331,7 @@ class ObjectStore: NSObject
     }
     
     //Call this to save a single object that has been modified by the client
-    func ClientSave<T: CoreObjectProtocol>(_ object: T)
+    func clientSave<T: CoreObjectProtocol>(_ object: T)
     {
         var newObject = object
         if let contact = newObject as? Contact
@@ -383,7 +383,7 @@ class ObjectStore: NSObject
     }
     
     //Call this to save multiple objects that has been modified by the client
-    func ClientSave<T: CoreObjectProtocol>(_ objects: [T])
+    func clientSave<T: CoreObjectProtocol>(_ objects: [T])
     {
         if objects.count != 0
         {

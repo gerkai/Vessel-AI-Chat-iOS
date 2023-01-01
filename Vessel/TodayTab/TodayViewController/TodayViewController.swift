@@ -66,13 +66,13 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             self.present(vc, animated: false)
             
             contact.flags |= Constants.SAW_INSIGHT_POPUP
-            ObjectStore.shared.ClientSave(contact)
+            ObjectStore.shared.clientSave(contact)
         }
         else if contact.flags & Constants.SAW_ACTIVITY_POPUP == 0
         {
             //show the "Congrats for adding your first activity" popup but only if they haven't seen it
             //yet and only if the first activity was added today (VH-5081)
-            let plans = PlansManager.shared.getActivities()
+            let plans = PlansManager.shared.getActivityPlans()
             if plans.count != 0
             {
                 let plan = plans.first!
@@ -85,7 +85,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
                     }
                 }
                 contact.flags |= Constants.SAW_ACTIVITY_POPUP
-                ObjectStore.shared.ClientSave(contact)
+                ObjectStore.shared.clientSave(contact)
             }
         }
     }
@@ -144,7 +144,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
             NSLayoutConstraint(item: congratulationsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 462.0)
         ])
         
-        let numberOfActivities = PlansManager.shared.getActivities().count
+        let numberOfActivities = PlansManager.shared.getActivityPlans().count
         let numberOfFoods = Contact.main()?.suggestedFoods.count ?? 0
         let totalWaterAmount = Contact.main()?.dailyWaterIntake ?? 0
         let completedInsights = LessonsManager.shared.getLessonsCompletedOn(dateString: todayString).count
@@ -290,7 +290,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             else
             {
                 guard let activity = activities[safe: indexPath.row - 1],
-                      let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activity.id }) else { return }
+                      let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id }) else { return }
                 let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                 let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
                 activityDetailsVC.hidesBottomBarWhenPushed = true
@@ -345,7 +345,7 @@ extension TodayViewController: FoodCheckmarkViewDelegate
         Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: view.isChecked))
         { [weak self] togglePlanData in
             guard let self = self else { return }
-            PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
+            PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
             cell.updateCheckedFoods()
             self.showGamificationCongratulationsViewIfNeeded()
@@ -409,7 +409,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
         if type == .activity
         {
             let activities = PlansManager.shared.activities
-            let activityPlans = PlansManager.shared.getActivities()
+            let activityPlans = PlansManager.shared.getActivityPlans()
             guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
             
             if let activity = activities.first(where: { $0.id == plan.typeId })
@@ -420,7 +420,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
             { [weak self] togglePlanData in
                 guard let self = self else { return }
-                PlansManager.shared.togglePlanCompleted(planId: plan.id, date: togglePlanData.date, completed: togglePlanData.completed)
+                PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
                 self.tableView.reloadData()
                 self.showGamificationCongratulationsViewIfNeeded()
             } onFailure: { error in
