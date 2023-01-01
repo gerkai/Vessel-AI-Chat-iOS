@@ -123,7 +123,7 @@ class LessonsManager
             }
         }
         //This saves all modified steps to both local storage and the back end
-        ObjectStore.shared.ClientSave(updatedSteps)
+        ObjectStore.shared.clientSave(updatedSteps)
     }
     
     func shiftLessonDaysBack()

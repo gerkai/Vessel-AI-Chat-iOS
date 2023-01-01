@@ -100,7 +100,7 @@ class OnboardingCoordinator
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
                 navigationController?.fadeTo(vc)
-                //print("Onboarding Coordinator 2: Sending hide splash screen notification")
+                //fade out splash screen
                 NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
             })
         }
@@ -115,9 +115,6 @@ class OnboardingCoordinator
     
         if curState == .welcome
         {
-            //Separated load plans call because an issue with stored plans not having weekdays
-            PlansManager.shared.loadPlans()
-            
             let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeViewController") as! OnboardingWelcomeViewController
             vc.coordinator = self
             navigationController?.fadeTo(vc)
@@ -341,7 +338,7 @@ class OnboardingCoordinator
                     contact.setGoalsAnalytics()
                 }
                 
-                ObjectStore.shared.ClientSave(contact)
+                ObjectStore.shared.clientSave(contact)
             }
         }
     }

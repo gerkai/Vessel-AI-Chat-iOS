@@ -582,7 +582,7 @@ class AfterTestViewModel
         
         //update contact flags and save contact
         Contact.main()!.flags |= contactFlags
-        ObjectStore.shared.ClientSave(Contact.main()!)
+        ObjectStore.shared.clientSave(Contact.main()!)
         
         return AfterTestViewControllerData("", "", "", .push, .dismiss)
     }
@@ -661,7 +661,7 @@ class AfterTestViewModel
         }
         
         analytics.log(event: .waterAdded)
-        ObjectStore.shared.ClientSave(contact)
+        ObjectStore.shared.clientSave(contact)
         WaterManager.shared.createWaterPlanIfNeeded()
         
         Log_Add("setDailyWaterIntake() - post .newDataArrived: Plan")

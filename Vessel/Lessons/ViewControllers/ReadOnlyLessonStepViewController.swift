@@ -129,7 +129,7 @@ private extension ReadOnlyLessonStepViewController
         }
         else
         {
-            let userPlans = PlansManager.shared.getActivities()
+            let userPlans = PlansManager.shared.getActivityPlans()
             for activityId in viewModel.step.activityIds
             {
                 if let activity = Storage.retrieve(activityId, as: Tip.self)
@@ -184,7 +184,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
     
     func onActivityRemovedFromPlan(activityId: Int)
     {
-        guard let plan = PlansManager.shared.getActivities().first(where: { $0.typeId == activityId}) else { return }
+        guard let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activityId}) else { return }
         Server.shared.removeSinglePlan(planId: plan.id)
         { [weak self] in
             guard let self = self else { return }
