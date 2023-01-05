@@ -9,6 +9,29 @@ import UIKit
 
 let MAX_LESSONS_PER_DAY = 4
 
+/* used for testing
+enum CompletedWhen
+{
+    case never
+    case yesterday
+    case today
+}
+
+//cw temp testing
+extension Date
+{
+    static var yesterday: Date { return Date().dayBefore }
+    static var tomorrow: Date { return Date().dayAfter }
+    var dayBefore: Date
+    {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    }
+    var dayAfter: Date
+    {
+        return Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+    }
+} */
+
 class LessonsManager
 {
     static let shared = LessonsManager()
@@ -20,6 +43,8 @@ class LessonsManager
     init()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(dayChanged), name: UIApplication.significantTimeChangeNotification, object: nil)
+        
+        //testLessons()
     }
     
     var nextLesson: Lesson?
@@ -28,6 +53,50 @@ class LessonsManager
         return lessons[safe: firstUncompletedIndex]
     }
     
+    /*
+    //cw temp testing
+    func testLessons()
+    {
+        unlockMoreInsights = true
+        lessons = [createLesson(completed: .yesterday), createLesson(completed: .today), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .yesterday), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .never)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .never)]
+        print(todayLessons)
+        
+        lessons = [createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today)]
+        print(todayLessons)
+    }
+    
+    func createLesson(completed: CompletedWhen) -> Lesson
+    {
+        var date: String?
+        if completed == .yesterday
+        {
+            date = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date().dayBefore))
+            //date = Date().dayBefore.iso8601
+        }
+        else if completed == .today
+        {
+            //date = Date().iso8601
+            date = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
+        }
+        var lesson = Lesson(id: 0, last_updated: 1, title: "Test Lesson", description: "Test Lesson Description", imageUrl: nil, completedDate: date, rank: 1, stepIds: [], goalIds: [], duration: 3)
+        return lesson
+    }
+    */
     var todayLessons: [Lesson]
     {
         //get index of first incomplete lesson (or completed today). If none found, return empty array.
@@ -58,15 +127,15 @@ class LessonsManager
         let goalsCurriculums = allCurriculums.filter({ contact.goal_ids.contains($0.goalId) })
         if goalsCurriculums.count != 0
         {
-            let lessons = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
-            let uniqueLessons = Array(Set(lessons))
-            let sortedLessons = uniqueLessons.sorted(by: { $0.rank < $1.rank })
+            let lessonRanks = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
+            let uniqueLessonRanks = Array(Set(lessonRanks))
+            let sortedLessonRanks = uniqueLessonRanks.sorted(by: { $0.rank < $1.rank })
             
-            if sortedLessons.count != 0
+            if sortedLessonRanks.count != 0
             {
                 //get all the lessons indicated by ids[]
                 print("GET LESSONS") //will remove once login data loading is speedy
-                ObjectStore.shared.get(type: Lesson.self, ids: sortedLessons.map({ $0.id }))
+                ObjectStore.shared.get(type: Lesson.self, ids: sortedLessonRanks.map({ $0.id }))
                 { lessons in
                     self.lessons = lessons.sorted(by: { $0.rank == $1.rank ? $0.id < $1.id : $0.rank < $1.rank })
                     self.planBuilt = true

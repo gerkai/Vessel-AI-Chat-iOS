@@ -291,13 +291,28 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             {
                 guard let activity = activities[safe: indexPath.row - 1],
                       let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id }) else { return }
-                let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
-                let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
-                activityDetailsVC.hidesBottomBarWhenPushed = true
-                activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id))
-                analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
-                
-                navigationController?.pushViewController(activityDetailsVC, animated: true)
+                if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (plan.type == .lifestyleRecommendation)
+                {
+                    Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+                    { url in
+                        print("SUCCESS: \(url)")
+                        self.openInSafari(url: url)
+                    }
+                    onFailure:
+                    { string in
+                        print("Failure: \(string)")
+                    }
+                }
+                else
+                {
+                    let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+                    let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
+                    activityDetailsVC.hidesBottomBarWhenPushed = true
+                    activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id))
+                    analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
+                    
+                    navigationController?.pushViewController(activityDetailsVC, animated: true)
+                }
             }
         case .food:
             if indexPath.row == 0

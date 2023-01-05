@@ -161,6 +161,7 @@
 		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
 		3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */; };
 		3FD3BDBE2960A88A00AEF9C3 /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */; };
+		3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -463,6 +464,7 @@
 		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
 		3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelInfo.swift; sourceTree = "<group>"; };
 		3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
+		3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleRecommendation.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 				7215E9562893ADB100C22A24 /* HeightComponents.swift */,
 				72461EF02924AD7500A85AE5 /* Lesson.swift */,
 				72461EF42924AE2600A85AE5 /* LessonStep.swift */,
+				3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */,
 				3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */,
 				3F87B95C27D27A6B00D589F7 /* ObjectStore.swift */,
 				7295567F28F67980000DD006 /* Plan.swift */,
@@ -1922,6 +1925,7 @@
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */,
+				3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */,
 				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
 				729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */,
 				3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */,

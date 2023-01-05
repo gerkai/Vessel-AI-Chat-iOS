@@ -47,7 +47,7 @@ let CONTACT_ID_KEY = "contact_id"
 let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
-let FUEL_QUIZ_PATH = "pages/fuel-landing/?preview_theme_id=131922690234"
+let FUEL_QUIZ_PATH = "pages/fuel-landing" // /?preview_theme_id=131922690234"
 
 //Endpoints
 let SERVER_FORGOT_PASSWORD_PATH = "auth/forgot-password"
@@ -77,6 +77,7 @@ let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
 let GET_LESSON_PATH = "lesson/{lesson_id}"
 let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_response_id}"
 let USER_HAS_FUEL_PATH = "fuel"
+let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
 
 // MARK: - Structs
 struct CardAssociation
@@ -1167,6 +1168,45 @@ class Server: NSObject
         let error = NSError.init(domain: "", code: 1000, userInfo: ["message": NSLocalizedString("Unable to get fuel", comment: "Server error message")])
         return error
     }
+    
+    // MARK: - Lifestyle Recommendation
+    //THIS IS TEMPORARY CODE. STOP USING THIS ONCE WE CAN LOAD LIFESTYLE RECOMMENDATIONS USING OBJECT STORE
+    func getLifestyleRecommendation(id: Int, onSuccess success: @escaping (_ result: LifestyleRecommendation) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    {
+        let urlString = "https://dev-api.vesselhealth.com/v2/lifestyle-recommendation/\(id)"
+        let request = Server.shared.GenerateRequest(urlString: urlString)!
+        
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let decoder = JSONDecoder()
+
+                let object = try decoder.decode(LifestyleRecommendation.self, from: data)
+                
+                DispatchQueue.main.async()
+                {
+                    success(object)
+                }
+            }
+            catch
+            {
+                print("ERROR: \(error)")
+                DispatchQueue.main.async()
+                {
+                    failure(self.fuelError())
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error)
+            }
+        }
+    }
+    
     // MARK: - Utils
     func allowDebugPrint() -> Bool
     {

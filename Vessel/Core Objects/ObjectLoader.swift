@@ -23,7 +23,26 @@ class ObjectLoader: NSObject
             LessonsManager.shared.buildLessonPlan(onDone:
             {
                 PlansManager.shared.loadPlans()
-                done()
+                
+                //load lifestyle recommendation template objects
+                //this is how we should be doing it
+                /*ObjectStore.shared.get(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) { object in
+                    print("Got Object: \(object)")
+                } onFailure: {
+                    print("FAILED!")
+                }*/
+
+                //this is using V2 api and not using ObjectStore. THIS IS TEMPORARY CODE
+                Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
+                { result in
+                    ObjectStore.shared.serverSave(result)
+                    done()
+                },
+                onFailure:
+                { error in
+                    print("ERROR: \(String(describing: error))")
+                    done()
+                })
             })
         },
         onFailure:
