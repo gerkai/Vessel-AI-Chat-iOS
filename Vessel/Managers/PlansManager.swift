@@ -32,16 +32,39 @@ class PlansManager
             ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds)
             { activities in
                 self.activities = activities
+                self.addFuelActivities()
                 done()
             }
         onFailure:
             {
+                self.addFuelActivities()
                 done()
             }
         }
         else
         {
+            addFuelActivities()
             done()
+        }
+    }
+    
+    func addFuelActivities()
+    {
+        if Contact.main()!.hasFuel
+        {
+        }
+        else
+        {
+            //add get fuel card to both activities array and plans array
+            if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
+            {
+                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL, frequency: "")
+                self.activities.insert(getFuelCard, at: 0)
+                
+                //make it show up every day
+                let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                addPlans(plansToAdd: [plan])
+            }
         }
     }
     
@@ -117,7 +140,7 @@ class PlansManager
     //returns array of only activities
     func getActivityPlans() -> [Plan]
     {
-        return plans.filter({ $0.type == .activity })
+        return plans.filter({ $0.type == .activity || $0.type == .lifestyleRecommendation})
     }
     
     //returns array of only reagentLifestyleRecommendations
