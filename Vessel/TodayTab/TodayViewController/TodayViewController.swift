@@ -34,6 +34,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         
         //get notified when new foods, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAdded, object: nil)
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
@@ -98,7 +99,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     // MARK: - Notifications
     
-    @objc func dataUpdated(_ notification: NSNotification)
+    @objc
+    func dataUpdated(_ notification: NSNotification)
     {
         if let type = notification.userInfo?["objectType"] as? String
         {
@@ -124,6 +126,15 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         }
     }
     
+    @objc
+    func newPlanAdded(_ notification: NSNotification)
+    {
+        viewModel.lastDayProgress = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
+        reloadUI()
+    }
+    
+    // MARK: - UI
+    
     private func reloadUI()
     {
         print("Today Tab: reloadUI")
@@ -132,6 +143,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
     
     func showGamificationCongratulationsViewIfNeeded()
     {
+        guard viewModel.showProgressDays else { return }
         let todayString = Date.serverDateFormatter.string(from: Date())
         let todayProgress = PlansManager.shared.calculateProgressFor(date: todayString)
         guard viewModel.lastDayProgress != todayProgress else { return }
@@ -177,7 +189,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        viewModel.sections[safe: indexPath.section]?.cells[safe: indexPath.row]?.height ?? 0.0 + (viewModel.sections[indexPath.section] == viewModel.sections.last ? max(0.0, tableViewOffset ?? 0.0) : ViewConstants.TABLE_VIEW_SPACING)
+        viewModel.sections[safe: indexPath.section]?.cells[safe: indexPath.row]?.height ?? 0.0 + ViewConstants.TABLE_VIEW_SPACING
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell

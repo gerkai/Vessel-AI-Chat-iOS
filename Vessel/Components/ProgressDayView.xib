@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,7 +55,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RrM-LM-8it" userLabel="dotView">
-                            <rect key="frame" x="19" y="46" width="4" height="4"/>
+                            <rect key="frame" x="19" y="50" width="4" height="4"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="4" id="1zv-1g-FY8"/>
@@ -78,7 +78,7 @@
                         <constraint firstItem="4qR-CK-cNP" firstAttribute="leading" secondItem="KoV-3n-ONc" secondAttribute="leading" constant="4" id="oqk-4n-4ev"/>
                         <constraint firstItem="4qR-CK-cNP" firstAttribute="top" secondItem="KoV-3n-ONc" secondAttribute="top" constant="4" id="rk9-no-e46"/>
                         <constraint firstItem="RrM-LM-8it" firstAttribute="bottom" secondItem="KoV-3n-ONc" secondAttribute="bottom" priority="999" id="wY3-gR-2Yl"/>
-                        <constraint firstItem="RrM-LM-8it" firstAttribute="top" secondItem="4qR-CK-cNP" secondAttribute="bottom" constant="8" id="zq4-B9-hH5"/>
+                        <constraint firstItem="RrM-LM-8it" firstAttribute="top" secondItem="4qR-CK-cNP" secondAttribute="bottom" constant="12" id="zq4-B9-hH5"/>
                     </constraints>
                 </view>
             </subviews>
