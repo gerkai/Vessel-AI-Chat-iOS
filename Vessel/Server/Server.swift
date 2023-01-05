@@ -1173,8 +1173,9 @@ class Server: NSObject
     //THIS IS TEMPORARY CODE. STOP USING THIS ONCE WE CAN LOAD LIFESTYLE RECOMMENDATIONS USING OBJECT STORE
     func getLifestyleRecommendation(id: Int, onSuccess success: @escaping (_ result: LifestyleRecommendation) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
-        let urlString = "https://dev-api.vesselhealth.com/v2/lifestyle-recommendation/\(id)"
-        let request = Server.shared.GenerateRequest(urlString: urlString)!
+        let urlString = API() + "lifestyle-recommendation/\(id)"
+        let modifiedURLString = urlString.replacingOccurrences(of: "v3", with: "v2")
+        let request = Server.shared.GenerateRequest(urlString: modifiedURLString)!
         
         serverGet(request: request)
         { data in
