@@ -91,6 +91,19 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
         }
     }
     
+    func openSupplementQuiz()
+    {
+        Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+        { url in
+            print("SUCCESS: \(url)")
+            self.openInSafari(url: url)
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func onTakeATest()
     {
@@ -305,15 +318,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                       let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id }) else { return }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (plan.type == .lifestyleRecommendation)
                 {
-                    Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
-                    { url in
-                        print("SUCCESS: \(url)")
-                        self.openInSafari(url: url)
-                    }
-                    onFailure:
-                    { string in
-                        print("Failure: \(string)")
-                    }
+                    openSupplementQuiz()
                 }
                 else
                 {
@@ -439,19 +444,26 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             let activityPlans = PlansManager.shared.getActivityPlans()
             guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
             
-            if let activity = activities.first(where: { $0.id == plan.typeId })
+            if plan.type == .lifestyleRecommendation && plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
             {
-                analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
+                openSupplementQuiz()
             }
-            
-            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
-            { [weak self] togglePlanData in
-                guard let self = self else { return }
-                PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
-                self.tableView.reloadData()
-                self.showGamificationCongratulationsViewIfNeeded()
-            } onFailure: { error in
-                self.tableView.reloadData()
+            else
+            {
+                if let activity = activities.first(where: { $0.id == plan.typeId })
+                {
+                    analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
+                }
+                
+                Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
+                { [weak self] togglePlanData in
+                    guard let self = self else { return }
+                    PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
+                    self.tableView.reloadData()
+                    self.showGamificationCongratulationsViewIfNeeded()
+                } onFailure: { error in
+                    self.tableView.reloadData()
+                }
             }
         }
         else if type == .lesson
