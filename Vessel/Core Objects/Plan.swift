@@ -31,7 +31,7 @@ struct CompletionInfo: Codable, Equatable, Hashable
     var units: Int
 }
 
-struct Plan: CoreObjectProtocol, Codable
+struct Plan: CoreObjectProtocol, Codable, Equatable
 {
     let id: Int
     var last_updated: Int

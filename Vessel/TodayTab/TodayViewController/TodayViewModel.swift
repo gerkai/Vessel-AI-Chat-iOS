@@ -205,10 +205,10 @@ enum TodayViewCell: Equatable
             let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
             return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
-        case .checkMarkCard: return 203.0
-        case .foldedCheckMarkCard: return 112.0
-        case .text: return 22.0
-        case .button: return 60.0
+        case .checkMarkCard: return 219.0
+        case .foldedCheckMarkCard: return 132.0
+        case .text: return 38.0
+        case .button: return 76.0
         case .footer: return 173.0
         }
     }
@@ -237,8 +237,7 @@ class TodayViewModel
     private var contact = Contact.main()!
     
     // Feature flags
-
-    private var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
+    var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
     private var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
     private var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
     private var showFoods: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false

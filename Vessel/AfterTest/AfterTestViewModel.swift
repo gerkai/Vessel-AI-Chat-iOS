@@ -665,6 +665,7 @@ class AfterTestViewModel
         WaterManager.shared.createWaterPlanIfNeeded()
         
         Log_Add("setDailyWaterIntake() - post .newDataArrived: Plan")
+        NotificationCenter.default.post(name: .newPlanAdded, object: nil, userInfo: [:])
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
 }

@@ -49,7 +49,7 @@ class PlansManager
     {
         for plan in plansToAdd
         {
-            ObjectStore.shared.serverSave(plan)
+            ObjectStore.shared.serverSave(plan, notifyNewDataArrived: plan == plansToAdd.last)
         }
         self.plans = Storage.retrieve(as: Plan.self)
         if plansToAdd.contains(where: { $0.type == .activity })
@@ -60,6 +60,7 @@ class PlansManager
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
+        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
     }
     
     func removePlans(plansToRemove: [Plan])
@@ -83,6 +84,7 @@ class PlansManager
         {
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
         }
+        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
     }
     
     func setPlanCompleted(planId: Int, date: String, isComplete: Bool)
@@ -104,21 +106,6 @@ class PlansManager
             plans[index].completed.removeAll(where: { $0 == date })
         }
         ObjectStore.shared.serverSave(plans[index])
-    }
-    
-    func remove(plan: Plan)
-    {
-        plans.removeAll{$0.id == plan.id}
-        Storage.remove(plan.id, objectType: Plan.self)
-        ObjectStore.shared.removeFromCache(plan)
-        if plan.type == .activity
-        {
-            loadActivitiesForPlans
-            {
-                Log_Add("PlansManager: remove() - post .newDataArrived: Plan")
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-            }
-        }
     }
     
     //returns array of only food plans
@@ -175,13 +162,10 @@ extension PlansManager
         let activityPlans = getActivityPlans()
         if showActivites
         {
-            let activities = activities.filter({ activity in
-                return plans.contains(where: { $0.typeId == activity.id })
-            })
-            if !activities.isEmpty
+            if !activityPlans.isEmpty
             {
                 parts += 1
-                progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activities.count)
+                progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activityPlans.count)
             }
         }
         
