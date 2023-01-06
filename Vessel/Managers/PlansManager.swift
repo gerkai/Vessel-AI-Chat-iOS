@@ -50,20 +50,33 @@ class PlansManager
     
     func addFuelActivities()
     {
-        if Contact.main()!.hasFuel
+        if !Contact.main()!.hasFuel
         {
-        }
-        else
-        {
+            print("ADDING FUEL ACTIVITIES")
             //add get fuel card to both activities array and plans array
             if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
             {
-                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL, frequency: "")
-                self.activities.insert(getFuelCard, at: 0)
+                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL, frequency: "", isLifestyleRecommendation: true)
+                self.activities.append(getFuelCard)
                 
                 //make it show up every day
                 let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                addPlans(plansToAdd: [plan])
+                plans.append(plan)
+            }
+            else
+            {
+                //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
+                // TODO: Fix
+                print("FUEL RECOMMENDATION DOESN'T EXISTS")
+                Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
+                { result in
+                    ObjectStore.shared.serverSave(result)
+                    self.addFuelActivities()
+                },
+                onFailure:
+                { error in
+                    print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
+                })
             }
         }
     }
@@ -140,7 +153,7 @@ class PlansManager
     //returns array of only activities
     func getActivityPlans() -> [Plan]
     {
-        return plans.filter({ $0.type == .activity || $0.type == .lifestyleRecommendation})
+        return plans.filter({ $0.type == .activity })
     }
     
     //returns array of only reagentLifestyleRecommendations

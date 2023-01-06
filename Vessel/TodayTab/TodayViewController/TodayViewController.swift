@@ -316,7 +316,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             {
                 guard let activity = activities[safe: indexPath.row - 1],
                       let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id }) else { return }
-                if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (plan.type == .lifestyleRecommendation)
+                if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
                     openSupplementQuiz()
                 }
