@@ -39,12 +39,13 @@ extension UIViewController
         return nil
     }
     
-    func openInSafari(url: String)
+    func openInSafari(url: String, delegate: SFSafariViewControllerDelegate? = nil)
     {
         if let url = URL(string: url)
         {
             let vc = SFSafariViewController(url: url)
             vc.modalPresentationStyle = .overCurrentContext
+            vc.delegate = delegate
             present(vc, animated: true)
         }
     }

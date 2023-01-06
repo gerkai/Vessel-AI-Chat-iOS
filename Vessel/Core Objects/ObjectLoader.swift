@@ -19,7 +19,9 @@ class ObjectLoader: NSObject
         Log_Add("LoadCoreObjects(Result, Food, Curriculum, Plan)")
         ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self], onSuccess: 
         {
-            Contact.main()!.getFuelStatus()
+            Contact.main()!.getFuelStatus
+            {
+            }
             LessonsManager.shared.buildLessonPlan(onDone:
             {
                 PlansManager.shared.loadPlans()
@@ -35,6 +37,9 @@ class ObjectLoader: NSObject
                 //this is using V2 api and not using ObjectStore. THIS IS TEMPORARY CODE
                 Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
                 { result in
+                    //object on back end doesn't have a subtext field. Our local object does so we add the desired subtext here.
+                    //Tech Debt: Add subtext field to back end lifestyle recommendation object
+                    result.subtext = NSLocalizedString("Take a simple 3 minute quiz", comment: "")
                     ObjectStore.shared.serverSave(result)
                     done()
                 },
@@ -42,6 +47,24 @@ class ObjectLoader: NSObject
                 { error in
                     print("ERROR: \(String(describing: error))")
                     done()
+                })
+                
+                Server.shared.getLifestyleRecommendation(id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
+                { result in
+                    ObjectStore.shared.serverSave(result)
+                },
+                onFailure:
+                { error in
+                    print("ERROR: \(String(describing: error))")
+                })
+                
+                Server.shared.getLifestyleRecommendation(id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
+                { result in
+                    ObjectStore.shared.serverSave(result)
+                },
+                onFailure:
+                { error in
+                    print("ERROR: \(String(describing: error))")
                 })
             })
         },

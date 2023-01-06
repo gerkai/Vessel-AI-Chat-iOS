@@ -119,8 +119,8 @@ class AfterTestViewModel
         }
         //find out if user already is enrolled in a supplement plan or not.
         Server.shared.getFuel()
-        { result in
-            self.hasSupplementPlan = result
+        { status in
+            self.hasSupplementPlan = status.hasFuel
         }
         onFailure:
         { error in
@@ -344,10 +344,7 @@ class AfterTestViewModel
         //show fuel prompt if user isn't already enrolled and they have at least 3 test results
         if hasSupplementPlan == false
         {
-            if totalResults() >= 3
-            {
-                screens.append(.FUEL_PROMPT)
-            }
+            screens.append(.FUEL_PROMPT)
         }
     }
     

@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class TodayViewController: UIViewController, VesselScreenIdentifiable
+class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebViewControllerDelegate
 {
     // MARK: - Constants
     private struct ViewConstants
@@ -173,6 +174,15 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable
                                                 showConfetti: true,
                                                 delegate: self)
     }
+    
+    //MARK: - FUEL
+    func TodayWebViewDismissed()
+    {
+        Contact.main()!.getFuelStatus
+        {
+            PlansManager.shared.loadPlans()
+        }
+    }
 }
 
 extension TodayViewController: UITableViewDelegate, UITableViewDataSource
@@ -308,7 +318,8 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                     Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
                     { url in
                         print("SUCCESS: \(url)")
-                        self.openInSafari(url: url)
+                        let vc = TodayWebViewController.initWith(url: url, delegate: self)
+                        self.present(vc, animated: true)
                     }
                     onFailure:
                     { string in

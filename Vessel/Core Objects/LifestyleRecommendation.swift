@@ -26,18 +26,18 @@ class LifestyleRecommendation: CoreObjectProtocol
     }
 
     private var _last_updated: Int?
-    var imageURL: String
+    var imageURL: String?
     var title: String
-    //var subtext: String
+    var subtext: String?
     var description: String
     let storage: StorageType = .cache //just store in cache for now since we're loading each time using V2 API
     
-    init(id: Int, lastUpdated: Int, imageURL: String, title: String, /*subtext: String,*/ description: String)
+    init(id: Int, lastUpdated: Int, imageURL: String?, title: String, subtext: String, description: String)
     {
         self.id = id
         self.imageURL = imageURL
         self.title = title
-        //self.subtext = subtext
+        self.subtext = subtext
         self.description = description
         self.last_updated = lastUpdated
     }

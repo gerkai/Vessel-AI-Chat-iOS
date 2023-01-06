@@ -48,6 +48,7 @@ let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
 let FUEL_QUIZ_PATH = "pages/fuel-landing" // /?preview_theme_id=131922690234"
+//let FUEL_QUIZ_PATH = "pages/fuel-landing/?preview_theme_id=131922690234"
 
 //Endpoints
 let SERVER_FORGOT_PASSWORD_PATH = "auth/forgot-password"
@@ -517,7 +518,7 @@ class Server: NSObject
     func multipassURL(path: String, onSuccess success: @escaping (_ url: String) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         var dictPostBody = [String: String]()
-        dictPostBody["path"] = path
+        dictPostBody["path"] = path + "?token=\(accessToken!)"
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(MULTIPASS_PATH)")
         { object in
@@ -1110,8 +1111,14 @@ class Server: NSObject
         }
     }
     
+    struct FuelStatus
+    {
+        let hasFuel: Bool
+        let completedQuiz: Bool
+    }
+    
     //MARK:  Fuel
-    func getFuel(onSuccess success: @escaping (_ hasFuel: Bool) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getFuel(onSuccess success: @escaping (_ status: FuelStatus) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
         let request = Server.shared.GenerateRequest(urlString: urlString)!
@@ -1123,11 +1130,17 @@ class Server: NSObject
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    if let hasFuel = object["is_active"] as? Bool
+                    var completedQuiz = false
+                    if let _ = object["formula"]
+                    {
+                        completedQuiz = true
+                    }
+                    if let isActive = object["is_active"] as? Bool
                     {
                         DispatchQueue.main.async()
                         {
-                            success(hasFuel)
+                            var status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz)
+                            success(status)
                         }
                     }
                     else

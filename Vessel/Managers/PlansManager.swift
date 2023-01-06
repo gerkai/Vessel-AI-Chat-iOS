@@ -25,6 +25,7 @@ class PlansManager
     
     private func loadActivitiesForPlans(onDone done: @escaping () -> Void)
     {
+        print("loadActivitiesForPlans()")
         let activityIDs = self.getActivityPlans().map({ $0.typeId })
         let uniqueActivityIds = Array(Set(activityIDs))
         if uniqueActivityIds.count != 0
@@ -50,15 +51,19 @@ class PlansManager
     
     func addFuelActivities()
     {
+        print("Adding fuel activities")
+        removeOldFuelActivities()
         if Contact.main()!.hasFuel
         {
+            print("CONTACT HAS FUEL")
         }
         else
         {
+            print("CONTACT DOES NOT HAVE FUEL. Adding Get Supplement Plan card")
             //add get fuel card to both activities array and plans array
             if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
             {
-                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL, frequency: "")
+                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "")
                 self.activities.insert(getFuelCard, at: 0)
                 
                 //make it show up every day
@@ -66,6 +71,21 @@ class PlansManager
                 addPlans(plansToAdd: [plan])
             }
         }
+    }
+    
+    func removeOldFuelActivities()
+    {
+        //TODO: Remove old activities. 
+        /*do
+        {
+            try plans.removeAll(where: { Plan in
+                
+            })
+        }
+        catch
+        {
+            
+        }*/
     }
     
     func addPlans(plansToAdd: [Plan])
