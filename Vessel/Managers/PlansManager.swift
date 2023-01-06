@@ -90,6 +90,8 @@ class PlansManager
                 { result in
                     ObjectStore.shared.serverSave(result)
                     self.addFuelActivities()
+                    Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
+                    NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
                 },
                 onFailure:
                 { error in

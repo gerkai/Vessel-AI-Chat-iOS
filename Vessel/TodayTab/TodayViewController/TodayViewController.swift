@@ -325,8 +325,10 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             }
             else
             {
+                let plans = PlansManager.shared.getActivityPlans() + PlansManager.shared.getLifestyleRecommendationPlans()
+                
                 guard let activity = activities[safe: indexPath.row - 1],
-                      let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id }) else { return }
+                      let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .lifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else { return }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
 /*<<<<<<< HEAD
