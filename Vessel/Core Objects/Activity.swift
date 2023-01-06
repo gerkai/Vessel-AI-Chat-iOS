@@ -17,13 +17,15 @@ class Tip: CoreObjectProtocol
     let imageUrl: String
     //let smallImage: String?
     let storage: StorageType = .cacheAndDisk
+    var isLifestyleRecommendation = false
     
     init(id: Int,
          last_updated: Int,
          title: String,
          description: String?,
          imageUrl: String,
-         frequency: String)
+         frequency: String,
+         isLifestyleRecommendation: Bool = false)
     {
         self.id = id
         self.last_updated = last_updated
@@ -31,6 +33,7 @@ class Tip: CoreObjectProtocol
         self.description = description
         self.imageUrl = imageUrl
         self.frequency = frequency
+        self.isLifestyleRecommendation = isLifestyleRecommendation
     }
     
     enum CodingKeys: String, CodingKey

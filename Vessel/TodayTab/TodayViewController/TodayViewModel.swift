@@ -267,9 +267,13 @@ class TodayViewModel
         contact = Contact.main()!
         let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
-        let plans = PlansManager.shared.getActivityPlans()
+        let activityPlans = PlansManager.shared.getActivityPlans()
+        let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
-            return plans.contains(where: { $0.typeId == activity.id })
+            return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
+        }) : []
+        let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
+            return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
         }) : []
         let foods = showFoods ? contact.suggestedFoods : []
         let dailyWaterIntake = showWater ? contact.dailyWaterIntake : nil
@@ -278,7 +282,7 @@ class TodayViewModel
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .progressDays(progress: progressDays),
             .insights(insights: lessons, isToday: self.isToday),
-            .activities(activities: activities, selectedDate: selectedDate),
+            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate),
             .food(foods: foods, selectedDate: selectedDate),
             .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses),
             .footer
