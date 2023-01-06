@@ -100,7 +100,10 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
               let delegate = delegate else { return }
         if isChecked == false
         {
-            isChecked = true
+            if type != .lifestyleRecommendation
+            {
+                isChecked = true
+            }
             delegate.onCardChecked(id: id, type: type)
         }
         else

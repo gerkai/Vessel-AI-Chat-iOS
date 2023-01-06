@@ -11,6 +11,7 @@ enum CheckMarkCardType
 {
     case lesson
     case activity
+    case lifestyleRecommendation
 }
 
 enum TodayViewSection: Equatable
@@ -125,7 +126,7 @@ enum TodayViewSection: Equatable
                                             backgroundImage: activity.imageUrl,
                                             isCompleted: false,
                                             id: activity.id,
-                                            type: .activity))
+                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity))
             }
         }
         return cells

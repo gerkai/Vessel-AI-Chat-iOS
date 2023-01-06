@@ -1139,7 +1139,7 @@ class Server: NSObject
                     {
                         DispatchQueue.main.async()
                         {
-                            var status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz)
+                            let status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz)
                             success(status)
                         }
                     }

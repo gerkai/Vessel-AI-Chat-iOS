@@ -331,20 +331,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                       let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .lifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else { return }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
-/*<<<<<<< HEAD
-                    Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
-                    { url in
-                        print("SUCCESS: \(url)")
-                        let vc = TodayWebViewController.initWith(url: url, delegate: self)
-                        self.present(vc, animated: true)
-                    }
-                    onFailure:
-                    { string in
-                        print("Failure: \(string)")
-                    }
-=======*/
                     openSupplementQuiz()
-//>>>>>>> develop
                 }
                 else
                 {
@@ -455,7 +442,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
 {
     func canUncheckCard(type: CheckMarkCardType) -> Bool
     {
-        if type == .activity
+        if type == .activity || type == .lifestyleRecommendation
         {
             return false
         }
@@ -464,32 +451,35 @@ extension TodayViewController: TodayCheckMarkCardDelegate
     
     func onCardChecked(id: Int, type: CheckMarkCardType)
     {
-        if type == .activity
+        if type == .lifestyleRecommendation
+        {
+            let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
+            guard let plan = lifestyleRecommendationPlans.first(where: { $0.typeId == id }) else { return }
+
+            if plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
+            {
+                openSupplementQuiz()
+            }
+        }
+        else if type == .activity
         {
             let activities = PlansManager.shared.activities
             let activityPlans = PlansManager.shared.getActivityPlans()
             guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
             
-            if plan.type == .lifestyleRecommendation && plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
+            if let activity = activities.first(where: { $0.id == plan.typeId })
             {
-                openSupplementQuiz()
+                analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
             }
-            else
-            {
-                if let activity = activities.first(where: { $0.id == plan.typeId })
-                {
-                    analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
-                }
-                
-                Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
-                { [weak self] togglePlanData in
-                    guard let self = self else { return }
-                    PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
-                    self.tableView.reloadData()
-                    self.showGamificationCongratulationsViewIfNeeded()
-                } onFailure: { error in
-                    self.tableView.reloadData()
-                }
+            
+            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
+            { [weak self] togglePlanData in
+                guard let self = self else { return }
+                PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
+                self.tableView.reloadData()
+                self.showGamificationCongratulationsViewIfNeeded()
+            } onFailure: { error in
+                self.tableView.reloadData()
             }
         }
         else if type == .lesson
