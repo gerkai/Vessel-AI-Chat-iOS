@@ -61,7 +61,10 @@ class PlansManager
                 if Contact.main()!.hasAMFormula
                 {
                     let amFuelCard = Tip(id: -getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: getAMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                    self.activities.insert(amFuelCard, at: 0)
+                    if !activities.contains(where: { $0.id == -getAMFuelRecommendation.id })
+                    {
+                        self.activities.append(amFuelCard)
+                    }
                     
                     //make it show up every day
                     let plan = Plan(id: -getAMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
@@ -77,7 +80,10 @@ class PlansManager
                     if Contact.main()!.hasPMFormula
                     {
                         let pmFuelCard = Tip(id: -getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: getPMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                        self.activities.insert(pmFuelCard, at: 1)
+                        if !activities.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                        {
+                            self.activities.append(pmFuelCard)
+                        }
                         
                         //make it show up every day
                         let plan = Plan(id: -getPMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
@@ -104,16 +110,23 @@ class PlansManager
             if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
             {
                 let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                self.activities.insert(getFuelCard, at: 0)
+                if !activities.contains(where: { $0.id == getFuelRecommendation.id })
+                {
+                    activities.append(getFuelCard)
+                }
                 
                 //make it show up every day
-                let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                plans.append(plan)
+                let plan = Plan(id: getFuelRecommendation.id, type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                if !plans.contains(where: { $0.id == getFuelRecommendation.id })
+                {
+                    plans.append(plan)
+                }
             }
             else
             {
                 //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
                 // TODO: Fix
+                //CW: I think this section won't ever get called now as I fixed the race condition that was causing the objects to sometimes not be in the object store.
                 print("FUEL RECOMMENDATION DOESN'T EXISTS")
                 Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
                                                             { result in
