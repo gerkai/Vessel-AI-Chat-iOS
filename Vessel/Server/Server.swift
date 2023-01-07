@@ -48,6 +48,7 @@ let KEYCHAIN_ACCOUNT = "vessel"
 
 let SUPPORT_URL = "http://help.vesselhealth.com/"
 let FUEL_QUIZ_PATH = "pages/fuel-landing" // /?preview_theme_id=131922690234"
+//let FUEL_QUIZ_PATH = "pages/fuel-landing/?preview_theme_id=131922690234"
 
 //Endpoints
 let SERVER_FORGOT_PASSWORD_PATH = "auth/forgot-password"
@@ -517,7 +518,7 @@ class Server: NSObject
     func multipassURL(path: String, onSuccess success: @escaping (_ url: String) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         var dictPostBody = [String: String]()
-        dictPostBody["path"] = path
+        dictPostBody["path"] = path + "?token=\(accessToken!)"
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(MULTIPASS_PATH)")
         { object in
@@ -1110,8 +1111,23 @@ class Server: NSObject
         }
     }
     
+    enum Formula
+    {
+        case AM
+        case PM
+        case AMPM
+        case none
+    }
+    
+    struct FuelStatus
+    {
+        let hasFuel: Bool
+        let completedQuiz: Bool
+        let formula: Formula //whether user has AM formula, PM formula or both (used for deciding to show AM/PM fuel cards on Today page)
+    }
+    
     //MARK:  Fuel
-    func getFuel(onSuccess success: @escaping (_ hasFuel: Bool) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getFuel(onSuccess success: @escaping (_ status: FuelStatus) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
         let request = Server.shared.GenerateRequest(urlString: urlString)!
@@ -1120,14 +1136,60 @@ class Server: NSObject
         { data in
             do
             {
+                //parse formula ingredients to determine if user has AM supplements, PM supplements or both
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    if let hasFuel = object["is_active"] as? Bool
+                    var formula: Formula = .none
+                    var completedQuiz = false
+                    if let formulaObject = object["formula"] as? [String: Any]
+                    {
+                        completedQuiz = true
+                        if let ingredientsArray = formulaObject["ingredients"] as? [[String: Any]]
+                        {
+                            print("Ingredients: \(ingredientsArray)")
+                            var am = false
+                            var pm = false
+                            for ingredient in ingredientsArray
+                            {
+                                if let timeOfDay = ingredient["time_of_day"] as? String
+                                {
+                                    if timeOfDay == "AM"
+                                    {
+                                        am = true
+                                    }
+                                    if timeOfDay == "PM"
+                                    {
+                                        pm = true
+                                    }
+                                }
+                            }
+                            if am
+                            {
+                                if pm
+                                {
+                                    formula = .AMPM
+                                }
+                                else
+                                {
+                                    formula = .AM
+                                }
+                            }
+                            else
+                            {
+                                if pm
+                                {
+                                    formula = .PM
+                                }
+                            }
+                        }
+                    }
+                    if let isActive = object["is_active"] as? Bool
                     {
                         DispatchQueue.main.async()
                         {
-                            success(hasFuel)
+                            let status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz, formula: formula)
+                            success(status)
                         }
                     }
                     else
@@ -1170,7 +1232,8 @@ class Server: NSObject
     }
     
     // MARK: - Lifestyle Recommendation
-    //THIS IS TEMPORARY CODE. STOP USING THIS ONCE WE CAN LOAD LIFESTYLE RECOMMENDATIONS USING OBJECT STORE
+    //Tech Debt: THIS IS TEMPORARY CODE. STOP USING THIS ONCE WE CAN LOAD LIFESTYLE RECOMMENDATIONS USING OBJECT STORE
+    //Consider baking in the lifestyle recommendations
     func getLifestyleRecommendation(id: Int, onSuccess success: @escaping (_ result: LifestyleRecommendation) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = API() + "lifestyle-recommendation/\(id)"

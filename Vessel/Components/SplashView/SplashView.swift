@@ -120,7 +120,7 @@ class SplashView: UIView
         }
         if let shouldShow = notification.userInfo?["show"] as? Bool
         {
-            print("Got showSplash notification: show: \(shouldShow), fade: \(fadeTime)")
+            //print("Got showSplash notification: show: \(shouldShow), fade: \(fadeTime)")
             if shouldShow == true
             {
                 isHidden = false
@@ -147,7 +147,7 @@ class SplashView: UIView
         }
         else
         {
-            print("Got showSplash notification: Don't Show, fade: \(fadeTime)")
+            //print("Got showSplash notification: Don't Show, fade: \(fadeTime)")
             UIView.animate(withDuration: fadeTime)
             {
                 self.contentView.alpha = 0.0

@@ -162,6 +162,7 @@
 		3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */; };
 		3FD3BDBE2960A88A00AEF9C3 /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */; };
 		3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */; };
+		3FD3BDC22967CB7600AEF9C3 /* TodayWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDC12967CB7600AEF9C3 /* TodayWebViewController.swift */; };
 		3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3699F27C9A07E00231D42 /* AppDelegate.swift */; };
 		3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE369A127C9A07E00231D42 /* SceneDelegate.swift */; };
 		3FE369AC27C9A07F00231D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE369AA27C9A07F00231D42 /* LaunchScreen.storyboard */; };
@@ -465,6 +466,7 @@
 		3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelInfo.swift; sourceTree = "<group>"; };
 		3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleRecommendation.swift; sourceTree = "<group>"; };
+		3FD3BDC12967CB7600AEF9C3 /* TodayWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWebViewController.swift; sourceTree = "<group>"; };
 		3FE3699C27C9A07E00231D42 /* Vessel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vessel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE3699F27C9A07E00231D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE369A127C9A07E00231D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1447,6 +1449,7 @@
 				72C721DA28E2B809003FB61A /* Cells */,
 				72F0DEE028E278ED00034088 /* TodayViewController.swift */,
 				72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */,
+				3FD3BDC12967CB7600AEF9C3 /* TodayWebViewController.swift */,
 			);
 			path = TodayViewController;
 			sourceTree = "<group>";
@@ -1820,6 +1823,7 @@
 				72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */,
 				725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */,
 				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
+				3FD3BDC22967CB7600AEF9C3 /* TodayWebViewController.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
 				3F12F013287B4DCE00FCC52E /* ItemPreferencesViewController.swift in Sources */,
