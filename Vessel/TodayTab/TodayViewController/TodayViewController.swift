@@ -242,6 +242,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
+        case .lockedCheckMarkCard(let backgroundImage):
+            guard let cell = cell as? TodayLockedCheckMarkCardCell else { fatalError("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController") }
+            cell.setup(backgroundImage: backgroundImage)
         case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, id: id, type: type, delegate: self)
@@ -345,6 +348,12 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 }
             }
         case .food:
+            guard (Contact.main()?.suggestedFoods ?? []).count > 0 else
+            {
+                mainTabBarController?.vesselButtonPressed()
+                return
+            }
+            
             if indexPath.row == 0
             {
                 GenericAlertViewController.presentAlert(in: self, type:
@@ -353,6 +362,11 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                                                                                                  button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
             }
         case .water:
+            guard Contact.main()?.dailyWaterIntake != nil else
+            {
+                mainTabBarController?.vesselButtonPressed()
+                return
+            }
             let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
             let waterDetailsVC = storyboard.instantiateViewController(identifier: "WaterDetailsViewController") as! WaterDetailsViewController
             waterDetailsVC.hidesBottomBarWhenPushed = true
@@ -506,7 +520,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             }
             else
             {
-                guard let viewController = coordinator.getNextStepViewController() else { return }
+                guard let viewController = coordinator.getNextStepViewController(shouldSave: viewModel.isToday && lesson.completedDate == nil) else { return }
                 navigationController?.pushViewController(viewController, animated: true)
             }
         }

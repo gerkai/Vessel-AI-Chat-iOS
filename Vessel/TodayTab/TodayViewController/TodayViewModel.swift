@@ -143,7 +143,13 @@ enum TodayViewSection: Equatable
     
     func createFoodSection(foods: [Food], selectedDate: String) -> [TodayViewCell]
     {
-        guard foods.count > 0 else { return [] }
+        guard foods.count > 0 else
+        {
+            return [
+                .sectionTitle(icon: "food-icon", name: "Food"),
+                .lockedCheckMarkCard(backgroundImage: "food-placeholder")
+            ]
+        }
         return [
             .sectionTitle(icon: "food-icon", name: "Food"),
             .foodDetails(foods: foods, selectedDate: selectedDate)
@@ -152,7 +158,13 @@ enum TodayViewSection: Equatable
     
     func createWaterSection(glassesNumber: Int?, checkedGlasses: Int) -> [TodayViewCell]
     {
-        guard let glassesNumber = glassesNumber else { return [] }
+        guard let glassesNumber = glassesNumber else
+        {
+            return [
+                .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: "")),
+                .lockedCheckMarkCard(backgroundImage: "water-placeholder")
+            ]
+        }
         return [
             .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount"))"),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
@@ -187,6 +199,7 @@ enum TodayViewCell: Equatable
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
+    case lockedCheckMarkCard(backgroundImage: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String)
@@ -215,6 +228,7 @@ enum TodayViewCell: Equatable
             let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
             return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
+        case .lockedCheckMarkCard: return 96.0
         case .checkMarkCard: return 219.0
         case .foldedCheckMarkCard: return 132.0
         case .text: return 38.0
@@ -232,6 +246,7 @@ enum TodayViewCell: Equatable
         case .sectionTitle: return "TodaySectionTitleCell"
         case .foodDetails: return "TodayFoodDetailsSectionCell"
         case .waterDetails: return "TodayWaterDetailsSectionCell"
+        case .lockedCheckMarkCard: return "LockedCheckmarkCardCell"
         case .checkMarkCard: return "CheckmarkCardCell"
         case .foldedCheckMarkCard: return "FoldedCheckmarkCardCell"
         case .text: return "TodayTextCell"

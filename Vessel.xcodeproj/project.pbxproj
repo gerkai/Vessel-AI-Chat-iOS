@@ -200,6 +200,7 @@
 		721B6BB4289A0C0D0099BC4A /* GenericAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */; };
 		721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */; };
 		721F7BE22935BACA00B1F501 /* LessonResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */; };
+		7230AE54296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7230AE53296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift */; };
 		72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */; };
 		72332FB028EE8D94008CBA8C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAF28EE8D94008CBA8C /* Food.swift */; };
 		72332FB228EE9527008CBA8C /* ActivityDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */; };
@@ -510,6 +511,7 @@
 		721B6BB2289A0C0D0099BC4A /* GenericAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlertViewController.swift; sourceTree = "<group>"; };
 		721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericAlertViewController.xib; sourceTree = "<group>"; };
 		721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResultsViewController.swift; sourceTree = "<group>"; };
+		7230AE53296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLockedCheckMarkCardCell.swift; sourceTree = "<group>"; };
 		72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		72332FAF28EE8D94008CBA8C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -1387,6 +1389,7 @@
 				72BBD6952938284200D9EB5E /* TodayTextCell.swift */,
 				72BBD6972938285200D9EB5E /* TodayButtonCell.swift */,
 				72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */,
+				7230AE53296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1770,6 +1773,7 @@
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
 				72B5C9F5294C134500032818 /* ProgressDayView.swift in Sources */,
 				72692B88293717DB00A8F33C /* Activity.swift in Sources */,
+				7230AE54296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
 				3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
