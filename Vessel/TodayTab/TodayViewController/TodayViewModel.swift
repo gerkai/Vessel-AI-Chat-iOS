@@ -111,7 +111,16 @@ enum TodayViewSection: Equatable
         var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities")]
         for activity in activities
         {
-            let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
+            var plan: Plan?
+            if activity.isLifestyleRecommendation
+            {
+                plan = PlansManager.shared.getLifestyleRecommendationPlans().first(where: { $0.typeId == activity.id })
+            }
+            else
+            {
+                plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
+            }
+            
             if (plan?.completed ?? []).contains(selectedDate)
             {
                 cells.append(.foldedCheckMarkCard(title: activity.title,

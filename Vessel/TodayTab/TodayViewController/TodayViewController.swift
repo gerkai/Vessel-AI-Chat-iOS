@@ -333,7 +333,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 {
                     openSupplementQuiz()
                 }
-                else
+                else if !activity.isLifestyleRecommendation
                 {
                     let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                     let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
@@ -459,6 +459,12 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             if plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
             {
                 openSupplementQuiz()
+            }
+            else
+            {
+                PlansManager.shared.setPlanCompleted(planId: plan.id, date: viewModel.selectedDate, isComplete: true)
+                self.tableView.reloadData()
+                self.showGamificationCongratulationsViewIfNeeded()
             }
         }
         else if type == .activity

@@ -60,12 +60,15 @@ class PlansManager
                 //Show the AM Fuel Supplement card
                 if Contact.main()!.hasAMFormula
                 {
-                    let amFuelCard = Tip(id: getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: getAMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                    let amFuelCard = Tip(id: -getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: getAMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
                     self.activities.insert(amFuelCard, at: 0)
                     
                     //make it show up every day
-                    let plan = Plan(type: .lifestyleRecommendation, typeId: getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                    plans.append(plan)
+                    let plan = Plan(id: -getAMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                    if !plans.contains(where: { $0.id == -getAMFuelRecommendation.id })
+                    {
+                        plans.append(plan)
+                    }
                 }
                 
                 if let getPMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
@@ -73,12 +76,15 @@ class PlansManager
                     //Show the PM Fuel Supplement card
                     if Contact.main()!.hasPMFormula
                     {
-                        let pmFuelCard = Tip(id: getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: getPMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                        let pmFuelCard = Tip(id: -getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: getPMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
                         self.activities.insert(pmFuelCard, at: 1)
                         
                         //make it show up every day
-                        let plan = Plan(type: .lifestyleRecommendation, typeId: getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                        plans.append(plan)
+                        let plan = Plan(id: -getPMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                        if !plans.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                        {
+                            plans.append(plan)
+                        }
                     }
                 }
                 else
@@ -238,13 +244,13 @@ extension PlansManager
         var parts: Double = 0.0
         
         // Activities
-        let activityPlans = getActivityPlans()
+        let plans = getActivityPlans() + getLifestyleRecommendationPlans().filter({ $0.typeId != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.typeId != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID })
         if showActivites
         {
-            if !activityPlans.isEmpty
+            if !plans.isEmpty
             {
                 parts += 1
-                progress += Double(activityPlans.filter({ $0.completed.contains(date) }).count) / Double(activityPlans.count)
+                progress += Double(plans.filter({ $0.completed.contains(date) }).count) / Double(plans.count)
             }
         }
         
