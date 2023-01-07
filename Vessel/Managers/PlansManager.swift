@@ -103,11 +103,11 @@ class PlansManager
             //add get fuel card to both activities array and plans array
             if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
             {
-                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                let getFuelCard = Tip(id: -getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
                 self.activities.insert(getFuelCard, at: 0)
                 
                 //make it show up every day
-                let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                let plan = Plan(id: -getFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
                 if !plans.contains(where: { $0.id == -getFuelRecommendation.id })
                 {
                     plans.append(plan)
