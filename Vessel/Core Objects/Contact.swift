@@ -38,6 +38,8 @@ class Contact: CoreObjectProtocol
     var storage: StorageType = .cache
     var hasFuel = false
     var completedQuiz = false
+    var hasAMFormula = false
+    var hasPMFormula = false
     
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
@@ -192,10 +194,23 @@ class Contact: CoreObjectProtocol
     
     func getFuelStatus(onDone done: @escaping () -> Void)
     {
+        //print("Get Fuel Status:")
         Server.shared.getFuel()
-        { status in
+        { status in            
             self.hasFuel = status.hasFuel
             self.completedQuiz = status.completedQuiz
+            if status.formula == .AM || status.formula == .AMPM
+            {
+                self.hasAMFormula = true
+            }
+            else
+            {
+                if status.formula == .PM || status.formula == .AMPM
+                {
+                    self.hasPMFormula = true
+                }
+            }
+            //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
             done()
         }
         onFailure:

@@ -51,12 +51,45 @@ class PlansManager
     
     func addFuelActivities()
     {
-//<<<<<<< HEAD
         print("Adding fuel activities")
-        removeOldFuelActivities()
         if Contact.main()!.hasFuel
         {
             print("CONTACT HAS FUEL")
+            if let getAMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID)
+            {
+                //Show the AM Fuel Supplement card
+                if Contact.main()!.hasAMFormula
+                {
+                    let amFuelCard = Tip(id: getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: getAMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                    self.activities.insert(amFuelCard, at: 0)
+                    
+                    //make it show up every day
+                    let plan = Plan(type: .lifestyleRecommendation, typeId: getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                    plans.append(plan)
+                }
+                
+                if let getPMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
+                {
+                    //Show the PM Fuel Supplement card
+                    if Contact.main()!.hasPMFormula
+                    {
+                        let pmFuelCard = Tip(id: getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: getPMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                        self.activities.insert(pmFuelCard, at: 1)
+                        
+                        //make it show up every day
+                        let plan = Plan(type: .lifestyleRecommendation, typeId: getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                        plans.append(plan)
+                    }
+                }
+                else
+                {
+                    print("Unable to get PM card from Object Store")
+                }
+            }
+            else
+            {
+                print("Unable to get AM card from Object Store")
+            }
         }
         else
         {
@@ -66,16 +99,6 @@ class PlansManager
             {
                 let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
                 self.activities.insert(getFuelCard, at: 0)
-/*=======
-        if !Contact.main()!.hasFuel
-        {
-            print("ADDING FUEL ACTIVITIES")
-            //add get fuel card to both activities array and plans array
-            if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
-            {
-                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL, frequency: "", isLifestyleRecommendation: true)
-                self.activities.append(getFuelCard)
->>>>>>> develop*/
                 
                 //make it show up every day
                 let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
@@ -87,33 +110,18 @@ class PlansManager
                 // TODO: Fix
                 print("FUEL RECOMMENDATION DOESN'T EXISTS")
                 Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-                { result in
+                                                            { result in
                     ObjectStore.shared.serverSave(result)
                     self.addFuelActivities()
                     Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
                     NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
                 },
-                onFailure:
-                { error in
+                                                         onFailure:
+                                                            { error in
                     print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
                 })
             }
         }
-    }
-    
-    func removeOldFuelActivities()
-    {
-        //TODO: Remove old activities. 
-        /*do
-        {
-            try plans.removeAll(where: { Plan in
-                
-            })
-        }
-        catch
-        {
-            
-        }*/
     }
     
     func addPlans(plansToAdd: [Plan])

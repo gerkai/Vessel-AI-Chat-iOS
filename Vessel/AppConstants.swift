@@ -180,8 +180,8 @@ struct Constants
     static let WATER_LIFESTYLE_RECOMMENDATION_ID = 5
     static let CHART_Y_COORDINATE_FOR_BAD_DATA = -10.0 //far enough off chart to not plot visible dot
     
-    static let FUEL_AM_LIFESTYLE_RECOMMENDATION_ID = 11
-    static let FUEL_PM_LIFESTYLE_RECOMMENDATION_ID = 12
+    static let FUEL_AM_LIFESTYLE_RECOMMENDATION_ID = 14
+    static let FUEL_PM_LIFESTYLE_RECOMMENDATION_ID = 15
     static let GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID = 13
     
     //Common Strings
