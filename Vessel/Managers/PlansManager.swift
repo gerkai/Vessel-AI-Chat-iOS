@@ -108,12 +108,16 @@ class PlansManager
                 
                 //make it show up every day
                 let plan = Plan(type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                plans.append(plan)
+                if !plans.contains(where: { $0.id == -getFuelRecommendation.id })
+                {
+                    plans.append(plan)
+                }
             }
             else
             {
                 //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
                 // TODO: Fix
+                //CW: I think this section won't ever get called now as I fixed the race condition that was causing the objects to sometimes not be in the object store.
                 print("FUEL RECOMMENDATION DOESN'T EXISTS")
                 Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
                                                             { result in
