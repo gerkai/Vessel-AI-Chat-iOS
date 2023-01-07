@@ -199,16 +199,13 @@ class Contact: CoreObjectProtocol
         { status in            
             self.hasFuel = status.hasFuel
             self.completedQuiz = status.completedQuiz
-            if status.formula == .AM || status.formula == .AMPM
+            if (status.formula == .AM || status.formula == .AMPM)
             {
                 self.hasAMFormula = true
             }
-            else
+            if (status.formula == .PM || status.formula == .AMPM)
             {
-                if status.formula == .PM || status.formula == .AMPM
-                {
-                    self.hasPMFormula = true
-                }
+                self.hasPMFormula = true
             }
             //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
             done()
