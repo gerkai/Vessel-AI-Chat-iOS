@@ -36,7 +36,9 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>save a photo</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>save a photo</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

@@ -52,93 +52,120 @@ class PlansManager
     func addFuelActivities()
     {
         print("Adding fuel activities")
-        if Contact.main()!.hasFuel
+        if let fuelStatus = Contact.main()!.fuelStatus
         {
-            print("CONTACT HAS FUEL")
-            if let getAMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID)
+            if fuelStatus.hasFuel
             {
-                //Show the AM Fuel Supplement card
-                if Contact.main()!.hasAMFormula
+                print("CONTACT HAS FUEL")
+                if let getAMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID)
                 {
-                    let amFuelCard = Tip(id: -getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: getAMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                    if !activities.contains(where: { $0.id == -getAMFuelRecommendation.id })
+                    //Show the AM Fuel Supplement card
+                    if fuelStatus.hasAMFormula
                     {
-                        self.activities.append(amFuelCard)
-                    }
-                    
-                    //make it show up every day
-                    let plan = Plan(id: -getAMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                    if !plans.contains(where: { $0.id == -getAMFuelRecommendation.id })
-                    {
-                        plans.append(plan)
-                    }
-                }
-                
-                if let getPMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
-                {
-                    //Show the PM Fuel Supplement card
-                    if Contact.main()!.hasPMFormula
-                    {
-                        let pmFuelCard = Tip(id: -getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: getPMFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                        if !activities.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                        var amMessage: String?
+                        if let amCapsPerServing = fuelStatus.amCapsPerServing
                         {
-                            self.activities.append(pmFuelCard)
+                            if amCapsPerServing == 1
+                            {
+                                amMessage = NSLocalizedString("(1) capsule after first meal", comment: "")
+                            }
+                            else
+                            {
+                                amMessage = String(format: NSLocalizedString("(%i) capsules after first meal", comment: ""), amCapsPerServing)
+                            }
+                        }
+                        let amFuelCard = Tip(id: -getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: amMessage ?? "", isLifestyleRecommendation: true)
+                        if !activities.contains(where: { $0.id == -getAMFuelRecommendation.id })
+                        {
+                            self.activities.append(amFuelCard)
                         }
                         
                         //make it show up every day
-                        let plan = Plan(id: -getPMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                        if !plans.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                        let plan = Plan(id: -getAMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                        if !plans.contains(where: { $0.id == -getAMFuelRecommendation.id })
                         {
                             plans.append(plan)
                         }
                     }
+                    
+                    if let getPMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
+                    {
+                        //Show the PM Fuel Supplement card
+                        if fuelStatus.hasPMFormula
+                        {
+                            var pmMessage: String?
+                            if let pmCapsPerServing = fuelStatus.pmCapsPerServing
+                            {
+                                if pmCapsPerServing == 1
+                                {
+                                    pmMessage = NSLocalizedString("(1) capsule after last meal", comment: "")
+                                }
+                                else
+                                {
+                                    pmMessage = String(format: NSLocalizedString("(%i) capsules after last meal", comment: ""), pmCapsPerServing)
+                                }
+                            }
+                            let pmFuelCard = Tip(id: -getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: pmMessage ?? "", isLifestyleRecommendation: true)
+                            if !activities.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                            {
+                                self.activities.append(pmFuelCard)
+                            }
+                            
+                            //make it show up every day
+                            let plan = Plan(id: -getPMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                            if !plans.contains(where: { $0.id == -getPMFuelRecommendation.id })
+                            {
+                                plans.append(plan)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        print("Unable to get PM card from Object Store")
+                    }
                 }
                 else
                 {
-                    print("Unable to get PM card from Object Store")
+                    print("Unable to get AM card from Object Store")
                 }
             }
             else
             {
-                print("Unable to get AM card from Object Store")
-            }
-        }
-        else
-        {
-            print("CONTACT DOES NOT HAVE FUEL. Adding Get Supplement Plan card")
-            //add get fuel card to both activities array and plans array
-            if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
-            {
-                let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
-                if !activities.contains(where: { $0.id == getFuelRecommendation.id })
+                print("CONTACT DOES NOT HAVE FUEL. Adding Get Supplement Plan card")
+                //add get fuel card to both activities array and plans array
+                if let getFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
                 {
-                    activities.append(getFuelCard)
+                    let getFuelCard = Tip(id: getFuelRecommendation.id, last_updated: 0, title: getFuelRecommendation.title, description: getFuelRecommendation.description, imageUrl: getFuelRecommendation.imageURL ?? "", frequency: getFuelRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                    if !activities.contains(where: { $0.id == getFuelRecommendation.id })
+                    {
+                        activities.append(getFuelCard)
+                    }
+                    
+                    //make it show up every day
+                    let plan = Plan(id: getFuelRecommendation.id, type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                    if !plans.contains(where: { $0.id == getFuelRecommendation.id })
+                    {
+                        plans.append(plan)
+                    }
                 }
-                
-                //make it show up every day
-                let plan = Plan(id: getFuelRecommendation.id, type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
-                if !plans.contains(where: { $0.id == getFuelRecommendation.id })
+                else
                 {
-                    plans.append(plan)
+                    //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
+                    // TODO: Fix
+                    //CW: I think this section won't ever get called now as I fixed the race condition that was causing the objects to sometimes not be in the object store.
+                    print("FUEL RECOMMENDATION DOESN'T EXISTS")
+                    Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
+                                                                { result in
+                        ObjectStore.shared.serverSave(result)
+                        self.addFuelActivities()
+                        Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
+                        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
+                    },
+                                                             onFailure:
+                                                                { error in
+                        print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
+                    })
                 }
-            }
-            else
-            {
-                //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
-                // TODO: Fix
-                //CW: I think this section won't ever get called now as I fixed the race condition that was causing the objects to sometimes not be in the object store.
-                print("FUEL RECOMMENDATION DOESN'T EXISTS")
-                Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-                                                            { result in
-                    ObjectStore.shared.serverSave(result)
-                    self.addFuelActivities()
-                    Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
-                    NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-                },
-                                                         onFailure:
-                                                            { error in
-                    print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
-                })
             }
         }
     }

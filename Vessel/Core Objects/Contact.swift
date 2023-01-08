@@ -36,10 +36,7 @@ class Contact: CoreObjectProtocol
     var id: Int
     var last_updated: Int = 0
     var storage: StorageType = .cache
-    var hasFuel = false
-    var completedQuiz = false
-    var hasAMFormula = false
-    var hasPMFormula = false
+    var fuelStatus: FuelStatus?
     
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
@@ -196,17 +193,9 @@ class Contact: CoreObjectProtocol
     {
         //print("Get Fuel Status:")
         Server.shared.getFuel()
-        { status in            
-            self.hasFuel = status.hasFuel
-            self.completedQuiz = status.completedQuiz
-            if (status.formula == .AM || status.formula == .AMPM)
-            {
-                self.hasAMFormula = true
-            }
-            if (status.formula == .PM || status.formula == .AMPM)
-            {
-                self.hasPMFormula = true
-            }
+        { status in
+            self.fuelStatus = status
+            
             //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
             done()
         }

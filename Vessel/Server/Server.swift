@@ -95,6 +95,16 @@ struct ServerError
     var moreInfo: String?
 }
 
+struct FuelStatus
+{
+    let hasFuel: Bool
+    let completedQuiz: Bool
+    let hasAMFormula: Bool
+    let hasPMFormula: Bool
+    let amCapsPerServing: Int?
+    let pmCapsPerServing: Int?
+}
+
 // MARK: - Server Class
 class Server: NSObject
 {
@@ -1111,22 +1121,8 @@ class Server: NSObject
         }
     }
     
-    enum Formula
-    {
-        case AM
-        case PM
-        case AMPM
-        case none
-    }
-    
-    struct FuelStatus
-    {
-        let hasFuel: Bool
-        let completedQuiz: Bool
-        let formula: Formula //whether user has AM formula, PM formula or both (used for deciding to show AM/PM fuel cards on Today page)
-    }
-    
     //MARK:  Fuel
+    //tech debt: Create fuel object and decode json response below into that object
     func getFuel(onSuccess success: @escaping (_ status: FuelStatus) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
@@ -1140,16 +1136,28 @@ class Server: NSObject
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any]
                 {
-                    var formula: Formula = .none
+                    //var formula: Formula = .none
                     var completedQuiz = false
+                    var am = false
+                    var pm = false
+                    var amCapsules: Int?
+                    var pmCapsules: Int?
+                    
                     if let formulaObject = object["formula"] as? [String: Any]
                     {
                         completedQuiz = true
+                        if let amCapsulesPerServing = formulaObject["caps_per_serving"] as? Int
+                        {
+                            amCapsules = amCapsulesPerServing
+                        }
+                        if let pmCapsulesPerServing = formulaObject["pm_caps_per_serving"] as? Int
+                        {
+                            pmCapsules = pmCapsulesPerServing
+                        }
                         if let ingredientsArray = formulaObject["ingredients"] as? [[String: Any]]
                         {
                             print("Ingredients: \(ingredientsArray)")
-                            var am = false
-                            var pm = false
+                            
                             for ingredient in ingredientsArray
                             {
                                 if let timeOfDay = ingredient["time_of_day"] as? String
@@ -1164,31 +1172,13 @@ class Server: NSObject
                                     }
                                 }
                             }
-                            if am
-                            {
-                                if pm
-                                {
-                                    formula = .AMPM
-                                }
-                                else
-                                {
-                                    formula = .AM
-                                }
-                            }
-                            else
-                            {
-                                if pm
-                                {
-                                    formula = .PM
-                                }
-                            }
                         }
                     }
                     if let isActive = object["is_active"] as? Bool
                     {
                         DispatchQueue.main.async()
                         {
-                            let status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz, formula: formula)
+                            let status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz, hasAMFormula: am, hasPMFormula: pm, amCapsPerServing: amCapsules, pmCapsPerServing: pmCapsules)
                             success(status)
                         }
                     }
