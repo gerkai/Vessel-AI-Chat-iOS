@@ -94,7 +94,21 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     
     func openSupplementQuiz()
     {
-        Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+        Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
+        { url in
+            print("SUCCESS: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            self.present(vc, animated: true)
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
+    }
+    
+    func openFormulation()
+    {
+        Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
         { url in
             print("SUCCESS: \(url)")
             let vc = TodayWebViewController.initWith(url: url, delegate: self)
@@ -335,6 +349,10 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
                     openSupplementQuiz()
+                }
+                else if activity.isLifestyleRecommendation && ((activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID) || (activity.id == -Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID))
+                {
+                    openFormulation()
                 }
                 else if !activity.isLifestyleRecommendation
                 {
