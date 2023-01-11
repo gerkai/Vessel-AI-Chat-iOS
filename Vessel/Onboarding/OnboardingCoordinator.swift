@@ -64,6 +64,9 @@ class OnboardingCoordinator
         }
         Bugsee.setAttribute("contact_id", value: contact.id)
         
+        //setup for ReviewManager
+        ReviewManagerStart()
+        
         //if gender is nil, have user go through whole onboarding process
         if contact.gender == nil || contact.gender?.count == 0
         {

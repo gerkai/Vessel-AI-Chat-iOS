@@ -90,6 +90,11 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
                 ObjectStore.shared.clientSave(contact)
             }
         }
+        else
+        {
+            //prompt the user to rate their experience (if they haven't done so already)
+            ReviewManagerExperienceReview(presentOverVC: self)
+        }
     }
     
     func openSupplementQuiz()

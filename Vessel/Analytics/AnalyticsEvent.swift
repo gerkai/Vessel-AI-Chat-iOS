@@ -13,6 +13,9 @@ enum AnalyticsEvent
     case activityAdded(activityId: Int, activityName: String)
     case activityComplete(activityId: Int, activityName: String, completed: Bool)
     case activityShown(activityId: Int, activityName: String)
+    case appReviewComments(text: String)
+    case appReviewFeedback(text: String)
+    case appReviewGoToStore(value: Bool)
     case cancelButtonTapped
     case cameraOpened
     case continuePastTimer
@@ -46,6 +49,9 @@ enum AnalyticsEvent
         case .activityAdded: return "Activity Added"
         case .activityComplete: return "Activity Complete"
         case .activityShown: return "Activity Shown"
+        case .appReviewComments: return "App Review Comments"
+        case .appReviewFeedback: return "App Review Feedback"
+        case .appReviewGoToStore: return "App Review Go To Store"
         case .cancelButtonTapped: return "CANCEL TAKE TEST"
         case .cameraOpened: return "CAMERA OPENED"
         case .continuePastTimer: return "CONTINUE PAST TIMER"
@@ -89,6 +95,12 @@ enum AnalyticsEvent
         case .activityShown(let activityId, let activityName):
             return ["Activity ID": activityId,
                     "Activity Name": activityName]
+        case .appReviewComments(let text):
+            return ["text": text]
+        case .appReviewFeedback(let text):
+            return ["text": text]
+        case .appReviewGoToStore(let value):
+            return ["value": value]
         case .cancelButtonTapped:
             return [:]
         case .cameraOpened:
@@ -173,6 +185,7 @@ enum AnalyticsFlowName: String
     case resultsTabFlow = "Results Tab Flow"
     case takeTestFlow = "Take Test Flow"
     case todayTabFlow = "Today Tab Flow"
+    case appReviewFlow = "App Review Flow"
 }
 
 enum AnalyticsLoginType: String

@@ -137,8 +137,10 @@ struct Constants
     static let KEY_RESET_LESSON_PROGRESS = "KEY_RESET_LESSON_PROGRESS"
     static let KEY_NEW_LESSON_DAY = "KEY_NEW_LESSON_DAY"
     static let KEY_USE_MOCK_RESULTS = "KEY_USE_MOCK_RESULTS"
+    static let KEY_FORCE_APP_REVIEW = "KEY_FORCE_APP_REVIEW"
     static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     static let ALLOW_BUGSEE_KEY = "ALLOW_BUGSEE"
+    static let KEY_FIRST_LAUNCH_DATE = "KEY_FIRST_LAUNCH_DATE"
     
     //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001
@@ -164,6 +166,7 @@ struct Constants
     static let SAW_WELLNESS_POPUP           = 0x00100000
     static let SAW_COACH_POPUP              = 0x00200000
     static let SAW_REAGENT_POPUP            = 0x00400000
+    static let HAS_RATED_APP                = 0x00800000
     
     //Misc
     static let MAX_GOALS_AT_A_TIME = 3 /* max goals a user can select during onboarding */
