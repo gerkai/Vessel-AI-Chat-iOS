@@ -30,6 +30,8 @@ enum DebugMenuOption: Int
     case newDayForLesson
     case useMockResults
     
+    case forceAppReview
+    
     var title: String
     {
         switch self
@@ -54,6 +56,8 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return "Reset Lesson Progress"
             case .newDayForLesson: return "Make today a new lesson day"
             case .useMockResults: return "Use mock test results"
+            
+            case .forceAppReview: return "Force App Review"
         }
     }
     
@@ -85,6 +89,7 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
             case .newDayForLesson: return Constants.KEY_NEW_LESSON_DAY
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
+            case .forceAppReview: return Constants.KEY_FORCE_APP_REVIEW
         }
     }
     
@@ -166,6 +171,24 @@ enum DebugMenuOption: Int
             //force today tab to update
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
         }
+        else if self == .useMockResults
+        {
+            //force today and results tabs to update and show/hide blocker view if necessary
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
+        }
+        else if self == .forceAppReview
+        {
+            //set date in NSUserDefaults to be 12 days ago
+            let date = Calendar.current.date(byAdding: .day, value: -30, to: Date())
+            UserDefaults.standard.set(date, forKey: Constants.KEY_FIRST_LAUNCH_DATE)
+            
+            //clear app flag to allow review prompt to appear again for this user
+            if let contact = Contact.main()
+            {
+                contact.flags &= ~Constants.HAS_RATED_APP
+                ObjectStore.shared.clientSave(contact)
+            }
+        }
         else if let flag = flag
         {
             if isEnabled
@@ -179,11 +202,6 @@ enum DebugMenuOption: Int
             else
             {
                 UserDefaults.standard.set(true, forKey: flag)
-            }
-            if self == .useMockResults
-            {
-                //force today and results tabs to update and show/hide blocker view if necessary
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Result.self)])
             }
         }
         return shouldRefresh
@@ -210,6 +228,7 @@ class DebugMenuViewModel
         .eraseSteps,
         .resetLessonProgress,
         .newDayForLesson,
-        .useMockResults
+        .useMockResults,
+        .forceAppReview
     ]
 }

@@ -16,10 +16,10 @@ class SlideupViewController: UIViewController
     
     override func viewDidLoad()
     {
+        super.viewDidLoad()
         darkenView.alpha = 0.0
         originalBottom = popupBottom.constant
         popupBottom.constant = view.bounds.height + popupView.frame.height
-        super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool)
