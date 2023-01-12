@@ -10,7 +10,7 @@ import WebKit
 
 protocol TodayWebViewControllerDelegate: AnyObject
 {
-    func TodayWebViewDismissed()
+    func todayWebViewDismissed()
 }
 
 class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
@@ -40,7 +40,7 @@ class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
     
     @IBAction func done()
     {
-        delegate?.TodayWebViewDismissed()
+        delegate?.todayWebViewDismissed()
         dismiss(animated: true)
     }
     
