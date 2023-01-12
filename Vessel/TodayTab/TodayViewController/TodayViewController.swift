@@ -195,7 +195,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     }
     
     //MARK: - FUEL
-    func TodayWebViewDismissed()
+    func todayWebViewDismissed()
     {
         Contact.main()!.getFuelStatus
         {

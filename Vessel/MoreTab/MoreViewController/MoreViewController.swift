@@ -111,6 +111,17 @@ extension MoreViewController: UITableViewDelegate
             mainTabBarController?.vesselButtonPressed()
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
+        case .customSupplements:
+            Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+            { url in
+                print("SUCCESS: \(url)")
+                let vc = TodayWebViewController.initWith(url: url, delegate: self)
+                self.present(vc, animated: true)
+            }
+            onFailure:
+            { string in
+                print("Failure: \(string)")
+            }
         case .chatWithNutritionist:
             tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
         case .backedByScience:
@@ -155,5 +166,16 @@ extension MoreViewController: UITableViewDelegate
     {
         viewModel.removeDebugMenu()
         tableView.reloadData()
+    }
+}
+
+extension MoreViewController: TodayWebViewControllerDelegate
+{
+    func todayWebViewDismissed()
+    {
+        Contact.main()!.getFuelStatus
+        {
+            PlansManager.shared.loadPlans()
+        }
     }
 }
