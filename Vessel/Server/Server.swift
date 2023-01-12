@@ -24,7 +24,7 @@ let DEV_S3_BUCKET_NAME = "vessel-ips-dev-sample-images"
 let DEV_S3_ACCESSS_KEY = "AKIAW42KY3LBQXWJLT6K"
 let DEV_S3_SECRET_KEY = "r/h1g6XYMqFz5CkxroXUK0XS9mDV+QZWDzUr5umg"
 let DEV_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
-let DEV_FUEL_FORMULATION_PATH = "pages/fuel-formulation/?preview_theme_id=132393566394"
+let DEV_FUEL_FORMULATION_PATH = "pages/fuel-formulation" // /?preview_theme_id=132393566394"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
 //let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
