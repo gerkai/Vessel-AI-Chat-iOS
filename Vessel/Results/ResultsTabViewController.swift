@@ -103,6 +103,10 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
                 contact.flags |= Constants.SAW_COACH_POPUP
                 ObjectStore.shared.clientSave(contact)
             }
+            else
+            {
+                ReviewManagerExperienceReview(presentOverVC: self)
+            }
         }
     }
     

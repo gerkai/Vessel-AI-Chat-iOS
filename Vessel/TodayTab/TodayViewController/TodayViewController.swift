@@ -61,6 +61,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     override func viewDidAppear(_ animated: Bool)
     {
         guard let contact = Contact.main() else { return }
+        var canShowReview = true
         
         if contact.flags & Constants.SAW_INSIGHT_POPUP == 0
         {
@@ -69,6 +70,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
             
             contact.flags |= Constants.SAW_INSIGHT_POPUP
             ObjectStore.shared.clientSave(contact)
+            canShowReview = false
         }
         else if contact.flags & Constants.SAW_ACTIVITY_POPUP == 0
         {
@@ -84,13 +86,14 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
                     {
                         let vc = ActivityPopupViewController.createWith(plan: plans.first!)
                         self.present(vc, animated: false)
+                        canShowReview = false
                     }
                 }
                 contact.flags |= Constants.SAW_ACTIVITY_POPUP
                 ObjectStore.shared.clientSave(contact)
             }
         }
-        else
+        if canShowReview
         {
             //prompt the user to rate their experience (if they haven't done so already)
             ReviewManagerExperienceReview(presentOverVC: self)
