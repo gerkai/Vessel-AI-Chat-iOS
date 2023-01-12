@@ -185,6 +185,11 @@
 		3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */; };
 		3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEACB1E28FA073600686D79 /* ChartZone.xib */; };
 		3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB2028FA075F00686D79 /* ChartZone.swift */; };
+		3FEFDAED296E00C500A4FA2E /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAEC296E00C500A4FA2E /* ReviewViewController.swift */; };
+		3FEFDAEF296E00E200A4FA2E /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEFDAEE296E00E200A4FA2E /* Review.storyboard */; };
+		3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */; };
+		3FEFDAF3296E1BEE00A4FA2E /* AppReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF2296E1BEE00A4FA2E /* AppReviewViewController.swift */; };
+		3FEFDAF5296E266000A4FA2E /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF4296E266000A4FA2E /* FeedbackViewController.swift */; };
 		3FF45285291185C900B967CA /* MockResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45284291185C900B967CA /* MockResults.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */; };
@@ -496,6 +501,11 @@
 		3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentDetailsViewController.swift; sourceTree = "<group>"; };
 		3FEACB1E28FA073600686D79 /* ChartZone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartZone.xib; sourceTree = "<group>"; };
 		3FEACB2028FA075F00686D79 /* ChartZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartZone.swift; sourceTree = "<group>"; };
+		3FEFDAEC296E00C500A4FA2E /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		3FEFDAEE296E00E200A4FA2E /* Review.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Review.storyboard; sourceTree = "<group>"; };
+		3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		3FEFDAF2296E1BEE00A4FA2E /* AppReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewViewController.swift; sourceTree = "<group>"; };
+		3FEFDAF4296E266000A4FA2E /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		3FF45284291185C900B967CA /* MockResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResults.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsViewController.swift; sourceTree = "<group>"; };
@@ -951,6 +961,7 @@
 				3FD3BDBA295FB80D00AEF9C3 /* Objects */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				3F426DBD28DFA2FF00927B68 /* Results */,
+				3FEFDAEB296E00C500A4FA2E /* Review */,
 				3FE369A127C9A07E00231D42 /* SceneDelegate.swift */,
 				3F0547C727CA9FF1006E3098 /* Server */,
 				3F12F043287DCC6900FCC52E /* TakeTest */,
@@ -1082,6 +1093,18 @@
 				72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		3FEFDAEB296E00C500A4FA2E /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFDAF4296E266000A4FA2E /* FeedbackViewController.swift */,
+				3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */,
+				3FEFDAEC296E00C500A4FA2E /* ReviewViewController.swift */,
+				3FEFDAF2296E1BEE00A4FA2E /* AppReviewViewController.swift */,
+				3FEFDAEE296E00E200A4FA2E /* Review.storyboard */,
+			);
+			path = Review;
 			sourceTree = "<group>";
 		};
 		7206C4DD28837AE6000130DA /* Main */ = {
@@ -1608,6 +1631,7 @@
 				3FE369E327C9A74B00231D42 /* BananaGrotesk-Extralight.otf in Resources */,
 				3FE369E127C9A74B00231D42 /* BananaGrotesk-Regular.otf in Resources */,
 				3FE369E427C9A74B00231D42 /* BananaGrotesk-Bold.otf in Resources */,
+				3FEFDAEF296E00E200A4FA2E /* Review.storyboard in Resources */,
 				72E7FEC328F5CE3500F1A372 /* TodayTab.storyboard in Resources */,
 				3F59A18828E28715005E5F46 /* GoalLearnMoreTileView.xib in Resources */,
 				3F4A989D291AE0C70031B8B8 /* alarm.mp3 in Resources */,
@@ -1752,6 +1776,7 @@
 				3F9C67B628FF1C3900BC44FA /* SourceInfoView.swift in Sources */,
 				72BBD6962938284200D9EB5E /* TodayTextCell.swift in Sources */,
 				3F0547B127C9DB8F006E3098 /* DebugViewController.swift in Sources */,
+				3FEFDAED296E00C500A4FA2E /* ReviewViewController.swift in Sources */,
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
 				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
@@ -1813,6 +1838,7 @@
 				72BC2445292C93B1002F6DA2 /* LessonStepViewModel.swift in Sources */,
 				729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */,
 				7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */,
+				3FEFDAF5296E266000A4FA2E /* FeedbackViewController.swift in Sources */,
 				3FE369A027C9A07E00231D42 /* AppDelegate.swift in Sources */,
 				3F0547BD27C9F04D006E3098 /* UIViewControllerExtensions.swift in Sources */,
 				3F15ACEE2888659D004716CA /* MediaManager.swift in Sources */,
@@ -1925,6 +1951,7 @@
 				72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */,
 				725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
+				3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				72FCD54928F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift in Sources */,
@@ -1949,6 +1976,7 @@
 				3F12F019287B896A00FCC52E /* OnboardingFinalViewController.swift in Sources */,
 				3F9D6D852953432700664EA8 /* ActivityPopupViewController.swift in Sources */,
 				3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */,
+				3FEFDAF3296E1BEE00A4FA2E /* AppReviewViewController.swift in Sources */,
 				3F59A16028DFFA65005E5F46 /* ResultsTabViewModel.swift in Sources */,
 				3F9C67B228FE627B00BC44FA /* Sodium.swift in Sources */,
 				3F9D6D832952811000664EA8 /* InsightsPopupViewController.swift in Sources */,
@@ -2129,7 +2157,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2147,7 +2175,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.6;
+				MARKETING_VERSION = 3.0.7;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2164,7 +2192,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2182,7 +2210,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.6;
+				MARKETING_VERSION = 3.0.7;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
