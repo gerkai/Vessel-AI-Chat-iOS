@@ -36,6 +36,9 @@ class AppReviewViewController: SlideupViewController, VesselScreenIdentifiable
         let urlStr = "https://itunes.apple.com/app/id\(appId)?action=write-review"
         self.openInSafari(url: urlStr)
         analytics.log(event: .appReviewGoToStore(value: true))
+        dismissAnimation
+        {
+        }
     }
     
     @IBAction func onNoThanks()

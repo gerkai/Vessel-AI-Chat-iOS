@@ -385,8 +385,8 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
-        var captureTime = CACurrentMediaTime() - cameraOpenTime
-        var captureTimeMS = Int(captureTime * 1000.0)
+        let captureTime = CACurrentMediaTime() - cameraOpenTime
+        let captureTimeMS = Int(captureTime * 1000.0)
         analytics.log(event: .sampleImageCaptured(attemptTimeMs: captureTimeMS, cardUUID: viewModel.cardQRCode))
         print("DID FINISH CAPTURE")
         if error == nil
