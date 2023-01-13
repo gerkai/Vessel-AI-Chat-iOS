@@ -20,6 +20,8 @@ class KeyboardFriendlyViewController: UIViewController
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissKeyboard), name: UIApplication.willResignActiveNotification, object: nil)
+        
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")
@@ -73,5 +75,25 @@ class KeyboardFriendlyViewController: UIViewController
         // go through all of the textfield inside the view, and end editing thus resigning first responder
         // ie. it will trigger a keyboardWillHide notification
         self.view.endEditing(true)
+    }
+    
+    @objc func dismissKeyboard(_ notification: NSNotification)
+    {
+        resignFirstResponderToSubviews(view: self.view)
+    }
+    
+    func resignFirstResponderToSubviews(view: UIView)
+    {
+        for view in view.subviews
+        {
+            if let textField = view as? UITextField
+            {
+                textField.resignFirstResponder()
+            }
+            else
+            {
+                resignFirstResponderToSubviews(view: view)
+            }
+        }
     }
 }
