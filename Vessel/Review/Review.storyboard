@@ -201,7 +201,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qr8-Cr-Rh3">
                                 <rect key="frame" x="20" y="408" width="353" height="390"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy-unselected" translatesAutoresizingMaskIntoConstraints="NO" id="mOq-eN-XUC">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mOq-eN-XUC">
                                         <rect key="frame" x="136.66666666666666" y="20" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="4Yl-tQ-ean"/>
@@ -496,6 +496,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="happy-icon" width="80" height="80"/>
         <image name="happy-selected" width="82" height="82"/>
         <image name="happy-unselected" width="80" height="80"/>
         <image name="meh-selected" width="80" height="80"/>
