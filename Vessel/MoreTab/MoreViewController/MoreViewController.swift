@@ -112,7 +112,7 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
-            Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+            Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
             { url in
                 print("SUCCESS: \(url)")
                 let vc = TodayWebViewController.initWith(url: url, delegate: self)
