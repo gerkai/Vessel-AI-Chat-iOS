@@ -204,7 +204,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     @IBAction func onLooksGood()
     {
-        analytics.log(event: .sampleImageConfirmed)
+        analytics.log(event: .sampleImageConfirmed(cardUUID: viewModel.cardQRCode))
         UIApplication.shared.isIdleTimerDisabled = false
         let vc = viewModel.nextViewController()
         
