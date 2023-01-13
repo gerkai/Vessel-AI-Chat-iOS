@@ -26,6 +26,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     weak var clearTimer: Timer?
     var clearTimerCount = 0
     var holdStillTime: CFTimeInterval?
+    var cameraOpenTime: CFTimeInterval!
     
     override func viewDidLoad()
     {
@@ -115,6 +116,7 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        cameraOpenTime = CACurrentMediaTime()
         clearTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
         {
            _ in self.onTick()
@@ -383,7 +385,9 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?)
     {
-        analytics.log(event: .sampleImageCaptured)
+        var captureTime = CACurrentMediaTime() - cameraOpenTime
+        var captureTimeMS = Int(captureTime * 1000.0)
+        analytics.log(event: .sampleImageCaptured(attemptTimeMs: captureTimeMS, cardUUID: viewModel.cardQRCode))
         print("DID FINISH CAPTURE")
         if error == nil
         {

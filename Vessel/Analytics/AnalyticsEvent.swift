@@ -29,7 +29,7 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
-    case sampleImageCaptured
+    case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed
     case scanError(errorString: String)
     case signUp(loginType: AnalyticsLoginType)
@@ -137,8 +137,8 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
-        case .sampleImageCaptured:
-            return [:]
+        case .sampleImageCaptured(let captureTime, let cardUUID):
+            return ["attempt_time_ms": captureTime, "wellness_card_uuid": cardUUID]
         case .sampleImageConfirmed:
             return [:]
         case .scanError(let errorString):
