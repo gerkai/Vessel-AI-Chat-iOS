@@ -33,7 +33,7 @@ class GetSupplementsViewController: AfterTestMVVMViewController
     @IBAction func getSupplementPlan()
     {
         getSupplementsButton.showLoading()
-        Server.shared.multipassURL(path: FUEL_QUIZ_PATH)
+        Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
             print("SUCCESS: \(url)")
             self.openInSafari(url: url)
