@@ -112,15 +112,16 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
-            Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
-            { url in
-                print("SUCCESS: \(url)")
-                let vc = TodayWebViewController.initWith(url: url, delegate: self)
-                self.present(vc, animated: true)
-            }
-            onFailure:
-            { string in
-                print("Failure: \(string)")
+            if let fuelStatus = Contact.main()!.fuelStatus
+            {
+                if fuelStatus.hasFuel
+                {
+                    openFormulation()
+                }
+                else
+                {
+                    openSupplementQuiz()
+                }
             }
         case .chatWithNutritionist:
             tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
@@ -166,6 +167,34 @@ extension MoreViewController: UITableViewDelegate
     {
         viewModel.removeDebugMenu()
         tableView.reloadData()
+    }
+    
+    private func openSupplementQuiz()
+    {
+        Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
+        { url in
+            print("SUCCESS: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            self.present(vc, animated: true)
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
+    }
+    
+    private func openFormulation()
+    {
+        Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
+        { url in
+            print("SUCCESS: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            self.present(vc, animated: true)
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
     }
 }
 
