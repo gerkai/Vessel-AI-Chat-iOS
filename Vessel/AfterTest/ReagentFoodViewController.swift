@@ -58,11 +58,12 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         {
             guard let reagentID = Reagent.ID(rawValue: reagentId ?? -1),
                   let reagentName = Reagents[reagentID]?.name else { return }
-            subtitleLabel.text = "Looks like you already added all the foods for \(reagentName)"
+            
+            subtitleLabel.text = String(format: NSLocalizedString("Looks like you already added all the foods for %@", comment: ""), reagentName)
         }
         else
         {
-            subtitleLabel.text = "Choose up to 3 foods to add to your plan:"
+            subtitleLabel.text = NSLocalizedString("Choose up to 3 foods to add to your plan:", comment: "")
         }
     }
     
