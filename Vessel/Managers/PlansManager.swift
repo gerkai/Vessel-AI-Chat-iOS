@@ -174,6 +174,8 @@ class PlansManager
     {
         for plan in plansToAdd
         {
+            var plan = plan
+            plan.createdDate = Date.serverDateFormatter.string(from: Date())
             ObjectStore.shared.serverSave(plan, notifyNewDataArrived: plan == plansToAdd.last)
         }
         self.plans = Storage.retrieve(as: Plan.self)
@@ -185,16 +187,16 @@ class PlansManager
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
-        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
+        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil)
     }
     
     func removePlans(plansToRemove: [Plan])
     {
         for plan in plansToRemove
         {
-            ObjectStore.shared.removeFromCache(plan)
-            Storage.remove(plan.id, objectType: Plan.self)
-            plans.removeAll{$0.id == plan.id}
+            var plan = plan
+            plan.removedDate = Date.serverDateFormatter.string(from: Date())
+            ObjectStore.shared.clientSave(plan)
         }
         self.plans = Storage.retrieve(as: Plan.self)
         if plansToRemove.contains(where: { $0.type == .activity })
@@ -209,7 +211,7 @@ class PlansManager
         {
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
         }
-        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
+        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil)
     }
     
     func setPlanCompleted(planId: Int, date: String, isComplete: Bool)
@@ -389,11 +391,11 @@ extension PlansManager
         }
         else if plans[waterPlanIndex].completionInfo != nil
         {
-            plans[waterPlanIndex].completionInfo!.append(CompletionInfo(date: date, units: value))
+            plans[waterPlanIndex].completionInfo!.append(CompletionInfo(date: date, units: value, dailyWaterIntake: Contact.main()?.dailyWaterIntake))
         }
         else
         {
-            plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value)]
+            plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value, dailyWaterIntake: Contact.main()?.dailyWaterIntake)]
         }
         
         ObjectStore.shared.clientSave(plans[waterPlanIndex])
@@ -404,6 +406,6 @@ extension PlansManager
     {
         guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .lifestyleRecommendation }),
               plans[waterPlanIndex].completionInfo?.first(where: { $0.date == date }) == nil else { return }
-        plans[waterPlanIndex].completionInfo?.append(CompletionInfo(date: date, units: 0))
+        plans[waterPlanIndex].completionInfo?.append(CompletionInfo(date: date, units: 0, dailyWaterIntake: Contact.main()?.dailyWaterIntake))
     }
 }

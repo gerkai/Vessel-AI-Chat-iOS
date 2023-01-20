@@ -14,11 +14,13 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     private var checked: [Bool] = []
     private weak var delegate: FoodCheckmarkViewDelegate?
     var selectedDate: String = ""
+    var isToday: Bool = false
     
-    func setup(foods: [Food], selectedDate: String, delegate: FoodCheckmarkViewDelegate)
+    func setup(foods: [Food], selectedDate: String, isToday: Bool, delegate: FoodCheckmarkViewDelegate)
     {
         self.foods = foods
         self.selectedDate = selectedDate
+        self.isToday = isToday
         stackView.removeAllArrangedSubviews()
         
         for (i, food) in foods.enumerated()
@@ -50,11 +52,21 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     
     func updateCheckedFoods()
     {
+        let todayDate = Date.serverDateFormatter.string(from: Date())
         guard let contact = Contact.main() else { return }
-        checked = PlansManager.shared.getFoodPlans().filter
+        let foodPlans = PlansManager.shared.getFoodPlans().sorted(by: { $0.typeId < $1.typeId }).filter
         { plan in
-            contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
-        }.map({ $0.completed.contains(selectedDate) })
+            if isToday
+            {
+                return plan.removedDate == nil && contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
+            }
+            else
+            {
+                return selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate) && contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
+            }
+        }
+        
+        checked = foodPlans.map({ $0.completed.contains(selectedDate) })
         
         for (i, view) in stackView.arrangedSubviews.enumerated()
         {

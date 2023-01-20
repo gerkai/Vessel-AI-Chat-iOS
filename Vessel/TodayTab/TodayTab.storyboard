@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1225,6 +1225,7 @@ However, most people drink below what their body needs because it's hard to know
                         <outlet property="reagentsLabel" destination="tHB-tH-Vww" id="rLK-nW-1HJ"/>
                         <outlet property="reagentsStackView" destination="gZm-Yf-eCN" id="hs4-2G-6tB"/>
                         <outlet property="removeFromPlanButton" destination="se3-uW-g0W" id="9UV-Qb-im6"/>
+                        <outlet property="removePlanLayoutConstraint" destination="YLM-SO-feg" id="NRg-oY-gV7"/>
                         <outlet property="scrollView" destination="tgC-MZ-s97" id="c2y-oy-fZY"/>
                         <outlet property="subtitleLabel" destination="6SP-22-Ci4" id="xEY-0u-EFx"/>
                         <outlet property="titleLabel" destination="WW8-60-Pah" id="Plo-cv-drL"/>

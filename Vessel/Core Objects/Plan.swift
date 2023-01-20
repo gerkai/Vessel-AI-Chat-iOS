@@ -29,12 +29,15 @@ struct CompletionInfo: Codable, Equatable, Hashable
 {
     let date: String
     var units: Int
+    let dailyWaterIntake: Int?
 }
 
 struct Plan: CoreObjectProtocol, Codable, Equatable
 {
     let id: Int
     var last_updated: Int
+    var createdDate: String
+    var removedDate: String?
     let storage: StorageType = .disk
     var type: PlanType = .food
     var typeId: Int
@@ -50,6 +53,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     
     init(id: Int = 0,
          last_updated: Int = 0,
+         createdDate: String = "",
+         removedDate: String? = nil,
          type: PlanType = .food,
          typeId: Int = 0,
          completed: [String] = [],
@@ -60,6 +65,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     {
         self.id = id
         self.last_updated = last_updated
+        self.createdDate = createdDate
+        self.removedDate = removedDate
         self.type = type
         self.typeId = typeId
         self.completed = completed
@@ -72,6 +79,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     {
         case id
         case last_updated
+        case createdDate = "created_date"
+        case removedDate = "removed_date"
         case type
         case typeId = "type_id"
         case completed

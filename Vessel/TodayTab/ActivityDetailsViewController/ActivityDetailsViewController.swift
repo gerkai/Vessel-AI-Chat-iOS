@@ -21,9 +21,11 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var quantitiesLabel: UILabel?
     @IBOutlet private weak var reagentsStackView: UIStackView?
     @IBOutlet private weak var removeFromPlanButton: BounceButton!
+    @IBOutlet private weak var removePlanLayoutConstraint: NSLayoutConstraint!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
+    private var shouldShowRemovePlan: Bool = true
     
     // MARK: - Model
     private var viewModel: ActivityDetailsViewModel?
@@ -45,9 +47,10 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     }
     
     // MARK: - Initialization
-    func setup(model: ActivityDetailsModel)
+    func setup(model: ActivityDetailsModel, shouldShowRemovePlan: Bool = true)
     {
         viewModel = ActivityDetailsViewModel(model: model)
+        self.shouldShowRemovePlan = shouldShowRemovePlan
     }
     
     // MARK: - Actions
@@ -93,6 +96,10 @@ private extension ActivityDetailsViewController
         {
             reagentsStackView?.removeFromSuperview()
         }
+        removePlanLayoutConstraint.constant = shouldShowRemovePlan ? 128 : 0
+        removeFromPlanButton.isHidden = !shouldShowRemovePlan
+        scrollView.layoutIfNeeded()
+        
         guard let url = viewModel?.imageURL else { return }
         headerImageView.kf.setImage(with: url)
     }
