@@ -35,7 +35,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         
         //get notified when new foods, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAdded, object: nil)
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
@@ -260,7 +260,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             cell.setup(iconName: icon, title: name)
         case .foodDetails(let foods, let selectedDate):
             guard let cell = cell as? TodayFoodDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayFoodDetailsSectionTableViewCell from tableView in TodayViewController") }
-            cell.setup(foods: foods, selectedDate: selectedDate, isToday: viewModel.isToday, delegate: self)
+            cell.setup(foods: foods, selectedDate: selectedDate, delegate: self)
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
@@ -340,7 +340,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                     navigationController?.pushViewController(viewController, animated: true)
                 }
             }
-        case .activities(let activities, _, _):
+        case .activities(let activities, _):
             if indexPath.row == 0
             {
                 GenericAlertViewController.presentAlert(in: self, type:
@@ -350,30 +350,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                let todayDate = Date.serverDateFormatter.string(from: Date())
-                let activityPlans: [Plan]
-                if viewModel.isToday
-                {
-                    activityPlans = PlansManager.shared.getActivityPlans().filter({ $0.removedDate == nil })
-                }
-                else
-                {
-                    activityPlans = PlansManager.shared.getActivityPlans().filter({ viewModel.selectedDate >= $0.createdDate && viewModel.selectedDate < ($0.removedDate ?? todayDate) })
-                }
-                let plans: [Plan] = activityPlans + PlansManager.shared.getLifestyleRecommendationPlans()
+                let plans = PlansManager.shared.getActivityPlans() + PlansManager.shared.getLifestyleRecommendationPlans()
                 
-                guard let activity = activities.filter({ activity in
-                    plans.contains(where: { plan in
-                        if activity.isLifestyleRecommendation
-                        {
-                            return plan.typeId == activity.id && plan.type == .lifestyleRecommendation
-                        }
-                        else
-                        {
-                            return plan.typeId == activity.id && plan.type == .activity
-                        }
-                    })
-                })[safe: indexPath.row - 1 ],
+                guard let activity = activities[safe: indexPath.row - 1],
                       let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .lifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else { return }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
@@ -388,9 +367,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                     let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                     let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
                     activityDetailsVC.hidesBottomBarWhenPushed = true
-                    let planToRemove = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id && $0.removedDate == nil })
-                    activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id), shouldShowRemovePlan: planToRemove != nil)
-
+                    activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id))
                     analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
                     
                     navigationController?.pushViewController(activityDetailsVC, animated: true)
@@ -442,17 +419,7 @@ extension TodayViewController: FoodCheckmarkViewDelegate
 {
     func checkmarkTapped(view: FoodCheckmarkView)
     {
-        let todayDate = Date.serverDateFormatter.string(from: Date())
-        let foodPlans: [Plan]
-        if viewModel.isToday
-        {
-            foodPlans = PlansManager.shared.getFoodPlans().filter({ $0.removedDate == nil })
-        }
-        else
-        {
-            foodPlans = PlansManager.shared.getFoodPlans().filter({ viewModel.selectedDate >= $0.createdDate && viewModel.selectedDate < ($0.removedDate ?? todayDate) })
-        }
-
+        let foodPlans = PlansManager.shared.getFoodPlans()
         guard let plan = foodPlans.first(where: { $0.typeId == view.food?.id }) else { return }
         
         if let food = view.food
@@ -476,12 +443,11 @@ extension TodayViewController: FoodCheckmarkViewDelegate
     func checkmarkViewTapped(view: FoodCheckmarkView)
     {
         guard let food = view.food,
-              let plan = PlansManager.shared.getFoodPlans().first(where: { $0.typeId == food.id }) else { return }
+        let plan = PlansManager.shared.getFoodPlans().first(where: { $0.typeId == food.id }) else { return }
         let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
         let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
         activityDetailsVC.hidesBottomBarWhenPushed = true
-        let planToRemove = PlansManager.shared.getFoodPlans().first(where: { $0.typeId == food.id && $0.removedDate == nil })
-        activityDetailsVC.setup(model: food.getActivityDetailsModel(planId: planToRemove?.id ?? plan.id), shouldShowRemovePlan: planToRemove != nil)
+        activityDetailsVC.setup(model: food.getActivityDetailsModel(planId: plan.id))
         
         analytics.log(event: .foodShown(foodId: food.id, foodName: food.title))
         
@@ -543,17 +509,8 @@ extension TodayViewController: TodayCheckMarkCardDelegate
         }
         else if type == .activity
         {
-            let todayDate = Date.serverDateFormatter.string(from: Date())
             let activities = PlansManager.shared.activities
-            let activityPlans: [Plan]
-            if viewModel.isToday
-            {
-                activityPlans = PlansManager.shared.getActivityPlans().filter({ $0.removedDate == nil  })
-            }
-            else
-            {
-                activityPlans = PlansManager.shared.getActivityPlans().filter({ viewModel.selectedDate >= $0.createdDate && viewModel.selectedDate < ($0.removedDate ?? todayDate) })
-            }
+            let activityPlans = PlansManager.shared.getActivityPlans()
             guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
             
             if let activity = activities.first(where: { $0.id == plan.typeId })
@@ -601,7 +558,6 @@ extension TodayViewController: ProgressDayViewDelegate
     func onProgressDayTapped(date: String)
     {
         viewModel.selectedDate = date
-        viewModel.refreshContactSuggestedfoods()
         tableView.reloadData()
     }
 }

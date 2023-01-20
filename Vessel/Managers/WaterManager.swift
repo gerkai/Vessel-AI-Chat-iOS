@@ -59,7 +59,7 @@ class WaterManager
         {
             let waterPlan = Plan(type: .lifestyleRecommendation,
                                  typeId: Constants.WATER_LIFESTYLE_RECOMMENDATION_ID,
-                                 completionInfo: [CompletionInfo(date: todayString, units: 0, dailyWaterIntake: Contact.main()?.dailyWaterIntake)])
+                                 completionInfo: [CompletionInfo(date: todayString, units: 0)])
             Server.shared.addSinglePlan(plan: waterPlan) { addedPlan in
                 PlansManager.shared.addPlans(plansToAdd: [addedPlan])
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])

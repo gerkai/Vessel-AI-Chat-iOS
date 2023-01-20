@@ -15,7 +15,7 @@ extension Notification.Name
     //when new data arrives from back end, this notification gets sent with the CoreObject type. Interested parties
     //can update themselves. Used for updating the results tab when a new Result arrives.
     static let newDataArrived = Notification.Name("NewDataArrived")
-    static let newPlanAddedOrRemoved = Notification.Name("newPlanAddedOrRemoved")
+    static let newPlanAdded = Notification.Name("newPlanAdded")
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
     static let showSplashScreen = Notification.Name("ShowSplashScreen") //specify a bool object to show/hide

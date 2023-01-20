@@ -136,7 +136,7 @@ private extension ReadOnlyLessonStepViewController
                 {
                     let activityView = LessonStepActivityView(frame: .zero)
                     activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)
-                    if userPlans.contains(where: { $0.type == .activity && $0.typeId == activityId && $0.removedDate == nil })
+                    if userPlans.contains(where: { $0.type == .activity && $0.typeId == activityId })
                     {
                         activityView.setButtonText(addText: false)
                     }
@@ -184,7 +184,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
     
     func onActivityRemovedFromPlan(activityId: Int)
     {
-        guard let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activityId && $0.removedDate == nil }) else { return }
+        guard let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activityId}) else { return }
         Server.shared.removeSinglePlan(planId: plan.id)
         { [weak self] in
             guard let self = self else { return }

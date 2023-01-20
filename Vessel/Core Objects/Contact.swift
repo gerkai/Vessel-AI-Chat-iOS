@@ -70,13 +70,13 @@ class Contact: CoreObjectProtocol
         let storedFoods = Storage.retrieve(as: Food.self)
         
         let foodIds: [Int]
-        let foodPlans = PlansManager.shared.getFoodPlans().filter({ $0.removedDate == nil })
+        let foodPlans = PlansManager.shared.getFoodPlans()
         foodIds = foodPlans.map({ $0.typeId })
         
         let foods: [Food] = foodIds.compactMap({ foodId in
             return storedFoods.first(where: { $0.id == foodId })
         })
-        return foods.sorted(by: { $0.id < $1.id })
+        return foods
     }()
     
     @Resolved private var analytics: Analytics
@@ -252,21 +252,20 @@ class Contact: CoreObjectProtocol
     }
     
     // MARK: - Suggested Foods
-    func refreshSuggestedFoods(selectedDate: String, isToday: Bool)
+    func refreshSuggestedFoods()
     {
         suggestedFoods =
         {
-            let todayDate = Date.serverDateFormatter.string(from: Date())
             let storedFoods = Storage.retrieve(as: Food.self)
             let foodIds: [Int]
             
-            let foodPlans = PlansManager.shared.getFoodPlans().filter({ isToday ? $0.removedDate == nil : (selectedDate >= $0.createdDate && selectedDate < ($0.removedDate ?? todayDate)) })
+            let foodPlans = PlansManager.shared.getFoodPlans()
             foodIds = foodPlans.map({ $0.typeId })
             
             let foods: [Food] = foodIds.compactMap({ foodId in
                 return storedFoods.first(where: { $0.id == foodId })
             })
-            return foods.sorted(by: { $0.id < $1.id })
+            return foods
         }()
     }
     

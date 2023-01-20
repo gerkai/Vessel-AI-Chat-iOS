@@ -9,39 +9,27 @@ import UIKit
 
 protocol DebugMenuCellDelegate: AnyObject
 {
-    func onToggle(_ value: Bool, tag: Int, textFieldValue: String?)
+    func onToggle(_ value: Bool, tag: Int)
 }
 
 class DebugMenuCell: UITableViewCell
 {
     // MARK: - View
-    @IBOutlet weak var textField: UITextField!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet weak var switchToggle: UISwitch!
     private var delegate: DebugMenuCellDelegate?
     
     // MARK: - Methods
-    func setup(title: String, turnedOn: Bool, showTextField: Bool = false, delegate: DebugMenuCellDelegate)
+    func setup(title: String, turnedOn: Bool, delegate: DebugMenuCellDelegate)
     {
         titleLabel.text = title
         switchToggle.isOn = turnedOn
-        textField.isHidden = !showTextField
-        textField.delegate = self
         self.delegate = delegate
     }
     
     // MARK: - Actions
     @IBAction func onSwitchToggle()
     {
-        delegate?.onToggle(switchToggle.isOn, tag: tag, textFieldValue: textField.text)
-    }
-}
-
-extension DebugMenuCell: UITextFieldDelegate
-{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        return true
+        delegate?.onToggle(switchToggle.isOn, tag: tag)
     }
 }

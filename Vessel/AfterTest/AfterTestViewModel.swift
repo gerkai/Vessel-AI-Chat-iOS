@@ -45,7 +45,7 @@ class AfterTestViewModel
     var currentScreen: Int = -1
     var contactFlags: Int = 0
     var screens: [AfterTestScreen] = []
-    var selectedFoodIds: [Int] = PlansManager.shared.getFoodPlans().filter({ $0.removedDate == nil }).map({ $0.typeId })//Contact.main()!.suggestedFoods.compactMap({ $0.id })
+    var selectedFoodIds: [Int] = Contact.main()!.suggestedFoods.compactMap({ $0.id })
     var newSelectedFoods: [ReagentFood] = []
     var suggestedFoods: [ReagentFood] = []
     var isHydroLow: Bool = true
@@ -630,7 +630,7 @@ class AfterTestViewModel
     
     func refreshSelectedFoods()
     {
-        selectedFoodIds = PlansManager.shared.getFoodPlans().filter({ $0.removedDate == nil }).map({ $0.typeId })
+        selectedFoodIds = PlansManager.shared.getFoodPlans().map({ $0.typeId })
     }
     
     // MARK: - Water
@@ -662,7 +662,7 @@ class AfterTestViewModel
         WaterManager.shared.createWaterPlanIfNeeded()
         
         Log_Add("setDailyWaterIntake() - post .newDataArrived: Plan")
-        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil, userInfo: [:])
+        NotificationCenter.default.post(name: .newPlanAdded, object: nil, userInfo: [:])
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
 }

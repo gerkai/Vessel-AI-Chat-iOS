@@ -54,7 +54,7 @@ extension DebugMenuViewController: UITableViewDelegate, UITableViewDataSource
             return UITableViewCell()
         }
         
-        cell.setup(title: option.title, turnedOn: option.isEnabled, showTextField: option.showTextField, delegate: self)
+        cell.setup(title: option.title, turnedOn: option.isEnabled, delegate: self)
         cell.tag = option.rawValue
         return cell
     }
@@ -62,10 +62,10 @@ extension DebugMenuViewController: UITableViewDelegate, UITableViewDataSource
 
 extension DebugMenuViewController: DebugMenuCellDelegate
 {
-    func onToggle(_ value: Bool, tag: Int, textFieldValue: String?)
+    func onToggle(_ value: Bool, tag: Int)
     {
         guard let option = DebugMenuOption(rawValue: tag) else { return }
-        if option.toggle(value: textFieldValue) == true
+        if option.toggle() == true
         {
             delegate?.refresh()
         }

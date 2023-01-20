@@ -19,7 +19,7 @@ enum TodayViewSection: Equatable
     case header(name: String, goals: [String])
     case progressDays(progress: [String: Double])
     case insights(insights: [Lesson], isToday: Bool)
-    case activities(activities: [Tip], selectedDate: String, isToday: Bool)
+    case activities(activities: [Tip], selectedDate: String)
     case food(foods: [Food], selectedDate: String)
     case water(glassesNumber: Int?, checkedGlasses: Int)
     //case customize
@@ -46,7 +46,7 @@ enum TodayViewSection: Equatable
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         case .progressDays(let progress): return createProgressDaySection(progress: progress)
         case .insights(let lessons, let isToday): return createInsightsSection(lessons: lessons, isToday: isToday)
-        case .activities(let activities, let selectedDate, let isToday): return createActivitiesSection(activities: activities, selectedDate: selectedDate, isToday: isToday)
+        case .activities(let activities, let selectedDate): return createActivitiesSection(activities: activities, selectedDate: selectedDate)
         case .food(let foods, let selectedDate): return createFoodSection(foods: foods, selectedDate: selectedDate)
         case .water(let glassesNumber, let checkedGlasses): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
         case .footer: return [.footer]
@@ -105,9 +105,8 @@ enum TodayViewSection: Equatable
         return cells
     }
     
-    func createActivitiesSection(activities: [Tip], selectedDate: String, isToday: Bool) -> [TodayViewCell]
+    func createActivitiesSection(activities: [Tip], selectedDate: String) -> [TodayViewCell]
     {
-        let todayDate = Date.serverDateFormatter.string(from: Date())
         guard activities.count > 0 else { return [] }
         var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities")]
         for activity in activities
@@ -119,34 +118,24 @@ enum TodayViewSection: Equatable
             }
             else
             {
-                if isToday
-                {
-                    plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id && $0.removedDate == nil  })
-                }
-                else
-                {
-                    plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id && selectedDate >= $0.createdDate && selectedDate < ($0.removedDate ?? todayDate)  })
-                }
+                plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
             }
             
-            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
+            if (plan?.completed ?? []).contains(selectedDate)
             {
-                if plan.completed.contains(selectedDate)
-                {
-                    cells.append(.foldedCheckMarkCard(title: activity.title,
-                                                      subtitle: "",
-                                                      backgroundImage: activity.imageUrl))
-                }
-                else
-                {
-                    cells.append(.checkMarkCard(title: activity.title,
-                                                subtitle: activity.frequency,
-                                                description: activity.description ?? "",
-                                                backgroundImage: activity.imageUrl,
-                                                isCompleted: false,
-                                                id: activity.id,
-                                                type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity))
-                }
+                cells.append(.foldedCheckMarkCard(title: activity.title,
+                                                  subtitle: "",
+                                                  backgroundImage: activity.imageUrl))
+            }
+            else
+            {
+                cells.append(.checkMarkCard(title: activity.title,
+                                            subtitle: activity.frequency,
+                                            description: activity.description ?? "",
+                                            backgroundImage: activity.imageUrl,
+                                            isCompleted: false,
+                                            id: activity.id,
+                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity))
             }
         }
         return cells
@@ -307,10 +296,10 @@ class TodayViewModel
         let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
-        }).sorted(by: { $0.id < $1.id }) : []
+        }) : []
         let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
-        }).sorted(by: { $0.id < $1.id }) : []
+        }) : []
         let foods = showFoods ? contact.suggestedFoods : []
         let dailyWaterIntake = showWater ? contact.dailyWaterIntake : nil
         
@@ -318,7 +307,7 @@ class TodayViewModel
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .progressDays(progress: progressDays),
             .insights(insights: lessons, isToday: self.isToday),
-            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate, isToday: self.isToday),
+            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate),
             .food(foods: foods, selectedDate: selectedDate),
             .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses),
             .footer
@@ -349,7 +338,7 @@ class TodayViewModel
     
     func refreshContactSuggestedfoods()
     {
-        contact.refreshSuggestedFoods(selectedDate: selectedDate, isToday: isToday)
+        contact.refreshSuggestedFoods()
     }
     
     func refreshLastWeekProgress()
