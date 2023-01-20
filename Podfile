@@ -15,6 +15,7 @@ def pods
   pod 'lottie-ios', '3.5.0'
   pod 'Mixpanel-swift'
   pod 'FirebaseRemoteConfig'
+  pod 'FirebaseDynamicLinks'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'SwiftLint'
   pod 'SwiftyMarkdown'

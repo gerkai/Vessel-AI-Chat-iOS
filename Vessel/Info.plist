@@ -36,6 +36,19 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
+    <false/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.vesselhealth.vessel-ios</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>vessel</string>
+            </array>
+        </dict>
+    </array>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>save a photo</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

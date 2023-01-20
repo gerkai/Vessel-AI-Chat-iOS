@@ -47,6 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    /*func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
+    {
+        let handled = DynamicLinks.dynamicLinks()
+            .handleUniversalLink(userActivity.webpageURL!) { dynamiclink, error in
+              // ...
+            }
+
+          return handled
+    }
+    */
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>)
     {
         // Called when the user discards a scene session.
@@ -66,6 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         Log_Save()
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool
+    {
+        Log_Add("Open URL: \(url), options:\(options)")
+        return true
+    }
+
     func launchBugsee()
     {
         //launch bugsee if we're in dev or staging. If we're in prod, only launch bugsee if ALLOW_BUGSEE key has been set.
@@ -137,37 +153,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         CoreLogger.logLevel = .debug
     }
 }
-
-/*
-//MARK: - Bugsee
-extension AppDelegate
-{
-    func launchBugsee()
-    {
-        if !Constants.isProdMode
-        {
-            Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
-            if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
-            {
-                Bugsee.setEmail(userEmail)
-                Bugsee.setAttribute("contact_id", value: contactId)
-            }
-            
-        }
-        else if let savedBugseeDateString = UserDefaults.standard.value(forKey: UserDefaultsKeys.bugseeDate.rawValue) as? String
-        {
-            let bugseeDate = savedBugseeDateString.toDate("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-            let daysSinceSaving = Calendar.current.dateComponents([.day], from: bugseeDate, to: Date()).day
-            if daysSinceSaving! <= 30
-            {
-                Bugsee.launch(token: Constants.bugseeKey, options: [BugseeCrashReportKey: false])
-                if let userEmail = UserManager.shared.contact?.email, let contactId = UserManager.shared.contact?.id
-                {
-                    Bugsee.setEmail(userEmail)
-                    Bugsee.setAttribute("contact_id", value: contactId)
-                }
-            }
-        }
-    }
-}
-*/
