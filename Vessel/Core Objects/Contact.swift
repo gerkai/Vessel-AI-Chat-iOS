@@ -32,6 +32,7 @@ class Contact: CoreObjectProtocol
 {
     static var MainID: Int = 0
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
+    static var PractitionerID: Int? //temporary place to hold pa_id after app starts up but before user logged in. Set by app delegate
     
     var id: Int
     var last_updated: Int = 0
@@ -61,6 +62,7 @@ class Contact: CoreObjectProtocol
     var allergy_ids: [Int]
     var goal_ids: [Int]
     var expert_id: Int?
+    var pa_id: Int?
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
     var dailyWaterIntake: Int?
@@ -118,6 +120,7 @@ class Contact: CoreObjectProtocol
          allergy_ids: [Int] = [],
          goal_ids: [Int] = [],
          expert_id: Int? = nil,
+         pa_id: Int? = nil,
          loginType: LoginType? = nil,
          dailyWaterIntake: Int? = nil
     )
@@ -137,6 +140,7 @@ class Contact: CoreObjectProtocol
         self.allergy_ids = allergy_ids
         self.goal_ids = goal_ids
         self.expert_id = expert_id
+        self.pa_id = pa_id
         self.loginType = loginType
         self.dailyWaterIntake = dailyWaterIntake
     }
@@ -158,6 +162,7 @@ class Contact: CoreObjectProtocol
         self.allergy_ids = contact.allergy_ids
         self.goal_ids = contact.goal_ids
         self.expert_id = contact.expert_id
+        self.pa_id = contact.pa_id
         self.loginType = contact.loginType
         self.dailyWaterIntake = contact.dailyWaterIntake
     }
@@ -215,13 +220,14 @@ class Contact: CoreObjectProtocol
         case height
         case weight
         case birth_date
+        case email
         case flags = "app_flags"
         case _enrolled_program_ids = "enrolled_program_ids"
         case diet_ids
         case allergy_ids
         case goal_ids
-        case email
         case expert_id
+        case pa_id
         case dailyWaterIntake = "daily_water_intake_glasses"
     }
     

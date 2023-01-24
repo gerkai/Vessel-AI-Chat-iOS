@@ -73,6 +73,15 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
         {
             let contact = Contact.main()!
             contact.loginType = self.loginType
+            
+            //handle practitioner attribution
+            if let id = Contact.PractitionerID
+            {
+                Log_Add("loadContact: Setting attribution: \(id)")
+                contact.pa_id = id
+                Contact.PractitionerID = nil
+            }
+            
             ObjectStore.shared.serverSave(contact)
 
             if contact.isBrandNew()

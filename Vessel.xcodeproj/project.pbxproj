@@ -190,6 +190,7 @@
 		3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */; };
 		3FEFDAF3296E1BEE00A4FA2E /* AppReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF2296E1BEE00A4FA2E /* AppReviewViewController.swift */; };
 		3FEFDAF5296E266000A4FA2E /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF4296E266000A4FA2E /* FeedbackViewController.swift */; };
+		3FEFDAF9297CC36C00A4FA2E /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */; };
 		3FF45285291185C900B967CA /* MockResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF45284291185C900B967CA /* MockResults.swift */; };
 		3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF833AC28A1AD4D005D5B43 /* Reachability.swift */; };
 		3FF8C57029031A58001643C1 /* GoalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */; };
@@ -406,6 +407,7 @@
 		3F4A989C291AE0C70031B8B8 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		3F4C59472877CE6B0088F03A /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		3F4C59492877CEC10088F03A /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
+		3F57AB5A297F0E6E00DB5F4F /* Vessel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vessel.entitlements; sourceTree = "<group>"; };
 		3F59A15728DFD750005E5F46 /* WellnessScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessScoreViewController.swift; sourceTree = "<group>"; };
 		3F59A15B28DFF24B005E5F46 /* ReagentScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReagentScoreView.xib; sourceTree = "<group>"; };
 		3F59A15D28DFF269005E5F46 /* ReagentScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentScoreView.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 		3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		3FEFDAF2296E1BEE00A4FA2E /* AppReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewViewController.swift; sourceTree = "<group>"; };
 		3FEFDAF4296E266000A4FA2E /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		3FF45284291185C900B967CA /* MockResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResults.swift; sourceTree = "<group>"; };
 		3FF833AC28A1AD4D005D5B43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3FF8C56F29031A58001643C1 /* GoalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsViewController.swift; sourceTree = "<group>"; };
@@ -677,6 +680,7 @@
 				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
 				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
+				3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -943,6 +947,7 @@
 		3FE3699E27C9A07E00231D42 /* Vessel */ = {
 			isa = PBXGroup;
 			children = (
+				3F57AB5A297F0E6E00DB5F4F /* Vessel.entitlements */,
 				3F15AD07288DC87C004716CA /* AfterTest */,
 				72D4FC0D287D2CD400EA2EA3 /* Analytics */,
 				3FE3699F27C9A07E00231D42 /* AppDelegate.swift */,
@@ -1910,6 +1915,7 @@
 				72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */,
 				3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */,
 				72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */,
+				3FEFDAF9297CC36C00A4FA2E /* URLExtensions.swift in Sources */,
 				72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */,
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */,
@@ -2156,6 +2162,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
@@ -2191,6 +2198,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
