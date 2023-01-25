@@ -162,7 +162,7 @@ enum TodayViewSection: Equatable
         {
             return [
                 .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: "")),
-                .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get personalized water recommendations", comment: ""))
+                .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get precise hydration recommendations", comment: ""))
             ]
         }
         return [
