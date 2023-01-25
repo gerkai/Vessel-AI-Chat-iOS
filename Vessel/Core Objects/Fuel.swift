@@ -13,11 +13,11 @@ struct Expert: Decodable
     let download_url: String?
     let business_name: String?
     let description: String?
-    let contact_id: Int
+    let contact_id: Int?
     let phone_number: String?
     let expert_uuid: String
-    let last_name: String
-    let first_name: String
+    let last_name: String?
+    let first_name: String?
     let business_address: String?
     let image_url: String?
     
@@ -38,11 +38,11 @@ struct Expert: Decodable
 
 struct Ingredient: Decodable
 {
-    let name: String
-    let dosage: String //cw should this be a Double instead?
-    let time_of_day: String
+    let name: String?
+    let dosage: String
+    let time_of_day: String?
     let mil_id: String
-    let description: String
+    let description: String?
     let unit: String
 }
 
@@ -56,7 +56,7 @@ struct Formula: Decodable
     let weight: Double
     let capsules: Int
     let days_supply: Int
-    let monthly_retail_price: String //cw should this be a Double instead?
+    let monthly_retail_price: String
     let pm_capsules: Int
     let total_bottles: Int
     let kind: String
