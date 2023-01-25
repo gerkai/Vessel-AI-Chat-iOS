@@ -112,9 +112,9 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
-            if let fuelStatus = Contact.main()!.fuelStatus
+            if let fuel = Contact.main()!.fuel
             {
-                if fuelStatus.hasFuel
+                if fuel.is_active
                 {
                     openFormulation()
                 }
@@ -202,7 +202,7 @@ extension MoreViewController: TodayWebViewControllerDelegate
 {
     func todayWebViewDismissed()
     {
-        Contact.main()!.getFuelStatus
+        Contact.main()!.getFuel
         {
             PlansManager.shared.loadPlans()
         }

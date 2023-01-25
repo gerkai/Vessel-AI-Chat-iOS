@@ -106,6 +106,7 @@ class AfterTestMVVMViewController: UIViewController
         else if result.type == .dismiss
         {
             //also called in ResultsViewController
+            PlansManager.shared.loadPlans() //so supplement card will appear if it wasn't previously shown
             NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
             dismiss(animated: true)
         }

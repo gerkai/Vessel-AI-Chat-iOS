@@ -99,16 +99,6 @@ struct ServerError
     var moreInfo: String?
 }
 
-struct FuelStatus
-{
-    let hasFuel: Bool
-    let completedQuiz: Bool
-    let hasAMFormula: Bool
-    let hasPMFormula: Bool
-    let amCapsPerServing: Int?
-    let pmCapsPerServing: Int?
-}
-
 // MARK: - Server Class
 class Server: NSObject
 {
@@ -560,7 +550,12 @@ class Server: NSObject
     func multipassURL(path: String, onSuccess success: @escaping (_ url: String) -> Void, onFailure failure: @escaping (_ string: String) -> Void)
     {
         var dictPostBody = [String: String]()
-        dictPostBody["path"] = path + "?token=\(accessToken!)"
+        var scaRef = ""
+        if let urlCode = Contact.main()!.fuel?.url_code
+        {
+            scaRef = "&" + urlCode
+        }
+        dictPostBody["path"] = path + "?token=\(accessToken!)" + scaRef
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(MULTIPASS_PATH)")
         { object in
@@ -1155,7 +1150,7 @@ class Server: NSObject
     
     //MARK:  Fuel
     //tech debt: Create fuel object and decode json response below into that object
-    func getFuel(onSuccess success: @escaping (_ status: FuelStatus) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
+    func getFuel(onSuccess success: @escaping (_ fuelObject: Fuel) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
         let request = Server.shared.GenerateRequest(urlString: urlString)!
@@ -1164,74 +1159,14 @@ class Server: NSObject
         { data in
             do
             {
-                //parse formula ingredients to determine if user has AM supplements, PM supplements or both
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                if let object = json as? [String: Any]
-                {
-                    //var formula: Formula = .none
-                    var completedQuiz = false
-                    var am = false
-                    var pm = false
-                    var amCapsules: Int?
-                    var pmCapsules: Int?
-                    
-                    if let formulaObject = object["formula"] as? [String: Any]
-                    {
-                        completedQuiz = true
-                        if let amCapsulesPerServing = formulaObject["caps_per_serving"] as? Int
-                        {
-                            amCapsules = amCapsulesPerServing
-                        }
-                        if let pmCapsulesPerServing = formulaObject["pm_caps_per_serving"] as? Int
-                        {
-                            pmCapsules = pmCapsulesPerServing
-                        }
-                        if let ingredientsArray = formulaObject["ingredients"] as? [[String: Any]]
-                        {
-                            print("Ingredients: \(ingredientsArray)")
-                            
-                            for ingredient in ingredientsArray
-                            {
-                                if let timeOfDay = ingredient["time_of_day"] as? String
-                                {
-                                    if timeOfDay == "AM"
-                                    {
-                                        am = true
-                                    }
-                                    if timeOfDay == "PM"
-                                    {
-                                        pm = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if let isActive = object["is_active"] as? Bool
-                    {
-                        DispatchQueue.main.async()
-                        {
-                            let status = FuelStatus(hasFuel: isActive, completedQuiz: completedQuiz, hasAMFormula: am, hasPMFormula: pm, amCapsPerServing: amCapsules, pmCapsPerServing: pmCapsules)
-                            success(status)
-                        }
-                    }
-                    else
-                    {
-                        DispatchQueue.main.async()
-                        {
-                            failure(self.fuelError())
-                        }
-                    }
-                }
-                else
-                {
-                    DispatchQueue.main.async()
-                    {
-                        failure(self.fuelError())
-                    }
-                }
+                let decoder = JSONDecoder()
+                let decodedFuel = try decoder.decode(Fuel.self, from: data)
+                //print("Decoded Fuel: \(decodedFuel)")
+                success(decodedFuel)
             }
             catch
             {
+                print(error)
                 DispatchQueue.main.async()
                 {
                     failure(self.fuelError())

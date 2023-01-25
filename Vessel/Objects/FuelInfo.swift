@@ -4,22 +4,10 @@
 //
 //  Created by Carson Whitsett on 12/30/22.
 //
-
+/*
 import Foundation
 
-struct Ingredient: Codable
-{
-    let name: String
-    let dosage: Double
-    let time_of_day: String
-    let mil_id: String
-}
 
-struct Formula: Codable
-{
-    let ingredients: [Ingredient]
-    let id: Int
-}
 
 struct FuelInfo: Codable
 {
@@ -30,3 +18,4 @@ struct FuelInfo: Codable
     let updated_at: String
     let formula: Formula
 }
+*/

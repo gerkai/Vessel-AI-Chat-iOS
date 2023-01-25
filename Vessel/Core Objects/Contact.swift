@@ -37,7 +37,7 @@ class Contact: CoreObjectProtocol
     var id: Int
     var last_updated: Int = 0
     var storage: StorageType = .cache
-    var fuelStatus: FuelStatus?
+    var fuel: Fuel?
     
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
@@ -194,12 +194,12 @@ class Contact: CoreObjectProtocol
         return false
     }
     
-    func getFuelStatus(onDone done: @escaping () -> Void)
+    func getFuel(onDone done: @escaping () -> Void)
     {
         //print("Get Fuel Status:")
         Server.shared.getFuel()
-        { status in
-            self.fuelStatus = status
+        { fuel in
+            self.fuel = fuel
             
             //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
             done()

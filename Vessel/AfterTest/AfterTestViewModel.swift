@@ -119,8 +119,8 @@ class AfterTestViewModel
         }
         //find out if user already is enrolled in a supplement plan or not.
         Server.shared.getFuel()
-        { status in
-            self.hasSupplementPlan = status.hasFuel
+        { fuel in
+            self.hasSupplementPlan = fuel.is_active
         }
         onFailure:
         { error in

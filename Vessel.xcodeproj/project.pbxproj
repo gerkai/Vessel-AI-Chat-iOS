@@ -82,6 +82,7 @@
 		3F28232A2944021200CB3844 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2823292944021200CB3844 /* SplashView.swift */; };
 		3F28232C2944022500CB3844 /* SplashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F28232B2944022500CB3844 /* SplashView.xib */; };
 		3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */; };
+		3F3FCA15298096080010B111 /* Fuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3FCA14298096080010B111 /* Fuel.swift */; };
 		3F426DB728DFA1CA00927B68 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */; };
 		3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB428DFA1CA00927B68 /* GraphView.swift */; };
 		3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F426DB528DFA1CA00927B68 /* ChartView.swift */; };
@@ -393,6 +394,7 @@
 		3F28232B2944022500CB3844 /* SplashView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashView.xib; sourceTree = "<group>"; };
 		3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vessel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3E113727F77CE00089BA6A /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
+		3F3FCA14298096080010B111 /* Fuel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fuel.swift; sourceTree = "<group>"; };
 		3F426DB328DFA1CA00927B68 /* ChartViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		3F426DB428DFA1CA00927B68 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		3F426DB528DFA1CA00927B68 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 				72461EEE2924AAA500A85AE5 /* Curriculum.swift */,
 				3F13A7912877BEA200C74FB9 /* Diet.swift */,
 				72332FAF28EE8D94008CBA8C /* Food.swift */,
+				3F3FCA14298096080010B111 /* Fuel.swift */,
 				3F12F010287B4C0600FCC52E /* Goal.swift */,
 				7215E9562893ADB100C22A24 /* HeightComponents.swift */,
 				72461EF02924AD7500A85AE5 /* Lesson.swift */,
@@ -1957,6 +1960,7 @@
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
 				3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
+				3F3FCA15298096080010B111 /* Fuel.swift in Sources */,
 				3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */,
 				72FCD54928F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift in Sources */,
 				3F9CB7B828C7F7410093228E /* CropFailureSlideupViewController.swift in Sources */,
@@ -2160,7 +2164,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
@@ -2196,7 +2199,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
