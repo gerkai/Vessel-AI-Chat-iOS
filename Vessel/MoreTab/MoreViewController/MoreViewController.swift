@@ -123,6 +123,10 @@ extension MoreViewController: UITableViewDelegate
                     openSupplementQuiz()
                 }
             }
+            else
+            {
+                openSupplementQuiz()
+            }
         case .chatWithNutritionist:
             tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
         case .backedByScience:
