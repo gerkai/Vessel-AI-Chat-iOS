@@ -108,7 +108,7 @@ class AfterTestViewModel
     init(testResult: Result)
     {
         self.testResult = testResult
-        calculateTotalScreens()
+        
         if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
         {
             results = mockResults
@@ -121,6 +121,7 @@ class AfterTestViewModel
         Server.shared.getFuel()
         { fuel in
             self.hasSupplementPlan = fuel.is_active
+            self.calculateTotalScreens()
         }
         onFailure:
         { error in

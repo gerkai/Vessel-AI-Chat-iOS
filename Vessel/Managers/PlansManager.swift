@@ -66,13 +66,13 @@ class PlansManager
         {
             print("Adding fuel activities")
             var fuelActive = false
-            if Contact.main()!.fuel?.is_active == true
+            if Contact.FuelInfo?.is_active == true
             {
                 fuelActive = true
             }
             if fuelActive
             {
-                let fuel = Contact.main()!.fuel!
+                let fuel = Contact.FuelInfo!
                 print("CONTACT HAS FUEL")
                 if let getAMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID)
                 {

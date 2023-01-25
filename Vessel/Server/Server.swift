@@ -551,7 +551,7 @@ class Server: NSObject
     {
         var dictPostBody = [String: String]()
         var scaRef = ""
-        if let urlCode = Contact.main()!.fuel?.url_code
+        if let urlCode = Contact.FuelInfo?.url_code
         {
             scaRef = "&" + urlCode
         }
@@ -1166,7 +1166,7 @@ class Server: NSObject
             }
             catch
             {
-                print(error)
+                //print("get fuel error: \(error)")
                 DispatchQueue.main.async()
                 {
                     failure(self.fuelError())
@@ -1177,6 +1177,7 @@ class Server: NSObject
         { error in
             DispatchQueue.main.async()
             {
+                //print("get fuel error2: \(String(describing: error))")
                 failure(error)
             }
         }

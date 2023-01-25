@@ -112,7 +112,7 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
-            if let fuel = Contact.main()!.fuel
+            if let fuel = Contact.FuelInfo
             {
                 if fuel.is_active
                 {
