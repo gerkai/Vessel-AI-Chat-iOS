@@ -69,6 +69,14 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
                     {
                         if let contact = Contact.main()
                         {
+                            //handle practitioner attribution
+                            if let id = Contact.PractitionerID
+                            {
+                                Log_Add("nbt: Setting attribution: \(id)")
+                                contact.pa_id = id
+                                Contact.PractitionerID = nil
+                            }
+                            
                             contact.first_name = firstName
                             contact.last_name = lastName
                             ObjectStore.shared.clientSave(contact)
@@ -115,6 +123,11 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
     private func createContact(firstName: String, lastName: String, password: String)
     {
         let contact = Contact(firstName: firstName, lastName: lastName, email: Contact.SavedEmail ?? "")
+        //handle practitioner attribution
+        Log_Add("createContact: Setting attribution: \(Contact.PractitionerID ?? -1)")
+        contact.pa_id = Contact.PractitionerID
+        Contact.PractitionerID = nil
+        
         nextButton.showLoading()
         Server.shared.createContact(contact: contact, password: password)
         {

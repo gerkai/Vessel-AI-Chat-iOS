@@ -14,6 +14,7 @@ import ChatProvidersSDK
 import SupportSDK
 import AVFoundation
 import FirebaseRemoteConfig
+import FirebaseDynamicLinks
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -47,16 +48,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
-    /*func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     {
-        let handled = DynamicLinks.dynamicLinks()
-            .handleUniversalLink(userActivity.webpageURL!) { dynamiclink, error in
-              // ...
+        Log_Add("Continue User Activity with URL: \(userActivity.webpageURL!)")
+        if let expertID = userActivity.webpageURL!.valueOf("expert_id")
+        {
+            Log_Add("Setting Global ExpertID: \(expertID)")
+            Contact.PractitionerID = Int(expertID)
+        }
+        
+        //cw not sure if this code is needed for our use case. Adding logging so we can gain insight...
+        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!)
+        { dynamiclink, error in
+            Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+            if let expertID = dynamiclink?.url?.valueOf("expert_id")
+            {
+                Log_Add("Dynamic Link had expert ID: \(expertID)")
+                if Contact.PractitionerID == nil
+                {
+                    Contact.PractitionerID = Int(expertID)
+                }
             }
-
-          return handled
+        }
+        return handled
     }
-    */
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>)
     {
         // Called when the user discards a scene session.
@@ -79,6 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool
     {
         Log_Add("Open URL: \(url), options:\(options)")
+        //if there's an expert_id in the URL, pass it to the Contact module so we can attribute the contact to the expert
+        if let expertID = url.valueOf("expert_id")
+        {
+            Log_Add("Setting Global ExpertID: \(expertID)")
+            Contact.PractitionerID = Int(expertID)
+        }
         return true
     }
 

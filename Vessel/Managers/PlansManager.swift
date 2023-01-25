@@ -51,27 +51,44 @@ class PlansManager
     
     func addFuelActivities()
     {
-        print("Adding fuel activities")
-        if let fuelStatus = Contact.main()!.fuelStatus
+        //user must have taken at least one test before we show any fuel cards
+        var results: [Result] = []
+        if UserDefaults.standard.bool(forKey: Constants.KEY_USE_MOCK_RESULTS)
         {
-            if fuelStatus.hasFuel
+            results = mockResults
+        }
+        else
+        {
+            results = Storage.retrieve(as: Result.self)
+        }
+        
+        if results.count != 0
+        {
+            print("Adding fuel activities")
+            var fuelActive = false
+            if Contact.main()!.fuel?.is_active == true
             {
+                fuelActive = true
+            }
+            if fuelActive
+            {
+                let fuel = Contact.main()!.fuel!
                 print("CONTACT HAS FUEL")
                 if let getAMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID)
                 {
                     //Show the AM Fuel Supplement card
-                    if fuelStatus.hasAMFormula
+                    if fuel.hasAMFormula()
                     {
                         var amMessage: String?
-                        if let amCapsPerServing = fuelStatus.amCapsPerServing
+                        if let amCapsPerServing = fuel.amCapsulesPerServing()
                         {
                             if amCapsPerServing == 1
                             {
-                                amMessage = NSLocalizedString("(1) capsule after first meal", comment: "")
+                                amMessage = NSLocalizedString("1 capsule after first meal", comment: "")
                             }
                             else
                             {
-                                amMessage = String(format: NSLocalizedString("(%i) capsules after first meal", comment: ""), amCapsPerServing)
+                                amMessage = String(format: NSLocalizedString("%i capsules after first meal", comment: ""), amCapsPerServing)
                             }
                         }
                         let amFuelCard = Tip(id: -getAMFuelRecommendation.id, last_updated: 0, title: getAMFuelRecommendation.title, description: getAMFuelRecommendation.description, imageUrl: getAMFuelRecommendation.imageURL ?? "", frequency: amMessage ?? "", isLifestyleRecommendation: true)
@@ -91,18 +108,18 @@ class PlansManager
                     if let getPMFuelRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
                     {
                         //Show the PM Fuel Supplement card
-                        if fuelStatus.hasPMFormula
+                        if fuel.hasPMFormula()
                         {
                             var pmMessage: String?
-                            if let pmCapsPerServing = fuelStatus.pmCapsPerServing
+                            if let pmCapsPerServing = fuel.pmCapsulesPerServing()
                             {
                                 if pmCapsPerServing == 1
                                 {
-                                    pmMessage = NSLocalizedString("(1) capsule after last meal", comment: "")
+                                    pmMessage = NSLocalizedString("1 capsule after last meal", comment: "")
                                 }
                                 else
                                 {
-                                    pmMessage = String(format: NSLocalizedString("(%i) capsules after last meal", comment: ""), pmCapsPerServing)
+                                    pmMessage = String(format: NSLocalizedString("%i capsules after last meal", comment: ""), pmCapsPerServing)
                                 }
                             }
                             let pmFuelCard = Tip(id: -getPMFuelRecommendation.id, last_updated: 0, title: getPMFuelRecommendation.title, description: getPMFuelRecommendation.description, imageUrl: getPMFuelRecommendation.imageURL ?? "", frequency: pmMessage ?? "", isLifestyleRecommendation: true)
