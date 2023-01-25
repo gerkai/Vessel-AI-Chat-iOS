@@ -147,7 +147,7 @@ enum TodayViewSection: Equatable
         {
             return [
                 .sectionTitle(icon: "food-icon", name: "Food"),
-                .lockedCheckMarkCard(backgroundImage: "food-placeholder")
+                .lockedCheckMarkCard(backgroundImage: "food-placeholder", subtext: NSLocalizedString("Get personalized food recommendations", comment: ""))
             ]
         }
         return [
@@ -162,7 +162,7 @@ enum TodayViewSection: Equatable
         {
             return [
                 .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: "")),
-                .lockedCheckMarkCard(backgroundImage: "water-placeholder")
+                .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get personalized water recommendations", comment: ""))
             ]
         }
         return [
@@ -199,7 +199,7 @@ enum TodayViewCell: Equatable
     case sectionTitle(icon: String, name: String)
     case foodDetails(foods: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
-    case lockedCheckMarkCard(backgroundImage: String)
+    case lockedCheckMarkCard(backgroundImage: String, subtext: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String)

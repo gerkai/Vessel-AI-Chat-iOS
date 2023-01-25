@@ -68,7 +68,7 @@ struct Formula: Decodable
 struct Fuel: Decodable
 {
     let url_code: String?
-    let expert_uuid: String
+    let expert_uuid: String?
     let updated_by: String?
     let affiliate_url: String?
     let expert: Expert?
