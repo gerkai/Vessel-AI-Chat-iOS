@@ -57,18 +57,18 @@ struct Formula: Decodable
     let capsules: Int
     let days_supply: Int
     let monthly_retail_price: String
-    let pm_capsules: Int
+    let pm_capsules: Int?
     let total_bottles: Int
     let kind: String
     let email: String?
     let name: String?
-    let pm_caps_per_serving: Int
+    let pm_caps_per_serving: Int?
 }
 
 struct Fuel: Decodable
 {
     let url_code: String?
-    let expert_uuid: String
+    let expert_uuid: String?
     let updated_by: String?
     let affiliate_url: String?
     let expert: Expert?

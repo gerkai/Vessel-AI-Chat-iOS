@@ -33,11 +33,11 @@ class Contact: CoreObjectProtocol
     static var MainID: Int = 0
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
     static var PractitionerID: Int? //temporary place to hold pa_id after app starts up but before user logged in. Set by app delegate
+    static var FuelInfo: Fuel? //the fuel data for the current Contact
     
     var id: Int
     var last_updated: Int = 0
     var storage: StorageType = .cache
-    var fuel: Fuel?
     
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
@@ -103,6 +103,7 @@ class Contact: CoreObjectProtocol
         KeychainHelper.standard.delete(service: CONTACT_ID_KEY, account: KEYCHAIN_ACCOUNT)
         MainID = 0
         SavedEmail = nil
+        FuelInfo = nil
     }
     
     init(id: Int = 0,
@@ -199,10 +200,13 @@ class Contact: CoreObjectProtocol
         //print("Get Fuel Status:")
         Server.shared.getFuel()
         { fuel in
-            self.fuel = fuel
+            Contact.FuelInfo = fuel
             
             //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
-            done()
+            DispatchQueue.main.async()
+            {
+                done()
+            }
         }
         onFailure:
         { error in

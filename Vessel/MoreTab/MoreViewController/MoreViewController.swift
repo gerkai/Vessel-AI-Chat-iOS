@@ -112,7 +112,7 @@ extension MoreViewController: UITableViewDelegate
         case .orderCards:
             openInSafari(url: "https://vesselhealth.com/membership")
         case .customSupplements:
-            if let fuel = Contact.main()!.fuel
+            if let fuel = Contact.FuelInfo
             {
                 if fuel.is_active
                 {
@@ -122,6 +122,10 @@ extension MoreViewController: UITableViewDelegate
                 {
                     openSupplementQuiz()
                 }
+            }
+            else
+            {
+                openSupplementQuiz()
             }
         case .chatWithNutritionist:
             tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX

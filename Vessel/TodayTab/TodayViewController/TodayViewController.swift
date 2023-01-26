@@ -264,9 +264,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
-        case .lockedCheckMarkCard(let backgroundImage):
+        case .lockedCheckMarkCard(let backgroundImage, let subtext):
             guard let cell = cell as? TodayLockedCheckMarkCardCell else { fatalError("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController") }
-            cell.setup(backgroundImage: backgroundImage)
+            cell.setup(backgroundImage: backgroundImage, subtext: subtext)
         case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, id: id, type: type, delegate: self)
