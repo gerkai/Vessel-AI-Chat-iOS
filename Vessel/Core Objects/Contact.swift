@@ -203,7 +203,10 @@ class Contact: CoreObjectProtocol
             Contact.FuelInfo = fuel
             
             //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
-            done()
+            DispatchQueue.main.async()
+            {
+                done()
+            }
         }
         onFailure:
         { error in
