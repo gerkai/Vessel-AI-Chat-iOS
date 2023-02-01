@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuViewControllerDelegate
+class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuViewControllerDelegate, MFMailComposeViewControllerDelegate
 {
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
@@ -107,12 +108,70 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     
     @IBAction func onMailButton()
     {
-        print("MAIL")
+        if MFMailComposeViewController.canSendMail()
+        {
+            let info = viewModel.practitionerInfo()
+            let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + info.qrString
+            
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            mailComposer.setSubject(NSLocalizedString("Vessel Wellness App", comment: "email subject line"))
+            //mailComposer.setToRecipients([MAIL_RECIPIENT])
+            mailComposer.setMessageBody(messageBody, isHTML: false)
+            mailComposer.modalPresentationStyle = .fullScreen
+            present(mailComposer, animated: true)
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Debug Log", message: "E-mail is not currently available for this device", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+            { (action) in
+                //print("You've pressed cancel");
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
+        }
     }
     
     @IBAction func onShareButton()
     {
-        print("SHARE")
+        let info = viewModel.practitionerInfo()
+        let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + info.qrString
+                
+        //let objectsToShare = [messageBody, myWebsiteURL, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+        let objectsToShare = [messageBody] as [Any]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+
+        //Excluded Activities
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+
+        activityVC.popoverPresentationController?.sourceView = self.view
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+    {
+        switch result
+        {
+            case .cancelled:
+                print("Mail cancelled")
+            case .saved:
+                print("Mail saved")
+            case .sent:
+                print("Mail sent")
+            case .failed:
+                print("Mail sent failure: %@", error!.localizedDescription)
+            if let description = error?.localizedDescription
+            {
+                UIView.showError(text: NSLocalizedString("Couldn't send mail", comment: ""), detailText: description, image: nil)
+            }
+            default:
+                break
+        }
+        controller.dismiss(animated: true)
     }
 }
 
