@@ -122,4 +122,32 @@ class MoreViewModel
         let index = options.firstIndex(of: .debugLog)!
         options.remove(at: index)
     }
+    
+    func shouldShowPractitionerSection() -> Bool
+    {
+        if Contact.main()!.expert_id == nil
+        {
+            return false
+        }
+        return true
+    }
+    
+    func practitionerInfo() -> (name: String, qrString: String)
+    {
+        /*var name: String?
+        if let expertID = Contact.main()!.expert_id
+        {
+            ObjectStore.shared.get(type: Expert.self, id: expertID) { object in
+        }
+        onFailure:
+        {
+                
+        }
+
+        }
+        
+        return name*/
+        
+        return (name: "Test Practitioner", qrString: "https://vesselhealth.page.link/getVessel")
+    }
 }

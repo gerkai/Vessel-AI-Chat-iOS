@@ -13,6 +13,9 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var environmentLabel: UILabel!
+    @IBOutlet private weak var qrImageView: UIImageView!
+    @IBOutlet private weak var companyNameLabel: UILabel!
+    @IBOutlet private weak var practitionerView: UIView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .moreTabFlow
@@ -35,6 +38,44 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
             viewModel.addDebugLog()
             tableView.reloadData()
         }
+        
+        if viewModel.shouldShowPractitionerSection()
+        {
+            practitionerView.isHidden = false
+            let info = viewModel.practitionerInfo()
+            companyNameLabel.text = info.name
+            qrImageView.image = createQR(info.qrString)
+        }
+        else
+        {
+            practitionerView.isHidden = true
+        }
+    }
+    
+    func createQR(_ string: String) -> UIImage?
+    {
+        let data = string.data(using: String.Encoding.ascii)
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else
+        {
+            return nil
+        }
+        qrFilter.setValue(data, forKey: "inputMessage")
+        guard let qrImage = qrFilter.outputImage else
+        {
+            return nil
+        }
+        
+        // Scale the image
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledQrImage = qrImage.transformed(by: transform)
+        
+        // Get a CIContext
+        let context = CIContext()
+        // Create a CGImage *from the extent of the outputCIImage*
+        guard let processedImage = context.createCGImage(scaledQrImage, from: scaledQrImage.extent) else { return nil }
+        // Finally, get a usable UIImage from the CGImage
+        let convertedImage = UIImage(cgImage: processedImage)
+        return convertedImage
     }
     
     func environment() -> String
@@ -62,6 +103,16 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     {
         viewModel.key.append(1)
         viewModel.key.remove(at: 0)
+    }
+    
+    @IBAction func onMailButton()
+    {
+        print("MAIL")
+    }
+    
+    @IBAction func onShareButton()
+    {
+        print("SHARE")
     }
 }
 
