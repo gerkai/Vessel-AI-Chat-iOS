@@ -53,6 +53,31 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         mindLabel.text = goals[goalIndex]
         updateGoals()
         splashView.set(visible: true)
+        if Contact.PractitionerID == nil
+        {
+            Log_Add("Welcome: vdl: Contact has no practitioner ID")
+            if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+            {
+                Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")
+                splashView.setImageURL(urlString: imageURL)
+                splashView.setMode(mode: .practitioner)
+            }
+            else
+            {
+                Log_Add("No ImageURL in UserDefaults")
+            }
+        }
+        else
+        {
+            Log_Add("Welcome: vdl: Contact practitioner ID: \(Contact.PractitionerID!)")
+            
+            if let urlString = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+            {
+                splashView.setImageURL(urlString: urlString)
+                splashView.setMode(mode: .practitioner)
+            }
+        }
+        
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")
@@ -106,19 +131,32 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     func checkInternet()
     {
+        Log_Add("Check Internet")
         if Reachability.isConnectedToNetwork()
         {
             if Server.shared.isLoggedIn()
             {
+                Log_Add("Is Logged In")
                 ObjectStore.shared.loadMainContact
                 { [weak self] in
                     guard let self = self else { return }
-                    print("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                    //Log_Add("Loaded Main Contact")
+                    Log_Add("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                    if let id = Contact.PractitionerID
+                    {
+                        Log_Add("checkInternet: Setting attribution: \(id)")
+                        if let contact = Contact.main()
+                        {
+                            contact.pa_id = id
+                            ObjectStore.shared.clientSave(contact)
+                            Contact.PractitionerID = nil
+                        }
+                    }
                     LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
                 }
                 onFailure:
                 {
-                    print("Unsuccessful at re-logging in. Making user sign-in again")
+                    Log_Add("Unsuccessful at re-logging in. Making user sign-in again")
                     //fade splash screen in right away since we already spent time trying to load contact from back end
                     UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
                     {
@@ -129,7 +167,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             else
             {
                 //fade splash screen in after 1 second. (Normal login flow)
-                print("Normal sign-in flow. Not re-logging in.")
+                Log_Add("Normal sign-in flow. Not re-logging in.")
                 UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
                 {
                     self.splashView.alpha = 0.0

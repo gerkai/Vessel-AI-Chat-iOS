@@ -104,7 +104,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     {
         Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
-            print("SUCCESS: \(url)")
+            Log_Add("Supplement Quiz: \(url)")
             let vc = TodayWebViewController.initWith(url: url, delegate: self)
             self.present(vc, animated: true)
         }

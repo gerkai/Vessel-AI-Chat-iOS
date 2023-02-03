@@ -178,8 +178,8 @@ class PlansManager
                         Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
                         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
                     },
-                                                             onFailure:
-                                                                { error in
+                    onFailure:
+                    { error in
                         print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
                     })
                 }

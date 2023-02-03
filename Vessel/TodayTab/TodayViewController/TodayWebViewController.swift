@@ -34,7 +34,8 @@ class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
         let url = URL(string: self.url)
         let request = URLRequest(url: url!)
         webView.navigationDelegate = self
-        //webView.uiDelegate = self
+        webView.configuration.websiteDataStore = WKWebsiteDataStore.default()
+        webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
         webView.load(request)
     }
     
@@ -64,6 +65,20 @@ class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
         print("ERROR: \(error)")
     }
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
+    {
+        webView.evaluateJavaScript("JSON.stringify(localStorage)")
+        { (result, error) in
+            if let result = result
+            {
+                Log_Add("Javascript: \(result)")
+            }
+            else if let error = error
+            {
+                print("Error while getting local storage: \(error.localizedDescription)")
+            }
+        }
+    }
     // this handles target=_blank links by opening them in the same view
     /*func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
     {

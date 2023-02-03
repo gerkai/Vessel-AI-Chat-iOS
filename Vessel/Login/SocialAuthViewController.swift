@@ -82,7 +82,7 @@ class SocialAuthViewController: UIViewController, WKNavigationDelegate, WKUIDele
                 Contact.PractitionerID = nil
             }
             
-            ObjectStore.shared.serverSave(contact)
+            ObjectStore.shared.clientSave(contact)
 
             if contact.isBrandNew()
             {

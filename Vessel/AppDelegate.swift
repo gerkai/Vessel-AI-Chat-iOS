@@ -36,9 +36,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         launchBugsee()
         //so videos will play sound even if mute button is on
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        
         return true
     }
 
+    func extractExpertInfo(percentEncodedURLString: String) -> Int?
+    {
+        var expertID: Int?
+        Log_Add("extractExpertInfo")
+        if let url = percentEncodedURLString.removingPercentEncoding
+        {
+            let componentString = url.replacingOccurrences(of: "?", with: "&")
+            let components = componentString.components(separatedBy: "&")
+            //print(components)
+            for component in components
+            {
+                if let range = component.range(of: "expert_id=")
+                {
+                    let numberString = component[range.upperBound...]
+                    if let number = numberString.components(separatedBy: CharacterSet.decimalDigits.inverted).first
+                    {
+                        expertID = Int(number)
+                        Log_Add("Captured ExpertID: \(String(describing: expertID))")
+                    }
+                }
+                if let range = component.range(of: "logo=")
+                {
+                    let logoString = String(component[range.upperBound...])
+                    UserDefaults.standard.setValue(logoString, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+                    Log_Add("1 Setting Global ExpertLogo: \(logoString)")
+                }
+                else
+                {
+                    Log_Add("1 Removing global ExpertLogo")
+                    UserDefaults.standard.removeObject(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+                }
+            }
+        }
+        return expertID
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration
@@ -50,23 +87,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     {
-        Log_Add("Continue User Activity with URL: \(userActivity.webpageURL!)")
-        if let expertID = userActivity.webpageURL!.valueOf("expert_id")
+        Log_Add("Continue User Activity")
+        if let urlString = userActivity.webpageURL?.absoluteString
         {
-            Log_Add("Setting Global ExpertID: \(expertID)")
-            Contact.PractitionerID = Int(expertID)
+            let expertID = extractExpertInfo(percentEncodedURLString: urlString)
+            Contact.PractitionerID = expertID
+            if expertID != nil
+            {
+                Log_Add("1 Setting Global ExpertID: \(expertID!)")
+            }
         }
         
         //cw not sure if this code is needed for our use case. Adding logging so we can gain insight...
         let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!)
         { dynamiclink, error in
             Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
-            if let expertID = dynamiclink?.url?.valueOf("expert_id")
+            if let urlString = dynamiclink?.url?.absoluteString
             {
-                Log_Add("Dynamic Link had expert ID: \(expertID)")
-                if Contact.PractitionerID == nil
+                let expertID = self.extractExpertInfo(percentEncodedURLString: urlString)
+                Contact.PractitionerID = expertID
+                if expertID != nil
                 {
-                    Contact.PractitionerID = Int(expertID)
+                    Log_Add("Dynamic Link had ExpertID: \(expertID!)")
                 }
             }
         }
@@ -88,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func applicationWillTerminate(_ application: UIApplication)
     {
-        Log_Add("App Terminating")
+        Log_Add("App Terminating\n\n\n\n\n")
         Log_Save()
     }
     
@@ -96,10 +138,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         Log_Add("Open URL: \(url), options:\(options)")
         //if there's an expert_id in the URL, pass it to the Contact module so we can attribute the contact to the expert
-        if let expertID = url.valueOf("expert_id")
+        
+        let expertID = extractExpertInfo(percentEncodedURLString: url.absoluteString)
+        Contact.PractitionerID = expertID
+        if expertID != nil
         {
-            Log_Add("Setting Global ExpertID: \(expertID)")
-            Contact.PractitionerID = Int(expertID)
+            Log_Add("2 Setting Global ExpertID: \(expertID!)")
         }
         return true
     }

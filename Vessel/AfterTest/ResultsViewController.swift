@@ -485,6 +485,7 @@ class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiab
         //used for test/debug
         
         testResult = Result(id: 1, last_updated: 0, card_uuid: "12345", wellnessScore: 0.5, insert_date: "2022-09-24T15:22:14", reagentResults: [
+            /*
             ReagentResult(id: 11, score: 1.0, value: 5.0, errorCodes: []), //B7
             ReagentResult(id: 8, score: 0.4, value: 100.0, errorCodes: []), //Cortisol
             ReagentResult(id: 1, score: 1.0, value: 5.5, errorCodes: []), //pH
@@ -493,6 +494,15 @@ class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiab
             ReagentResult(id: 2, score: 0.6, value: 1.006, errorCodes: []), //Hydration
             ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: []), //Magnesium
             ReagentResult(id: 21, score: 1.0, value: 0.50, errorCodes: []) //Nitrite
+             */
+            ReagentResult(id: 5, score: 1.0, value: 450.0, errorCodes: []), //Magnesium
+            ReagentResult(id: 4, score: 1.0, value: 420.0, errorCodes: []), //Vitamin C
+            ReagentResult(id: 2, score: 0.6, value: 1.020, errorCodes: []), //Hydration
+            ReagentResult(id: 23, score: 0.6, value: 92, errorCodes: []), //Sodium
+            ReagentResult(id: 18, score: 0.6, value: 15, errorCodes: []), //Calcium
+            ReagentResult(id: 21, score: 0.2, value: 4.0, errorCodes: []), //Nitrite
+            ReagentResult(id: 1, score: 0.2, value: 7.9, errorCodes: []), //pH
+            ReagentResult(id: 3, score: 0.0, value: 5.0, errorCodes: []) //Ketones
         ])
     }
 }

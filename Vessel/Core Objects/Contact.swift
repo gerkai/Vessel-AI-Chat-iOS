@@ -211,7 +211,6 @@ class Contact: CoreObjectProtocol
         onFailure:
         { error in
             Log_Add("getFuel error: \(String(describing: error))")
-            print("ERROR: \(String(describing: error))")
         }
     }
     
