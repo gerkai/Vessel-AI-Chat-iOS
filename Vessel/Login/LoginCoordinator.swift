@@ -55,11 +55,12 @@ class LoginCoordinator
                     Log_Add("logo not in UserDefaults")
                     ObjectStore.shared.get(type: Expert.self, id: contact.pa_id!)
                     { expert in
-                        Log_Add("re-saving URL: \(expert.logo_image_url)")
+                        Log_Add("re-saving URL: \(String(describing: expert.logo_image_url))")
                         UserDefaults.standard.set(expert.logo_image_url, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
                     }
                     onFailure:
                     {
+                        Log_Add("LC: Failed to get expert")
                     }
                 }
             }

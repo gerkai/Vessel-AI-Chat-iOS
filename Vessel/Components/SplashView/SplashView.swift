@@ -166,6 +166,17 @@ class SplashView: UIView
             //print("Got showSplash notification: show: \(shouldShow), fade: \(fadeTime)")
             if shouldShow == true
             {
+                //so co-branded splash will appear after logout or social login
+                if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+                {
+                    Log_Add("splash notification: ImageURL in UserDefaults: \(imageURL)")
+                    setImageURL(urlString: imageURL)
+                    setMode(mode: .practitioner)
+                }
+                else
+                {
+                    setMode(mode: .normal)
+                }
                 isHidden = false
                 UIView.animate(withDuration: fadeTime)
                 {
