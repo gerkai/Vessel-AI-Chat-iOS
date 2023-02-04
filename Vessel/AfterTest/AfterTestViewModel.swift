@@ -185,7 +185,11 @@ class AfterTestViewModel
     {
         //Determines how many screens will be shown based on evaluation of test results.
         //This allows us to know the maximum value of the progress bar that is displayed on many of the screens.
-        guard let contact = Contact.main() else { fatalError("Couldn't load contact in AfterTestViewModel") }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("Couldn't load contact in AfterTestViewModel")
+            return
+        }
         
         if contact.flags & Constants.SAW_MAGNESIUM_INFO == 0
         {
