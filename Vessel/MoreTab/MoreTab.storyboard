@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="anQ-jV-QPx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="749"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DebugMenuCell" id="mZC-tw-gUs" customClass="DebugMenuCell" customModule="Vessel" customModuleProvider="target">
@@ -71,18 +71,27 @@
                                     <outlet property="delegate" destination="Khd-SO-LuV" id="hyE-4V-wmO"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D7-PU-MbI">
+                                <rect key="frame" x="186" y="749" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SDc-er-tqN"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SDc-er-tqN" firstAttribute="bottom" secondItem="anQ-jV-QPx" secondAttribute="bottom" id="MHc-mk-bt0"/>
+                            <constraint firstItem="2D7-PU-MbI" firstAttribute="bottom" secondItem="SDc-er-tqN" secondAttribute="bottom" id="AvP-qn-eX1"/>
+                            <constraint firstItem="anQ-jV-QPx" firstAttribute="bottom" secondItem="2D7-PU-MbI" secondAttribute="top" id="MHc-mk-bt0"/>
                             <constraint firstItem="anQ-jV-QPx" firstAttribute="top" secondItem="SDc-er-tqN" secondAttribute="top" id="Mbt-jR-S32"/>
                             <constraint firstItem="anQ-jV-QPx" firstAttribute="leading" secondItem="SDc-er-tqN" secondAttribute="leading" id="ZDr-9w-uhM"/>
-                            <constraint firstItem="SDc-er-tqN" firstAttribute="trailing" secondItem="anQ-jV-QPx" secondAttribute="trailing" id="v2Y-lI-OKi"/>
+                            <constraint firstItem="2D7-PU-MbI" firstAttribute="centerX" secondItem="SDc-er-tqN" secondAttribute="centerX" id="gfO-d8-6Us"/>
+                            <constraint firstItem="anQ-jV-QPx" firstAttribute="trailing" secondItem="SDc-er-tqN" secondAttribute="trailing" id="v2Y-lI-OKi"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="contactLabel" destination="2D7-PU-MbI" id="lMd-X9-aPR"/>
                         <outlet property="tableView" destination="anQ-jV-QPx" id="nBm-QI-WDB"/>
                     </connections>
                 </viewController>
@@ -976,7 +985,7 @@
         <!--Log View Controller-->
         <scene sceneID="RoR-Hv-QVH">
             <objects>
-                <viewController storyboardIdentifier="LogViewController" modalPresentationStyle="fullScreen" id="42b-jY-Tbv" customClass="LogViewController" customModule="QuickConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogViewController" modalPresentationStyle="fullScreen" id="42b-jY-Tbv" customClass="LogViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6lj-s8-l1b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

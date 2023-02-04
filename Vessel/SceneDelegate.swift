@@ -18,7 +18,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         Log_Add("Scene will connect to: \(connectionOptions)")
+        
+        if let url = connectionOptions.urlContexts.first?.url.absoluteString
+        {
+            Log_Add("URL: \(url)")
+            let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
+            Contact.PractitionerID = expertID
+            if expertID != nil
+            {
+                Log_Add("3 Setting Global ExpertID: \(expertID!)")
+            }
+        }
         guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
+    {
+        Log_Add("Scene openURLContexts")
+        if let url = URLContexts.first?.url.absoluteString
+        {
+            Log_Add("URL: \(url)")
+            let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
+            Contact.PractitionerID = expertID
+            if expertID != nil
+            {
+                Log_Add("4 Setting Global ExpertID: \(expertID!)")
+                if let contact = Contact.main()
+                {
+                    contact.pa_id = expertID
+                    ObjectStore.shared.clientSave(contact)
+                    Contact.PractitionerID = nil
+                }
+            }
+        }
     }
     
     func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String)

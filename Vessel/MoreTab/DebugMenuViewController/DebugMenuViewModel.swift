@@ -231,4 +231,11 @@ class DebugMenuViewModel
         .useMockResults,
         .forceAppReview
     ]
+    
+    func contactIDText() -> String
+    {
+        let contact = Contact.main()!
+        let result = "Contact ID: \(contact.id)"
+        return result
+    }
 }
