@@ -325,7 +325,7 @@ class ObjectStore: NSObject
         //print("Sending .newDataArrived notification with \(String(describing: T.self))")
         if notifyNewDataArrived
         {
-            Log_Add("ObjectStore: serverSave() - post .newDataArrived: \(String(describing: T.self))")
+            //Log_Add("ObjectStore: serverSave() - post .newDataArrived: \(String(describing: T.self))")
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
         }
     }
@@ -373,7 +373,7 @@ class ObjectStore: NSObject
             //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
             Server.shared.saveObjects(objects: dict)
             {
-                print("Saved \(name)")
+                Log_Add("Saved \(name)")
             }
             onFailure:
             { result in

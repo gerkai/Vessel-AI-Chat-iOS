@@ -83,6 +83,7 @@ let GET_LESSON_PATH = "lesson/{lesson_id}"
 let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_response_id}"
 let USER_HAS_FUEL_PATH = "fuel"
 let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
+let GET_EXPERT_PATH = "fuel/expert"
 
 // MARK: - Structs
 struct CardAssociation
@@ -1149,7 +1150,6 @@ class Server: NSObject
     }
     
     //MARK:  Fuel
-    //tech debt: Create fuel object and decode json response below into that object
     func getFuel(onSuccess success: @escaping (_ fuelObject: Fuel) -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
         let urlString = "\(API())\(USER_HAS_FUEL_PATH)"
@@ -1166,7 +1166,7 @@ class Server: NSObject
             }
             catch
             {
-                //print("get fuel error: \(error)")
+                print("get fuel error: \(error)")
                 DispatchQueue.main.async()
                 {
                     failure(self.fuelError())
@@ -1187,6 +1187,44 @@ class Server: NSObject
     {
         let error = NSError.init(domain: "", code: 1000, userInfo: ["message": NSLocalizedString("Unable to get fuel", comment: "Server error message")])
         return error
+    }
+    
+    // MARK: - Expert
+    func getExpert(id: Int, onSuccess success: @escaping (_ expert: Expert) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        var dictPostBody = [String: Int]()
+        dictPostBody["expert_id"] = id
+        
+        postToServer(dictBody: dictPostBody, url: "\(API())\(GET_EXPERT_PATH)")
+        { object in
+            do
+            {
+                let json = try JSONSerialization.data(withJSONObject: object)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let expert = try decoder.decode(Expert.self, from: json)
+                
+                DispatchQueue.main.async()
+                {
+                    success(expert)
+                }
+            }
+            catch
+            {
+                print(error)
+                DispatchQueue.main.async()
+                {
+                    //let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+        onFailure:
+        { message in
+            print("Got server failure: \(message)")
+            failure(message)
+        }
+        let urlString = API() + "fuel/expert"
     }
     
     // MARK: - Lifestyle Recommendation

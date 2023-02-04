@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "powered-by-vessel.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

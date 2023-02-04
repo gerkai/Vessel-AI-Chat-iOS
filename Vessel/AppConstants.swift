@@ -86,6 +86,7 @@ struct Constants
     static let vesselGood = #colorLiteral(red: 0.8588235294, green: 0.9215686275, blue: 0.8352941176, alpha: 1)     //#DBEBD5
     static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
     static let vesselTope = #colorLiteral(red: 0.831372549, green: 0.7960784314, blue: 0.7725490196, alpha: 1)      //#D4CBC5
+    static let vesselPeach = #colorLiteral(red: 0.9843137255, green: 0.9647058824, blue: 0.9294117647, alpha: 1)     //FBF6ED
     
     //color components
     static let POOR_COLOR = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
@@ -141,6 +142,7 @@ struct Constants
     static let KEY_LAST_OPENED_DAY = "KEY_LAST_OPENED_DAY"
     static let ALLOW_BUGSEE_KEY = "ALLOW_BUGSEE"
     static let KEY_FIRST_LAUNCH_DATE = "KEY_FIRST_LAUNCH_DATE"
+    static let KEY_PRACTITIONER_IMAGE_URL = "KEY_PRACTITIONER_IMAGE_URL"
     
     //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001

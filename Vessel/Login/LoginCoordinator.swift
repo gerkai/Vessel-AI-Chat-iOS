@@ -13,6 +13,8 @@ class LoginCoordinator
     
     func pushLastViewController(to navigationController: UINavigationController?)
     {
+        Log_Add("pushLastViewController")
+        updateCobranding()
         if contactFieldsValid()
         {
             //go straight to onboarding
@@ -38,5 +40,30 @@ class LoginCoordinator
             valid = false
         }
         return valid
+    }
+    
+    //restores expert imageURL in event user deleted app then re-installed
+    func updateCobranding()
+    {
+        Log_Add("updateCobranding")
+        if let contact = Contact.main()
+        {
+            if contact.pa_id != nil
+            {
+                if UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL) == nil
+                {
+                    Log_Add("logo not in UserDefaults")
+                    ObjectStore.shared.get(type: Expert.self, id: contact.pa_id!)
+                    { expert in
+                        Log_Add("re-saving URL: \(String(describing: expert.logo_image_url))")
+                        UserDefaults.standard.set(expert.logo_image_url, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+                    }
+                    onFailure:
+                    {
+                        Log_Add("LC: Failed to get expert")
+                    }
+                }
+            }
+        }
     }
 }

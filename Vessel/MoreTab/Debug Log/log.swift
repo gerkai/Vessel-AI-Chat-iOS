@@ -52,13 +52,19 @@ func Log_Save()
 func Log_Clear()
 {
     eventLog = []
+    Log_Save()
     Log_Refresh()
 }
 
-func Log_Add(_ text: String)
+//set shouldPrint to false if you don't want this to also print to the console
+func Log_Add(_ text: String, _ shouldPrint: Bool = true)
 {
     let timeStamp = Date.getCurrentDate()
     
+    if shouldPrint
+    {
+        print("\(timeStamp) \(text)")
+    }
     eventLog.append("\(timeStamp) \(text)\n")
     Log_Refresh()
 }

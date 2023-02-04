@@ -14,11 +14,19 @@ protocol SplashViewDelegate: AnyObject
     func splashAnimationFinished()
 }
 
+enum SplashViewMode
+{
+    case normal
+    case practitioner
+}
+
 class SplashView: UIView
 {
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var animationContainerView: UIView!
     @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var poweredByVessel: UIImageView!
     
     let activityIndicatorAppearanceInterval = 4.0 //Seconds
     
@@ -26,6 +34,7 @@ class SplashView: UIView
     weak var delegate: SplashViewDelegate?
     var timer: Timer!
     var activityTimer: Timer!
+    var mode: SplashViewMode = .normal
     
     override init(frame: CGRect)
     {
@@ -37,6 +46,40 @@ class SplashView: UIView
     {
         super.init(coder: aDecoder)
         commonInit()
+    }
+    
+    func setImageURL(urlString: String?)
+    {
+        if let urlString = urlString
+        {
+            if let url = URL(string: urlString)
+            {
+                logoImageView.kf.setImage(with: url)
+            }
+        }
+        else
+        {
+            logoImageView.image = nil
+        }
+    }
+    
+    func setMode(mode: SplashViewMode)
+    {
+        self.mode = mode
+        if mode == .normal
+        {
+            self.contentView.backgroundColor = Constants.vesselGreat
+            poweredByVessel.isHidden = true
+            animationContainerView.isHidden = false
+            activityIndicatorView.color = .white
+        }
+        else
+        {
+            self.contentView.backgroundColor = Constants.vesselPeach
+            poweredByVessel.isHidden = false
+            animationContainerView.isHidden = true
+            activityIndicatorView.color = .black
+        }
     }
     
     func commonInit()
@@ -123,6 +166,17 @@ class SplashView: UIView
             //print("Got showSplash notification: show: \(shouldShow), fade: \(fadeTime)")
             if shouldShow == true
             {
+                //so co-branded splash will appear after logout or social login
+                if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+                {
+                    Log_Add("splash notification: ImageURL in UserDefaults: \(imageURL)")
+                    setImageURL(urlString: imageURL)
+                    setMode(mode: .practitioner)
+                }
+                else
+                {
+                    setMode(mode: .normal)
+                }
                 isHidden = false
                 UIView.animate(withDuration: fadeTime)
                 {

@@ -82,6 +82,7 @@ class GiftedCardRegisterViewController: KeyboardFriendlyViewController, UITextFi
                             ObjectStore.shared.clientSave(contact)
                         }
                     }
+                    LoginCoordinator.shared.updateCobranding()
                     OnboardingCoordinator.pushInitialViewController(to: navigationController)
                 }
                 else

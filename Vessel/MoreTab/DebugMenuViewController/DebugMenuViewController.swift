@@ -21,12 +21,15 @@ class DebugMenuViewController: UIViewController, VesselScreenIdentifiable
     
     // MARK: - View
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var contactLabel: UILabel!
+    
     private let viewModel = DebugMenuViewModel()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         title = NSLocalizedString("Debug Menu", comment: "")
+        contactLabel.text = viewModel.contactIDText()
     }
     
     override func viewWillDisappear(_ animated: Bool)

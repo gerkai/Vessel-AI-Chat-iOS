@@ -128,6 +128,16 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                             {
                                 Contact.main()?.identifyAnalytics()
                                 self.analytics.log(event: .logIn(loginType: .email))
+                                if let id = Contact.PractitionerID
+                                {
+                                    if let contact = Contact.main()
+                                    {
+                                        Log_Add("LoginVC: Setting attribution: \(id)")
+                                        contact.pa_id = id
+                                        Contact.PractitionerID = nil
+                                        ObjectStore.shared.clientSave(contact)
+                                    }
+                                }
                                 LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
                             }
                             onFailure:
