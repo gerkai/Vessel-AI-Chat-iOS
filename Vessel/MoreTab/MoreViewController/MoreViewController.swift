@@ -23,6 +23,8 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     
     // MARK: Model
     private let viewModel = MoreViewModel()
+    private var practitionerName: String?
+    private var practitionerDownloadURL: String?
     
     override func viewDidLoad()
     {
@@ -39,13 +41,21 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
             viewModel.addDebugLog()
             tableView.reloadData()
         }
-        
+        self.companyNameLabel.text = ""
         if viewModel.shouldShowPractitionerSection()
         {
-            practitionerView.isHidden = false
-            let info = viewModel.practitionerInfo()
-            companyNameLabel.text = info.name
-            qrImageView.image = createQR(info.qrString)
+            viewModel.practitionerInfo
+            { name, qrString in
+                self.practitionerName = name
+                self.practitionerDownloadURL = qrString
+                self.companyNameLabel.text = name
+                self.qrImageView.image = self.createQR(qrString)
+                self.practitionerView.isHidden = false
+            }
+            onFailure:
+            {
+                self.practitionerView.isHidden = true
+            }
         }
         else
         {
@@ -110,16 +120,18 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     {
         if MFMailComposeViewController.canSendMail()
         {
-            let info = viewModel.practitionerInfo()
-            let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + info.qrString
-            
-            let mailComposer = MFMailComposeViewController()
-            mailComposer.mailComposeDelegate = self
-            mailComposer.setSubject(NSLocalizedString("Vessel Wellness App", comment: "email subject line"))
-            //mailComposer.setToRecipients([MAIL_RECIPIENT])
-            mailComposer.setMessageBody(messageBody, isHTML: false)
-            mailComposer.modalPresentationStyle = .fullScreen
-            present(mailComposer, animated: true)
+            if let qrString = practitionerDownloadURL
+            {
+                let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + qrString
+                
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                mailComposer.setSubject(NSLocalizedString("Vessel Wellness App", comment: "email subject line"))
+                //mailComposer.setToRecipients([MAIL_RECIPIENT])
+                mailComposer.setMessageBody(messageBody, isHTML: false)
+                mailComposer.modalPresentationStyle = .fullScreen
+                present(mailComposer, animated: true)
+            }
         }
         else
         {
@@ -138,18 +150,20 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     
     @IBAction func onShareButton()
     {
-        let info = viewModel.practitionerInfo()
-        let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + info.qrString
-                
-        //let objectsToShare = [messageBody, myWebsiteURL, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
-        let objectsToShare = [messageBody] as [Any]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-
-        //Excluded Activities
-        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-
-        activityVC.popoverPresentationController?.sourceView = self.view
-        present(activityVC, animated: true, completion: nil)
+        if let qrString = practitionerDownloadURL
+        {
+            let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + qrString
+            
+            //let objectsToShare = [messageBody, myWebsiteURL, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+            let objectsToShare = [messageBody] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //Excluded Activities
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            
+            activityVC.popoverPresentationController?.sourceView = self.view
+            present(activityVC, animated: true, completion: nil)
+        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)

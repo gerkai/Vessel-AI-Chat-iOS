@@ -12,7 +12,7 @@ struct Expert: CoreObjectProtocol, Decodable
     let id: Int
     var last_updated: Int
     let storage: StorageType = .disk
-    let download_url: String?
+    let url_code: String?
     let business_name: String?
     let description: String?
     let contact_id: Int?
@@ -27,7 +27,7 @@ struct Expert: CoreObjectProtocol, Decodable
     {
         case id
         case last_updated
-        case download_url
+        case url_code
         case business_name
         case description
         case contact_id

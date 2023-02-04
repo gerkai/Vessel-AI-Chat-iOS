@@ -1224,7 +1224,6 @@ class Server: NSObject
             print("Got server failure: \(message)")
             failure(message)
         }
-        let urlString = API() + "fuel/expert"
     }
     
     // MARK: - Lifestyle Recommendation
