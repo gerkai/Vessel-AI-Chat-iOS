@@ -152,14 +152,14 @@ class MoreViewModel
                         name = firstName + " " + lastName
                     }
                 }
-                if expert.url_code != nil
-                {
-                    success(name, expert.url_code!)
-                }
+                //if expert.dynamic_link != nil
+                //{
+                    success(name, expert.download_url)
+                /*}
                 else
                 {
                     failure()
-                }
+                }*/
             }
             onFailure:
             {

@@ -22,6 +22,8 @@ struct Expert: CoreObjectProtocol, Decodable
     let first_name: String?
     let business_address: String?
     let logo_image_url: String?
+    let dynamic_link: String?
+    let download_url: String
     
     enum CodingKeys: CodingKey
     {
@@ -37,5 +39,7 @@ struct Expert: CoreObjectProtocol, Decodable
         case first_name
         case business_address
         case logo_image_url
+        case dynamic_link
+        case download_url
     }
 }
