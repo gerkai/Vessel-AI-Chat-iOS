@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GetSupplementsViewController: AfterTestMVVMViewController
+class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewControllerDelegate
 {
     @IBOutlet weak var getSupplementsButton: LoadingButton!
     
@@ -36,7 +36,10 @@ class GetSupplementsViewController: AfterTestMVVMViewController
         Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
             print("SUCCESS: \(url)")
-            self.openInSafari(url: url)
+            //self.openInSafari(url: url)
+            Log_Add("Supplement Quiz: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            self.present(vc, animated: true)
             self.getSupplementsButton.hideLoading()
         }
         onFailure:
@@ -49,6 +52,14 @@ class GetSupplementsViewController: AfterTestMVVMViewController
     @IBAction func maybeLater()
     {
         nextScreen()
+    }
+    
+    func todayWebViewDismissed()
+    {
+        Contact.main()!.getFuel
+        {
+            PlansManager.shared.loadPlans()
+        }
     }
 }
 

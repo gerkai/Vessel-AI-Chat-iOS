@@ -1166,7 +1166,7 @@ class Server: NSObject
             }
             catch
             {
-                print("get fuel error: \(error)")
+                Log_Add("get fuel error: \(error)")
                 DispatchQueue.main.async()
                 {
                     failure(self.fuelError())
