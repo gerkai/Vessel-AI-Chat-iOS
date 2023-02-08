@@ -60,6 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                         Log_Add("Captured ExpertID: \(String(describing: expertID))")
                     }
                 }
+                else
+                {
+                    //so we can track that a user launched the app with a URL but there was no expert_id
+                    //Firebase didn't make a successful match in this case.
+                    analytics.log(event: .prlNoExpertID)
+                }
                 if let range = component.range(of: "logo=")
                 {
                     let logoString = String(component[range.upperBound...])

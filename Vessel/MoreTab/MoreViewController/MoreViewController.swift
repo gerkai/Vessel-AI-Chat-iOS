@@ -6,19 +6,25 @@
 //
 
 import UIKit
+import MessageUI
 
-class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuViewControllerDelegate
+class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuViewControllerDelegate, MFMailComposeViewControllerDelegate
 {
     // MARK: Views
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var environmentLabel: UILabel!
+    @IBOutlet private weak var qrImageView: UIImageView!
+    @IBOutlet private weak var companyNameLabel: UILabel!
+    @IBOutlet private weak var practitionerView: UIView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .moreTabFlow
     
     // MARK: Model
     private let viewModel = MoreViewModel()
+    private var practitionerName: String?
+    private var practitionerDownloadURL: String?
     
     override func viewDidLoad()
     {
@@ -35,6 +41,52 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
             viewModel.addDebugLog()
             tableView.reloadData()
         }
+        self.companyNameLabel.text = ""
+        if viewModel.shouldShowPractitionerSection()
+        {
+            viewModel.practitionerInfo
+            { name, qrString in
+                self.practitionerName = name
+                self.practitionerDownloadURL = qrString
+                self.companyNameLabel.text = name
+                self.qrImageView.image = self.createQR(qrString)
+                self.practitionerView.isHidden = false
+            }
+            onFailure:
+            {
+                self.practitionerView.isHidden = true
+            }
+        }
+        else
+        {
+            practitionerView.isHidden = true
+        }
+    }
+    
+    func createQR(_ string: String) -> UIImage?
+    {
+        let data = string.data(using: String.Encoding.ascii)
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else
+        {
+            return nil
+        }
+        qrFilter.setValue(data, forKey: "inputMessage")
+        guard let qrImage = qrFilter.outputImage else
+        {
+            return nil
+        }
+        
+        // Scale the image
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledQrImage = qrImage.transformed(by: transform)
+        
+        // Get a CIContext
+        let context = CIContext()
+        // Create a CGImage *from the extent of the outputCIImage*
+        guard let processedImage = context.createCGImage(scaledQrImage, from: scaledQrImage.extent) else { return nil }
+        // Finally, get a usable UIImage from the CGImage
+        let convertedImage = UIImage(cgImage: processedImage)
+        return convertedImage
     }
     
     func environment() -> String
@@ -62,6 +114,78 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     {
         viewModel.key.append(1)
         viewModel.key.remove(at: 0)
+    }
+    
+    @IBAction func onMailButton()
+    {
+        if MFMailComposeViewController.canSendMail()
+        {
+            if let qrString = practitionerDownloadURL
+            {
+                let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + qrString
+                
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                mailComposer.setSubject(NSLocalizedString("Vessel Wellness App", comment: "email subject line"))
+                //mailComposer.setToRecipients([MAIL_RECIPIENT])
+                mailComposer.setMessageBody(messageBody, isHTML: false)
+                mailComposer.modalPresentationStyle = .fullScreen
+                present(mailComposer, animated: true)
+            }
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Debug Log", message: "E-mail is not currently available for this device", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
+            { (action) in
+                //print("You've pressed cancel");
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
+        }
+    }
+    
+    @IBAction func onShareButton()
+    {
+        if let qrString = practitionerDownloadURL
+        {
+            let messageBody = NSLocalizedString("Tap on this link to download the Vessel Wellness app\n\n", comment: "") + qrString
+            
+            //let objectsToShare = [messageBody, myWebsiteURL, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+            let objectsToShare = [messageBody] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //Excluded Activities
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            
+            activityVC.popoverPresentationController?.sourceView = self.view
+            present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+    {
+        switch result
+        {
+            case .cancelled:
+                print("Mail cancelled")
+            case .saved:
+                print("Mail saved")
+            case .sent:
+                print("Mail sent")
+            case .failed:
+                print("Mail sent failure: %@", error!.localizedDescription)
+            if let description = error?.localizedDescription
+            {
+                UIView.showError(text: NSLocalizedString("Couldn't send mail", comment: ""), detailText: description, image: nil)
+            }
+            default:
+                break
+        }
+        controller.dismiss(animated: true)
     }
 }
 

@@ -209,6 +209,7 @@ class ObjectStore: NSObject
                         let decoder = JSONDecoder()
 
                         let object = try decoder.decode(T.self, from: json)
+                        self.serverSave(object, notifyNewDataArrived: false)
                         success(object)
                     }
                     catch

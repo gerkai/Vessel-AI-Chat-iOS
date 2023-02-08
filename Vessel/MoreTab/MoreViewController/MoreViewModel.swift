@@ -122,4 +122,49 @@ class MoreViewModel
         let index = options.firstIndex(of: .debugLog)!
         options.remove(at: index)
     }
+    
+    func shouldShowPractitionerSection() -> Bool
+    {
+        if Contact.main()!.expert_id == nil
+        {
+            return false
+        }
+        return true
+    }
+    
+    //attempts to return expert business name. If nil, attempts to return expert first & last name. If also nil, name = ""
+    //if download_url is nil, returns failure (as we cannot generate a QR code then). Otherwise returns the download_url.
+    func practitionerInfo(onSuccess success: @escaping (_ name: String, _ qrString: String) -> Void, onFailure failure: @escaping () -> Void) -> ()
+    {
+        if let expertID = Contact.main()!.expert_id
+        {
+            ObjectStore.shared.get(type: Expert.self, id: expertID)
+            { expert in
+                var name = ""
+                if expert.business_name != nil
+                {
+                    name = expert.business_name!
+                }
+                else
+                {
+                    if let firstName = expert.first_name, let lastName = expert.last_name
+                    {
+                        name = firstName + " " + lastName
+                    }
+                }
+                if expert.download_url != nil
+                {
+                    success(name, expert.download_url!)
+                }
+                else
+                {
+                    failure()
+                }
+            }
+            onFailure:
+            {
+                failure()
+            }
+        }
+    }
 }

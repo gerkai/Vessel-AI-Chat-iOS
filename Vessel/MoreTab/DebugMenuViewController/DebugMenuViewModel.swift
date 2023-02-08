@@ -167,7 +167,7 @@ enum DebugMenuOption: Int
             Storage.clear(objectType: Plan.self)
             Storage.clear(objectType: Result.self)
             Storage.clear(objectType: Step.self)
-            
+            Storage.clear(objectType: Expert.self)
             //force today tab to update
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Lesson.self)])
         }

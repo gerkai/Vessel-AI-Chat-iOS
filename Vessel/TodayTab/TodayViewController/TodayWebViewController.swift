@@ -65,6 +65,7 @@ class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
         print("ERROR: \(error)")
     }
     
+    /*cw uncomment to view javascript
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
     {
         webView.evaluateJavaScript("JSON.stringify(localStorage)")
@@ -79,6 +80,7 @@ class TodayWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
             }
         }
     }
+     */
     // this handles target=_blank links by opening them in the same view
     /*func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
     {

@@ -17,7 +17,8 @@ class ObjectLoader: NSObject
     func loadCoreObjects(onDone done: @escaping () -> Void)
     {
         Log_Add("LoadCoreObjects(Result, Food, Curriculum, Plan)")
-        ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self], onSuccess: 
+        //add Expert once back end updates objects/all endpoint to handle Expert
+        ObjectStore.shared.getMostRecent(objectTypes: [Result.self, Food.self, Curriculum.self, Plan.self/*, Expert.self*/], onSuccess:
         {
             Contact.main()!.getFuel
             {

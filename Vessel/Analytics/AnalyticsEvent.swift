@@ -29,6 +29,7 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
+    case prlNoExpertID
     case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed(cardUUID: String)
     case scanError(errorString: String)
@@ -65,6 +66,7 @@ enum AnalyticsEvent
         case .lessonCompleted: return "Lesson Completed"
         case .lessonStarted: return "Lesson Started"
         case .logIn: return "Log In"
+        case .prlNoExpertID: return "PRL No Expert ID"
         case .sampleImageCaptured: return "SAMPLE IMAGE CAPTURED"
         case .sampleImageConfirmed: return "SAMPLE IMAGE CONFIRMED"
         case .scanError: return "SCAN ERROR"
@@ -137,6 +139,8 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
+        case .prlNoExpertID:
+            return [:]
         case .sampleImageCaptured(let captureTime, let cardUUID):
             return ["attempt_time_ms": captureTime, "wellness_card_uuid": cardUUID]
         case .sampleImageConfirmed(let cardUUID):
