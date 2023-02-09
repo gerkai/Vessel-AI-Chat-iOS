@@ -8,8 +8,6 @@
 
 import Foundation
 
-//var moreViewModel: MoreViewModel?
-
 enum MoreTabOptions
 {
     case myAccount

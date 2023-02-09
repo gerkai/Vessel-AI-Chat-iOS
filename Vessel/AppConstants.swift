@@ -143,6 +143,7 @@ struct Constants
     static let ALLOW_BUGSEE_KEY = "ALLOW_BUGSEE"
     static let KEY_FIRST_LAUNCH_DATE = "KEY_FIRST_LAUNCH_DATE"
     static let KEY_PRACTITIONER_IMAGE_URL = "KEY_PRACTITIONER_IMAGE_URL"
+    static let KEY_PRACTITIONER_ID = "KEY_PRACTITIONER_ID"
     
     //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001

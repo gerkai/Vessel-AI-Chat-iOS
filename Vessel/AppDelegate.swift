@@ -49,6 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             let componentString = url.replacingOccurrences(of: "?", with: "&")
             let components = componentString.components(separatedBy: "&")
             //print(components)
+            if !componentString.contains("logo=")
+            {
+                Log_Add("1 Removing global ExpertLogo")
+                UserDefaults.standard.removeObject(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+            }
             for component in components
             {
                 if let range = component.range(of: "expert_id=")
@@ -71,11 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                     let logoString = String(component[range.upperBound...])
                     UserDefaults.standard.setValue(logoString, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
                     Log_Add("1 Setting Global ExpertLogo: \(logoString)")
-                }
-                else
-                {
-                    Log_Add("1 Removing global ExpertLogo")
-                    UserDefaults.standard.removeObject(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
                 }
             }
         }
