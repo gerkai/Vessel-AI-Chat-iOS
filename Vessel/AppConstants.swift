@@ -20,6 +20,7 @@ extension Notification.Name
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
     static let showSplashScreen = Notification.Name("ShowSplashScreen") //specify a bool object to show/hide
     static let selectChartViewCell = Notification.Name("SelectChartViewCell") //so all charts can by in sync
+    static let gotCobrandingImage = Notification.Name("GotCobrandingImage") //let splash screen know cobranding arrived late
 }
 
 struct Constants

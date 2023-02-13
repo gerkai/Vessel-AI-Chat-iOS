@@ -76,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                     let logoString = String(component[range.upperBound...])
                     UserDefaults.standard.setValue(logoString, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
                     Log_Add("1 Setting Global ExpertLogo: \(logoString)")
+                    //post a notification in case splash screen already got instantiated. Splash screen will pick up this notification.
+                    NotificationCenter.default.post(name: .gotCobrandingImage, object: nil, userInfo: ["logo": logoString])
                 }
             }
         }
