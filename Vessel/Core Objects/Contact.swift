@@ -33,6 +33,24 @@ class Contact: CoreObjectProtocol
     static var MainID: Int = 0
     static var SavedEmail: String? //temporary place to hold e-mail during account creation
     static var PractitionerID: Int? //temporary place to hold pa_id after app starts up but before user logged in. Set by app delegate
+    {
+        get
+        {
+            return UserDefaults.standard.object(forKey: Constants.KEY_PRACTITIONER_ID) as? Int
+        }
+        set
+        {
+            if newValue == nil
+            {
+                UserDefaults.standard.removeObject(forKey: Constants.KEY_PRACTITIONER_ID)
+            }
+            else
+            {
+                UserDefaults.standard.set(newValue, forKey: Constants.KEY_PRACTITIONER_ID)
+            }
+        }
+    }
+    
     static var FuelInfo: Fuel? //the fuel data for the current Contact
     
     var id: Int
