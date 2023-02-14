@@ -186,6 +186,7 @@
 		3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */; };
 		3FEACB1F28FA073600686D79 /* ChartZone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEACB1E28FA073600686D79 /* ChartZone.xib */; };
 		3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEACB2028FA075F00686D79 /* ChartZone.swift */; };
+		3FEDE75F299C0D7100F18A0E /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDE75E299C0D7100F18A0E /* TermsOfServiceViewController.swift */; };
 		3FEFDAED296E00C500A4FA2E /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAEC296E00C500A4FA2E /* ReviewViewController.swift */; };
 		3FEFDAEF296E00E200A4FA2E /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEFDAEE296E00E200A4FA2E /* Review.storyboard */; };
 		3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */; };
@@ -505,6 +506,7 @@
 		3FEACB1C28F7893C00686D79 /* ReagentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentDetailsViewController.swift; sourceTree = "<group>"; };
 		3FEACB1E28FA073600686D79 /* ChartZone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartZone.xib; sourceTree = "<group>"; };
 		3FEACB2028FA075F00686D79 /* ChartZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartZone.swift; sourceTree = "<group>"; };
+		3FEDE75E299C0D7100F18A0E /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		3FEFDAEC296E00C500A4FA2E /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		3FEFDAEE296E00E200A4FA2E /* Review.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Review.storyboard; sourceTree = "<group>"; };
 		3FEFDAF0296E04DE00A4FA2E /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
@@ -1055,6 +1057,7 @@
 				3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
 				3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */,
+				3FEDE75E299C0D7100F18A0E /* TermsOfServiceViewController.swift */,
 				3F0547D127CAFD19006E3098 /* TestCardExistCheckingViewController.swift */,
 				3FE369EE27C9A88A00231D42 /* WelcomeSignInViewController.swift */,
 			);
@@ -1870,6 +1873,7 @@
 				725F38292935EFDE00A48B3E /* CheckMarkCardView.swift in Sources */,
 				3F59A16228DFFB67005E5F46 /* ResultsTabMVVMViewController.swift in Sources */,
 				3F9C67BA28FF3E7E00BC44FA /* ExpandableContentView.swift in Sources */,
+				3FEDE75F299C0D7100F18A0E /* TermsOfServiceViewController.swift in Sources */,
 				729EE03D295696FF00183922 /* UIScreenExtension.swift in Sources */,
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */,
