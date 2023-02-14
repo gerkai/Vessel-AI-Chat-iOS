@@ -13,4 +13,9 @@ class TermsOfServiceViewController: UIViewController
     {
         super.viewDidLoad()
     }
+    
+    @IBAction func close()
+    {
+        dismiss(animated: true)
+    }
 }
