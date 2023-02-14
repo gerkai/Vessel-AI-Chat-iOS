@@ -90,7 +90,8 @@ class SplashView: UIView
         contentView.fixInView(self)
         self.backgroundColor = .clear
         NotificationCenter.default.addObserver(self, selector: #selector(showSplashScreen), name: .showSplashScreen, object: nil)
-        
+        //this notification will come in if logo got set after splash screen was instantiated (covers race condition)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSplashScreen), name: .gotCobrandingImage, object: nil)
         animationView = .init(name: "splash_animation")
         animationView!.frame = animationContainerView.bounds
         animationView!.contentMode = .scaleAspectFit
@@ -206,6 +207,15 @@ class SplashView: UIView
             {
                 self.contentView.alpha = 0.0
             }
+        }
+    }
+    
+    @objc func updateSplashScreen(_ notification: NSNotification)
+    {
+        if let logoURL = notification.userInfo?["logo"] as? String
+        {
+            setImageURL(urlString: logoURL)
+            setMode(mode: .practitioner)
         }
     }
 }
