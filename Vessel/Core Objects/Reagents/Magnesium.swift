@@ -23,7 +23,7 @@ let Magnesium = Reagent(
             description: NSLocalizedString("Good job! You’ve filled up your magnesium tank, and a slight excess is spilling out into your urine. This is just what you want.  Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being in a good range for Magnesium.", comment: ""))),
         Bucket(low: 0.0, high: 100.0, score: 20.0, evaluation: .low,
             hint: TitleDescription(title: NSLocalizedString("You’re low in Magnesium", comment: ""),
-            description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")))],
+            description: NSLocalizedString("Not to worry. You can improve your levels by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. You got this!", comment: "")))],
     goalImpacts: [
         GoalImpact(goalID: 1, impact: 3),
         GoalImpact(goalID: 2, impact: 1),

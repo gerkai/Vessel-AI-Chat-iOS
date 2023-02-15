@@ -23,10 +23,10 @@ let Hydration = Reagent(
             description: NSLocalizedString("Good job! You’re getting enough water to help your body function at its best. Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience from being well hydrated.", comment: ""))),
         Bucket(low: 1.006, high: 1.015, score: 80.0, evaluation: .low,
             hint: TitleDescription(title: NSLocalizedString("You're under hydrated", comment: ""),
-            description: NSLocalizedString("You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: ""))),
+            description: NSLocalizedString("You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. You got this!", comment: ""))),
         Bucket(low: 1.015, high: 1.031, score: 20.0, evaluation: .veryLow,
             hint: TitleDescription(title: NSLocalizedString("You’re dehydrated", comment: ""),
-            description: NSLocalizedString("Not to worry. You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. Tap below to see your personalized plan. You got this!", comment: "")))],
+            description: NSLocalizedString("Not to worry. You can improve your hydration level by changing your daily water intake. You should start to see results in 1-2 days so you may want to re-test to make sure you’re hitting your target. You got this!", comment: "")))],
     goalImpacts: [
         GoalImpact(goalID: 1, impact: 1),
         GoalImpact(goalID: 2, impact: 3),

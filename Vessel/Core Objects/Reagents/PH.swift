@@ -20,7 +20,7 @@ let PH = Reagent(
         Bucket(low: 6.0, high: 7.75, score: 100.0, evaluation: .good,
             hint: TitleDescription(title: NSLocalizedString("Your pH level is balanced", comment: ""), description: NSLocalizedString("Good job! You’re keeping your body’s acid-base status well balanced. Keep up the good work! Check out the Science section below to see some of the potential benefits you may experience by having a balanced pH.", comment: ""))),
         Bucket(low: 5.0, high: 6.0, score: 30.0, evaluation: .low,
-            hint: TitleDescription(title: NSLocalizedString("You're a bit acidic", comment: ""), description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. Click below to see your personalized plan. You got this!", comment: "")))],
+            hint: TitleDescription(title: NSLocalizedString("You're a bit acidic", comment: ""), description: NSLocalizedString("Not to worry. You can improve your ph by changing your nutrient intake, whether that’s with food and/or supplements. Be patient because it can take 1-2 weeks to see your levels improve. You got this!", comment: "")))],
     goalImpacts: [
         GoalImpact(goalID: 5, impact: 1),
         GoalImpact(goalID: 6, impact: 1),
