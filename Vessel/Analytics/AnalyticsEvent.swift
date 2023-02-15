@@ -29,7 +29,11 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
+    case prlAfterTestGetSupplement
+    case prlClicked(url: String)
     case prlNoExpertID
+    case prlTodayPageGetSupplement
+    case prlTodayPageShowIngredients
     case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed(cardUUID: String)
     case scanError(errorString: String)
@@ -66,7 +70,11 @@ enum AnalyticsEvent
         case .lessonCompleted: return "Lesson Completed"
         case .lessonStarted: return "Lesson Started"
         case .logIn: return "Log In"
-        case .prlNoExpertID: return "PRL No Expert ID"
+        case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
+        case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
+        case .prlNoExpertID: return "PRL NO EXPERT ID"
+        case .prlTodayPageGetSupplement: return "TODAY PAGE GET SUPPLEMENT"
+        case .prlTodayPageShowIngredients: return "TODAY PAGE SHOW INGREDIENTS"
         case .sampleImageCaptured: return "SAMPLE IMAGE CAPTURED"
         case .sampleImageConfirmed: return "SAMPLE IMAGE CONFIRMED"
         case .scanError: return "SCAN ERROR"
@@ -139,7 +147,15 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
+        case .prlAfterTestGetSupplement:
+            return [:]
+        case .prlClicked(let url):
+            return ["url": url]
         case .prlNoExpertID:
+            return [:]
+        case .prlTodayPageGetSupplement:
+            return [:]
+        case .prlTodayPageShowIngredients:
             return [:]
         case .sampleImageCaptured(let captureTime, let cardUUID):
             return ["attempt_time_ms": captureTime, "wellness_card_uuid": cardUUID]
