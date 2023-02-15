@@ -73,7 +73,10 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
     @IBAction func onTermsButtonTapped(_ sender: Any)
     {
         self.view.endEditing(true)
-        openInSafari(url: Constants.termsOfServiceURL)
+        //openInSafari(url: Constants.termsOfServiceURL)
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TermsOfServiceViewController") as! TermsOfServiceViewController
+        self.present(vc, animated: true)
     }
     
     @IBAction func onNextButtonTapped(_ sender: Any)

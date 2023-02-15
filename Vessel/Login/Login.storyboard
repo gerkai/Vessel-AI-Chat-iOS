@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVj-Xu-UJn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LVj-Xu-UJn">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -399,6 +400,769 @@
             </objects>
             <point key="canvasLocation" x="18.399999999999999" y="831.63418290854577"/>
         </scene>
+        <!--Terms Of Service View Controller-->
+        <scene sceneID="4U3-8L-geX">
+            <objects>
+                <viewController storyboardIdentifier="TermsOfServiceViewController" modalPresentationStyle="overFullScreen" id="HpD-PT-zEf" customClass="TermsOfServiceViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wUn-ch-RU2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="C88-BN-9kU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsO-Rv-hJ6" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="9750.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vessel_logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="rH7-x9-Ab9">
+                                                <rect key="frame" x="125.5" y="60" width="124.5" height="44.5"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TERMS OF USE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72I-Tt-q8T">
+                                                <rect key="frame" x="128.5" y="120.5" width="118.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLEASE READ THESE TERMS OF USE CAREFULLY BEFORE USING THIS APP." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2j-q5-la2">
+                                                <rect key="frame" x="20" y="157" width="335" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-WE-6lC">
+                                                <rect key="frame" x="20" y="214" width="335" height="354"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">By using this application (the “App”) on any computer, mobile phone, tablet, console or any other device (collectively, “Device”), you assert that you have read, understand and agree to be bound by these Terms of Use and any other applicable law. Vessel Health, Inc. (“Vessel”) may change these Terms of Use at any time without notice, effective upon its posting to the App. Your continued use of the App shall be considered your acceptance to the revised Terms of Use. If you do not agree to these Terms of Use, you shall not use this App.</string>
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="17" name="NoeText"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="f3m-ld-AzW">
+                                                <rect key="frame" x="20" y="584" width="335" height="9150.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="84f-a2-Wsc" userLabel="Medical Disclaimer">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="385"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9o-2M-2c0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="11" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="1.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpO-VM-9Dw">
+                                                                <rect key="frame" x="19" y="0.0" width="316" height="385"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Medical Disclaimer.">
+                                                                        <attributes>
+                                                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content"> The content of this app is provided as an information source and is not intended as, nor should it be considered a substitute for, professional medical advice. If you have,or suspect you have, a medical problem, promptly contact your professional healthcare provider. This app is not meant to replace or supersede the instructions of your physician, dietitian, or any other healthcare provider. For any and all treatment management concerns, contact your physician or dietitian directly.</string>
+<attributes>
+    <font key="NSFont" size="17" name="NoeText"/>
+    <real key="NSKern" value="0.0"/>
+    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <real key="NSStrokeWidth" value="0.0"/>
+</attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CLZ-eT-adw" userLabel="Intellectual Property">
+                                                        <rect key="frame" x="0.0" y="401" width="335" height="437.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLa-DN-CmU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="2.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRw-WI-gM7">
+                                                                <rect key="frame" x="22.5" y="0.0" width="312.5" height="437.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Intellectual Property">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment content=". ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <font key="NSOriginalFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">All intellectual property on the App is owned by Vessel or its licensors, which includes materials protected by copyright, trademark, or patent laws. All trademarks, service marks and trade names are owned, registered and/or licensed by Vessel. All content on the App (except for Personal Information), including but not limited to text, software, scripts, code, designs, graphics, photos, sounds, music, videos, applications, interactive features and all other content (“Content”) is a collective work under the United States and other copyright laws and is the proprietary property of Vessel; All rights reserved.</string>
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="NoeText"/>
+                                                                            <real key="NSKern" value="0.0"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mfR-dS-SNx" userLabel="App Use Restrictions">
+                                                        <rect key="frame" x="0.0" y="854.5" width="335" height="565"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpw-G2-eN6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="3.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUS-1Q-28Z">
+                                                                <rect key="frame" x="22" y="0.0" width="313" height="565"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="App Use Restrictions. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">You may use the Content only for your own non-commercial use to use the App. You agree not to change or delete any ownership notices from materials downloaded or printed from the App. You agree not to modify, copy, translate, broadcast, perform, display, distribute, frame, reproduce, republish, download, display, post, transmit or sell any Intellectual Property or Content appearing on the App, including Personal Information (defined below), without Vessel’s prior written consent, unless it is your own Personal Information that you legally post on the App. You agree not to use any data mining, robots, scraping or similar data gathering methods. Nothing in these Terms of Use shall be interpreted as granting any license of intellectual property rights to you.</string>
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="NoeText"/>
+                                                                            <real key="NSKern" value="0.0"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1n1-pM-r9u" userLabel="Personal Information">
+                                                        <rect key="frame" x="0.0" y="1435.5" width="335" height="412"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfN-sg-SKt">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="4.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yn-Ql-XQd">
+                                                                <rect key="frame" x="22.5" y="0.0" width="312.5" height="412"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Personal Information. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">To use the App, you may be asked to provide certain personal information (the “Personal Information”), including, but not limited to, information about your weight, age and gender, to optimize your use of the App. If you choose to provide such Personal Information, you agree to provide accurate and current information about yourself, and Vessel will not be responsible for any injury related to any Personal Information you submit to the App or omit. The use or disclosure of any Personal Information you supply will be governed by our Privacy Policy.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="siG-Sy-DZC" userLabel="Nutritionist Chat Disclaimer">
+                                                        <rect key="frame" x="0.0" y="1863.5" width="335" height="1431.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJ3-qz-D3r">
+                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="5.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRO-dL-r84">
+                                                                <rect key="frame" x="23" y="0.0" width="312" height="1431.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Nutritionist Chat Disclaimer. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">INFORMATION PROVIDED BY THE NUTRITIONIST CHAT FEATURE IN THIS APP IS PROVIDED ON AN "AS IS," "AS AVAILABLE" BASIS. YOU AGREE THAT USE OF THE NUTRITIONIST CHAT AND FOLLOWING ANY NUTRITIONIST ADVICE OR RECOMMENDATIONS IS DONE AT YOUR SOLE RISK. THE NUTRITIONIST DOES NOT KNOW OR HAVE ACCESS TO ANY OF YOUR HEALTH HISTORY BEYOND THE INFORMATION SUPPLIED DIRECTLY TO THEM, BY YOU. THE NUTRITIONIST’S ADVICE, OPINIONS AND RECOMMENDATIONS ARE NOT A SUBSTITUTE TO YOUR PRIMARY CAREGIVER OR OTHER HEALTH PROFESSIONALS GUIDANCE. YOU ARE RESPONSIBLE FOR FOLLOWING ANY AND ALL PERSONAL HEALTHCARE PROFESSIONALS RECOMMENDATIONS. THE NUTRITIONIST MAY OFFER DIETARY RECOMMENDATIONS. YOU ARE RESPONSIBLE FOR ENSURING YOU DO NOT ALTER YOUR DIET WITHOUT CONSULTING YOUR PRIMARY DOCTOR OR OTHER HEALTHCARE PROFESSIONALS. YOU ARE RESPONSIBLE FOR NOT INGESTING FOOD OR OTHER SUPPLEMENTS THAT YOU KNOW, OR SHOULD KNOW, CAUSE ALLERGIC REACTIONS. VESSEL IS NOT RESPONSIBLE FOR YOUR RELIANCE, INCLUDING NEGLIGENT RELIANCE, ON NUTRITIONIST ADVICE OR YOUR CONSUMPTION OF SUBSTANCES CAUSING ALLERGIC REACTIONS. VESSEL DISCLAIMS ALL WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO ANY EXPRESS WARRANTIES, STATUTORY WARRANTIES, AND ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. TO THE EXTENT YOUR JURISDICTION DOES NOT ALLOW LIMITATIONS ON WARRANTIES, THIS LIMITATION MAY NOT APPLY TO YOU. YOUR SOLE AND EXCLUSIVE REMEDY RELATING TO YOUR USE OF THIS APP SHALL BE TO DISCONTINUE USING THE APP.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9YU-8W-Jc7" userLabel="Links">
+                                                        <rect key="frame" x="0.0" y="3311" width="335" height="310"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWl-YE-9n2">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="6.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2s-Sw-2Yu">
+                                                                <rect key="frame" x="22.5" y="0.0" width="312.5" height="310"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Links. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">The App may contain links to websites, applications or other products or services operated by other companies (“Third Party Platforms”). Vessel does not endorse, monitor or have any control over these Third Party Platforms, which have separate terms of use and privacy policies. Vessel is not responsible for the content or policies of Third Party Platforms and you access such Third Party Platforms at your own risk.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0vZ-It-2b3" userLabel="Mobile Services">
+                                                        <rect key="frame" x="0.0" y="3637" width="335" height="412"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="559-Aw-yxq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="12.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="7.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dr-BZ-hw7">
+                                                                <rect key="frame" x="20.5" y="0.0" width="314.5" height="412"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Mobile Services. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">The App contains services and features that are available to certain mobile Devices. Your carrier’s normal rates and fees apply. Not all mobile services will work with all carriers or Devices. By using Vessel’s mobile services, you agree that we may communicate with you by electronic means to your mobile Device and that certain information about your use of these services may be shared with us. If you change or deactivate your mobile phone number, you must promptly update your account information to ensure that we don’t send your messages to a different person.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uhV-zt-eVb" userLabel="Indemnification">
+                                                        <rect key="frame" x="0.0" y="4065" width="335" height="361"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ep-uz-dEc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="8.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9v-Tq-KNH">
+                                                                <rect key="frame" x="22.5" y="0.0" width="312.5" height="361"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Indemnification. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">You agree to indemnify, defend, and hold harmless Vessel, its affiliates, officers, directors, employees, agents, licensors and suppliers from and against all claims, losses, liabilities, expenses, damages and costs, including, without limitation, attorneys’ fees, arising from or relating in any way to your Personal Information, your use of the App, your conduct in connection with the App or with other App users, or any violation of these Terms of Use, any law or the rights of any third party.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kaZ-yk-h5p" userLabel="Privacy">
+                                                        <rect key="frame" x="0.0" y="4442" width="335" height="131.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocr-s8-BEJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="9.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="067-Mr-ydF">
+                                                                <rect key="frame" x="22.5" y="0.0" width="312.5" height="131.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Privacy. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">Our Privacy Policy, which is incorporated into these Terms of Use by this reference, further describes the collection and use of information on this App.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o8c-Bs-JUR" userLabel="User Interaction Disclaimer">
+                                                        <rect key="frame" x="0.0" y="4589.5" width="335" height="437.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csO-0R-tIY">
+                                                                <rect key="frame" x="0.0" y="0.0" width="22" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="10.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hx6-Ne-N9i">
+                                                                <rect key="frame" x="30" y="0.0" width="305" height="437.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="User Interaction Disclaimer. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">You are solely responsible for your interactions with other people, whether online or in person. Vessel is not responsible or liable for any loss or damage resulting from any interaction with other App users, persons you meet through the App, or persons who find you because of information posted on, by or through the App. You agree to take reasonable precautions in all interactions with other users on the App, and conduct any necessary investigation before meeting another person. Vessel is under no obligation to become involved with any user dispute, but may do so at its own discretion.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-rG-TgF" userLabel="Warranty Disclaimer">
+                                                        <rect key="frame" x="0.0" y="5043" width="335" height="1075"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ak-mi-dS7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="17.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="11.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xaw-bh-UVk">
+                                                                <rect key="frame" x="25.5" y="0.0" width="309.5" height="1075"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Warranty Disclaimer. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">Vessel is not responsible or liable for any Personal Information posted on the App or for any offensive, unlawful or objectionable content you may encounter on or through the App. The App is provided “AS IS” and without warranties of any kind. To the fullest extent permitted by law, Vessel disclaims all warranties, express or implied, including, but not limited to, implied warranties of title, merchantability, fitness for a particular purpose and non-infringement. Vessel cannot guarantee and does not promise any specific results from use of the App. Vessel does not represent or warrant that the App will be uninterrupted or error-free, that any defects will be corrected, or that this App or the server that makes the App available are free of viruses or anything else harmful. To the fullest extent permitted by law, Vessel does not make any warranties or representations regarding the use of the materials or Content in the App in terms of their correctness, accuracy, adequacy, usefulness, reliability or otherwise. You understand and agree that you download or otherwise obtain Content at your own risk, and that you will be solely responsible for your use and any damage to your mobile Device, computer system or other Device in which you access the App, loss of data or other harm of any kind that may result. Vessel reserves the right to change any and all Content and other items used or contained in the App at any time without notice. Some states do not permit limitations or exclusions on warranties, so the above limitations may not apply to you.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zmD-3k-ci4" userLabel="Limitation of Liability">
+                                                        <rect key="frame" x="0.0" y="6134" width="335" height="845.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ty-xl-J6U">
+                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="12.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f82-t4-4Zb">
+                                                                <rect key="frame" x="29" y="0.0" width="306" height="845.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Limitation of Liability. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">VESSEL SHALL NOT BE LIABLE FOR ANY DIRECT, SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES, INCLUDING FOR ANY LOST PROFITS OR LOST DATA, THAT RESULT FROM THE USE OF, OR THE INABILITY TO USE, THIS APP OR THE CONDUCT OF OTHER APP USERS (WHETHER ONLINE OR OFFLINE) OR ATTENDANCE AT A VESSELEVENT OR ANY PERSONAL INFORMATION, EVEN IF VESSEL HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. YOU ASSUME TOTAL RESPONSIBILITY FOR YOUR USE OF THE APP. YOUR ONLY REMEDY AGAINST VESSEL FOR USE OF THE APP OR ANY CONTENT IS TO STOP USING THE APP. THAT SAID, IF VESSEL IS FOUND TO BE LIABLE TO YOU FOR ANY DAMAGE OR LOSS WHICH IS IN ANY WAY CONNECTED WITH YOUR USE OF THIS APP OR ANY CONTENT, VESSEL’S LIABILITY SHALL NOT EXCEED THE MINIMUM AMOUNT AMOUNT PERMITTED BY LAW. APPLICABLE LAW MAY NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY OR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.</string>
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="17" name="NoeText"/>
+                                                                                <real key="NSKern" value="0.0"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                                <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <real key="NSStrokeWidth" value="0.0"/>
+                                                                            </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zYX-XZ-OAc" userLabel="Forum">
+                                                        <rect key="frame" x="0.0" y="6995.5" width="335" height="845.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-SN-CEf">
+                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="13.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJP-4r-hcI">
+                                                                <rect key="frame" x="29" y="0.0" width="306" height="845.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Forum. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">You agree that this App shall be deemed a passive website solely based in San Diego, California, which does not give rise to personal jurisdiction over Vessel in jurisdictions other than California. You agree that this App, Terms of Use, Privacy Policy and any dispute between you and Vessel shall be governed in all respects by California law, without regard to choice of law provisions, and not by the 1980 U.N. Convention on contracts for the international sale of goods. Except where prohibited, you agree that all disputes, claims and legal proceedings directly or indirectly arising out of or relating to this App (including but not limited to the purchase of Vessel products) shall be resolved individually, without resort to any form of class action, and exclusively in the state or federal courts located in San Diego County, California. You consent to waive all defenses of lack of personal jurisdiction and forum non conveniens with respect to venue and jurisdiction in the state and federal courts of San Diego, California. Any cause of action or claim you may have with respect to the App (including but not limited to the purchase of Vessel products) must be commenced within one (1) year after the claim or cause of action arises.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3qB-e8-Sbr" userLabel="Notice and Waiver">
+                                                        <rect key="frame" x="0.0" y="7857" width="335" height="488.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-Fu-ach">
+                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="14.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u44-so-Tsw">
+                                                                <rect key="frame" x="29" y="0.0" width="306" height="488.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Notice and Waiver. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">By using the App, you agree to receive certain electronic communications from Vessel. You agree that any notice, agreement, disclosure or other communication that Vessel sends you electronically will satisfy any legal communication requirements, including that such communications be in writing. Vessel’s failure to insist upon or enforce strict performance of any of these Terms of Use shall not be considered a waiver of any provision or right. Neither the course of conduct between the parties nor trade practice shall modify any of these Terms of Use. Vessel may assign its rights and duties under these Terms of Use to any party at any time without notice to you.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TxP-SB-Y3x" userLabel="Severability">
+                                                        <rect key="frame" x="0.0" y="8361.5" width="335" height="259"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1k-vJ-aIv">
+                                                                <rect key="frame" x="0.0" y="0.0" width="21.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="15.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2T1-gp-QOm">
+                                                                <rect key="frame" x="29.5" y="0.0" width="305.5" height="259"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Severability. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">If any provision in these Terms of Use is held invalid, the remainder of these Terms of Use shall continue to be enforceable. If any provision in these Terms of Use is deemed unlawful, void or unenforceable, then that provision is deemed severable from these Terms of Use and the remaining provisions are still valid and enforceable.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uu0-e8-yIi" userLabel="Termination">
+                                                        <rect key="frame" x="0.0" y="8636.5" width="335" height="514"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icy-Xv-BYh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="21.5" height="30.5"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="16.">
+                                                                        <attributes>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-dn-NSe">
+                                                                <rect key="frame" x="29.5" y="0.0" width="305.5" height="514"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Termination. ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <font key="NSFont" size="17" name="BananaGrotesk-Bold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment>
+                                                                        <string key="content">Vessel reserves the right in its sole discretion to terminate your account, delete your profile and any of your Personal Information, and restrict your use of all or any part of the App for any or no reason, without notice, and without liability to you or anyone else. Vessel also reserves the right to block users from certain IP addresses or Device numbers and prevent access to the App. These Terms of Use remain in effect even after your account is terminated. The Terms of Use relating to Intellectual Property, Indemnification, User Interaction Disclaimer, Warranty Disclaimer, Limitation of Liability, Miscellaneous, Severability and terms that by their nature may survive termination shall survive any termination.</string>
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="17" name="NoeText"/>
+                                                                        <real key="NSKern" value="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                                        <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <real key="NSStrokeWidth" value="0.0"/>
+                                                                    </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="rH7-x9-Ab9" firstAttribute="centerX" secondItem="gsO-Rv-hJ6" secondAttribute="centerX" id="1ga-hW-tdc"/>
+                                            <constraint firstItem="r2j-q5-la2" firstAttribute="trailing" secondItem="gsO-Rv-hJ6" secondAttribute="trailing" constant="-20" id="2dm-kh-b4u"/>
+                                            <constraint firstItem="GJ3-WE-6lC" firstAttribute="trailing" secondItem="gsO-Rv-hJ6" secondAttribute="trailing" constant="-20" id="DTg-gK-35n"/>
+                                            <constraint firstAttribute="trailing" secondItem="f3m-ld-AzW" secondAttribute="trailing" constant="20" id="JUz-zd-RZQ"/>
+                                            <constraint firstItem="72I-Tt-q8T" firstAttribute="centerX" secondItem="rH7-x9-Ab9" secondAttribute="centerX" id="NN2-wD-iVe"/>
+                                            <constraint firstItem="r2j-q5-la2" firstAttribute="leading" secondItem="gsO-Rv-hJ6" secondAttribute="leading" constant="20" id="PSf-O7-bgo"/>
+                                            <constraint firstItem="GJ3-WE-6lC" firstAttribute="top" secondItem="r2j-q5-la2" secondAttribute="bottom" constant="16" id="SWT-He-Jac"/>
+                                            <constraint firstItem="f3m-ld-AzW" firstAttribute="leading" secondItem="gsO-Rv-hJ6" secondAttribute="leading" constant="20" id="VW2-iv-INQ"/>
+                                            <constraint firstItem="72I-Tt-q8T" firstAttribute="top" secondItem="rH7-x9-Ab9" secondAttribute="bottom" constant="16" id="el2-Ws-UcY"/>
+                                            <constraint firstItem="f3m-ld-AzW" firstAttribute="top" secondItem="GJ3-WE-6lC" secondAttribute="bottom" constant="16" id="gzj-Ge-fRz"/>
+                                            <constraint firstItem="r2j-q5-la2" firstAttribute="top" secondItem="72I-Tt-q8T" secondAttribute="bottom" constant="16" id="jNQ-5f-fYI"/>
+                                            <constraint firstItem="f3m-ld-AzW" firstAttribute="bottom" secondItem="gsO-Rv-hJ6" secondAttribute="bottom" constant="-16" id="r3k-ML-v3X"/>
+                                            <constraint firstItem="GJ3-WE-6lC" firstAttribute="leading" secondItem="gsO-Rv-hJ6" secondAttribute="leading" constant="20" id="vgg-3S-y3s"/>
+                                            <constraint firstItem="rH7-x9-Ab9" firstAttribute="top" secondItem="gsO-Rv-hJ6" secondAttribute="top" constant="60" id="wi4-gE-XGK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="gsO-Rv-hJ6" firstAttribute="top" secondItem="Y0E-YO-mNN" secondAttribute="top" id="9Sj-ZK-ixc"/>
+                                    <constraint firstItem="gsO-Rv-hJ6" firstAttribute="bottom" secondItem="Y0E-YO-mNN" secondAttribute="bottom" id="FPZ-8e-klO"/>
+                                    <constraint firstItem="gsO-Rv-hJ6" firstAttribute="centerX" secondItem="C88-BN-9kU" secondAttribute="centerX" id="ZKn-tL-2Di"/>
+                                    <constraint firstItem="gsO-Rv-hJ6" firstAttribute="leading" secondItem="Y0E-YO-mNN" secondAttribute="leading" id="kKY-8t-HC5"/>
+                                    <constraint firstItem="gsO-Rv-hJ6" firstAttribute="trailing" secondItem="Y0E-YO-mNN" secondAttribute="trailing" id="tu3-Y8-ywh"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Y0E-YO-mNN"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Tla-IA-Xd2"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fi-KQ-QsH" userLabel="Back Button">
+                                <rect key="frame" x="20" y="44" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4Qb-xz-WGb"/>
+                                    <constraint firstAttribute="height" constant="50" id="cHj-aq-M6e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" title="Back" image="square_back_button">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="close" destination="HpD-PT-zEf" eventType="touchUpInside" id="TEp-Pe-mA4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OAR-hk-1cz"/>
+                        <color key="backgroundColor" red="0.8156862855" green="0.88627451660000001" blue="0.78431367870000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="9Fi-KQ-QsH" firstAttribute="leading" secondItem="wUn-ch-RU2" secondAttribute="leading" constant="20" id="A2U-7Z-aMe"/>
+                            <constraint firstItem="C88-BN-9kU" firstAttribute="leading" secondItem="wUn-ch-RU2" secondAttribute="leading" id="Awq-jV-ojV"/>
+                            <constraint firstItem="C88-BN-9kU" firstAttribute="bottom" secondItem="wUn-ch-RU2" secondAttribute="bottom" id="Ljj-Jq-PsR"/>
+                            <constraint firstItem="9Fi-KQ-QsH" firstAttribute="top" secondItem="wUn-ch-RU2" secondAttribute="top" constant="44" id="V7K-a0-s2C"/>
+                            <constraint firstItem="C88-BN-9kU" firstAttribute="top" secondItem="wUn-ch-RU2" secondAttribute="top" id="XxG-pg-fbE"/>
+                            <constraint firstItem="C88-BN-9kU" firstAttribute="trailing" secondItem="wUn-ch-RU2" secondAttribute="trailing" id="ZmZ-R4-qbT"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uq4-OH-Ft1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.600000000000001" y="1569.265367316342"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="5Lg-Ny-l71">
             <objects>
@@ -704,7 +1468,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiling Woman" translatesAutoresizingMaskIntoConstraints="NO" id="i4Q-7U-D7w">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="861"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naD-yC-VIh" userLabel="Back Button">
                                 <rect key="frame" x="20" y="44" width="50" height="50"/>
@@ -726,7 +1490,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-QE-Vbf">
-                                <rect key="frame" x="20" y="131" width="335" height="696"/>
+                                <rect key="frame" x="20" y="131" width="335" height="502"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-50-WWO">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="35"/>
@@ -756,10 +1520,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQx-Ia-Qd6">
-                                        <rect key="frame" x="0.0" y="55" width="335" height="111"/>
+                                        <rect key="frame" x="0.0" y="55" width="335" height="17"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-hZ-FOV">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="111"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="180" id="bdB-nD-rOS"/>
                                                 </constraints>
@@ -788,14 +1552,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWi-Ig-Lg3" userLabel="Spacer View">
-                                        <rect key="frame" x="0.0" y="186" width="335" height="50"/>
+                                        <rect key="frame" x="0.0" y="92" width="335" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="250" constant="1" id="cRJ-mM-2pm"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PY-h5-qwU">
-                                        <rect key="frame" x="0.0" y="256" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="112" width="335" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="VmW-4S-fZ5"/>
@@ -815,7 +1579,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcW-Fp-74b">
-                                        <rect key="frame" x="0.0" y="336" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="192" width="335" height="60"/>
                                         <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="EPf-4B-n1A"/>
@@ -833,7 +1597,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odW-Dc-ELh">
-                                        <rect key="frame" x="0.0" y="416" width="335" height="50"/>
+                                        <rect key="frame" x="0.0" y="272" width="335" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign Up with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDP-0O-z69">
                                                 <rect key="frame" x="104.5" y="0.0" width="126" height="20.5"/>
@@ -853,7 +1617,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ib-Fb-50R" customClass="VesselTextField" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="486" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="292" width="335" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="P5n-tk-hVm"/>
@@ -874,7 +1638,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqg-8e-8Fm" customClass="LoadingButton" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="566" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="372" width="335" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="tUK-U1-23s"/>
@@ -893,7 +1657,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Fww-kE-eNd" userLabel="Link Stack View">
-                                        <rect key="frame" x="0.0" y="646" width="335" height="50"/>
+                                        <rect key="frame" x="0.0" y="452" width="335" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lt-tY-FmT" userLabel="privacyButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="167.5" height="50"/>
