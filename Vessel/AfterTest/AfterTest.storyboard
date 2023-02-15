@@ -620,7 +620,7 @@
         <!--Get Supplements View Controller-->
         <scene sceneID="XjX-yF-RkJ">
             <objects>
-                <viewController storyboardIdentifier="GetSupplementsViewController" id="unF-nr-TWi" customClass="GetSupplementsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetSupplementsViewController" modalPresentationStyle="overFullScreen" id="unF-nr-TWi" customClass="GetSupplementsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zTC-2a-bLz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -631,8 +631,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4MO-9w-QAo" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Formulas" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-gC-Kfd">
-                                                <rect key="frame" x="0.0" y="106" width="414" height="340"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="Formulas" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-gC-Kfd">
+                                                <rect key="frame" x="20" y="96" width="374" height="440.5"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See what supplements can help you feel your best." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSF-Nh-Z7e">
                                                 <rect key="frame" x="20" y="536.5" width="374" height="54"/>
@@ -646,7 +646,7 @@
                                                     <fragment>
                                                         <string key="content">Take this simple 3 minute quiz and you'll get a personalized supplement plan based on your recent wellness test results and quiz answers.  It's one of the perks of your Vessel membership.</string>
                                                         <attributes>
-                                                            <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <font key="NSFont" size="16" name="NoeText-Book"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.6000000000000001" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -698,7 +698,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="leading" secondItem="4MO-9w-QAo" secondAttribute="leading" id="30V-ET-1ms"/>
+                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="leading" secondItem="4MO-9w-QAo" secondAttribute="leading" constant="20" id="30V-ET-1ms"/>
                                             <constraint firstItem="Y7b-T2-9Fg" firstAttribute="centerX" secondItem="4MO-9w-QAo" secondAttribute="centerX" id="98T-NE-uJc"/>
                                             <constraint firstItem="wOy-PE-8vF" firstAttribute="trailing" secondItem="4MO-9w-QAo" secondAttribute="trailing" constant="-20" id="Ack-Uk-HBg"/>
                                             <constraint firstItem="kbo-3N-Ch9" firstAttribute="leading" secondItem="4MO-9w-QAo" secondAttribute="leading" constant="20" id="FJj-bc-hoL"/>
@@ -709,10 +709,10 @@
                                             <constraint firstItem="kbo-3N-Ch9" firstAttribute="trailing" secondItem="4MO-9w-QAo" secondAttribute="trailing" constant="-20" id="anC-bh-cG2"/>
                                             <constraint firstItem="wOy-PE-8vF" firstAttribute="top" secondItem="kbo-3N-Ch9" secondAttribute="bottom" constant="28" id="bvB-h0-h9J"/>
                                             <constraint firstItem="kbo-3N-Ch9" firstAttribute="top" secondItem="oSF-Nh-Z7e" secondAttribute="bottom" constant="12" id="gf6-rR-hQK"/>
-                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="top" secondItem="4MO-9w-QAo" secondAttribute="top" constant="106" id="q6D-g9-Bh5"/>
-                                            <constraint firstItem="oSF-Nh-Z7e" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OBN-gC-Kfd" secondAttribute="bottom" constant="20" id="sgb-9q-mFQ"/>
+                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="top" secondItem="4MO-9w-QAo" secondAttribute="top" constant="96" id="q6D-g9-Bh5"/>
+                                            <constraint firstItem="oSF-Nh-Z7e" firstAttribute="top" secondItem="OBN-gC-Kfd" secondAttribute="bottom" id="sgb-9q-mFQ"/>
                                             <constraint firstItem="wOy-PE-8vF" firstAttribute="leading" secondItem="4MO-9w-QAo" secondAttribute="leading" constant="20" id="sgx-0k-d2y"/>
-                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="trailing" secondItem="4MO-9w-QAo" secondAttribute="trailing" id="wF0-aD-XIA"/>
+                                            <constraint firstItem="OBN-gC-Kfd" firstAttribute="trailing" secondItem="4MO-9w-QAo" secondAttribute="trailing" constant="-20" id="wF0-aD-XIA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1245,7 +1245,7 @@
     </scenes>
     <resources>
         <image name="Checkbox_beige_unselected" width="48" height="48"/>
-        <image name="Formulas" width="335" height="340"/>
+        <image name="Formulas" width="331.5" height="336.5"/>
         <image name="HappyWoman" width="161" height="237"/>
         <image name="progressMark" width="6" height="6"/>
         <image name="square_back_button" width="50" height="50"/>
