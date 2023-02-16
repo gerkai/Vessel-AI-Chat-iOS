@@ -102,7 +102,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     
     func openSupplementQuiz()
     {
-        analytics.log(event: .prlTodayPageGetSupplement)
+        analytics.log(event: .prlTodayPageGetSupplement(expertID: Contact.main()!.pa_id))
         Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
             Log_Add("Supplement Quiz: \(url)")

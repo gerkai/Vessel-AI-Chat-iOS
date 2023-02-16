@@ -299,6 +299,7 @@ extension MoreViewController: UITableViewDelegate
     
     private func openSupplementQuiz()
     {
+        analytics.log(event: .prlMoreTabGetSupplement(expertID: Contact.main()!.pa_id))
         Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
             print("SUCCESS: \(url)")
@@ -313,6 +314,7 @@ extension MoreViewController: UITableViewDelegate
     
     private func openFormulation()
     {
+        analytics.log(event: .prlMoreTabShowIngredients)
         Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
         { url in
             print("SUCCESS: \(url)")

@@ -29,10 +29,12 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
-    case prlAfterTestGetSupplement
+    case prlAfterTestGetSupplement(expertID: Int?)
     case prlClicked(url: String)
+    case prlMoreTabGetSupplement(expertID: Int?)
+    case prlMoreTabShowIngredients
     case prlNoExpertID
-    case prlTodayPageGetSupplement
+    case prlTodayPageGetSupplement(expertID: Int?)
     case prlTodayPageShowIngredients
     case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed(cardUUID: String)
@@ -72,6 +74,8 @@ enum AnalyticsEvent
         case .logIn: return "Log In"
         case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
         case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
+        case .prlMoreTabGetSupplement: return "MORE TAB GET SUPPLEMENT"
+        case .prlMoreTabShowIngredients: return "MORE TAB SHOW INGREDIENTS"
         case .prlNoExpertID: return "PRL NO EXPERT ID"
         case .prlTodayPageGetSupplement: return "TODAY PAGE GET SUPPLEMENT"
         case .prlTodayPageShowIngredients: return "TODAY PAGE SHOW INGREDIENTS"
@@ -147,14 +151,39 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
-        case .prlAfterTestGetSupplement:
-            return [:]
+        case .prlAfterTestGetSupplement(let expertID):
+            if let expertID = expertID
+            {
+                return ["expert_id": expertID]
+            }
+            else
+            {
+                return [:]
+            }
         case .prlClicked(let url):
             return ["url": url]
+        case .prlMoreTabGetSupplement(let expertID):
+            if let expertID = expertID
+            {
+                return ["expert_id": expertID]
+            }
+            else
+            {
+                return [:]
+            }
+        case .prlMoreTabShowIngredients:
+            return [:]
         case .prlNoExpertID:
             return [:]
-        case .prlTodayPageGetSupplement:
-            return [:]
+        case .prlTodayPageGetSupplement(let expertID):
+            if let expertID = expertID
+            {
+                return ["expert_id": expertID]
+            }
+            else
+            {
+                return [:]
+            }
         case .prlTodayPageShowIngredients:
             return [:]
         case .sampleImageCaptured(let captureTime, let cardUUID):

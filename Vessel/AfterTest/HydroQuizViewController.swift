@@ -22,7 +22,6 @@ class HydroQuizViewController: AfterTestMVVMViewController
     {
         super.viewDidLoad()
         
-        analytics.log(event: .prlAfterTestGetSupplement)
         for view in optionViews
         {
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onOptionTapped))

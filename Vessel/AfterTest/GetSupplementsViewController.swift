@@ -9,6 +9,7 @@ import UIKit
 
 class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewControllerDelegate
 {
+    @Resolved private var analytics: Analytics
     @IBOutlet weak var getSupplementsButton: LoadingButton!
     
     static func initWith(viewModel: AfterTestViewModel) -> GetSupplementsViewController
@@ -33,6 +34,7 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
     @IBAction func getSupplementPlan()
     {
         getSupplementsButton.showLoading()
+        analytics.log(event: .prlAfterTestGetSupplement(expertID: Contact.main()!.pa_id))
         Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
         { url in
             print("SUCCESS: \(url)")
