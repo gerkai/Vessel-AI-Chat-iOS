@@ -100,7 +100,7 @@ class ChartViewCell: UICollectionViewCell
                 //animate to selected state
                 if notification.userInfo?["animated"] as? Bool == true
                 {
-                    //print("Selecting cell \(tag) ANIMATED with wellness: \(wellnessScoreLabel.text)")
+                    //print("Selecting cell \(tag) ANIMATED")
                     if animatingSelected == false
                     {
                         animatingSelected = true
@@ -111,22 +111,19 @@ class ChartViewCell: UICollectionViewCell
                         }
                         completion:
                         { finished in
-                            if finished == true
+                            self.animatingSelected = false
+                            if self.infoHeight.constant == selectedHeight
                             {
-                                self.animatingSelected = false
-                                if self.infoHeight.constant == selectedHeight
-                                {
-                                    self.graphView.isSelected = true
-                                    self.infoView.alpha = 1.0
-                                    self.setScoreLabelPosition()
-                                }
+                                self.graphView.isSelected = true
+                                self.infoView.alpha = 1.0
+                                self.setScoreLabelPosition()
                             }
                         }
                     }
                 }
                 else
                 {
-                    //print("Selecting cell \(tag) with wellness: \(wellnessScoreLabel.text)")
+                    //print("Selecting cell \(tag)")
                     self.infoHeight.constant = selectedHeight
                     self.graphView.isSelected = true
                     self.infoView.alpha = 1.0

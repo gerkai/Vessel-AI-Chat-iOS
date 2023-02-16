@@ -67,12 +67,12 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     
     @objc func selected(_ notification: NSNotification)
     {
-        if let cell = notification.userInfo?["cell"] as? Int
+        if let cellIndex = notification.userInfo?["cell"] as? Int
         {
             //if my selectedCell doesn't match notification cell then move to the notification cell
-            if cell != selectedCell
+            if cellIndex != selectedCell
             {
-                preSelectCell(cellIndex: cell)
+                preSelectCell(cellIndex: cellIndex)
             }
         }
     }
@@ -104,6 +104,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
     func preSelectCell(cellIndex: Int)
     {
         selectedCell = cellIndex
+        //print("preselecting cell: \(cellIndex) for \(dataSource)")
         var offset = 0.0
         let numCells = dataSource.chartViewNumDataPoints()
         let selectionIncrement = (collectionView.contentSize.width - frame.width - 2.0) / Double(numCells - 2)
@@ -232,6 +233,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         //time delay of at least 1 display cycle ensures proper subview frame positioning of cell
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) //w/o this, infoLabel in wrong spot
         {
+            //print("Setting selected cell: \(cell.tag) in vc:\(String(describing: self.dataSource))")
             cell.select(selectionIntent: self.dataSource.chartViewWhichCellSelected(cellIndex: cell.tag))
         }
         if showScaleOnSelection == false

@@ -93,7 +93,7 @@ class TestsGoalsView: UIView, GoalLearnMoreTileViewDelegate, ReagentLearnMoreTil
         //add reagent tiles in the order specified by the Reagents array. Select the one that matches selectedReagentID
         for reagentID in ReagentOrder
         {
-            print("REAGENT ID: \(reagentID)")
+            //print("REAGENT ID: \(reagentID)")
             let id = reagentID.rawValue
             if let reagentResult = result.reagentResults.first(where: { $0.id == id })
             {
