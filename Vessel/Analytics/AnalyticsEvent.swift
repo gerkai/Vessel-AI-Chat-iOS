@@ -29,6 +29,7 @@ enum AnalyticsEvent
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
     case logIn(loginType: AnalyticsLoginType)
+    case logOut
     case prlAfterTestGetSupplement(expertID: Int?)
     case prlClicked(url: String)
     case prlMoreTabGetSupplement(expertID: Int?)
@@ -72,6 +73,7 @@ enum AnalyticsEvent
         case .lessonCompleted: return "Lesson Completed"
         case .lessonStarted: return "Lesson Started"
         case .logIn: return "Log In"
+        case .logOut: return "LOGOUT"
         case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
         case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
         case .prlMoreTabGetSupplement: return "MORE TAB GET SUPPLEMENT"
@@ -151,6 +153,8 @@ enum AnalyticsEvent
                     "Lesson Name": lessonName]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
+        case .logOut:
+            return [:]
         case .prlAfterTestGetSupplement(let expertID):
             if let expertID = expertID
             {

@@ -103,6 +103,7 @@ struct ServerError
 // MARK: - Server Class
 class Server: NSObject
 {
+    @Resolved private var analytics: Analytics
     static let shared = Server()
     //TODO: Move access and refresh tokens to secure storage
     var accessToken: String?
@@ -471,6 +472,7 @@ class Server: NSObject
     
     func logOut()
     {
+        analytics.log(event: .logOut)
         ObjectStore.shared.clearCache()
         print("logout() deleting keychain tokens")
         if accessToken != nil
