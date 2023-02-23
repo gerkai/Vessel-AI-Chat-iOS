@@ -31,6 +31,7 @@ enum AnalyticsEvent
     case logIn(loginType: AnalyticsLoginType)
     case prlAfterTestGetSupplement(expertID: Int?)
     case prlClicked(url: String)
+    case prlFoundExpertID(id: Int)
     case prlMoreTabGetSupplement(expertID: Int?)
     case prlMoreTabShowIngredients
     case prlNoExpertID
@@ -74,6 +75,7 @@ enum AnalyticsEvent
         case .logIn: return "Log In"
         case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
         case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
+        case .prlFoundExpertID: return "FOUND EXPERT ID"
         case .prlMoreTabGetSupplement: return "MORE TAB GET SUPPLEMENT"
         case .prlMoreTabShowIngredients: return "MORE TAB SHOW INGREDIENTS"
         case .prlNoExpertID: return "PRL NO EXPERT ID"
@@ -162,6 +164,8 @@ enum AnalyticsEvent
             }
         case .prlClicked(let url):
             return ["url": url]
+        case .prlFoundExpertID(let id):
+            return ["expert_id": id]
         case .prlMoreTabGetSupplement(let expertID):
             if let expertID = expertID
             {

@@ -66,12 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                         Log_Add("Captured ExpertID: \(String(describing: expertID))")
                     }
                 }
-                else
-                {
-                    //so we can track that a user launched the app with a URL but there was no expert_id
-                    //Firebase didn't make a successful match in this case.
-                    analytics.log(event: .prlNoExpertID)
-                }
                 if let range = component.range(of: "logo=")
                 {
                     let logoString = String(component[range.upperBound...])
@@ -80,6 +74,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                     //post a notification in case splash screen already got instantiated. Splash screen will pick up this notification.
                     NotificationCenter.default.post(name: .gotCobrandingImage, object: nil, userInfo: ["logo": logoString])
                 }
+            }
+            if let id = expertID
+            {
+                analytics.log(event: .prlFoundExpertID(id: id))
+            }
+            else
+            {
+                //so we can track that a user launched the app with a URL but there was no expert_id
+                //Firebase didn't make a successful match in this case.
+                analytics.log(event: .prlNoExpertID)
             }
         }
         return expertID
