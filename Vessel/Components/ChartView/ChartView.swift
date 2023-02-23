@@ -242,6 +242,7 @@ class ChartView: UIView, UIScrollViewDelegate, UICollectionViewDelegate, UIColle
         }
         if let date = Date.from(vesselTime: data[2].last_updated)
         {
+           // print("date: \(date) last_updated: \(data[2].last_updated)")
             let components = Date.components(for: date)
             cell.monthLabel.text = Date.abbreviationFor(month: components.month)
             cell.dayLabel.text = String(format: "%02i", components.day)
