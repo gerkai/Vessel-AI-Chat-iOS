@@ -64,10 +64,13 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             showDebugButton()
         }
         
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
-        vc.delegate = self
-        self.navigationController?.fadeTo(vc)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRL_NO_MATCH) == true
+        {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
+            vc.delegate = self
+            self.navigationController?.fadeTo(vc)
+        }
     }
     
     func showSplash()

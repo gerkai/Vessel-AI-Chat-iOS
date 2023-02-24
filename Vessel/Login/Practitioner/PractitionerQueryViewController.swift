@@ -86,7 +86,6 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
     {
         if yesButton.isChecked
         {
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = PractitionerSelectViewController.initWith(viewModel: viewModel)
             vc.delegate = self
             self.navigationController?.fadeTo(vc)
@@ -95,6 +94,7 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         {
             //then no button is checked
             navigationController?.fadeOut()
+            UserDefaults.standard.removeObject(forKey: Constants.KEY_PRL_NO_MATCH)
         }
     }
     

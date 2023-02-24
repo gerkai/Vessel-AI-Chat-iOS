@@ -59,10 +59,10 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
         
         for i in 0 ..< numExperts
         {
-            let expertInfo = viewModel.expertFor(index: i)
+            let expert = viewModel.expertFor(index: i)
             
             let selectionCheckmarkView = SelectionCheckmarkView()
-            selectionCheckmarkView.textLabel.text = expertInfo.expert_name
+            selectionCheckmarkView.textLabel.text = "\(expert.first_name ?? "") \(expert.last_name ?? "")"
             let heightConstraint = NSLayoutConstraint(item: selectionCheckmarkView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 72)
             selectionCheckmarkView.addConstraints([heightConstraint])
             selectionCheckmarkView.delegate = self
@@ -126,6 +126,7 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
         navigationArray.remove(at: navigationArray.count - 2) // To remove previous UIViewController
         self.navigationController?.viewControllers = navigationArray
         
+        UserDefaults.standard.removeObject(forKey: Constants.KEY_PRL_NO_MATCH)
         navigationController.fadeOut()
     }
     /*

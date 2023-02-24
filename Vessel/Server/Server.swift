@@ -84,6 +84,7 @@ let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_respon
 let USER_HAS_FUEL_PATH = "fuel"
 let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
 let GET_EXPERT_PATH = "fuel/expert"
+let GET_ALL_EXPERTS_PATH = "experts"
 
 // MARK: - Structs
 struct CardAssociation
@@ -1226,6 +1227,59 @@ class Server: NSObject
             print("Got server failure: \(message)")
             failure(message)
         }
+    }
+    
+    func getAllExperts(onSuccess success: @escaping (_ experts: [Expert]) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        var objectDict: [String: [String: Int]] = [:]
+        var experts: [Expert] = []
+
+        //last_updated of 0 will fetch all experts in database
+        objectDict["expert"] = ["last_updated": 0]
+        
+        let url = "\(API())\(GET_ALL_EXPERTS_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objectDict)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (data) in
+            if let objects = data["expert"]
+            {
+                for singleObjectDict in objects as! [[String: Any]]
+                {
+                    do
+                    {
+                        let json = try JSONSerialization.data(withJSONObject: singleObjectDict)
+                        let decoder = JSONDecoder()
+                        
+                        let object = try decoder.decode(Expert.self, from: json)
+                        experts.append(object)
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async()
+            {
+                success(experts)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
     }
     
     // MARK: - Lifestyle Recommendation

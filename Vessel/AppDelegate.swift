@@ -84,6 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 //so we can track that a user launched the app with a URL but there was no expert_id
                 //Firebase didn't make a successful match in this case.
                 analytics.log(event: .prlNoExpertID)
+                
+                //This will force the app to prompt the user if they were referred by a practitioner and ask them to select which one.
+                UserDefaults.standard.set(true, forKey: Constants.KEY_PRL_NO_MATCH)
             }
         }
         return expertID
