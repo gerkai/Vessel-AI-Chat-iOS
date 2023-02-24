@@ -115,7 +115,7 @@ class BirthdaySelectViewController: UIViewController, VesselScreenIdentifiable
 //MARK: - SelectionCheckmarkView Delegate
 extension BirthdaySelectViewController: SelectionCheckmarkViewDelegate
 {
-    func didTapCheckmark(_ isChecked: Bool)
+    func didTapCheckmark(_ checkmarkView: SelectionCheckmarkView, _ isChecked: Bool) 
     {
         var pickerAlpha = 1.0
         if isChecked

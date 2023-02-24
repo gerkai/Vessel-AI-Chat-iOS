@@ -11,7 +11,7 @@
 
 import UIKit
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate, SplashViewDelegate
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate, SplashViewDelegate, PractitionerQueryViewControllerDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
@@ -52,6 +52,28 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
+        showSplash()
+        
+        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
+        {
+            print("❇️ \(self)")
+        }
+        
+        if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
+        {
+            showDebugButton()
+        }
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
+        vc.delegate = self
+        self.navigationController?.fadeTo(vc)
+    }
+    
+    func showSplash()
+    {
+        //called at startup. Also called by PractitionerQueryViewController in case practitioner association/cobranding got updated
+        //print("SHOW SPLASH")
         splashView.set(visible: true)
         if Contact.PractitionerID == nil
         {
@@ -64,7 +86,9 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             }
             else
             {
-                Log_Add("No ImageURL in UserDefaults")
+                Log_Add("1 No ImageURL in UserDefaults")
+                splashView.setImageURL(urlString: nil)
+                splashView.setMode(mode: .normal)
             }
         }
         else
@@ -73,19 +97,16 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
             
             if let urlString = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
             {
+                Log_Add("ImageURL: \(urlString)")
                 splashView.setImageURL(urlString: urlString)
                 splashView.setMode(mode: .practitioner)
             }
-        }
-        
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
-        {
-            print("❇️ \(self)")
-        }
-        
-        if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
-        {
-            showDebugButton()
+            else
+            {
+                Log_Add("2 No ImageURL in UserDefaults")
+                splashView.setImageURL(urlString: nil)
+                splashView.setMode(mode: .normal)
+            }
         }
     }
     

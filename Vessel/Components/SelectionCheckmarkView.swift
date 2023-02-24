@@ -9,7 +9,7 @@ import UIKit
 
 protocol SelectionCheckmarkViewDelegate
 {
-    func didTapCheckmark(_ isChecked: Bool)
+    func didTapCheckmark(_ checkmarkView: SelectionCheckmarkView, _ isChecked: Bool)
 }
 
 class SelectionCheckmarkView: UIView
@@ -18,6 +18,8 @@ class SelectionCheckmarkView: UIView
     @IBOutlet var roundedView: UIView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
+    //@IBOutlet weak var maskedView: UIView!
+    //@IBOutlet weak var maskedCheckbox: UIImageView!
     var originalColor: UIColor!
     var delegate: SelectionCheckmarkViewDelegate?
     
@@ -33,9 +35,6 @@ class SelectionCheckmarkView: UIView
     {
         didSet
         {
-            //if there's a delegate, let it know
-            delegate?.didTapCheckmark(isChecked)
-            
             //animate checkmark
             UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
             {
@@ -46,6 +45,10 @@ class SelectionCheckmarkView: UIView
                 if self.isChecked == true
                 {
                     self.checkImage.image = UIImage(named: "checkbox_selected")
+                    if self.originalColor == nil
+                    {
+                        self.originalColor = self.roundedView.backgroundColor
+                    }
                     self.roundedView.backgroundColor = UIColor.white
                 }
                 else
@@ -87,6 +90,19 @@ class SelectionCheckmarkView: UIView
         self.backgroundColor = .clear
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        /* hanging on to this in case it's needed in the future
+        let image = getImageWithInvertedPixelsOfImage(image: maskedCheckbox.image!)
+
+        //let view = UIView(frame: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+
+        //maskedView.isHidden = true
+        let mask = CALayer()
+        mask.frame = CGRect(x: maskedCheckbox.frame.origin.x + 20, y: maskedCheckbox.frame.origin.y, width: maskedCheckbox.frame.size.width, height: maskedCheckbox.frame.size.height)
+        
+       // mask.contents = image.cgImage!
+        mask.contents = maskedCheckbox.image!.cgImage!
+        roundedView.layer.mask = mask
+        roundedView.layer.masksToBounds = true*/
     }
     
     override func awakeFromNib()
@@ -98,5 +114,23 @@ class SelectionCheckmarkView: UIView
     @IBAction func checkmarkPressed()
     {
         isChecked = !isChecked
+        //if there's a delegate, let it know
+        delegate?.didTapCheckmark(self, isChecked)
     }
+    /* hanging on to this in case it's needed in the future
+    func getImageWithInvertedPixelsOfImage(image: UIImage) -> UIImage
+    {
+        let rect = CGRect(origin: CGPoint(), size: image.size)
+
+        UIGraphicsBeginImageContextWithOptions(image.size, false, 2.0)
+        UIGraphicsGetCurrentContext()!.setBlendMode(.copy)
+        image.draw(in: rect)
+        UIGraphicsGetCurrentContext()!.setBlendMode(.sourceOut)
+        UIGraphicsGetCurrentContext()!.setFillColor(UIColor.green.cgColor)
+        UIGraphicsGetCurrentContext()!.fill(rect)
+
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result!
+    }*/
 }

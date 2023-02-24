@@ -34,7 +34,6 @@
 		3F061D2629A7EE1C00139EC1 /* PractitionerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */; };
 		3F061D2829A7EE3800139EC1 /* PractitionerQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */; };
 		3F061D2A29A7EE4F00139EC1 /* PractitionerQueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */; };
-		3F061D2C29A8038900139EC1 /* PractitionerSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2B29A8038900139EC1 /* PractitionerSelectCell.swift */; };
 		3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */; };
 		3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */; };
 		3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */; };
@@ -352,7 +351,6 @@
 		3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PractitionerSelectViewController.swift; sourceTree = "<group>"; };
 		3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractitionerQueryViewController.swift; sourceTree = "<group>"; };
 		3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractitionerQueryViewModel.swift; sourceTree = "<group>"; };
-		3F061D2B29A8038900139EC1 /* PractitionerSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractitionerSelectCell.swift; sourceTree = "<group>"; };
 		3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 		3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestsGoalsView.xib; sourceTree = "<group>"; };
 		3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsGoalsView.swift; sourceTree = "<group>"; };
@@ -745,7 +743,6 @@
 		3F061D2429A7EE1B00139EC1 /* Practitioner */ = {
 			isa = PBXGroup;
 			children = (
-				3F061D2B29A8038900139EC1 /* PractitionerSelectCell.swift */,
 				3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */,
 				3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */,
 				3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */,
@@ -1914,7 +1911,6 @@
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */,
 				3F0547AC27C9B8BE006E3098 /* LoginViewController.swift in Sources */,
-				3F061D2C29A8038900139EC1 /* PractitionerSelectCell.swift in Sources */,
 				3F9C67AE28FE622A00BC44FA /* Nitrite.swift in Sources */,
 				3F9C67A428FE613700BC44FA /* VitaminC.swift in Sources */,
 				72DEA1CC289E44AA00C92695 /* Blurable.swift in Sources */,
