@@ -12,12 +12,13 @@ protocol PractitionerQueryViewControllerDelegate: AnyObject
     func showSplash()
 }
 
-class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, PractitionerSelectViewControllerDelegate
+class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, PractitionerSelectViewControllerDelegate, VesselScreenIdentifiable
 {
+    let flowName: AnalyticsFlowName = .practitionerQueryFlow
+    @Resolved internal var analytics: Analytics
     @IBOutlet weak var yesButton: SelectionCheckmarkView!
     @IBOutlet weak var noButton: SelectionCheckmarkView!
     @IBOutlet weak var nextButton: UIButton!
-    @Resolved internal var analytics: Analytics
     var viewModel = PractitionerQueryViewModel()
     var delegate: PractitionerQueryViewControllerDelegate?
     

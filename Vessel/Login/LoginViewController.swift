@@ -126,7 +126,6 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
-                                Contact.main()?.identifyAnalytics()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 if let id = Contact.PractitionerID
                                 {

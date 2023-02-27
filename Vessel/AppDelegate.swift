@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         Log_Add("extractExpertInfo")
         if let url = percentEncodedURLString.removingPercentEncoding
         {
-            analytics.log(event: .prlClicked(url: url))
+            //analytics.log(event: .prlClicked(url: url))
             let componentString = url.replacingOccurrences(of: "?", with: "&")
             let components = componentString.components(separatedBy: "&")
             //print(components)
@@ -77,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             }
             if let id = expertID
             {
+                Log_Add("1 Found Expert ID: \(id)")
                 analytics.log(event: .prlFoundExpertID(id: id))
             }
             else

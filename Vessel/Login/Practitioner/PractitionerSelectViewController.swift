@@ -12,8 +12,9 @@ protocol PractitionerSelectViewControllerDelegate: AnyObject
     func showSplash()
 }
 
-class PractitionerSelectViewController: UIViewController, SelectionCheckmarkViewDelegate
+class PractitionerSelectViewController: UIViewController, SelectionCheckmarkViewDelegate, VesselScreenIdentifiable
 {
+    let flowName: AnalyticsFlowName = .practitionerQueryFlow
     @Resolved internal var analytics: Analytics
     var viewModel: PractitionerQueryViewModel!
     @IBOutlet weak var stackView: UIStackView!

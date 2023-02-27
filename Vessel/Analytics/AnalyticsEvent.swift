@@ -31,7 +31,7 @@ enum AnalyticsEvent
     case logIn(loginType: AnalyticsLoginType)
     case logOut
     case prlAfterTestGetSupplement(expertID: Int?)
-    case prlClicked(url: String)
+    //case prlClicked(url: String)
     case prlFoundExpertID(id: Int)
     case prlMoreTabGetSupplement(expertID: Int?)
     case prlMoreTabShowIngredients
@@ -76,7 +76,7 @@ enum AnalyticsEvent
         case .logIn: return "Log In"
         case .logOut: return "LOGOUT"
         case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
-        case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
+        //case .prlClicked: return "EXPERT DOWNLOAD LINK CLICKED"
         case .prlFoundExpertID: return "FOUND EXPERT ID"
         case .prlMoreTabGetSupplement: return "MORE TAB GET SUPPLEMENT"
         case .prlMoreTabShowIngredients: return "MORE TAB SHOW INGREDIENTS"
@@ -166,8 +166,8 @@ enum AnalyticsEvent
             {
                 return [:]
             }
-        case .prlClicked(let url):
-            return ["url": url]
+        //case .prlClicked(let url):
+            //return ["url": url]
         case .prlFoundExpertID(let id):
             return ["expert_id": id]
         case .prlMoreTabGetSupplement(let expertID):
@@ -243,6 +243,7 @@ enum AnalyticsFlowName: String
     case takeTestFlow = "Take Test Flow"
     case todayTabFlow = "Today Tab Flow"
     case appReviewFlow = "App Review Flow"
+    case practitionerQueryFlow = "Practitioner Query Flow"
 }
 
 enum AnalyticsLoginType: String
