@@ -32,12 +32,12 @@ enum AnalyticsEvent
     case logOut
     case prlAfterTestGetSupplement(expertID: Int?)
     //case prlClicked(url: String)
-    case prlFoundExpertID(id: Int)
+    case prlFoundExpertID(expertID: Int)
     case prlMoreTabGetSupplement(expertID: Int?)
-    case prlMoreTabShowIngredients
+    case prlMoreTabShowIngredients(expertID: Int?)
     case prlNoExpertID
     case prlTodayPageGetSupplement(expertID: Int?)
-    case prlTodayPageShowIngredients
+    case prlTodayPageShowIngredients(expertID: Int?)
     case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed(cardUUID: String)
     case scanError(errorString: String)
@@ -179,8 +179,15 @@ enum AnalyticsEvent
             {
                 return [:]
             }
-        case .prlMoreTabShowIngredients:
-            return [:]
+        case .prlMoreTabShowIngredients(let expertID):
+            if let expertID = expertID
+            {
+                return ["expert_id": expertID]
+            }
+            else
+            {
+                return [:]
+            }
         case .prlNoExpertID:
             return [:]
         case .prlTodayPageGetSupplement(let expertID):
@@ -192,8 +199,15 @@ enum AnalyticsEvent
             {
                 return [:]
             }
-        case .prlTodayPageShowIngredients:
-            return [:]
+        case .prlTodayPageShowIngredients(let expertID):
+            if let expertID = expertID
+            {
+                return ["expert_id": expertID]
+            }
+            else
+            {
+                return [:]
+            }
         case .sampleImageCaptured(let captureTime, let cardUUID):
             return ["attempt_time_ms": captureTime, "wellness_card_uuid": cardUUID]
         case .sampleImageConfirmed(let cardUUID):

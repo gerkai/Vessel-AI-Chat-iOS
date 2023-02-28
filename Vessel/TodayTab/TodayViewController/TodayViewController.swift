@@ -117,7 +117,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     
     func openFormulation()
     {
-        analytics.log(event: .prlTodayPageShowIngredients)
+        analytics.log(event: .prlTodayPageShowIngredients(expertID: Contact.main()!.pa_id))
         Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
         { url in
             print("SUCCESS: \(url)")

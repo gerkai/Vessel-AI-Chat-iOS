@@ -314,7 +314,7 @@ extension MoreViewController: UITableViewDelegate
     
     private func openFormulation()
     {
-        analytics.log(event: .prlMoreTabShowIngredients)
+        analytics.log(event: .prlMoreTabShowIngredients(expertID: Contact.main()!.pa_id))
         Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
         { url in
             print("SUCCESS: \(url)")
