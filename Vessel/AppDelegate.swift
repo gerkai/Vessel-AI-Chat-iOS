@@ -102,16 +102,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    //handle links received as Universal Links when the app is already installed
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     {
         Log_Add("Continue User Activity")
         if let urlString = userActivity.webpageURL?.absoluteString
         {
-            let expertID = extractExpertInfo(percentEncodedURLString: urlString)
-            Contact.PractitionerID = expertID
-            if expertID != nil
+            if let expertID = extractExpertInfo(percentEncodedURLString: urlString)
             {
-                Log_Add("1 Setting Global ExpertID: \(expertID!)")
+                Contact.PractitionerID = expertID
+                Log_Add("1 Setting Global ExpertID: \(expertID)")
             }
         }
         
@@ -121,11 +121,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
             if let urlString = dynamiclink?.url?.absoluteString
             {
-                let expertID = self.extractExpertInfo(percentEncodedURLString: urlString)
-                Contact.PractitionerID = expertID
-                if expertID != nil
+                if let expertID = self.extractExpertInfo(percentEncodedURLString: urlString)
                 {
-                    Log_Add("Dynamic Link had ExpertID: \(expertID!)")
+                    Contact.PractitionerID = expertID
+                    Log_Add("Dynamic Link had ExpertID: \(expertID)")
                 }
             }
         }
@@ -151,16 +150,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         Log_Save()
     }
     
+    //called when the app is opened the first time after installation
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool
     {
         Log_Add("Open URL: \(url), options:\(options)")
-        //if there's an expert_id in the URL, pass it to the Contact module so we can attribute the contact to the expert
         
-        let expertID = extractExpertInfo(percentEncodedURLString: url.absoluteString)
-        Contact.PractitionerID = expertID
-        if expertID != nil
+        //if there's an expert_id in the URL, pass it to the Contact module so we can attribute the contact to the expert
+        if let expertID = extractExpertInfo(percentEncodedURLString: url.absoluteString)
         {
-            Log_Add("2 Setting Global ExpertID: \(expertID!)")
+            Contact.PractitionerID = expertID
+            Log_Add("2 Setting Global ExpertID: \(expertID)")
         }
         return true
     }

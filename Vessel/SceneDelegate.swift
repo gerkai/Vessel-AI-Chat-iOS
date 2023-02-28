@@ -22,11 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         if let url = connectionOptions.urlContexts.first?.url.absoluteString
         {
             Log_Add("URL: \(url)")
-            let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
-            Contact.PractitionerID = expertID
-            if expertID != nil
+            if let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
             {
-                Log_Add("3 Setting Global ExpertID: \(expertID!)")
+                Contact.PractitionerID = expertID
+                Log_Add("3 Setting Global ExpertID: \(expertID)")
             }
         }
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -38,11 +37,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         if let url = URLContexts.first?.url.absoluteString
         {
             Log_Add("URL: \(url)")
-            let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
-            Contact.PractitionerID = expertID
-            if expertID != nil
+            if let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
             {
-                Log_Add("4 Setting Global ExpertID: \(expertID!)")
+                Contact.PractitionerID = expertID
+                
+                Log_Add("4 Setting Global ExpertID: \(expertID)")
                 if let contact = Contact.main()
                 {
                     contact.pa_id = expertID

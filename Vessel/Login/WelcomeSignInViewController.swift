@@ -78,38 +78,19 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //called at startup. Also called by PractitionerQueryViewController in case practitioner association/cobranding got updated
         //print("SHOW SPLASH")
         splashView.set(visible: true)
-        if Contact.PractitionerID == nil
+
+        Log_Add("Welcome: vdl: Contact has no practitioner ID")
+        if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
         {
-            Log_Add("Welcome: vdl: Contact has no practitioner ID")
-            if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
-            {
-                Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")
-                splashView.setImageURL(urlString: imageURL)
-                splashView.setMode(mode: .practitioner)
-            }
-            else
-            {
-                Log_Add("1 No ImageURL in UserDefaults")
-                splashView.setImageURL(urlString: nil)
-                splashView.setMode(mode: .normal)
-            }
+            Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")
+            splashView.setImageURL(urlString: imageURL)
+            splashView.setMode(mode: .practitioner)
         }
         else
         {
-            Log_Add("Welcome: vdl: Contact practitioner ID: \(Contact.PractitionerID!)")
-            
-            if let urlString = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
-            {
-                Log_Add("ImageURL: \(urlString)")
-                splashView.setImageURL(urlString: urlString)
-                splashView.setMode(mode: .practitioner)
-            }
-            else
-            {
-                Log_Add("2 No ImageURL in UserDefaults")
-                splashView.setImageURL(urlString: nil)
-                splashView.setMode(mode: .normal)
-            }
+            Log_Add("1 No ImageURL in UserDefaults")
+            splashView.setImageURL(urlString: nil)
+            splashView.setMode(mode: .normal)
         }
     }
     
