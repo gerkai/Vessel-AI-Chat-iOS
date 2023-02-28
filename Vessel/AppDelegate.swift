@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             if let id = expertID
             {
                 Log_Add("1 Found Expert ID: \(id)")
-                analytics.log(event: .prlFoundExpertID(id: id))
+                analytics.log(event: .prlFoundExpertID(expertID: id))
             }
             else
             {
