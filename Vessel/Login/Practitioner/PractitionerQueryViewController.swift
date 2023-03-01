@@ -12,19 +12,22 @@ protocol PractitionerQueryViewControllerDelegate: AnyObject
     func showSplash()
 }
 
-class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, PractitionerSelectViewControllerDelegate, VesselScreenIdentifiable
+class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, PractitionerSelectViewControllerDelegate, VesselScreenIdentifiable, PractitionerQueryViewModelDelegate
 {
     let flowName: AnalyticsFlowName = .practitionerQueryFlow
     @Resolved internal var analytics: Analytics
     @IBOutlet weak var yesButton: SelectionCheckmarkView!
     @IBOutlet weak var noButton: SelectionCheckmarkView!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: LoadingButton!
     var viewModel = PractitionerQueryViewModel()
     var delegate: PractitionerQueryViewControllerDelegate?
+    var expertsAreLoaded = false
+    var didTryToViewExperts = false
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        viewModel.delegate = self
         enableNextButton(false)
         yesButton.textLabel.text = NSLocalizedString("Yes", comment: "")
         noButton.textLabel.text = NSLocalizedString("No", comment: "")
@@ -87,9 +90,15 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
     {
         if yesButton.isChecked
         {
-            let vc = PractitionerSelectViewController.initWith(viewModel: viewModel)
-            vc.delegate = self
-            self.navigationController?.fadeTo(vc)
+            didTryToViewExperts = true
+            if expertsAreLoaded == true
+            {
+                selectExpert()
+            }
+            else
+            {
+                nextButton.showLoading()
+            }
         }
         else
         {
@@ -99,9 +108,25 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         }
     }
     
+    func selectExpert()
+    {
+        let vc = PractitionerSelectViewController.initWith(viewModel: viewModel)
+        vc.delegate = self
+        self.navigationController?.fadeTo(vc)
+    }
+    
     func showSplash()
     {
         //forces WelcomeSignInViewController to update splash screen in case co-branding changed
         delegate?.showSplash()
+    }
+    
+    func expertsLoaded()
+    {
+        expertsAreLoaded = true
+        if didTryToViewExperts == true
+        {
+            selectExpert()
+        }
     }
 }

@@ -7,10 +7,16 @@
 
 import Foundation
 
+protocol PractitionerQueryViewModelDelegate: AnyObject
+{
+    func expertsLoaded()
+}
+
 class PractitionerQueryViewModel
 {
     var experts: [Expert] = []
     var selectedPractitioner: Int?
+    var delegate: PractitionerQueryViewModelDelegate?
     
     init()
     {
@@ -94,6 +100,7 @@ class PractitionerQueryViewModel
                 }
             }
             self.experts = experts
+            self.delegate?.expertsLoaded()
         },
         onFailure:
         { message in
