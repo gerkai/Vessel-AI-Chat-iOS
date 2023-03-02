@@ -174,7 +174,8 @@ class MainTabBarController: UITabBarController
     @objc func vesselButtonPressed()
     {
         analytics.log(event: .vButtonTapped)
-        if isWithinTestingWindow()
+        //if contact is associated with a practitioner, skip the "test after waking up" alert
+        if Contact.main()!.pa_id != nil
         {
             //allow enough time for Vessel button to finish animating
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
@@ -184,19 +185,30 @@ class MainTabBarController: UITabBarController
         }
         else
         {
-            analytics.log(event: .dontForgetShown)
-            GenericAlertViewController.presentAlert(in: self,
-                                                    type: .imageTitleSubtitleHorizontalButtons(image: UIImage(named: "VesselButton")!,
-                                                                                               title: GenericAlertLabelInfo(title: NSLocalizedString("Don't forget, test right after waking up.", comment: "")),
-                                                                                               subtitle: GenericAlertLabelInfo(title: NSLocalizedString("For the most accurate results, test immediately after you wake up -- before you eat, drink, or exercise. If you've done any of these things, please test yourself tomorrow.", comment: ""),
-                                                                                                                               alignment: .center,
-                                                                                                                               height: 250),
-                                                                                               buttons: [
-                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Cancel", comment: "")), type: .dark),
-                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Test Now", comment: "")), type: .clear)
-                                                                                               ]),
-                                                    background: .green,
-                                                    delegate: self)
+            if isWithinTestingWindow()
+            {
+                //allow enough time for Vessel button to finish animating
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
+                {
+                    self.segueToNextVC()
+                }
+            }
+            else
+            {
+                analytics.log(event: .dontForgetShown)
+                GenericAlertViewController.presentAlert(in: self,
+                                                        type: .imageTitleSubtitleHorizontalButtons(image: UIImage(named: "VesselButton")!,
+                                                                                                   title: GenericAlertLabelInfo(title: NSLocalizedString("Don't forget, test right after waking up.", comment: "")),
+                                                                                                   subtitle: GenericAlertLabelInfo(title: NSLocalizedString("For the most accurate results, test immediately after you wake up -- before you eat, drink, or exercise. If you've done any of these things, please test yourself tomorrow.", comment: ""),
+                                                                                                                                   alignment: .center,
+                                                                                                                                   height: 250),
+                                                                                                   buttons: [
+                                                                                                    GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Cancel", comment: "")), type: .dark),
+                                                                                                    GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Test Now", comment: "")), type: .clear)
+                                                                                                   ]),
+                                                        background: .green,
+                                                        delegate: self)
+            }
         }
     }
     
