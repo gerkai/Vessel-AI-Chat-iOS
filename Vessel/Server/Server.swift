@@ -18,7 +18,6 @@ let ENDPOINT_ROOT = "v3/"
 
 //Environment Constants
 let DEV_API = "https://dev-api.vesselhealth.com/" + ENDPOINT_ROOT
-//let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
 let DEV_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let DEV_S3_BUCKET_NAME = "vessel-ips-dev-sample-images"
 let DEV_S3_ACCESSS_KEY = "AKIAW42KY3LBQXWJLT6K"
@@ -27,7 +26,6 @@ let DEV_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let DEV_FUEL_FORMULATION_PATH = "pages/fuel-formulation?preview_theme_id=132393566394"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
-//let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
 let STAGING_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let STAGING_S3_BUCKET_NAME = "vessel-ips-staging-sample-images"
 let STAGING_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
@@ -36,7 +34,6 @@ let STAGING_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let STAGING_FUEL_FORMULATION_PATH = "pages/fuel-formulation/?preview_theme_id=132445077690"
 
 let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
-//let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
 let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let PROD_S3_BUCKET_NAME = "vessel-ips-production-sample-images"
 let PROD_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"

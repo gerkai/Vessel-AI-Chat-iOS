@@ -234,7 +234,7 @@ extension MoreViewController: UITableViewDelegate
         case .takeATest:
             mainTabBarController?.vesselButtonPressed()
         case .orderCards:
-            openInSafari(url: "https://vesselhealth.com/membership")
+            openInSafari(url: Constants.orderSupplementsURL)
         case .customSupplements:
             if let fuel = Contact.FuelInfo
             {

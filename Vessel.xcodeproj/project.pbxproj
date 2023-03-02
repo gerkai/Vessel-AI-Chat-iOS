@@ -674,6 +674,7 @@
 				72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */,
 				3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */,
 				72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */,
+				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
 				3F12F006287A6B4800FCC52E /* DateExtensions.swift */,
 				3F87B96627D4209F00D589F7 /* Encodable.swift */,
 				3F87B97D27D5338D00D589F7 /* NibRegistry.swift */,
@@ -684,15 +685,14 @@
 				3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */,
 				3F15ACE92887759C004716CA /* UIImageExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
+				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
 				3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */,
 				3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
-				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
-				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
-				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
 				3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */,
+				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
