@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>vessel</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.vesselhealth.vessel-ios</string>
+			</array>
+		</dict>
+	</array>
+	<key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
+	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BananaGrotesk-Thin.otf</string>
@@ -35,23 +52,6 @@
 		</dict>
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-    <key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
-    <false/>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>com.vesselhealth.vessel-ios</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>vessel</string>
-            </array>
-        </dict>
-    </array>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>save a photo</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>

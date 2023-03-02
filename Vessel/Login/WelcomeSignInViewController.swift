@@ -79,7 +79,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //print("SHOW SPLASH")
         splashView.set(visible: true)
 
-        Log_Add("Welcome: vdl: Contact has no practitioner ID")
+        Log_Add("showSplash")
         if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
         {
             Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")

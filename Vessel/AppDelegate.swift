@@ -50,11 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             let componentString = url.replacingOccurrences(of: "?", with: "&")
             let components = componentString.components(separatedBy: "&")
             //print(components)
-            if !componentString.contains("logo=")
-            {
-                Log_Add("1 Removing global ExpertLogo")
-                UserDefaults.standard.removeObject(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
-            }
+
             for component in components
             {
                 if let range = component.range(of: "expert_id=")
@@ -150,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         Log_Save()
     }
     
-    //called when the app is opened the first time after installation
+    //called by Firebase Dynamic Links SDK when the app is opened the first time after installation
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool
     {
         Log_Add("Open URL: \(url), options:\(options)")

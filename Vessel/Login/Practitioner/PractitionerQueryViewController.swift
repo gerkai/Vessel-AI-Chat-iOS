@@ -126,6 +126,7 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         expertsAreLoaded = true
         if didTryToViewExperts == true
         {
+            nextButton.hideLoading()
             selectExpert()
         }
     }

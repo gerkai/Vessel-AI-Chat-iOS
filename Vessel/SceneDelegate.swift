@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
+    //Called when vessel:// link is tapped with app already running in the background
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
         Log_Add("Scene openURLContexts")
@@ -39,15 +40,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             Log_Add("URL: \(url)")
             if let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
             {
-                Contact.PractitionerID = expertID
-                
                 Log_Add("4 Setting Global ExpertID: \(expertID)")
-                if let contact = Contact.main()
-                {
-                    contact.pa_id = expertID
-                    ObjectStore.shared.clientSave(contact)
-                    Contact.PractitionerID = nil
-                }
+                //if we're already logged in, then go ahead and make the association now
+                makeAssociation(expertID: expertID)
             }
         }
     }
@@ -57,13 +52,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         Log_Add("Scene WillContinue: userActivityType: \(userActivityType)")
     }
     
+    func makeAssociation(expertID: Int)
+    {
+        Contact.PractitionerID = expertID
+        
+        //if we're already logged in, then go ahead and make the association now
+        if let contact = Contact.main()
+        {
+            contact.pa_id = expertID
+            ObjectStore.shared.clientSave(contact)
+            Contact.PractitionerID = nil
+        }
+    }
+    
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity)
     {
         Log_Add("Scene Continue")
-        let _ = DynamicLinks.dynamicLinks()
-            .handleUniversalLink(userActivity.webpageURL!)
-        { dynamiclink, error in
-            Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+        if let webpageURL = userActivity.webpageURL
+        {
+            let _ = DynamicLinks.dynamicLinks().handleUniversalLink(webpageURL)
+            { dynamiclink, error in
+                Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+                
+                if let url = dynamiclink?.url
+                {
+                    if let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url.absoluteString)
+                    {
+                        self.makeAssociation(expertID: expertID)
+                        Log_Add("5 Setting Global ExpertID: \(expertID)")
+                    }
+                }
+            }
         }
     }
     
