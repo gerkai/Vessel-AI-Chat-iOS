@@ -63,27 +63,40 @@ class TestCardExistCheckingViewController: UIViewController, VesselScreenIdentif
  
         if selectedOption == 1
         {
-            let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
-            analytics.log(event: .identification(type: .purchased))
-            self.navigationController?.fadeTo(vc)
-        }
-        else if selectedOption == 2
-        {
-            if Contact.main() != nil
+            if Contact.PractitionerID == nil
             {
-                //if the contact already exists (due to social login, we can go straight to Onboarding (or contact cleanup)
-                LoginCoordinator.shared.pushLastViewController(to: navigationController)
+                let vc = storyboard.instantiateViewController(identifier: "BoughtCardLoginViewController") as! BoughtCardLoginViewController
+                analytics.log(event: .identification(type: .purchased))
+                self.navigationController?.fadeTo(vc)
             }
             else
             {
-                let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
-                self.navigationController?.fadeTo(vc)
+                navToGiftedOrCoordinator()
             }
+        }
+        else if selectedOption == 2
+        {
+            navToGiftedOrCoordinator()
         }
         else
         {
             let vc = storyboard.instantiateViewController(identifier: "NoTestCardOnboardViewController") as! NoTestCardOnboardViewController
             analytics.log(event: .identification(type: .dontHaveYet))
+            self.navigationController?.fadeTo(vc)
+        }
+    }
+    
+    func navToGiftedOrCoordinator()
+    {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if Contact.main() != nil
+        {
+            //if the contact already exists (due to social login, we can go straight to Onboarding (or contact cleanup)
+            LoginCoordinator.shared.pushLastViewController(to: navigationController)
+        }
+        else
+        {
+            let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
             self.navigationController?.fadeTo(vc)
         }
     }
