@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol PractitionerSelectViewControllerDelegate: AnyObject
-{
-    func showSplash()
-}
-
 class PractitionerSelectViewController: UIViewController, SelectionCheckmarkViewDelegate, VesselScreenIdentifiable
 {
     let flowName: AnalyticsFlowName = .practitionerQueryFlow
@@ -19,7 +14,6 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
     var viewModel: PractitionerQueryViewModel!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var nextButton: UIButton!
-    var delegate: PractitionerSelectViewControllerDelegate?
     
     static func initWith(viewModel: PractitionerQueryViewModel) -> PractitionerSelectViewController
     {
@@ -118,17 +112,10 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
     @IBAction func next()
     {
         viewModel.setExpertAssociation()
-        //forces WelcomeSignInViewController to update splash screen in case co-branding changed
-        delegate?.showSplash()
         
-        //remove previous viewController
-        guard let navigationController = self.navigationController else { return }
-        var navigationArray = navigationController.viewControllers // To get all UIViewController stack as Array
-        navigationArray.remove(at: navigationArray.count - 2) // To remove previous UIViewController
-        self.navigationController?.viewControllers = navigationArray
-        
-        UserDefaults.standard.removeObject(forKey: Constants.KEY_PRL_NO_MATCH)
-        navigationController.fadeOut()
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     /*
     //MARK: - TableView delegates

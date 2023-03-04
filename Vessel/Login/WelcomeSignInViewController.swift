@@ -11,7 +11,7 @@
 
 import UIKit
 
-class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate, SplashViewDelegate, PractitionerQueryViewControllerDelegate
+class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate, VesselScreenIdentifiable, GenericAlertDelegate, SplashViewDelegate
 {
     @IBOutlet private weak var mindLabel: UILabel!
     @IBOutlet private weak var debugButton: VesselButton!
@@ -63,19 +63,11 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         {
             showDebugButton()
         }
-        
-        if UserDefaults.standard.bool(forKey: Constants.KEY_PRL_NO_MATCH) == true
-        {
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
-            vc.delegate = self
-            self.navigationController?.fadeTo(vc)
-        }
     }
     
     func showSplash()
     {
-        //called at startup. Also called by PractitionerQueryViewController in case practitioner association/cobranding got updated
+        //called at startup.
         //print("SHOW SPLASH")
         splashView.set(visible: true)
 

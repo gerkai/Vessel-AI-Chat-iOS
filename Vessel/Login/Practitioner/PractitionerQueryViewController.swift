@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol PractitionerQueryViewControllerDelegate: AnyObject
-{
-    func showSplash()
-}
-
-class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, PractitionerSelectViewControllerDelegate, VesselScreenIdentifiable, PractitionerQueryViewModelDelegate
+class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewDelegate, VesselScreenIdentifiable, PractitionerQueryViewModelDelegate
 {
     let flowName: AnalyticsFlowName = .practitionerQueryFlow
     @Resolved internal var analytics: Analytics
@@ -20,7 +15,6 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
     @IBOutlet weak var noButton: SelectionCheckmarkView!
     @IBOutlet weak var nextButton: LoadingButton!
     var viewModel = PractitionerQueryViewModel()
-    var delegate: PractitionerQueryViewControllerDelegate?
     var expertsAreLoaded = false
     var didTryToViewExperts = false
     
@@ -45,6 +39,11 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         {
             print("❌ \(self)")
         }
+    }
+    
+    @IBAction func back()
+    {
+        navigationController?.fadeOut()
     }
     
     func enableNextButton(_ isEnabled: Bool)
@@ -103,22 +102,17 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         else
         {
             //then no button is checked
-            navigationController?.fadeOut()
-            UserDefaults.standard.removeObject(forKey: Constants.KEY_PRL_NO_MATCH)
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.nextButton.hideLoading()
         }
     }
     
     func selectExpert()
     {
         let vc = PractitionerSelectViewController.initWith(viewModel: viewModel)
-        vc.delegate = self
         self.navigationController?.fadeTo(vc)
-    }
-    
-    func showSplash()
-    {
-        //forces WelcomeSignInViewController to update splash screen in case co-branding changed
-        delegate?.showSplash()
     }
     
     func expertsLoaded()

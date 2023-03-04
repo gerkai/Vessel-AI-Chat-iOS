@@ -146,7 +146,6 @@ struct Constants
     static let KEY_FIRST_LAUNCH_DATE = "KEY_FIRST_LAUNCH_DATE"
     static let KEY_PRACTITIONER_IMAGE_URL = "KEY_PRACTITIONER_IMAGE_URL"
     static let KEY_PRACTITIONER_ID = "KEY_PRACTITIONER_ID"
-    static let KEY_PRL_NO_MATCH = "KEY_PRL_NO_MATCH" //Practitioner Referral Link didn't have a match (so no expert_id)
     
     //Contact Flags (App Flags on back end)
     static let DECLINED_BIRTH_DATE          = 0x00000001
