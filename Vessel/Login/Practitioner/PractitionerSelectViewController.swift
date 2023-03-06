@@ -57,7 +57,7 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
             let expert = viewModel.expertFor(index: i)
             
             let selectionCheckmarkView = SelectionCheckmarkView()
-            selectionCheckmarkView.textLabel.text = "\(expert.first_name ?? "") \(expert.last_name ?? "")"
+            selectionCheckmarkView.textLabel.text = "\(expert.last_name ?? ""), \(expert.first_name ?? "")"
             let heightConstraint = NSLayoutConstraint(item: selectionCheckmarkView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 72)
             selectionCheckmarkView.addConstraints([heightConstraint])
             selectionCheckmarkView.delegate = self
