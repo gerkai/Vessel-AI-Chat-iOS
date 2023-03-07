@@ -18,7 +18,6 @@ let ENDPOINT_ROOT = "v3/"
 
 //Environment Constants
 let DEV_API = "https://dev-api.vesselhealth.com/" + ENDPOINT_ROOT
-//let DEV_ORDER_CARDS_URL = "https://dev.vesselhealth.com/membership-dev"
 let DEV_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let DEV_S3_BUCKET_NAME = "vessel-ips-dev-sample-images"
 let DEV_S3_ACCESSS_KEY = "AKIAW42KY3LBQXWJLT6K"
@@ -27,7 +26,6 @@ let DEV_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let DEV_FUEL_FORMULATION_PATH = "pages/fuel-formulation?preview_theme_id=132393566394"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
-//let STAGING_ORDER_CARDS_URL = "https://stage.vesselhealth.com/membership"
 let STAGING_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let STAGING_S3_BUCKET_NAME = "vessel-ips-staging-sample-images"
 let STAGING_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
@@ -36,7 +34,6 @@ let STAGING_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let STAGING_FUEL_FORMULATION_PATH = "pages/fuel-formulation/?preview_theme_id=132445077690"
 
 let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
-//let PROD_ORDER_CARDS_URL = "https://vesselhealth.com/membership"
 let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
 let PROD_S3_BUCKET_NAME = "vessel-ips-production-sample-images"
 let PROD_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
@@ -84,6 +81,7 @@ let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_respon
 let USER_HAS_FUEL_PATH = "fuel"
 let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
 let GET_EXPERT_PATH = "fuel/expert"
+let GET_ALL_EXPERTS_PATH = "experts"
 
 // MARK: - Structs
 struct CardAssociation
@@ -1226,6 +1224,59 @@ class Server: NSObject
             print("Got server failure: \(message)")
             failure(message)
         }
+    }
+    
+    func getAllExperts(onSuccess success: @escaping (_ experts: [Expert]) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        var objectDict: [String: [String: Int]] = [:]
+        var experts: [Expert] = []
+
+        //last_updated of 0 will fetch all experts in database
+        objectDict["expert"] = ["last_updated": 0]
+        
+        let url = "\(API())\(GET_ALL_EXPERTS_PATH)"
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(objectDict)
+        let Url = String(format: url)
+        guard let serviceUrl = URL(string: Url) else { return }
+        var request = URLRequest(url: serviceUrl)
+        request.httpBody = data
+        
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (data) in
+            if let objects = data["expert"]
+            {
+                for singleObjectDict in objects as! [[String: Any]]
+                {
+                    do
+                    {
+                        let json = try JSONSerialization.data(withJSONObject: singleObjectDict)
+                        let decoder = JSONDecoder()
+                        
+                        let object = try decoder.decode(Expert.self, from: json)
+                        experts.append(object)
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async()
+            {
+                success(experts)
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
     }
     
     // MARK: - Lifestyle Recommendation

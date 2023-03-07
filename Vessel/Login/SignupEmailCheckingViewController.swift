@@ -102,10 +102,7 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
                         //save e-mail for use later during sign-up process
                         Contact.SavedEmail = email
                         
-                        //navigate to TestCardExistCheckingViewController
-                        let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        self.nextButton.hideLoading()
+                        self.showPractScreens()
                     }
                 }
                 onFailure:
@@ -122,6 +119,42 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         {
             UIView.showError(text: "", detailText: Constants.ENTER_VALID_EMAIL_STRING, image: nil)
         }
+    }
+    
+    func showPractScreens()
+    {
+        var showPract = false
+        if let contact = Contact.main()
+        {
+            Log_Add("There is a contact")
+            if contact.pa_id == nil
+            {
+                Log_Add("There is no pa_id. Showing pract")
+                showPract = true
+            }
+        }
+        else
+        {
+            Log_Add("There is not a contact")
+            if Contact.PractitionerID == nil
+            {
+                Log_Add("PractitionerID == nil. Showing Pract.")
+                showPract = true
+            }
+        }
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if showPract
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
+            self.navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            //navigate to TestCardExistCheckingViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.fadeTo(vc)
+        }
+        self.nextButton.hideLoading()
     }
     
     //MARK: - textfield delegates

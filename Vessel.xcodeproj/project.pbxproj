@@ -31,6 +31,9 @@
 		3F0547D927CB00FA006E3098 /* BoughtCardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */; };
 		3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */; };
 		3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */; };
+		3F061D2629A7EE1C00139EC1 /* PractitionerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */; };
+		3F061D2829A7EE3800139EC1 /* PractitionerQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */; };
+		3F061D2A29A7EE4F00139EC1 /* PractitionerQueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */; };
 		3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */; };
 		3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */; };
 		3F0D387428E28E6E00D7C3A3 /* TestsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */; };
@@ -345,6 +348,9 @@
 		3F0547D727CB00FA006E3098 /* BoughtCardLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtCardLoginViewController.swift; sourceTree = "<group>"; };
 		3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTestCardOnboardViewController.swift; sourceTree = "<group>"; };
 		3F0547DB27CB0455006E3098 /* GiftedCardRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftedCardRegisterViewController.swift; sourceTree = "<group>"; };
+		3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PractitionerSelectViewController.swift; sourceTree = "<group>"; };
+		3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractitionerQueryViewController.swift; sourceTree = "<group>"; };
+		3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractitionerQueryViewModel.swift; sourceTree = "<group>"; };
 		3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 		3F0D387128E28E6E00D7C3A3 /* TestsGoalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestsGoalsView.xib; sourceTree = "<group>"; };
 		3F0D387228E28E6E00D7C3A3 /* TestsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsGoalsView.swift; sourceTree = "<group>"; };
@@ -469,6 +475,7 @@
 		3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D8D295D113400664EA8 /* GetSupplementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupplementsViewController.swift; sourceTree = "<group>"; };
+		3F9FDA2329B11CE10064B9B0 /* Vessel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vessel.entitlements; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
@@ -667,6 +674,7 @@
 				72E2533D287E4958004C99C7 /* AppDelegate+Injection.swift */,
 				3F4A989829198EED0031B8B8 /* AutoSizedCollectionView.swift */,
 				72E2533F287E49C9004C99C7 /* Analytics+Injection.swift */,
+				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
 				3F12F006287A6B4800FCC52E /* DateExtensions.swift */,
 				3F87B96627D4209F00D589F7 /* Encodable.swift */,
 				3F87B97D27D5338D00D589F7 /* NibRegistry.swift */,
@@ -677,15 +685,14 @@
 				3F0547D327CAFE57006E3098 /* UIColorExtensions.swift */,
 				3F15ACE92887759C004716CA /* UIImageExtensions.swift */,
 				3F0547BA27C9EB15006E3098 /* UINavigationControllerExtensions.swift */,
+				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
 				3F12F00E287B43AB00FCC52E /* UIScrollViewExtension.swift */,
 				3F0D386F28E2884600D7C3A3 /* UIStackViewExtensions.swift */,
 				3F0547B827C9EAAB006E3098 /* UITextFieldExtensions.swift */,
 				3F0547BC27C9F04D006E3098 /* UIViewControllerExtensions.swift */,
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
-				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
-				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
-				729EE03C295696FF00183922 /* UIScreenExtension.swift */,
 				3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */,
+				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -732,6 +739,16 @@
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
 			);
 			path = "Core Objects";
+			sourceTree = "<group>";
+		};
+		3F061D2429A7EE1B00139EC1 /* Practitioner */ = {
+			isa = PBXGroup;
+			children = (
+				3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */,
+				3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */,
+				3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */,
+			);
+			path = Practitioner;
 			sourceTree = "<group>";
 		};
 		3F12F043287DCC6900FCC52E /* TakeTest */ = {
@@ -954,6 +971,7 @@
 		3FE3699E27C9A07E00231D42 /* Vessel */ = {
 			isa = PBXGroup;
 			children = (
+				3F9FDA2329B11CE10064B9B0 /* Vessel.entitlements */,
 				3F15AD07288DC87C004716CA /* AfterTest */,
 				72D4FC0D287D2CD400EA2EA3 /* Analytics */,
 				3FE3699F27C9A07E00231D42 /* AppDelegate.swift */,
@@ -1055,6 +1073,7 @@
 				3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */,
 				3F0547AB27C9B8BE006E3098 /* LoginViewController.swift */,
 				3F0547D827CB00FA006E3098 /* NoTestCardOnboardViewController.swift */,
+				3F061D2429A7EE1B00139EC1 /* Practitioner */,
 				3F0547B227C9E421006E3098 /* SignupEmailCheckingViewController.swift */,
 				3F0547CA27CAC72D006E3098 /* SocialAuthViewController.swift */,
 				3FEDE75E299C0D7100F18A0E /* TermsOfServiceViewController.swift */,
@@ -1774,6 +1793,7 @@
 				727C07B628B74BA500039BE0 /* DebugMenuCell.swift in Sources */,
 				3F1A248D2891E8B600BC539F /* Result.swift in Sources */,
 				3F12F04B287DCE2200FCC52E /* CupTipViewController.swift in Sources */,
+				3F061D2A29A7EE4F00139EC1 /* PractitionerQueryViewModel.swift in Sources */,
 				3F244287293FFAE80043E4B4 /* LogViewController.swift in Sources */,
 				3F4C59482877CE6B0088F03A /* UICollectionViewExtension.swift in Sources */,
 				3F13A7972877CB2D00C74FB9 /* CheckmarkCollectionViewCell.swift in Sources */,
@@ -1809,6 +1829,7 @@
 				3F0547B727C9E9D5006E3098 /* VesselTextField.swift in Sources */,
 				3F12F051287E1CDE00FCC52E /* NibLoadingView.swift in Sources */,
 				72B5C9F5294C134500032818 /* ProgressDayView.swift in Sources */,
+				3F061D2629A7EE1C00139EC1 /* PractitionerSelectViewController.swift in Sources */,
 				72692B88293717DB00A8F33C /* Activity.swift in Sources */,
 				7230AE54296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift in Sources */,
 				3F9CB7B728C7F7410093228E /* InvalidQRSlideupViewController.swift in Sources */,
@@ -1865,6 +1886,7 @@
 				72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */,
 				725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */,
 				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
+				3F061D2829A7EE3800139EC1 /* PractitionerQueryViewController.swift in Sources */,
 				3FD3BDC22967CB7600AEF9C3 /* TodayWebViewController.swift in Sources */,
 				72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */,
 				3F15ACF4288C4AF8004716CA /* UploadingSampleViewController.swift in Sources */,
@@ -2172,12 +2194,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vessel uses the camera to scan the QR code on your wellness card";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save a photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Login;
@@ -2191,7 +2215,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.11;
+				MARKETING_VERSION = 3.0.12;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2207,12 +2231,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vessel uses the camera to scan the QR code on your wellness card";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save a photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Login;
@@ -2226,7 +2252,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.11;
+				MARKETING_VERSION = 3.0.12;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";

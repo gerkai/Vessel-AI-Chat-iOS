@@ -52,31 +52,7 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         //kick off first word
         mindLabel.text = goals[goalIndex]
         updateGoals()
-        splashView.set(visible: true)
-        if Contact.PractitionerID == nil
-        {
-            Log_Add("Welcome: vdl: Contact has no practitioner ID")
-            if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
-            {
-                Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")
-                splashView.setImageURL(urlString: imageURL)
-                splashView.setMode(mode: .practitioner)
-            }
-            else
-            {
-                Log_Add("No ImageURL in UserDefaults")
-            }
-        }
-        else
-        {
-            Log_Add("Welcome: vdl: Contact practitioner ID: \(Contact.PractitionerID!)")
-            
-            if let urlString = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
-            {
-                splashView.setImageURL(urlString: urlString)
-                splashView.setMode(mode: .practitioner)
-            }
-        }
+        showSplash()
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
@@ -86,6 +62,27 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         if UserDefaults.standard.bool(forKey: Constants.KEY_DEBUG_MENU) == true
         {
             showDebugButton()
+        }
+    }
+    
+    func showSplash()
+    {
+        //called at startup.
+        //print("SHOW SPLASH")
+        splashView.set(visible: true)
+
+        Log_Add("showSplash")
+        if let imageURL = UserDefaults.standard.string(forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
+        {
+            Log_Add("Welcome: vdl: ImageURL in UserDefaults: \(imageURL)")
+            splashView.setImageURL(urlString: imageURL)
+            splashView.setMode(mode: .practitioner)
+        }
+        else
+        {
+            Log_Add("1 No ImageURL in UserDefaults")
+            splashView.setImageURL(urlString: nil)
+            splashView.setMode(mode: .normal)
         }
     }
     

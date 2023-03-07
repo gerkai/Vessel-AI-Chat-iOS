@@ -126,7 +126,6 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
                         {
                             ObjectStore.shared.loadMainContact
                             {
-                                Contact.main()?.identifyAnalytics()
                                 self.analytics.log(event: .logIn(loginType: .email))
                                 if let id = Contact.PractitionerID
                                 {
@@ -193,9 +192,7 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             }
             //hide the splash screen as we have more login screens to flow through
             NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            showPractScreens()
         }
         else
         {
@@ -205,6 +202,38 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
             }
             LoginCoordinator.shared.pushLastViewController(to: navigationController)
         }
+    }
+    
+    func showPractScreens()
+    {
+        var showPract = false
+        if let contact = Contact.main()
+        {
+            if contact.pa_id != nil
+            {
+                showPract = true
+            }
+        }
+        else
+        {
+            if Contact.PractitionerID == nil
+            {
+                showPract = true
+            }
+        }
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if showPract
+        {
+            let vc = storyboard.instantiateViewController(withIdentifier: "PractitionerQueryViewController") as! PractitionerQueryViewController
+            self.navigationController?.fadeTo(vc)
+        }
+        else
+        {
+            //navigate to TestCardExistCheckingViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.fadeTo(vc)
+        }
+        self.nextButton.hideLoading()
     }
     
     //MARK: - textfield delegates

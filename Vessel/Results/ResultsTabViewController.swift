@@ -15,6 +15,8 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
     @IBOutlet weak var lockoutView: UIView!
     @IBOutlet weak var testsGoalsView: TestsGoalsView!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var lockoutTextView: UITextView!
+    @IBOutlet weak var lockoutTextViewHeight: NSLayoutConstraint!
     
     var defaultSelectedReagent = Reagent.ID.MAGNESIUM
     
@@ -45,13 +47,48 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
         NotificationCenter.default.removeObserver(self)
     }
     
+    func setupLockoutViewText()
+    {
+        //add tappable link 'here' to text in this textView
+        let str = NSLocalizedString("If you don't have a test card, you can get one here. Tap this button to take your first test.", comment: "")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.75
+        let attributedString = NSMutableAttributedString(string: str, attributes: [NSAttributedString.Key.foregroundColor: Constants.vesselBlack, NSAttributedString.Key.font: Constants.FontBodyAlt16, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let foundRange = attributedString.mutableString.range(of: NSLocalizedString("here", comment: "Must match 'here' in 'If you don't have a test card, you can get one here.' (this text will be a tappable link)"))
+        attributedString.addAttribute(NSAttributedString.Key.link, value: "https://www.google.com", range: foundRange)
+        let linkAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: UIColor.init(hex: "1199ff"),
+            NSAttributedString.Key.underlineColor: UIColor.init(hex: "1199ff"),
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        lockoutTextView.linkTextAttributes = linkAttributes
+        lockoutTextView.attributedText = attributedString
+        lockoutTextView.delegate = self
+        
+        let size = lockoutTextView.sizeThatFits(lockoutTextView.frame.size)
+        lockoutTextViewHeight.constant = size.height
+    }
+    
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
     {
-        let storyboard = UIStoryboard(name: "Results", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WellnessScoreViewController") as! WellnessScoreViewController
-        vc.initWithViewModel(vm: viewModel)
-        navigationController?.pushViewController(vc, animated: true)
+        if textView == self.textView
+        {
+            let storyboard = UIStoryboard(name: "Results", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WellnessScoreViewController") as! WellnessScoreViewController
+            vc.initWithViewModel(vm: viewModel)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        else
+        {
+            //lockoutTextView
+            openInSafari(url: Constants.orderSupplementsURL)
+        }
         return false
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        setupLockoutViewText()
     }
     
     override func viewWillAppear(_ animated: Bool)

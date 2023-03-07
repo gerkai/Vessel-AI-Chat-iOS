@@ -82,7 +82,6 @@ class BoughtCardLoginViewController: KeyboardFriendlyViewController, UITextField
                 {
                     ObjectStore.shared.loadMainContact
                     {
-                        Contact.main()?.identifyAnalytics()
                         let storyboard = UIStoryboard(name: "Login", bundle: nil)
                         let vc = storyboard.instantiateViewController(identifier: "GiftedCardRegisterViewController") as! GiftedCardRegisterViewController
                         

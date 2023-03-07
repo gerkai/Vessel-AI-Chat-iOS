@@ -30,6 +30,7 @@ struct Constants
     static let privacyPolicyURL = "\(websiteURL)/privacy-policy.html"
     static let termsOfServiceURL = "\(websiteURL)/terms-of-service.html"
     static let zenDeskSupportURL = "https://vesselhealth.zendesk.com/hc/en-us"
+    static let orderSupplementsURL = "https://vesselhealth.com/membership"
     
     //media
     static let mediaPath = "https://media.vesselhealth.com"

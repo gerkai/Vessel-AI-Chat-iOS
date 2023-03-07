@@ -105,6 +105,7 @@ class ObjectStore: NSObject
         { contact in
             let con = contact
             self.cacheObject(con)
+            con.identifyAnalytics()
             success()
         }
         onFailure:
