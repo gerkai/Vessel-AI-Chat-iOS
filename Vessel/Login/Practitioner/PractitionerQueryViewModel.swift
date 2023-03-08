@@ -15,6 +15,7 @@ protocol PractitionerQueryViewModelDelegate: AnyObject
 class PractitionerQueryViewModel
 {
     var experts: [Expert] = []
+    var filteredExperts: [Expert] = []
     var selectedPractitioner: Int?
     var delegate: PractitionerQueryViewModelDelegate?
     
@@ -44,12 +45,32 @@ class PractitionerQueryViewModel
     
     func numExperts() -> Int
     {
-        return experts.count
+        return filteredExperts.count
     }
     
     func expertFor(index: Int) -> Expert
     {
-        return experts[index]
+        return filteredExperts[index]
+    }
+    
+    func expertFilter(filterString: String)
+    {
+        if filterString.count == 0
+        {
+            filteredExperts = experts
+        }
+        else
+        {
+            filteredExperts = []
+            let lowerCasedFilterString = filterString.lowercased()
+            for item in experts
+            {
+                if (item.first_name?.lowercased().range(of: lowerCasedFilterString) != nil) || (item.last_name?.lowercased().range(of: lowerCasedFilterString) != nil)
+                {
+                    filteredExperts.append(item)
+                }
+            }
+        }
     }
     
     func setExpertAssociation()
@@ -100,6 +121,7 @@ class PractitionerQueryViewModel
                 }
             }
             self.experts = experts
+            self.filteredExperts = experts
             self.delegate?.expertsLoaded()
         },
         onFailure:
