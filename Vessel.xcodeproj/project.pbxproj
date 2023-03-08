@@ -2196,7 +2196,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2215,7 +2215,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.12;
+				MARKETING_VERSION = 3.0.13;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2233,7 +2233,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2252,7 +2252,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.12;
+				MARKETING_VERSION = 3.0.13;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";

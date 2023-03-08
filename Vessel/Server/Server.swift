@@ -254,7 +254,7 @@ class Server: NSObject
                 }
                 else
                 {
-                    print("Couldn't convert main ID: \(stringID)")
+                    Log_Add("Couldn't convert main ID: \(stringID)")
                 }
             }
         }
@@ -449,7 +449,7 @@ class Server: NSObject
                         
                     }
                 }
-                print("Need to handle new tokens here")
+                Log_Add("Need to handle new tokens here")
                 self.debugJSONResponse(data: data)
                 success(data)
             }
@@ -465,14 +465,14 @@ class Server: NSObject
         accessToken = "Bogus Token"
         let accessData = Data(accessToken!.utf8)
         KeychainHelper.standard.save(accessData, service: ACCESS_TOKEN_KEY, account: KEYCHAIN_ACCOUNT)
-        print("Invalidated access token")
+        Log_Add("Invalidated access token")
     }
     
     func logOut()
     {
         analytics.log(event: .logOut)
         ObjectStore.shared.clearCache()
-        print("logout() deleting keychain tokens")
+        Log_Add("logout() deleting keychain tokens")
         if accessToken != nil
         {
             //let accessData = Data(accessToken!.utf8)
@@ -571,7 +571,7 @@ class Server: NSObject
         }
         onFailure:
         { message in
-            print("Multipass server error: \(message)")
+            Log_Add("Multipass server error: \(message)")
             failure(message)
         }
     }
@@ -932,13 +932,13 @@ class Server: NSObject
         //send it to server
         serverDelete(request: request)
         {
-            print("SUCCESS")
+            Log_Add("SUCCESS")
             DispatchQueue.main.async()
             {
                 success()
             }
         } onFailure: { string in
-            print("ERROR: \(string)")
+            Log_Add("ERROR: \(string)")
             DispatchQueue.main.async()
             {
                 failure(string)
@@ -1161,7 +1161,7 @@ class Server: NSObject
             {
                 let decoder = JSONDecoder()
                 let decodedFuel = try decoder.decode(Fuel.self, from: data)
-                //print("Decoded Fuel: \(decodedFuel)")
+                //Log_Add("Decoded Fuel: \(decodedFuel)")
                 success(decodedFuel)
             }
             catch
@@ -1177,7 +1177,7 @@ class Server: NSObject
         { error in
             DispatchQueue.main.async()
             {
-                //print("get fuel error2: \(String(describing: error))")
+                //Log_Add("get fuel error2: \(String(describing: error))")
                 failure(error)
             }
         }
@@ -1211,7 +1211,7 @@ class Server: NSObject
             }
             catch
             {
-                print(error)
+                Log_Add(error.localizedDescription)
                 DispatchQueue.main.async()
                 {
                     //let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
@@ -1221,7 +1221,7 @@ class Server: NSObject
         }
         onFailure:
         { message in
-            print("Got server failure: \(message)")
+            Log_Add("Got server failure: \(message)")
             failure(message)
         }
     }
@@ -1260,7 +1260,7 @@ class Server: NSObject
                     }
                     catch
                     {
-                        print(error)
+                        Log_Add(error.localizedDescription)
                     }
                 }
             }
@@ -1303,7 +1303,7 @@ class Server: NSObject
             }
             catch
             {
-                print("ERROR: \(error)")
+                Log_Add("ERROR: \(error)")
                 DispatchQueue.main.async()
                 {
                     failure(self.fuelError())
@@ -1356,7 +1356,7 @@ class Server: NSObject
         {
             if let url = request.url
             {
-                print("GET: \(url)")
+                Log_Add("GET: \(url)")
             }
         }
         
@@ -1404,7 +1404,7 @@ class Server: NSObject
         {
             if let url = request.url
             {
-                print("DELETE: \(url)")
+                Log_Add("DELETE: \(url)")
             }
         }
         let session = URLSession.shared
@@ -1416,7 +1416,7 @@ class Server: NSObject
                 {
                     if allowPrint
                     {
-                        print("SUCCESS")
+                        Log_Add("SUCCESS")
                     }
                     success()
                 }
@@ -1425,7 +1425,7 @@ class Server: NSObject
                     let string = "Unable to delete object from server"
                     if allowPrint
                     {
-                        print(string)
+                        Log_Add(string)
                     }
                     let error = ServerError(code: 400, description: NSLocalizedString(string, comment: "Server error message"))
                     failure(error)
@@ -1448,13 +1448,13 @@ class Server: NSObject
         {
             if let url = request.url
             {
-                print("\(requestType): \(url)")
+                Log_Add("\(requestType): \(url)")
                 if request.httpBody != nil
                 {
                     if let jsonData = request.httpBody
                     {
                         let jsonString = String(data: jsonData, encoding: .utf8)!
-                        print(jsonString)
+                        Log_Add(jsonString)
                     }
                 }
             }
@@ -1469,7 +1469,7 @@ class Server: NSObject
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if self.allowDebugPrint()
                     {
-                        print("Server Response:\n\(json)\n")
+                        Log_Add("Server Response:\n\(json)\n")
                     }
 //CW: Put a breakpoint here to see json response from server
                     if let object = json as? [String: Any]
@@ -1522,7 +1522,7 @@ class Server: NSObject
                     errorCode = err.code
                     let string = String.init(data: data, encoding: .utf8)
                     let result = ServerError(code: errorCode, description: error.localizedDescription, moreInfo: string)
-                    //print("ERROR: \(string ?? "Unknown")")
+                    //Log_Add("ERROR: \(string ?? "Unknown")")
                     failure(result)
                 }
             }
@@ -1557,7 +1557,7 @@ class Server: NSObject
         }
         catch
         {
-            print(error.localizedDescription)
+            Log_Add(error.localizedDescription)
         }
     }
     
@@ -1566,7 +1566,7 @@ class Server: NSObject
         do
         {
             let jsonString = String(data: data, encoding: .utf8)!
-            print("SUCCESS: \(jsonString)")
+            Log_Add("SUCCESS: \(jsonString)")
         }
     }
     
