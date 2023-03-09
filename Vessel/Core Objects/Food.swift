@@ -107,7 +107,7 @@ struct Food: CoreObjectProtocol, Equatable, Codable
             }
         }
         
-        return ActivityDetailsModel(id: planId, imageUrl: self.imageUrl, title: self.title, subtitle: subtitle, description: "", reagents: reagents, quantities: quantities)
+        return ActivityDetailsModel(id: planId, imageUrl: self.imageUrl, title: self.title, subtitle: subtitle, description: "", reagents: reagents, quantities: quantities, type: .food)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InputLessonStepViewController: UIViewController
+class InputLessonStepViewController: UIViewController, VesselScreenIdentifiable
 {
     var viewModel: StepViewModel!
     var coordinator: LessonsCoordinator!
@@ -22,6 +22,8 @@ class InputLessonStepViewController: UIViewController
     @IBOutlet private weak var progressBar: LessonStepsProgressBar!
     @IBOutlet private weak var nextButton: BounceButton!
     
+    @Resolved var analytics: Analytics
+    var flowName: AnalyticsFlowName = .lessonsFlow
     private var initialTextViewText: String?
     private var progressBarSetup = false
     

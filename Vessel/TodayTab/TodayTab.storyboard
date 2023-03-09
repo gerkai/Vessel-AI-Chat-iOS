@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -257,7 +257,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T77-00-g79">
-                                                            <rect key="frame" x="38" y="20" width="270" height="24.666666666666671"/>
+                                                            <rect key="frame" x="38" y="20" width="217" height="24.666666666666671"/>
                                                             <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -300,23 +300,62 @@
                                                             </constraints>
                                                             <blurEffect style="light"/>
                                                         </visualEffectView>
+                                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WjT-Vp-qAB">
+                                                            <rect key="frame" x="275" y="20" width="33" height="33"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JwK-lR-qP0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            </view>
+                                                            <blurEffect style="regular"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <integer key="value" value="12"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </visualEffectView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8i-Uh-xEt">
+                                                            <rect key="frame" x="275" y="20" width="33" height="33"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="33" id="Q5N-RB-soI"/>
+                                                                <constraint firstAttribute="height" constant="33" id="fZv-RT-yW0"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" image="reminders-icon" title=""/>
+                                                            <connections>
+                                                                <action selector="onReminderButtonTapped" destination="Phi-qQ-L7f" eventType="touchUpInside" id="j7S-1w-onC"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-zx-P9P">
+                                                            <rect key="frame" x="276.33333333333331" y="55" width="30.666666666666686" height="13.666666666666671"/>
+                                                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="oCS-eO-uoZ" secondAttribute="trailing" id="26e-35-SZu"/>
                                                         <constraint firstItem="FJO-7q-s2I" firstAttribute="bottom" secondItem="oCS-eO-uoZ" secondAttribute="bottom" id="BPw-fN-O5l"/>
+                                                        <constraint firstItem="dcO-zx-P9P" firstAttribute="top" secondItem="B8i-Uh-xEt" secondAttribute="bottom" constant="2" id="Bcm-i9-qCZ"/>
                                                         <constraint firstItem="36v-er-yZc" firstAttribute="top" secondItem="Xs4-Nh-Xl9" secondAttribute="top" id="CEb-Tg-1l8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="B8i-Uh-xEt" secondAttribute="trailing" constant="20" id="DMC-5m-82b"/>
                                                         <constraint firstAttribute="trailing" secondItem="36v-er-yZc" secondAttribute="trailing" id="Ez9-Cz-4SL"/>
                                                         <constraint firstAttribute="bottom" secondItem="oCS-eO-uoZ" secondAttribute="bottom" id="IYQ-05-bFu"/>
                                                         <constraint firstItem="Lmj-h3-4AF" firstAttribute="top" secondItem="T77-00-g79" secondAttribute="bottom" constant="4" id="K1T-Zb-zay"/>
+                                                        <constraint firstItem="WjT-Vp-qAB" firstAttribute="width" secondItem="B8i-Uh-xEt" secondAttribute="width" id="Lg4-be-Qum"/>
                                                         <constraint firstItem="FJO-7q-s2I" firstAttribute="centerX" secondItem="oCS-eO-uoZ" secondAttribute="centerX" id="UCp-fp-4zK"/>
-                                                        <constraint firstItem="oCS-eO-uoZ" firstAttribute="trailing" secondItem="T77-00-g79" secondAttribute="trailing" constant="20" id="YnD-2N-N6r"/>
+                                                        <constraint firstItem="oCS-eO-uoZ" firstAttribute="trailing" secondItem="T77-00-g79" secondAttribute="trailing" constant="73" id="YnD-2N-N6r"/>
                                                         <constraint firstItem="36v-er-yZc" firstAttribute="leading" secondItem="Xs4-Nh-Xl9" secondAttribute="leading" id="afV-nP-qgx"/>
+                                                        <constraint firstItem="dcO-zx-P9P" firstAttribute="centerX" secondItem="B8i-Uh-xEt" secondAttribute="centerX" id="d4O-bj-JEg"/>
+                                                        <constraint firstItem="WjT-Vp-qAB" firstAttribute="centerX" secondItem="B8i-Uh-xEt" secondAttribute="centerX" id="dVN-lX-eIf"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lmj-h3-4AF" secondAttribute="trailing" constant="20" id="iJo-M5-YEh"/>
                                                         <constraint firstItem="oCS-eO-uoZ" firstAttribute="leading" secondItem="Xs4-Nh-Xl9" secondAttribute="leading" id="iiN-0J-oPN"/>
                                                         <constraint firstItem="T77-00-g79" firstAttribute="top" secondItem="oCS-eO-uoZ" secondAttribute="top" constant="20" id="ole-wA-xjC"/>
                                                         <constraint firstItem="oCS-eO-uoZ" firstAttribute="top" secondItem="Xs4-Nh-Xl9" secondAttribute="top" id="vhP-I5-fnV"/>
+                                                        <constraint firstItem="B8i-Uh-xEt" firstAttribute="top" secondItem="Xs4-Nh-Xl9" secondAttribute="top" constant="20" id="vo0-8V-fJF"/>
                                                         <constraint firstItem="FJO-7q-s2I" firstAttribute="width" secondItem="oCS-eO-uoZ" secondAttribute="width" id="wfJ-Tf-kQR"/>
                                                         <constraint firstItem="Lmj-h3-4AF" firstAttribute="leading" secondItem="T77-00-g79" secondAttribute="leading" id="y1s-87-3au"/>
+                                                        <constraint firstItem="WjT-Vp-qAB" firstAttribute="height" secondItem="B8i-Uh-xEt" secondAttribute="height" id="yQo-g5-19l"/>
+                                                        <constraint firstItem="WjT-Vp-qAB" firstAttribute="centerY" secondItem="B8i-Uh-xEt" secondAttribute="centerY" id="yoK-B5-jSI"/>
                                                         <constraint firstAttribute="bottom" secondItem="36v-er-yZc" secondAttribute="bottom" id="zCi-mn-QjX"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -348,6 +387,9 @@
                                             <outlet property="backgroundImageView" destination="oCS-eO-uoZ" id="2c1-jn-bZT"/>
                                             <outlet property="checkImage" destination="IUA-xx-YhI" id="t1f-Qz-A1U"/>
                                             <outlet property="descriptionLabel" destination="v4M-RA-QaQ" id="a4B-IX-767"/>
+                                            <outlet property="notificationButton" destination="B8i-Uh-xEt" id="1ep-ox-qDh"/>
+                                            <outlet property="notificationButtonBackground" destination="WjT-Vp-qAB" id="IwI-yl-A3m"/>
+                                            <outlet property="notificationButtonLabel" destination="dcO-zx-P9P" id="05S-s0-Cbn"/>
                                             <outlet property="subtitleLabel" destination="Lmj-h3-4AF" id="q0W-7P-eQQ"/>
                                             <outlet property="titleLabel" destination="T77-00-g79" id="UBr-qw-CJY"/>
                                         </connections>
@@ -667,19 +709,19 @@
                                                         <rect key="frame" x="92" y="0.0" width="283" height="337"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Water" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ow4-Lq-Jjl">
-                                                        <rect key="frame" x="20.000000000000007" y="346" width="100.66666666666669" height="39.333333333333314"/>
+                                                        <rect key="frame" x="20.000000000000007" y="346" width="91.666666666666686" height="41"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8oz daily" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asy-Ld-Uzz">
-                                                        <rect key="frame" x="20" y="399.33333333333331" width="82" height="22.666666666666686"/>
+                                                        <rect key="frame" x="20" y="401" width="79.333333333333329" height="23.333333333333314"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="98" translatesAutoresizingMaskIntoConstraints="NO" id="VHq-mI-2wC" customClass="WaterIntakeView" customModule="Vessel" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="450" width="335" height="100.33333333333337"/>
+                                                        <rect key="frame" x="20" y="452.33333333333331" width="335" height="97.999999999999943"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
@@ -701,7 +743,7 @@
                                                 <rect key="frame" x="0.0" y="586.33333333333348" width="375" height="1489"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water is essential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goO-4R-e4O">
-                                                        <rect key="frame" x="20" y="60" width="194" height="30"/>
+                                                        <rect key="frame" x="20" y="60" width="187.66666666666666" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Gdh-63-SP6"/>
                                                         </constraints>
@@ -710,7 +752,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This includes our:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ka-aC-tZ5">
-                                                        <rect key="frame" x="20" y="224" width="192.66666666666666" height="30"/>
+                                                        <rect key="frame" x="20" y="222" width="189" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Xka-hJ-zb2"/>
                                                         </constraints>
@@ -719,7 +761,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neR-oe-HXc">
-                                                        <rect key="frame" x="20" y="118" width="335" height="86"/>
+                                                        <rect key="frame" x="20" y="118" width="335" height="84"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Water is a natural resource that is required by every person to help satisfy our health-related needs. ">
                                                                 <attributes>
@@ -731,7 +773,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nsa-ZG-N4B">
-                                                        <rect key="frame" x="30" y="437" width="325" height="84"/>
+                                                        <rect key="frame" x="30" y="453.66666666666663" width="325" height="84"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="It is evident that water is one of the key elements responsible for human life on earth and is vital for our survival.">
                                                                 <attributes>
@@ -748,7 +790,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDl-w1-VR6">
-                                                        <rect key="frame" x="24" y="265" width="142.33333333333334" height="112"/>
+                                                        <rect key="frame" x="24" y="263" width="139.33333333333334" height="130.66666666666663"/>
                                                         <string key="text">· Body composition
  · Mental focus
  · Sleep
@@ -792,16 +834,16 @@ However, most people drink below what their body needs because it's hard to know
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMZ-g5-ZdL">
-                                                        <rect key="frame" x="20" y="580.99999999999989" width="335" height="548.00000000000011"/>
+                                                        <rect key="frame" x="20" y="597.66666666666652" width="335" height="531.33333333333348"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="250" image="water-details-background" translatesAutoresizingMaskIntoConstraints="NO" id="G3e-58-uju">
-                                                                <rect key="frame" x="131" y="0.0" width="204" height="548"/>
+                                                                <rect key="frame" x="131" y="0.0" width="204" height="531.33333333333337"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="204" id="8f1-xY-xBA"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-qn-hNt">
-                                                                <rect key="frame" x="28" y="40" width="148" height="116"/>
+                                                                <rect key="frame" x="28" y="40.000000000000007" width="148" height="83.666666666666686"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="The human brain is composed of">
                                                                         <attributes>
@@ -814,61 +856,61 @@ However, most people drink below what their body needs because it's hard to know
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lungs are" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-xk-pX7">
-                                                                <rect key="frame" x="28" y="220" width="68.333333333333329" height="16"/>
+                                                                <rect key="frame" x="28" y="188.66666666666674" width="65.333333333333329" height="18.666666666666657"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="water" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqD-pd-Lws">
-                                                                <rect key="frame" x="83.333333333333329" y="170.66666666666674" width="42.333333333333329" height="16"/>
+                                                                <rect key="frame" x="85" y="137.33333333333326" width="40" height="18.666666666666657"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="95%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5md-3c-hhb">
-                                                                <rect key="frame" x="28.000000000000004" y="165" width="49.333333333333343" height="27"/>
+                                                                <rect key="frame" x="28" y="132.66666666666674" width="51" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBB-gy-IIU">
-                                                                <rect key="frame" x="28.000000000000004" y="244" width="50.333333333333343" height="27"/>
+                                                                <rect key="frame" x="28" y="215.33333333333326" width="51" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="83%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-wB-8OW">
-                                                                <rect key="frame" x="32" y="323" width="48" height="27"/>
+                                                                <rect key="frame" x="32" y="298" width="51" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="76%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KI-Sf-pCD">
-                                                                <rect key="frame" x="31.999999999999996" y="402" width="47.666666666666657" height="27"/>
+                                                                <rect key="frame" x="32" y="380.66666666666674" width="51" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blood is" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SJ-mU-E9l">
-                                                                <rect key="frame" x="33" y="299" width="58" height="16"/>
+                                                                <rect key="frame" x="33" y="271.33333333333326" width="57" height="18.666666666666686"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="muscles are" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIP-NJ-0nZ">
-                                                                <rect key="frame" x="33" y="378" width="88" height="16"/>
+                                                                <rect key="frame" x="33" y="354" width="86" height="18.666666666666686"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bones are" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4N-a3-hHZ">
-                                                                <rect key="frame" x="32.999999999999993" y="457" width="71.333333333333314" height="16"/>
+                                                                <rect key="frame" x="33" y="436.66666666666674" width="71" height="18.666666666666686"/>
                                                                 <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
                                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZT-do-QPj">
-                                                                <rect key="frame" x="33" y="481" width="48.333333333333343" height="27"/>
+                                                                <rect key="frame" x="33" y="463.33333333333326" width="51" height="28"/>
                                                                 <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                                                 <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1017,14 +1059,14 @@ However, most people drink below what their body needs because it's hard to know
             <objects>
                 <viewController storyboardIdentifier="ActivityDetailsViewController" automaticallyAdjustsScrollViewInsets="NO" id="s9P-Zc-7rm" customClass="ActivityDetailsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dXq-JC-X3m">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="804"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1085"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgC-MZ-s97">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="804"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1085"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="uG3-rK-gPy">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="932"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uG3-rK-gPy">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1155"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27m-mV-9DP" userLabel="Header View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="612"/>
@@ -1038,10 +1080,10 @@ However, most people drink below what their body needs because it's hard to know
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="gZm-Yf-eCN">
-                                                        <rect key="frame" x="19.999999999999986" y="594" width="234.66666666666663" height="28"/>
+                                                        <rect key="frame" x="20" y="548" width="232" height="28"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHB-tH-Vww">
-                                                                <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="96" height="28"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="· Reagents">
                                                                         <attributes>
@@ -1054,7 +1096,7 @@ However, most people drink below what their body needs because it's hard to know
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfO-Lt-s9e">
-                                                                <rect key="frame" x="137.33333333333334" y="0.0" width="97.333333333333343" height="28"/>
+                                                                <rect key="frame" x="136" y="0.0" width="96" height="28"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Quantities">
                                                                         <attributes>
@@ -1069,13 +1111,13 @@ However, most people drink below what their body needs because it's hard to know
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SP-22-Ci4">
-                                                        <rect key="frame" x="20" y="451.33333333333331" width="73.666666666666671" height="80.666666666666686"/>
+                                                        <rect key="frame" x="20" y="453" width="68.333333333333329" height="33"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IG5-1c-3A5">
-                                                        <rect key="frame" x="20" y="544" width="87.333333333333329" height="28"/>
+                                                        <rect key="frame" x="20" y="498" width="81.666666666666671" height="28"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Description">
                                                                 <attributes>
@@ -1088,7 +1130,7 @@ However, most people drink below what their body needs because it's hard to know
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW8-60-Pah">
-                                                        <rect key="frame" x="20" y="400" width="73.666666666666671" height="39.333333333333314"/>
+                                                        <rect key="frame" x="20" y="400" width="65.666666666666671" height="41"/>
                                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1120,8 +1162,101 @@ However, most people drink below what their body needs because it's hard to know
                                                     <constraint firstItem="WW8-60-Pah" firstAttribute="top" secondItem="27m-mV-9DP" secondAttribute="top" constant="400" id="zy1-wE-6hq"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx3-QR-aKP">
+                                                <rect key="frame" x="0.0" y="612" width="375" height="223"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uw3-b9-VFT">
+                                                        <rect key="frame" x="20.000000000000007" y="20" width="100.66666666666669" height="97"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="92z-mT-OID">
+                                                        <rect key="frame" x="20" y="163" width="335" height="60"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsV-Rc-vEj">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mk7-br-dIu">
+                                                                        <rect key="frame" x="20" y="22" width="51" height="16.333333333333329"/>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="14"/>
+                                                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-4Q-zuz">
+                                                                        <rect key="frame" x="263" y="22" width="52" height="16.333333333333329"/>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="14"/>
+                                                                        <color key="textColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" red="0.91764705879999997" green="0.92156862750000001" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="mk7-br-dIu" firstAttribute="leading" secondItem="jsV-Rc-vEj" secondAttribute="leading" constant="20" id="3KR-zy-9OX"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="SE1-4Q-zuz" secondAttribute="trailing" constant="20" id="6u7-hL-39f"/>
+                                                                    <constraint firstItem="SE1-4Q-zuz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mk7-br-dIu" secondAttribute="trailing" constant="10" id="8IN-aM-WLy"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="Fim-dB-8wX"/>
+                                                                    <constraint firstItem="SE1-4Q-zuz" firstAttribute="centerY" secondItem="jsV-Rc-vEj" secondAttribute="centerY" id="nhB-bk-j0D"/>
+                                                                    <constraint firstItem="mk7-br-dIu" firstAttribute="centerY" secondItem="jsV-Rc-vEj" secondAttribute="centerY" id="swp-wU-TJV"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <integer key="value" value="24"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set a reminder to see your schedule here." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPu-Gz-0JY">
+                                                        <rect key="frame" x="20" y="163" width="335" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="u8x-WS-dxs"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOU-az-wrz" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="248" y="20" width="107" height="54"/>
+                                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="54" id="9fb-aG-e2o"/>
+                                                            <constraint firstAttribute="width" constant="107" id="TDq-ZU-V4B"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                        <state key="normal" title="Edit" image="edit-icon">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onEditSchedule" destination="s9P-Zc-7rm" eventType="touchUpInside" id="dio-Gv-Zca"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="92z-mT-OID" firstAttribute="top" secondItem="Uw3-b9-VFT" secondAttribute="bottom" constant="46" id="7jO-qo-WFc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UPu-Gz-0JY" secondAttribute="trailing" constant="20" id="KoG-rZ-9ER"/>
+                                                    <constraint firstItem="UPu-Gz-0JY" firstAttribute="top" secondItem="Uw3-b9-VFT" secondAttribute="bottom" constant="46" id="Lkm-AD-eTd"/>
+                                                    <constraint firstItem="92z-mT-OID" firstAttribute="leading" secondItem="sx3-QR-aKP" secondAttribute="leading" constant="20" id="OB5-ty-XBa"/>
+                                                    <constraint firstItem="Uw3-b9-VFT" firstAttribute="top" secondItem="sx3-QR-aKP" secondAttribute="top" constant="20" id="OSi-V6-qfo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qOU-az-wrz" secondAttribute="trailing" constant="20" id="PgJ-mc-yKi"/>
+                                                    <constraint firstItem="qOU-az-wrz" firstAttribute="top" secondItem="sx3-QR-aKP" secondAttribute="top" constant="20" id="XXr-Vm-6C6"/>
+                                                    <constraint firstItem="Uw3-b9-VFT" firstAttribute="leading" secondItem="sx3-QR-aKP" secondAttribute="leading" constant="20" id="dBn-In-WJD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="92z-mT-OID" secondAttribute="trailing" constant="20" id="gI8-3t-iyc"/>
+                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UPu-Gz-0JY" secondAttribute="bottom" id="ggv-eu-F7i"/>
+                                                    <constraint firstItem="UPu-Gz-0JY" firstAttribute="leading" secondItem="sx3-QR-aKP" secondAttribute="leading" constant="20" id="gwc-Wn-bGX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="92z-mT-OID" secondAttribute="bottom" id="meq-rm-hQG"/>
+                                                    <constraint firstItem="qOU-az-wrz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Uw3-b9-VFT" secondAttribute="trailing" constant="20" id="pky-jI-VHF"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNU-Oh-fi3">
-                                                <rect key="frame" x="0.0" y="612" width="375" height="128"/>
+                                                <rect key="frame" x="0.0" y="835" width="375" height="128"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se3-uW-g0W" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="34" width="335" height="60"/>
@@ -1147,13 +1282,14 @@ However, most people drink below what their body needs because it's hard to know
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="se3-uW-g0W" firstAttribute="leading" secondItem="wNU-Oh-fi3" secondAttribute="leading" constant="20" id="AdU-dB-ZWv"/>
-                                                    <constraint firstItem="se3-uW-g0W" firstAttribute="centerY" secondItem="wNU-Oh-fi3" secondAttribute="centerY" id="W7g-Hi-AD4"/>
-                                                    <constraint firstAttribute="height" constant="128" id="YLM-SO-feg"/>
+                                                    <constraint firstItem="se3-uW-g0W" firstAttribute="top" secondItem="wNU-Oh-fi3" secondAttribute="top" constant="34" id="L0d-Cy-dZn"/>
+                                                    <constraint firstAttribute="height" constant="128" id="Vwb-U2-hv7"/>
+                                                    <constraint firstAttribute="bottom" secondItem="se3-uW-g0W" secondAttribute="bottom" constant="34" id="bEf-aE-Gwa"/>
                                                     <constraint firstAttribute="trailing" secondItem="se3-uW-g0W" secondAttribute="trailing" constant="20" id="eA5-Qh-nLR"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLs-b1-Wjh" customClass="VesselFooterView" customModule="Vessel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="740" width="375" height="192"/>
+                                                <rect key="frame" x="0.0" y="963" width="375" height="192"/>
                                                 <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="192" id="BCb-0g-Y5O"/>
@@ -1217,15 +1353,18 @@ However, most people drink below what their body needs because it's hard to know
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="804"/>
+                    <size key="freeformSize" width="375" height="1085"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="IG5-1c-3A5" id="itH-UC-Vx2"/>
+                        <outlet property="emptyScheduleLabel" destination="UPu-Gz-0JY" id="wWa-uK-HA7"/>
                         <outlet property="headerImageView" destination="Y3d-gc-K81" id="0nd-Nd-2Tv"/>
                         <outlet property="headerView" destination="27m-mV-9DP" id="MVf-UR-f7o"/>
                         <outlet property="quantitiesLabel" destination="VfO-Lt-s9e" id="7yk-nm-G4a"/>
                         <outlet property="reagentsLabel" destination="tHB-tH-Vww" id="rLK-nW-1HJ"/>
                         <outlet property="reagentsStackView" destination="gZm-Yf-eCN" id="hs4-2G-6tB"/>
                         <outlet property="removeFromPlanButton" destination="se3-uW-g0W" id="9UV-Qb-im6"/>
+                        <outlet property="scheduleSection" destination="sx3-QR-aKP" id="iTi-56-6kj"/>
+                        <outlet property="scheduleStackView" destination="92z-mT-OID" id="KEI-qp-Y0a"/>
                         <outlet property="scrollView" destination="tgC-MZ-s97" id="c2y-oy-fZY"/>
                         <outlet property="subtitleLabel" destination="6SP-22-Ci4" id="xEY-0u-EFx"/>
                         <outlet property="titleLabel" destination="WW8-60-Pah" id="Plo-cv-drL"/>
@@ -1233,7 +1372,7 @@ However, most people drink below what their body needs because it's hard to know
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFe-Ff-jtI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1950" y="-55"/>
+            <point key="canvasLocation" x="2006.9230769230769" y="45.142180094786731"/>
         </scene>
         <!--Insights Popup View Controller-->
         <scene sceneID="lQY-sH-SwO">
@@ -1255,16 +1394,16 @@ However, most people drink below what their body needs because it's hard to know
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftw-cw-4dF">
-                                <rect key="frame" x="20" y="157" width="350" height="150"/>
+                                <rect key="frame" x="20" y="157" width="350" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="An insight a day keeps the doctor away" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYn-tL-agd">
-                                        <rect key="frame" x="20" y="20" width="310" height="54"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="56"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxz-pE-g2A">
-                                        <rect key="frame" x="20" y="82" width="310" height="48"/>
+                                        <rect key="frame" x="20" y="84" width="310" height="56"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Each day, you'll get one new insight to help you reach your goals.">
                                                 <attributes>
@@ -1294,7 +1433,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xt8-On-wfA">
-                                <rect key="frame" x="20" y="323" width="350" height="207"/>
+                                <rect key="frame" x="20" y="333" width="350" height="207"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KPg-l7-35g">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="207"/>
@@ -1305,13 +1444,13 @@ However, most people drink below what their body needs because it's hard to know
                                         <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29g-Pk-ysb">
-                                        <rect key="frame" x="20" y="20" width="310" height="24.666666666666671"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="25.666666666666671"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjd-LP-qVg">
-                                        <rect key="frame" x="19.999999999999996" y="48.666666666666686" width="50.666666666666657" height="16"/>
+                                        <rect key="frame" x="20" y="49.666666666666686" width="48" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1382,7 +1521,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </variation>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointer-finger" translatesAutoresizingMaskIntoConstraints="NO" id="bjE-X8-S6L">
-                                <rect key="frame" x="171.66666666666666" y="506" width="47" height="71"/>
+                                <rect key="frame" x="171.66666666666666" y="516" width="47" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="jbr-vf-cnY"/>
                                     <constraint firstAttribute="height" constant="71" id="ouG-JP-yeu"/>
@@ -1445,16 +1584,16 @@ However, most people drink below what their body needs because it's hard to know
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaB-w8-aUQ">
-                                <rect key="frame" x="20" y="157" width="350" height="150"/>
+                                <rect key="frame" x="20" y="157" width="350" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Congrats on adding your first activity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP2-Lr-Jxa">
-                                        <rect key="frame" x="20" y="20" width="310" height="54"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="56"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkb-H8-Aje">
-                                        <rect key="frame" x="20" y="82" width="310" height="48"/>
+                                        <rect key="frame" x="20" y="84" width="310" height="56"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Track how many times you complete this and build healthy habits.">
                                                 <attributes>
@@ -1484,7 +1623,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YY5-bh-aXt">
-                                <rect key="frame" x="20" y="323" width="350" height="207"/>
+                                <rect key="frame" x="20" y="333" width="350" height="207"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXJ-7J-8E6">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="207"/>
@@ -1495,13 +1634,13 @@ However, most people drink below what their body needs because it's hard to know
                                         <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-Hb-Dce">
-                                        <rect key="frame" x="279.33333333333331" y="20" width="50.666666666666686" height="24.666666666666671"/>
+                                        <rect key="frame" x="282" y="20" width="48" height="25.666666666666671"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BC0-Gv-v6D">
-                                        <rect key="frame" x="279.33333333333331" y="48.666666666666686" width="50.666666666666686" height="16"/>
+                                        <rect key="frame" x="282" y="49.666666666666686" width="48" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1613,7 +1752,7 @@ However, most people drink below what their body needs because it's hard to know
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eo5-Zk-PRw">
-                                <rect key="frame" x="0.0" y="87" width="390" height="723"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -1621,7 +1760,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eig-qD-zG5">
-                                <rect key="frame" x="20" y="47" width="44" height="32"/>
+                                <rect key="frame" x="20" y="47" width="43" height="33"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -1662,9 +1801,11 @@ However, most people drink below what their body needs because it's hard to know
         <image name="Plan-Icon" width="18" height="18"/>
         <image name="checkbox_locked" width="48" height="48"/>
         <image name="close-icon" width="10" height="10"/>
+        <image name="edit-icon" width="14" height="14"/>
         <image name="food-placeholder" width="315" height="80.333335876464844"/>
         <image name="info-icon" width="19" height="19"/>
         <image name="pointer-finger" width="47" height="71"/>
+        <image name="reminders-icon" width="16" height="16"/>
         <image name="square_back_button" width="50" height="50"/>
         <image name="todayInsightsIcon" width="23" height="31"/>
         <image name="todayLeaves" width="167" height="147"/>

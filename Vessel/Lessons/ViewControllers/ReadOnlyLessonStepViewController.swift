@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReadOnlyLessonStepViewController: UIViewController
+class ReadOnlyLessonStepViewController: UIViewController, VesselScreenIdentifiable
 {
     var viewModel: StepViewModel!
     var coordinator: LessonsCoordinator!
@@ -23,7 +23,8 @@ class ReadOnlyLessonStepViewController: UIViewController
     @IBOutlet private weak var planAddedViewHeightConstraint: NSLayoutConstraint!
     
     private var progressBarSetup = false
-    @Resolved private var analytics: Analytics
+    @Resolved var analytics: Analytics
+    var flowName: AnalyticsFlowName = .lessonsFlow
     
     override func viewDidLoad()
     {
@@ -174,6 +175,35 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
                 UIView.animate(withDuration: 0.3, delay: 2.0)
                 {
                     self.view.layoutIfNeeded()
+                } completion: { _ in
+                    let activities = PlansManager.shared.activities
+                    let activityPlans = PlansManager.shared.getActivityPlans()
+                    guard let plan = activityPlans.first(where: { $0.typeId == activityId }),
+                          let activity = activities.first(where: { $0.id == plan.typeId }) else
+                    {
+                        assertionFailure("ReadOnlyLessonStepViewController-onActivityAddedToPlan: Can't find plan or activity with id: \(activityId)")
+                        return
+                    }
+                    
+                    self.analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
+                    
+                    let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+                    if reminders.count > 0
+                    {
+                        let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                        let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
+                        addReminderVC.hidesBottomBarWhenPushed = true
+                        addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, activity: activity)
+                        self.navigationController?.pushViewController(addReminderVC, animated: true)
+                    }
+                    else
+                    {
+                        let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                        let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
+                        addReminderVC.hidesBottomBarWhenPushed = true
+                        addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, activity: activity)
+                        self.navigationController?.pushViewController(addReminderVC, animated: true)
+                    }
                 }
             }
         } onFailure: { [weak self] error in

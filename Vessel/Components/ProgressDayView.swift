@@ -58,6 +58,7 @@ class ProgressDayView: UIView
         makeBorderPath(progress: progress)
     }
     
+    // Setup for using on progress days
     func setup(dateString: String, progress: Double, isSelectedDay: Bool, delegate: ProgressDayViewDelegate?)
     {
         self.dateString = dateString
@@ -71,6 +72,22 @@ class ProgressDayView: UIView
         dayLabel.text = Date.dayInitialFormatter.string(from: date)
         backgroundView.backgroundColor = progress == 1.0 ? .black : UIColor.backgroundGray
         dayLabel.textColor = progress == 1.0 ? .white : .black
+        makeBorderPath(progress: progress)
+    }
+    
+    // Setup for using on selection of days
+    func setup(dateString: String, dayString: String, isSelected: Bool, delegate: ProgressDayViewDelegate?)
+    {
+        self.dateString = dateString
+        self.delegate = delegate
+        self.progress = isSelected ? 1.0 : 0.0
+        backgroundView.layer.cornerRadius = backgroundBorderView.frame.width * 0.30
+        backgroundView.layer.masksToBounds = true
+
+        dotView.isHidden = !isSelected
+        dayLabel.text = dayString
+        backgroundView.backgroundColor = UIColor.backgroundGray
+        dayLabel.textColor = .black
         makeBorderPath(progress: progress)
     }
     

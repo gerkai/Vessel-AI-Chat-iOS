@@ -59,3 +59,36 @@ extension String
         return attrStr
     }
 }
+
+extension String
+{
+    func convertTo24HourFormat() -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.amSymbol = Constants.AM_SYMBOL
+        dateFormatter.pmSymbol = Constants.PM_SYMBOL
+
+        guard let date = dateFormatter.date(from: self) else
+        {
+            return self
+        }
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
+    
+    func convertTo12HourFormat() -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+
+        guard let date = dateFormatter.date(from: self) else
+        {
+            return self
+        }
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.amSymbol = Constants.AM_SYMBOL
+        dateFormatter.pmSymbol = Constants.PM_SYMBOL
+        return dateFormatter.string(from: date)
+    }
+}

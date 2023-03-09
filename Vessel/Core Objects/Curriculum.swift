@@ -9,7 +9,7 @@ import Foundation
 
 class Curriculum: CoreObjectProtocol
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
     let storage: StorageType = .cacheAndDisk
     

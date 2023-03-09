@@ -17,7 +17,7 @@ enum StepType: String
 
 class Step: CoreObjectProtocol
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
     let storage: StorageType = .cacheAndDisk
 
@@ -99,7 +99,7 @@ class Step: CoreObjectProtocol
 
 class LessonStepAnswer: CoreObjectProtocol
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
     let storage: StorageType = .cacheAndDisk
 

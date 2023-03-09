@@ -162,6 +162,10 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
                     LessonsManager.shared.buildLessonPlan(onDone: {})
                 }
             }
+            else if type == String(describing: Reminder.self)
+            {
+                reloadUI()
+            }
         }
     }
     
@@ -224,7 +228,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
 }
 
 extension TodayViewController: UITableViewDelegate, UITableViewDataSource
-{
+{    
     func numberOfSections(in tableView: UITableView) -> Int
     {
         viewModel.sections.count
@@ -269,9 +273,11 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         case .lockedCheckMarkCard(let backgroundImage, let subtext):
             guard let cell = cell as? TodayLockedCheckMarkCardCell else { fatalError("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController") }
             cell.setup(backgroundImage: backgroundImage, subtext: subtext)
-        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type):
+        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
-            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, id: id, type: type, delegate: self)
+            let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
+            let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
+            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: remindersButtonState, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
         case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
             cell.setup(title: title, subtitle: subtitle, description: nil, backgroundImage: backgroundImage, completed: true)
@@ -550,6 +556,70 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             {
                 guard let viewController = coordinator.getNextStepViewController(shouldSave: viewModel.isToday && lesson.completedDate == nil) else { return }
                 navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    func onReminderTapped(id: Int, type: CheckMarkCardType)
+    {
+        guard viewModel.showReminders else { return }
+        if type == .activity
+        {
+            let activities = PlansManager.shared.activities
+            let activityPlans = PlansManager.shared.getActivityPlans()
+            guard let plan = activityPlans.first(where: { $0.typeId == id }),
+                  let activity = activities.first(where: { $0.id == plan.typeId }) else
+            {
+                assertionFailure("TodayViewController-onReminderTapped: Can't find plan or activity with id: \(id)")
+                return
+            }
+            
+            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
+            
+            let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+            if reminders.count > 0
+            {
+                let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
+                addReminderVC.hidesBottomBarWhenPushed = true
+                addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, activity: activity)
+                navigationController?.pushViewController(addReminderVC, animated: true)
+            }
+            else
+            {
+                let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
+                addReminderVC.hidesBottomBarWhenPushed = true
+                addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, activity: activity)
+                navigationController?.pushViewController(addReminderVC, animated: true)
+            }
+        }
+        else if type == .lifestyleRecommendation
+        {
+            let lifestyleRecommendations = Storage.retrieve(as: LifestyleRecommendation.self)
+            let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
+            guard let plan = lifestyleRecommendationPlans.first(where: { $0.typeId == id }),
+                  let lifestyleRecommendation = lifestyleRecommendations.first(where: { $0.id == plan.typeId }),
+                      plan.typeId != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID else { return }
+
+            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .lifestyleRecommendation))
+            
+            let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+            if reminders.count > 0
+            {
+                let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
+                addReminderVC.hidesBottomBarWhenPushed = true
+                addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, lifestyleRecommendation: lifestyleRecommendation)
+                navigationController?.pushViewController(addReminderVC, animated: true)
+            }
+            else
+            {
+                let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
+                addReminderVC.hidesBottomBarWhenPushed = true
+                addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, lifestyleRecommendation: lifestyleRecommendation)
+                navigationController?.pushViewController(addReminderVC, animated: true)
             }
         }
     }

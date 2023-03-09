@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Bold.otf">
+            <string>BananaGrotesk-Bold</string>
+        </array>
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+        <array key="NoeText-Book.otf">
+            <string>NoeText-Book</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Reminders View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="RemindersViewController" id="Y6W-OH-hqX" customClass="RemindersViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5De-Me-Zhv">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="180"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="06H-m2-zbB">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="180"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avocado" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1J4-xA-J7V">
+                                        <rect key="frame" x="90" y="54.999999999999993" width="280" height="24.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 whole avocado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egb-Bj-itL">
+                                        <rect key="frame" x="90" y="83" width="280" height="16"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABB-VV-2EM" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Xjh-tm-xRm"/>
+                                            <constraint firstAttribute="height" constant="50" id="flK-IK-Bm5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <state key="normal" image="square_back_button">
+                                            <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="back" destination="Y6W-OH-hqX" eventType="touchUpInside" id="EDx-R9-VMv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ABB-VV-2EM" firstAttribute="leading" secondItem="5De-Me-Zhv" secondAttribute="leading" constant="20" id="29C-vw-WGc"/>
+                                    <constraint firstAttribute="trailing" secondItem="1J4-xA-J7V" secondAttribute="trailing" constant="20" id="3Qq-qG-1Gq"/>
+                                    <constraint firstItem="06H-m2-zbB" firstAttribute="top" secondItem="5De-Me-Zhv" secondAttribute="top" id="5NF-7h-x0G"/>
+                                    <constraint firstItem="1J4-xA-J7V" firstAttribute="top" secondItem="06H-m2-zbB" secondAttribute="topMargin" id="7OL-ga-KRm"/>
+                                    <constraint firstAttribute="trailing" secondItem="06H-m2-zbB" secondAttribute="trailing" id="Sax-rE-k3w"/>
+                                    <constraint firstItem="06H-m2-zbB" firstAttribute="leading" secondItem="5De-Me-Zhv" secondAttribute="leading" id="gWt-nQ-zwp"/>
+                                    <constraint firstItem="egb-Bj-itL" firstAttribute="trailing" secondItem="1J4-xA-J7V" secondAttribute="trailing" id="iqU-KN-1Ei"/>
+                                    <constraint firstItem="1J4-xA-J7V" firstAttribute="leading" secondItem="ABB-VV-2EM" secondAttribute="trailing" constant="20" id="kvB-d4-XRy"/>
+                                    <constraint firstItem="ABB-VV-2EM" firstAttribute="top" secondItem="5De-Me-Zhv" secondAttribute="topMargin" id="odO-28-czg"/>
+                                    <constraint firstItem="egb-Bj-itL" firstAttribute="top" secondItem="1J4-xA-J7V" secondAttribute="bottom" constant="3.3333333333333428" id="rAl-dX-rC5"/>
+                                    <constraint firstItem="egb-Bj-itL" firstAttribute="leading" secondItem="1J4-xA-J7V" secondAttribute="leading" id="s47-i9-WIV"/>
+                                    <constraint firstAttribute="bottom" secondItem="06H-m2-zbB" secondAttribute="bottom" id="vME-Pe-0Oj"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-PB-rnN">
+                                <rect key="frame" x="20" y="251" width="350" height="579"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemindersTableViewCell" rowHeight="206" id="oVy-ac-M1y" customClass="RemindersTableViewCell" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="350" height="206"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oVy-ac-M1y" id="MAS-7r-Qu7">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="206"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPS-ox-taA">
+                                                    <rect key="frame" x="0.0" y="10" width="338" height="196"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eON-8K-f0e">
+                                                            <rect key="frame" x="16" y="16" width="306" height="44"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxh-Xu-rCg">
+                                                                    <rect key="frame" x="137.66666666666666" y="15.333333333333336" width="30.666666666666657" height="13.666666666666664"/>
+                                                                    <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPL-3g-nny" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="268" y="6" width="32" height="32"/>
+                                                                    <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="32" id="Fk0-K9-xot"/>
+                                                                        <constraint firstAttribute="height" constant="32" id="R5R-lE-hAN"/>
+                                                                    </constraints>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" title="+">
+                                                                        <fontDescription key="titleFontDescription" name="BananaGrotesk-Extralight" family="Banana Grotesk" pointSize="20"/>
+                                                                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                                                    </buttonConfiguration>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <integer key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="increaseQuantity" destination="oVy-ac-M1y" eventType="touchUpInside" id="FJ8-SX-vIz"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM2-u7-1tz" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="6" y="6" width="32" height="32"/>
+                                                                    <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="32" id="HPa-eE-2DR"/>
+                                                                        <constraint firstAttribute="width" constant="32" id="jDo-6U-One"/>
+                                                                    </constraints>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" title="-">
+                                                                        <fontDescription key="titleFontDescription" name="BananaGrotesk-Extralight" family="Banana Grotesk" pointSize="20"/>
+                                                                    </buttonConfiguration>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <integer key="value" value="12"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="decreaseQuantity" destination="oVy-ac-M1y" eventType="touchUpInside" id="CA1-fN-ZOW"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="CPL-3g-nny" firstAttribute="centerY" secondItem="eON-8K-f0e" secondAttribute="centerY" id="Fhf-VN-1Db"/>
+                                                                <constraint firstItem="PM2-u7-1tz" firstAttribute="leading" secondItem="eON-8K-f0e" secondAttribute="leading" constant="6" id="JhD-MI-3mP"/>
+                                                                <constraint firstAttribute="trailing" secondItem="CPL-3g-nny" secondAttribute="trailing" constant="6" id="VdP-rF-gMY"/>
+                                                                <constraint firstItem="PM2-u7-1tz" firstAttribute="centerY" secondItem="eON-8K-f0e" secondAttribute="centerY" id="WuW-Sg-Qdf"/>
+                                                                <constraint firstItem="Xxh-Xu-rCg" firstAttribute="centerY" secondItem="eON-8K-f0e" secondAttribute="centerY" id="ogl-Xv-uts"/>
+                                                                <constraint firstAttribute="height" constant="44" id="wdF-bF-wp5"/>
+                                                                <constraint firstItem="Xxh-Xu-rCg" firstAttribute="centerX" secondItem="eON-8K-f0e" secondAttribute="centerX" id="weo-yO-twt"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <integer key="value" value="16"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-hN-iE4">
+                                                            <rect key="frame" x="16" y="76" width="306" height="44"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xao-z1-T5s">
+                                                                    <rect key="frame" x="137.66666666666666" y="15.333333333333329" width="30.666666666666657" height="13.666666666666664"/>
+                                                                    <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="44" id="EVN-av-BuY"/>
+                                                                <constraint firstItem="xao-z1-T5s" firstAttribute="centerY" secondItem="c6k-hN-iE4" secondAttribute="centerY" id="MZo-UF-DeB"/>
+                                                                <constraint firstItem="xao-z1-T5s" firstAttribute="centerX" secondItem="c6k-hN-iE4" secondAttribute="centerX" id="eCF-Bt-D4f"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <integer key="value" value="16"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="muM-bv-WKe">
+                                                            <rect key="frame" x="16" y="136" width="306" height="48"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05b-Zk-cB2" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="39.333333333333336" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMv-M5-lyv" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="44.333333333333343" y="0.0" width="39.666666666666657" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENf-n7-ItR" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="89" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ydf-HF-edL" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="133.33333333333334" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haf-Lf-xDO" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="177.66666666666666" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mB6-oB-D7B" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="222" y="0.0" width="39.666666666666686" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RdG-LY-Hlq" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="266.66666666666669" y="0.0" width="39.333333333333314" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="46" id="LF2-6h-YdZ"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="eON-8K-f0e" secondAttribute="trailing" constant="16" id="3g7-8N-5QO"/>
+                                                        <constraint firstItem="c6k-hN-iE4" firstAttribute="top" secondItem="eON-8K-f0e" secondAttribute="bottom" constant="16" id="6zL-qi-G8A"/>
+                                                        <constraint firstItem="c6k-hN-iE4" firstAttribute="leading" secondItem="pPS-ox-taA" secondAttribute="leading" constant="16" id="9cE-IH-oyt"/>
+                                                        <constraint firstItem="eON-8K-f0e" firstAttribute="leading" secondItem="pPS-ox-taA" secondAttribute="leading" constant="16" id="IxL-VS-dkz"/>
+                                                        <constraint firstItem="muM-bv-WKe" firstAttribute="leading" secondItem="pPS-ox-taA" secondAttribute="leading" constant="16" id="K9Z-kH-ZpO"/>
+                                                        <constraint firstAttribute="bottom" secondItem="muM-bv-WKe" secondAttribute="bottom" constant="12" id="Kac-q9-DjI"/>
+                                                        <constraint firstItem="eON-8K-f0e" firstAttribute="top" secondItem="pPS-ox-taA" secondAttribute="top" constant="16" id="jw9-kN-T68"/>
+                                                        <constraint firstItem="muM-bv-WKe" firstAttribute="top" secondItem="c6k-hN-iE4" secondAttribute="bottom" constant="16" id="omY-WH-Y9i"/>
+                                                        <constraint firstAttribute="trailing" secondItem="c6k-hN-iE4" secondAttribute="trailing" constant="16" id="rgm-uP-feR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="muM-bv-WKe" secondAttribute="trailing" constant="16" id="vrR-rJ-9Fx"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfu-sF-0xZ" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                    <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Cva-7E-esk"/>
+                                                        <constraint firstAttribute="width" constant="30" id="kN8-zV-ell"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="round_close_button" title=""/>
+                                                    <connections>
+                                                        <action selector="onRemoveReminder" destination="oVy-ac-M1y" eventType="touchUpInside" id="Vj9-mP-S2d"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="pPS-ox-taA" secondAttribute="bottom" id="20J-JS-pyg"/>
+                                                <constraint firstItem="pPS-ox-taA" firstAttribute="top" secondItem="MAS-7r-Qu7" secondAttribute="top" constant="10" id="KX8-af-1tc"/>
+                                                <constraint firstItem="pPS-ox-taA" firstAttribute="leading" secondItem="MAS-7r-Qu7" secondAttribute="leading" id="WPu-sc-Jgp"/>
+                                                <constraint firstItem="dfu-sF-0xZ" firstAttribute="top" secondItem="MAS-7r-Qu7" secondAttribute="top" id="kHv-qI-PAJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="dfu-sF-0xZ" secondAttribute="trailing" id="mhY-wL-NJl"/>
+                                                <constraint firstAttribute="trailing" secondItem="pPS-ox-taA" secondAttribute="trailing" constant="12" id="sks-1w-u6d"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="daysOfWeekStackView" destination="muM-bv-WKe" id="kTG-eJ-gUA"/>
+                                            <outlet property="decreaseQuantityButton" destination="PM2-u7-1tz" id="1XF-6n-w8r"/>
+                                            <outlet property="quantityLabel" destination="Xxh-Xu-rCg" id="IY6-RN-yhW"/>
+                                            <outlet property="timeLabel" destination="xao-z1-T5s" id="Dbs-Ad-qoC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShortRemindersTableViewCell" rowHeight="146" id="oRd-KM-Kq9" customClass="RemindersTableViewCell" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="256" width="350" height="146"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oRd-KM-Kq9" id="HvT-eQ-bRo">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="146"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryy-zd-8J7">
+                                                    <rect key="frame" x="0.0" y="10" width="338" height="136"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hra-sB-uB1">
+                                                            <rect key="frame" x="16" y="16" width="306" height="44"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYs-Qq-Nf2">
+                                                                    <rect key="frame" x="137.66666666666666" y="15.333333333333336" width="30.666666666666657" height="13.666666666666664"/>
+                                                                    <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="YYs-Qq-Nf2" firstAttribute="centerY" secondItem="hra-sB-uB1" secondAttribute="centerY" id="3sE-ai-6yK"/>
+                                                                <constraint firstAttribute="height" constant="44" id="E9P-hP-FXN"/>
+                                                                <constraint firstItem="YYs-Qq-Nf2" firstAttribute="centerX" secondItem="hra-sB-uB1" secondAttribute="centerX" id="VoH-C1-gd3"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <integer key="value" value="16"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="q35-4i-xWG">
+                                                            <rect key="frame" x="16" y="76" width="306" height="48"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pcs-da-45b" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="39.333333333333336" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3w-Ae-cZ6" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="44.333333333333343" y="0.0" width="39.666666666666657" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1B-ko-m08" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="89" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RM-Z5-VNy" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="133.33333333333334" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7h-jC-c4C" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="177.66666666666666" y="0.0" width="39.333333333333343" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uk8-kB-kyc" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="222" y="0.0" width="39.666666666666686" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzt-DD-Phu" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                                    <rect key="frame" x="266.66666666666669" y="0.0" width="39.333333333333314" height="48"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="46" id="YeI-TE-CPp"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="hra-sB-uB1" firstAttribute="top" secondItem="Ryy-zd-8J7" secondAttribute="top" constant="16" id="2z3-NA-Yeg"/>
+                                                        <constraint firstItem="q35-4i-xWG" firstAttribute="leading" secondItem="Ryy-zd-8J7" secondAttribute="leading" constant="16" id="9lh-W6-XzJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="hra-sB-uB1" secondAttribute="trailing" constant="16" id="CRx-3Y-uWC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="q35-4i-xWG" secondAttribute="trailing" constant="16" id="ZkR-w0-qG9"/>
+                                                        <constraint firstItem="q35-4i-xWG" firstAttribute="top" secondItem="hra-sB-uB1" secondAttribute="bottom" constant="16" id="ibN-Jd-ScB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="q35-4i-xWG" secondAttribute="bottom" constant="12" id="r2m-o3-8pz"/>
+                                                        <constraint firstItem="hra-sB-uB1" firstAttribute="leading" secondItem="Ryy-zd-8J7" secondAttribute="leading" constant="16" id="uJt-K5-ShI"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXZ-6R-UaG" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                    <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="0wt-jf-sGz"/>
+                                                        <constraint firstAttribute="height" constant="30" id="aEI-Na-iBv"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="round_close_button" title=""/>
+                                                    <connections>
+                                                        <action selector="onRemoveReminder" destination="oRd-KM-Kq9" eventType="touchUpInside" id="Ln6-bi-B43"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Ryy-zd-8J7" secondAttribute="bottom" id="1iL-XV-4M4"/>
+                                                <constraint firstItem="Ryy-zd-8J7" firstAttribute="leading" secondItem="HvT-eQ-bRo" secondAttribute="leading" id="5oe-bm-lb9"/>
+                                                <constraint firstItem="Ryy-zd-8J7" firstAttribute="top" secondItem="HvT-eQ-bRo" secondAttribute="top" constant="10" id="5ui-yg-w2k"/>
+                                                <constraint firstItem="YXZ-6R-UaG" firstAttribute="top" secondItem="HvT-eQ-bRo" secondAttribute="top" id="fuo-Di-0eC"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ryy-zd-8J7" secondAttribute="trailing" constant="12" id="mHn-Yj-OG0"/>
+                                                <constraint firstAttribute="trailing" secondItem="YXZ-6R-UaG" secondAttribute="trailing" id="pAx-l8-vVv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="daysOfWeekStackView" destination="q35-4i-xWG" id="1Oy-Pe-7tc"/>
+                                            <outlet property="timeLabel" destination="YYs-Qq-Nf2" id="zm1-HH-5GC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="0UL-F9-n1B"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="9Oi-g2-It8"/>
+                                </connections>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uZd-7n-zHm">
+                                <rect key="frame" x="20" y="830" width="350" height="136"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NcF-Fk-xqW" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Rll-S7-OYS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onSave" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rfs-o8-N3o"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yww-Ah-Mj6" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="76" width="350" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="IeZ-ZO-Y3o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                        <state key="normal" title="Add Another Reminder">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addAnotherReminder" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bbI-70-NhM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJS-uz-Qxh">
+                                <rect key="frame" x="20" y="208" width="350" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="sQ0-kw-l0N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please add a new reminder for your plan!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vk7-P8-kow">
+                                <rect key="frame" x="78" y="490.66666666666669" width="234" height="32.000000000000057"/>
+                                <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="uZd-7n-zHm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="483-oG-Xit"/>
+                            <constraint firstItem="IJS-uz-Qxh" firstAttribute="top" secondItem="06H-m2-zbB" secondAttribute="bottom" constant="28" id="4p5-cr-hjw"/>
+                            <constraint firstItem="e1P-PB-rnN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="4sn-Zu-5eA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="e1P-PB-rnN" secondAttribute="trailing" constant="20" id="6cY-HK-Wbq"/>
+                            <constraint firstItem="uZd-7n-zHm" firstAttribute="top" secondItem="e1P-PB-rnN" secondAttribute="bottom" id="CDG-rJ-Gvq"/>
+                            <constraint firstItem="5De-Me-Zhv" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Cg3-so-z5k"/>
+                            <constraint firstItem="5De-Me-Zhv" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Hl5-g1-WKM"/>
+                            <constraint firstItem="vk7-P8-kow" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="MIW-XO-3JH"/>
+                            <constraint firstItem="5De-Me-Zhv" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="top" constant="133" id="VPU-Vm-O4M"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uZd-7n-zHm" secondAttribute="trailing" constant="20" id="VsV-fy-e54"/>
+                            <constraint firstItem="5De-Me-Zhv" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="X5n-h4-3om"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IJS-uz-Qxh" secondAttribute="trailing" constant="20" id="ZZf-Ml-1LI"/>
+                            <constraint firstItem="e1P-PB-rnN" firstAttribute="top" secondItem="IJS-uz-Qxh" secondAttribute="bottom" id="fha-73-RRh"/>
+                            <constraint firstItem="vk7-P8-kow" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.6" id="mHx-VI-qDz"/>
+                            <constraint firstItem="vk7-P8-kow" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="mWc-HX-e1z"/>
+                            <constraint firstItem="IJS-uz-Qxh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="pbk-DW-Tos"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="uZd-7n-zHm" secondAttribute="bottom" id="wTe-ri-lvg"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="390" height="1000"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="06H-m2-zbB" id="T4z-O6-irw"/>
+                        <outlet property="emptyRemindersLabel" destination="vk7-P8-kow" id="qvr-DD-5iL"/>
+                        <outlet property="saveButton" destination="NcF-Fk-xqW" id="2nZ-sw-04M"/>
+                        <outlet property="subtitleLabeL" destination="egb-Bj-itL" id="0Zy-FD-IK5"/>
+                        <outlet property="tableView" destination="e1P-PB-rnN" id="zc7-69-puO"/>
+                        <outlet property="titleLabel" destination="1J4-xA-J7V" id="Qeg-RC-GVt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="153.84615384615384" y="-17.061611374407583"/>
+        </scene>
+        <!--Add Reminder View Controller-->
+        <scene sceneID="8S6-8b-Ine">
+            <objects>
+                <viewController storyboardIdentifier="AddReminderViewController" id="Ged-Mb-KqV" customClass="AddReminderViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="74S-dR-NP8">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67Q-da-bom">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="180"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eKC-jw-4eF">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="180"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avocado" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X3-RC-bli">
+                                        <rect key="frame" x="90" y="54.999999999999993" width="280" height="24.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 whole avocado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuU-bs-hwh">
+                                        <rect key="frame" x="90" y="83" width="280" height="16"/>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyn-jh-iHA" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="5RU-O0-0LB"/>
+                                            <constraint firstAttribute="height" constant="50" id="zze-5q-DQy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                        <state key="normal" image="square_back_button">
+                                            <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="back" destination="Ged-Mb-KqV" eventType="touchUpInside" id="i8G-VC-h34"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uuU-bs-hwh" firstAttribute="trailing" secondItem="4X3-RC-bli" secondAttribute="trailing" id="3rG-Eb-uCL"/>
+                                    <constraint firstItem="4X3-RC-bli" firstAttribute="leading" secondItem="gyn-jh-iHA" secondAttribute="trailing" constant="20" id="4zI-8J-zQh"/>
+                                    <constraint firstItem="eKC-jw-4eF" firstAttribute="top" secondItem="67Q-da-bom" secondAttribute="top" id="HRt-UK-xb9"/>
+                                    <constraint firstItem="4X3-RC-bli" firstAttribute="top" secondItem="67Q-da-bom" secondAttribute="topMargin" id="MCx-8M-UWQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eKC-jw-4eF" secondAttribute="trailing" id="WQY-DW-2Gd"/>
+                                    <constraint firstAttribute="trailing" secondItem="4X3-RC-bli" secondAttribute="trailing" constant="20" id="Ylv-Ft-6ZJ"/>
+                                    <constraint firstItem="eKC-jw-4eF" firstAttribute="leading" secondItem="67Q-da-bom" secondAttribute="leading" id="dvD-cW-Uzf"/>
+                                    <constraint firstItem="uuU-bs-hwh" firstAttribute="top" secondItem="4X3-RC-bli" secondAttribute="bottom" constant="3.3333333333333428" id="fLe-Dh-63o"/>
+                                    <constraint firstItem="uuU-bs-hwh" firstAttribute="leading" secondItem="4X3-RC-bli" secondAttribute="leading" id="hEr-KP-r9U"/>
+                                    <constraint firstItem="gyn-jh-iHA" firstAttribute="leading" secondItem="67Q-da-bom" secondAttribute="leading" constant="20" id="tRo-lq-Qje"/>
+                                    <constraint firstAttribute="bottom" secondItem="eKC-jw-4eF" secondAttribute="bottom" id="wrW-E4-lfC"/>
+                                    <constraint firstItem="gyn-jh-iHA" firstAttribute="top" secondItem="67Q-da-bom" secondAttribute="topMargin" id="y63-Pa-123"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W02-6u-bSf">
+                                <rect key="frame" x="0.0" y="180" width="390" height="820"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="agP-MN-xao">
+                                        <rect key="frame" x="20" y="0.0" width="350" height="778"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yaz-Di-HCm">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="8"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="8" id="364-3D-naL"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEZ-ys-9Da">
+                                                <rect key="frame" x="0.0" y="28" width="350" height="43"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="43" id="0fk-37-9U6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="30"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How much?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3P-56-HNN">
+                                                <rect key="frame" x="0.0" y="91" width="350" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="2ER-22-ScY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZp-uP-9qe">
+                                                <rect key="frame" x="0.0" y="141" width="350" height="60"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPx-mp-nBu">
+                                                        <rect key="frame" x="154.66666666666666" y="21" width="40.666666666666657" height="18"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDK-al-tng" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="298" y="8" width="44" height="44"/>
+                                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="f9B-Cr-ZH8"/>
+                                                            <constraint firstAttribute="height" constant="44" id="nuv-C7-xfD"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="+">
+                                                            <fontDescription key="titleFontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="30"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="increaseQuantity" destination="Ged-Mb-KqV" eventType="touchUpInside" id="XAc-Mz-PFK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHd-gc-kJ6" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                                        <color key="backgroundColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="4dX-zv-HPS"/>
+                                                            <constraint firstAttribute="height" constant="44" id="Lx7-uS-ngC"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="-">
+                                                            <fontDescription key="titleFontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="30"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <integer key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="decreaseQuantity" destination="Ged-Mb-KqV" eventType="touchUpInside" id="NEy-uV-ent"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="ZDK-al-tng" firstAttribute="centerY" secondItem="gZp-uP-9qe" secondAttribute="centerY" id="3oN-Oh-tAU"/>
+                                                    <constraint firstItem="pPx-mp-nBu" firstAttribute="centerY" secondItem="gZp-uP-9qe" secondAttribute="centerY" id="AYk-mj-FLl"/>
+                                                    <constraint firstItem="SHd-gc-kJ6" firstAttribute="centerY" secondItem="gZp-uP-9qe" secondAttribute="centerY" id="Yo5-ZY-Oxd"/>
+                                                    <constraint firstAttribute="height" constant="60" id="hez-83-aj7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZDK-al-tng" secondAttribute="trailing" constant="8" id="lVe-qS-fpV"/>
+                                                    <constraint firstItem="pPx-mp-nBu" firstAttribute="centerX" secondItem="gZp-uP-9qe" secondAttribute="centerX" id="oHI-bD-9p7"/>
+                                                    <constraint firstItem="SHd-gc-kJ6" firstAttribute="leading" secondItem="gZp-uP-9qe" secondAttribute="leading" constant="8" id="uJ9-Ke-9bu"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What time?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9K-1R-YyU">
+                                                <rect key="frame" x="0.0" y="221" width="350" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="7Xk-Ov-H9v"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f95-fW-lqR">
+                                                <rect key="frame" x="0.0" y="271" width="350" height="90"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="InR-4P-Pj4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="90"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-3N-vlP">
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="42"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m5d-wo-JGj" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="42"/>
+                                                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                        <state key="normal" title="Morning">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <integer key="value" value="12"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="onTimeSelected:" destination="Ged-Mb-KqV" eventType="touchUpInside" id="Rsd-vj-RAZ"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ET-Cj-kcd" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                        <rect key="frame" x="120" y="0.0" width="110" height="42"/>
+                                                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                        <state key="normal" title="Daytime">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <integer key="value" value="12"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="onTimeSelected:" destination="Ged-Mb-KqV" eventType="touchUpInside" id="1Kz-nC-JSM"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EkG-Fh-xhF" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                        <rect key="frame" x="240" y="0.0" width="110" height="42"/>
+                                                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                        <state key="normal" title="Evening">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <integer key="value" value="12"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="onTimeSelected:" destination="Ged-Mb-KqV" eventType="touchUpInside" id="bhN-T7-um7"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="42" id="HDx-ie-SoA"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxz-7G-GMA" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="52" width="350" height="38"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="38" id="RZV-8r-Yt9"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="12"/>
+                                                                <state key="normal" title="Pick an exact time">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <integer key="value" value="12"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onPickAnExactTime" destination="Ged-Mb-KqV" eventType="touchUpInside" id="0Tp-Wo-OzU"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="InR-4P-Pj4" firstAttribute="leading" secondItem="f95-fW-lqR" secondAttribute="leading" id="1be-SK-CbJ"/>
+                                                    <constraint firstAttribute="height" constant="90" id="7Px-4e-Ryx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="InR-4P-Pj4" secondAttribute="trailing" id="jYp-J1-elZ"/>
+                                                    <constraint firstItem="InR-4P-Pj4" firstAttribute="top" secondItem="f95-fW-lqR" secondAttribute="top" id="q4v-pA-M6i"/>
+                                                    <constraint firstAttribute="bottom" secondItem="InR-4P-Pj4" secondAttribute="bottom" id="qCs-HC-W0y"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCF-EC-eLN">
+                                                <rect key="frame" x="0.0" y="381" width="350" height="58"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon, Tue, Wed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcr-kg-5GI">
+                                                        <rect key="frame" x="0.0" y="30" width="350" height="28"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="28" id="StR-d9-Qqi"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="16"/>
+                                                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What days of the week?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKo-hh-e6j">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="Yq7-7v-Vcy"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="bKo-hh-e6j" secondAttribute="trailing" id="6aR-F2-HZH"/>
+                                                    <constraint firstItem="bKo-hh-e6j" firstAttribute="top" secondItem="dCF-EC-eLN" secondAttribute="top" id="9wk-J6-Hds"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Qcr-kg-5GI" secondAttribute="trailing" id="KbC-El-v9h"/>
+                                                    <constraint firstItem="Qcr-kg-5GI" firstAttribute="leading" secondItem="dCF-EC-eLN" secondAttribute="leading" id="bc0-ET-aZ6"/>
+                                                    <constraint firstItem="bKo-hh-e6j" firstAttribute="leading" secondItem="dCF-EC-eLN" secondAttribute="leading" id="d2l-QE-YFq"/>
+                                                    <constraint firstAttribute="height" constant="58" id="eRG-eT-UkT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Qcr-kg-5GI" secondAttribute="bottom" id="q3X-O7-gL6"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qyu-ca-nnc">
+                                                <rect key="frame" x="0.0" y="459" width="350" height="70"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMf-hA-wNV" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="10" width="45.666666666666664" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jem-oY-IPN" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="50.666666666666671" y="10" width="45.666666666666671" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SP0-bU-S62" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="101.33333333333333" y="10" width="45.666666666666671" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhk-Ax-CWP" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="152" y="10" width="46" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDy-nQ-cmf" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="203" y="10" width="45.666666666666657" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzb-kb-2Yj" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="253.66666666666666" y="10" width="45.666666666666657" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62z-L8-zfH" customClass="ProgressDayView" customModule="Vessel" customModuleProvider="target">
+                                                        <rect key="frame" x="304.33333333333331" y="10" width="45.666666666666686" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="nAF-bU-e4S"/>
+                                                </constraints>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="m2e-0I-V97">
+                                                <rect key="frame" x="0.0" y="549" width="350" height="99"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGz-0e-mo1" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="668" width="350" height="60"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="ghQ-u6-TD1"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="16"/>
+                                                <state key="normal" title="Add to Plan">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addToPlan" destination="Ged-Mb-KqV" eventType="touchUpInside" id="r1W-Ea-ur8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uCH-ZI-Wor" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="748" width="350" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="54S-Y8-RHu"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Skip">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="16" name="BananaGrotesk-Semibold"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                <integer key="NSUnderline" value="1"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onSkip" destination="Ged-Mb-KqV" eventType="touchUpInside" id="v4R-En-xuZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="agP-MN-xao" firstAttribute="leading" secondItem="W02-6u-bSf" secondAttribute="leading" constant="20" id="eJg-I6-pfa"/>
+                                    <constraint firstAttribute="trailing" secondItem="agP-MN-xao" secondAttribute="trailing" constant="20" id="s9E-x8-KOO"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="agP-MN-xao" secondAttribute="bottom" id="tne-pD-tsW"/>
+                                    <constraint firstItem="agP-MN-xao" firstAttribute="top" secondItem="W02-6u-bSf" secondAttribute="top" id="zHA-Uf-MHy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5PH-Hr-RnF"/>
+                        <color key="backgroundColor" red="0.75686274509999996" green="0.87058823529999996" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="5PH-Hr-RnF" firstAttribute="top" secondItem="67Q-da-bom" secondAttribute="bottom" constant="-133" id="310-Br-dHp"/>
+                            <constraint firstItem="67Q-da-bom" firstAttribute="width" secondItem="74S-dR-NP8" secondAttribute="width" id="4c1-IN-9aE"/>
+                            <constraint firstItem="W02-6u-bSf" firstAttribute="leading" secondItem="5PH-Hr-RnF" secondAttribute="leading" id="Cre-Dg-Jxv"/>
+                            <constraint firstAttribute="bottom" secondItem="W02-6u-bSf" secondAttribute="bottom" id="Tim-Kf-3pf"/>
+                            <constraint firstItem="W02-6u-bSf" firstAttribute="top" secondItem="67Q-da-bom" secondAttribute="bottom" id="Vol-H2-H39"/>
+                            <constraint firstItem="67Q-da-bom" firstAttribute="centerX" secondItem="5PH-Hr-RnF" secondAttribute="centerX" id="m8i-7X-TEH"/>
+                            <constraint firstItem="5PH-Hr-RnF" firstAttribute="trailing" secondItem="W02-6u-bSf" secondAttribute="trailing" id="oYG-aM-74X"/>
+                            <constraint firstItem="67Q-da-bom" firstAttribute="top" secondItem="74S-dR-NP8" secondAttribute="top" id="tz8-Z2-KBf"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="390" height="1000"/>
+                    <connections>
+                        <outlet property="addAReminderLabel" destination="fEZ-ys-9Da" id="7nL-Iq-Eim"/>
+                        <outlet property="backgroundImageView" destination="eKC-jw-4eF" id="Dhx-B8-6Gn"/>
+                        <outlet property="daysOfWeekLabel" destination="Qcr-kg-5GI" id="MjK-KQ-Sfl"/>
+                        <outlet property="daysOfWeekStackView" destination="Qyu-ca-nnc" id="AtX-EX-C3Q"/>
+                        <outlet property="decreaseQuantityButton" destination="SHd-gc-kJ6" id="C4J-y1-zwy"/>
+                        <outlet property="exactTimeViewHeightConstraint" destination="RZV-8r-Yt9" id="a5V-dN-S28"/>
+                        <outlet property="howMuchTextLabel" destination="pPx-mp-nBu" id="2RE-Pw-0U7"/>
+                        <outlet property="howMuchTitleLabel" destination="V3P-56-HNN" id="9qP-08-tbw"/>
+                        <outlet property="howMuchView" destination="gZp-uP-9qe" id="BW0-yO-sGC"/>
+                        <outlet property="pickExactTimeButton" destination="kxz-7G-GMA" id="emU-j3-NKh"/>
+                        <outlet property="skipButton" destination="uCH-ZI-Wor" id="cL5-GV-1dC"/>
+                        <outlet property="subtitleLabeL" destination="uuU-bs-hwh" id="KfT-I5-bOg"/>
+                        <outlet property="titleLabel" destination="4X3-RC-bli" id="Ky4-t6-fZd"/>
+                        <outlet property="whatTimeViewHeightConstraint" destination="7Px-4e-Ryx" id="Xji-9W-ghQ"/>
+                        <outletCollection property="whatTimeButtons" destination="m5d-wo-JGj" collectionClass="NSMutableArray" id="ikA-rt-z6W"/>
+                        <outletCollection property="whatTimeButtons" destination="8ET-Cj-kcd" collectionClass="NSMutableArray" id="kDb-a4-vIH"/>
+                        <outletCollection property="whatTimeButtons" destination="EkG-Fh-xhF" collectionClass="NSMutableArray" id="DRE-xz-QjX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WLM-fZ-yI7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-643.07692307692309" y="-17.061611374407583"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="round_close_button" width="30" height="30"/>
+        <image name="square_back_button" width="50" height="50"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

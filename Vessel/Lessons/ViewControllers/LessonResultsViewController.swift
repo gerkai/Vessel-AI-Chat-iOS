@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LessonResultsViewController: UIViewController
+class LessonResultsViewController: UIViewController, VesselScreenIdentifiable
 {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var successfulLessonIcon: UIImageView!
@@ -31,6 +31,8 @@ class LessonResultsViewController: UIViewController
     
     var success: Bool = true
     var imageUrl: String?
+    @Resolved var analytics: Analytics
+    var flowName: AnalyticsFlowName = .lessonsFlow
     
     override func viewDidLoad()
     {

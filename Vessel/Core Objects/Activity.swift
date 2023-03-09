@@ -48,6 +48,6 @@ class Tip: CoreObjectProtocol
     
     func getActivityDetailsModel(planId: Int) -> ActivityDetailsModel
     {
-        return ActivityDetailsModel(id: planId, imageUrl: imageUrl, title: title, subtitle: frequency, description: description ?? "", reagents: nil, quantities: nil)
+        return ActivityDetailsModel(id: planId, imageUrl: imageUrl, title: title, subtitle: frequency, description: description ?? "", reagents: nil, quantities: nil, type: .activity)
     }
 }

@@ -191,7 +191,10 @@ struct Constants
     static let FUEL_AM_LIFESTYLE_RECOMMENDATION_ID = 14
     static let FUEL_PM_LIFESTYLE_RECOMMENDATION_ID = 15
     static let GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID = 13
-    
+    static let DAYS_OF_THE_WEEK = [NSLocalizedString("Monday", comment: ""), NSLocalizedString("Tuesday", comment: ""), NSLocalizedString("Wednesday", comment: ""), NSLocalizedString("Thursday", comment: ""), NSLocalizedString("Friday", comment: ""), NSLocalizedString("Saturday", comment: ""), NSLocalizedString("Sunday", comment: "")]
+    static let ABBREVIATED_WEEK_DAYS = [NSLocalizedString("Mon", comment: ""), NSLocalizedString("Tue", comment: ""), NSLocalizedString("Wed", comment: ""), NSLocalizedString("Thu", comment: ""), NSLocalizedString("Fri", comment: ""), NSLocalizedString("Sat", comment: ""), NSLocalizedString("Sun", comment: "")]
+    static let REMINDERS_DEFAULT_TIMES = [NSLocalizedString("Morning", comment: ""), NSLocalizedString("Daytime", comment: ""), NSLocalizedString("Evening", comment: "")]
+
     //Common Strings
     static let DONT_SHOW_AGAIN_STRING = NSLocalizedString("Don't show this again", comment: "")
     static let INTERNET_CONNECTION_STRING = NSLocalizedString("Please check your internet connection", comment: "")
@@ -205,14 +208,19 @@ struct Constants
     static let HOW_TO_READ_THE_GRAPH = NSLocalizedString("How to read the graph", comment: "")
     static let WHY_IT_MATTERS = NSLocalizedString("Why It Matters", comment: "")
     static let TIPS_TO_IMPROVE = NSLocalizedString("Tips to Improve", comment: "")
+    static let AM_SYMBOL = NSLocalizedString("AM", comment: "")
+    static let PM_SYMBOL = NSLocalizedString("PM", comment: "")
     
     //Fonts
     static let FontBodyMain16 = UIFont(name: "BananaGrotesk-Regular", size: 16)!
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)!
+    static let FontTitleMain16 = UIFont(name: "BananaGrotesk-Semibold", size: 16)!
+    static let FontTitleMain12 = UIFont(name: "BananaGrotesk-Semibold", size: 12)!
     static let FontBoldMain28 = UIFont(name: "BananaGrotesk-Bold", size: 28)!
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)!
     static let FontBodyAlt14 = UIFont(name: "NoeText", size: 14.0)!
-    static let FontPicker22 = UIFont(name: "BananaGrotesk", size: 24)!
+    static let FontPicker22 = UIFont(name: "BananaGrotesk-Regular", size: 22)!
+    static let FontPickerSemibold22 = UIFont(name: "BananaGrotesk-Semibold", size: 22)!
     static let FontLearnMore10 = UIFont(name: "BananaGrotesk-Semibold", size: 10.0)!
     
     //Zendesk

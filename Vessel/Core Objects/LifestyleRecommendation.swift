@@ -11,7 +11,7 @@ import Foundation
 
 class LifestyleRecommendation: CoreObjectProtocol
 {
-    let id: Int
+    var id: Int
     //var last_updated: Int
     var last_updated: Int
     {

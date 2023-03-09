@@ -800,10 +800,11 @@ class Server: NSObject
         }
     }
     
-    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
+    func saveObjects<Value>(objects: [String: Value], onSuccess success: @escaping (_ id: Int?) -> Void, onFailure failure: @escaping (_ error: String) -> Void) where Value: Encodable
     {
         let url = "\(API())\(OBJECT_SAVE_PATH)"
 
+        let objectName = objects.keys.first ?? ""
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(objects)
@@ -818,7 +819,7 @@ class Server: NSObject
         { (object) in
             DispatchQueue.main.async()
             {
-                success()
+                success((object[objectName] as? [[String: Any]])?[0]["id"] as? Int)
             }
         },
         onFailure:

@@ -11,6 +11,7 @@ protocol TodayCheckMarkCardDelegate: AnyObject
 {
     func onCardChecked(id: Int, type: CheckMarkCardType)
     func canUncheckCard(type: CheckMarkCardType) -> Bool
+    func onReminderTapped(id: Int, type: CheckMarkCardType)
 }
 
 class TodayCheckMarkCardTableViewCell: UITableViewCell
@@ -20,6 +21,9 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var checkImage: UIImageView!
+    @IBOutlet private weak var notificationButton: UIButton!
+    @IBOutlet private weak var notificationButtonLabel: UILabel!
+    @IBOutlet private weak var notificationButtonBackground: UIVisualEffectView!
     
     var id: Int?
     var type: CheckMarkCardType?
@@ -69,6 +73,8 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
                description: String?,
                backgroundImage: String,
                completed: Bool,
+               remindersButtonState: Bool? = nil,
+               remindersButtonTitle: String? = nil,
                id: Int? = nil,
                type: CheckMarkCardType? = nil,
                delegate: TodayCheckMarkCardDelegate? = nil)
@@ -85,6 +91,12 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
         checkImage.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
         
         checkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCheckMarkSelected)))
+        
+        notificationButton?.isHidden = !(remindersButtonState != nil)
+        notificationButtonBackground?.isHidden = !(remindersButtonState != nil)
+        notificationButton?.setImage(remindersButtonState ?? false ? UIImage(named: "reminders-icon-on") : UIImage(named: "reminders-icon"), for: .normal)
+        notificationButtonLabel?.isHidden = !(remindersButtonState ?? false)
+        notificationButtonLabel?.text = remindersButtonTitle?.convertTo12HourFormat() ?? remindersButtonTitle
         
         isChecked = completed
         allowDidSet = true
@@ -114,5 +126,14 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
                 delegate.onCardChecked(id: id, type: type)
             }
         }
+    }
+    
+    @IBAction func onReminderButtonTapped()
+    {
+        guard let id = id,
+              let type = type,
+              let delegate = delegate else { return }
+
+        delegate.onReminderTapped(id: id, type: type)
     }
 }

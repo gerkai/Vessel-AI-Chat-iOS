@@ -7,7 +7,7 @@
 
 import UIKit
 
-class QuizSurveyLessonStepViewController: UIViewController
+class QuizSurveyLessonStepViewController: UIViewController, VesselScreenIdentifiable
 {
     var viewModel: StepViewModel!
     var coordinator: LessonsCoordinator!
@@ -32,6 +32,8 @@ class QuizSurveyLessonStepViewController: UIViewController
             return nil
         }
     }
+    @Resolved var analytics: Analytics
+    var flowName: AnalyticsFlowName = .lessonsFlow
     
     override func viewDidLoad()
     {

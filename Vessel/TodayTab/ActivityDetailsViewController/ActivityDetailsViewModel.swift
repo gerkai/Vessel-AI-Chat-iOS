@@ -16,12 +16,19 @@ struct ActivityDetailsModel
     let description: String
     let reagents: String?
     let quantities: String?
+    let type: PlanType
 }
 
 class ActivityDetailsViewModel
 {
     // MARK: - Private vars
     private var object: ActivityDetailsModel
+    var reminders: [Reminder] {
+        return RemindersManager.shared.getRemindersForPlan(planId: id)
+    }
+    var remindersSchedules: [(day: String, time: String)] {
+        return RemindersManager.shared.getReminderSchedules(forPlanId: id)
+    }
     
     private var isMetric: Bool
     {
@@ -33,6 +40,11 @@ class ActivityDetailsViewModel
     var id: Int
     {
         object.id
+    }
+    
+    var type: PlanType
+    {
+        object.type
     }
     
     var imageURL: URL?
@@ -63,6 +75,11 @@ class ActivityDetailsViewModel
     var quantities: String?
     {
         object.quantities
+    }
+    
+    var remindersAreEmpty: Bool
+    {
+        reminders.count == 0
     }
     
     init(model: ActivityDetailsModel)

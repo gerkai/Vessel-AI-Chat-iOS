@@ -12,6 +12,7 @@ enum AnalyticsEvent
     case accountDeleted
     case activityAdded(activityId: Int, activityName: String)
     case activityComplete(activityId: Int, activityName: String, completed: Bool)
+    case addReminder(planId: Int, typeId: Int, planType: PlanType)
     case activityShown(activityId: Int, activityName: String)
     case appReviewComments(text: String)
     case appReviewFeedback(text: String)
@@ -38,8 +39,12 @@ enum AnalyticsEvent
     case prlNoExpertID
     case prlTodayPageGetSupplement(expertID: Int?)
     case prlTodayPageShowIngredients(expertID: Int?)
+    case reminderAdded(planId: Int, typeId: Int, planType: PlanType, howMuch: String?, whatTime: String, daysOfTheWeek: String)
+    case reminderRemoved(reminderId: Int, planId: Int, typeId: Int, planType: PlanType)
+    case reminderSkipped(planId: Int, typeId: Int, planType: PlanType)
     case sampleImageCaptured(attemptTimeMs: Int, cardUUID: String)
     case sampleImageConfirmed(cardUUID: String)
+    case saveReminders(planId: Int, typeId: Int, planType: PlanType)
     case scanError(errorString: String)
     case signUp(loginType: AnalyticsLoginType)
     case skipCaptureTimer
@@ -57,6 +62,7 @@ enum AnalyticsEvent
         case .accountDeleted: return "Account Deleted"
         case .activityAdded: return "Activity Added"
         case .activityComplete: return "Activity Complete"
+        case .addReminder: return "ADD REMINDER"
         case .activityShown: return "Activity Shown"
         case .appReviewComments: return "App Review Comments"
         case .appReviewFeedback: return "App Review Feedback"
@@ -83,8 +89,12 @@ enum AnalyticsEvent
         case .prlNoExpertID: return "PRL NO EXPERT ID"
         case .prlTodayPageGetSupplement: return "TODAY PAGE GET SUPPLEMENT"
         case .prlTodayPageShowIngredients: return "TODAY PAGE SHOW INGREDIENTS"
+        case .reminderAdded: return "REMINDER ADDED"
+        case .reminderRemoved: return "REMINDER REMOVED"
+        case .reminderSkipped: return "REMINDER SKIPPED"
         case .sampleImageCaptured: return "SAMPLE IMAGE CAPTURED"
         case .sampleImageConfirmed: return "SAMPLE IMAGE CONFIRMED"
+        case .saveReminders: return "SAVE REMINDERS"
         case .scanError: return "SCAN ERROR"
         case .signUp: return "Sign Up"
         case .skipCaptureTimer: return "SKIP TIMER"
@@ -110,6 +120,10 @@ enum AnalyticsEvent
             return ["Activity ID": activityId,
                     "Activity Name": activityName,
                     "Completed": completed]
+        case .addReminder(let planId, let typeId, let planType):
+            return ["Plan ID": planId,
+                    "Type ID": typeId,
+                    "Plan Type": planType.rawValue]
         case .activityShown(let activityId, let activityName):
             return ["Activity ID": activityId,
                     "Activity Name": activityName]
@@ -208,10 +222,34 @@ enum AnalyticsEvent
             {
                 return [:]
             }
+        case .reminderAdded(let planId, let typeId, let planType, let howMuch, let whatTime, let daysOfTheWeek):
+            var properties: [String: Any] = ["Plan ID": planId,
+                                             "Type ID": typeId,
+                                             "Plan Type": planType.rawValue,
+                                             "What Time": whatTime,
+                                             "Days Of The Week": daysOfTheWeek]
+            if let howMuch = howMuch
+            {
+                properties["How Much"] = howMuch
+            }
+            return properties
+        case .reminderRemoved(let reminderId, let planId, let typeId, let planType):
+            return ["ReminderID": reminderId,
+                    "Plan ID": planId,
+                    "Type ID": typeId,
+                    "Plan Type": planType.rawValue]
+        case .reminderSkipped(let planId, let typeId, let planType):
+            return ["Plan ID": planId,
+                    "Type ID": typeId,
+                    "Plan Type": planType.rawValue]
         case .sampleImageCaptured(let captureTime, let cardUUID):
             return ["attempt_time_ms": captureTime, "wellness_card_uuid": cardUUID]
         case .sampleImageConfirmed(let cardUUID):
             return ["wellness_card_uuid": cardUUID]
+        case .saveReminders(let planId, let typeId, let planType):
+            return ["Plan ID": planId,
+                    "Type ID": typeId,
+                    "Plan Type": planType.rawValue]
         case .scanError(let errorString):
             return ["error": errorString]
         case .signUp(let loginType):
@@ -257,6 +295,7 @@ enum AnalyticsFlowName: String
     case takeTestFlow = "Take Test Flow"
     case todayTabFlow = "Today Tab Flow"
     case appReviewFlow = "App Review Flow"
+    case remindersFlow = "Reminders Flow"
     case practitionerQueryFlow = "Practitioner Query Flow"
 }
 

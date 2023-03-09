@@ -9,7 +9,7 @@ import Foundation
 
 class Lesson: CoreObjectProtocol, Equatable
 {
-    let id: Int
+    var id: Int
     var last_updated: Int = 0
     let storage: StorageType = .cacheAndDisk
     

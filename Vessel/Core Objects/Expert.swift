@@ -9,7 +9,7 @@ import Foundation
 
 struct Expert: CoreObjectProtocol, Decodable
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
     let storage: StorageType = .disk
     let url_code: String?

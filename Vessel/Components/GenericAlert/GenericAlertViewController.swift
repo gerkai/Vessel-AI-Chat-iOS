@@ -594,7 +594,8 @@ private extension GenericAlertViewController
     {
         stackView.insertArrangedSubview(view, at: stackView.arrangedSubviews.count - 1)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1.0)
+            view.widthAnchor.constraint(equalTo: stackView.widthAnchor, constant: 40),
+            view.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -20)
         ])
     }
 }

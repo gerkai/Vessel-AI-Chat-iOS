@@ -18,7 +18,7 @@ enum StorageType: Int
 //every object should be encodable and decodable and it must have an id and a last_updated field
 protocol CoreObjectProtocol: Codable
 {
-    var id: Int { get }
+    var id: Int { get set }
     var last_updated: Int { get set }
     var storage: StorageType { get }
 }
@@ -341,13 +341,17 @@ class ObjectStore: NSObject
             newObject = contact.replaceEmptyDietsAndAllergies() as! T
         }
         
-        if object.storage == .cache || object.storage == .cacheAndDisk
+        // If the object has id 0 then wait for the response to save it (Can it be saved now and the id updated later?)
+        if newObject.id != 0
         {
-            cacheObject(newObject)
-        }
-        if object.storage == .disk || object.storage == .cacheAndDisk
-        {
-            Storage.store(newObject)
+            if object.storage == .cache || object.storage == .cacheAndDisk
+            {
+                cacheObject(newObject)
+            }
+            if object.storage == .disk || object.storage == .cacheAndDisk
+            {
+                Storage.store(newObject)
+            }
         }
 
         if let plan = newObject as? Plan
@@ -357,8 +361,28 @@ class ObjectStore: NSObject
             
             //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
             Server.shared.saveObjects(objects: dict)
-            {
-                print("Saved \("plan")")
+            { id in
+                Log_Add("Saved \("plan")")
+                
+                if let id = id, newObject.id == 0
+                {
+                    newObject.id = id
+                    
+                    if object.storage == .cache || object.storage == .cacheAndDisk
+                    {
+                        self.cacheObject(newObject)
+                        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+                    }
+                    if object.storage == .disk || object.storage == .cacheAndDisk
+                    {
+                        Storage.store(newObject)
+                        // Added validation to avoid repeating the notification if the storage is cacheAndDisk
+                        if object.storage == .disk
+                        {
+                            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+                        }
+                    }
+                }
             }
             onFailure:
             { result in
@@ -374,8 +398,26 @@ class ObjectStore: NSObject
             
             //note: When saving Contact, server ignores e-mail address. So even if you change it in the contact, it won't stick. There's an alternate API for just changing the e-mail.
             Server.shared.saveObjects(objects: dict)
-            {
+            { id in
                 Log_Add("Saved \(name)")
+                if let id = id, newObject.id == 0
+                {
+                    newObject.id = id
+                    
+                    if object.storage == .cache || object.storage == .cacheAndDisk
+                    {
+                        self.cacheObject(newObject)
+                        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+                    }
+                    if object.storage == .disk || object.storage == .cacheAndDisk
+                    {
+                        Storage.store(newObject)
+                        // Added validation to avoid repeating the notification if the storage is cacheAndDisk
+                        if object.storage == .disk
+                        {
+                            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: T.self)])
+                        }                    }
+                }
             }
             onFailure:
             { result in
@@ -405,7 +447,7 @@ class ObjectStore: NSObject
             let dict = [name: objects]
             
             Server.shared.saveObjects(objects: dict)
-            {
+            { _ in
                 print("Saved \(name)")
             }
         onFailure:

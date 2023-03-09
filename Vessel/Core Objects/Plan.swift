@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlanType: Codable
+enum PlanType: String, Codable
 {
     case food
     case activity
@@ -33,7 +33,7 @@ struct CompletionInfo: Codable, Equatable, Hashable
 
 struct Plan: CoreObjectProtocol, Codable, Equatable
 {
-    let id: Int
+    var id: Int
     var last_updated: Int
     let storage: StorageType = .disk
     var type: PlanType = .food
@@ -41,7 +41,7 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     var completed: [String]
     var completionInfo: [CompletionInfo]?
     let timeOfDay: String?
-    let dayOfWeek: [Int]?
+    var dayOfWeek: [Int]?
     
     var isComplete: Bool
     {

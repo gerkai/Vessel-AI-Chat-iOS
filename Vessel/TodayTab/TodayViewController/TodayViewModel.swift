@@ -75,7 +75,9 @@ enum TodayViewSection: Equatable
                                             backgroundImage: lesson.imageUrl ?? "",
                                             isCompleted: false,
                                             id: lesson.id,
-                                            type: .lesson))
+                                            type: .lesson,
+                                            remindersButtonState: nil,
+                                            remindersButtonText: nil))
             }
             else
             {
@@ -121,6 +123,8 @@ enum TodayViewSection: Equatable
                 plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
             }
             
+            RemindersManager.shared.reloadReminders()
+            let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan?.id ?? -1)
             if (plan?.completed ?? []).contains(selectedDate)
             {
                 cells.append(.foldedCheckMarkCard(title: activity.title,
@@ -135,7 +139,9 @@ enum TodayViewSection: Equatable
                                             backgroundImage: activity.imageUrl,
                                             isCompleted: false,
                                             id: activity.id,
-                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity))
+                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
+                                            remindersButtonState: reminders.count > 0,
+                                            remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan?.id)))
             }
         }
         return cells
@@ -200,7 +206,7 @@ enum TodayViewCell: Equatable
     case foodDetails(foods: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, subtext: String)
-    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType)
+    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String)
     case button(text: String)
@@ -267,6 +273,7 @@ class TodayViewModel
     private var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
     private var showFoods: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
     private var showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
+    var showReminders: Bool = RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false
     
     var selectedDate: String = Date.serverDateFormatter.string(from: Date())
     var lastWeekProgress: [String: Double] = PlansManager.shared.getLastWeekPlansProgress()
