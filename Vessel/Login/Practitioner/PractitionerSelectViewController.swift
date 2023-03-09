@@ -7,13 +7,14 @@
 
 import UIKit
 
-class PractitionerSelectViewController: UIViewController, SelectionCheckmarkViewDelegate, VesselScreenIdentifiable
+class PractitionerSelectViewController: KeyboardFriendlyViewController, SelectionCheckmarkViewDelegate, VesselScreenIdentifiable, UITextFieldDelegate
 {
     let flowName: AnalyticsFlowName = .practitionerQueryFlow
     @Resolved internal var analytics: Analytics
     var viewModel: PractitionerQueryViewModel!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var searchTextField: VesselTextField!
     
     static func initWith(viewModel: PractitionerQueryViewModel) -> PractitionerSelectViewController
     {
@@ -51,7 +52,7 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
     func setupStackView()
     {
         let numExperts = viewModel.numExperts()
-        
+        stackView.removeAllArrangedSubviews()
         for i in 0 ..< numExperts
         {
             let expert = viewModel.expertFor(index: i)
@@ -117,6 +118,32 @@ class PractitionerSelectViewController: UIViewController, SelectionCheckmarkView
         let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //MARK: - Textfield delegates
+    @IBAction func textfieldChanged(textfield: UITextField)
+    {
+        if let text = textfield.text
+        {
+            viewModel.expertFilter(filterString: text)
+            setupStackView()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        self.activeTextField = nil
+    }
+    
     /*
     //MARK: - TableView delegates
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
