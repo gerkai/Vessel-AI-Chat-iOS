@@ -225,6 +225,7 @@
 		72461EEF2924AAA500A85AE5 /* Curriculum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EEE2924AAA500A85AE5 /* Curriculum.swift */; };
 		72461EF12924AD7500A85AE5 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF02924AD7500A85AE5 /* Lesson.swift */; };
 		72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72461EF42924AE2600A85AE5 /* LessonStep.swift */; };
+		725131C629C04A49006156EF /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725131C529C04A49006156EF /* UIDevice+Extension.swift */; };
 		725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725BD180295299A900D266E9 /* GamificationCongratulationsDayView.swift */; };
 		725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */; };
 		725C5C052938CED9000708AA /* LessonStepsProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */; };
@@ -559,6 +560,7 @@
 		72461EEE2924AAA500A85AE5 /* Curriculum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curriculum.swift; sourceTree = "<group>"; };
 		72461EF02924AD7500A85AE5 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		72461EF42924AE2600A85AE5 /* LessonStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStep.swift; sourceTree = "<group>"; };
+		725131C529C04A49006156EF /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		725BD180295299A900D266E9 /* GamificationCongratulationsDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationCongratulationsDayView.swift; sourceTree = "<group>"; };
 		725C5C022938CECB000708AA /* LessonStepsProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepsProgressBar.swift; sourceTree = "<group>"; };
 		725C5C042938CED9000708AA /* LessonStepsProgressBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepsProgressBar.xib; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				3F0547AE27C9B8EA006E3098 /* UIViewExtensions.swift */,
 				3FEFDAF8297CC36C00A4FA2E /* URLExtensions.swift */,
 				3F0547CC27CACF08006E3098 /* WKWebviewExtension.swift */,
+				725131C529C04A49006156EF /* UIDevice+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2067,6 +2070,7 @@
 				3F12F00B287A736600FCC52E /* Allergy.swift in Sources */,
 				72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */,
 				3FF724EE2989A8E9002A2DA7 /* Expert.swift in Sources */,
+				725131C629C04A49006156EF /* UIDevice+Extension.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */,
 				3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */,
@@ -2268,7 +2272,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2305,7 +2309,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

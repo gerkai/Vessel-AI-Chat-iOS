@@ -41,12 +41,20 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
         {
             drawingView.showDebugDrawing = true
         }
-
-        avCaptureDevice = AVCaptureDevice.default(for: .video)
+        
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera], mediaType: AVMediaType.video, position: .back)
+        if let captureDevice = deviceDiscoverySession.devices.first, UIDevice.isIphone14
+        {
+            avCaptureDevice = captureDevice
+        }
+        else
+        {
+            avCaptureDevice = AVCaptureDevice.default(for: .video)
+        }
 
         if let videoCaptureDevice = avCaptureDevice
         {
-            guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else{ return }
+            guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else { return }
             
             do
             {
