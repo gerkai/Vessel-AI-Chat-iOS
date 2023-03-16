@@ -103,7 +103,32 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     func openSupplementQuiz()
     {
         analytics.log(event: .prlTodayPageGetSupplement(expertID: Contact.main()!.pa_id))
-        Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
+        if let expertID = Contact.main()!.expert_id
+        {
+            ObjectStore.shared.get(type: Expert.self, id: expertID)
+            { [weak self] expert in
+                guard let self = self else { return }
+                if let urlCode = expert.url_code
+                {
+                    let expertFuelQuizURL = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
+                    self.showSupplementQuiz(path: expertFuelQuizURL)
+                }
+            }
+            onFailure:
+            { [weak self] in
+                guard let self = self else { return }
+                self.showSupplementQuiz(path: Server.shared.FuelQuizURL())
+            }
+        }
+        else
+        {
+            showSupplementQuiz(path: Server.shared.FuelQuizURL())
+        }
+    }
+    
+    private func showSupplementQuiz(path: String)
+    {
+        Server.shared.multipassURL(path: path)
         { url in
             Log_Add("Supplement Quiz: \(url)")
             let vc = TodayWebViewController.initWith(url: url, delegate: self)

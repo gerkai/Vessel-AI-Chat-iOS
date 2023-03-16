@@ -150,9 +150,11 @@ class MoreViewModel
                         name = firstName + " " + lastName
                     }
                 }
-                if expert.download_url != nil
+                if let urlCode = expert.url_code
                 {
-                    success(name, expert.download_url!)
+                    let url = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
+                    let downloadURL = "vesselhealth.com/" + url
+                    success(name, downloadURL)
                 }
                 else
                 {

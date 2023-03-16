@@ -24,6 +24,7 @@ let DEV_S3_ACCESSS_KEY = "AKIAW42KY3LBQXWJLT6K"
 let DEV_S3_SECRET_KEY = "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"
 let DEV_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let DEV_FUEL_FORMULATION_PATH = "pages/fuel-formulation?preview_theme_id=132393566394"
+let DEV_EXPERT_FUEL_QUIZ_PATH = "pages/fuel-landing?%@"
 
 let STAGING_API = "https://staging-api.vesselhealth.com/" + ENDPOINT_ROOT
 let STAGING_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
@@ -32,6 +33,7 @@ let STAGING_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
 let STAGING_S3_SECRET_KEY = "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"
 let STAGING_FUEL_QUIZ_PATH = "pages/fuel-landing?preview_theme_id=131922690234"
 let STAGING_FUEL_FORMULATION_PATH = "pages/fuel-formulation/?preview_theme_id=132445077690"
+let STAGING_EXPERT_FUEL_QUIZ_PATH = "pages/fuel-landing?%@"
 
 let PROD_API = "https://api.vesselhealth.com/" + ENDPOINT_ROOT
 let PROD_QUIZ_URL = "https://vesselhealth.com/pages/new-quiz"
@@ -40,6 +42,7 @@ let PROD_S3_ACCESS_KEY = "AKIAYPGAXRLX7ZBTCRY2"
 let PROD_S3_SECRET_KEY = "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"
 let PROD_FUEL_QUIZ_PATH = "pages/fuel-landing"
 let PROD_FUEL_FORMULATION_PATH = "pages/fuel-formulation"
+let PROD_EXPERT_FUEL_QUIZ_PATH = "pages/fuel-landing?%@"
 
 //Security strings
 let AUTH_PREFIX = "Bearer"
@@ -147,6 +150,20 @@ class Server: NSObject
                 return STAGING_FUEL_QUIZ_PATH
             default:
                 return PROD_FUEL_QUIZ_PATH
+        }
+    }
+    
+    func ExpertFuelQuizURL(urlCode: String) -> String
+    {
+        let index = UserDefaults.standard.integer(forKey: Constants.environmentKey)
+        switch index
+        {
+            case Constants.DEV_INDEX:
+                return String(format: DEV_EXPERT_FUEL_QUIZ_PATH, urlCode)
+            case Constants.STAGING_INDEX:
+                return String(format: STAGING_EXPERT_FUEL_QUIZ_PATH, urlCode)
+            default:
+                return String(format: PROD_EXPERT_FUEL_QUIZ_PATH, urlCode)
         }
     }
     

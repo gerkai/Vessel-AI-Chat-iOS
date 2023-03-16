@@ -35,19 +35,27 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
     {
         getSupplementsButton.showLoading()
         analytics.log(event: .prlAfterTestGetSupplement(expertID: Contact.main()!.pa_id))
-        Server.shared.multipassURL(path: Server.shared.FuelQuizURL())
-        { url in
-            print("SUCCESS: \(url)")
-            //self.openInSafari(url: url)
-            Log_Add("Supplement Quiz: \(url)")
-            let vc = TodayWebViewController.initWith(url: url, delegate: self)
-            self.present(vc, animated: true)
-            self.getSupplementsButton.hideLoading()
+        
+        if let expertID = Contact.main()!.expert_id
+        {
+            ObjectStore.shared.get(type: Expert.self, id: expertID)
+            { [weak self] expert in
+                guard let self = self else { return }
+                if let urlCode = expert.url_code
+                {
+                    let expertFuelQuizURL = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
+                    self.showSupplementQuiz(path: expertFuelQuizURL)
+                }
+            }
+            onFailure:
+            { [weak self] in
+                guard let self = self else { return }
+                self.showSupplementQuiz(path: Server.shared.FuelQuizURL())
+            }
         }
-        onFailure:
-        { string in
-            print("Failure: \(string)")
-            self.getSupplementsButton.hideLoading()
+        else
+        {
+            showSupplementQuiz(path: Server.shared.FuelQuizURL())
         }
     }
     
@@ -61,6 +69,24 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
         Contact.main()!.getFuel
         {
             PlansManager.shared.loadPlans()
+        }
+    }
+    
+    private func showSupplementQuiz(path: String)
+    {
+        Server.shared.multipassURL(path: path)
+        { url in
+            print("SUCCESS: \(url)")
+            //self.openInSafari(url: url)
+            Log_Add("Supplement Quiz: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            self.present(vc, animated: true)
+            self.getSupplementsButton.hideLoading()
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+            self.getSupplementsButton.hideLoading()
         }
     }
 }
