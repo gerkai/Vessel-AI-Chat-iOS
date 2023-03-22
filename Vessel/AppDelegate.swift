@@ -15,6 +15,9 @@ import SupportSDK
 import AVFoundation
 import FirebaseRemoteConfig
 import FirebaseDynamicLinks
+//import FirebaseCore
+//import FirebaseFirestore
+//import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -36,6 +39,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         launchBugsee()
         //so videos will play sound even if mute button is on
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        
+        if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL
+        {
+            processDynamicLink(url: url)
+        }
+        else if let activityDictionary = launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any]
+        {
+            for key in activityDictionary.keys
+            {
+                if let userActivity = activityDictionary[key] as? NSUserActivity
+                {
+                    if let url = userActivity.webpageURL
+                    {
+                        processDynamicLink(url: url)
+                    }
+                }
+            }
+        }
         
         return true
     }
@@ -148,7 +169,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             Contact.PractitionerID = expertID
             Log_Add("2 Setting Global ExpertID: \(expertID)")
         }
-        return true
+        
+        return application(app, open: url,
+                           sourceApplication: options[UIApplication.OpenURLOptionsKey
+                             .sourceApplication] as? String,
+                           annotation: "")
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+    {
+        let component = url.lastPathComponent
+        if let _ = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url)
+        {
+            if let route = RoutingOption(rawValue: component)
+            {
+                let result = RouteManager.shared.routeTo(route)
+                if !result
+                {
+                    RouteManager.shared.pendingRoutingOption = route
+                }
+            }
+            return true
+        }
+        return false
     }
 
     func launchBugsee()
@@ -220,5 +263,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         Chat.initialize(accountKey: Constants.zendeskAccountKey)
         CoreLogger.enabled = true
         CoreLogger.logLevel = .debug
+    }
+    
+    func processDynamicLink(url: URL?)
+    {
+        if let url = url
+        {
+            let component = url.lastPathComponent
+            let _ = DynamicLinks.dynamicLinks().handleUniversalLink(url)
+            { dynamiclink, error in
+                Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+                
+                if let route = RoutingOption(rawValue: component)
+                {
+                    let result = RouteManager.shared.routeTo(route)
+                    if !result
+                    {
+                        RouteManager.shared.pendingRoutingOption = route
+                    }
+                }
+            }
+        }
     }
 }

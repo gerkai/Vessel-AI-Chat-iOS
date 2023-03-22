@@ -53,5 +53,16 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>FirebaseDynamicLinksCustomDomains</key>
+    <array>
+      <string>https://vesselhealth.page.link/takeTest</string>
+      <string>https://vesselhealth.page.link/results</string>
+      <string>https://vesselhealth.page.link/coach</string>
+      <string>https://vesselhealth.page.link/today</string>
+      <string>vessel://takeTest</string>
+      <string>vessel://results</string>
+      <string>vessel://coach</string>
+      <string>vessel://today</string>
+    </array>
 </dict>
 </plist>

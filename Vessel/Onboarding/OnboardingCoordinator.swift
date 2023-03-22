@@ -105,6 +105,12 @@ class OnboardingCoordinator
                 navigationController?.fadeTo(vc)
                 //fade out splash screen
                 NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
+                if let route = RouteManager.shared.pendingRoutingOption
+                {
+                    print(route)
+                    RouteManager.shared.pendingRoutingOption = nil
+                    _ = RouteManager.shared.routeTo(route)
+                }
             })
         }
     }

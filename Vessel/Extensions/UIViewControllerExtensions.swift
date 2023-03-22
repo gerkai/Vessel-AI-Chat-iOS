@@ -31,11 +31,18 @@ extension UIViewController
         {
             return mainTabBarController
         }
-        else if let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController,
-              let mainTabBarController = navigationController.topViewController as? MainTabBarController
+        else if let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
         {
-            return mainTabBarController
+            if let mainTabBarController = navigationController.topViewController as? MainTabBarController
+            {
+                return mainTabBarController
+            }
+            else if let mainTabBarController = navigationController.viewControllers.first(where: { $0 as? MainTabBarController != nil }) as? MainTabBarController
+            {
+                return mainTabBarController
+            }
         }
+        
         return nil
     }
     

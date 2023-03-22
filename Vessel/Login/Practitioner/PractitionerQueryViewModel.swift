@@ -107,17 +107,31 @@ class PractitionerQueryViewModel
             //sort alphabetically by last_name then by first_name
             experts.sort
             {
-                let last_name_a = $0.last_name?.lowercased()
-                let last_name_b = $1.last_name?.lowercased()
-                let first_name_a = $0.first_name?.lowercased()
-                let first_name_b = $1.first_name?.lowercased()
-                if last_name_a != last_name_b
+                let businessNameA = $0.business_name?.lowercased() ?? ""
+                let businessNameB = $1.business_name?.lowercased() ?? ""
+                let lastNameA = $0.last_name?.lowercased() ?? ""
+                let lastNameB = $1.last_name?.lowercased() ?? ""
+                let firstNameA = $0.first_name?.lowercased() ?? ""
+                let firstNameB = $1.first_name?.lowercased() ?? ""
+                if businessNameA.isEmpty && !businessNameB.isEmpty
                 {
-                    return last_name_a ?? "" < last_name_b ?? ""
+                    return false
+                }
+                else if !businessNameA.isEmpty && businessNameB.isEmpty
+                {
+                    return true
+                }
+                else if !businessNameA.isEmpty && !businessNameB.isEmpty && businessNameA != businessNameB
+                {
+                    return businessNameA < businessNameB
+                }
+                else if lastNameA != lastNameB
+                {
+                    return lastNameA < lastNameB
                 }
                 else
                 {
-                    return first_name_a ?? "" < first_name_b ?? ""
+                    return firstNameA < firstNameB
                 }
             }
             self.experts = experts

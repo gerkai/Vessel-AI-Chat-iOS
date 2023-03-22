@@ -100,7 +100,17 @@ class AfterTestMVVMViewController: UIViewController
         }
         else if result.type == .fuelPrompt
         {
-            let vc = GetSupplementsViewController.initWith(viewModel: viewModel)
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .buyFuel)
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
+        }
+        else if result.type == .ingredientsPrompt
+        {
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulation)
+            setTransitionAndNavigate(vc: vc, transition: result.transition)
+        }
+        else if result.type == .ingredientsPromptWithoutFuel
+        {
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulationWithoutQuiz)
             setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
         else if result.type == .dismiss

@@ -280,6 +280,7 @@
 		72BC2447292C93C7002F6DA2 /* Lesson.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72BC2446292C93C7002F6DA2 /* Lesson.storyboard */; };
 		72BC244A292CAAA0002F6DA2 /* LessonStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */; };
 		72BC244C292CABC9002F6DA2 /* LessonStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72BC244B292CABC9002F6DA2 /* LessonStepView.xib */; };
+		72C0BCC529CB858500843586 /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C0BCC429CB858500843586 /* RouteManager.swift */; };
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
 		72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */; };
@@ -618,6 +619,7 @@
 		72BC2446292C93C7002F6DA2 /* Lesson.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lesson.storyboard; sourceTree = "<group>"; };
 		72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepView.swift; sourceTree = "<group>"; };
 		72BC244B292CABC9002F6DA2 /* LessonStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepView.xib; sourceTree = "<group>"; };
+		72C0BCC429CB858500843586 /* RouteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayProgressDaysCell.swift; sourceTree = "<group>"; };
@@ -1447,6 +1449,7 @@
 				72DB1C962907ABFD00410C2D /* WaterManager.swift */,
 				72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */,
 				72798B81298D0A2100A5BD65 /* RemindersManager.swift */,
+				72C0BCC429CB858500843586 /* RouteManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2072,6 +2075,7 @@
 				3FF724EE2989A8E9002A2DA7 /* Expert.swift in Sources */,
 				725131C629C04A49006156EF /* UIDevice+Extension.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
+				72C0BCC529CB858500843586 /* RouteManager.swift in Sources */,
 				3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */,
 				3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */,
 				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
@@ -2272,10 +2276,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vessel uses the camera to scan the QR code on your wellness card";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save a photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2309,10 +2314,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vessel uses the camera to scan the QR code on your wellness card";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save a photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

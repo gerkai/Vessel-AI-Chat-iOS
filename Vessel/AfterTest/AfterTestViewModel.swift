@@ -17,6 +17,8 @@ struct AfterTestViewControllerData
         case hydroQuiz
         case reagentFood
         case fuelPrompt
+        case ingredientsPrompt
+        case ingredientsPromptWithoutFuel
         case dismiss
     }
     
@@ -52,6 +54,7 @@ class AfterTestViewModel
     var selectedWaterOption: Int?
     var results: [Result]!
     var hasSupplementPlan = false
+    var hasTakenQuiz = false
     
     @Resolved private var analytics: Analytics
     
@@ -103,6 +106,8 @@ class AfterTestViewModel
         //case CORT_HIGH_3
         //case TEST_REMINDER
         case FUEL_PROMPT
+        case INGREDIENTS_PROMPT
+        case INGREDIENTS_PROMPT_WITHOUT_FUEL
     }
     
     init(testResult: Result)
@@ -121,6 +126,7 @@ class AfterTestViewModel
         Server.shared.getFuel()
         { fuel in
             self.hasSupplementPlan = fuel.is_active
+            self.hasTakenQuiz = fuel.formula != nil
             self.calculateTotalScreens()
         }
         onFailure:
@@ -346,10 +352,18 @@ class AfterTestViewModel
         {
             screens.append(.HYDRO_HIGH_4)
         }
-        //show fuel prompt if user isn't already enrolled and they have at least 3 test results
-        if hasSupplementPlan == false
+
+        if hasTakenQuiz == false && hasSupplementPlan == false
         {
             screens.append(.FUEL_PROMPT)
+        }
+        else if hasSupplementPlan == true && hasTakenQuiz == false
+        {
+            screens.append(.INGREDIENTS_PROMPT_WITHOUT_FUEL)
+        }
+        else if hasSupplementPlan == true || hasTakenQuiz == true
+        {
+            screens.append(.INGREDIENTS_PROMPT)
         }
     }
     
@@ -578,6 +592,12 @@ class AfterTestViewModel
                                                    .push)
             case .FUEL_PROMPT:
                 return AfterTestViewControllerData("", "", "", .push, .fuelPrompt)
+                
+            case .INGREDIENTS_PROMPT:
+                return AfterTestViewControllerData("", "", "", .push, .ingredientsPrompt)
+                
+            case .INGREDIENTS_PROMPT_WITHOUT_FUEL:
+                return AfterTestViewControllerData("", "", "", .push, .ingredientsPromptWithoutFuel)
             }
         }
         currentScreen -= 1

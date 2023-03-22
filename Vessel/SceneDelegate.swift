@@ -18,21 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         Log_Add("Scene will connect to: \(String(describing: connectionOptions.urlContexts))")
-        processDynamicLink(url: connectionOptions.urlContexts.first?.url)
-        /*if let url = connectionOptions.urlContexts.first?.url.absoluteString
+        if let url = connectionOptions.urlContexts.first?.url
         {
-            Log_Add("URL: \(url)")
-            if let expertID = AppDelegate().extractExpertInfo(percentEncodedURLString: url)
-            {
-                Contact.PractitionerID = expertID
-                Log_Add("3 Setting Global ExpertID: \(expertID)")
-            }
-        }*/
+            processDynamicLink(url: url)
+        }
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
     //Called when vessel:// link is tapped with app already running in the background
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
+    func scene(_ scene: UIScene, wrContexts URLContexts: Set<UIOpenURLContext>)
     {
         Log_Add("Scene openURLContexts")
         processDynamicLink(url: URLContexts.first?.url)
@@ -92,6 +87,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     {
         if let url = url
         {
+            let component = url.lastPathComponent
             let _ = DynamicLinks.dynamicLinks().handleUniversalLink(url)
             { dynamiclink, error in
                 Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
@@ -104,7 +100,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
                         Log_Add("5 Setting Global ExpertID: \(expertID)")
                     }
                 }
+                
+                if let route = RoutingOption(rawValue: component)
+                {
+                    let result = RouteManager.shared.routeTo(route)
+                    if !result
+                    {
+                        RouteManager.shared.pendingRoutingOption = route
+                    }
+                }
             }
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Swift.Void)
+    {
+        if let url = request.url
+        {
+            processDynamicLink(url: url)
         }
     }
     
