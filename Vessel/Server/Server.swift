@@ -573,7 +573,15 @@ class Server: NSObject
         {
             scaRef = "&" + urlCode
         }
-        dictPostBody["path"] = path + "?token=\(accessToken!)" + scaRef
+        
+        if path.contains("?")
+        {
+            dictPostBody["path"] = path + "&token=\(accessToken!)" + scaRef
+        }
+        else
+        {
+            dictPostBody["path"] = path + "?token=\(accessToken!)" + scaRef
+        }
         
         postToServer(dictBody: dictPostBody, url: "\(API())\(MULTIPASS_PATH)")
         { object in

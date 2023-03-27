@@ -65,7 +65,7 @@ class PractitionerQueryViewModel
             let lowerCasedFilterString = filterString.lowercased()
             for item in experts
             {
-                if (item.first_name?.lowercased().range(of: lowerCasedFilterString) != nil) || (item.last_name?.lowercased().range(of: lowerCasedFilterString) != nil)
+                if (item.first_name?.lowercased().range(of: lowerCasedFilterString) != nil) || (item.last_name?.lowercased().range(of: lowerCasedFilterString) != nil) || (item.business_name?.lowercased().range(of: lowerCasedFilterString) != nil)
                 {
                     filteredExperts.append(item)
                 }
