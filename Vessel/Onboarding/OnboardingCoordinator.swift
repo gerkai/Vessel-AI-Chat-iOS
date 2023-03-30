@@ -52,7 +52,7 @@ class OnboardingCoordinator
     @Resolved private var analytics: Analytics
     
     //MARK: - Navigation
-    static func pushInitialViewController(to navigationController: UINavigationController?)
+    static func pushInitialViewController(to navigationController: UINavigationController?, genericAlertDelegate: GenericAlertDelegate? = nil)
     {
         //MainContact is guaranteed
         let contact = Contact.main()!
@@ -90,26 +90,39 @@ class OnboardingCoordinator
                 WaterManager.shared.createWaterPlanIfNeeded()
                 WaterManager.shared.resetDrinkedWaterGlassesIfNeeded()
                 
-                // TODO: Remove later, just for testing purposes
-                //Print current progress for last week
-                print("LAST WEEK PROGRESS WAS:")
-                let progress = PlansManager.shared.getLastWeekPlansProgress()
-                let dates = progress.keys.sorted(by: { $0 < $1 })
-                for date in dates
+                guard let minimumRequiredVersion = RemoteConfigManager.shared.getValue(for: .minimumSupportedVersion) as? String,
+                let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else
                 {
-                    print("\(date): \(progress[date] ?? 0.0)")
+                    assertionFailure("OnboardingCoordinator: Version string not available")
+                    return
                 }
                 
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
-                navigationController?.fadeTo(vc)
-                //fade out splash screen
-                NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
-                if let route = RouteManager.shared.pendingRoutingOption
+                if version < minimumRequiredVersion
                 {
-                    print(route)
-                    RouteManager.shared.pendingRoutingOption = nil
-                    _ = RouteManager.shared.routeTo(route)
+                    guard let navigationController = navigationController else
+                    {
+                        assertionFailure("OnboardingCoordinator: Navigation controller string not available")
+                        return
+                    }
+                    GenericAlertViewController.presentAlert(in: navigationController, type: .titleButton(text: GenericAlertLabelInfo(title: NSLocalizedString("A new improved version of the Vessel app is ready", comment: ""), font: Constants.FontTitleMain24, height: 100.0),
+                                                                                                                                     button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Download Now", comment: "")), type: .dark)),
+                                                            shouldCloseWhenButtonTapped: false,
+                                                            delegate: genericAlertDelegate)
+                }
+                else
+                {
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                    navigationController?.fadeTo(vc)
+                    
+                    //fade out splash screen
+                    NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
+                    if let route = RouteManager.shared.pendingRoutingOption
+                    {
+                        print(route)
+                        RouteManager.shared.pendingRoutingOption = nil
+                        _ = RouteManager.shared.routeTo(route)
+                    }
                 }
             })
         }

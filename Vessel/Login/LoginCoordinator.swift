@@ -18,7 +18,7 @@ class LoginCoordinator
         if contactFieldsValid()
         {
             //go straight to onboarding
-            OnboardingCoordinator.pushInitialViewController(to: navigationController)
+            OnboardingCoordinator.pushInitialViewController(to: navigationController, genericAlertDelegate: self)
         }
         else
         {
@@ -67,6 +67,17 @@ class LoginCoordinator
                     }
                 }
             }
+        }
+    }
+}
+
+extension LoginCoordinator: GenericAlertDelegate
+{
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
+    {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id1467842264")
+        {
+            UIApplication.shared.open(url)
         }
     }
 }

@@ -10,12 +10,16 @@ import FirebaseRemoteConfig
 
 enum RemoteConfigKey
 {
+    // Feature flag
     case progressDaysFeature
     case insightsFeature
     case activitiesFeature
     case foodFeature
     case waterFeature
     case remindersFeature
+    
+    // Config
+    case minimumSupportedVersion
     
     static var allKeys: [String]
     {
@@ -38,6 +42,8 @@ enum RemoteConfigKey
             return "water_feature"
         case .remindersFeature:
             return "reminders_feature"
+        case .minimumSupportedVersion:
+            return "app_min_version"
         }
     }
     
@@ -47,6 +53,8 @@ enum RemoteConfigKey
         {
         case .progressDaysFeature, .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature, .remindersFeature:
             return RemoteConfig.remoteConfig()[key].boolValue
+        case .minimumSupportedVersion:
+            return RemoteConfig.remoteConfig()[key].stringValue ?? "1.0"
         }
     }
 }
@@ -117,6 +125,8 @@ class RemoteConfigManager
                 return true
             case .remindersFeature:
                 return true
+            case .minimumSupportedVersion:
+                return "1.0"
             }
         case Constants.PROD_INDEX:
             return key.value
