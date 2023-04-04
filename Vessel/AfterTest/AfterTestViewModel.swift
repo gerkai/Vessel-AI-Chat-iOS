@@ -123,11 +123,18 @@ class AfterTestViewModel
             results = Storage.retrieve(as: Result.self)
         }
         //find out if user already is enrolled in a supplement plan or not.
+        loadFuelState(onCompletion: {
+            self.calculateTotalScreens()
+        })
+    }
+    
+    func loadFuelState(onCompletion completion: @escaping () -> ())
+    {
         Server.shared.getFuel()
         { fuel in
             self.hasSupplementPlan = fuel.is_active
             self.hasTakenQuiz = fuel.formula != nil
-            self.calculateTotalScreens()
+            completion()
         }
         onFailure:
         { error in

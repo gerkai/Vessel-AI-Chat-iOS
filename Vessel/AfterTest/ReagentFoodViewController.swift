@@ -15,8 +15,6 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var nextButton: BounceButton!
     
-    @Resolved private var analytics: Analytics
-    
     var titleText: String!
     var reagentId: Int?
     

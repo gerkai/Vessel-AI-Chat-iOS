@@ -163,7 +163,6 @@
 		3FA6683E287F69830006166D /* TakeTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683D287F69830006166D /* TakeTestViewModel.swift */; };
 		3FA66840287F74DD0006166D /* TakeTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */; };
 		3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA668692885F8380006166D /* ActivateCardViewController.swift */; };
-		3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */; };
 		3FD3BDBE2960A88A00AEF9C3 /* CoachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */; };
 		3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */; };
 		3FD3BDC22967CB7600AEF9C3 /* TodayWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3BDC12967CB7600AEF9C3 /* TodayWebViewController.swift */; };
@@ -286,6 +285,8 @@
 		72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */; };
 		72CAA0802952659600B2B848 /* GamificationCongratulationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CAA07F2952659600B2B848 /* GamificationCongratulationsView.swift */; };
 		72CAA082295265C100B2B848 /* GamificationCongratulationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CAA081295265C100B2B848 /* GamificationCongratulationsView.xib */; };
+		72CD3C3D29D6A91D00571C1E /* TodayTabPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CD3C3C29D6A91D00571C1E /* TodayTabPopupViewController.swift */; };
+		72CD3C3F29D6B86D00571C1E /* LifestyleRecommendationPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CD3C3E29D6B86D00571C1E /* LifestyleRecommendationPopupViewController.swift */; };
 		72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */; };
 		72CF678A28EFB3C00008B0F6 /* WaterIntakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */; };
 		72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */; };
@@ -493,7 +494,6 @@
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
 		3FA6683F287F74DD0006166D /* TakeTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3FA668692885F8380006166D /* ActivateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateCardViewController.swift; sourceTree = "<group>"; };
-		3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelInfo.swift; sourceTree = "<group>"; };
 		3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachViewController.swift; sourceTree = "<group>"; };
 		3FD3BDBF2966302200AEF9C3 /* LifestyleRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleRecommendation.swift; sourceTree = "<group>"; };
 		3FD3BDC12967CB7600AEF9C3 /* TodayWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWebViewController.swift; sourceTree = "<group>"; };
@@ -625,6 +625,8 @@
 		72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayProgressDaysCell.swift; sourceTree = "<group>"; };
 		72CAA07F2952659600B2B848 /* GamificationCongratulationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationCongratulationsView.swift; sourceTree = "<group>"; };
 		72CAA081295265C100B2B848 /* GamificationCongratulationsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamificationCongratulationsView.xib; sourceTree = "<group>"; };
+		72CD3C3C29D6A91D00571C1E /* TodayTabPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTabPopupViewController.swift; sourceTree = "<group>"; };
+		72CD3C3E29D6B86D00571C1E /* LifestyleRecommendationPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleRecommendationPopupViewController.swift; sourceTree = "<group>"; };
 		72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeView.swift; sourceTree = "<group>"; };
 		72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterIntakeView.xib; sourceTree = "<group>"; };
 		72CF678B28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWaterDetailsSectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -950,6 +952,7 @@
 			children = (
 				3F9D6D842953432700664EA8 /* ActivityPopupViewController.swift */,
 				3F9D6D822952811000664EA8 /* InsightsPopupViewController.swift */,
+				72CD3C3E29D6B86D00571C1E /* LifestyleRecommendationPopupViewController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -960,16 +963,9 @@
 				3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */,
 				3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */,
 				3F9D6D872953612100664EA8 /* WellnessPopupViewController.swift */,
+				72CD3C3C29D6A91D00571C1E /* TodayTabPopupViewController.swift */,
 			);
 			path = Tutorial;
-			sourceTree = "<group>";
-		};
-		3FD3BDBA295FB80D00AEF9C3 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				3FD3BDBB295FB80D00AEF9C3 /* FuelInfo.swift */,
-			);
-			path = Objects;
 			sourceTree = "<group>";
 		};
 		3FE3699327C9A07E00231D42 = {
@@ -1013,7 +1009,6 @@
 				7206C4DD28837AE6000130DA /* Main */,
 				72BC243D2928D1C3002F6DA2 /* Managers */,
 				7282D413288F7C8200B4E26D /* MoreTab */,
-				3FD3BDBA295FB80D00AEF9C3 /* Objects */,
 				3F87B96827D429E000D589F7 /* Onboarding */,
 				72F214DC298B90FC00832BE7 /* Reminders */,
 				3F426DBD28DFA2FF00927B68 /* Results */,
@@ -1892,7 +1887,6 @@
 				7296B727292F44A000162812 /* ReadOnlyLessonStepViewController.swift in Sources */,
 				3F87B95D27D27A6B00D589F7 /* ObjectStore.swift in Sources */,
 				3F9CB7BC28C7F7D10093228E /* SkipTimerSlideupViewController.swift in Sources */,
-				3FD3BDBC295FB80E00AEF9C3 /* FuelInfo.swift in Sources */,
 				3FEACB2128FA075F00686D79 /* ChartZone.swift in Sources */,
 				728B593628921967001C4B2A /* EditProfileViewController.swift in Sources */,
 				3F9CB7B928C7F7410093228E /* PopupViewController.swift in Sources */,
@@ -1975,6 +1969,7 @@
 				72B2E79828B9B3BC005AA536 /* ItemPreferencesViewModel.swift in Sources */,
 				3F9C679528FDEC5500BC44FA /* ScienceStudiesView.swift in Sources */,
 				72E2533E287E4958004C99C7 /* AppDelegate+Injection.swift in Sources */,
+				72CD3C3F29D6B86D00571C1E /* LifestyleRecommendationPopupViewController.swift in Sources */,
 				72D4FC11287D2EB600EA2EA3 /* MixpanelAnalytics.swift in Sources */,
 				727C07B228B742FF00039BE0 /* DebugMenuViewController.swift in Sources */,
 				72461EEF2924AAA500A85AE5 /* Curriculum.swift in Sources */,
@@ -2012,6 +2007,7 @@
 				72F41EDE289115EE005136B3 /* ChangePasswordCell.swift in Sources */,
 				3F0547D427CAFE57006E3098 /* UIColorExtensions.swift in Sources */,
 				3F0547C127CA8DD1006E3098 /* ForgotPasswordViewController.swift in Sources */,
+				72CD3C3D29D6A91D00571C1E /* TodayTabPopupViewController.swift in Sources */,
 				3F9C67AC28FE61FB00BC44FA /* Calcium.swift in Sources */,
 				72CF678C28EFD0FE0008B0F6 /* TodayWaterDetailsSectionTableViewCell.swift in Sources */,
 				3F87B96C27D429E000D589F7 /* OnboardingCoordinator.swift in Sources */,

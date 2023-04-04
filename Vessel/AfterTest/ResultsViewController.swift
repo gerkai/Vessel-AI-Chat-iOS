@@ -29,7 +29,6 @@ class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiab
     @IBOutlet weak var resultViewBottomEdgeConstraint: NSLayoutConstraint!
     @IBOutlet weak var wellnessCardSubtextLabel: UILabel!
     
-    @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .resultsTabFlow
     let resultViewEdgeInset = 20.0
     

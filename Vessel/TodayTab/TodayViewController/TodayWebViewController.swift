@@ -8,8 +8,10 @@
 import UIKit
 import WebKit
 
+@objc
 protocol TodayWebViewControllerDelegate: AnyObject
 {
+    @objc
     func todayWebViewDismissed()
 }
 

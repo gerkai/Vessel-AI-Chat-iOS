@@ -9,7 +9,6 @@ import UIKit
 
 class HydroQuizViewController: AfterTestMVVMViewController
 {
-    @Resolved private var analytics: Analytics
     // MARK: - Views
     @IBOutlet private var optionViews: [UIView]!
     @IBOutlet private var checkmarkViews: [UIImageView]!

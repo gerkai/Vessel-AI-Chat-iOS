@@ -20,7 +20,6 @@ class ReagentInfoViewController: AfterTestMVVMViewController, VesselScreenIdenti
     var details: String!
     var image: UIImage!
     
-    @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .resultsTabFlow
     
     static func initWith(viewModel: AfterTestViewModel, result: AfterTestViewControllerData) -> ReagentInfoViewController

@@ -72,7 +72,7 @@ class GenericAlertViewController: UIViewController
     
     // MARK: Model
     private var viewModel: GenericAlertViewModel!
-    private weak var delegate: GenericAlertDelegate?
+    private var delegate: GenericAlertDelegate?
     private let buttonCloseAnimationDelay = 0.3
     private var screenHeight: CGFloat
     {

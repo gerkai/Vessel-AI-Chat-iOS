@@ -14,20 +14,27 @@ enum GetSupplementsViewControllerType
     case showFormulation
 }
 
-class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewControllerDelegate
+protocol GetSupplementsViewControllerDelegate: AnyObject
 {
-    @Resolved private var analytics: Analytics
+    func updateFuelState()
+}
+
+class GetSupplementsViewController: AfterTestMVVMViewController
+{
     @IBOutlet weak var getSupplementsButton: LoadingButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     private var type: GetSupplementsViewControllerType?
-
-    static func initWith(viewModel: AfterTestViewModel, type: GetSupplementsViewControllerType) -> GetSupplementsViewController
+    
+    weak var delegate: GetSupplementsViewControllerDelegate?
+    
+    static func initWith(viewModel: AfterTestViewModel, type: GetSupplementsViewControllerType, delegate: GetSupplementsViewControllerDelegate?) -> GetSupplementsViewController
     {
         let storyboard = UIStoryboard(name: "AfterTest", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GetSupplementsViewController") as! GetSupplementsViewController
         vc.viewModel = viewModel
         vc.type = type
+        vc.delegate = delegate
         
         return vc
     }
@@ -50,7 +57,7 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
         
         if type == .buyFuel
         {
-            showSupplementQuiz()
+            super.showSupplementQuiz()
         }
         else
         {
@@ -61,14 +68,6 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
     @IBAction func maybeLater()
     {
         nextScreen()
-    }
-    
-    func todayWebViewDismissed()
-    {
-        Contact.main()!.getFuel
-        {
-            PlansManager.shared.loadPlans()
-        }
     }
     
     private func setupUI()
@@ -93,63 +92,36 @@ class GetSupplementsViewController: AfterTestMVVMViewController, TodayWebViewCon
         }
     }
     
-    private func showSupplementQuiz()
+    override func todayWebViewDismissed()
     {
-        if let expertID = Contact.main()!.expert_id
-        {
-            ObjectStore.shared.get(type: Expert.self, id: expertID)
-            { [weak self] expert in
-                guard let self = self else { return }
-                if let urlCode = expert.url_code
+        Contact.main()!.getFuel
+        { [weak self] in
+            guard let self = self else { return }
+            PlansManager.shared.loadPlans()
+            self.delegate?.updateFuelState()
+            if let mainTabBarController = self.mainTabBarController
+            {
+                if self.isVisible
                 {
-                    let expertFuelQuizURL = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
-                    self.showSupplementQuiz(path: expertFuelQuizURL)
+                    self.nextScreen()
+                }
+                else
+                {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.AFTER_TEST_POP_UP_TIMEOUT, execute: {
+                        // User is already on the Today page
+                        if let todayViewController = mainTabBarController.selectedViewController as? TodayViewController, mainTabBarController.selectedIndex == 0
+                        {
+                            todayViewController.presentSupplementsTutorial()
+                        }
+                        // User is on other tab
+                        else
+                        {
+                            let vc = TodayTabPopupViewController.create()
+                            mainTabBarController.present(vc, animated: false)
+                        }
+                    })
                 }
             }
-            onFailure:
-            { [weak self] in
-                guard let self = self else { return }
-                self.showSupplementQuiz(path: Server.shared.FuelQuizURL())
-            }
-        }
-        else
-        {
-            showSupplementQuiz(path: Server.shared.FuelQuizURL())
-        }
-    }
-    
-    private func showSupplementQuiz(path: String)
-    {
-        analytics.log(event: .prlAfterTestGetSupplement(expertID: Contact.main()!.pa_id))
-        Server.shared.multipassURL(path: path)
-        { url in
-            print("SUCCESS: \(url)")
-            //self.openInSafari(url: url)
-            Log_Add("Supplement Quiz: \(url)")
-            let vc = TodayWebViewController.initWith(url: url, delegate: self)
-            self.present(vc, animated: true)
-            self.getSupplementsButton.hideLoading()
-        }
-        onFailure:
-        { string in
-            print("Failure: \(string)")
-            self.getSupplementsButton.hideLoading()
-        }
-    }
-    
-    private func showFormulation()
-    {
-        analytics.log(event: .prlMoreTabShowIngredients(expertID: Contact.main()!.pa_id))
-        Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
-        { url in
-            print("SUCCESS: \(url)")
-            let vc = TodayWebViewController.initWith(url: url, delegate: self)
-            self.present(vc, animated: true)
-        }
-        onFailure:
-        { string in
-            print("Failure: \(string)")
         }
     }
 }
-

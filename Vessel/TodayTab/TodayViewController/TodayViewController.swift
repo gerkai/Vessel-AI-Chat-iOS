@@ -242,6 +242,17 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
                                                 delegate: self)
     }
     
+    func presentSupplementsTutorial()
+    {
+        let plans = PlansManager.shared.getLifestyleRecommendationPlans()
+        guard let plan = plans.first(where: { $0.id == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID }) else { return }
+        tableView.scrollToRow(at: IndexPath(row: 0, section: TodayViewSection.activities(activities: [], selectedDate: "").sectionIndex), at: .top, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+            let vc = LifestyleRecommendationPopupViewController.createWith(plan: plan)
+            self.present(vc, animated: false)
+        })
+    }
+    
     //MARK: - FUEL
     func todayWebViewDismissed()
     {

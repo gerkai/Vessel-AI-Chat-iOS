@@ -15,9 +15,11 @@ enum ScreenTransistion
 
 class AfterTestMVVMViewController: UIViewController
 {
-    weak var viewModel: AfterTestViewModel!
+    var viewModel: AfterTestViewModel!
     var transition: ScreenTransistion = .fade
     var backTransition: ScreenTransistion = .fade
+    @Resolved var analytics: Analytics
+    internal var isVisible = false
     
     func initWithViewModel(vm: AfterTestViewModel)
     {
@@ -31,6 +33,18 @@ class AfterTestMVVMViewController: UIViewController
         {
             print("❇️ \(self)")
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        isVisible = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        isVisible = false
     }
     
     deinit
@@ -100,17 +114,17 @@ class AfterTestMVVMViewController: UIViewController
         }
         else if result.type == .fuelPrompt
         {
-            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .buyFuel)
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .buyFuel, delegate: self)
             setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
         else if result.type == .ingredientsPrompt
         {
-            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulation)
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulation, delegate: self)
             setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
         else if result.type == .ingredientsPromptWithoutFuel
         {
-            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulationWithoutQuiz)
+            let vc = GetSupplementsViewController.initWith(viewModel: viewModel, type: .showFormulationWithoutQuiz, delegate: self)
             setTransitionAndNavigate(vc: vc, transition: result.transition)
         }
         else if result.type == .dismiss
@@ -119,6 +133,28 @@ class AfterTestMVVMViewController: UIViewController
             PlansManager.shared.loadPlans() //so supplement card will appear if it wasn't previously shown
             NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": Constants.TAB_BAR_RESULTS_INDEX])
             dismiss(animated: true)
+            
+            if !viewModel.hasSupplementPlan
+            {
+                let hasTakenQuiz = viewModel.hasTakenQuiz
+                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.AFTER_TEST_POP_UP_TIMEOUT, execute: {
+                    guard let mainTabBarController = self.mainTabBarController else { return }
+                    GenericAlertViewController.presentAlert(in: mainTabBarController,
+                                                            type: .imageTitleSubtitleButtons(image: UIImage(named: "supplements")!,
+                                                                                             title: GenericAlertLabelInfo(title: NSLocalizedString("Your personalized supplements are waiting", comment: ""),
+                                                                                                                          font: Constants.FontTitleMain24,
+                                                                                                                          height: 60.0),
+                                                                                             subtitle: GenericAlertLabelInfo(title: hasTakenQuiz ? NSLocalizedString("You’ve already taken a quiz so your supplements formula is now finalized.", comment: "") : NSLocalizedString("The next step to your personalized supplements is a 3 minute quiz.", comment: ""),
+                                                                                                                             alignment: .center,
+                                                                                                                             height: 80.0),
+                                                                                             buttons: [
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: hasTakenQuiz ? NSLocalizedString("Buy now", comment: "") : NSLocalizedString("Take the quiz", comment: "")), type: .dark),
+                                                                                                GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Learn more", comment: "")), type: .plain)
+                                                                                             ]),
+                                                            showCloseButton: true,
+                                                            delegate: self)
+                })
+            }
         }
     }
     
@@ -131,6 +167,111 @@ class AfterTestMVVMViewController: UIViewController
         } onFailure: { error in
             UIView.showError(text: "", detailText: error)
             complete()
+        }
+    }
+}
+
+extension AfterTestMVVMViewController: GetSupplementsViewControllerDelegate
+{
+    func updateFuelState()
+    {
+        viewModel.loadFuelState { }
+    }
+}
+
+extension AfterTestMVVMViewController: GenericAlertDelegate
+{
+    func onAlertButtonTapped(_ alert: GenericAlertViewController, index: Int, alertDescription: String)
+    {
+        if viewModel.hasTakenQuiz
+        {
+            showFormulation()
+        }
+        else
+        {
+            showSupplementQuiz()
+        }
+    }
+    
+    func showSupplementQuiz()
+    {
+        if let expertID = Contact.main()!.expert_id
+        {
+            ObjectStore.shared.get(type: Expert.self, id: expertID)
+            { [weak self] expert in
+                guard let self = self else { return }
+                if let urlCode = expert.url_code
+                {
+                    let expertFuelQuizURL = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
+                    self.showSupplementQuiz(path: expertFuelQuizURL)
+                }
+            }
+            onFailure:
+            { [weak self] in
+                guard let self = self else { return }
+                self.showSupplementQuiz(path: Server.shared.FuelQuizURL())
+            }
+        }
+        else
+        {
+            showSupplementQuiz(path: Server.shared.FuelQuizURL())
+        }
+    }
+    
+    private func showSupplementQuiz(path: String)
+    {
+        analytics.log(event: .prlAfterTestGetSupplement(expertID: Contact.main()!.pa_id))
+        Server.shared.multipassURL(path: path)
+        { url in
+            print("SUCCESS: \(url)")
+            Log_Add("Supplement Quiz: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            if let mainTabBarController = self.mainTabBarController, !self.isVisible
+            {
+                mainTabBarController.present(vc, animated: true)
+            }
+            else
+            {
+                self.present(vc, animated: true)
+            }
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
+    }
+    
+    func showFormulation()
+    {
+        analytics.log(event: .prlMoreTabShowIngredients(expertID: Contact.main()!.pa_id))
+        Server.shared.multipassURL(path: Server.shared.FuelFormulationURL())
+        { url in
+            print("SUCCESS: \(url)")
+            Log_Add("Formulation: \(url)")
+            let vc = TodayWebViewController.initWith(url: url, delegate: self)
+            if let mainTabBarController = self.mainTabBarController, !self.isVisible
+            {
+                mainTabBarController.present(vc, animated: true)
+            }
+            else
+            {
+                self.present(vc, animated: true)
+            }
+        }
+        onFailure:
+        { string in
+            print("Failure: \(string)")
+        }
+    }
+}
+
+extension AfterTestMVVMViewController: TodayWebViewControllerDelegate
+{
+    func todayWebViewDismissed()
+    {
+        Contact.main()!.getFuel
+        {
+            PlansManager.shared.loadPlans()
         }
     }
 }

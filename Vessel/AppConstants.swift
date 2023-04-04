@@ -187,6 +187,7 @@ struct Constants
     static let MINIMUM_WATER_INTAKE = 4
     static let WATER_LIFESTYLE_RECOMMENDATION_ID = 5
     static let CHART_Y_COORDINATE_FOR_BAD_DATA = -10.0 //far enough off chart to not plot visible dot
+    static let AFTER_TEST_POP_UP_TIMEOUT = 10.0
     
     static let FUEL_AM_LIFESTYLE_RECOMMENDATION_ID = 14
     static let FUEL_PM_LIFESTYLE_RECOMMENDATION_ID = 15
