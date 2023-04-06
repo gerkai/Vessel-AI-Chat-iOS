@@ -17,6 +17,7 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
     @IBOutlet private weak var qrImageView: UIImageView!
     @IBOutlet private weak var companyNameLabel: UILabel!
     @IBOutlet private weak var practitionerView: UIView!
+    @IBOutlet private weak var practitionerSegmentedControl: VesselSegmentedControl!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .moreTabFlow
@@ -41,21 +42,10 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
             viewModel.addDebugLog()
             tableView.reloadData()
         }
-        self.companyNameLabel.text = ""
+        self.companyNameLabel.text = NSLocalizedString("SHARE YOUR LINK", comment: "")
         if viewModel.shouldShowPractitionerSection()
         {
-            viewModel.practitionerInfo
-            { name, qrString in
-                self.practitionerName = name
-                self.practitionerDownloadURL = qrString
-                self.companyNameLabel.text = name
-                self.qrImageView.image = self.createQR(qrString)
-                self.practitionerView.isHidden = false
-            }
-            onFailure:
-            {
-                self.practitionerView.isHidden = true
-            }
+            updatePractitionerSectionUI()
         }
         else
         {
@@ -63,7 +53,27 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
         }
     }
     
-    func createQR(_ string: String) -> UIImage?
+    private func updatePractitionerSectionUI()
+    {
+        viewModel.practitionerInfo(isQuiz: practitionerSegmentedControl.selectedSegmentIndex == 0, onSuccess: { [weak self] name, qrString in
+            guard let self = self else { return }
+            self.practitionerName = name
+            self.practitionerDownloadURL = qrString
+            self.companyNameLabel.text = name.isEmpty ? NSLocalizedString("SHARE YOUR LINK", comment: "") : name
+            self.qrImageView.image = self.createQR(qrString)
+            self.practitionerView.isHidden = false
+            let titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.font: Constants.FontTitleMain16
+            ]
+            self.practitionerSegmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
+            self.practitionerSegmentedControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
+        }, onFailure: {
+            self.practitionerView.isHidden = true
+        })
+    }
+    
+    private func createQR(_ string: String) -> UIImage?
     {
         let data = string.data(using: String.Encoding.ascii)
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else
@@ -164,6 +174,11 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
             activityVC.popoverPresentationController?.sourceView = self.view
             present(activityVC, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func onSegmentedControlChange()
+    {
+        updatePractitionerSectionUI()
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)

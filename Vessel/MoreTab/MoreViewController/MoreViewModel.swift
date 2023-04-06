@@ -132,7 +132,7 @@ class MoreViewModel
     
     //attempts to return expert business name. If nil, attempts to return expert first & last name. If also nil, name = ""
     //if download_url is nil, returns failure (as we cannot generate a QR code then). Otherwise returns the download_url.
-    func practitionerInfo(onSuccess success: @escaping (_ name: String, _ qrString: String) -> Void, onFailure failure: @escaping () -> Void) -> ()
+    func practitionerInfo(isQuiz: Bool, onSuccess success: @escaping (_ name: String, _ qrString: String) -> Void, onFailure failure: @escaping () -> Void)
     {
         if let expertID = Contact.main()!.expert_id
         {
@@ -150,11 +150,15 @@ class MoreViewModel
                         name = firstName + " " + lastName
                     }
                 }
-                if let urlCode = expert.url_code
+                if let urlCode = expert.url_code, isQuiz
                 {
                     let url = Server.shared.ExpertFuelQuizURL(urlCode: urlCode)
                     let downloadURL = "vesselhealth.com/" + url
                     success(name, downloadURL)
+                }
+                else if let dynamicLink = expert.dynamic_link, !isQuiz
+                {
+                    success(name, dynamicLink)
                 }
                 else
                 {
