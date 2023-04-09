@@ -17,6 +17,8 @@ enum DebugMenuOption: Int
     case printInitAndDeinit
     case relaxedScanningDistance
     
+    case addActivity
+    
     case eraseAll
     case eraseActivities
     case eraseCurriculums
@@ -44,6 +46,8 @@ enum DebugMenuOption: Int
             case .printInitAndDeinit: return "Print intialization and deinitialization"
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
             
+            case .addActivity: return "Add activity with id: "
+            
             case .eraseAll: return "Erase all objects"
             case .eraseActivities: return "Erase all activities"
             case .eraseCurriculums: return "Erase all curriculums"
@@ -67,6 +71,15 @@ enum DebugMenuOption: Int
         return UserDefaults.standard.object(forKey: flag) != nil
     }
     
+    var showTextField: Bool
+    {
+        switch self
+        {
+            case .addActivity: return true
+            default: return false
+        }
+    }
+    
     private var flag: String?
     {
         switch self
@@ -78,6 +91,7 @@ enum DebugMenuOption: Int
             case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
             case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
+            case .addActivity: return nil
             case .eraseAll: return Constants.KEY_ERASE_ALL
             case .eraseActivities: return Constants.KEY_ERASE_ACTIVITIES
             case .eraseCurriculums: return Constants.KEY_ERASE_CURRICULUMS
@@ -93,7 +107,7 @@ enum DebugMenuOption: Int
         }
     }
     
-    func toggle() -> Bool
+    func toggle(value: String?) -> Bool
     {
         var shouldRefresh = false
         if self == .resetUserFlags
@@ -103,6 +117,15 @@ enum DebugMenuOption: Int
                 main.flags = 0 //clears all app_flags (definitions of each flag in AppConstants)
                 main.gender = nil //forces user to go through onboarding again as well
                 ObjectStore.shared.clientSave(main)
+            }
+        }
+        else if self == .addActivity
+        {
+            guard let planId = Int(value ?? "") else { return shouldRefresh }
+            let planToAdd = Plan(type: .activity, typeId: planId)
+            Server.shared.addSinglePlan(plan: planToAdd) { addedPlan in
+                PlansManager.shared.addPlans(plansToAdd: [addedPlan])
+            } onFailure: { _ in
             }
         }
         else if self == .eraseActivities
@@ -218,6 +241,7 @@ class DebugMenuViewModel
         .printNetworkTraffic,
         .printInitAndDeinit,
         .relaxedScanningDistance,
+        .addActivity,
         .eraseAll,
         .eraseActivities,
         .eraseCurriculums,

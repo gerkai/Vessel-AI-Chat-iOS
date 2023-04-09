@@ -12,6 +12,7 @@ protocol FoodCheckmarkViewDelegate: AnyObject
 {
     func checkmarkViewTapped(view: FoodCheckmarkView)
     func checkmarkTapped(view: FoodCheckmarkView)
+    func animationComplete(view: FoodCheckmarkView)
 }
 
 class FoodCheckmarkView: NibLoadingView
@@ -67,31 +68,37 @@ class FoodCheckmarkView: NibLoadingView
     {
         didSet
         {
-            if !isChecked
+            self.checkImage.image = isChecked ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
+        }
+    }
+    
+    func animateChecked()
+    {
+        if !isChecked
+        {
+            self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
+            DispatchQueue.main.async
             {
-                self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
+                self.delegate?.animationComplete(view: self)
             }
-            else
+        }
+        else
+        {
+            //animate checkmark
+            UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
             {
-                //animate checkmark
+                self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+        completion:
+            { completed in
+                self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
+                
                 UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
                 {
-                    self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                }
-                completion:
-                { completed in
-                    if self.isChecked == true
+                    self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    DispatchQueue.main.async
                     {
-                        self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
-                    }
-                    else
-                    {
-                        self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                    }
-                    
-                    UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
-                    {
-                        self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        self.delegate?.animationComplete(view: self)
                     }
                 }
             }
@@ -101,6 +108,7 @@ class FoodCheckmarkView: NibLoadingView
     private func checkmarkPressed()
     {
         isChecked = !isChecked
+        animateChecked()
     }
     
     // MARK: - Actions

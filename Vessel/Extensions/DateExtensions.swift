@@ -188,4 +188,18 @@ extension Date
     
         return nil
     }
+    
+    func isMoreThan7DaysAgo() -> Bool
+    {
+        let now = Date()
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        return self < sevenDaysAgo
+    }
+    
+    func isMoreThan1MonthAgo() -> Bool
+    {
+        let now = Date()
+        let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        return self < oneMonthAgo
+    }
 }

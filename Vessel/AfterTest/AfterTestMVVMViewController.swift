@@ -60,7 +60,11 @@ class AfterTestMVVMViewController: UIViewController
         guard let viewControllersCount = navigationController?.viewControllers.count,
               let lastVC = navigationController?.viewControllers[safe: viewControllersCount - 2],
               lastVC.isMember(of: ReagentFoodViewController.self) == false
-        else { return }
+        else
+        {
+            assertionFailure("AfterTestMVVMViewController-back: Can't find lastViewController")
+            return
+        }
         
         viewModel.back()
         

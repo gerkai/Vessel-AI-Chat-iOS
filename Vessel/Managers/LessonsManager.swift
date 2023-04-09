@@ -9,29 +9,6 @@ import UIKit
 
 let MAX_LESSONS_PER_DAY = 4
 
-/* used for testing
-enum CompletedWhen
-{
-    case never
-    case yesterday
-    case today
-}
-
-//cw temp testing
-extension Date
-{
-    static var yesterday: Date { return Date().dayBefore }
-    static var tomorrow: Date { return Date().dayAfter }
-    var dayBefore: Date
-    {
-        return Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    }
-    var dayAfter: Date
-    {
-        return Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-    }
-} */
-
 class LessonsManager
 {
     static let shared = LessonsManager()
@@ -53,63 +30,20 @@ class LessonsManager
         return lessons[safe: firstUncompletedIndex]
     }
     
-    /*
-    //cw temp testing
-    func testLessons()
-    {
-        unlockMoreInsights = true
-        lessons = [createLesson(completed: .yesterday), createLesson(completed: .today), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .yesterday), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .never), createLesson(completed: .never), createLesson(completed: .never)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .yesterday), createLesson(completed: .never)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .never)]
-        print(todayLessons)
-        
-        lessons = [createLesson(completed: .today), createLesson(completed: .today), createLesson(completed: .today)]
-        print(todayLessons)
-    }
-    
-    func createLesson(completed: CompletedWhen) -> Lesson
-    {
-        var date: String?
-        if completed == .yesterday
-        {
-            date = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date().dayBefore))
-            //date = Date().dayBefore.iso8601
-        }
-        else if completed == .today
-        {
-            //date = Date().iso8601
-            date = Date.localToUTC(dateStr: Date.isoLocalDateFormatter.string(from: Date()))
-        }
-        var lesson = Lesson(id: 0, last_updated: 1, title: "Test Lesson", description: "Test Lesson Description", imageUrl: nil, completedDate: date, rank: 1, stepIds: [], goalIds: [], duration: 3)
-        return lesson
-    }
-    */
     var todayLessons: [Lesson]
     {
         //get index of first incomplete lesson (or completed today). If none found, return empty array.
-        guard let todayIndex = lessons.firstIndex(where: { $0.completedDate == nil || $0.completedToday }) else { return [] }
-        let completedTodayCount = min(MAX_LESSONS_PER_DAY, lessons.filter({ $0.completedToday }).count)
+        let filteredLessons = lessons.filter({ $0.completedDate == nil || $0.completedToday })
+        guard let todayIndex = filteredLessons.firstIndex(where: { $0.completedDate == nil || $0.completedToday }) else { return [] }
+        let completedTodayCount = min(MAX_LESSONS_PER_DAY, filteredLessons.filter({ $0.completedToday }).count)
         let lastIndex = max(todayIndex, (todayIndex + completedTodayCount + (unlockMoreInsights ? 0 : -1 )))
-        if lessons.count <= todayIndex
+        if filteredLessons.count <= todayIndex
         {
-            return lessons
+            return filteredLessons
         }
         else
         {
-            return Array<Lesson>(lessons[todayIndex...lastIndex])
+            return Array<Lesson>(filteredLessons[todayIndex...lastIndex])
         }
     }
     
@@ -122,12 +56,19 @@ class LessonsManager
     func buildLessonPlan(onDone done: @escaping () -> Void)
     {
         Log_Add("buildLessonPlan()")
-        guard let contact = Contact.main() else { return }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("LessonsManager-buildLessonPlan: mainContact not available")
+            return
+        }
         let allCurriculums = Storage.retrieve(as: Curriculum.self)
+        let allLessons = Array<LessonRank>(allCurriculums.map({ $0.lessonRanks }).joined())
+        let completedLessons = allLessons.filter({ $0.completed })
         let goalsCurriculums = allCurriculums.filter({ contact.goal_ids.contains($0.goalId) })
         if goalsCurriculums.count != 0
         {
-            let lessonRanks = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
+            var lessonRanks = Array<LessonRank>(goalsCurriculums.map({ $0.lessonRanks }).joined())
+            lessonRanks.append(contentsOf: completedLessons)
             let uniqueLessonRanks = Array(Set(lessonRanks))
             let sortedLessonRanks = uniqueLessonRanks.sorted(by: { $0.rank < $1.rank })
             
@@ -302,9 +243,21 @@ class LessonsManager
         }
     }
     
-    func lessonsCompleted() -> Bool
+    func lessonsAvailable(forDate date: String) -> Bool
     {
-        return (lessons.last?.isComplete ?? false) && !(lessons.last?.completedToday ?? true)
+        if let firstLesssonCompletedDate = lessons.first?.completedDate
+        {
+            if let lastLessonCompletedDate = lessons.last?.completedDate
+            {
+                return date > firstLesssonCompletedDate && date < lastLessonCompletedDate
+            }
+            else
+            {
+                return date > firstLesssonCompletedDate
+            }
+        }
+        
+        return true
     }
     
     @objc

@@ -47,7 +47,7 @@ class AfterTestViewModel
     var currentScreen: Int = -1
     var contactFlags: Int = 0
     var screens: [AfterTestScreen] = []
-    var selectedFoodIds: [Int] = Contact.main()!.suggestedFoods.compactMap({ $0.id })
+    var selectedFoodIds: [Int] = PlansManager.shared.getFoodPlans(shouldFilterForToday: true).map({ $0.typeId })
     var newSelectedFoods: [ReagentFood] = []
     var suggestedFoods: [ReagentFood] = []
     var isHydroLow: Bool = true
@@ -200,7 +200,7 @@ class AfterTestViewModel
         //This allows us to know the maximum value of the progress bar that is displayed on many of the screens.
         guard let contact = Contact.main() else
         {
-            assertionFailure("Couldn't load contact in AfterTestViewModel")
+            assertionFailure("AfterTestViewModel-calculateTotalScreens: Can't get main contact")
             return
         }
         
@@ -662,13 +662,18 @@ class AfterTestViewModel
     
     func refreshSelectedFoods()
     {
-        selectedFoodIds = PlansManager.shared.getFoodPlans().map({ $0.typeId })
+        selectedFoodIds = PlansManager.shared.getFoodPlans(shouldFilterForToday: true).map({ $0.typeId })
     }
     
     // MARK: - Water
     func setDailyWaterIntake(dailyDrinkedGlasses: Int)
     {
-        guard let contact = Contact.main() else { return }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("AfterTestViewModel-setDailyWaterIntake: Can't get main contact")
+            return
+        }
+        
         if isHydroLow
         {
             if testResult.isEvaluatedTo(id: Reagent.ID.HYDRATION, evaluation: .veryLow)
@@ -694,7 +699,7 @@ class AfterTestViewModel
         WaterManager.shared.createWaterPlanIfNeeded()
         
         Log_Add("setDailyWaterIntake() - post .newDataArrived: Plan")
-        NotificationCenter.default.post(name: .newPlanAdded, object: nil, userInfo: [:])
+        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil, userInfo: [:])
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
 }

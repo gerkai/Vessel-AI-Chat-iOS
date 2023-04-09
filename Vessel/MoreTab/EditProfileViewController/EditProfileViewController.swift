@@ -270,24 +270,52 @@ private extension EditProfileViewController
                 switch type
                 {
                 case .name:
-                    guard let name = value as? String else { return }
+                    guard let name = value as? String else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse name value to String")
+                        return
+                    }
                     viewModel.name = name
                 case .lastName:
-                    guard let lastName = value as? String else { return }
+                    guard let lastName = value as? String else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse lastName value to String")
+                        return
+                    }
                     viewModel.lastName = lastName
                 case .gender:
-                    guard let gender = value as? Int else { return }
+                    guard let gender = value as? Int else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse gender value to Int")
+                        return
+                    }
                     viewModel.gender = gender
                 case .height:
-                    guard let height = value as? String else { return }
+                    guard let height = value as? String else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse height value to String")
+                        return
+                    }
                     viewModel.height = height
                 case .weight:
-                    guard let weight = value as? String else { return }
+                    guard let weight = value as? String else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse weight value to String")
+                        return
+                    }
                     viewModel.weight = weight
                 case .birthDate:
-                    guard let birthDate = value as? String else { return }
+                    guard let birthDate = value as? String else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't parse birthDate value to String")
+                        return
+                    }
                     let strings = birthDate.split(separator: " ")
-                    guard let dateString = strings[safe: 1] else { return }
+                    guard let dateString = strings[safe: 1] else
+                    {
+                        assertionFailure("EditProfileViewController-handle.editContact: Couldn't get dateString from splitting of birthDate")
+                        return
+                    }
                     let date = viewModel.localDateFormatter.date(from: String(dateString))
                     viewModel.birthDate = date
                 }

@@ -22,11 +22,13 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var reagentsStackView: UIStackView?
     @IBOutlet private weak var scheduleSection: UIView!
     @IBOutlet private weak var removeFromPlanButton: BounceButton!
+    @IBOutlet private weak var removePlanLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var emptyScheduleLabel: UILabel!
     @IBOutlet private weak var scheduleStackView: UIStackView!
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
+    private var shouldShowRemovePlan: Bool = true
     
     // MARK: - Model
     private var viewModel: ActivityDetailsViewModel?
@@ -53,9 +55,10 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     }
     
     // MARK: - Initialization
-    func setup(model: ActivityDetailsModel)
+    func setup(model: ActivityDetailsModel, shouldShowRemovePlan: Bool = true)
     {
         viewModel = ActivityDetailsViewModel(model: model)
+        self.shouldShowRemovePlan = shouldShowRemovePlan
     }
     
     // MARK: - Notifications
@@ -81,14 +84,22 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
     
     @IBAction func onRemovePlan()
     {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel = viewModel else
+        {
+            assertionFailure("ActivityDetailsViewController-onRemovePlan: viewModel not available")
+            return
+        }
         removeFromPlanButton.isEnabled = false
         Server.shared.removeSinglePlan(planId: viewModel.id)
         {
             self.removeFromPlanButton.isEnabled = true
-            self.navigationController?.popViewController(animated: true)
-            guard let plan = PlansManager.shared.plans.first(where: { $0.id == viewModel.id }) else { return }
+            guard let plan = PlansManager.shared.plans.first(where: { $0.id == viewModel.id }) else
+            {
+                assertionFailure("ActivityDetailsViewController-onRemovePlan: Couldn't find plan to remove with id: \(viewModel.id)")
+                return
+            }
             PlansManager.shared.removePlans(plansToRemove: [plan])
+            self.navigationController?.popViewController(animated: true)
         }
         onFailure:
         { error in
@@ -185,7 +196,15 @@ private extension ActivityDetailsViewController
         {
             reagentsStackView?.removeFromSuperview()
         }
-        guard let url = viewModel?.imageURL else { return }
+        removePlanLayoutConstraint.constant = shouldShowRemovePlan ? 128 : 0
+        removeFromPlanButton.isHidden = !shouldShowRemovePlan
+        scrollView.layoutIfNeeded()
+        
+        guard let url = viewModel?.imageURL else
+        {
+            assertionFailure("CheckMarkCardView-setup: imageURL not available")
+            return
+        }
         headerImageView.kf.setImage(with: url)
     }
     

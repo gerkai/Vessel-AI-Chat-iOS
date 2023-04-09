@@ -52,7 +52,8 @@ class LessonsCoordinator
     
     func shouldShowSuccessScreen() -> Bool
     {
-        guard let step = currentStep else { return false }
+        guard let step = currentStep else
+        { return false }
 
         switch step.type
         {
@@ -73,7 +74,11 @@ class LessonsCoordinator
     func answerStep(answer: String, answerId: Int)
     {
         guard let step = currentStep,
-              let type = step.type else { return }
+              let type = step.type else
+        {
+            assertionFailure("LessonsCoordinator-answerStep: Step non existent or without a type")
+            return
+        }
         
         switch type
         {
@@ -122,7 +127,11 @@ class LessonsCoordinator
             {
                 let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
                 guard let step = currentStep,
-                      let type = step.type else { return nil }
+                      let type = step.type else
+                {
+                    assertionFailure("LessonsCoordinator-getNextStepViewController: Step non existent or without a type")
+                    return nil
+                }
 
                 switch type
                 {

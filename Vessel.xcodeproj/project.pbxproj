@@ -78,7 +78,6 @@
 		3F1A249128932E5300BC539F /* AfterTestMVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */; };
 		3F1A24932893479500BC539F /* ReagentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A24922893479500BC539F /* ReagentInfoViewController.swift */; };
 		3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A2496289B2A8700BC539F /* KeychainHelper.swift */; };
-		3F24427E293AFFBC0043E4B4 /* ServerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */; };
 		3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */; };
 		3F244286293FFAE80043E4B4 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244284293FFAE70043E4B4 /* log.swift */; };
 		3F244287293FFAE80043E4B4 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F244285293FFAE70043E4B4 /* LogViewController.swift */; };
@@ -407,7 +406,6 @@
 		3F1A249028932E5300BC539F /* AfterTestMVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterTestMVVMViewController.swift; sourceTree = "<group>"; };
 		3F1A24922893479500BC539F /* ReagentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentInfoViewController.swift; sourceTree = "<group>"; };
 		3F1A2496289B2A8700BC539F /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
-		3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPlan.swift; sourceTree = "<group>"; };
 		3F24427F293EDEB70043E4B4 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
 		3F244284293FFAE70043E4B4 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
 		3F244285293FFAE70043E4B4 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
@@ -762,7 +760,6 @@
 				3F9C679C28FE5FE700BC44FA /* Reagents */,
 				72798B7F298D072100A5BD65 /* Reminder.swift */,
 				3F1A248C2891E8B600BC539F /* Result.swift */,
-				3F24427D293AFFBC0043E4B4 /* ServerPlan.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
 			);
@@ -1877,7 +1874,6 @@
 				3F0547CB27CAC72D006E3098 /* SocialAuthViewController.swift in Sources */,
 				3F96182627F35B1100CB37B6 /* VesselSegmentedControl.swift in Sources */,
 				3F15ACF1288A50CF004716CA /* ScanCardViewController.swift in Sources */,
-				3F24427E293AFFBC0043E4B4 /* ServerPlan.swift in Sources */,
 				3F87B97027D42BEB00D589F7 /* HeightWeightSelectViewController.swift in Sources */,
 				3FF833AD28A1AD4D005D5B43 /* Reachability.swift in Sources */,
 				3FEACB1D28F7893C00686D79 /* ReagentDetailsViewController.swift in Sources */,

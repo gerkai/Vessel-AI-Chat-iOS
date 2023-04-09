@@ -51,7 +51,11 @@ class LessonStepActivityView: UIView
         titleLabel.text = title
         frequencyLabel.text = frequency
         self.delegate = delegate
-        guard let url = URL(string: backgroundImage) else { return }
+        guard let url = URL(string: backgroundImage) else
+        {
+            assertionFailure("LessonStepActivityView-setup: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
     }
     

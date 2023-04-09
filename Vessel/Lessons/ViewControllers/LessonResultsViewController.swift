@@ -40,7 +40,11 @@ class LessonResultsViewController: UIViewController, VesselScreenIdentifiable
         titleLabel.text = titleText
         successfulLessonIcon.isHidden = !success
         guard let imageUrl = imageUrl,
-              let url = URL(string: imageUrl) else { return }
+              let url = URL(string: imageUrl) else
+        {
+            assertionFailure("LessonResultsViewController-setupImageView: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {

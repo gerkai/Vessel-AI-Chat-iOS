@@ -32,10 +32,11 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     {
         super.viewDidLoad()
         resultsViewModel.refresh()
+        viewModel.resultsViewModel = resultsViewModel
         
         //get notified when new foods, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
@@ -60,7 +61,11 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     
     override func viewDidAppear(_ animated: Bool)
     {
-        guard let contact = Contact.main() else { return }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("TodayViewController-viewDidAppear: mainContact not available")
+            return
+        }
         var canShowReview = true
         
         if contact.flags & Constants.SAW_INSIGHT_POPUP == 0
@@ -76,7 +81,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         {
             //show the "Congrats for adding your first activity" popup but only if they haven't seen it
             //yet and only if the first activity was added today (VH-5081)
-            let plans = PlansManager.shared.getActivityPlans()
+            let plans = PlansManager.shared.getActivityPlans(shouldFilterForToday: true)
             if plans.count != 0
             {
                 let plan = plans.first!
@@ -224,9 +229,9 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
             NSLayoutConstraint(item: congratulationsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 462.0)
         ])
         
-        let numberOfActivities = PlansManager.shared.getActivityPlans().count
+        let numberOfActivities = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.selectedDate == todayString, shouldFilterForSelectedDate: todayString).count
         let numberOfFoods = Contact.main()?.suggestedFoods.count ?? 0
-        let totalWaterAmount = Contact.main()?.dailyWaterIntake ?? 0
+        let totalWaterAmount = WaterManager.shared.getDailyWaterIntake(date: viewModel.selectedDate) ?? 0
         let completedInsights = LessonsManager.shared.getLessonsCompletedOn(dateString: todayString).count
         analytics.log(event: .everythingComplete(date: todayString,
                                                  numberOfActivities: numberOfActivities,
@@ -246,7 +251,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     {
         let plans = PlansManager.shared.getLifestyleRecommendationPlans()
         guard let plan = plans.first(where: { $0.id == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID }) else { return }
-        tableView.scrollToRow(at: IndexPath(row: 0, section: TodayViewSection.activities(activities: [], selectedDate: "").sectionIndex), at: .top, animated: true)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: TodayViewSection.activities(activities: [], selectedDate: "", isToday: viewModel.isToday).sectionIndex), at: .top, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
             let vc = LifestyleRecommendationPopupViewController.createWith(plan: plan)
             self.present(vc, animated: false)
@@ -285,43 +290,84 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
         guard let section = viewModel.sections[safe: indexPath.section],
               let cellData = section.cells[safe: indexPath.row] else
         {
-            fatalError("Can't get cell data from viewModel in TodayViewController")
+            assertionFailure("Can't get cell data from viewModel in TodayViewController")
+            return UITableViewCell()
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellData.identifier, for: indexPath)
         switch cellData
         {
         case .header(let name, let goals):
-            guard let cell = cell as? TodayHeaderTableViewCell else { fatalError("Can't dequeue cell TodayHeaderTableViewCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayHeaderTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodayHeaderTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(name: name, goals: goals, delegate: self)
         case .progressDays(let progress):
-            guard let cell = cell as? TodayProgressDaysCell else { fatalError("Can't dequeue cell TodayProgressDaysCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayProgressDaysCell else
+            {
+                assertionFailure("Can't dequeue cell TodayProgressDaysCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(progress: progress, selectedDay: viewModel.selectedDate, delegate: self)
-        case .sectionTitle(let icon, let name):
-            guard let cell = cell as? TodaySectionTitleTableViewCell else { fatalError("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController") }
-            cell.setup(iconName: icon, title: name)
+        case .sectionTitle(let icon, let name, let showInfoIcon):
+            guard let cell = cell as? TodaySectionTitleTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodaySectionTitleTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
+            cell.setup(iconName: icon, title: name, showInfoIcon: showInfoIcon)
         case .foodDetails(let foods, let selectedDate):
-            guard let cell = cell as? TodayFoodDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayFoodDetailsSectionTableViewCell from tableView in TodayViewController") }
-            cell.setup(foods: foods, selectedDate: selectedDate, delegate: self)
+            guard let cell = cell as? TodayFoodDetailsSectionTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodayFoodDetailsSectionTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
+            cell.setup(foods: foods, selectedDate: selectedDate, isToday: viewModel.isToday, delegate: self)
         case .waterDetails(let glassesNumber, let checkedGlasses):
-            guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else { fatalError("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodayWaterDetailsSectionTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
         case .lockedCheckMarkCard(let backgroundImage, let subtext):
-            guard let cell = cell as? TodayLockedCheckMarkCardCell else { fatalError("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayLockedCheckMarkCardCell else
+            {
+                assertionFailure("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(backgroundImage: backgroundImage, subtext: subtext)
         case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText):
-            guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayCheckMarkCardTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
             let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: remindersButtonState, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
         case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
-            guard let cell = cell as? TodayCheckMarkCardTableViewCell else { fatalError("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayCheckMarkCardTableViewCell else
+            {
+                assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(title: title, subtitle: subtitle, description: nil, backgroundImage: backgroundImage, completed: true)
-        case .text(let text):
-            guard let cell = cell as? TodayTextCell else  { fatalError("Can't dequeue cell TodayTextCell from tableView in TodayViewController") }
-            cell.setup(text: text)
+        case .text(let text, let alignment):
+            guard let cell = cell as? TodayTextCell else
+            {
+                assertionFailure("Can't dequeue cell TodayTextCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
+            cell.setup(text: text, alignment: alignment)
         case .button(let text):
-            guard let cell = cell as? TodayButtonCell else  { fatalError("Can't dequeue cell TodayTextCell from tableView in TodayViewController") }
+            guard let cell = cell as? TodayButtonCell else
+            {
+                assertionFailure("Can't dequeue cell TodayTextCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
             cell.setup(title: text, delegate: self)
             break
         case .footer:
@@ -384,7 +430,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                     navigationController?.pushViewController(viewController, animated: true)
                 }
             }
-        case .activities(let activities, _):
+        case .activities(let activities, _, _):
             if indexPath.row == 0
             {
                 GenericAlertViewController.presentAlert(in: self, type:
@@ -394,10 +440,27 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                let plans = PlansManager.shared.getActivityPlans() + PlansManager.shared.getLifestyleRecommendationPlans()
+                let activityPlans: [Plan] = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDate: viewModel.selectedDate)
+               
+                let plans: [Plan] = activityPlans + PlansManager.shared.getLifestyleRecommendationPlans()
                 
-                guard let activity = activities[safe: indexPath.row - 1],
-                      let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .lifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else { return }
+                guard let activity = activities.filter({ activity in
+                    plans.contains(where: { plan in
+                        if activity.isLifestyleRecommendation
+                        {
+                            return plan.typeId == activity.id && plan.type == .reagentLifestyleRecommendation
+                        }
+                        else
+                        {
+                            return plan.typeId == activity.id && plan.type == .activity
+                        }
+                    })
+                })[safe: indexPath.row - 1 ],
+                      let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .reagentLifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else
+                {
+                    assertionFailure("TodayViewController-tableViewDidSelectRowAt.activities: Couldn't find the tapped activity")
+                    return
+                }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
                 {
                     openSupplementQuiz()
@@ -406,12 +469,19 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 {
                     openFormulation()
                 }
+                else if activity.isLifestyleRecommendation && (activity.id == -Constants.TAKE_A_TEST_LIFESTYLE_RECOMMENDATION_ID)
+                {
+                    mainTabBarController?.vesselButtonPressed()
+                }
                 else if !activity.isLifestyleRecommendation
                 {
                     let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                     let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
                     activityDetailsVC.hidesBottomBarWhenPushed = true
-                    activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id))
+                    let planToRemove = PlansManager.shared.getFirstActivityPlan(withId: activity.id, shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDay: viewModel.selectedDate)
+                    
+                    activityDetailsVC.setup(model: activity.getActivityDetailsModel(planId: plan.id), shouldShowRemovePlan: planToRemove != nil)
+
                     analytics.log(event: .activityShown(activityId: activity.id, activityName: activity.title))
                     
                     navigationController?.pushViewController(activityDetailsVC, animated: true)
@@ -432,7 +502,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                                                                                                  button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
             }
         case .water:
-            guard Contact.main()?.dailyWaterIntake != nil else
+            guard WaterManager.shared.getDailyWaterIntake(date: viewModel.selectedDate) != nil else
             {
                 mainTabBarController?.vesselButtonPressed()
                 return
@@ -456,6 +526,7 @@ extension TodayViewController: WaterIntakeViewDelegate
     {
         viewModel.updateCheckedGlasses(glasses)
         showGamificationCongratulationsViewIfNeeded()
+        reloadUI()
     }
 }
 
@@ -463,39 +534,47 @@ extension TodayViewController: FoodCheckmarkViewDelegate
 {
     func checkmarkTapped(view: FoodCheckmarkView)
     {
-        let foodPlans = PlansManager.shared.getFoodPlans()
-        guard let plan = foodPlans.first(where: { $0.typeId == view.food?.id }) else { return }
+        let foodPlans: [Plan] = PlansManager.shared.getFoodPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDay: viewModel.selectedDate)
+
+        guard let plan = foodPlans.first(where: { $0.typeId == view.food?.id }) else
+        {
+            assertionFailure("TodayViewController-checkmarkTapped: Couldn't find the tapped food")
+            return
+        }
         
         if let food = view.food
         {
             analytics.log(event: .foodComplete(foodId: food.id, foodName: food.title, completed: view.isChecked))
         }
         
-        Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: view.isChecked))
-        { [weak self] togglePlanData in
-            guard let self = self else { return }
-            PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
-            cell.updateCheckedFoods()
-            self.showGamificationCongratulationsViewIfNeeded()
-        } onFailure: { error in
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: TodayViewSection.food(foods: [], selectedDate: "").sectionIndex)) as? TodayFoodDetailsSectionTableViewCell else { return }
-            cell.updateCheckedFoods()
-        }
+        PlansManager.shared.setPlanCompleted(planId: plan.id, date: viewModel.selectedDate, isComplete: view.isChecked)
     }
     
     func checkmarkViewTapped(view: FoodCheckmarkView)
     {
         guard let food = view.food,
-        let plan = PlansManager.shared.getFoodPlans().first(where: { $0.typeId == food.id }) else { return }
+              let plan = PlansManager.shared.getFirstFoodPlan(withId: food.id, shouldFilterForToday: false) else
+        {
+            assertionFailure("TodayViewController-checkmarkViewTapped: FoodCheckmarkView didn't have a food or can't get food's plan")
+            return
+        }
         let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
         let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
         activityDetailsVC.hidesBottomBarWhenPushed = true
-        activityDetailsVC.setup(model: food.getActivityDetailsModel(planId: plan.id))
+        let planToRemove = PlansManager.shared.getFirstFoodPlan(withId: food.id, shouldFilterForToday: true)
+        activityDetailsVC.setup(model: food.getActivityDetailsModel(planId: planToRemove?.id ?? plan.id), shouldShowRemovePlan: planToRemove != nil)
         
         analytics.log(event: .foodShown(foodId: food.id, foodName: food.title))
         
         navigationController?.pushViewController(activityDetailsVC, animated: true)
+    }
+    
+    func animationComplete(view: FoodCheckmarkView)
+    {
+        viewModel.refreshLastWeekProgress()
+        viewModel.refreshContactSuggestedfoods()
+        reloadUI()
+        showGamificationCongratulationsViewIfNeeded()
     }
 }
 
@@ -504,7 +583,11 @@ extension TodayViewController: TodayHeaderTableViewCellDelegate
     func onGoalTapped(goal: String)
     {
         resultsViewModel.refresh()
-        guard let goalIndex = Goals.firstIndex(where: { $1.name == goal.lowercased() }) else { return }
+        guard let goalIndex = Goals.firstIndex(where: { $1.name == goal.lowercased() }) else
+        {
+            assertionFailure("TodayViewController-onGoalTapped: Couldn't find Goal with name: \(goal.lowercased())")
+            return
+        }
         let id = Goals[goalIndex].key.rawValue
         
         let goalID = Goal.ID(rawValue: id)!
@@ -533,12 +616,16 @@ extension TodayViewController: TodayCheckMarkCardDelegate
         return true
     }
     
-    func onCardChecked(id: Int, type: CheckMarkCardType)
+    func onCardChecked(id: Int, checked: Bool, type: CheckMarkCardType)
     {
         if type == .lifestyleRecommendation
         {
             let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
-            guard let plan = lifestyleRecommendationPlans.first(where: { $0.typeId == id }) else { return }
+            guard let plan = lifestyleRecommendationPlans.first(where: { $0.typeId == id }) else
+            {
+                assertionFailure("TodayViewController-onCardChecked: Couldn't find Lifestyle recommendation with id: \(id)")
+                return
+            }
 
             if plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
             {
@@ -547,35 +634,34 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             else
             {
                 PlansManager.shared.setPlanCompleted(planId: plan.id, date: viewModel.selectedDate, isComplete: true)
-                self.tableView.reloadData()
-                self.showGamificationCongratulationsViewIfNeeded()
             }
         }
         else if type == .activity
         {
             let activities = PlansManager.shared.activities
-            let activityPlans = PlansManager.shared.getActivityPlans()
-            guard let plan = activityPlans.first(where: { $0.typeId == id }) else { return }
+            let activityPlans: [Plan] = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDate: viewModel.selectedDate)
+            
+            guard let plan = activityPlans.first(where: { $0.typeId == id }) else
+            {
+                assertionFailure("TodayViewController-onCardChecked: Couldn't find activity with id: \(id)")
+                return
+            }
             
             if let activity = activities.first(where: { $0.id == plan.typeId })
             {
                 analytics.log(event: .activityComplete(activityId: activity.id, activityName: activity.title, completed: !plan.completed.contains(viewModel.selectedDate)))
             }
             
-            Server.shared.completePlan(planId: plan.id, toggleData: TogglePlanData(date: viewModel.selectedDate, completed: !plan.completed.contains(viewModel.selectedDate)))
-            { [weak self] togglePlanData in
-                guard let self = self else { return }
-                PlansManager.shared.setPlanCompleted(planId: plan.id, date: togglePlanData.date, isComplete: togglePlanData.completed)
-                self.tableView.reloadData()
-                self.showGamificationCongratulationsViewIfNeeded()
-            } onFailure: { error in
-                self.tableView.reloadData()
-            }
+            PlansManager.shared.setPlanCompleted(planId: plan.id, date: viewModel.selectedDate, isComplete: checked)
         }
         else if type == .lesson
         {
             let lessons = LessonsManager.shared.todayLessons
-            guard let lesson = lessons.first(where: { $0.id == id }) else { return }
+            guard let lesson = lessons.first(where: { $0.id == id }) else
+            {
+                assertionFailure("TodayViewController-onCardChecked: Couldn't find lesson with id: \(id)")
+                return
+            }
             let coordinator = LessonsCoordinator(lesson: lesson)
             coordinator.delegate = self
             if let index = lesson.indexOfFirstUnreadStep()
@@ -594,6 +680,14 @@ extension TodayViewController: TodayCheckMarkCardDelegate
                 navigationController?.pushViewController(viewController, animated: true)
             }
         }
+    }
+    
+    func animationComplete()
+    {
+        viewModel.refreshLastWeekProgress()
+        viewModel.refreshContactSuggestedfoods()
+        reloadUI()
+        showGamificationCongratulationsViewIfNeeded()
     }
     
     func onReminderTapped(id: Int, type: CheckMarkCardType)
@@ -638,7 +732,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
                   let lifestyleRecommendation = lifestyleRecommendations.first(where: { $0.id == plan.typeId }),
                       plan.typeId != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID else { return }
 
-            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .lifestyleRecommendation))
+            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .reagentLifestyleRecommendation))
             
             let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
             if reminders.count > 0
@@ -666,6 +760,7 @@ extension TodayViewController: ProgressDayViewDelegate
     func onProgressDayTapped(date: String)
     {
         viewModel.selectedDate = date
+        viewModel.refreshContactSuggestedfoods()
         tableView.reloadData()
     }
 }

@@ -55,7 +55,11 @@ class CheckMarkCardView: UIView
         subtitleLabel.text = subtitle
         descriptionLabel.text = description
         checkMark.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
-        guard let url = URL(string: backgroundImage) else { return }
+        guard let url = URL(string: backgroundImage) else
+        {
+            assertionFailure("CheckMarkCardView-setup: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
     }
     

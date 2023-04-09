@@ -11,7 +11,11 @@ let DAYS_TO_SHOW_REVIEW_PROMPT = 12
 
 func ReviewManagerStart()
 {
-    guard let contact = Contact.main() else { return }
+    guard let contact = Contact.main() else
+    {
+        assertionFailure("ReviewManagerStart: mainContact not available")
+        return
+    }
     if contact.flags & Constants.HAS_RATED_APP == 0
     {
         let launchDate = UserDefaults.standard.object(forKey: Constants.KEY_FIRST_LAUNCH_DATE) as? Date
@@ -25,7 +29,11 @@ func ReviewManagerStart()
 
 func ReviewManagerExperienceReview(presentOverVC: UIViewController)
 {
-    guard let contact = Contact.main() else { return }
+    guard let contact = Contact.main() else
+    {
+        assertionFailure("ReviewManagerExperienceReview: mainContact not available")
+        return
+    }
     if contact.flags & Constants.HAS_RATED_APP == 0
     {
         let date = UserDefaults.standard.object(forKey: Constants.KEY_FIRST_LAUNCH_DATE) as? Date

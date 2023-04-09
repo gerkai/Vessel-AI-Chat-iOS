@@ -41,8 +41,8 @@ class KeyboardFriendlyViewController: UIViewController
     {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else
         {
-            // if keyboard size is not available for some reason, dont do anything
-           return
+            assertionFailure("KeyboardFriendlyViewController-keyboardWillShow: Keyboard size not available")
+            return
         }
         
         var shouldMoveViewUp = false

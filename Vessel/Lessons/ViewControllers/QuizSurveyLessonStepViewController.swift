@@ -138,7 +138,11 @@ private extension QuizSurveyLessonStepViewController
     func setupImageView()
     {
         guard let imageUrl = viewModel.lesson.imageUrl,
-              let url = URL(string: imageUrl) else { return }
+              let url = URL(string: imageUrl) else
+        {
+            assertionFailure("QuizSurveyLessonStepViewController-setupImageView: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
     }
     
@@ -162,7 +166,11 @@ private extension QuizSurveyLessonStepViewController
             questionLabel.font = Constants.FontBoldMain28
             for view in stepsStackView.arrangedSubviews
             {
-                guard let view = view as? LessonStepView else { return }
+                guard let view = view as? LessonStepView else
+                {
+                    assertionFailure("QuizSurveyLessonStepViewController-reloadUI: stepsStackView arrangedSubview is not a LessonStepView")
+                    return
+                }
                 view.setup(checkedState: view.id == (viewModel.selectedAnswerId ?? 0) ? .selected : .unselected)
             }
         }
@@ -172,7 +180,11 @@ private extension QuizSurveyLessonStepViewController
             questionLabel.text = viewModel.step.successText ?? (viewModel.result == .correct ? NSLocalizedString("Nice work! You got it right!", comment: "") : NSLocalizedString("Good try! Below is the correct answer.", comment: ""))
             for view in stepsStackView.arrangedSubviews
             {
-                guard let view = view as? LessonStepView else { return }
+                guard let view = view as? LessonStepView else
+                {
+                    assertionFailure("QuizSurveyLessonStepViewController-reloadUI: stepsStackView arrangedSubview is not a LessonStepView")
+                    return
+                }
                 
                 let state: LessonStepViewCheckedState
                 if viewModel.state == .result && (viewModel.result == .correct || type == .survey)

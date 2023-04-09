@@ -32,36 +32,51 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="749"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DebugMenuCell" id="mZC-tw-gUs" customClass="DebugMenuCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DebugMenuCell" id="mZC-tw-gUs" customClass="DebugMenuCell" customModule="Vessel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mZC-tw-gUs" id="z4F-cz-lpa">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG7-v0-9Iq">
-                                                    <rect key="frame" x="20" y="11.5" width="41.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XzQ-fE-9ts">
-                                                    <rect key="frame" x="345" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="345" y="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="onSwitchToggle" destination="mZC-tw-gUs" eventType="valueChanged" id="F9e-eF-itJ"/>
                                                     </connections>
                                                 </switch>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="T52-Vj-Oco">
+                                                    <rect key="frame" x="20" y="5" width="320" height="34.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG7-v0-9Iq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="34.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="llX-Xo-5Xi">
+                                                            <rect key="frame" x="160" y="0.0" width="160" height="34.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="6h1-l8-Ghp"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="T52-Vj-Oco" firstAttribute="leading" secondItem="z4F-cz-lpa" secondAttribute="leading" constant="20" id="3zG-my-aoA"/>
                                                 <constraint firstItem="XzQ-fE-9ts" firstAttribute="centerY" secondItem="z4F-cz-lpa" secondAttribute="centerY" id="CrM-oe-oU9"/>
-                                                <constraint firstItem="gG7-v0-9Iq" firstAttribute="leading" secondItem="z4F-cz-lpa" secondAttribute="leading" constant="20" id="F8k-MY-kq1"/>
-                                                <constraint firstItem="XzQ-fE-9ts" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gG7-v0-9Iq" secondAttribute="trailing" id="Ues-Ai-ogc"/>
-                                                <constraint firstItem="gG7-v0-9Iq" firstAttribute="centerY" secondItem="z4F-cz-lpa" secondAttribute="centerY" id="Ycx-rC-Z0v"/>
+                                                <constraint firstAttribute="bottom" secondItem="T52-Vj-Oco" secondAttribute="bottom" constant="5" id="P62-sP-vam"/>
+                                                <constraint firstItem="XzQ-fE-9ts" firstAttribute="leading" secondItem="T52-Vj-Oco" secondAttribute="trailing" constant="5" id="mc4-aQ-L8B"/>
+                                                <constraint firstItem="T52-Vj-Oco" firstAttribute="top" secondItem="z4F-cz-lpa" secondAttribute="top" constant="5" id="qel-9Q-rLI"/>
                                                 <constraint firstAttribute="trailing" secondItem="XzQ-fE-9ts" secondAttribute="trailing" constant="20" id="t1I-Vl-TkH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="switchToggle" destination="XzQ-fE-9ts" id="JDq-gW-Vrk"/>
+                                            <outlet property="textField" destination="llX-Xo-5Xi" id="lrE-RA-WfW"/>
                                             <outlet property="titleLabel" destination="gG7-v0-9Iq" id="oel-aG-Si8"/>
                                         </connections>
                                     </tableViewCell>
@@ -97,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCT-Y7-qeM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117" y="128"/>
+            <point key="canvasLocation" x="115.94202898550725" y="127.90178571428571"/>
         </scene>
         <!--More-->
         <scene sceneID="s0d-6b-0kx">

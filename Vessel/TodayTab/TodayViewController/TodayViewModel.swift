@@ -19,11 +19,12 @@ enum TodayViewSection: Equatable
     case header(name: String, goals: [String])
     case progressDays(progress: [String: Double])
     case insights(insights: [Lesson], isToday: Bool)
-    case activities(activities: [Tip], selectedDate: String)
-    case food(foods: [Food], selectedDate: String)
-    case water(glassesNumber: Int?, checkedGlasses: Int)
+    case activities(activities: [Tip], selectedDate: String, isToday: Bool)
+    case food(foods: [Food], selectedDate: String, userHasTakenATest: Bool)
+    case water(glassesNumber: Int?, checkedGlasses: Int, isWaterPlanCreatedForSelectedDay: Bool, lastSelectedGlassesNumber: Int?, isWaterPlanCreatedToday: Bool)
     //case customize
     case footer
+    case userNotYetCreated
     
     var sectionIndex: Int
     {
@@ -36,6 +37,7 @@ enum TodayViewSection: Equatable
         case .food: return 4
         case .water: return 5
         case .footer: return 6
+        case .userNotYetCreated: return 1
         }
     }
     
@@ -46,10 +48,11 @@ enum TodayViewSection: Equatable
         case .header(let name, let goals): return [.header(name: name, goals: goals)]
         case .progressDays(let progress): return createProgressDaySection(progress: progress)
         case .insights(let lessons, let isToday): return createInsightsSection(lessons: lessons, isToday: isToday)
-        case .activities(let activities, let selectedDate): return createActivitiesSection(activities: activities, selectedDate: selectedDate)
-        case .food(let foods, let selectedDate): return createFoodSection(foods: foods, selectedDate: selectedDate)
-        case .water(let glassesNumber, let checkedGlasses): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
+        case .activities(let activities, let selectedDate, let isToday): return createActivitiesSection(activities: activities, selectedDate: selectedDate, isToday: isToday)
+        case .food(let foods, let selectedDate, let userHasTakenATest): return createFoodSection(foods: foods, selectedDate: selectedDate, userHasTakenATest: userHasTakenATest)
+        case .water(let glassesNumber, let checkedGlasses, let isWaterPlanCreatedForSelectedDay, let lastSelectedGlassesNumber, let isWaterPlanCreatedToday): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, isWaterPlanCreatedForSelectedDay: isWaterPlanCreatedForSelectedDay, lastSelectedGlassesNumber: lastSelectedGlassesNumber, isWaterPlanCreatedToday: isWaterPlanCreatedToday)
         case .footer: return [.footer]
+        case .userNotYetCreated: return [.sectionTitle(icon: "starIcon", name: NSLocalizedString("You can't go back in time,", comment: ""), showInfoIcon: false), .text(text: NSLocalizedString("it's just too dangerous Marty.", comment: ""), alignment: .left)]
         }
     }
     
@@ -63,8 +66,24 @@ enum TodayViewSection: Equatable
     
     func createInsightsSection(lessons: [Lesson], isToday: Bool) -> [TodayViewCell]
     {
-        guard lessons.count > 0 else { return [] }
-        var cells: [TodayViewCell] = [.sectionTitle(icon: "todayInsightsIcon", name: "Insights")]
+        guard lessons.count > 0 else
+        {
+            if isToday
+            {
+                return [
+                    .sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true),
+                    .text(text: NSLocalizedString("Congratulations you completed all your insights, change your goals to get more.", comment: ""), alignment: .center)
+                ]
+            }
+            else
+            {
+                return [
+                    .sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true),
+                    .text(text: NSLocalizedString("Insights you complete will show up here.", comment: ""), alignment: .center)
+                ]
+            }
+        }
+        var cells: [TodayViewCell] = [.sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true)]
         for lesson in lessons
         {
             if lesson.completedDate == nil
@@ -88,13 +107,13 @@ enum TodayViewSection: Equatable
                 {
                     if lesson == lessons.first
                     {
-                        cells.append(.text(text: NSLocalizedString("Today's insight is done!", comment: "")))
+                        cells.append(.text(text: NSLocalizedString("Today's insight is done!", comment: ""), alignment: .center))
                     }
                     if lesson == lessons.last && LessonsManager.shared.nextLesson != nil
                     {
                         if lessons.count == 4
                         {
-                            cells.append(.text(text: NSLocalizedString("Come back tomorrow for more insights", comment: "")))
+                            cells.append(.text(text: NSLocalizedString("Come back tomorrow for more insights", comment: ""), alignment: .center))
                         }
                         else
                         {
@@ -107,10 +126,11 @@ enum TodayViewSection: Equatable
         return cells
     }
     
-    func createActivitiesSection(activities: [Tip], selectedDate: String) -> [TodayViewCell]
+    func createActivitiesSection(activities: [Tip], selectedDate: String, isToday: Bool) -> [TodayViewCell]
     {
+        let todayDate = Date.serverDateFormatter.string(from: Date())
         guard activities.count > 0 else { return [] }
-        var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities")]
+        var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities", showInfoIcon: true)]
         for activity in activities
         {
             var plan: Plan?
@@ -120,59 +140,94 @@ enum TodayViewSection: Equatable
             }
             else
             {
-                plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id })
+                if isToday
+                {
+                    plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id && $0.removedDate == nil  })
+                }
+                else
+                {
+                    plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activity.id && selectedDate >= $0.createdDate && selectedDate < ($0.removedDate ?? todayDate)  })
+                }
             }
             
-            RemindersManager.shared.reloadReminders()
-            let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan?.id ?? -1)
-            if (plan?.completed ?? []).contains(selectedDate)
+            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
             {
-                cells.append(.foldedCheckMarkCard(title: activity.title,
-                                                  subtitle: "",
-                                                  backgroundImage: activity.imageUrl))
-            }
-            else
-            {
-                cells.append(.checkMarkCard(title: activity.title,
-                                            subtitle: activity.frequency,
-                                            description: activity.description ?? "",
-                                            backgroundImage: activity.imageUrl,
-                                            isCompleted: false,
-                                            id: activity.id,
-                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
-                                            remindersButtonState: reminders.count > 0,
-                                            remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan?.id)))
+                RemindersManager.shared.reloadReminders()
+                let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+                if plan.completed.contains(selectedDate)
+                {
+                    cells.append(.foldedCheckMarkCard(title: activity.title,
+                                                      subtitle: "",
+                                                      backgroundImage: activity.imageUrl))
+                }
+                else
+                {
+                    cells.append(.checkMarkCard(title: activity.title,
+                                                subtitle: activity.frequency,
+                                                description: activity.description ?? "",
+                                                backgroundImage: activity.imageUrl,
+                                                isCompleted: false,
+                                                id: activity.id,
+                                                type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
+                                                remindersButtonState: reminders.count > 0,
+                                                remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan.id)))
+                }
             }
         }
         return cells
     }
     
-    func createFoodSection(foods: [Food], selectedDate: String) -> [TodayViewCell]
+    func createFoodSection(foods: [Food], selectedDate: String, userHasTakenATest: Bool) -> [TodayViewCell]
     {
         guard foods.count > 0 else
         {
-            return [
-                .sectionTitle(icon: "food-icon", name: "Food"),
-                .lockedCheckMarkCard(backgroundImage: "food-placeholder", subtext: NSLocalizedString("Get personalized food recommendations", comment: ""))
-            ]
+            if !userHasTakenATest
+            {
+                return [
+                    .sectionTitle(icon: "food-icon", name: "Food", showInfoIcon: true),
+                    .lockedCheckMarkCard(backgroundImage: "food-placeholder", subtext: NSLocalizedString("Get personalized food recommendations", comment: ""))
+                ]
+            }
+            else
+            {
+                return []
+            }
         }
         return [
-            .sectionTitle(icon: "food-icon", name: "Food"),
+            .sectionTitle(icon: "food-icon", name: "Food", showInfoIcon: true),
             .foodDetails(foods: foods, selectedDate: selectedDate)
         ]
     }
     
-    func createWaterSection(glassesNumber: Int?, checkedGlasses: Int) -> [TodayViewCell]
+    func createWaterSection(glassesNumber: Int?, checkedGlasses: Int, isWaterPlanCreatedForSelectedDay: Bool, lastSelectedGlassesNumber: Int?, isWaterPlanCreatedToday: Bool) -> [TodayViewCell]
     {
         guard let glassesNumber = glassesNumber else
         {
-            return [
-                .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: "")),
-                .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get precise hydration recommendations", comment: ""))
-            ]
+            if let glassesNumber = lastSelectedGlassesNumber, isWaterPlanCreatedForSelectedDay
+            {
+                return [
+                    .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount in ounces"))", showInfoIcon: true),
+                    .waterDetails(glassesNumber: glassesNumber, checkedGlasses: 0)
+                ]
+            }
+            else
+            {
+                if isWaterPlanCreatedToday
+                {
+                    return []
+                }
+                else
+                {
+                    return [
+                        .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: ""), showInfoIcon: true),
+                        .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get precise hydration recommendations", comment: ""))
+                    ]
+                }
+            }
         }
+        
         return [
-            .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount"))"),
+            .sectionTitle(icon: "water-icon", name: "\(glassesNumber * 8) \(NSLocalizedString(" oz Water", comment: "Water amount"))", showInfoIcon: true),
             .waterDetails(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses)
         ]
     }
@@ -202,13 +257,13 @@ enum TodayViewCell: Equatable
 {
     case header(name: String, goals: [String])
     case progressDays(progress: [String: Double])
-    case sectionTitle(icon: String, name: String)
+    case sectionTitle(icon: String, name: String, showInfoIcon: Bool)
     case foodDetails(foods: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, subtext: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
-    case text(text: String)
+    case text(text: String, alignment: NSTextAlignment)
     case button(text: String)
     case footer
     
@@ -267,6 +322,8 @@ class TodayViewModel
     @Resolved private var analytics: Analytics
     private var contact = Contact.main()!
     
+    weak var resultsViewModel: ResultsTabViewModel?
+    
     // Feature flags
     var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
     private var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
@@ -281,7 +338,7 @@ class TodayViewModel
     
     var numberOfGlasses: Int?
     {
-        contact.dailyWaterIntake
+        WaterManager.shared.getDailyWaterIntake(date: selectedDate)
     }
     
     var drinkedWaterGlasses: Int
@@ -297,26 +354,48 @@ class TodayViewModel
     var sections: [TodayViewSection]
     {
         contact = Contact.main()!
+        
+        // PROGRESS DAYS
         let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
+
+        guard let createdDate = contact.createdDate, createdDate <= selectedDate else
+        {
+            return [.header(name: contact.first_name ?? "", goals: contact.getGoals()),
+                    .progressDays(progress: progressDays),
+                    .userNotYetCreated]
+        }
+        
+        let todayDate = Date.serverDateFormatter.string(from: Date())
+        // LESSONS
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
+        
+        //ACTIVITIES
         let activityPlans = PlansManager.shared.getActivityPlans()
         let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
         let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
-        }) : []
+        }).sorted(by: { $0.id < $1.id }) : []
         let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
             return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
-        }) : []
+        }).sorted(by: { $0.id < $1.id }) : []
+        
+        // FOODS
         let foods = showFoods ? contact.suggestedFoods : []
-        let dailyWaterIntake = showWater ? contact.dailyWaterIntake : nil
+        
+        // WATER
+        let dailyWaterIntake = showWater ? numberOfGlasses : nil
+        let isWaterPlanCreatedForSelectedDay = PlansManager.shared.getWaterPlan() != nil ? PlansManager.shared.getWaterPlan()!.createdDate <= selectedDate : false
+        let isWaterPlanCreatedToday = PlansManager.shared.getWaterPlan() != nil ? PlansManager.shared.getWaterPlan()!.createdDate <= todayDate : false
+        let lastSelectedGlassesNumberIndex = PlansManager.shared.getWaterPlan()?.completionInfo?.firstIndex(where: { $0.date >= selectedDate }) ?? 0 - 1
+        let lastSelectedGlasesNumber = lastSelectedGlassesNumberIndex < 0 ? nil : PlansManager.shared.getWaterPlan()?.completionInfo?[safe: lastSelectedGlassesNumberIndex]?.dailyWaterIntake
         
         return [
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .progressDays(progress: progressDays),
             .insights(insights: lessons, isToday: self.isToday),
-            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate),
-            .food(foods: foods, selectedDate: selectedDate),
-            .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses),
+            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate, isToday: self.isToday),
+            .food(foods: foods, selectedDate: selectedDate, userHasTakenATest: !(resultsViewModel?.isEmpty ?? true)),
+            .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses, isWaterPlanCreatedForSelectedDay: isWaterPlanCreatedForSelectedDay, lastSelectedGlassesNumber: lastSelectedGlasesNumber, isWaterPlanCreatedToday: isWaterPlanCreatedToday),
             .footer
         ]
     }
@@ -339,13 +418,13 @@ class TodayViewModel
     
     func updateCheckedGlasses(_ glasses: Int)
     {
-        analytics.log(event: .waterComplete(waterAmount: glasses, totalWaterAmount: contact.dailyWaterIntake ?? 0))
+        analytics.log(event: .waterComplete(waterAmount: glasses, totalWaterAmount: numberOfGlasses ?? 0))
         WaterManager.shared.setDrinkedWaterGlasses(value: glasses, date: selectedDate)
     }
     
     func refreshContactSuggestedfoods()
     {
-        contact.refreshSuggestedFoods()
+        contact.refreshSuggestedFoods(selectedDate: selectedDate, isToday: isToday)
     }
     
     func refreshLastWeekProgress()

@@ -15,7 +15,7 @@ extension Notification.Name
     //when new data arrives from back end, this notification gets sent with the CoreObject type. Interested parties
     //can update themselves. Used for updating the results tab when a new Result arrives.
     static let newDataArrived = Notification.Name("NewDataArrived")
-    static let newPlanAdded = Notification.Name("newPlanAdded")
+    static let newPlanAddedOrRemoved = Notification.Name("newPlanAddedOrRemoved")
     static let selectTabNotification = Notification.Name("SelectTab")
     static let foodPreferencesChangedNotification = Notification.Name("FoodPreferencesChanged")
     static let showSplashScreen = Notification.Name("ShowSplashScreen") //specify a bool object to show/hide
@@ -192,6 +192,9 @@ struct Constants
     static let FUEL_AM_LIFESTYLE_RECOMMENDATION_ID = 14
     static let FUEL_PM_LIFESTYLE_RECOMMENDATION_ID = 15
     static let GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID = 13
+    static let TAKE_A_TEST_LIFESTYLE_RECOMMENDATION_ID = 11
+    static let WEEKS_UNTIL_START_REMINDING_TAKE_A_TEST_MONTHLY = 5
+    
     static let DAYS_OF_THE_WEEK = [NSLocalizedString("Monday", comment: ""), NSLocalizedString("Tuesday", comment: ""), NSLocalizedString("Wednesday", comment: ""), NSLocalizedString("Thursday", comment: ""), NSLocalizedString("Friday", comment: ""), NSLocalizedString("Saturday", comment: ""), NSLocalizedString("Sunday", comment: "")]
     static let ABBREVIATED_WEEK_DAYS = [NSLocalizedString("Mon", comment: ""), NSLocalizedString("Tue", comment: ""), NSLocalizedString("Wed", comment: ""), NSLocalizedString("Thu", comment: ""), NSLocalizedString("Fri", comment: ""), NSLocalizedString("Sat", comment: ""), NSLocalizedString("Sun", comment: "")]
     static let REMINDERS_DEFAULT_TIMES = [NSLocalizedString("Morning", comment: ""), NSLocalizedString("Daytime", comment: ""), NSLocalizedString("Evening", comment: "")]

@@ -421,7 +421,11 @@ class Server: NSObject
     /* send the refresh token, get back a new access and refresh token */
     func refreshTokens(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: Error?) -> Void)
     {
-        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else { return }
+        guard let url = URL(string: "\(API())\(REFRESH_TOKEN_PATH)") else
+        {
+            assertionFailure("Server-refreshTokens: Can't parse url")
+            return
+        }
         let request = URLRequest(url: url)
         
         var mutableRequest = request
@@ -520,7 +524,11 @@ class Server: NSObject
         let data = try! encoder.encode(params)
         
         let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
+        guard let serviceUrl = URL(string: Url) else
+        {
+            assertionFailure("Server-changePassword: Can't parse serviceUrl")
+            return
+        }
         var request = URLRequest(url: serviceUrl)
         request.httpBody = data
         
@@ -644,7 +652,11 @@ class Server: NSObject
                 let jsonData = try JSONSerialization.data(withJSONObject: contactDict, options: .prettyPrinted)
                 
                 let Url = String(format: url)
-                guard let serviceUrl = URL(string: Url) else { return }
+                guard let serviceUrl = URL(string: Url) else
+                {
+                    assertionFailure("Server-createContact: Can't parse serviceUrl")
+                    return
+                }
                 var request = URLRequest(url: serviceUrl)
                 request.httpBody = jsonData
                 
@@ -702,7 +714,11 @@ class Server: NSObject
         let url = "\(API())\(DELETE_ACCOUNT_PATH)"
         
         let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
+        guard let serviceUrl = URL(string: Url) else
+        {
+            assertionFailure("Server-deleteAccount: Can't parse serviceUrl")
+            return
+        }
         let request = URLRequest(url: serviceUrl)
         
         //send it to server
@@ -835,7 +851,11 @@ class Server: NSObject
         let data = try! encoder.encode(objects)
         
         let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
+        guard let serviceUrl = URL(string: Url) else
+        {
+            assertionFailure("Server-saveObjects: Can't parse serviceUrl")
+            return
+        }
         var request = URLRequest(url: serviceUrl)
         request.httpBody = data
         
@@ -866,10 +886,10 @@ class Server: NSObject
                 guard let planDict = dict["plan"] as? [[String: Any]] else { return }
                 let json = try JSONSerialization.data(withJSONObject: planDict)
                 let decoder = JSONDecoder()
-                let decodedServerPlans = try decoder.decode([ServerPlan].self, from: json) //change to Plan once back end is updated
+                let decodedServerPlans = try decoder.decode([Plan].self, from: json)
                 DispatchQueue.main.async()
                 {
-                    let decodedPlans = ServerPlan.convert(serverPlans: decodedServerPlans) //delete this line once back end is updated
+                    let decodedPlans = decodedServerPlans
                     success(decodedPlans)
                 }
             }
@@ -892,7 +912,7 @@ class Server: NSObject
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        let data = try! encoder.encode(ServerPlan.convert(plan: plan))
+        let data = try! encoder.encode(plan)
         
         let urlString = "\(API())\(ADD_NEW_SINGLE_PLAN_PATH)"
         
@@ -912,10 +932,10 @@ class Server: NSObject
             {
                 let json = try JSONSerialization.data(withJSONObject: planDict)
                 let decoder = JSONDecoder()
-                let decodedPlan = try decoder.decode(ServerPlan.self, from: json)
+                let decodedPlan = try decoder.decode(Plan.self, from: json)
                 DispatchQueue.main.async()
                 {
-                    success(ServerPlan.convert(serverPlan: decodedPlan))
+                    success(decodedPlan)
                 }
             }
             catch
@@ -1001,54 +1021,7 @@ class Server: NSObject
                 
                 DispatchQueue.main.async()
                 {
-                    success(ServerPlan.convert(serverPlans: multiplePlansResponse.plans))
-                }
-            }
-            catch
-            {
-                DispatchQueue.main.async()
-                {
-                    let error = ServerError(code: 400, description: NSLocalizedString("Unable to decode multiple plans response", comment: "Server error message"))
-                    failure(error)
-                }
-            }
-        },
-        onFailure:
-        { (error) in
-            DispatchQueue.main.async()
-            {
-                failure(error)
-            }
-        })
-    }
-    
-    func completePlan(planId: Int, toggleData: TogglePlanData, onSuccess success: @escaping (_ togglePlanData: TogglePlanData) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        let urlString = "\(API())\(TOGGLE_PLAN_PATH)"
-        let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        let data = try! encoder.encode(toggleData)
-        let Url = String(format: finalUrlString)
-        
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpBody = data
-        
-        serverPost(request: request, onSuccess:
-        { (object) in
-            do
-            {
-                let json = try JSONSerialization.data(withJSONObject: object)
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let togglePlanData = try decoder.decode(TogglePlanData.self, from: json)
-                
-                DispatchQueue.main.async()
-                {
-                    success(togglePlanData)
+                    success(multiplePlansResponse.plans)
                 }
             }
             catch
@@ -1353,7 +1326,11 @@ class Server: NSObject
     
     func GenerateRequest(urlString: String) -> URLRequest?
     {
-        guard let serviceUrl = URL(string: urlString) else { return nil }
+        guard let serviceUrl = URL(string: urlString) else
+        {
+            assertionFailure("Server-GenerateRequest: Can't parse serviceUrl")
+            return nil
+        }
         return URLRequest(url: serviceUrl)
     }
     
@@ -1362,7 +1339,11 @@ class Server: NSObject
         guard var components = URLComponents(string: urlString) else { return nil }
         components.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-        guard let url = components.url else { return nil }
+        guard let url = components.url else
+        {
+            assertionFailure("Server-GenerateRequest: Can't parse componentsUrl")
+            return nil
+        }
         return URLRequest(url: url)
     }
     
@@ -1562,7 +1543,11 @@ class Server: NSObject
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
 
             let Url = String(format: url)
-            guard let serviceUrl = URL(string: Url) else { return }
+            guard let serviceUrl = URL(string: Url) else
+            {
+                assertionFailure("Server-postToServer: Can't parse serviceUrl")
+                return
+            }
             var request = URLRequest(url: serviceUrl)
             request.httpBody = jsonData
             
@@ -1651,7 +1636,11 @@ class Server: NSObject
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(objectDict)
         let Url = String(format: url)
-        guard let serviceUrl = URL(string: Url) else { return }
+        guard let serviceUrl = URL(string: Url) else
+        {
+            assertionFailure("Server-getAllObjects: Can't parse serviceUrl")
+            return
+        }
         var request = URLRequest(url: serviceUrl)
         request.httpBody = data
         

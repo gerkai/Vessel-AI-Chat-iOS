@@ -9,8 +9,9 @@ import UIKit
 
 protocol TodayCheckMarkCardDelegate: AnyObject
 {
-    func onCardChecked(id: Int, type: CheckMarkCardType)
+    func onCardChecked(id: Int, checked: Bool, type: CheckMarkCardType)
     func canUncheckCard(type: CheckMarkCardType) -> Bool
+    func animationComplete()
     func onReminderTapped(id: Int, type: CheckMarkCardType)
 }
 
@@ -28,43 +29,17 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
     var id: Int?
     var type: CheckMarkCardType?
     weak var delegate: TodayCheckMarkCardDelegate?
-    var allowDidSet = false
-    var isUnchecking = false
+    
+    override func prepareForReuse()
+    {
+        isChecked = false
+    }
+    
     var isChecked: Bool = false
     {
         didSet
         {
-            if allowDidSet
-            {
-                if !isChecked
-                {
-                    self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                }
-                else
-                {
-                    //animate checkmark
-                    UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
-                    {
-                        self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                    }
-                completion:
-                    { completed in
-                        if self.isChecked == true
-                        {
-                            self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
-                        }
-                        else
-                        {
-                            self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
-                        }
-                        
-                        UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
-                        {
-                            self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                        }
-                    }
-                }
-            }
+            checkImage.image = isChecked ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
         }
     }
 
@@ -88,7 +63,7 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
         {
             descriptionLabel?.text = description
         }
-        checkImage.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
+        //checkImage.image = completed ? UIImage(named: "Checkbox_beige_selected") : UIImage(named: "Checkbox_beige_unselected")
         
         checkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCheckMarkSelected)))
         
@@ -99,9 +74,49 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
         notificationButtonLabel?.text = remindersButtonTitle?.convertTo12HourFormat() ?? remindersButtonTitle
         
         isChecked = completed
-        allowDidSet = true
-        guard let url = URL(string: backgroundImage) else { return }
+        guard let url = URL(string: backgroundImage) else
+        {
+            assertionFailure("TodayCheckMarkCardTableViewCell-setup: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
+    }
+    
+    func animateChecked()
+    {
+        if !isChecked
+        {
+            self.checkImage.image = UIImage(named: "Checkbox_beige_unselected")
+            DispatchQueue.main.async
+            {
+                self.delegate?.animationComplete()
+            }
+        }
+        else
+        {
+            //animate checkmark
+            UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
+            {
+                self.checkImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+        completion:
+            { completed in
+                self.checkImage.image = UIImage(named: "Checkbox_beige_selected")
+                
+                UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState)
+                {
+                    self.checkImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            completion:
+                {
+                    _ in
+                    DispatchQueue.main.async
+                    {
+                        self.delegate?.animationComplete()
+                    }
+                }
+            }
+        }
     }
     
     @objc
@@ -116,14 +131,15 @@ class TodayCheckMarkCardTableViewCell: UITableViewCell
             {
                 isChecked = true
             }
-            delegate.onCardChecked(id: id, type: type)
+            animateChecked()
+            delegate.onCardChecked(id: id, checked: isChecked, type: type)
         }
         else
         {
             if delegate.canUncheckCard(type: type)
             {
                 isChecked = false
-                delegate.onCardChecked(id: id, type: type)
+                delegate.onCardChecked(id: id, checked: isChecked, type: type)
             }
         }
     }

@@ -47,7 +47,8 @@ class MixpanelAnalytics: Analytics
     {
         guard let properties = event.properties as? [String: MixpanelType] else
         {
-            fatalError("Not valid types found in properties for event: \(event)")
+            assertionFailure("MixpanelAnalytics-log: Not valid types found in properties for event: \(event)")
+            return
         }
         Mixpanel.mainInstance().track(event: event.name, properties: properties)
     }

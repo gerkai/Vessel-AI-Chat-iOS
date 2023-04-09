@@ -55,8 +55,11 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         if viewModel.newSelectedFoods.count > 0 || (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
         {
             guard let reagentID = Reagent.ID(rawValue: reagentId ?? -1),
-                  let reagentName = Reagents[reagentID]?.name else { return }
-            
+                  let reagentName = Reagents[reagentID]?.name else
+            {
+                assertionFailure("ReagentFoodViewController-updateSubtitle: Can't get reagent with id: \(reagentId ?? -1)")
+                return
+            }
             subtitleLabel.text = String(format: NSLocalizedString("Looks like you already added all the foods for %@", comment: ""), reagentName)
         }
         else
@@ -106,7 +109,11 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else { return 0 }
+        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else
+        {
+            assertionFailure("ReagentFoodViewController-tableViewHeightForRowAt: Can't get suggestedFood at indexPath: \(indexPath)")
+            return 0
+        }
         if viewModel.selectedFoodIds.contains(food.id)
         {
             return 0.0
@@ -121,7 +128,11 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReagentFoodCell", for: indexPath) as? ReagentFoodTableViewCell,
               let food = viewModel.suggestedFoods[safe: indexPath.row],
-              let imageURL = URL(string: food.imageUrl) else { return UITableViewCell() }
+              let imageURL = URL(string: food.imageUrl) else
+        {
+            assertionFailure("ReagentFoodViewController-tableViewCellForRowAt: Can't get cell, suggestedFood or imageURL at indexPath: \(indexPath)")
+            return UITableViewCell()
+        }
         
         var reagentQuantity = ""
         if food.quantity > 0
@@ -143,7 +154,11 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else { return }
+        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else
+        {
+            assertionFailure("ReagentFoodViewController-tableViewDidSelectRowAt: Can't get suggestedFood at indexPath: \(indexPath)")
+            return
+        }
         if let index = viewModel.newSelectedFoods.firstIndex(of: food)
         {
             viewModel.newSelectedFoods.remove(at: index)

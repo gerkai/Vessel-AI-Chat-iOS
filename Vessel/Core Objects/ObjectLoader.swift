@@ -25,12 +25,10 @@ class ObjectLoader: NSObject
             }
             LessonsManager.shared.buildLessonPlan(onDone:
             {
-                self.loadLifestyleRecommendations
-                {
-                    PlansManager.shared.loadPlans()
-                    RemindersManager.shared.setupRemindersIfNeeded()
-                    done()
-                }
+                self.loadLifestyleRecommendations()
+                PlansManager.shared.loadPlans()
+                RemindersManager.shared.setupRemindersIfNeeded()
+                done()
             })
         },
         onFailure:
@@ -39,53 +37,11 @@ class ObjectLoader: NSObject
         })
     }
     
-    func loadLifestyleRecommendations(onDone done: @escaping () -> Void)
+    func loadLifestyleRecommendations()
     {
-        //load lifestyle recommendation template objects
-        //this is how we should be doing it
-        /*ObjectStore.shared.get(type: LifestyleRecommendation.self, id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) { object in
-            print("Got Object: \(object)")
-        } onFailure: {
-            print("FAILED!")
-        }*/
-        
-        print("Requesting Lifestyle recommendations")
-        //this is using V2 api and not using ObjectStore. THIS IS TEMPORARY CODE
-        Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-        { result in
-            print("Got Get Supplements Recommendation")
-            //object on back end doesn't have a subtext field. Our local object does so we add the desired subtext here.
-            //Tech Debt: Add subtext field to back end lifestyle recommendation object
-            result.subtext = NSLocalizedString("Take a simple 3 minute quiz", comment: "")
-            ObjectStore.shared.serverSave(result)
-            
-            Server.shared.getLifestyleRecommendation(id: Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-            { result in
-                print("Got AM Fuel Recommendation")
-                ObjectStore.shared.serverSave(result)
-                
-                Server.shared.getLifestyleRecommendation(id: Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-                { result in
-                    print("Got PM Fuel Recommendation")
-                    ObjectStore.shared.serverSave(result)
-                    done()
-                },
-                onFailure:
-                { error in
-                    print("ERROR: \(String(describing: error))")
-                    done()
-                })
-            },
-            onFailure:
-            { error in
-                print("ERROR: \(String(describing: error))")
-                done()
-            })
-        },
-        onFailure:
-        { error in
-            print("ERROR: \(String(describing: error))")
-            done()
-        })
+        ObjectStore.shared.serverSave(LifestyleRecommendation.takeATest, notifyNewDataArrived: false)
+        ObjectStore.shared.serverSave(LifestyleRecommendation.supplements, notifyNewDataArrived: false)
+        ObjectStore.shared.serverSave(LifestyleRecommendation.fuelAM, notifyNewDataArrived: false)
+        ObjectStore.shared.serverSave(LifestyleRecommendation.fuelPM, notifyNewDataArrived: false)
     }
 }

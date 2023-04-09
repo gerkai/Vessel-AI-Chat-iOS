@@ -89,7 +89,12 @@ private extension HydroQuizViewController
             view.image = UIImage(named: "Checkbox_beige_unselected")
         }
         guard let selectedOption = viewModel.selectedWaterOption,
-              let checkmarkView = checkmarkViews[safe: selectedOption] else { return }
+              let checkmarkView = checkmarkViews[safe: selectedOption] else
+        {
+            assertionFailure("HydroQuizViewController-reloadUI: Can't get selected option checkmark view")
+            return
+        }
+        
         checkmarkView.image = UIImage(named: "Checkbox_beige_selected")
     }
     
@@ -97,7 +102,11 @@ private extension HydroQuizViewController
     func onOptionTapped(gestureRecognizer: UIGestureRecognizer)
     {
         guard let view = gestureRecognizer.view,
-              let index = optionViews.firstIndex(of: view) else { return }
+              let index = optionViews.firstIndex(of: view) else
+        {
+            assertionFailure("HydroQuizViewController-onOptionTapped: Can't get option view")
+            return
+        }
         if viewModel.selectedWaterOption == index
         {
             viewModel.selectedWaterOption = nil

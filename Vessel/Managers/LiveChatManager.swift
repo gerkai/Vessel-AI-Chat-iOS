@@ -14,7 +14,11 @@ class LiveChatManager: NSObject
     
     func navigateToLiveChat(in viewController: UIViewController)
     {
-        guard let contact = Contact.main() else { return }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("LiveChatManager-navigateToLiveChat: mainContact not available")
+            return
+        }
         LiveChat.name = contact.fullName
         LiveChat.email = contact.email
         LiveChat.groupId = "2" //nutritionist coach group == 2  support == 1

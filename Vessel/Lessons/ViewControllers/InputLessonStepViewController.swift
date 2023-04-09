@@ -110,7 +110,11 @@ private extension InputLessonStepViewController
     func setupImageView()
     {
         guard let imageUrl = viewModel.lesson.imageUrl,
-              let url = URL(string: imageUrl) else { return }
+              let url = URL(string: imageUrl) else
+        {
+            assertionFailure("InputLessonStepViewController-setupImageView: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
     }
     

@@ -60,6 +60,7 @@ class Contact: CoreObjectProtocol
     @NullCodable var first_name: String?
     @NullCodable var last_name: String?
     @NullCodable var gender: String?
+    var createdDate: String?
     var height: Double?
     var weight: Double?
     var birth_date: String?     //in yyyy-mm-dd format
@@ -90,13 +91,13 @@ class Contact: CoreObjectProtocol
         let storedFoods = Storage.retrieve(as: Food.self)
         
         let foodIds: [Int]
-        let foodPlans = PlansManager.shared.getFoodPlans()
+        let foodPlans = PlansManager.shared.getFoodPlans(shouldFilterForToday: true)
         foodIds = foodPlans.map({ $0.typeId })
         
         let foods: [Food] = foodIds.compactMap({ foodId in
             return storedFoods.first(where: { $0.id == foodId })
         })
-        return foods
+        return foods.sorted(by: { $0.id < $1.id })
     }()
     
     @Resolved private var analytics: Analytics
@@ -129,6 +130,7 @@ class Contact: CoreObjectProtocol
          firstName: String = "",
          lastName: String = "",
          gender: String = "",
+         createdDate: String? = nil,
          height: Double? = nil,
          weight: Double? = nil,
          birthDate: String? = nil,
@@ -149,6 +151,7 @@ class Contact: CoreObjectProtocol
         self.first_name = firstName
         self.last_name = lastName
         self.gender = gender
+        self.createdDate = createdDate
         self.height = height
         self.weight = weight
         self.birth_date = birthDate
@@ -171,6 +174,7 @@ class Contact: CoreObjectProtocol
         self.first_name = contact.first_name
         self.last_name = contact.last_name
         self.gender = contact.gender
+        self.createdDate = contact.createdDate
         self.height = contact.height
         self.weight = contact.weight
         self.birth_date = contact.birth_date
@@ -239,6 +243,7 @@ class Contact: CoreObjectProtocol
         case first_name
         case last_name
         case gender
+        case createdDate = "created_date"
         case height
         case weight
         case birth_date
@@ -280,20 +285,21 @@ class Contact: CoreObjectProtocol
     }
     
     // MARK: - Suggested Foods
-    func refreshSuggestedFoods()
+    func refreshSuggestedFoods(selectedDate: String, isToday: Bool)
     {
         suggestedFoods =
         {
             let storedFoods = Storage.retrieve(as: Food.self)
             let foodIds: [Int]
             
-            let foodPlans = PlansManager.shared.getFoodPlans()
+            let foodPlans = PlansManager.shared.getFoodPlans(shouldFilterForToday: isToday, shouldFilterForSelectedDay: selectedDate)
+                
             foodIds = foodPlans.map({ $0.typeId })
             
             let foods: [Food] = foodIds.compactMap({ foodId in
                 return storedFoods.first(where: { $0.id == foodId })
             })
-            return foods
+            return foods.sorted(by: { $0.id < $1.id })
         }()
     }
     
@@ -301,7 +307,11 @@ class Contact: CoreObjectProtocol
     func getDietsNames() -> [String]
     {
         return diet_ids.compactMap({ id in
-            guard let dietID = Diet.ID(rawValue: id) else { return nil }
+            guard let dietID = Diet.ID(rawValue: id) else
+            {
+                assertionFailure("Contact-getDietsNames: Diet not available for id: \(id)")
+                return nil
+            }
             return Diets[dietID]?.name.capitalized
         })
     }
@@ -309,7 +319,11 @@ class Contact: CoreObjectProtocol
     func getAllergiesListedString() -> String
     {
         let allergiesString: [String] = allergy_ids.compactMap({ id in
-            guard let allergyID = Allergy.ID(rawValue: id) else { return nil }
+            guard let allergyID = Allergy.ID(rawValue: id) else
+            {
+                assertionFailure("Contact-getAllergiesListedString: Allergy not available for id: \(id)")
+                return nil
+            }
             return Allergies[allergyID]?.name.capitalized
         })
         return allergiesString.joined(separator: ", ")
@@ -318,7 +332,11 @@ class Contact: CoreObjectProtocol
     func getGoals() -> [String]
     {
         return goal_ids.compactMap({ id in
-            guard let goalID = Goal.ID(rawValue: id) else { return nil }
+            guard let goalID = Goal.ID(rawValue: id) else
+            {
+                assertionFailure("Contact-getGoals: Goal not available for id: \(id)")
+                return nil
+            }
             return Goals[goalID]?.name.capitalized
         })
     }
@@ -326,7 +344,11 @@ class Contact: CoreObjectProtocol
     // MARK: - Analytics
     func identifyAnalytics()
     {
-        guard let email = email else { return }
+        guard let email = email else
+        {
+            assertionFailure("Contact-identifyAnalytics: Email doesn't exists")
+            return
+        }
         analytics.identify(id: "\(id)")
         analytics.setUserProperties(properties: [
             "$name": fullName,

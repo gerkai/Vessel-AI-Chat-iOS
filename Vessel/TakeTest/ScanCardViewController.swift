@@ -54,7 +54,11 @@ class ScanCardViewController: TakeTestMVVMViewController, AVCaptureMetadataOutpu
 
         if let videoCaptureDevice = avCaptureDevice
         {
-            guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else { return }
+            guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else
+            {
+                assertionFailure("ScanCardViewController-viewDidLoad: Couldn't find video capture device input")
+                return
+            }
             
             do
             {

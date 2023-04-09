@@ -11,15 +11,15 @@ enum PlanType: String, Codable
 {
     case food
     case activity
-    case lifestyleRecommendation
+    case reagentLifestyleRecommendation
     case suplement
 }
 
 struct PlanResponse: Decodable
 {
-    let plans: [ServerPlan]
+    let plans: [Plan]
     
-    internal init(plans: [ServerPlan])
+    internal init(plans: [Plan])
     {
         self.plans = plans
     }
@@ -29,12 +29,22 @@ struct CompletionInfo: Codable, Equatable, Hashable
 {
     let date: String
     var units: Int
+    var dailyWaterIntake: Int?
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case date
+        case units
+        case dailyWaterIntake = "daily_water_intake"
+    }
 }
 
 struct Plan: CoreObjectProtocol, Codable, Equatable
 {
     var id: Int
     var last_updated: Int
+    var createdDate: String!
+    var removedDate: String?
     let storage: StorageType = .disk
     var type: PlanType = .food
     var typeId: Int
@@ -50,6 +60,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     
     init(id: Int = 0,
          last_updated: Int = 0,
+         createdDate: String? = nil,
+         removedDate: String? = nil,
          type: PlanType = .food,
          typeId: Int = 0,
          completed: [String] = [],
@@ -60,6 +72,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     {
         self.id = id
         self.last_updated = last_updated
+        self.createdDate = createdDate
+        self.removedDate = removedDate
         self.type = type
         self.typeId = typeId
         self.completed = completed
@@ -72,6 +86,8 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
     {
         case id
         case last_updated
+        case createdDate = "created_date"
+        case removedDate = "removed_date"
         case type
         case typeId = "type_id"
         case completed
@@ -134,7 +150,7 @@ struct MultiplePlans: Codable
         }
         for reagentLifestyleRecommendationsId in reagentLifestyleRecommendationsIds ?? []
         {
-            plans.append(Plan(type: .lifestyleRecommendation, typeId: reagentLifestyleRecommendationsId))
+            plans.append(Plan(type: .reagentLifestyleRecommendation, typeId: reagentLifestyleRecommendationsId))
         }
         return plans
     }

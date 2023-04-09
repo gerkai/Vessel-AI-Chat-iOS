@@ -43,7 +43,7 @@ class RemindersViewModel
     
     var type: PlanType?
     {
-        return food != nil ? .food : activity != nil ? .activity : lifestyleRecommendation != nil ? .lifestyleRecommendation : nil
+        return food != nil ? .food : activity != nil ? .activity : lifestyleRecommendation != nil ? .reagentLifestyleRecommendation : nil
     }
     
     init(planId: Int, reminders: [Reminder], food: Food? = nil, activity: Tip? = nil, lifestyleRecommendation: LifestyleRecommendation? = nil)

@@ -33,20 +33,26 @@ class PlansManager
             ObjectStore.shared.get(type: Tip.self, ids: uniqueActivityIds)
             { activities in
                 self.activities = activities
-                self.addFuelActivities()
+                self.addExtraActivities()
                 done()
             }
         onFailure:
             {
-                self.addFuelActivities()
+                self.addExtraActivities()
                 done()
             }
         }
         else
         {
-            addFuelActivities()
+            addExtraActivities()
             done()
         }
+    }
+    
+    func addExtraActivities()
+    {
+        addFuelActivities()
+        addTakeATestActivityIfNeeded()
     }
     
     func addFuelActivities()
@@ -98,7 +104,7 @@ class PlansManager
                         }
                         
                         //make it show up every day
-                        let plan = Plan(id: -getAMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                        let plan = Plan(id: -getAMFuelRecommendation.id, type: .reagentLifestyleRecommendation, typeId: -getAMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
                         if !plans.contains(where: { $0.id == -getAMFuelRecommendation.id })
                         {
                             plans.append(plan)
@@ -129,7 +135,7 @@ class PlansManager
                             }
                             
                             //make it show up every day
-                            let plan = Plan(id: -getPMFuelRecommendation.id, type: .lifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                            let plan = Plan(id: -getPMFuelRecommendation.id, type: .reagentLifestyleRecommendation, typeId: -getPMFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
                             if !plans.contains(where: { $0.id == -getPMFuelRecommendation.id })
                             {
                                 plans.append(plan)
@@ -138,12 +144,12 @@ class PlansManager
                     }
                     else
                     {
-                        print("Unable to get PM card from Object Store")
+                        assertionFailure("Unable to get PM card from Object Store")
                     }
                 }
                 else
                 {
-                    print("Unable to get AM card from Object Store")
+                    assertionFailure("Unable to get AM card from Object Store")
                 }
             }
             else
@@ -157,9 +163,9 @@ class PlansManager
                     {
                         activities.append(getFuelCard)
                     }
-                    
+
                     //make it show up every day
-                    let plan = Plan(id: getFuelRecommendation.id, type: .lifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                    let plan = Plan(id: getFuelRecommendation.id, type: .reagentLifestyleRecommendation, typeId: getFuelRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
                     if !plans.contains(where: { $0.id == getFuelRecommendation.id })
                     {
                         plans.append(plan)
@@ -167,21 +173,39 @@ class PlansManager
                 }
                 else
                 {
-                    //This is a workaround for a bug with the quickGet function where randomly won't return stored objects (maybe those got deteled?)
-                    // TODO: Fix
-                    //CW: I think this section won't ever get called now as I fixed the race condition that was causing the objects to sometimes not be in the object store.
-                    print("FUEL RECOMMENDATION DOESN'T EXISTS")
-                    Server.shared.getLifestyleRecommendation(id: Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID, onSuccess:
-                                                                { result in
-                        ObjectStore.shared.serverSave(result)
-                        self.addFuelActivities()
-                        Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
-                        NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-                    },
-                    onFailure:
-                    { error in
-                        print("ERROR ADDING FUEL ACTIVITIES: \(String(describing: error))")
-                    })
+                    assertionFailure("Unable to get supplements card from Object Store")
+                }
+            }
+        }
+    }
+    
+    func addTakeATestActivityIfNeeded()
+    {
+        let todayDate = Date.serverDateFormatter.string(from: Date())
+        let results = Storage.retrieve(as: Result.self).sorted(by: { $0.last_updated < $1.last_updated })
+        let lastResult = results.last
+        
+        let lastResultInsertDate = lastResult?.last_updated == nil ? nil : Date.from(vesselTime: lastResult!.last_updated)
+        if lastResultInsertDate == nil || (results.count <= Constants.WEEKS_UNTIL_START_REMINDING_TAKE_A_TEST_MONTHLY && lastResultInsertDate!.isMoreThan7DaysAgo()) || lastResultInsertDate!.isMoreThan1MonthAgo() || Date.isSameDay(date1: lastResultInsertDate!, date2: Date())
+        {
+            if let takeATestRecommendation = ObjectStore.shared.quickGet(type: LifestyleRecommendation.self, id: Constants.TAKE_A_TEST_LIFESTYLE_RECOMMENDATION_ID)
+            {
+                let takeATestCard = Tip(id: -takeATestRecommendation.id, last_updated: 0, title: takeATestRecommendation.title, description: takeATestRecommendation.description, imageUrl: takeATestRecommendation.imageURL ?? "", frequency: takeATestRecommendation.subtext ?? "", isLifestyleRecommendation: true)
+                if !activities.contains(where: { $0.id == -takeATestRecommendation.id })
+                {
+                    activities.append(takeATestCard)
+                }
+                
+                //make it show up every day
+                var plan = Plan(id: -takeATestRecommendation.id, type: .reagentLifestyleRecommendation, typeId: -takeATestRecommendation.id, dayOfWeek: [0, 1, 2, 3, 4, 5, 6])
+                guard let lastResultInsertDate = lastResultInsertDate else { return }
+                if Date.isSameDay(date1: lastResultInsertDate, date2: Date())
+                {
+                    plan.completed = [todayDate]
+                }
+                if !plans.contains(where: { $0.id == -takeATestRecommendation.id })
+                {
+                    plans.append(plan)
                 }
             }
         }
@@ -191,6 +215,8 @@ class PlansManager
     {
         for plan in plansToAdd
         {
+            var plan = plan
+            plan.createdDate = Date.serverDateFormatter.string(from: Date())
             ObjectStore.shared.serverSave(plan, notifyNewDataArrived: plan == plansToAdd.last)
         }
         self.plans = Storage.retrieve(as: Plan.self)
@@ -202,36 +228,37 @@ class PlansManager
                 NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
             }
         }
-        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
+        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil)
     }
     
     func removePlans(plansToRemove: [Plan])
     {
         for plan in plansToRemove
         {
-            ObjectStore.shared.removeFromCache(plan)
-            Storage.remove(plan.id, objectType: Plan.self)
-            plans.removeAll{$0.id == plan.id}
+            var plan = plan
+            plan.removedDate = Date.serverDateFormatter.string(from: Date())
+            ObjectStore.shared.clientSave(plan)
         }
         self.plans = Storage.retrieve(as: Plan.self)
-        if plansToRemove.contains(where: { $0.type == .activity })
+        loadActivitiesForPlans
         {
-            loadActivitiesForPlans
-            {
-                Log_Add("PlansManager: removePlans() - post .newDataArrived: Plan")
-                NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
-            }
+            Log_Add("PlansManager: removePlans() - post .newDataArrived: Plan")
+            NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }
         if plansToRemove.contains(where: {  $0.type == .food })
         {
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Food.self)])
         }
-        NotificationCenter.default.post(name: .newPlanAdded, object: nil)
+        NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil)
     }
     
     func setPlanCompleted(planId: Int, date: String, isComplete: Bool)
     {
-        guard let index = plans.firstIndex(where: { $0.id == planId }) else { return }
+        guard let index = plans.firstIndex(where: { $0.id == planId }) else
+        {
+            assertionFailure("PlansManager-setPlanCompleted: Couldn't find plan index")
+            return
+        }
         if isComplete
         {
             if plans[index].completed.count == 0
@@ -247,25 +274,61 @@ class PlansManager
         {
             plans[index].completed.removeAll(where: { $0 == date })
         }
-        ObjectStore.shared.serverSave(plans[index])
+        ObjectStore.shared.clientSave(plans[index])
     }
     
-    //returns array of only food plans
-    func getFoodPlans() -> [Plan]
+    //returns array of only food plans, if variable shouldFilterForToday is true then it will return all foods without removedDate, or if shouldFilterForPastDay variable has a value, it will filter for foods existing on that date with server format (yyyy-MM-dd)
+    func getFoodPlans(shouldFilterForToday: Bool = false, shouldFilterForSelectedDay selectedDate: String? = nil) -> [Plan]
     {
-        return plans.filter({ $0.type == .food })
+        let todayDate = Date.serverDateFormatter.string(from: Date())
+
+        if shouldFilterForToday
+        {
+            return plans.filter({ $0.type == .food && $0.removedDate == nil })
+        }
+        else if let selectedDate = selectedDate
+        {
+            return plans.filter({ $0.type == .food && (selectedDate >= $0.createdDate && selectedDate < ($0.removedDate ?? todayDate)) })
+        }
+        else
+        {
+            return plans.filter({ $0.type == .food })
+        }
     }
     
-    //returns array of only activities
-    func getActivityPlans() -> [Plan]
+    func getFirstFoodPlan(withId foodId: Int, shouldFilterForToday: Bool, shouldFilterForSelectedDay selectedDate: String? = nil) -> Plan?
     {
-        return plans.filter({ $0.type == .activity })
+        getFoodPlans(shouldFilterForToday: shouldFilterForToday, shouldFilterForSelectedDay: selectedDate).first(where: { $0.typeId == foodId })
+    }
+    
+    //returns array of only activities, if variable shouldFilterForToday is true then it will return all activities without removedDate, or if shouldFilterForPastDay variable has a value, it will filter for activities existing on that date with server format (yyyy-MM-dd)
+    func getActivityPlans(shouldFilterForToday: Bool = false, shouldFilterForSelectedDate selectedDate: String? = nil) -> [Plan]
+    {
+        let todayDate = Date.serverDateFormatter.string(from: Date())
+
+        if shouldFilterForToday
+        {
+            return plans.filter({ $0.type == .activity && $0.removedDate == nil })
+        }
+        else if let selectedDate = selectedDate
+        {
+            return plans.filter({ $0.type == .activity && (selectedDate >= $0.createdDate && selectedDate < ($0.removedDate ?? todayDate)) })
+        }
+        else
+        {
+            return plans.filter({ $0.type == .activity })
+        }
+    }
+    
+    func getFirstActivityPlan(withId foodId: Int, shouldFilterForToday: Bool, shouldFilterForSelectedDay selectedDate: String? = nil) -> Plan?
+    {
+        getFoodPlans(shouldFilterForToday: shouldFilterForToday, shouldFilterForSelectedDay: selectedDate).first(where: { $0.typeId == foodId })
     }
     
     //returns array of only reagentLifestyleRecommendations
     func getLifestyleRecommendationPlans() -> [Plan]
     {
-        return plans.filter({ $0.type == .lifestyleRecommendation })
+        return plans.filter({ $0.type == .reagentLifestyleRecommendation })
     }
 }
 
@@ -288,9 +351,19 @@ extension PlansManager
         return progress
     }
     
-    // Given a certain date in server format calculate the progress for this date and returns it in a value from 0 to 1
+    // Given a certain date in server format (yyyy-MM-dd) calculate the progress for this date and returns it in a value from 0 to 1
     func calculateProgressFor(date: String) -> Double
     {
+        guard let contact = Contact.main(),
+              let createdDate = contact.createdDate, createdDate <= date else
+        {
+            assertionFailure("PlansManager-calculateProgressFor: mainContact not available or mainContact's createdDate not set")
+
+            return 0
+        }
+        
+        let todayDate = Date.serverDateFormatter.string(from: Date())
+        
         // Feature flags
         let showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
         let showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
@@ -301,7 +374,9 @@ extension PlansManager
         var parts: Double = 0.0
         
         // Activities
-        let plans = getActivityPlans() + getLifestyleRecommendationPlans().filter({ $0.typeId != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.typeId != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID })
+        let activities: [Plan] = getActivityPlans(shouldFilterForToday: date == todayDate, shouldFilterForSelectedDate: date)
+        
+        let plans = activities + getLifestyleRecommendationPlans().filter({ $0.typeId != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.typeId != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID && $0.typeId != -Constants.TAKE_A_TEST_LIFESTYLE_RECOMMENDATION_ID })
         if showActivites
         {
             if !plans.isEmpty
@@ -312,7 +387,8 @@ extension PlansManager
         }
         
         // Foods
-        let foods = getFoodPlans()
+        let foods: [Plan] = getFoodPlans(shouldFilterForToday: date == todayDate, shouldFilterForSelectedDay: date)
+
         if showFood && !foods.isEmpty && !Contact.main()!.suggestedFoods.isEmpty
         {
             parts += 1
@@ -320,7 +396,7 @@ extension PlansManager
         }
         
         // Insights
-        if showInsights
+        if showInsights && LessonsManager.shared.lessonsAvailable(forDate: date)
         {
             parts += 1
             let completedLessonsCount = LessonsManager.shared.getLessonsCompletedOn(dateString: date).count
@@ -328,7 +404,7 @@ extension PlansManager
         }
         
         // Water
-        if let contact = Contact.main(), let waterActivity = getWaterPlan(), let dailyWaterIntake = contact.dailyWaterIntake, showWater
+        if let waterActivity = getWaterPlan(), let dailyWaterIntake = WaterManager.shared.getDailyWaterIntake(date: date), showWater
         {
             parts += 1
             let amount = waterActivity.completionInfo?.first(where: { $0.date == date })?.units
@@ -347,25 +423,53 @@ extension PlansManager
     
     func calculateWeekStreak() -> Int
     {
-        let progress = getLastWeekPlansProgress()
-        var maxStreak = 0
-        var currentStreak = 0
-        for day in progress.keys.sorted(by: { $0 < $1 })
+        // Get unique completion dates from plans and lessons
+        let completedPlanDates = Array<String>(plans.map({ $0.completed }).joined())
+        let completedLessonsDates = LessonsManager.shared.completedLessonsDates()
+        var completedDates = [String]()
+        completedDates.append(contentsOf: completedPlanDates)
+        completedDates.append(contentsOf: completedLessonsDates)
+        let uniqueDates = Array(Set(completedDates)).sorted(by: { $0 < $1 })
+
+        // Convert dates strings to Date array and sort them
+        var dateArray: [Date] = []
+        for dateString in uniqueDates
         {
-            if progress[day] == 1.0
+            if let date = Date.serverDateFormatter.date(from: dateString)
             {
-                currentStreak += 1
+                dateArray.append(date)
+            }
+        }
+        dateArray.sort()
+        
+        // Calculate maxConsecutiveWeeks
+        var maxConsecutiveWeeks = 0
+        var currentConsecutiveWeeks = 0
+        var previousWeek = -1
+        for (index, date) in dateArray.enumerated()
+        {
+            let progress = calculateProgressFor(date: uniqueDates[index])
+            let weekOfYear = Calendar.current.component(.weekOfYear, from: date)
+            
+            if previousWeek == -1 && progress == 1.0
+            {
+                currentConsecutiveWeeks = 1
+                previousWeek = weekOfYear
+            }
+            else if previousWeek + 1 == weekOfYear && progress == 1.0
+            {
+                currentConsecutiveWeeks += 1
+                previousWeek = weekOfYear
             }
             else
             {
-                currentStreak = 0
-            }
-            if currentStreak > maxStreak
-            {
-                maxStreak = currentStreak
+                maxConsecutiveWeeks = max(maxConsecutiveWeeks, currentConsecutiveWeeks)
+                currentConsecutiveWeeks = 1
+                previousWeek = weekOfYear
             }
         }
-        return maxStreak
+        maxConsecutiveWeeks = max(maxConsecutiveWeeks, currentConsecutiveWeeks)
+        return maxConsecutiveWeeks
     }
     
     func allCompletedDaysCount() -> Int
@@ -399,18 +503,22 @@ extension PlansManager
     
     func setValueToWaterPlan(value: Int, date: String)
     {
-        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .lifestyleRecommendation }) else { return }
+        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .reagentLifestyleRecommendation }) else
+        {
+            assertionFailure("PlansManager-setValueToWaterPlan: Couldn't find water plan index")
+            return
+        }
         if let completionInfoIndex = plans[waterPlanIndex].completionInfo?.firstIndex(where: { $0.date == date })
         {
             plans[waterPlanIndex].completionInfo![completionInfoIndex].units = value
         }
         else if plans[waterPlanIndex].completionInfo != nil
         {
-            plans[waterPlanIndex].completionInfo!.append(CompletionInfo(date: date, units: value))
+            plans[waterPlanIndex].completionInfo!.append(CompletionInfo(date: date, units: value, dailyWaterIntake: Contact.main()?.dailyWaterIntake))
         }
         else
         {
-            plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value)]
+            plans[waterPlanIndex].completionInfo = [CompletionInfo(date: date, units: value, dailyWaterIntake: Contact.main()?.dailyWaterIntake)]
         }
         
         ObjectStore.shared.clientSave(plans[waterPlanIndex])
@@ -419,8 +527,10 @@ extension PlansManager
     
     func resetDrinkedWaterGlasses(date: String)
     {
-        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .lifestyleRecommendation }),
-              plans[waterPlanIndex].completionInfo?.first(where: { $0.date == date }) == nil else { return }
-        plans[waterPlanIndex].completionInfo?.append(CompletionInfo(date: date, units: 0))
+        guard let waterPlanIndex = plans.firstIndex(where: { $0.typeId == Constants.WATER_LIFESTYLE_RECOMMENDATION_ID && $0.type == .reagentLifestyleRecommendation }),
+              plans[waterPlanIndex].completionInfo?.first(where: { $0.date == date }) == nil,
+              let dailyWaterIntake = Contact.main()?.dailyWaterIntake else { return }
+        plans[waterPlanIndex].completionInfo?.append(CompletionInfo(date: date, units: 0, dailyWaterIntake: dailyWaterIntake))
+        ObjectStore.shared.clientSave(plans[waterPlanIndex])
     }
 }

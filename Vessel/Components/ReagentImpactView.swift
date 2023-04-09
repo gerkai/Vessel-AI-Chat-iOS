@@ -68,7 +68,11 @@ class ReagentImpactView: UIView
     @objc
     func viewTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        guard let reagentId = reagentId else { return }
+        guard let reagentId = reagentId else
+        {
+            assertionFailure("ReagentImpactView-viewTapped: ReagentId not available")
+            return
+        }
         delegate?.reagentImpactViewTappedReagent(reagentId: reagentId)
     }
     

@@ -113,7 +113,11 @@ class ResultsTabViewController: UIViewController, ChartViewDataSource, ChartView
             {
                 testsGoalsView.setupReagents(forResult: viewModel.selectedResult()!, selectedReagentID: .MAGNESIUM)
             }
-            guard let contact = Contact.main() else { return }
+            guard let contact = Contact.main() else
+            {
+                assertionFailure("ResultsTabViewController-viewWillAppear: mainContact not available")
+                return
+            }
             
             if contact.flags & Constants.SAW_WELLNESS_POPUP == 0
             {

@@ -83,6 +83,9 @@ class OnboardingCoordinator
             //if gender was chosen then we can assume all demographics were populated so skip onboarding
             //and go directly to MainTabBarController
             
+            //clear all plans from storage (done to fix issues with migration to new version)
+            Storage.clear(objectType: Plan.self)
+            
             //make sure our core objects are all up to date
             ObjectLoader.shared.loadCoreObjects(onDone:
             {

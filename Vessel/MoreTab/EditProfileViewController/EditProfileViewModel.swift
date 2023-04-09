@@ -88,7 +88,11 @@ class EditProfileViewModel
         set
         {
             guard let contact = contact,
-                  let newName = newValue else { return }
+                  let newName = newValue else
+            {
+                assertionFailure("EditProfileViewModel-name.setter: mainContact not available")
+                return
+            }
             guard newName.isValidName() else
             {
                 onError?(NSLocalizedString("Please enter a valid first name", comment: ""))
@@ -111,7 +115,11 @@ class EditProfileViewModel
         set
         {
             guard let contact = contact,
-                  let newLastName = newValue else { return }
+                  let newLastName = newValue else
+            {
+                assertionFailure("EditProfileViewModel-lastName.setter: mainContact not available")
+                return
+            }
             guard newLastName.isValidName() else
             {
                 onError?(NSLocalizedString("Please enter a valid last name", comment: ""))
@@ -133,7 +141,11 @@ class EditProfileViewModel
         set
         {
             guard let contact = contact,
-                  let newEmail = newValue else { return }
+                  let newEmail = newValue else
+            {
+                assertionFailure("EditProfileViewModel-email.setter: mainContact not available")
+                return
+            }
             contact.email = newEmail
             updateContact(contact: contact)
         }
@@ -154,7 +166,11 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newGender = newValue,
-                  let gender = Gender(rawValue: newGender) else { return }
+                  let gender = Gender(rawValue: newGender) else
+            {
+                assertionFailure("EditProfileViewModel-gender.setter: mainContact not available or gender not parseable")
+                return
+            }
             switch gender
             {
             case .male:
@@ -165,7 +181,11 @@ class EditProfileViewModel
                 contact.gender = Constants.GENDER_OTHER
             }
             updateContact(contact: contact)
-            guard let gender = contact.gender else { return }
+            guard let gender = contact.gender else
+            {
+                assertionFailure("EditProfileViewModel-gender.setter: mainContact's gender not available")
+                return
+            }
             analytics.setUserProperty(property: "Gender", value: gender)
         }
     }
@@ -189,21 +209,37 @@ class EditProfileViewModel
         set
         {
             guard let contact = contact,
-                  let newHeightString = newValue else { return }
+                  let newHeightString = newValue else
+            {
+                assertionFailure("EditProfileViewModel-height.setter: mainContact not available")
+                return
+            }
             if isMetric
             {
-                guard let newHeight = Double(newHeightString) else { return }
+                guard let newHeight = Double(newHeightString) else
+                {
+                    assertionFailure("EditProfileViewModel-height.setter: newHeightString not parseable to Double")
+                    return
+                }
                 contact.height = max(min(newHeight, Double(Constants.MAX_HEIGHT_METRIC)), Double(Constants.MIN_HEIGHT_METRIC))
             }
             else
             {
                 let feetInches = newHeightString.replacingOccurrences(of: "\"", with: "").split(separator: "\'")
-                guard let feet = Int(feetInches[safe: 0] ?? ""), let inches = Int(feetInches[safe: 1] ?? "") else { return }
+                guard let feet = Int(feetInches[safe: 0] ?? ""), let inches = Int(feetInches[safe: 1] ?? "") else
+                {
+                    assertionFailure("EditProfileViewModel-height.setter: feet and inches not parseable")
+                    return
+                }
                 let newHeight = convertFeetInchesToCentimeters(feet: feet, inches: inches)
                 contact.height = newHeight
             }
             updateContact(contact: contact)
-            guard let height = contact.height else { return }
+            guard let height = contact.height else
+            {
+                assertionFailure("EditProfileViewModel-height.setter: mainContact's height not available")
+                return
+            }
             analytics.setUserProperty(property: "Height", value: height)
         }
     }
@@ -227,7 +263,11 @@ class EditProfileViewModel
         {
             guard let contact = contact,
                   let newWeightString = newValue,
-                  let newWeight = Double(newWeightString) else { return }
+                  let newWeight = Double(newWeightString) else
+            {
+                assertionFailure("EditProfileViewModel-weight.setter: mainContact not available or newWeightString not parseable to Double")
+                return
+            }
             if isMetric
             {
                 contact.weight = max(min(convertKgToLbs(kg: newWeight), Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
@@ -237,7 +277,11 @@ class EditProfileViewModel
                 contact.weight = max(min(newWeight, Constants.MAX_WEIGHT_IMPERIAL), Constants.MIN_WEIGHT_IMPERIAL)
             }
             updateContact(contact: contact)
-            guard let weight = contact.weight else { return }
+            guard let weight = contact.weight else
+            {
+                assertionFailure("EditProfileViewModel-weight.setter: mainContact's weight not available")
+                return
+            }
             analytics.setUserProperty(property: "Weight", value: weight)
         }
     }
@@ -266,7 +310,11 @@ class EditProfileViewModel
         set
         {
             guard let contact = contact,
-                  let newBirthDate = newValue else { return }
+                  let newBirthDate = newValue else
+            {
+                assertionFailure("EditProfileViewModel-birthDate.setter: mainContact not available")
+                return
+            }
             contact.flags &= ~Constants.DECLINED_BIRTH_DATE
             let newBirthDateString = Date.serverDateFormatter.string(from: newBirthDate)
             contact.birth_date = newBirthDateString

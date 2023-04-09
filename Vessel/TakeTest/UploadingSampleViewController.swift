@@ -152,7 +152,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
         { [weak self](task, progress) in
             DispatchQueue.main.async(execute:
             {[weak self] in
-                guard let self = self else{ return }
+                guard let self = self else { return }
                 self.percentLabel.text = "\(Int(progress.fractionCompleted * 100)) %"
                 if Int(progress.fractionCompleted * 100) == 100
                 {
@@ -162,7 +162,7 @@ class UploadingSampleViewController: TakeTestMVVMViewController, AlreadyScannedS
             })
         })
         { [weak self] (task, error) in
-            guard let self = self else{ return }
+            guard let self = self else { return }
             if let error = error
             {
                 print("Upload Image error: \(error)")

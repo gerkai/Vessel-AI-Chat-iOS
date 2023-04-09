@@ -47,7 +47,11 @@ class FoodPreferencesViewModel: ItemPreferencesViewModel
             return
         }
         
-        guard let contact = Contact.main() else { return }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("FoodPreferencesViewModel-save: mainContact not available")
+            return
+        }
         contact.diet_ids = userDiets
         contact.allergy_ids = userAllergies
         

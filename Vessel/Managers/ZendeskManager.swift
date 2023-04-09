@@ -27,7 +27,11 @@ class ZendeskManager: NSObject
     {
         self.delegate = delegate
         guard let contact = Contact.main(),
-              let token = Server.shared.accessToken else { return }
+              let token = Server.shared.accessToken else
+        {
+            assertionFailure("ZendeskManager-navigateToChatWithSupport: mainContact or accessToken not available")
+            return
+        }
         
         self.viewController = viewController
         let identity = Identity.createJwt(token: token)

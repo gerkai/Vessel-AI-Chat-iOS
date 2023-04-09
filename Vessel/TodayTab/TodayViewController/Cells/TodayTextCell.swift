@@ -11,8 +11,9 @@ class TodayTextCell: UITableViewCell
 {
     @IBOutlet private weak var titleLabel: UILabel!
     
-    func setup(text: String)
+    func setup(text: String, alignment: NSTextAlignment)
     {
         titleLabel.text = text
+        titleLabel.textAlignment = alignment
     }
 }

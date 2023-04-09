@@ -101,7 +101,11 @@ private extension ReadOnlyLessonStepViewController
     func setupImageView()
     {
         guard let imageUrl = viewModel.lesson.imageUrl,
-              let url = URL(string: imageUrl) else { return }
+              let url = URL(string: imageUrl) else
+        {
+            assertionFailure("ReadOnlyLessonStepViewController-setupImageView: backgroundImage not a valid URL")
+            return
+        }
         backgroundImageView.kf.setImage(with: url)
     }
     
@@ -137,7 +141,7 @@ private extension ReadOnlyLessonStepViewController
                 {
                     let activityView = LessonStepActivityView(frame: .zero)
                     activityView.setup(activityId: activityId, title: activity.title, frequency: activity.frequency, backgroundImage: activity.imageUrl, delegate: self)
-                    if userPlans.contains(where: { $0.type == .activity && $0.typeId == activityId })
+                    if userPlans.contains(where: { $0.type == .activity && $0.typeId == activityId && $0.removedDate == nil })
                     {
                         activityView.setButtonText(addText: false)
                     }
@@ -214,7 +218,11 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
     
     func onActivityRemovedFromPlan(activityId: Int)
     {
-        guard let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activityId}) else { return }
+        guard let plan = PlansManager.shared.getActivityPlans().first(where: { $0.typeId == activityId && $0.removedDate == nil }) else
+        {
+            assertionFailure("ReadOnlyLessonStepViewController-onActivityRemovedFromPlan: Plan non existent")
+            return
+        }
         Server.shared.removeSinglePlan(planId: plan.id)
         { [weak self] in
             guard let self = self else { return }

@@ -63,7 +63,8 @@ class NibLoadingView: UIView
     {
         guard let nibName = type(of: self).description().components(separatedBy: ".").last else
         {
-            fatalError("Bad nib name")
+            assertionFailure("NibLoadingView-nibName: Bad nib name")
+            return UIView()
         }
         
         if let defaultBundleView = UINib(nibName: nibName, bundle: Bundle(for: type(of: self))).instantiate(withOwner: self, options: nil).first as? UIView
@@ -72,7 +73,8 @@ class NibLoadingView: UIView
         }
         else
         {
-            fatalError("Cannot load view from bundle")
+            assertionFailure("NibLoadingView-nibName: Cannot load view from bundle")
+            return UIView()
         }
     }
 }

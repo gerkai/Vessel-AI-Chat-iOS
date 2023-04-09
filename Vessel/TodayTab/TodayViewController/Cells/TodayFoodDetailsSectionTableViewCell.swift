@@ -14,11 +14,13 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     private var checked: [Bool] = []
     private weak var delegate: FoodCheckmarkViewDelegate?
     var selectedDate: String = ""
+    var isToday: Bool = false
     
-    func setup(foods: [Food], selectedDate: String, delegate: FoodCheckmarkViewDelegate)
+    func setup(foods: [Food], selectedDate: String, isToday: Bool, delegate: FoodCheckmarkViewDelegate)
     {
         self.foods = foods
         self.selectedDate = selectedDate
+        self.isToday = isToday
         stackView.removeAllArrangedSubviews()
         
         for (i, food) in foods.enumerated()
@@ -50,15 +52,25 @@ class TodayFoodDetailsSectionTableViewCell: UITableViewCell
     
     func updateCheckedFoods()
     {
-        guard let contact = Contact.main() else { return }
-        checked = PlansManager.shared.getFoodPlans().filter
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("TodayFoodDetailsSectionTableViewCell-updateCheckedFoods: mainContact not available")
+            return
+        }
+        let foodPlans = PlansManager.shared.getFoodPlans(shouldFilterForToday: isToday, shouldFilterForSelectedDay: selectedDate).sorted(by: { $0.typeId < $1.typeId }).filter
         { plan in
-            contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
-        }.map({ $0.completed.contains(selectedDate) })
+            return contact.suggestedFoods.contains(where: { $0.id == plan.typeId })
+        }
+        
+        checked = foodPlans.map({ $0.completed.contains(selectedDate) })
         
         for (i, view) in stackView.arrangedSubviews.enumerated()
         {
-            guard let stackView = view as? UIStackView else { return }
+            guard let stackView = view as? UIStackView else
+            {
+                assertionFailure("TodayFoodDetailsSectionTableViewCell-updateCheckedFoods: Couldn't parse view as stackView")
+                return
+            }
             if let foodView = stackView.arrangedSubviews[safe: 0] as? FoodCheckmarkView
             {
                 foodView.isChecked = checked[i * 2]

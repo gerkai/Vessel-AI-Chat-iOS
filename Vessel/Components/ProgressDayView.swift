@@ -64,7 +64,11 @@ class ProgressDayView: UIView
         self.dateString = dateString
         self.delegate = delegate
         self.progress = progress
-        guard let date = Date.serverDateFormatter.date(from: dateString) else { return }
+        guard let date = Date.serverDateFormatter.date(from: dateString) else
+        {
+            assertionFailure("ProgressDayView-setup: Can't parse date")
+            return
+        }
         backgroundView.layer.cornerRadius = backgroundBorderView.frame.width * 0.30
         backgroundView.layer.masksToBounds = true
 

@@ -160,6 +160,7 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
         { (_) -> Void in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else
             {
+                assertionFailure("ActivateCardViewController-showSettingsAlertPrompt: Can't parse settingsUrl")
                 return
             }
             if UIApplication.shared.canOpenURL(settingsUrl)
@@ -300,7 +301,11 @@ class ActivateCardViewController: TakeTestMVVMViewController, TakeTestViewModelD
     
     func insightsText() -> String
     {
-        guard let contact = Contact.main() else { return "" }
+        guard let contact = Contact.main() else
+        {
+            assertionFailure("ActivateCardViewController-insightsText: mainContact not available")
+            return ""
+        }
         
         var goalsString = ""
         contact.goal_ids.forEach { goalID in
@@ -440,7 +445,11 @@ extension ActivateCardViewController: CheckMarkCardViewDelegate
 {
     func onLessonSelected(id: Int)
     {
-        guard let lesson = LessonsManager.shared.todayLessons.first(where: { $0.id == id }) else { return }
+        guard let lesson = LessonsManager.shared.todayLessons.first(where: { $0.id == id }) else
+        {
+            assertionFailure("ActivateCardViewController-onLessonSelected: Couldn't find lesson with id :\(id) in today's lessons")
+            return
+        }
         let coordinator = LessonsCoordinator(lesson: lesson)
         
         if let index = lesson.indexOfFirstUnreadStep()
