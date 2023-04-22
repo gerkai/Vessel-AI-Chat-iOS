@@ -15,9 +15,7 @@ import SupportSDK
 import AVFoundation
 import FirebaseRemoteConfig
 import FirebaseDynamicLinks
-//import FirebaseCore
-//import FirebaseFirestore
-//import FirebaseAuth
+import Pushwoosh
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -37,6 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         UIViewController.swizzle() //used for analytics
         initializeZendesk()
         launchBugsee()
+        
+        if RemoteConfigManager.shared.getValue(for: .pushNotificationsFeature) as? Bool ?? false
+        {
+            Pushwoosh.sharedInstance().delegate = self
+            if #available(iOS 12.0, *)
+            {
+                Pushwoosh.sharedInstance().additionalAuthorizationOptions = UNAuthorizationOptions.provisional
+            }
+            Pushwoosh.sharedInstance().registerForPushNotifications()
+            Pushwoosh.sharedInstance().showPushnotificationAlert = true
+        }
+        
         //so videos will play sound even if mute button is on
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         
@@ -59,6 +69,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         
         return true
+    }
+    
+    func open(_ url: URL, options: [String: Any] = [:], completionHandler completion: ((Bool) -> Swift.Void)? = nil)
+    {
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let page = components?.host ?? ""
+        
+        if let route = RoutingOption(rawValue: page)
+        {
+            print("Route to: \(route.rawValue)")
+            _ = RouteManager.shared.routeTo(route)
+        }
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+    {
+        let token = deviceToken.map { String(format: "%.2hhx", $0) }.joined()
+        print("didRegisterForRemoteNotifications: \(token)")
+        Pushwoosh.sharedInstance().handlePushRegistration(deviceToken)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
+    {
+        Pushwoosh.sharedInstance().handlePushRegistrationFailure(error)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        Pushwoosh.sharedInstance().handlePushReceived(userInfo)
     }
 
     func extractExpertInfo(percentEncodedURLString: String) -> Int?
@@ -126,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         //cw not sure if this code is needed for our use case. Adding logging so we can gain insight...
         let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!)
         { dynamiclink, error in
-            Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+            Log_Add("App Delegate Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
             if let urlString = dynamiclink?.url?.absoluteString
             {
                 if let expertID = self.extractExpertInfo(percentEncodedURLString: urlString)
@@ -272,7 +311,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             let component = url.lastPathComponent
             let _ = DynamicLinks.dynamicLinks().handleUniversalLink(url)
             { dynamiclink, error in
-                Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+                Log_Add("App Delegate Process Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
                 
                 if let route = RoutingOption(rawValue: component)
                 {
@@ -284,5 +323,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 }
             }
         }
+    }
+}
+
+extension AppDelegate: PWMessagingDelegate
+{
+    func pushwoosh(_ pushwoosh: Pushwoosh, onMessageOpened message: PWMessage)
+    {
+        print("onMessageOpened: ", message.payload?.description ?? "")
+    }
+    
+    func pushwoosh(_ pushwoosh: Pushwoosh, onMessageReceived message: PWMessage)
+    {
+        print("onMessageReceived: ", message.payload?.description ?? "")
     }
 }

@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        Log_Add("Scene will connect to: \(String(describing: connectionOptions.urlContexts))")
-        if let url = connectionOptions.urlContexts.first?.url
+        Log_Add("Scene will connect to: \(String(describing: connectionOptions.userActivities.first?.webpageURL))")
+        if let url = connectionOptions.userActivities.first?.webpageURL
         {
             processDynamicLink(url: url)
         }
@@ -90,7 +90,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             let component = url.lastPathComponent
             let _ = DynamicLinks.dynamicLinks().handleUniversalLink(url)
             { dynamiclink, error in
-                Log_Add("Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error))")
+                Log_Add("SceneDelegate Process Dynamic Link: \(String(describing: dynamiclink)), error: \(String(describing: error)) component: \(component)")
                 
                 if let url = dynamiclink?.url
                 {
@@ -103,9 +103,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
                 
                 if let route = RoutingOption(rawValue: component)
                 {
+                    Log_Add("Routing to: \(route.rawValue)")
                     let result = RouteManager.shared.routeTo(route)
                     if !result
                     {
+                        Log_Add("Route failed, pending route option to: \(route.rawValue)")
                         RouteManager.shared.pendingRoutingOption = route
                     }
                 }

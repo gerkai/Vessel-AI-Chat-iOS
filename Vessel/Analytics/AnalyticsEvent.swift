@@ -21,7 +21,7 @@ enum AnalyticsEvent
     case cameraOpened
     case continuePastTimer
     case dontForgetShown
-    case everythingComplete(date: String, numberOfActivities: Int, numberOfFoods: Int, totalWaterAmount: Int, completedInsights: Int)
+    case everythingComplete(date: String, numberOfActivities: Int, numberOfFood: Int, totalWaterAmount: Int, completedInsights: Int)
     case foodAdded(foodId: Int, foodName: String)
     case foodComplete(foodId: Int, foodName: String, completed: Bool)
     case foodShown(foodId: Int, foodName: String)
@@ -141,10 +141,10 @@ enum AnalyticsEvent
             return [:]
         case .dontForgetShown:
             return [:]
-        case .everythingComplete(let date, let numberOfActivities, let numberOfFoods, let totalWaterAmount, let completedInsights):
+        case .everythingComplete(let date, let numberOfActivities, let numberOfFood, let totalWaterAmount, let completedInsights):
             return ["Date": date,
                     "Number of Activities": numberOfActivities,
-                    "Number of Foods": numberOfFoods,
+                    "Number of Foods": numberOfFood,
                     "Total Water Amount": totalWaterAmount,
                     "Completed Insights": completedInsights]
         case .foodAdded(let foodId, let foodName):

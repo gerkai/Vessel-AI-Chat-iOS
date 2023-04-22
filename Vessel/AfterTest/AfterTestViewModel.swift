@@ -48,8 +48,8 @@ class AfterTestViewModel
     var contactFlags: Int = 0
     var screens: [AfterTestScreen] = []
     var selectedFoodIds: [Int] = PlansManager.shared.getFoodPlans(shouldFilterForToday: true).map({ $0.typeId })
-    var newSelectedFoods: [ReagentFood] = []
-    var suggestedFoods: [ReagentFood] = []
+    var newSelectedFood: [ReagentFood] = []
+    var suggestedFood: [ReagentFood] = []
     var isHydroLow: Bool = true
     var selectedWaterOption: Int?
     var results: [Result]!
@@ -108,6 +108,7 @@ class AfterTestViewModel
         case FUEL_PROMPT
         case INGREDIENTS_PROMPT
         case INGREDIENTS_PROMPT_WITHOUT_FUEL
+        case FOOD
     }
     
     init(testResult: Result)
@@ -354,6 +355,20 @@ class AfterTestViewModel
             contactFlags |= Constants.SAW_TESTING_REMINDER
             //screens.append(.TEST_REMINDER)
         }
+        
+        // Present food selection in case the user doesn't have anything wrong with his test
+        // and hasn't selected any food before
+        if !screens.contains(.MAG_LOW_3) &&
+            !screens.contains(.CAL_LOW_4) &&
+            !screens.contains(.VIT_C_LOW_3) &&
+            !screens.contains(.PH_LOW_3) &&
+            !screens.contains(.KETO_LOW_4) &&
+            !screens.contains(.KETO_ELEVATED_2) &&
+            !screens.contains(.B7_LOW_3) && (Contact.main()?.suggestedFood ?? []).isEmpty
+        {
+            screens.append(.FOOD)
+        }
+        
         //if we're not already showing hydro quiz and user hasn't ever seen hydro quiz then show hydro quiz
         if !screens.contains(.HYDRO_LOW_3) && !screens.contains(.HYDRO_HIGH_4) && contact.flags & Constants.SAW_HYDRATION_LOW_INFO == 0 && contact.flags & Constants.SAW_HYDRATION_HIGH_INFO == 0
         {
@@ -409,7 +424,7 @@ class AfterTestViewModel
                                                    "Magnesium-top-right",
                                                    .fade)
             case .MAG_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Magnesium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.MAGNESIUM.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food rich in Magnesium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.MAGNESIUM.rawValue)
                 
             case .SOD_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Sodium Levels are High", comment: ""),
@@ -423,7 +438,7 @@ class AfterTestViewModel
                                                    .fade)
             case .SOD_HIGH_3:
                 return AfterTestViewControllerData(NSLocalizedString("How to Lower Sodium Levels", comment: ""),
-                                                   NSLocalizedString("Do your best to limit your Sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to foods when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
+                                                   NSLocalizedString("Do your best to limit your Sodium intake to < 2,300mg per day, one teaspoon. Those people who are > 51 year of age, have high blood pressure, diabetes or chronic kidney disease should limit their intake to < 1500mg per day. Instead of adding salt to food when cooking, add different spices for flavoring, such as parsley, cumin, cilantro, ginger, rosemary, garlic or onion powder, bay leaf, oregano, dry mustard, dill and more!", comment: ""),
                                                    "Sodium-top-right",
                                                    .push)
                 
@@ -443,7 +458,7 @@ class AfterTestViewModel
                                                    "Calcium-top-right",
                                                    .fade)
             case .CAL_LOW_4:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Calcium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.CALCIUM.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food rich in Calcium", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.CALCIUM.rawValue)
                 
             case .VIT_C_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Vitamin C Level is Low", comment: ""),
@@ -456,10 +471,10 @@ class AfterTestViewModel
                                                    "VitaminC-top-right",
                                                    .fade)
             case .VIT_C_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Vitamin C", comment: ""), "", "", .fade, /*false, true*/.reagentFood, reagentId: Reagent.ID.VITAMIN_C.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food rich in Vitamin C", comment: ""), "", "", .fade, /*false, true*/.reagentFood, reagentId: Reagent.ID.VITAMIN_C.rawValue)
             case .VIT_C_LOW_4:
                 return AfterTestViewControllerData(NSLocalizedString("What About a Vitamin C Supplement?", comment: ""),
-                                                   NSLocalizedString("Vitamin C supplementation can be a great way to boost your overall levels. In addition to consuming vitamin C rich foods, your Vessel fuel supplement plan will contain vitamin C. Through food and supplementation intake, you can expect to see improvements in your Vitamin C results, and feel the benefits within a few weeks!", comment: ""),
+                                                   NSLocalizedString("Vitamin C supplementation can be a great way to boost your overall levels. In addition to consuming vitamin C rich food, your Vessel fuel supplement plan will contain vitamin C. Through food and supplementation intake, you can expect to see improvements in your Vitamin C results, and feel the benefits within a few weeks!", comment: ""),
                                                    "VitaminC-top-right",
                                                    .push)
                 
@@ -470,11 +485,11 @@ class AfterTestViewModel
                                                    .fade)
             case .PH_LOW_2:
                 return AfterTestViewControllerData(NSLocalizedString("Improving Your pH Level", comment: ""),
-                                                   NSLocalizedString("A low urine pH indicates that your urine is slightly acidic. A common cause of lower (acidic) pH is eating a standard American diet of foods such as soft drinks, alcohol, refined grains, caffeine, and processed dairy. Low pH is associated with feelings of fatigue. By cutting out these foods and increasing alkaline foods you should see an improvement in your pH levels in a few weeks.", comment: ""),
+                                                   NSLocalizedString("A low urine pH indicates that your urine is slightly acidic. A common cause of lower (acidic) pH is eating a standard American diet of food such as soft drinks, alcohol, refined grains, caffeine, and processed dairy. Low pH is associated with feelings of fatigue. By cutting out these food and increasing alkaline food you should see an improvement in your pH levels in a few weeks.", comment: ""),
                                                    "pH-top-right",
                                                    .fade)
             case .PH_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Alkaline Foods for Increased PH", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.PH
+                return AfterTestViewControllerData(NSLocalizedString("Alkaline Food for Increased PH", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.PH
                     .rawValue)
                 
             case .PH_HIGH_1:
@@ -484,7 +499,7 @@ class AfterTestViewModel
                                                    .fade)
             case .PH_HIGH_2:
                 return AfterTestViewControllerData(NSLocalizedString("What Does a High pH Mean?", comment: ""),
-                                                   NSLocalizedString("A high urine pH indicates that your urine is slightly more basic than is desired. A basic pH can put you at risk for or indicate a bacterial infection. Please keep in mind a plant-based diet with high intakes of alkaline foods such as leafy greens, colorful fruits, nuts, seeds, and legumes can also result in a high pH.", comment: ""),
+                                                   NSLocalizedString("A high urine pH indicates that your urine is slightly more basic than is desired. A basic pH can put you at risk for or indicate a bacterial infection. Please keep in mind a plant-based diet with high intakes of alkaline food such as leafy greens, colorful fruits, nuts, seeds, and legumes can also result in a high pH.", comment: ""),
                                                    "pH-top-right",
                                                    .fade)
             case .PH_HIGH_3:
@@ -500,7 +515,7 @@ class AfterTestViewModel
                                                    .fade)
             case .HYDRO_LOW_2:
                 return AfterTestViewControllerData(NSLocalizedString("How to Optimize Your Hydration", comment: ""),
-                                                   NSLocalizedString("Low hydration is an indicator that you may not be drinking sufficient fluids. Within a few days of increasing your fluid intake through water and electrolyte rich foods such as: Spinach, Kale, Avocado, Broccoli, Sweet potato, and berries, you’ll be on your way to “good” hydration levels in no time!", comment: ""),
+                                                   NSLocalizedString("Low hydration is an indicator that you may not be drinking sufficient fluids. Within a few days of increasing your fluid intake through water and electrolyte rich food such as: Spinach, Kale, Avocado, Broccoli, Sweet potato, and berries, you’ll be on your way to “good” hydration levels in no time!", comment: ""),
                                                    "Hydration-top-right",
                                                    .fade)
             case .HYDRO_LOW_3:
@@ -519,7 +534,7 @@ class AfterTestViewModel
                                                    .fade)
             case .HYDRO_HIGH_3:
                 return AfterTestViewControllerData(NSLocalizedString("How to Improve Your Hydration Levels", comment: ""),
-                                                   NSLocalizedString("In order to improve your levels, add more electrolytes into your water daily! You will notice an improvement in hydration levels within a few days by adding an electrolyte tablet, powder, or pinch of sea salt with lemon to boost your electrolyte intake daily, or add electrolyte-rich foods to your diet such as spinach, avocado, broccoli, and strawberries.", comment: ""),
+                                                   NSLocalizedString("In order to improve your levels, add more electrolytes into your water daily! You will notice an improvement in hydration levels within a few days by adding an electrolyte tablet, powder, or pinch of sea salt with lemon to boost your electrolyte intake daily, or add electrolyte-rich food to your diet such as spinach, avocado, broccoli, and strawberries.", comment: ""),
                                                    "Hydration-top-right",
                                                    .fade)
             case .HYDRO_HIGH_4:
@@ -542,7 +557,7 @@ class AfterTestViewModel
                                                    "Ketones-top-right",
                                                    .fade)
             case .KETO_LOW_4:
-                return AfterTestViewControllerData(NSLocalizedString("Foods to Boost Ketones", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food to Boost Ketones", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
                 
             case .KETO_ELEVATED_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are Elevated", comment: ""),
@@ -550,7 +565,7 @@ class AfterTestViewModel
                                                    "Ketones-top-right",
                                                    .fade)
             case .KETO_ELEVATED_2:
-                return AfterTestViewControllerData(NSLocalizedString("Foods to Maintain Ketones ", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food to Maintain Ketones ", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.KETONES_A.rawValue)
                 
             case .KETO_HIGH_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Ketones are High", comment: ""),
@@ -574,7 +589,7 @@ class AfterTestViewModel
                                                    "B7-top-right",
                                                    .push)
             case .B7_LOW_3:
-                return AfterTestViewControllerData(NSLocalizedString("Foods rich in Biotin", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.VITAMIN_B7.rawValue)
+                return AfterTestViewControllerData(NSLocalizedString("Food rich in Biotin", comment: ""), "", "", .push, .reagentFood, reagentId: Reagent.ID.VITAMIN_B7.rawValue)
                 
             case .CORT_LOW_1:
                 return AfterTestViewControllerData(NSLocalizedString("Your Cortisol Levels are Low", comment: ""),
@@ -605,6 +620,9 @@ class AfterTestViewModel
                 
             case .INGREDIENTS_PROMPT_WITHOUT_FUEL:
                 return AfterTestViewControllerData("", "", "", .push, .ingredientsPromptWithoutFuel)
+                
+            case .FOOD:
+                return AfterTestViewControllerData(NSLocalizedString("All food", comment: ""), "", "", .push, .reagentFood)
             }
         }
         currentScreen -= 1
@@ -617,27 +635,27 @@ class AfterTestViewModel
     }
     
     // MARK: - Food
-    func loadFoodsForReagent(reagentId: Int, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func loadFoodForReagent(reagentId: Int?, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        suggestedFoods = []
-        Server.shared.getFoodsForReagent(reagentId: reagentId, onSuccess: { foods in
-            self.suggestedFoods = foods
+        suggestedFood = []
+        Server.shared.getFoodForReagent(reagentId: reagentId, onSuccess: { food in
+            self.suggestedFood = food
             success()
         }, onFailure: { error in
             failure(error)
         })
     }
     
-    func addFoodsToPlan(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func addFoodToPlan(onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
-        for food in newSelectedFoods
+        for food in newSelectedFood
         {
             analytics.log(event: .foodAdded(foodId: food.id, foodName: food.foodTitle))
         }
         
-        if newSelectedFoods.count == 1
+        if newSelectedFood.count == 1
         {
-            let plan = Plan(type: .food, typeId: newSelectedFoods.first!.id)
+            let plan = Plan(type: .food, typeId: newSelectedFood.first!.id)
             Server.shared.addSinglePlan(plan: plan)
             { addedPlan in
                 PlansManager.shared.addPlans(plansToAdd: [addedPlan])
@@ -648,8 +666,8 @@ class AfterTestViewModel
         }
         else
         {
-            let foodsIds = newSelectedFoods.map { $0.id }
-            let multiplePlans = MultiplePlans(foodIds: foodsIds)
+            let foodIds = newSelectedFood.map { $0.id }
+            let multiplePlans = MultiplePlans(foodIds: foodIds)
             Server.shared.addMultiplePlans(plans: multiplePlans)
             { multiplePlans in
                 PlansManager.shared.addPlans(plansToAdd: multiplePlans)
@@ -660,7 +678,7 @@ class AfterTestViewModel
         }
     }
     
-    func refreshSelectedFoods()
+    func refreshSelectedFood()
     {
         selectedFoodIds = PlansManager.shared.getFoodPlans(shouldFilterForToday: true).map({ $0.typeId })
     }
@@ -702,4 +720,7 @@ class AfterTestViewModel
         NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil, userInfo: [:])
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
     }
+    
+    // MARK: - Push Notifications
+    
 }

@@ -97,7 +97,7 @@ class RemindersManager
         return schedules.first?.time
     }
     
-    private func getTimeOfDay(from string: String) -> (hour: Int, minute: Int)
+    func getTimeOfDay(from string: String) -> (hour: Int, minute: Int)
     {
         switch string
         {

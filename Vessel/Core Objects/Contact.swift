@@ -86,18 +86,18 @@ class Contact: CoreObjectProtocol
     private var _enrolled_program_ids: [Int]?
     var dailyWaterIntake: Int?
     
-    lazy var suggestedFoods: [Food] =
+    lazy var suggestedFood: [Food] =
     {
-        let storedFoods = Storage.retrieve(as: Food.self)
+        let storedFood = Storage.retrieve(as: Food.self)
         
         let foodIds: [Int]
         let foodPlans = PlansManager.shared.getFoodPlans(shouldFilterForToday: true)
         foodIds = foodPlans.map({ $0.typeId })
         
-        let foods: [Food] = foodIds.compactMap({ foodId in
-            return storedFoods.first(where: { $0.id == foodId })
+        let food: [Food] = foodIds.compactMap({ foodId in
+            return storedFood.first(where: { $0.id == foodId })
         })
-        return foods.sorted(by: { $0.id < $1.id })
+        return food.sorted(by: { $0.id < $1.id })
     }()
     
     @Resolved private var analytics: Analytics
@@ -284,22 +284,22 @@ class Contact: CoreObjectProtocol
         return contact
     }
     
-    // MARK: - Suggested Foods
-    func refreshSuggestedFoods(selectedDate: String, isToday: Bool)
+    // MARK: - Suggested Food
+    func refreshSuggestedFood(selectedDate: String, isToday: Bool)
     {
-        suggestedFoods =
+        suggestedFood =
         {
-            let storedFoods = Storage.retrieve(as: Food.self)
+            let storedFood = Storage.retrieve(as: Food.self)
             let foodIds: [Int]
             
             let foodPlans = PlansManager.shared.getFoodPlans(shouldFilterForToday: isToday, shouldFilterForSelectedDay: selectedDate)
                 
             foodIds = foodPlans.map({ $0.typeId })
             
-            let foods: [Food] = foodIds.compactMap({ foodId in
-                return storedFoods.first(where: { $0.id == foodId })
+            let food: [Food] = foodIds.compactMap({ foodId in
+                return storedFood.first(where: { $0.id == foodId })
             })
-            return foods.sorted(by: { $0.id < $1.id })
+            return food.sorted(by: { $0.id < $1.id })
         }()
     }
     

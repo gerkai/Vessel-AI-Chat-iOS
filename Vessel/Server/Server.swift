@@ -84,6 +84,7 @@ let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_respon
 let USER_HAS_FUEL_PATH = "fuel"
 let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
 let GET_EXPERT_PATH = "fuel/expert"
+let MEMBERSHIPS = "v2/memberships"
 let GET_ALL_EXPERTS_PATH = "experts"
 
 // MARK: - Structs
@@ -738,8 +739,8 @@ class Server: NSObject
         })
     }
     
-    //MARK: Foods
-    func getAllFoods(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    //MARK: Food
+    func getAllFood(lastUpdated: Int, onSuccess success: @escaping ([Food]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         getAllObjects(objects: [AllObjectReq(type: "food", last_updated: lastUpdated)])
         { dict in
@@ -748,17 +749,17 @@ class Server: NSObject
                 guard let foodDict = dict["food"] as? [[String: Any]] else { return }
                 let json = try JSONSerialization.data(withJSONObject: foodDict)
                 let decoder = JSONDecoder()
-                let decodedFoods = try decoder.decode([Food].self, from: json)
+                let decodedFood = try decoder.decode([Food].self, from: json)
                 DispatchQueue.main.async()
                 {
-                    success(decodedFoods)
+                    success(decodedFood)
                 }
             }
             catch
             {
                 DispatchQueue.main.async()
                 {
-                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get all foods response", comment: "Server error message")])
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get all food response", comment: "Server error message")])
                     failure(error.localizedDescription)
                 }
             }
@@ -767,12 +768,19 @@ class Server: NSObject
         }
     }
     
-    func getFoodsForReagent(reagentId: Int, onSuccess success: @escaping ([ReagentFood]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
+    func getFoodForReagent(reagentId: Int?, onSuccess success: @escaping ([ReagentFood]) -> Void, onFailure failure: @escaping (_ error: String) -> Void)
     {
         let urlString = "\(API())\(REAGENT_FOOD_RECOMMENDATIONS_PATH)"
-        guard let request = Server.shared.GenerateRequest(urlString: urlString, withParams: ["reagent_id": "\(reagentId)"]) else
+        
+        var params: [String: String] = [:]
+        if let reagentId = reagentId
         {
-            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+            params["reagent_id"] = "\(reagentId)"
+        }
+        
+        guard let request = Server.shared.GenerateRequest(urlString: urlString, withParams: params) else
+        {
+            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent food response", comment: "Server error message")])
             failure(error.localizedDescription)
             return
         }
@@ -814,7 +822,7 @@ class Server: NSObject
                         }
                         else
                         {
-                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent food response", comment: "Server error message")])
                             failure(error.localizedDescription)
                         }
                     }
@@ -823,7 +831,7 @@ class Server: NSObject
                 {
                     DispatchQueue.main.async()
                     {
-                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent foods response", comment: "Server error message")])
+                        let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to decode reagent food response", comment: "Server error message")])
                         failure(error.localizedDescription)
                     }
                 }
@@ -832,7 +840,7 @@ class Server: NSObject
             {
                 DispatchQueue.main.async()
                 {
-                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent foods response", comment: "Server error message")])
+                    let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get reagent food response", comment: "Server error message")])
                     failure(error.localizedDescription)
                 }
             }
@@ -1318,6 +1326,41 @@ class Server: NSObject
         }
     }
     
+    // MARK: - Memberships
+    func getMemberships(onSuccess success: @escaping (_ result: String) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        let API = API().components(separatedBy: ENDPOINT_ROOT).first ?? ""
+        let urlString = "\(API)\(MEMBERSHIPS)"
+        let request = Server.shared.GenerateRequest(urlString: urlString)!
+        
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(String.self, from: data)
+                //print("Decoded Fuel: \(decodedFuel)")
+                success(decodedResponse)
+            }
+            catch
+            {
+                Log_Add("get memberships error: \(error)")
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                //print("get fuel error2: \(String(describing: error))")
+                failure(error?.localizedDescription)
+            }
+        }
+    }
+
     // MARK: - Utils
     func allowDebugPrint() -> Bool
     {

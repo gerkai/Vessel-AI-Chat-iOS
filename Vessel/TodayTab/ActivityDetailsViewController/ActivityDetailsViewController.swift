@@ -147,7 +147,7 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
             
             guard let planId = viewModel?.id,
                   let plan = foodPlans.first(where: { $0.id == planId }),
-                  let food = Contact.main()?.suggestedFoods.first(where: { $0.id == plan.typeId }) else
+                  let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId }) else
             {
                 assertionFailure("ActivityDetailsViewController-onEditSchedule: Can't find food with id: \(viewModel?.id ?? 0)")
                 return

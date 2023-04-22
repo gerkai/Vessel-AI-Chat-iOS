@@ -78,14 +78,10 @@ class OnboardingCoordinator
             //print("Onboarding Coordinator 1: Sending hide splash screen notification")
             NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
         }
+        //if gender was chosen then we can assume all demographics were populated so skip onboarding
+        //and go directly to MainTabBarController
         else
         {
-            //if gender was chosen then we can assume all demographics were populated so skip onboarding
-            //and go directly to MainTabBarController
-            
-            //clear all plans from storage (done to fix issues with migration to new version)
-            Storage.clear(objectType: Plan.self)
-            
             //make sure our core objects are all up to date
             ObjectLoader.shared.loadCoreObjects(onDone:
             {
@@ -120,12 +116,6 @@ class OnboardingCoordinator
                     
                     //fade out splash screen
                     NotificationCenter.default.post(name: .showSplashScreen, object: nil, userInfo: ["show": false])
-                    if let route = RouteManager.shared.pendingRoutingOption
-                    {
-                        print(route)
-                        RouteManager.shared.pendingRoutingOption = nil
-                        _ = RouteManager.shared.routeTo(route)
-                    }
                 }
             })
         }

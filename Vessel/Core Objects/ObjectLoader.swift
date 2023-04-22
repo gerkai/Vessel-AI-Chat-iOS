@@ -27,6 +27,7 @@ class ObjectLoader: NSObject
             {
                 self.loadLifestyleRecommendations()
                 PlansManager.shared.loadPlans()
+                LocalNotificationsManager.shared.setupLocalNotifications()
                 RemindersManager.shared.setupRemindersIfNeeded()
                 done()
             })

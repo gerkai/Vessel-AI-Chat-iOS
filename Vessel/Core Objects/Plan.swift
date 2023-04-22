@@ -12,7 +12,6 @@ enum PlanType: String, Codable
     case food
     case activity
     case reagentLifestyleRecommendation
-    case suplement
 }
 
 struct PlanResponse: Decodable

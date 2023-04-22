@@ -16,9 +16,24 @@
 		</dict>
 	</array>
 	<key>FirebaseDeepLinkPasteboardRetrievalEnabled</key>
-	<false/>
+	<true/>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://vesselhealth.page.link/takeTest</string>
+		<string>https://vesselhealth.page.link/results</string>
+		<string>https://vesselhealth.page.link/coach</string>
+		<string>https://vesselhealth.page.link/today</string>
+		<string>vessel://takeTest</string>
+		<string>vessel://results</string>
+		<string>vessel://coach</string>
+		<string>vessel://today</string>
+	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>Pushwoosh_APPID</key>
+	<string>92DB1-1AC9D</string>
+	<key>Pushwoosh_LOG_LEVEL</key>
+	<string>VERBOSE</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BananaGrotesk-Thin.otf</string>
@@ -51,18 +66,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>remote-notifications</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>FirebaseDynamicLinksCustomDomains</key>
-    <array>
-      <string>https://vesselhealth.page.link/takeTest</string>
-      <string>https://vesselhealth.page.link/results</string>
-      <string>https://vesselhealth.page.link/coach</string>
-      <string>https://vesselhealth.page.link/today</string>
-      <string>vessel://takeTest</string>
-      <string>vessel://results</string>
-      <string>vessel://coach</string>
-      <string>vessel://today</string>
-    </array>
 </dict>
 </plist>

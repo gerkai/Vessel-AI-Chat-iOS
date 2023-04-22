@@ -20,7 +20,7 @@ enum TodayViewSection: Equatable
     case progressDays(progress: [String: Double])
     case insights(insights: [Lesson], isToday: Bool)
     case activities(activities: [Tip], selectedDate: String, isToday: Bool)
-    case food(foods: [Food], selectedDate: String, userHasTakenATest: Bool)
+    case food(food: [Food], selectedDate: String, userHasTakenATest: Bool)
     case water(glassesNumber: Int?, checkedGlasses: Int, isWaterPlanCreatedForSelectedDay: Bool, lastSelectedGlassesNumber: Int?, isWaterPlanCreatedToday: Bool)
     //case customize
     case footer
@@ -49,7 +49,7 @@ enum TodayViewSection: Equatable
         case .progressDays(let progress): return createProgressDaySection(progress: progress)
         case .insights(let lessons, let isToday): return createInsightsSection(lessons: lessons, isToday: isToday)
         case .activities(let activities, let selectedDate, let isToday): return createActivitiesSection(activities: activities, selectedDate: selectedDate, isToday: isToday)
-        case .food(let foods, let selectedDate, let userHasTakenATest): return createFoodSection(foods: foods, selectedDate: selectedDate, userHasTakenATest: userHasTakenATest)
+        case .food(let food, let selectedDate, let userHasTakenATest): return createFoodSection(food: food, selectedDate: selectedDate, userHasTakenATest: userHasTakenATest)
         case .water(let glassesNumber, let checkedGlasses, let isWaterPlanCreatedForSelectedDay, let lastSelectedGlassesNumber, let isWaterPlanCreatedToday): return createWaterSection(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, isWaterPlanCreatedForSelectedDay: isWaterPlanCreatedForSelectedDay, lastSelectedGlassesNumber: lastSelectedGlassesNumber, isWaterPlanCreatedToday: isWaterPlanCreatedToday)
         case .footer: return [.footer]
         case .userNotYetCreated: return [.sectionTitle(icon: "starIcon", name: NSLocalizedString("You can't go back in time,", comment: ""), showInfoIcon: false), .text(text: NSLocalizedString("it's just too dangerous Marty.", comment: ""), alignment: .left)]
@@ -177,9 +177,9 @@ enum TodayViewSection: Equatable
         return cells
     }
     
-    func createFoodSection(foods: [Food], selectedDate: String, userHasTakenATest: Bool) -> [TodayViewCell]
+    func createFoodSection(food: [Food], selectedDate: String, userHasTakenATest: Bool) -> [TodayViewCell]
     {
-        guard foods.count > 0 else
+        guard food.count > 0 else
         {
             if !userHasTakenATest
             {
@@ -195,7 +195,7 @@ enum TodayViewSection: Equatable
         }
         return [
             .sectionTitle(icon: "food-icon", name: "Food", showInfoIcon: true),
-            .foodDetails(foods: foods, selectedDate: selectedDate)
+            .foodDetails(food: food, selectedDate: selectedDate)
         ]
     }
     
@@ -258,7 +258,7 @@ enum TodayViewCell: Equatable
     case header(name: String, goals: [String])
     case progressDays(progress: [String: Double])
     case sectionTitle(icon: String, name: String, showInfoIcon: Bool)
-    case foodDetails(foods: [Food], selectedDate: String)
+    case foodDetails(food: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, subtext: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?)
@@ -284,9 +284,9 @@ enum TodayViewCell: Equatable
         case .header: return 177.0
         case .progressDays: return progressDaysHeight
         case .sectionTitle: return 56.0
-        case .foodDetails(let foods, _):
-            let foodHeight: Int = Int(ceil(Double(foods.count) / 2.0) * 56)
-            let spacingHeight: Int = Int((ceil(Double(foods.count) / 2.0) - 1) * 17)
+        case .foodDetails(let food, _):
+            let foodHeight: Int = Int(ceil(Double(food.count) / 2.0) * 56)
+            let spacingHeight: Int = Int((ceil(Double(food.count) / 2.0) - 1) * 17)
             return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
         case .lockedCheckMarkCard: return 96.0
@@ -328,7 +328,7 @@ class TodayViewModel
     var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
     private var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
     private var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
-    private var showFoods: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
+    private var showFood: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
     private var showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
     var showReminders: Bool = RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false
     
@@ -379,8 +379,8 @@ class TodayViewModel
             return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
         }).sorted(by: { $0.id < $1.id }) : []
         
-        // FOODS
-        let foods = showFoods ? contact.suggestedFoods : []
+        // FOOD
+        let food = showFood ? contact.suggestedFood : []
         
         // WATER
         let dailyWaterIntake = showWater ? numberOfGlasses : nil
@@ -394,7 +394,7 @@ class TodayViewModel
             .progressDays(progress: progressDays),
             .insights(insights: lessons, isToday: self.isToday),
             .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate, isToday: self.isToday),
-            .food(foods: foods, selectedDate: selectedDate, userHasTakenATest: !(resultsViewModel?.isEmpty ?? true)),
+            .food(food: food, selectedDate: selectedDate, userHasTakenATest: !(resultsViewModel?.isEmpty ?? true)),
             .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses, isWaterPlanCreatedForSelectedDay: isWaterPlanCreatedForSelectedDay, lastSelectedGlassesNumber: lastSelectedGlasesNumber, isWaterPlanCreatedToday: isWaterPlanCreatedToday),
             .footer
         ]
@@ -422,9 +422,9 @@ class TodayViewModel
         WaterManager.shared.setDrinkedWaterGlasses(value: glasses, date: selectedDate)
     }
     
-    func refreshContactSuggestedfoods()
+    func refreshContactSuggestedFood()
     {
-        contact.refreshSuggestedFoods(selectedDate: selectedDate, isToday: isToday)
+        contact.refreshSuggestedFood(selectedDate: selectedDate, isToday: isToday)
     }
     
     func refreshLastWeekProgress()

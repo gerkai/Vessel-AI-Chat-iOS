@@ -68,4 +68,4 @@ let VitaminB7 = Reagent(
             description: NSLocalizedString("Biotin, also called vitamin B7, is an essential vitamin that helps your body turn the carbohydrates, fats, and proteins in the food you eat into the energy you need. It also helps to regulate gene expression.", comment: "")),
         TitleDescription(
             title: Constants.TIPS_TO_IMPROVE,
-            description: NSLocalizedString("The best way to improve your biotin stores is with whole fresh foods. Some people may need additional biotin in the form of supplementation.", comment: ""))])
+            description: NSLocalizedString("The best way to improve your biotin stores is with whole fresh food. Some people may need additional biotin in the form of supplementation.", comment: ""))])

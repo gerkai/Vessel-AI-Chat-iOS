@@ -34,7 +34,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         resultsViewModel.refresh()
         viewModel.resultsViewModel = resultsViewModel
         
-        //get notified when new foods, plans or results comes in from After Test Flow
+        //get notified when new food, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
         
@@ -102,6 +102,12 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         {
             //prompt the user to rate their experience (if they haven't done so already)
             ReviewManagerExperienceReview(presentOverVC: self)
+        }
+        if let route = RouteManager.shared.pendingRoutingOption
+        {
+            Log_Add("Routing pending option to: \(route.rawValue)")
+            RouteManager.shared.pendingRoutingOption = nil
+            _ = RouteManager.shared.routeTo(route)
         }
     }
     
@@ -177,7 +183,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
             if type == String(describing: Food.self) || type == String(describing: Plan.self)
             {
                 viewModel.refreshLastWeekProgress()
-                viewModel.refreshContactSuggestedfoods()
+                viewModel.refreshContactSuggestedFood()
                 reloadUI()
             }
             else if type == String(describing: Lesson.self)
@@ -230,12 +236,12 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         ])
         
         let numberOfActivities = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.selectedDate == todayString, shouldFilterForSelectedDate: todayString).count
-        let numberOfFoods = Contact.main()?.suggestedFoods.count ?? 0
+        let numberOfFood = Contact.main()?.suggestedFood.count ?? 0
         let totalWaterAmount = WaterManager.shared.getDailyWaterIntake(date: viewModel.selectedDate) ?? 0
         let completedInsights = LessonsManager.shared.getLessonsCompletedOn(dateString: todayString).count
         analytics.log(event: .everythingComplete(date: todayString,
                                                  numberOfActivities: numberOfActivities,
-                                                 numberOfFoods: numberOfFoods,
+                                                 numberOfFood: numberOfFood,
                                                  totalWaterAmount: totalWaterAmount,
                                                  completedInsights: completedInsights))
         
@@ -318,13 +324,13 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.setup(iconName: icon, title: name, showInfoIcon: showInfoIcon)
-        case .foodDetails(let foods, let selectedDate):
+        case .foodDetails(let food, let selectedDate):
             guard let cell = cell as? TodayFoodDetailsSectionTableViewCell else
             {
                 assertionFailure("Can't dequeue cell TodayFoodDetailsSectionTableViewCell from tableView in TodayViewController")
                 return UITableViewCell()
             }
-            cell.setup(foods: foods, selectedDate: selectedDate, isToday: viewModel.isToday, delegate: self)
+            cell.setup(food: food, selectedDate: selectedDate, isToday: viewModel.isToday, delegate: self)
         case .waterDetails(let glassesNumber, let checkedGlasses):
             guard let cell = cell as? TodayWaterDetailsSectionTableViewCell else
             {
@@ -488,7 +494,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 }
             }
         case .food:
-            guard (Contact.main()?.suggestedFoods ?? []).count > 0 else
+            guard (Contact.main()?.suggestedFood ?? []).count > 0 else
             {
                 mainTabBarController?.vesselButtonPressed()
                 return
@@ -572,7 +578,7 @@ extension TodayViewController: FoodCheckmarkViewDelegate
     func animationComplete(view: FoodCheckmarkView)
     {
         viewModel.refreshLastWeekProgress()
-        viewModel.refreshContactSuggestedfoods()
+        viewModel.refreshContactSuggestedFood()
         reloadUI()
         showGamificationCongratulationsViewIfNeeded()
     }
@@ -685,7 +691,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
     func animationComplete()
     {
         viewModel.refreshLastWeekProgress()
-        viewModel.refreshContactSuggestedfoods()
+        viewModel.refreshContactSuggestedFood()
         reloadUI()
         showGamificationCongratulationsViewIfNeeded()
     }
@@ -760,7 +766,7 @@ extension TodayViewController: ProgressDayViewDelegate
     func onProgressDayTapped(date: String)
     {
         viewModel.selectedDate = date
-        viewModel.refreshContactSuggestedfoods()
+        viewModel.refreshContactSuggestedFood()
         tableView.reloadData()
     }
 }

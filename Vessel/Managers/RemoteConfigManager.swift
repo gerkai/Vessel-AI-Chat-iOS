@@ -17,6 +17,7 @@ enum RemoteConfigKey
     case foodFeature
     case waterFeature
     case remindersFeature
+    case pushNotificationsFeature
     
     // Config
     case minimumSupportedVersion
@@ -42,8 +43,10 @@ enum RemoteConfigKey
             return "water_feature"
         case .remindersFeature:
             return "reminders_feature"
+        case .pushNotificationsFeature:
+            return "push_notifications_feature"
         case .minimumSupportedVersion:
-            return "app_min_version"
+            return "app_min_version"    
         }
     }
     
@@ -51,7 +54,7 @@ enum RemoteConfigKey
     {
         switch self
         {
-        case .progressDaysFeature, .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature, .remindersFeature:
+        case .progressDaysFeature, .insightsFeature, .activitiesFeature, .foodFeature, .waterFeature, .remindersFeature, .pushNotificationsFeature:
             return RemoteConfig.remoteConfig()[key].boolValue
         case .minimumSupportedVersion:
             return RemoteConfig.remoteConfig()[key].stringValue ?? "1.0"
@@ -124,6 +127,8 @@ class RemoteConfigManager
             case .waterFeature:
                 return true
             case .remindersFeature:
+                return true
+            case .pushNotificationsFeature:
                 return true
             case .minimumSupportedVersion:
                 return "1.0"

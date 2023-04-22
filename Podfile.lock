@@ -99,6 +99,9 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
+  - PushwooshXCFramework (6.4.10):
+    - PushwooshXCFramework/Core (= 6.4.10)
+  - PushwooshXCFramework/Core (6.4.10)
   - QuickLayout (3.0.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
@@ -139,6 +142,7 @@ DEPENDENCIES:
   - LiveChat
   - lottie-ios (= 3.5.0)
   - Mixpanel-swift
+  - PushwooshXCFramework
   - SwiftEntryKit (= 1.2.3)
   - SwiftLint
   - SwiftyMarkdown
@@ -168,6 +172,7 @@ SPEC REPOS:
     - Mixpanel-swift
     - nanopb
     - PromisesObjC
+    - PushwooshXCFramework
     - QuickLayout
     - SwiftEntryKit
     - SwiftLint
@@ -205,6 +210,7 @@ SPEC CHECKSUMS:
   Mixpanel-swift: 91fc28834402720682f4cce760e95571fbb388c3
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  PushwooshXCFramework: 0780e50c1e92146a7feff87b1bda8ca83b1c4097
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
@@ -221,6 +227,6 @@ SPEC CHECKSUMS:
   ZendeskSupportProvidersSDK: 685b5d185af47ced0ec40564ec46355c838bbd06
   ZendeskSupportSDK: 92e6f9d334e81e9186f8a17583862350460a5393
 
-PODFILE CHECKSUM: 5bcf712aefd353dee4ea4fc18be57932f85efb07
+PODFILE CHECKSUM: 836a33088d013eaebe9f7f5dd8b3c2187aa14447
 
 COCOAPODS: 1.11.2

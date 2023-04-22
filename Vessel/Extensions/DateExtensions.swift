@@ -67,6 +67,24 @@ extension Date
         return day == 1 ? 6 : day - 2
     }
     
+    var month: Int?
+    {
+        let myCalendar = Calendar(identifier: .gregorian)
+        return myCalendar.component(.month, from: self)
+    }
+    
+    var hour: Int?
+    {
+        let myCalendar = Calendar(identifier: .gregorian)
+        return myCalendar.component(.hour, from: self)
+    }
+    
+    var minute: Int?
+    {
+        let myCalendar = Calendar(identifier: .gregorian)
+        return myCalendar.component(.minute, from: self)
+    }
+    
     //Create a Date from a string like so:
     //Date("2022-07-09")
     init(_ dateString: String)

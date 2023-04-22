@@ -22,11 +22,24 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        viewModel.refreshSelectedFoods()
+        viewModel.refreshSelectedFood()
         subtitleLabel.text = ""
         if let reagentId = reagentId
         {
-            viewModel.loadFoodsForReagent(reagentId: reagentId)
+            viewModel.loadFoodForReagent(reagentId: reagentId)
+            { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+                self.updateSubtitle()
+            }
+            onFailure:
+            { error in
+                UIView.showError(text: "", detailText: error)
+            }
+        }
+        else
+        {
+            viewModel.loadFoodForReagent(reagentId: nil)
             { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
@@ -41,18 +54,18 @@ class ReagentFoodViewController: AfterTestMVVMViewController
         let inset = UIEdgeInsets(top: 28, left: 0, bottom: 0, right: 0)
         self.tableView.contentInset = inset
         
-        viewModel.newSelectedFoods = []
+        viewModel.newSelectedFood = []
     }
         
     func updateSubtitle()
     {
         let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
             { (selectedFoodId) in
-                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
+                viewModel.suggestedFood.contains(where: { $0.id == selectedFoodId })
             }
         )
         
-        if viewModel.newSelectedFoods.count > 0 || (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count)
+        if viewModel.newSelectedFood.count > 0 || (viewModel.suggestedFood.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFood.count)
         {
             guard let reagentID = Reagent.ID(rawValue: reagentId ?? -1),
                   let reagentName = Reagents[reagentID]?.name else
@@ -60,11 +73,11 @@ class ReagentFoodViewController: AfterTestMVVMViewController
                 assertionFailure("ReagentFoodViewController-updateSubtitle: Can't get reagent with id: \(reagentId ?? -1)")
                 return
             }
-            subtitleLabel.text = String(format: NSLocalizedString("Looks like you already added all the foods for %@", comment: ""), reagentName)
+            subtitleLabel.text = String(format: NSLocalizedString("Looks like you already added all the food for %@", comment: ""), reagentName)
         }
         else
         {
-            subtitleLabel.text = NSLocalizedString("Choose up to 3 foods to add to your plan:", comment: "")
+            subtitleLabel.text = NSLocalizedString("Choose up to 3 food to add to your plan:", comment: "")
         }
     }
     
@@ -78,20 +91,20 @@ class ReagentFoodViewController: AfterTestMVVMViewController
     {
         let filteredSelectedFoodIds = viewModel.selectedFoodIds.filter(
             { (selectedFoodId) in
-                viewModel.suggestedFoods.contains(where: { $0.id == selectedFoodId })
+                viewModel.suggestedFood.contains(where: { $0.id == selectedFoodId })
             }
         )
 
-        if (viewModel.suggestedFoods.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFoods.count) || viewModel.newSelectedFoods.count == 0
+        if (viewModel.suggestedFood.count > 0 && filteredSelectedFoodIds.count > 0 && filteredSelectedFoodIds.count == viewModel.suggestedFood.count) || viewModel.newSelectedFood.count == 0
         {
             nextScreen()
         }
-        else if viewModel.newSelectedFoods.count > 0
+        else if viewModel.newSelectedFood.count > 0
         {
             nextButton.isEnabled = false
             nextButton.backgroundColor = Constants.vesselGray
             
-            addFoodsToPlan
+            addFoodToPlan
             {
                 self.nextButton.isEnabled = true
                 self.nextButton.backgroundColor = Constants.vesselBlack
@@ -104,12 +117,12 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        viewModel.suggestedFoods.count
+        viewModel.suggestedFood.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else
+        guard let food = viewModel.suggestedFood[safe: indexPath.row] else
         {
             assertionFailure("ReagentFoodViewController-tableViewHeightForRowAt: Can't get suggestedFood at indexPath: \(indexPath)")
             return 0
@@ -127,7 +140,7 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReagentFoodCell", for: indexPath) as? ReagentFoodTableViewCell,
-              let food = viewModel.suggestedFoods[safe: indexPath.row],
+              let food = viewModel.suggestedFood[safe: indexPath.row],
               let imageURL = URL(string: food.imageUrl) else
         {
             assertionFailure("ReagentFoodViewController-tableViewCellForRowAt: Can't get cell, suggestedFood or imageURL at indexPath: \(indexPath)")
@@ -147,29 +160,29 @@ extension ReagentFoodViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         
-        let isChecked = viewModel.newSelectedFoods.contains(food)
+        let isChecked = viewModel.newSelectedFood.contains(food)
         cell.setup(foodName: food.foodTitle, reagentQuantity: reagentQuantity, isChecked: isChecked, backgroundImageURL: imageURL)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        guard let food = viewModel.suggestedFoods[safe: indexPath.row] else
+        guard let food = viewModel.suggestedFood[safe: indexPath.row] else
         {
             assertionFailure("ReagentFoodViewController-tableViewDidSelectRowAt: Can't get suggestedFood at indexPath: \(indexPath)")
             return
         }
-        if let index = viewModel.newSelectedFoods.firstIndex(of: food)
+        if let index = viewModel.newSelectedFood.firstIndex(of: food)
         {
-            viewModel.newSelectedFoods.remove(at: index)
+            viewModel.newSelectedFood.remove(at: index)
         }
         else
         {
-            if viewModel.newSelectedFoods.count == 3
+            if viewModel.newSelectedFood.count == 3
             {
-                viewModel.newSelectedFoods.remove(at: 0)
+                viewModel.newSelectedFood.remove(at: 0)
             }
-            viewModel.newSelectedFoods.append(food)
+            viewModel.newSelectedFood.append(food)
         }
         tableView.reloadData()
     }

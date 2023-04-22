@@ -232,6 +232,7 @@
 		7262F9C829263206006DD849 /* LessonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7262F9C729263206006DD849 /* LessonsManager.swift */; };
 		72673C5128E807CF0056C701 /* WaterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */; };
 		72692B88293717DB00A8F33C /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72692B87293717DB00A8F33C /* Activity.swift */; };
+		726A545B29ADDBA600E63B32 /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A545A29ADDBA600E63B32 /* LocalNotificationsManager.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
 		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
 		72798B79298C6CF100A5BD65 /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72798B78298C6CF100A5BD65 /* AddReminderViewController.swift */; };
@@ -333,6 +334,19 @@
 			remoteInfo = Vessel;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		723B2C5929F210D800AB38E7 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		19047202DE476CDF8D072DD8 /* Pods-Vessel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.release.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.release.xcconfig"; sourceTree = "<group>"; };
@@ -486,7 +500,6 @@
 		3F9D6D882953612100664EA8 /* CoachPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D8B2953620000664EA8 /* ReagentPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReagentPopupViewController.swift; sourceTree = "<group>"; };
 		3F9D6D8D295D113400664EA8 /* GetSupplementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupplementsViewController.swift; sourceTree = "<group>"; };
-		3F9FDA2329B11CE10064B9B0 /* Vessel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vessel.entitlements; sourceTree = "<group>"; };
 		3FA66836287F4CAC0006166D /* CaptureIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntroViewController.swift; sourceTree = "<group>"; };
 		3FA6683B287F64960006166D /* TipInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipInstructionsViewController.swift; sourceTree = "<group>"; };
 		3FA6683D287F69830006166D /* TakeTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTestViewModel.swift; sourceTree = "<group>"; };
@@ -553,6 +566,7 @@
 		72332FAF28EE8D94008CBA8C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		72332FB128EE9527008CBA8C /* ActivityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewModel.swift; sourceTree = "<group>"; };
 		72384F3528E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCheckMarkCardTableViewCell.swift; sourceTree = "<group>"; };
+		723B2C4E29F210D800AB38E7 /* VesselNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VesselNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		72411CF0287E0715004A312E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		72411CF6287E413C004A312E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		72411CF7287E413C004A312E /* Resolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolved.swift; sourceTree = "<group>"; };
@@ -568,6 +582,8 @@
 		7262F9C729263206006DD849 /* LessonsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsManager.swift; sourceTree = "<group>"; };
 		72673C5028E807CF0056C701 /* WaterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterDetailsViewController.swift; sourceTree = "<group>"; };
 		72692B87293717DB00A8F33C /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		726A545A29ADDBA600E63B32 /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
+		726A545C29B06A0C00E63B32 /* Vessel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vessel.entitlements; sourceTree = "<group>"; };
 		7270EDDE28A361E100177898 /* MyAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
 		7270EDDF28A361E100177898 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
@@ -672,6 +688,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3FE369B927C9A07F00231D42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		723B2C4B29F210D800AB38E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -983,6 +1006,7 @@
 				3FE3699C27C9A07E00231D42 /* Vessel.app */,
 				3FE369B227C9A07F00231D42 /* VesselTests.xctest */,
 				3FE369BC27C9A07F00231D42 /* VesselUITests.xctest */,
+				723B2C4E29F210D800AB38E7 /* VesselNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -990,7 +1014,7 @@
 		3FE3699E27C9A07E00231D42 /* Vessel */ = {
 			isa = PBXGroup;
 			children = (
-				3F9FDA2329B11CE10064B9B0 /* Vessel.entitlements */,
+				726A545C29B06A0C00E63B32 /* Vessel.entitlements */,
 				3F15AD07288DC87C004716CA /* AfterTest */,
 				72D4FC0D287D2CD400EA2EA3 /* Analytics */,
 				3FE3699F27C9A07E00231D42 /* AppDelegate.swift */,
@@ -1441,6 +1465,7 @@
 				72DB1C962907ABFD00410C2D /* WaterManager.swift */,
 				72985CFE292DD38E00E6173E /* RemoteConfigManager.swift */,
 				72798B81298D0A2100A5BD65 /* RemindersManager.swift */,
+				726A545A29ADDBA600E63B32 /* LocalNotificationsManager.swift */,
 				72C0BCC429CB858500843586 /* RouteManager.swift */,
 			);
 			path = Managers;
@@ -1593,6 +1618,7 @@
 				3FE3699A27C9A07E00231D42 /* Resources */,
 				9A12A64D682B5E96466F0488 /* [CP] Embed Pods Frameworks */,
 				7206C4E42883A545000130DA /* ShellScript */,
+				723B2C5929F210D800AB38E7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1640,6 +1666,23 @@
 			productReference = 3FE369BC27C9A07F00231D42 /* VesselUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		723B2C4D29F210D800AB38E7 /* VesselNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 723B2C5629F210D800AB38E7 /* Build configuration list for PBXNativeTarget "VesselNotificationServiceExtension" */;
+			buildPhases = (
+				723B2C4A29F210D800AB38E7 /* Sources */,
+				723B2C4B29F210D800AB38E7 /* Frameworks */,
+				723B2C4C29F210D800AB38E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VesselNotificationServiceExtension;
+			productName = VesselNotificationServiceExtension;
+			productReference = 723B2C4E29F210D800AB38E7 /* VesselNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1647,7 +1690,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					3FE3699B27C9A07E00231D42 = {
@@ -1660,6 +1703,9 @@
 					3FE369BB27C9A07F00231D42 = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 3FE3699B27C9A07E00231D42;
+					};
+					723B2C4D29F210D800AB38E7 = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -1679,6 +1725,7 @@
 				3FE3699B27C9A07E00231D42 /* Vessel */,
 				3FE369B127C9A07F00231D42 /* VesselTests */,
 				3FE369BB27C9A07F00231D42 /* VesselUITests */,
+				723B2C4D29F210D800AB38E7 /* VesselNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1757,6 +1804,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3FE369BA27C9A07F00231D42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		723B2C4C29F210D800AB38E7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1915,6 +1969,7 @@
 				727C07B428B7484500039BE0 /* DebugMenuViewModel.swift in Sources */,
 				72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */,
 				3F426DB828DFA1CA00927B68 /* GraphView.swift in Sources */,
+				726A545B29ADDBA600E63B32 /* LocalNotificationsManager.swift in Sources */,
 				7295568028F67980000DD006 /* Plan.swift in Sources */,
 				3F87B96727D4209F00D589F7 /* Encodable.swift in Sources */,
 				3F4C594A2877CEC10088F03A /* NSObjectExtension.swift in Sources */,
@@ -2114,6 +2169,13 @@
 			files = (
 				3FE369C327C9A07F00231D42 /* VesselUITestsLaunchTests.swift in Sources */,
 				3FE369C127C9A07F00231D42 /* VesselUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		723B2C4A29F210D800AB38E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2414,6 +2476,60 @@
 			};
 			name = Release;
 		};
+		723B2C5729F210D800AB38E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LVHT76MK6B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VesselNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VesselNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.0.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios.VesselNotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		723B2C5829F210D800AB38E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LVHT76MK6B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VesselNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VesselNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.0.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios.VesselNotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2449,6 +2565,15 @@
 			buildConfigurations = (
 				3FE369CD27C9A07F00231D42 /* Debug */,
 				3FE369CE27C9A07F00231D42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		723B2C5629F210D800AB38E7 /* Build configuration list for PBXNativeTarget "VesselNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				723B2C5729F210D800AB38E7 /* Debug */,
+				723B2C5829F210D800AB38E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

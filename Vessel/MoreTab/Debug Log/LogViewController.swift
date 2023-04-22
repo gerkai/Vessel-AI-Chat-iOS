@@ -7,7 +7,7 @@
 import UIKit
 import MessageUI
 
-let MAIL_RECIPIENT = "carson@vesselhealth.com"
+let MAIL_RECIPIENT = "nicolas@vesselhealth.com"
 
 class LogViewController: UIViewController, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate
 {

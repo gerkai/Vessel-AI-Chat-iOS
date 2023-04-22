@@ -277,7 +277,7 @@ class PlansManager
         ObjectStore.shared.clientSave(plans[index])
     }
     
-    //returns array of only food plans, if variable shouldFilterForToday is true then it will return all foods without removedDate, or if shouldFilterForPastDay variable has a value, it will filter for foods existing on that date with server format (yyyy-MM-dd)
+    //returns array of only food plans, if variable shouldFilterForToday is true then it will return all food without removedDate, or if shouldFilterForPastDay variable has a value, it will filter for food existing on that date with server format (yyyy-MM-dd)
     func getFoodPlans(shouldFilterForToday: Bool = false, shouldFilterForSelectedDay selectedDate: String? = nil) -> [Plan]
     {
         let todayDate = Date.serverDateFormatter.string(from: Date())
@@ -386,13 +386,13 @@ extension PlansManager
             }
         }
         
-        // Foods
-        let foods: [Plan] = getFoodPlans(shouldFilterForToday: date == todayDate, shouldFilterForSelectedDay: date)
+        // Food
+        let food: [Plan] = getFoodPlans(shouldFilterForToday: date == todayDate, shouldFilterForSelectedDay: date)
 
-        if showFood && !foods.isEmpty && !Contact.main()!.suggestedFoods.isEmpty
+        if showFood && !food.isEmpty && !Contact.main()!.suggestedFood.isEmpty
         {
             parts += 1
-            progress += foods.contains(where: { $0.completed.contains(date) }) ? 1.0 : 0.0
+            progress += food.contains(where: { $0.completed.contains(date) }) ? 1.0 : 0.0
         }
         
         // Insights

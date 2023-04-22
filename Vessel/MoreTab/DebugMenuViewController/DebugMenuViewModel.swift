@@ -22,7 +22,7 @@ enum DebugMenuOption: Int
     case eraseAll
     case eraseActivities
     case eraseCurriculums
-    case eraseFoods
+    case eraseFood
     case eraseLessons
     case erasePlans
     case eraseResults
@@ -31,6 +31,10 @@ enum DebugMenuOption: Int
     case resetLessonProgress
     case newDayForLesson
     case useMockResults
+    case useShortPeriodsForRemindersPushes
+    case useShortPeriodsForTakeATestPushes
+    case useShortPeriodsForGeneralWellnessPushes
+    case useShortPeriodsForFuelPushes
     
     case forceAppReview
     
@@ -51,7 +55,7 @@ enum DebugMenuOption: Int
             case .eraseAll: return "Erase all objects"
             case .eraseActivities: return "Erase all activities"
             case .eraseCurriculums: return "Erase all curriculums"
-            case .eraseFoods: return "Erase all foods"
+            case .eraseFood: return "Erase all food"
             case .eraseLessons: return "Erase all lessons"
             case .erasePlans: return "Erase all plans"
             case .eraseResults: return "Erase all test results"
@@ -60,7 +64,11 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return "Reset Lesson Progress"
             case .newDayForLesson: return "Make today a new lesson day"
             case .useMockResults: return "Use mock test results"
-            
+            case .useShortPeriodsForRemindersPushes: return "Use short periods for reminders pushes"
+            case .useShortPeriodsForTakeATestPushes: return "Use short periods for take a test pushes"
+            case .useShortPeriodsForGeneralWellnessPushes: return "Use short periods for wellness pushes"
+            case .useShortPeriodsForFuelPushes: return "Use short periods for fuel pushes"
+
             case .forceAppReview: return "Force App Review"
         }
     }
@@ -95,7 +103,7 @@ enum DebugMenuOption: Int
             case .eraseAll: return Constants.KEY_ERASE_ALL
             case .eraseActivities: return Constants.KEY_ERASE_ACTIVITIES
             case .eraseCurriculums: return Constants.KEY_ERASE_CURRICULUMS
-            case .eraseFoods: return Constants.KEY_ERASE_FOODS
+            case .eraseFood: return Constants.KEY_ERASE_FOOD
             case .eraseLessons: return Constants.KEY_ERASE_LESSONS
             case .erasePlans: return Constants.KEY_ERASE_PLANS
             case .eraseResults: return Constants.KEY_ERASE_RESULTS
@@ -103,6 +111,10 @@ enum DebugMenuOption: Int
             case .resetLessonProgress: return Constants.KEY_RESET_LESSON_PROGRESS
             case .newDayForLesson: return Constants.KEY_NEW_LESSON_DAY
             case .useMockResults: return Constants.KEY_USE_MOCK_RESULTS
+            case .useShortPeriodsForRemindersPushes: return Constants.KEY_USE_SHORT_PERIODS_FOR_REMINDERS_PUSHES
+            case .useShortPeriodsForTakeATestPushes: return Constants.KEY_USE_SHORT_PERIODS_FOR_TAKE_A_TEST_PUSHES
+            case .useShortPeriodsForGeneralWellnessPushes: return Constants.KEY_USE_SHORT_PERIODS_FOR_GENERAL_WELLNESS_PUSHES
+            case .useShortPeriodsForFuelPushes: return Constants.KEY_USE_SHORT_PERIODS_FOR_FUEL_PUSHES
             case .forceAppReview: return Constants.KEY_FORCE_APP_REVIEW
         }
     }
@@ -138,7 +150,7 @@ enum DebugMenuOption: Int
             }
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
         }
-        else if self == .eraseFoods
+        else if self == .eraseFood
         {
             Storage.clear(objectType: Food.self)
             //force today tab to update
@@ -245,7 +257,7 @@ class DebugMenuViewModel
         .eraseAll,
         .eraseActivities,
         .eraseCurriculums,
-        .eraseFoods,
+        .eraseFood,
         .eraseLessons,
         .erasePlans,
         .eraseResults,
@@ -253,6 +265,10 @@ class DebugMenuViewModel
         .resetLessonProgress,
         .newDayForLesson,
         .useMockResults,
+        .useShortPeriodsForRemindersPushes,
+        .useShortPeriodsForTakeATestPushes,
+        .useShortPeriodsForGeneralWellnessPushes,
+        .useShortPeriodsForFuelPushes,
         .forceAppReview
     ]
     
