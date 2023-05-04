@@ -91,4 +91,9 @@ extension String
         dateFormatter.pmSymbol = Constants.PM_SYMBOL
         return dateFormatter.string(from: date)
     }
+    
+    func removeISODateEndingToServerFormat() -> String?
+    {
+        return String(self.dropLast(16))
+    }
 }

@@ -37,7 +37,7 @@ class AfterTestMVVMViewController: UIViewController
 
     override func viewWillAppear(_ animated: Bool)
     {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         isVisible = true
     }
     

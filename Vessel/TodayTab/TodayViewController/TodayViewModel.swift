@@ -358,7 +358,10 @@ class TodayViewModel
         // PROGRESS DAYS
         let progressDays: [String: Double] = showProgressDays ? lastWeekProgress : [:]
 
-        guard let createdDate = contact.createdDate, createdDate <= selectedDate else
+        guard let createdDateString = contact.createdDate,
+              let localCreatedDateString = Date.utcToLocal(dateStr: createdDateString),
+              let shortLocalCreatedString = localCreatedDateString.removeISODateEndingToServerFormat(),
+              shortLocalCreatedString < selectedDate else
         {
             return [.header(name: contact.first_name ?? "", goals: contact.getGoals()),
                     .progressDays(progress: progressDays),
