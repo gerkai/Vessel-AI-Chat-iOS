@@ -14,9 +14,10 @@ class LiveChatManager: NSObject
     
     func navigateToLiveChat(in viewController: UIViewController)
     {
-        guard let contact = Contact.main() else
+        guard let contact = Contact.main(),
+              let accessToken = Server.shared.accessToken else
         {
-            assertionFailure("LiveChatManager-navigateToLiveChat: mainContact not available")
+            assertionFailure("LiveChatManager-navigateToLiveChat: mainContact or accessToken not available")
             return
         }
         LiveChat.name = contact.fullName
@@ -25,6 +26,7 @@ class LiveChatManager: NSObject
         LiveChat.licenseId = Constants.LiveChatLicenseID
         LiveChat.delegate = self
         LiveChat.customPresentationStyleEnabled = true
+        LiveChat.setVariable(withKey: "access_token", value: accessToken)
 
         viewController.present(LiveChat.chatViewController!, animated: true)
     }
