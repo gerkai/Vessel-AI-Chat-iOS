@@ -162,9 +162,23 @@ enum TodayViewSection: Equatable
                 }
                 else
                 {
+                    let description: String
+                    if activity.isLifestyleRecommendation && activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID
+                    {
+                        var goals = Contact.main()?.getGoals() ?? []
+                        if goals.contains("Sleep") && goals.count > 1
+                        {
+                            goals.removeAll(where: { $0 == "Sleep" })
+                        }
+                        description = String(format: activity.description ?? "", goals.map({ $0.lowercased() }).joined(separator: ", "))
+                    }
+                    else
+                    {
+                        description = activity.description ?? ""
+                    }
                     cells.append(.checkMarkCard(title: activity.title,
                                                 subtitle: activity.frequency,
-                                                description: activity.description ?? "",
+                                                description: description,
                                                 backgroundImage: activity.imageUrl,
                                                 isCompleted: false,
                                                 id: activity.id,

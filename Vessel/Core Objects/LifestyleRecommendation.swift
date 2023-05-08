@@ -78,5 +78,5 @@ extension LifestyleRecommendation
                                                                          imageURL: "https://dev-media.vesselhealth.com/AM%20Card%20cropped_1672942778950.jpg",
                                                                          title: NSLocalizedString("Vessel Fuel AM", comment: ""),
                                                                          subtext: nil,
-                                                                         description: NSLocalizedString("Personalized for you to help improve your nutrient levels and to help with sleep.", comment: ""))
+                                                                         description: NSLocalizedString("Personalized for you to help improve your nutrient levels and to help with %@.", comment: ""))
 }
