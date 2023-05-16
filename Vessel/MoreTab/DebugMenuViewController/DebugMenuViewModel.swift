@@ -16,6 +16,7 @@ enum DebugMenuOption: Int
     case printNetworkTraffic
     case printInitAndDeinit
     case relaxedScanningDistance
+    case enableChatGPTCoach
     
     case addActivity
     
@@ -49,6 +50,7 @@ enum DebugMenuOption: Int
             case .printNetworkTraffic: return "Print Network Traffic"
             case .printInitAndDeinit: return "Print intialization and deinitialization"
             case .relaxedScanningDistance: return "Relaxed Scanning Distance"
+            case .enableChatGPTCoach: return "Enable ChatGPT coach"
             
             case .addActivity: return "Add activity with id: "
             
@@ -99,6 +101,7 @@ enum DebugMenuOption: Int
             case .showDebugDrawing: return Constants.KEY_SHOW_DEBUG_DRAWING
             case .printInitAndDeinit: return Constants.KEY_PRINT_INIT_DEINIT
             case .relaxedScanningDistance: return Constants.KEY_RELAXED_SCANNING_DISTANCE
+            case .enableChatGPTCoach: return Constants.KEY_ENABLE_CHAT_GPT_COACH
             case .addActivity: return nil
             case .eraseAll: return Constants.KEY_ERASE_ALL
             case .eraseActivities: return Constants.KEY_ERASE_ACTIVITIES
@@ -253,6 +256,7 @@ class DebugMenuViewModel
         .printNetworkTraffic,
         .printInitAndDeinit,
         .relaxedScanningDistance,
+        .enableChatGPTCoach,
         .addActivity,
         .eraseAll,
         .eraseActivities,

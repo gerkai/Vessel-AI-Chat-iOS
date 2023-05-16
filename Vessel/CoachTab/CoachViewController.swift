@@ -22,8 +22,12 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         super.viewDidLoad()
         
-        let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(onLaunchChat))
-        imageView.addGestureRecognizer(gestureRecognizer2)
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onToggleChatGPT))
+        gestureRecognizer.numberOfTapsRequired = 3
+        imageView.addGestureRecognizer(gestureRecognizer)
+        
+//        let gestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(onLaunchChat))
+//        imageView.addGestureRecognizer(gestureRecognizer2)
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
@@ -44,5 +48,13 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     @IBAction func onLaunchChat()
     {
         LiveChatManager.shared.navigateToLiveChat(in: self)
+    }
+    
+    @objc
+    func onToggleChatGPT()
+    {
+        let value = UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
+        UserDefaults.standard.set(!value, forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
+        Log_Add("CHAT GPT COACH TOGGLED: \(UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH))")
     }
 }
