@@ -72,6 +72,14 @@ class PlansManager
         {
             print("Adding fuel activities")
             var fuelActive = false
+            guard Contact.FuelInfo != nil else
+            {
+                Contact.main()?.getFuel(onDone: {
+                    self.addFuelActivities()
+                })
+                return
+            }
+            
             if Contact.FuelInfo?.is_active == true
             {
                 fuelActive = true
@@ -274,7 +282,15 @@ class PlansManager
         {
             plans[index].completed.removeAll(where: { $0 == date })
         }
-        ObjectStore.shared.clientSave(plans[index])
+        if plans[index].id < 0
+        {
+            let plan = Plan(plan: plans[index])
+            ObjectStore.shared.clientSave(plan)
+        }
+        else
+        {
+            ObjectStore.shared.clientSave(plans[index])
+        }
     }
     
     //returns array of only food plans, if variable shouldFilterForToday is true then it will return all food without removedDate, or if shouldFilterForPastDay variable has a value, it will filter for food existing on that date with server format (yyyy-MM-dd)

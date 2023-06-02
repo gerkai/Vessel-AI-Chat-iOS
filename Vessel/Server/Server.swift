@@ -79,13 +79,14 @@ let ADD_NEW_SINGLE_PLAN_PATH = "plan"
 let REMOVE_SINGLE_PLAN_PATH = "plan/{plan_id}"
 let ADD_NEW_MULTIPLE_PLAN_PATH = "plan/build"
 let TOGGLE_PLAN_PATH = "plan/{plan_id}/toggle"
-let GET_LESSON_PATH = "lesson/{lesson_id}"
-let GET_LESSON_QUESTION_PATH = "lesson-question-response/{lesson_question_response_id}"
 let USER_HAS_FUEL_PATH = "fuel"
 let LIFESTYLE_RECOMMENDATION_PATH = "lifestyle-recommendation"
 let GET_EXPERT_PATH = "fuel/expert"
-let MEMBERSHIPS = "v2/memberships"
+let MEMBERSHIPS_PATH = "v2/memberships"
 let GET_ALL_EXPERTS_PATH = "experts"
+let GET_LEADERBOARD = "expert/{expert_id}/leaderboard"
+let GET_STAFF = "expert/{expert_id}/staff"
+let STAFF_EXPERT_ASSOCIATION = "expert/{expert_id}/attribution"
 
 // MARK: - Structs
 struct CardAssociation
@@ -510,6 +511,7 @@ class Server: NSObject
         Contact.reset()
         PlansManager.shared.plans = []
         LessonsManager.shared.clearLessons()
+        UserDefaults.standard.set(nil, forKey: Constants.KEY_PRACTITIONER_IMAGE_URL)
     }
     
     func changePassword(oldPassword: String, newPassword: String, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: String) -> Void)
@@ -966,11 +968,6 @@ class Server: NSObject
     
     func removeSinglePlan(planId: Int, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
-//        let encoder = JSONEncoder()
-//        encoder.outputFormatting = .prettyPrinted
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
-//        let data = try! encoder.encode(plan.id)
-        
         let urlString = "\(API())\(REMOVE_SINGLE_PLAN_PATH)"
         let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
         
@@ -982,7 +979,7 @@ class Server: NSObject
         }
         
         let request = URLRequest(url: url)
-//        request.httpBody = data
+
         //send it to server
         serverDelete(request: request)
         {
@@ -1326,11 +1323,136 @@ class Server: NSObject
         }
     }
     
+    // MARK: - Dashboard
+    func getLeaderboard(expertId: Int, startDate: String?, endDate: String?, onSuccess success: @escaping (_ leaderboard: LeaderboardResponse) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        let urlString = "\(API())\(GET_LEADERBOARD)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{expert_id}", with: "\(expertId)")
+        
+        var params = [String: String]()
+        if let startDate = startDate
+        {
+            params["start_date"] = startDate
+        }
+        if let endDate = endDate
+        {
+            params["end_date"] = endDate
+        }
+        
+        guard let request = Server.shared.GenerateRequest(urlString: finalUrlString, withParams: params) else
+        {
+            let error = NSError.init(domain: "", code: 400, userInfo: ["message": NSLocalizedString("Unable to get leaderboard response", comment: "Server error message")])
+            failure(error.localizedDescription)
+            return
+        }
+
+        //send it to server
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(LeaderboardResponse.self, from: data)
+                success(decodedResponse)
+            }
+            catch
+            {
+                Log_Add("get leaderboard error: \(error)")
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error?.localizedDescription)
+            }
+        }
+    }
+    
+    func getStaff(expertId: Int, onSuccess success: @escaping (_ staff: [Staff]) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        let urlString = "\(API())\(GET_STAFF)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{expert_id}", with: "\(expertId)")
+        
+        guard let url = URL(string: finalUrlString) else
+        {
+            failure("Error making url from string: \(finalUrlString)")
+            return
+        }
+        
+        let request = URLRequest(url: url)
+
+        //send it to server
+        serverGet(request: request)
+        { data in
+            do
+            {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode([Staff].self, from: data)
+                success(decodedResponse)
+            }
+            catch
+            {
+                Log_Add("get staff error: \(error)")
+                DispatchQueue.main.async()
+                {
+                    failure(error.localizedDescription)
+                }
+            }
+        }
+        onFailure:
+        { error in
+            DispatchQueue.main.async()
+            {
+                failure(error?.localizedDescription)
+            }
+        }
+    }
+    
+    func setExpertAttribution(expertId: Int, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
+    {
+        let urlString = "\(API())\(STAFF_EXPERT_ASSOCIATION)"
+        let finalUrlString = urlString.replacingOccurrences(of: "{expert_id}", with: "\(expertId)")
+        
+        guard let url = URL(string: finalUrlString) else
+        {
+            failure("Error making url from string: \(finalUrlString)")
+            return
+        }
+        
+        let request = URLRequest(url: url)
+
+        //send it to server
+        serverPost(request: request, onSuccess:
+        { (data) in
+            if let staffId = data["staff_id"]
+            {
+                print("STAFF ID: \(staffId)")
+            }
+            
+            DispatchQueue.main.async()
+            {
+                success()
+            }
+        },
+        onFailure:
+        { (string) in
+            DispatchQueue.main.async()
+            {
+                failure(NSLocalizedString("Server Error", comment: ""))
+            }
+        })
+    }
+    
     // MARK: - Memberships
     func getMemberships(onSuccess success: @escaping (_ result: String) -> Void, onFailure failure: @escaping (_ message: String?) -> Void)
     {
         let API = API().components(separatedBy: ENDPOINT_ROOT).first ?? ""
-        let urlString = "\(API)\(MEMBERSHIPS)"
+        let urlString = "\(API)\(MEMBERSHIPS_PATH)"
         let request = Server.shared.GenerateRequest(urlString: urlString)!
         
         serverGet(request: request)
@@ -1339,7 +1461,6 @@ class Server: NSObject
             {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(String.self, from: data)
-                //print("Decoded Fuel: \(decodedFuel)")
                 success(decodedResponse)
             }
             catch
@@ -1355,7 +1476,6 @@ class Server: NSObject
         { error in
             DispatchQueue.main.async()
             {
-                //print("get fuel error2: \(String(describing: error))")
                 failure(error?.localizedDescription)
             }
         }

@@ -143,4 +143,27 @@ class PractitionerQueryViewModel
             print("Unable to retrieve experts")
         })
     }
+    
+    func loadStaff(onCompletion: @escaping (_ staff: [Staff]) -> Void, onFailure: @escaping () -> Void)
+    {
+        guard let expertId = Contact.PractitionerID else
+        {
+            DispatchQueue.main.async
+            {
+                onFailure()
+            }
+            return
+        }
+        Server.shared.getStaff(expertId: expertId) { staff in
+            DispatchQueue.main.async
+            {
+                onCompletion(staff)
+            }
+        } onFailure: { message in
+            DispatchQueue.main.async
+            {
+                onFailure()
+            }
+        }
+    }
 }

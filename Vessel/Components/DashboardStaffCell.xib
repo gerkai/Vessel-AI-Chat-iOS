@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BananaGrotesk-Bold.otf">
+            <string>BananaGrotesk-Bold</string>
+        </array>
+        <array key="BananaGrotesk-Regular.otf">
+            <string>BananaGrotesk-Regular</string>
+        </array>
+        <array key="BananaGrotesk-Semibold.otf">
+            <string>BananaGrotesk-Semibold</string>
+        </array>
+        <array key="NoeText-Book.otf">
+            <string>NoeText-Book</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardStaffCell" customModule="Vessel" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="yb0-2g-qvE" id="k7u-dL-oqZ"/>
+                <outlet property="imageView" destination="0OZ-xV-1Vh" id="gtN-1Y-PX8"/>
+                <outlet property="indexLabel" destination="ven-Kr-PYI" id="kve-UX-vPS"/>
+                <outlet property="nameLabel" destination="dfL-00-xju" id="oNJ-7C-asL"/>
+                <outlet property="quizesLabel" destination="HEZ-5A-XK3" id="iiG-el-rvS"/>
+                <outlet property="salesLabel" destination="RxE-3X-TSV" id="epa-R2-w96"/>
+                <outlet property="testLabel" destination="RXZ-3e-sPZ" id="7pD-MD-JbW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yb0-2g-qvE">
+                    <rect key="frame" x="0.0" y="0.0" width="335" height="76"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0OZ-xV-1Vh">
+                            <rect key="frame" x="16" y="18" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="7Es-6Y-9ke"/>
+                                <constraint firstAttribute="width" constant="40" id="q2e-9x-DtC"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="16"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-00-xju">
+                            <rect key="frame" x="72" y="28" width="12.333333333333329" height="20"/>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxE-3X-TSV">
+                            <rect key="frame" x="301" y="27" width="9" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="hU1-aK-6pI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-3e-sPZ">
+                            <rect key="frame" x="259" y="27" width="9" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="naN-uD-yEd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEZ-5A-XK3">
+                            <rect key="frame" x="220" y="27" width="9" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="rbW-30-mbe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ven-Kr-PYI">
+                            <rect key="frame" x="44" y="42" width="16" height="16"/>
+                            <color key="backgroundColor" red="1" green="0.76862745098039209" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="H86-qH-nYe"/>
+                                <constraint firstAttribute="height" constant="16" id="eaL-HS-7u2"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="NoeText-Book" family="Noe Text" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0OZ-xV-1Vh" firstAttribute="top" secondItem="yb0-2g-qvE" secondAttribute="top" constant="18" id="0TT-jz-BMA"/>
+                        <constraint firstItem="dfL-00-xju" firstAttribute="centerY" secondItem="yb0-2g-qvE" secondAttribute="centerY" id="By0-oz-zYm"/>
+                        <constraint firstItem="RXZ-3e-sPZ" firstAttribute="centerY" secondItem="yb0-2g-qvE" secondAttribute="centerY" id="F5m-dF-kNC"/>
+                        <constraint firstAttribute="trailing" secondItem="RxE-3X-TSV" secondAttribute="trailing" constant="25" id="Jj9-a2-PLj"/>
+                        <constraint firstItem="HEZ-5A-XK3" firstAttribute="centerY" secondItem="yb0-2g-qvE" secondAttribute="centerY" id="UGp-FU-dds"/>
+                        <constraint firstItem="ven-Kr-PYI" firstAttribute="bottom" secondItem="0OZ-xV-1Vh" secondAttribute="bottom" id="UfK-vb-RPO"/>
+                        <constraint firstItem="RxE-3X-TSV" firstAttribute="centerY" secondItem="yb0-2g-qvE" secondAttribute="centerY" id="bBp-cz-pks"/>
+                        <constraint firstAttribute="bottom" secondItem="0OZ-xV-1Vh" secondAttribute="bottom" constant="18" id="bIa-Pc-u7W"/>
+                        <constraint firstItem="ven-Kr-PYI" firstAttribute="trailing" secondItem="0OZ-xV-1Vh" secondAttribute="trailing" constant="4" id="lpK-W2-vsl"/>
+                        <constraint firstItem="0OZ-xV-1Vh" firstAttribute="leading" secondItem="yb0-2g-qvE" secondAttribute="leading" constant="16" id="lpS-M6-iAj"/>
+                        <constraint firstItem="dfL-00-xju" firstAttribute="leading" secondItem="0OZ-xV-1Vh" secondAttribute="trailing" constant="16" id="rcA-vo-tdb"/>
+                        <constraint firstItem="RxE-3X-TSV" firstAttribute="leading" secondItem="RXZ-3e-sPZ" secondAttribute="trailing" constant="33" id="uiX-mX-U8R"/>
+                        <constraint firstItem="RXZ-3e-sPZ" firstAttribute="leading" secondItem="HEZ-5A-XK3" secondAttribute="trailing" constant="30" id="wRi-jy-KD2"/>
+                        <constraint firstItem="HEZ-5A-XK3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dfL-00-xju" secondAttribute="trailing" constant="10" id="z7P-cI-XXt"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yb0-2g-qvE" secondAttribute="trailing" id="Deh-Rd-jyE"/>
+                <constraint firstItem="yb0-2g-qvE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GEm-KO-hox"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yb0-2g-qvE" secondAttribute="bottom" id="X5P-ww-QE3"/>
+                <constraint firstItem="yb0-2g-qvE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uZ5-hT-Lb8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-263.35877862595419" y="-19.014084507042256"/>
+        </view>
+    </objects>
+</document>

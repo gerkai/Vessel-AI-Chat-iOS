@@ -8,6 +8,7 @@ def pods
   pod 'AWSCore'
   pod 'AWSS3'
   pod 'Bugsee'
+  pod 'Fastis'
   pod 'Firebase/Core'
   pod 'FirebaseDynamicLinks'
   pod 'FirebaseRemoteConfig'

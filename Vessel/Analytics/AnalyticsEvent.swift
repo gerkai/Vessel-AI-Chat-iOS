@@ -29,6 +29,7 @@ enum AnalyticsEvent
     case identification(type: AnalyticsIdentificationType)
     case lessonCompleted(lessonId: Int, lessonName: String)
     case lessonStarted(lessonId: Int, lessonName: String)
+    case loadComplete(objectsLoadedTime: Double, buildLessonPlanTime: Double, completeTime: Double)
     case logIn(loginType: AnalyticsLoginType)
     case logOut
     case prlAfterTestGetSupplement(expertID: Int?)
@@ -79,6 +80,7 @@ enum AnalyticsEvent
         case .identification: return "Identification"
         case .lessonCompleted: return "Lesson Completed"
         case .lessonStarted: return "Lesson Started"
+        case .loadComplete: return "Initial Load Completed"
         case .logIn: return "Log In"
         case .logOut: return "LOGOUT"
         case .prlAfterTestGetSupplement: return "AFTER TEST GET SUPPLEMENT"
@@ -167,6 +169,10 @@ enum AnalyticsEvent
         case .lessonStarted(let lessonId, let lessonName):
             return ["Lesson ID": lessonId,
                     "Lesson Name": lessonName]
+        case .loadComplete(let objectsLoadedTime, let buildLessonPlanTime, let completeTime):
+            return ["Objects Loaded Time": objectsLoadedTime,
+                    "Build Lesson Plan Time": buildLessonPlanTime,
+                    "Complete Time": completeTime]
         case .logIn(let loginType):
             return ["Login Type": loginType.rawValue]
         case .logOut:

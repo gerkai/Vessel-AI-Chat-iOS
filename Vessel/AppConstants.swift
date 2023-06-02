@@ -99,6 +99,7 @@ struct Constants
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"
     static let PRESENTATION_DATE_FORMAT = "dd MM yyyy"
+    static let VERBOSE_FORMAT = "d MMMM"
     static let ISO_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
     static let DAY_INITIAL_DATE_FORMAT = "EEEEE"
     
@@ -127,6 +128,7 @@ struct Constants
     static let KEY_PRINT_INIT_DEINIT = "KEY_PRINT_INIT_DEINIT"
     static let KEY_RELAXED_SCANNING_DISTANCE = "KEY_RELAXED_SCANNING_DISTANCE"
     static let KEY_ENABLE_CHAT_GPT_COACH = "KEY_ENABLE_CHAT_GPT_COACH"
+    static let KEY_ENABLE_FUEL = "KEY_ENABLE_FUEL"
     
     static let KEY_ERASE_ALL = "KEY_ERASE_ALL"
     static let KEY_ERASE_ACTIVITIES = "KEY_ERASE_ACTIVITIES"
@@ -224,6 +226,9 @@ struct Constants
     static let FontBodyMain16 = UIFont(name: "BananaGrotesk-Regular", size: 16)!
     static let FontTitleMain24 = UIFont(name: "BananaGrotesk-Semibold", size: 24)!
     static let FontTitleMain16 = UIFont(name: "BananaGrotesk-Semibold", size: 16)!
+    static let FontTitleBold18 = UIFont(name: "BananaGrotesk-Bold", size: 18)!
+    static let FontTitleBold16 = UIFont(name: "BananaGrotesk-Bold", size: 16)!
+    static let FontTitleRegular16 = UIFont(name: "BananaGrotesk-Regular", size: 16)!
     static let FontTitleMain12 = UIFont(name: "BananaGrotesk-Semibold", size: 12)!
     static let FontBoldMain28 = UIFont(name: "BananaGrotesk-Bold", size: 28)!
     static let FontBodyAlt16 = UIFont(name: "NoeText-Book", size: 16)!

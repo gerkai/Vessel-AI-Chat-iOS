@@ -10,6 +10,7 @@ import Foundation
 
 enum MoreTabOptions
 {
+    case dashboard
     case myAccount
     case takeATest
     case orderCards
@@ -24,6 +25,8 @@ enum MoreTabOptions
     {
         switch self
         {
+        case .dashboard:
+            return "dashboardIcon"
         case .myAccount:
             return "myAccountIcon"
         case .takeATest:
@@ -49,6 +52,8 @@ enum MoreTabOptions
     {
         switch self
         {
+        case .dashboard:
+            return NSLocalizedString("Dashboard", comment: "")
         case .myAccount:
             return NSLocalizedString("My Account", comment: "")
         case .takeATest:
@@ -121,9 +126,15 @@ class MoreViewModel
         options.remove(at: index)
     }
     
+    func addDashboard()
+    {
+        guard shouldShowPractitionerSection() && !options.contains(.dashboard) else { return }
+        options.insert(.dashboard, at: 0)
+    }
+    
     func shouldShowPractitionerSection() -> Bool
     {
-        if Contact.main()!.expert_id == nil
+        if Contact.main()!.expert_id == nil && Contact.main()!.staff_id == nil
         {
             return false
         }

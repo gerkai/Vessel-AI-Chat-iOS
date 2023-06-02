@@ -514,8 +514,26 @@
                                             <outlet property="titleLabel" destination="lhq-6F-Qp9" id="8DD-2S-EQm"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TodayLoaderCell" rowHeight="38" id="xyI-Rn-GAJ" userLabel="LoaderCell">
+                                        <rect key="frame" x="0.0" y="866" width="390" height="38"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xyI-Rn-GAJ" id="2Iv-bc-tuL">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="38"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-Th-npL">
+                                                    <rect key="frame" x="185" y="9" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hUJ-Th-npL" firstAttribute="centerX" secondItem="2Iv-bc-tuL" secondAttribute="centerXWithinMargins" id="djg-yC-mOy"/>
+                                                <constraint firstItem="hUJ-Th-npL" firstAttribute="centerY" secondItem="2Iv-bc-tuL" secondAttribute="centerY" id="xWf-Oa-ZXs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TodayButtonCell" rowHeight="76" id="8Z6-A2-AMH" customClass="TodayButtonCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="866" width="390" height="76"/>
+                                        <rect key="frame" x="0.0" y="904" width="390" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Z6-A2-AMH" id="uI9-Uu-lzR">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="76"/>
@@ -553,7 +571,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TodayWaterDetailsSectionCell" rowHeight="114" id="FAD-b6-nYw" customClass="TodayWaterDetailsSectionTableViewCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="942" width="390" height="114"/>
+                                        <rect key="frame" x="0.0" y="980" width="390" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FAD-b6-nYw" id="aAv-3R-ka9">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="114"/>
@@ -577,7 +595,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TodayFoodDetailsSectionCell" rowHeight="173" id="7Tq-bI-s8S" customClass="TodayFoodDetailsSectionTableViewCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1056" width="390" height="173"/>
+                                        <rect key="frame" x="0.0" y="1094" width="390" height="173"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Tq-bI-s8S" id="8Vx-Er-jmi">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="173"/>
@@ -636,7 +654,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TodayFooterCell" focusStyle="custom" rowHeight="173" id="9D2-Y6-AM0" customClass="TodayFooterTableViewCell" customModule="Vessel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1229" width="390" height="173"/>
+                                        <rect key="frame" x="0.0" y="1267" width="390" height="173"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9D2-Y6-AM0" id="ASr-h0-WmU">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="173"/>
@@ -1575,7 +1593,7 @@ However, most people drink below what their body needs because it's hard to know
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eo5-Zk-PRw">
-                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
+                                <rect key="frame" x="0.0" y="87" width="390" height="723"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -1583,7 +1601,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eig-qD-zG5">
-                                <rect key="frame" x="20" y="47" width="43" height="33"/>
+                                <rect key="frame" x="20" y="47" width="44" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">

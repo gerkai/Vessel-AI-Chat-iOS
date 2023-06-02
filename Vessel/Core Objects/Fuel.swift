@@ -45,7 +45,7 @@ struct Fuel: Decodable
     let affiliate_url: String?
     let expert: Expert?
     let formula: Formula?
-    let is_active: Bool
+    var is_active: Bool
     let fuel_uuid: String?
     
     func amCapsulesPerServing() -> Int?

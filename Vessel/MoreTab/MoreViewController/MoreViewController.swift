@@ -46,6 +46,7 @@ class MoreViewController: UIViewController, VesselScreenIdentifiable, DebugMenuV
         if viewModel.shouldShowPractitionerSection()
         {
             updatePractitionerSectionUI()
+            viewModel.addDashboard()
         }
         else
         {
@@ -241,6 +242,14 @@ extension MoreViewController: UITableViewDelegate
         
         switch option
         {
+        case .dashboard:
+            guard let expertId = Contact.main()!.expert_id else { return }
+            let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "DashboardViewController") as! DashboardViewController
+            vc.hidesBottomBarWhenPushed = true
+            vc.expertId = expertId
+            navigationController?.pushViewController(vc, animated: true)
+
         case .myAccount:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "MyAccountViewController") as! MyAccountViewController
@@ -314,7 +323,7 @@ extension MoreViewController: UITableViewDelegate
     
     private func openSupplementQuiz()
     {
-        analytics.log(event: .prlMoreTabGetSupplement(expertID: Contact.main()!.pa_id))
+        analytics.log(event: .prlMoreTabGetSupplement(expertID: Contact.main()!.expert_id))
         
         if let expertID = Contact.main()!.expert_id
         {

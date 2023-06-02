@@ -136,11 +136,9 @@ class SignupEmailCheckingViewController: KeyboardFriendlyViewController, UITextF
         else
         {
             Log_Add("There is not a contact")
-            if Contact.PractitionerID == nil
-            {
-                Log_Add("PractitionerID == nil. Showing Pract.")
-                showPract = true
-            }
+            Contact.PractitionerID = nil
+            Log_Add("PractitionerID == nil. Showing Pract.")
+            showPract = true
         }
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         if showPract

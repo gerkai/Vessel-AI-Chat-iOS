@@ -211,6 +211,7 @@
 		721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */; };
 		721F7BE22935BACA00B1F501 /* LessonResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */; };
 		7230AE54296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7230AE53296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift */; };
+		7230BC242A208EDF00B48E75 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7230BC232A208EDF00B48E75 /* Staff.swift */; };
 		7231415329A4887400C774B0 /* ActivityDetailsScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231415229A4887400C774B0 /* ActivityDetailsScheduleView.swift */; };
 		7231415529A4889100C774B0 /* ActivityDetailsScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7231415429A4889100C774B0 /* ActivityDetailsScheduleView.xib */; };
 		72332FAE28EE890F008CBA8C /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */; };
@@ -235,6 +236,8 @@
 		726A545B29ADDBA600E63B32 /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A545A29ADDBA600E63B32 /* LocalNotificationsManager.swift */; };
 		7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB028FA88ED00909A9D /* ReagentFood.swift */; };
 		7271DFB328FA9B4B00909A9D /* PlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271DFB228FA9B4B00909A9D /* PlansManager.swift */; };
+		727472182A2085B7006B686F /* DashboardStaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727472172A2085B7006B686F /* DashboardStaffCell.swift */; };
+		7274721A2A2085DE006B686F /* DashboardStaffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 727472192A2085DE006B686F /* DashboardStaffCell.xib */; };
 		72798B79298C6CF100A5BD65 /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72798B78298C6CF100A5BD65 /* AddReminderViewController.swift */; };
 		72798B7C298C75FE00A5BD65 /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72798B7B298C75FE00A5BD65 /* RemindersViewController.swift */; };
 		72798B7E298C7A3E00A5BD65 /* AddReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72798B7D298C7A3E00A5BD65 /* AddReminderViewModel.swift */; };
@@ -256,6 +259,7 @@
 		7295133228F7DEC600E4E950 /* CoachTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7295133128F7DEC600E4E950 /* CoachTab.storyboard */; };
 		7295568028F67980000DD006 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295567F28F67980000DD006 /* Plan.swift */; };
 		7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295568128F6893E000DD006 /* ReagentFoodViewController.swift */; };
+		7295A6382A271930000D7E40 /* StaffSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7295A6372A271930000D7E40 /* StaffSelectViewModel.swift */; };
 		7296B727292F44A000162812 /* ReadOnlyLessonStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */; };
 		729757AB29011C5400EEFB65 /* ZendeskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AA29011C5400EEFB65 /* ZendeskManager.swift */; };
 		729757AD2901220D00EEFB65 /* LiveChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729757AC2901220D00EEFB65 /* LiveChatManager.swift */; };
@@ -263,6 +267,8 @@
 		72985D01292DD69500E6173E /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72985D00292DD69400E6173E /* remote_config_defaults.plist */; };
 		7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */; };
 		729EE03D295696FF00183922 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729EE03C295696FF00183922 /* UIScreenExtension.swift */; };
+		72A32DEE2A1DB02100C550A9 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A32DED2A1DB02100C550A9 /* DashboardViewController.swift */; };
+		72A32DF02A1DB03500C550A9 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A32DEF2A1DB03500C550A9 /* DashboardViewModel.swift */; };
 		72B2E78D28B8860D005AA536 /* GenderSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */; };
 		72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */; };
 		72B2E79128B8862A005AA536 /* BirthdaySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */; };
@@ -280,6 +286,7 @@
 		72BC244A292CAAA0002F6DA2 /* LessonStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */; };
 		72BC244C292CABC9002F6DA2 /* LessonStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72BC244B292CABC9002F6DA2 /* LessonStepView.xib */; };
 		72C0BCC529CB858500843586 /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C0BCC429CB858500843586 /* RouteManager.swift */; };
+		72C120AD2A2717DF001170B0 /* StaffSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C120AC2A2717DF001170B0 /* StaffSelectViewController.swift */; };
 		72C721DC28E2B831003FB61A /* TodayHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */; };
 		72C721DE28E2BF9B003FB61A /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */; };
 		72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */; };
@@ -560,6 +567,7 @@
 		721B6BB3289A0C0D0099BC4A /* GenericAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericAlertViewController.xib; sourceTree = "<group>"; };
 		721F7BE12935BACA00B1F501 /* LessonResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResultsViewController.swift; sourceTree = "<group>"; };
 		7230AE53296939FC004DBE3E /* TodayLockedCheckMarkCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLockedCheckMarkCardCell.swift; sourceTree = "<group>"; };
+		7230BC232A208EDF00B48E75 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		7231415229A4887400C774B0 /* ActivityDetailsScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsScheduleView.swift; sourceTree = "<group>"; };
 		7231415429A4889100C774B0 /* ActivityDetailsScheduleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDetailsScheduleView.xib; sourceTree = "<group>"; };
 		72332FAD28EE890F008CBA8C /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
@@ -589,6 +597,8 @@
 		7270EDE028A361E100177898 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		7271DFB028FA88ED00909A9D /* ReagentFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFood.swift; sourceTree = "<group>"; };
 		7271DFB228FA9B4B00909A9D /* PlansManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansManager.swift; sourceTree = "<group>"; };
+		727472172A2085B7006B686F /* DashboardStaffCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardStaffCell.swift; sourceTree = "<group>"; };
+		727472192A2085DE006B686F /* DashboardStaffCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardStaffCell.xib; sourceTree = "<group>"; };
 		72798B78298C6CF100A5BD65 /* AddReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
 		72798B7B298C75FE00A5BD65 /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
 		72798B7D298C7A3E00A5BD65 /* AddReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewModel.swift; sourceTree = "<group>"; };
@@ -610,6 +620,7 @@
 		7295133128F7DEC600E4E950 /* CoachTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CoachTab.storyboard; sourceTree = "<group>"; };
 		7295567F28F67980000DD006 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		7295568128F6893E000DD006 /* ReagentFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodViewController.swift; sourceTree = "<group>"; };
+		7295A6372A271930000D7E40 /* StaffSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffSelectViewModel.swift; sourceTree = "<group>"; };
 		7296B726292F44A000162812 /* ReadOnlyLessonStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyLessonStepViewController.swift; sourceTree = "<group>"; };
 		729757AA29011C5400EEFB65 /* ZendeskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZendeskManager.swift; sourceTree = "<group>"; };
 		729757AC2901220D00EEFB65 /* LiveChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatManager.swift; sourceTree = "<group>"; };
@@ -617,6 +628,8 @@
 		72985D00292DD69400E6173E /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
 		7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentFoodTableViewCell.swift; sourceTree = "<group>"; };
 		729EE03C295696FF00183922 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		72A32DED2A1DB02100C550A9 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		72A32DEF2A1DB03500C550A9 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		72B2E78C28B8860D005AA536 /* GenderSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E78E28B8861B005AA536 /* HeightWeightSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightWeightSelectViewModel.swift; sourceTree = "<group>"; };
 		72B2E79028B8862A005AA536 /* BirthdaySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewModel.swift; sourceTree = "<group>"; };
@@ -634,6 +647,7 @@
 		72BC2449292CAAA0002F6DA2 /* LessonStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonStepView.swift; sourceTree = "<group>"; };
 		72BC244B292CABC9002F6DA2 /* LessonStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonStepView.xib; sourceTree = "<group>"; };
 		72C0BCC429CB858500843586 /* RouteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
+		72C120AC2A2717DF001170B0 /* StaffSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffSelectViewController.swift; sourceTree = "<group>"; };
 		72C721DB28E2B831003FB61A /* TodayHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		72C721DD28E2BF9B003FB61A /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		72C86EF5294C2B5900E194E9 /* TodayProgressDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayProgressDaysCell.swift; sourceTree = "<group>"; };
@@ -785,6 +799,7 @@
 				3F1A248C2891E8B600BC539F /* Result.swift */,
 				3F9C679828FDF36D00BC44FA /* Source.swift */,
 				3F87B95E27D2C41C00D589F7 /* Storage.swift */,
+				7230BC232A208EDF00B48E75 /* Staff.swift */,
 			);
 			path = "Core Objects";
 			sourceTree = "<group>";
@@ -795,6 +810,8 @@
 				3F061D2529A7EE1B00139EC1 /* PractitionerSelectViewController.swift */,
 				3F061D2729A7EE3800139EC1 /* PractitionerQueryViewController.swift */,
 				3F061D2929A7EE4F00139EC1 /* PractitionerQueryViewModel.swift */,
+				72C120AC2A2717DF001170B0 /* StaffSelectViewController.swift */,
+				7295A6372A271930000D7E40 /* StaffSelectViewModel.swift */,
 			);
 			path = Practitioner;
 			sourceTree = "<group>";
@@ -1131,6 +1148,8 @@
 			children = (
 				3FE369F327C9B34A00231D42 /* BounceButton.swift */,
 				3F426DB228DFA1CA00927B68 /* ChartView */,
+				727472172A2085B7006B686F /* DashboardStaffCell.swift */,
+				727472192A2085DE006B686F /* DashboardStaffCell.xib */,
 				3F9C67B928FF3E7E00BC44FA /* ExpandableContentView.swift */,
 				3F9C67BB28FF3EC000BC44FA /* ExpandableContentView.xib */,
 				72F3D62D28F15C54007ED9A8 /* FoodCheckmarkView.swift */,
@@ -1158,11 +1177,11 @@
 				3F2823282944021200CB3844 /* SplashView */,
 				3F59A18128E28715005E5F46 /* TestsGoals */,
 				3FE369F527C9B39100231D42 /* VesselButton.swift */,
-				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
-				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
-				720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */,
 				72B3B9F228ECEBC30060A6E8 /* VesselFooterView.swift */,
 				72B3B9F428ECEBDF0060A6E8 /* VesselFooterView.xib */,
+				720A23DA28DC114A00A11CF6 /* VesselScreenIdentifiable.swift */,
+				3F96182527F35B1100CB37B6 /* VesselSegmentedControl.swift */,
+				3F0547B627C9E9D5006E3098 /* VesselTextField.swift */,
 				72CF678728EFB3B10008B0F6 /* WaterIntakeView.swift */,
 				72CF678928EFB3C00008B0F6 /* WaterIntakeView.xib */,
 			);
@@ -1297,6 +1316,7 @@
 		7282D413288F7C8200B4E26D /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				72A32DEC2A1DB00E00C550A9 /* DashboardViewController */,
 				3F244283293FFAE70043E4B4 /* Debug Log */,
 				727C07B028B742E900039BE0 /* DebugMenuViewController */,
 				7270EDDD28A361CA00177898 /* ChangePasswordViewController */,
@@ -1343,6 +1363,15 @@
 				7299878228F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		72A32DEC2A1DB00E00C550A9 /* DashboardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72A32DED2A1DB02100C550A9 /* DashboardViewController.swift */,
+				72A32DEF2A1DB03500C550A9 /* DashboardViewModel.swift */,
+			);
+			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
 		72B2E77F28B8847C005AA536 /* OnboardingWelcome */ = {
@@ -1783,6 +1812,7 @@
 				3F0D387328E28E6E00D7C3A3 /* TestsGoalsView.xib in Resources */,
 				72BC2447292C93C7002F6DA2 /* Lesson.storyboard in Resources */,
 				3FE369E827C9A74B00231D42 /* NoeText-Book.otf in Resources */,
+				7274721A2A2085DE006B686F /* DashboardStaffCell.xib in Resources */,
 				721B6BB5289A0C0D0099BC4A /* GenericAlertViewController.xib in Resources */,
 				3F9C67BC28FF3EC000BC44FA /* ExpandableContentView.xib in Resources */,
 				3F15ACF8288C5421004716CA /* test_result_flow_p2.json in Resources */,
@@ -1956,6 +1986,7 @@
 				3F9C67B428FF011300BC44FA /* StudiesViewController.swift in Sources */,
 				3F9C67A628FE616700BC44FA /* Magnesium.swift in Sources */,
 				72BC244A292CAAA0002F6DA2 /* LessonStepView.swift in Sources */,
+				7230BC242A208EDF00B48E75 /* Staff.swift in Sources */,
 				3F0547DA27CB00FA006E3098 /* NoTestCardOnboardViewController.swift in Sources */,
 				72DD1FCC28F541C8006071B0 /* HydroQuizViewController.swift in Sources */,
 				3F12F049287DCE1400FCC52E /* PeeTipViewController.swift in Sources */,
@@ -2073,6 +2104,7 @@
 				3F0547C327CA94F1006E3098 /* StringExtensions.swift in Sources */,
 				3F9D6D8C2953620000664EA8 /* ReagentPopupViewController.swift in Sources */,
 				3F9D6D8E295D113400664EA8 /* GetSupplementsViewController.swift in Sources */,
+				727472182A2085B7006B686F /* DashboardStaffCell.swift in Sources */,
 				3F15ACEC288863C6004716CA /* FileDownloader.swift in Sources */,
 				3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */,
 				3FA6686A2885F8380006166D /* ActivateCardViewController.swift in Sources */,
@@ -2081,6 +2113,7 @@
 				3F4A989929198EED0031B8B8 /* AutoSizedCollectionView.swift in Sources */,
 				3FF45285291185C900B967CA /* MockResults.swift in Sources */,
 				3F0547BF27C9F105006E3098 /* AppConstants.swift in Sources */,
+				72C120AD2A2717DF001170B0 /* StaffSelectViewController.swift in Sources */,
 				72411CF9287E413C004A312E /* Resolved.swift in Sources */,
 				3F9CB7B428C7F7410093228E /* AlreadyScannedSlideupViewController.swift in Sources */,
 				7284205C28E2C85000EA61F3 /* TodaySectionTitleTableViewCell.swift in Sources */,
@@ -2105,12 +2138,14 @@
 				3F9C67A228FE60EE00BC44FA /* Ketones.swift in Sources */,
 				3F9C67A828FE61A200BC44FA /* Cortisol.swift in Sources */,
 				72F3D62E28F15C54007ED9A8 /* FoodCheckmarkView.swift in Sources */,
+				72A32DF02A1DB03500C550A9 /* DashboardViewModel.swift in Sources */,
 				3F15ACF2288A50CF004716CA /* DrawingView.swift in Sources */,
 				3FE369F427C9B34A00231D42 /* BounceButton.swift in Sources */,
 				728B593828924A64001C4B2A /* EditProfileViewModel.swift in Sources */,
 				72B2E78F28B8861B005AA536 /* HeightWeightSelectViewModel.swift in Sources */,
 				725C5C032938CECB000708AA /* LessonStepsProgressBar.swift in Sources */,
 				3F12F007287A6B4800FCC52E /* DateExtensions.swift in Sources */,
+				7295A6382A271930000D7E40 /* StaffSelectViewModel.swift in Sources */,
 				3FEFDAF1296E04DE00A4FA2E /* ReviewManager.swift in Sources */,
 				72F3C69428A36788001E3323 /* MyAccountViewModel.swift in Sources */,
 				3F3FCA15298096080010B111 /* Fuel.swift in Sources */,
@@ -2134,6 +2169,7 @@
 				3F3E113827F77CE00089BA6A /* OnboardingWelcomeViewController.swift in Sources */,
 				3F92D09E292DAA57004795E3 /* LoginCoordinator.swift in Sources */,
 				72DF47FE2890EDCC00DF33BE /* ChangePasswordViewController.swift in Sources */,
+				72A32DEE2A1DB02100C550A9 /* DashboardViewController.swift in Sources */,
 				3F59A18D28E28715005E5F46 /* GoalLearnMoreTileView.swift in Sources */,
 				3F12F00D287B3C6900FCC52E /* TermsViewController.swift in Sources */,
 				72985CFF292DD38E00E6173E /* RemoteConfigManager.swift in Sources */,
@@ -2350,7 +2386,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.17;
+				MARKETING_VERSION = 3.0.19;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2388,7 +2424,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.17;
+				MARKETING_VERSION = 3.0.19;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vesselhealth.vessel-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";

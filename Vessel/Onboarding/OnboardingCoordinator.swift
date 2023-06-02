@@ -82,6 +82,8 @@ class OnboardingCoordinator
         //and go directly to MainTabBarController
         else
         {
+            Log_Add("START INITIAL LOAD")
+
             //make sure our core objects are all up to date
             ObjectLoader.shared.loadCoreObjects(onDone:
             {

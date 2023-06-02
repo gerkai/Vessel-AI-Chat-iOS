@@ -81,6 +81,7 @@ class Contact: CoreObjectProtocol
     var allergy_ids: [Int]
     var goal_ids: [Int]
     var expert_id: Int?
+    var staff_id: Int?
     var pa_id: Int?
     var loginType: LoginType?
     private var _enrolled_program_ids: [Int]?
@@ -141,6 +142,7 @@ class Contact: CoreObjectProtocol
          allergy_ids: [Int] = [],
          goal_ids: [Int] = [],
          expert_id: Int? = nil,
+         staff_id: Int? = nil,
          pa_id: Int? = nil,
          loginType: LoginType? = nil,
          dailyWaterIntake: Int? = nil
@@ -162,6 +164,7 @@ class Contact: CoreObjectProtocol
         self.allergy_ids = allergy_ids
         self.goal_ids = goal_ids
         self.expert_id = expert_id
+        self.staff_id = staff_id
         self.pa_id = pa_id
         self.loginType = loginType
         self.dailyWaterIntake = dailyWaterIntake
@@ -185,6 +188,7 @@ class Contact: CoreObjectProtocol
         self.allergy_ids = contact.allergy_ids
         self.goal_ids = contact.goal_ids
         self.expert_id = contact.expert_id
+        self.staff_id = contact.staff_id
         self.pa_id = contact.pa_id
         self.loginType = contact.loginType
         self.dailyWaterIntake = contact.dailyWaterIntake
@@ -223,8 +227,11 @@ class Contact: CoreObjectProtocol
         Server.shared.getFuel()
         { fuel in
             Contact.FuelInfo = fuel
+            if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_FUEL)
+            {
+                Contact.FuelInfo?.is_active = true
+            }
             
-            //print("Has Fuel: \(self.hasFuel), completed Quiz: \(self.completedQuiz)")
             DispatchQueue.main.async()
             {
                 done()

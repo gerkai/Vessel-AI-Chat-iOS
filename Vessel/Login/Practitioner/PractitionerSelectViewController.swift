@@ -13,7 +13,7 @@ class PractitionerSelectViewController: KeyboardFriendlyViewController, Selectio
     @Resolved internal var analytics: Analytics
     var viewModel: PractitionerQueryViewModel!
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: LoadingButton!
     @IBOutlet weak var searchTextField: VesselTextField!
     
     static func initWith(viewModel: PractitionerQueryViewModel) -> PractitionerSelectViewController
@@ -113,10 +113,19 @@ class PractitionerSelectViewController: KeyboardFriendlyViewController, Selectio
     @IBAction func next()
     {
         viewModel.setExpertAssociation()
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        nextButton.showLoading()
+        viewModel.loadStaff { staff in
+            self.nextButton.hideLoading()
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "StaffSelectViewController") as! StaffSelectViewController
+            vc.viewModel.staff = staff
+            self.navigationController?.pushViewController(vc, animated: true)
+        } onFailure: {
+            self.nextButton.hideLoading()
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TestCardExistCheckingViewController") as! TestCardExistCheckingViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     //MARK: - Textfield delegates
@@ -143,26 +152,4 @@ class PractitionerSelectViewController: KeyboardFriendlyViewController, Selectio
     {
         self.activeTextField = nil
     }
-    
-    /*
-    //MARK: - TableView delegates
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 72.0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return viewModel.numExperts()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PractitionerSelectCell", for: indexPath) as! PractitionerSelectCell
-        
-        let expertInfo = viewModel.expertFor(index: indexPath.row)
-        cell.selectionCheckmarkView.textLabel.text = expertInfo.expert_name
-        return cell
-    }
-     */
 }

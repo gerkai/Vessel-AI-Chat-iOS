@@ -27,6 +27,7 @@ class PractitionerQueryViewController: UIViewController, SelectionCheckmarkViewD
         noButton.textLabel.text = NSLocalizedString("No", comment: "")
         yesButton.delegate = self
         noButton.delegate = self
+        nextButton.originalButtonText = NSLocalizedString("Next", comment: "")
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")

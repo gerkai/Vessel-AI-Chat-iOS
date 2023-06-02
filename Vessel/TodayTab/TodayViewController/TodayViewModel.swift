@@ -70,10 +70,20 @@ enum TodayViewSection: Equatable
         {
             if isToday
             {
-                return [
-                    .sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true),
-                    .text(text: NSLocalizedString("Congratulations you completed all your insights, change your goals to get more.", comment: ""), alignment: .center)
-                ]
+                if LessonsManager.shared.planBuilt
+                {
+                    return [
+                        .sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true),
+                        .text(text: NSLocalizedString("Congratulations you completed all your insights, change your goals to get more.", comment: ""), alignment: .center)
+                    ]
+                }
+                else
+                {
+                    return [
+                        .sectionTitle(icon: "todayInsightsIcon", name: "Insights", showInfoIcon: true),
+                        .loader
+                    ]
+                }
             }
             else
             {
@@ -278,6 +288,7 @@ enum TodayViewCell: Equatable
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String, alignment: NSTextAlignment)
+    case loader
     case button(text: String)
     case footer
     
@@ -307,6 +318,7 @@ enum TodayViewCell: Equatable
         case .checkMarkCard: return 219.0
         case .foldedCheckMarkCard: return 132.0
         case .text: return 38.0
+        case .loader: return 38.0
         case .button: return 76.0
         case .footer: return 173.0
         }
@@ -325,6 +337,7 @@ enum TodayViewCell: Equatable
         case .checkMarkCard: return "CheckmarkCardCell"
         case .foldedCheckMarkCard: return "FoldedCheckmarkCardCell"
         case .text: return "TodayTextCell"
+        case .loader: return "TodayLoaderCell"
         case .button: return "TodayButtonCell"
         case .footer: return "TodayFooterCell"
         }

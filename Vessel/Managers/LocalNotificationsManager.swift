@@ -11,7 +11,7 @@ class LocalNotificationsManager: NSObject
         
         Server.shared.getFuel()
         { fuel in
-            manager.hasFuel = fuel.is_active
+            manager.hasFuel = fuel.is_active || UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_FUEL)
             manager.hasAMFormula = fuel.hasAMFormula()
             manager.hasPMFormula = fuel.hasPMFormula()
         }

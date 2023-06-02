@@ -216,10 +216,8 @@ class LoginViewController: KeyboardFriendlyViewController, UITextFieldDelegate, 
         }
         else
         {
-            if Contact.PractitionerID == nil
-            {
-                showPract = true
-            }
+            Contact.PractitionerID = nil
+            showPract = true
         }
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         if showPract

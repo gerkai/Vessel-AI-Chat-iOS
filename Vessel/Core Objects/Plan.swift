@@ -81,6 +81,20 @@ struct Plan: CoreObjectProtocol, Codable, Equatable
         self.dayOfWeek = dayOfWeek
     }
     
+    init(plan: Plan)
+    {
+        self.id = abs(plan.id)
+        self.last_updated = plan.last_updated
+        self.createdDate = plan.createdDate
+        self.removedDate = plan.removedDate
+        self.type = plan.type
+        self.typeId = abs(plan.typeId)
+        self.completed = plan.completed
+        self.completionInfo = plan.completionInfo
+        self.timeOfDay = plan.timeOfDay
+        self.dayOfWeek = plan.dayOfWeek
+    }
+    
     enum CodingKeys: String, CodingKey
     {
         case id

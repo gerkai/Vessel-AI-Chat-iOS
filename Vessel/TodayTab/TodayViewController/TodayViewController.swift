@@ -368,6 +368,8 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.setup(text: text, alignment: alignment)
+        case .loader:
+            break
         case .button(let text):
             guard let cell = cell as? TodayButtonCell else
             {
@@ -636,6 +638,14 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             if plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID
             {
                 openSupplementQuiz()
+            }
+            else if (plan.typeId == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID) || (plan.typeId == -Constants.FUEL_PM_LIFESTYLE_RECOMMENDATION_ID)
+            {
+                openFormulation()
+            }
+            else if plan.typeId == -Constants.TAKE_A_TEST_LIFESTYLE_RECOMMENDATION_ID
+            {
+                mainTabBarController?.vesselButtonPressed()
             }
             else
             {
