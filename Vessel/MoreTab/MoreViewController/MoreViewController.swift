@@ -299,7 +299,7 @@ extension MoreViewController: UITableViewDelegate
             }
             else
             {
-                openInSafari(url: Constants.zenDeskSupportURL)
+                ZendeskManager.shared.navigateToChatWithSupport(in: self)
             }
         case .debug:
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
