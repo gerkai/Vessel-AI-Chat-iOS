@@ -226,7 +226,9 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
             assertionFailure("ReadOnlyLessonStepViewController-onActivityRemovedFromPlan: Plan non existent")
             return
         }
-        self.setActivityButtonTitle(activityId: activityId, addText: true)
         PlansManager.shared.removePlans(plansToRemove: [plan])
+        {
+            self.setActivityButtonTitle(activityId: activityId, addText: true)
+        }
     }
 }

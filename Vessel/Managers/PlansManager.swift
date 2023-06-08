@@ -240,7 +240,7 @@ class PlansManager
         NotificationCenter.default.post(name: .newPlanAddedOrRemoved, object: nil)
     }
     
-    func removePlans(plansToRemove: [Plan])
+    func removePlans(plansToRemove: [Plan], onComplete: (() -> ())? = nil)
     {
         for plan in plansToRemove
         {
@@ -253,6 +253,7 @@ class PlansManager
         {
             Log_Add("PlansManager: removePlans() - post .newDataArrived: Plan")
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
+            onComplete?()
         }
         if plansToRemove.contains(where: {  $0.type == .food })
         {
