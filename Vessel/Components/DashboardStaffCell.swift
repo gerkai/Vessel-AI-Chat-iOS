@@ -48,7 +48,7 @@ class DashboardStaffCell: UIView
         {
             nameLabel.text = (staff.first_name ?? "") + "."
         }
-        quizesLabel.text = "\(staff.quizes_completed ?? 0)"
+        quizesLabel.text = "\(staff.quizzes_completed ?? 0)"
         salesLabel.text = "\(staff.sales ?? 0)"
         testLabel.text = "\(staff.tests_completed ?? 0)"
         indexLabel.text = "\(index + 1)"
@@ -57,6 +57,7 @@ class DashboardStaffCell: UIView
         guard let imageUrl = staff.image_url, let url = URL(string: imageUrl) else
         {
             imageView.image = UIImage(named: "Logo")
+            imageView.backgroundColor = .black
             return
         }
         imageView.kf.setImage(with: url)

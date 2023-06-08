@@ -36,16 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         initializeZendesk()
         launchBugsee()
         
-        if RemoteConfigManager.shared.getValue(for: .pushNotificationsFeature) as? Bool ?? false
+        Pushwoosh.sharedInstance().delegate = self
+        if #available(iOS 12.0, *)
         {
-            Pushwoosh.sharedInstance().delegate = self
-            if #available(iOS 12.0, *)
-            {
-                Pushwoosh.sharedInstance().additionalAuthorizationOptions = UNAuthorizationOptions.provisional
-            }
-            Pushwoosh.sharedInstance().registerForPushNotifications()
-            Pushwoosh.sharedInstance().showPushnotificationAlert = true
+            Pushwoosh.sharedInstance().additionalAuthorizationOptions = UNAuthorizationOptions.provisional
         }
+        Pushwoosh.sharedInstance().registerForPushNotifications()
+        Pushwoosh.sharedInstance().showPushnotificationAlert = true
         
         //so videos will play sound even if mute button is on
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)

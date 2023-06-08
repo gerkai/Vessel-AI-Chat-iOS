@@ -16,6 +16,10 @@ class RemindersViewController: UIViewController, VesselScreenIdentifiable
     @IBOutlet private weak var saveButton: BounceButton!
     @IBOutlet private weak var emptyRemindersLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var addAnotherReminderButton: BounceButton!
+    
+    // MARK: - Constants
+    let REMINDERS_MAX_COUNT = 10
     
     var flowName: AnalyticsFlowName = .remindersFlow
     @Resolved var analytics: Analytics
@@ -36,6 +40,7 @@ class RemindersViewController: UIViewController, VesselScreenIdentifiable
     
     @IBAction func addAnotherReminder()
     {
+        guard viewModel.reminders.count < REMINDERS_MAX_COUNT else { return }
         if let typeId = viewModel.typeId, let type = viewModel.type
         {
             analytics.log(event: .addReminder(planId: viewModel.planId, typeId: typeId, planType: type))
@@ -99,7 +104,6 @@ private extension RemindersViewController
         subtitleLabeL.text = viewModel.subtitle
         setupImageView()
         reloadUI()
-        saveButton.isHidden = viewModel.reminders.count == 0
     }
     
     func setupImageView()
@@ -113,6 +117,8 @@ private extension RemindersViewController
     {
         emptyRemindersLabel.isHidden = viewModel.reminders.count > 0
         saveButton.isHidden = viewModel.reminders.count == 0
+        addAnotherReminderButton.isEnabled = viewModel.reminders.count < REMINDERS_MAX_COUNT
+        addAnotherReminderButton.alpha = viewModel.reminders.count < REMINDERS_MAX_COUNT ? 1.0 : 0.75
         tableView.reloadData()
     }
 }
@@ -178,6 +184,6 @@ extension RemindersViewController: AddReminderViewControllerDelegate
     {
         viewModel.reminders.append(reminder)
         RemindersManager.shared.reloadReminders()
-        tableView.reloadData()
+        reloadUI()
     }
 }

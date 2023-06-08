@@ -966,37 +966,6 @@ class Server: NSObject
         })
     }
     
-    func removeSinglePlan(planId: Int, onSuccess success: @escaping () -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
-    {
-        let urlString = "\(API())\(REMOVE_SINGLE_PLAN_PATH)"
-        let finalUrlString = urlString.replacingOccurrences(of: "{plan_id}", with: "\(planId)")
-        
-        guard let url = URL(string: finalUrlString) else
-        {
-            let error = ServerError(code: 400, description: NSLocalizedString("Unable to remove plan from contact", comment: "Server error message"))
-            failure(error)
-            return
-        }
-        
-        let request = URLRequest(url: url)
-
-        //send it to server
-        serverDelete(request: request)
-        {
-            Log_Add("SUCCESS")
-            DispatchQueue.main.async()
-            {
-                success()
-            }
-        } onFailure: { string in
-            Log_Add("ERROR: \(string)")
-            DispatchQueue.main.async()
-            {
-                failure(string)
-            }
-        }
-    }
-    
     func addMultiplePlans(plans: MultiplePlans, onSuccess success: @escaping (_ plans: [Plan]) -> Void, onFailure failure: @escaping (_ error: ServerError) -> Void)
     {
         let encoder = JSONEncoder()

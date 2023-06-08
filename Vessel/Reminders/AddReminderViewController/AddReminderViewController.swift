@@ -82,6 +82,7 @@ class AddReminderViewController: UIViewController, VesselScreenIdentifiable
             pickerView.heightAnchor.constraint(equalToConstant: 200)
         ])
         pickerView.backgroundColor = UIColor.willowGreen
+        viewModel.temporarySelectedExactTime = "01:00\(Constants.AM_SYMBOL)"
         GenericAlertViewController.presentAlert(in: self,
                                                 type: .titleCustomViewButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Pick an exact time", comment: "")),
                                                                              view: pickerView, button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Continue", comment: "")),
@@ -263,7 +264,7 @@ extension AddReminderViewController: UIPickerViewDelegate
         switch component
         {
         case 0:
-            return row < 9 ? "0\(row + 1)" : "\(row + 1)"
+            return "\(row + 1)"
         case 1:
             return row <= 9 ? "0\(row)" : "\(row)"
         case 2:

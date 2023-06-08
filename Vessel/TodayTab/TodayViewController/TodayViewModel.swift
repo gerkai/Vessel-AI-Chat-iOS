@@ -388,7 +388,7 @@ class TodayViewModel
         guard let createdDateString = contact.createdDate,
               let localCreatedDateString = Date.utcToLocal(dateStr: createdDateString),
               let shortLocalCreatedString = localCreatedDateString.removeISODateEndingToServerFormat(),
-              shortLocalCreatedString < selectedDate else
+              (shortLocalCreatedString < selectedDate) || isToday else
         {
             return [.header(name: contact.first_name ?? "", goals: contact.getGoals()),
                     .progressDays(progress: progressDays),

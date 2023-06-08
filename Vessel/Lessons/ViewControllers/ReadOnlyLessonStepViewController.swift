@@ -180,33 +180,36 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
                 {
                     self.view.layoutIfNeeded()
                 } completion: { _ in
-                    let activities = PlansManager.shared.activities
-                    let activityPlans = PlansManager.shared.getActivityPlans()
-                    guard let plan = activityPlans.first(where: { $0.typeId == activityId }),
-                          let activity = activities.first(where: { $0.id == plan.typeId }) else
+                    if RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false
                     {
-                        assertionFailure("ReadOnlyLessonStepViewController-onActivityAddedToPlan: Can't find plan or activity with id: \(activityId)")
-                        return
-                    }
-                    
-                    self.analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
-                    
-                    let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
-                    if reminders.count > 0
-                    {
-                        let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
-                        let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
-                        addReminderVC.hidesBottomBarWhenPushed = true
-                        addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, activity: activity)
-                        self.navigationController?.pushViewController(addReminderVC, animated: true)
-                    }
-                    else
-                    {
-                        let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
-                        let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
-                        addReminderVC.hidesBottomBarWhenPushed = true
-                        addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, activity: activity)
-                        self.navigationController?.pushViewController(addReminderVC, animated: true)
+                        let activities = PlansManager.shared.activities
+                        let activityPlans = PlansManager.shared.getActivityPlans()
+                        guard let plan = activityPlans.first(where: { $0.typeId == activityId }),
+                              let activity = activities.first(where: { $0.id == plan.typeId }) else
+                        {
+                            assertionFailure("ReadOnlyLessonStepViewController-onActivityAddedToPlan: Can't find plan or activity with id: \(activityId)")
+                            return
+                        }
+                        
+                        self.analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
+                        
+                        let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+                        if reminders.count > 0
+                        {
+                            let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                            let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
+                            addReminderVC.hidesBottomBarWhenPushed = true
+                            addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, activity: activity)
+                            self.navigationController?.pushViewController(addReminderVC, animated: true)
+                        }
+                        else
+                        {
+                            let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
+                            let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
+                            addReminderVC.hidesBottomBarWhenPushed = true
+                            addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, activity: activity)
+                            self.navigationController?.pushViewController(addReminderVC, animated: true)
+                        }
                     }
                 }
             }
@@ -223,17 +226,7 @@ extension ReadOnlyLessonStepViewController: LessonStepActivityViewDelegate
             assertionFailure("ReadOnlyLessonStepViewController-onActivityRemovedFromPlan: Plan non existent")
             return
         }
-        Server.shared.removeSinglePlan(planId: plan.id)
-        { [weak self] in
-            guard let self = self else { return }
-            self.setActivityButtonTitle(activityId: activityId, addText: true)
-            PlansManager.shared.removePlans(plansToRemove: [plan])
-        }
-        onFailure:
-        { [weak self] error in
-            guard let self = self else { return }
-            print(error)
-            self.setActivityButtonTitle(activityId: activityId, addText: false)
-        }
+        self.setActivityButtonTitle(activityId: activityId, addText: true)
+        PlansManager.shared.removePlans(plansToRemove: [plan])
     }
 }

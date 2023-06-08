@@ -146,7 +146,7 @@ class PractitionerQueryViewModel
     
     func loadStaff(onCompletion: @escaping (_ staff: [Staff]) -> Void, onFailure: @escaping () -> Void)
     {
-        guard let expertId = Contact.PractitionerID else
+        guard let selectedPractitioner = selectedPractitioner else
         {
             DispatchQueue.main.async
             {
@@ -154,7 +154,8 @@ class PractitionerQueryViewModel
             }
             return
         }
-        Server.shared.getStaff(expertId: expertId) { staff in
+        let expert = expertFor(index: selectedPractitioner)
+        Server.shared.getStaff(expertId: expert.id) { staff in
             DispatchQueue.main.async
             {
                 onCompletion(staff)

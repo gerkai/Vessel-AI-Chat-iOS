@@ -118,7 +118,6 @@
 		3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */; };
 		3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */; };
 		3F87B97C27D532C200D589F7 /* SelectionCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */; };
-		3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87B97D27D5338D00D589F7 /* NibRegistry.swift */; };
 		3F92D09C292C0A29004795E3 /* NSMutableAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F92D09B292C0A29004795E3 /* NSMutableAttributedStringExtension.swift */; };
 		3F92D09E292DAA57004795E3 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */; };
 		3F96182027D56DE100CB37B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */; };
@@ -468,7 +467,6 @@
 		3F87B97527D52D3500D589F7 /* BirthdaySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectViewController.swift; sourceTree = "<group>"; };
 		3F87B97727D5301800D589F7 /* SelectionCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCheckmarkView.swift; sourceTree = "<group>"; };
 		3F87B97B27D532C200D589F7 /* SelectionCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionCheckmarkView.xib; sourceTree = "<group>"; };
-		3F87B97D27D5338D00D589F7 /* NibRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRegistry.swift; sourceTree = "<group>"; };
 		3F92D09B292C0A29004795E3 /* NSMutableAttributedStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringExtension.swift; sourceTree = "<group>"; };
 		3F92D09D292DAA57004795E3 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		3F96181F27D56DE100CB37B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -738,7 +736,6 @@
 				7282D42A288FB92000B4E26D /* ArrayExtension.swift */,
 				3F12F006287A6B4800FCC52E /* DateExtensions.swift */,
 				3F87B96627D4209F00D589F7 /* Encodable.swift */,
-				3F87B97D27D5338D00D589F7 /* NibRegistry.swift */,
 				3F92D09B292C0A29004795E3 /* NSMutableAttributedStringExtension.swift */,
 				3F4C59492877CEC10088F03A /* NSObjectExtension.swift */,
 				3F0547C227CA94F1006E3098 /* StringExtensions.swift */,
@@ -2120,7 +2117,6 @@
 				3F87B97627D52D3500D589F7 /* BirthdaySelectViewController.swift in Sources */,
 				3F87B97827D5301800D589F7 /* SelectionCheckmarkView.swift in Sources */,
 				3F9CB79B28C10CA70093228E /* NullCodable.swift in Sources */,
-				3F87B97E27D5338D00D589F7 /* NibRegistry.swift in Sources */,
 				3FE369A227C9A07E00231D42 /* SceneDelegate.swift in Sources */,
 				3F1A24932893479500BC539F /* ReagentInfoViewController.swift in Sources */,
 				3F15ACEA2887759C004716CA /* UIImageExtensions.swift in Sources */,
@@ -2366,7 +2362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;
@@ -2404,7 +2400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vessel/Vessel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LVHT76MK6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vessel/Info.plist;

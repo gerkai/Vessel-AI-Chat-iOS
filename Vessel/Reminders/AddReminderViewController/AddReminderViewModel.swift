@@ -127,6 +127,9 @@ class AddReminderViewModel
     {
         ObjectStore.shared.clientSave(reminder)
         RemindersManager.shared.reloadReminders()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            RemindersManager.shared.setupRemindersIfNeeded()
+        })
 
         if let typeId = typeId, let type = type
         {

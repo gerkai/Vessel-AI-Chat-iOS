@@ -14,7 +14,7 @@ struct Staff: Codable
     let last_name: String?
     let expert_id: Int?
     let staff_id: Int?
-    let quizes_completed: Int?
+    let quizzes_completed: Int?
     let tests_completed: Int?
     let sales: Int?
     let image_url: String?
@@ -26,7 +26,7 @@ struct Staff: Codable
         case last_name
         case expert_id
         case staff_id
-        case quizes_completed
+        case quizzes_completed
         case tests_completed
         case sales
         case image_url
@@ -60,7 +60,7 @@ struct LeaderboardResponse: Codable
     enum CodingKeys: String, CodingKey
     {
         case totalSignups = "total_signups"
-        case totalQuizesCompleted = "total_quizes_completed"
+        case totalQuizesCompleted = "total_quizzes_completed"
         case totalTestsCompleted = "total_tests_completed"
         case totalSales = "total_sales"
         case ranking

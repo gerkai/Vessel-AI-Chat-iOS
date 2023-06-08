@@ -85,7 +85,8 @@ class SelectionCheckmarkView: UIView
     
     func commonInit()
     {
-        Bundle.main.loadNib(.selectionCheckmarkView, owner: self, options: nil)
+        let xibName = String(describing: type(of: self))
+        Bundle.main.loadNibNamed(xibName, owner: self, options: nil)
         addSubview(contentView)
         self.backgroundColor = .clear
         contentView.frame = bounds

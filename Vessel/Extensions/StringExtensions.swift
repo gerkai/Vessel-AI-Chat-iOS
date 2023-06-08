@@ -37,7 +37,7 @@ extension String
 
     var firstUppercased: String
     {
-        prefix(1).uppercased() + dropFirst()
+        prefix(1).uppercased()
     }
     
     func makeAttributedString(fontName: String? = nil, textColor: UIColor? = nil) -> NSMutableAttributedString

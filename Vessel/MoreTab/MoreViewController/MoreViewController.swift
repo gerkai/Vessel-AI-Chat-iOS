@@ -243,7 +243,7 @@ extension MoreViewController: UITableViewDelegate
         switch option
         {
         case .dashboard:
-            guard let expertId = Contact.main()!.expert_id else { return }
+            guard let expertId = Contact.main()!.staff_id ?? Contact.main()!.expert_id else { return }
             let storyboard = UIStoryboard(name: "MoreTab", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "DashboardViewController") as! DashboardViewController
             vc.hidesBottomBarWhenPushed = true

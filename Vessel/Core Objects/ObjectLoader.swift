@@ -93,7 +93,6 @@ class ObjectLoader: NSObject
             self.loadLifestyleRecommendations()
             PlansManager.shared.loadPlans()
             LocalNotificationsManager.shared.setupLocalNotifications()
-            RemindersManager.shared.setupRemindersIfNeeded()
             
             let completeTimeEnd = DispatchTime.now()
             let completeTime = (Double(completeTimeEnd.uptimeNanoseconds) - Double(loadStartTime.uptimeNanoseconds)) / 1_000_000_000.0

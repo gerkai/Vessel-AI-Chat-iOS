@@ -28,10 +28,26 @@ class RemindersManager
 
         for reminder in reminders
         {
-            let content = UNMutableNotificationContent()
-            content.title = "\(NSLocalizedString("Plan", comment: "")) \(reminder.planId)"
-            content.body = String(format: NSLocalizedString("Take %i at %@", comment: "instructions when to take capsules"), reminder.quantity, reminder.timeOfDay)
+            guard let plan = PlansManager.shared.plans.first(where: { $0.id == reminder.planId }) else { continue }
             
+            let content = UNMutableNotificationContent()
+            
+            switch plan.type
+            {
+            case .activity:
+                guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == false && $0.id == plan.typeId }) else { continue }
+                content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
+                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do activity"), tip.title.lowercased(), reminder.timeOfDay)
+            case .reagentLifestyleRecommendation:
+                guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == true && $0.id == plan.typeId }) else { continue }
+                content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
+                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do lifestyle recommendation"), tip.title.lowercased(), reminder.timeOfDay)
+            case .food:
+                guard let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId }) else { continue }
+                content.title = String(format: NSLocalizedString("Eat %@.", comment: ""), food.title.lowercased())
+                content.body = String(format: NSLocalizedString("Remember to eat %@ today!", comment: "Instructions when to eat food"), reminder.quantity, reminder.timeOfDay)
+            }
+                        
             let timeOfDay = getTimeOfDay(from: reminder.timeOfDay)
             let hour = timeOfDay.hour
             let minute = timeOfDay.minute
@@ -42,7 +58,7 @@ class RemindersManager
                 let dateComponents = DateComponents(hour: hour, minute: minute, weekday: adjustedDay)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 
-                let identifier = "\(reminder.id)"
+                let identifier = "\(reminder.id)+\(day)"
                 center.getPendingNotificationRequests { (requests) in
                     let existingRequests = requests.filter({ $0.identifier == identifier })
                     if existingRequests.isEmpty
@@ -109,7 +125,7 @@ class RemindersManager
             return (19, 0)
         default:
             let components = string.split(separator: ":")
-            guard components.count == 3, let hour = Int(components[0]), let minute = Int(components[1]) else
+            guard components.count == 2, let hour = Int(components[0]), let minute = Int(components[1]) else
             {
                 return (0, 0)
             }

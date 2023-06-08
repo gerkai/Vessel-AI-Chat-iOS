@@ -20,6 +20,7 @@ class PlansManager
         {
             Log_Add("PlansManager: loadPlans() - post .newDataArrived: Plan")
             NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Plan.self)])
+            RemindersManager.shared.setupRemindersIfNeeded()
         }
     }
     

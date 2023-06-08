@@ -90,21 +90,14 @@ class ActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
             return
         }
         removeFromPlanButton.isEnabled = false
-        Server.shared.removeSinglePlan(planId: viewModel.id)
+        guard let plan = PlansManager.shared.plans.first(where: { $0.id == viewModel.id }) else
         {
-            self.removeFromPlanButton.isEnabled = true
-            guard let plan = PlansManager.shared.plans.first(where: { $0.id == viewModel.id }) else
-            {
-                assertionFailure("ActivityDetailsViewController-onRemovePlan: Couldn't find plan to remove with id: \(viewModel.id)")
-                return
-            }
-            PlansManager.shared.removePlans(plansToRemove: [plan])
-            self.navigationController?.popViewController(animated: true)
+            assertionFailure("ActivityDetailsViewController-onRemovePlan: Couldn't find plan to remove with id: \(viewModel.id)")
+            return
         }
-        onFailure:
-        { error in
-            self.removeFromPlanButton.isEnabled = true
-        }
+        PlansManager.shared.removePlans(plansToRemove: [plan])
+        self.removeFromPlanButton.isEnabled = true
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onEditSchedule()
