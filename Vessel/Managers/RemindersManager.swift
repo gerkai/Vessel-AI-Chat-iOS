@@ -37,15 +37,15 @@ class RemindersManager
             case .activity:
                 guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == false && $0.id == plan.typeId }) else { continue }
                 content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
-                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do activity"), tip.title.lowercased(), reminder.timeOfDay)
+                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do activity"), tip.title.lowercased())
             case .reagentLifestyleRecommendation:
                 guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == true && $0.id == plan.typeId }) else { continue }
                 content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
-                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do lifestyle recommendation"), tip.title.lowercased(), reminder.timeOfDay)
+                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do lifestyle recommendation"), tip.title.lowercased())
             case .food:
                 guard let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId }) else { continue }
                 content.title = String(format: NSLocalizedString("Eat %@.", comment: ""), food.title.lowercased())
-                content.body = String(format: NSLocalizedString("Remember to eat %@ today!", comment: "Instructions when to eat food"), reminder.quantity, reminder.timeOfDay)
+                content.body = String(format: NSLocalizedString("Remember to eat %@ today!", comment: "Instructions when to eat food"), food.title.lowercased())
             }
                         
             let timeOfDay = getTimeOfDay(from: reminder.timeOfDay)

@@ -340,7 +340,7 @@ class PlansManager
     
     func getFirstActivityPlan(withId foodId: Int, shouldFilterForToday: Bool, shouldFilterForSelectedDay selectedDate: String? = nil) -> Plan?
     {
-        getFoodPlans(shouldFilterForToday: shouldFilterForToday, shouldFilterForSelectedDay: selectedDate).first(where: { $0.typeId == foodId })
+        getActivityPlans(shouldFilterForToday: shouldFilterForToday, shouldFilterForSelectedDate: selectedDate).first(where: { $0.typeId == foodId })
     }
     
     //returns array of only reagentLifestyleRecommendations
