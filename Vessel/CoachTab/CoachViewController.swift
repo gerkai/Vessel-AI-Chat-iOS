@@ -52,6 +52,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
         {
             let newChat = NewChatView(viewModel: ChatViewModel())
             let viewController = UIHostingController(rootView: newChat)
+            viewController.modalPresentationStyle = .fullScreen
             present(viewController, animated: true)
         }
         else

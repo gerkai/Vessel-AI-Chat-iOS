@@ -201,6 +201,7 @@
 		3FF8C574290367FC001643C1 /* ReagentImpactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8C573290367FC001643C1 /* ReagentImpactView.xib */; };
 		3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */; };
 		67CACB982A83D0DB0090AD28 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CACB972A83D0DB0090AD28 /* NewChatView.swift */; };
+		67D94D7E2A84FE700052A09E /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D94D7D2A84FE700052A09E /* ChatViewModel.swift */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
 		7206C4E62883C974000130DA /* ConsolePrintedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */; };
@@ -557,6 +558,7 @@
 		3FF8C573290367FC001643C1 /* ReagentImpactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReagentImpactView.xib; sourceTree = "<group>"; };
 		3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactScoreSlideupViewController.swift; sourceTree = "<group>"; };
 		67CACB972A83D0DB0090AD28 /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		67D94D7D2A84FE700052A09E /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7206C4E52883C974000130DA /* ConsolePrintedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePrintedAnalytics.swift; sourceTree = "<group>"; };
@@ -1199,6 +1201,15 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		67D94D7C2A84EEC20052A09E /* NewChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				67CACB972A83D0DB0090AD28 /* NewChatView.swift */,
+				67D94D7D2A84FE700052A09E /* ChatViewModel.swift */,
+			);
+			path = NewChatBot;
+			sourceTree = "<group>";
+		};
 		7206C4DD28837AE6000130DA /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1352,7 +1363,7 @@
 			children = (
 				7295133128F7DEC600E4E950 /* CoachTab.storyboard */,
 				3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */,
-				67CACB972A83D0DB0090AD28 /* NewChatView.swift */,
+				67D94D7C2A84EEC20052A09E /* NewChatBot */,
 			);
 			path = CoachTab;
 			sourceTree = "<group>";
@@ -2011,6 +2022,7 @@
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
+				67D94D7E2A84FE700052A09E /* ChatViewModel.swift in Sources */,
 				72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */,
 				7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */,
 				3F12F011287B4C0600FCC52E /* Goal.swift in Sources */,
