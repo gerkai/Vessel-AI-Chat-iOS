@@ -50,8 +50,9 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
         {
-            let newChat = NewChatView(viewModel: ChatViewModel())
-            let viewController = UIHostingController(rootView: newChat)
+//            let chatBot = ChatBotListView(viewModel: ChatBotViewModel())
+            let chatBot = ChatBotView(viewModel: ChatBotViewModel())
+            let viewController = UIHostingController(rootView: chatBot)
             viewController.modalPresentationStyle = .fullScreen
             present(viewController, animated: true)
         }

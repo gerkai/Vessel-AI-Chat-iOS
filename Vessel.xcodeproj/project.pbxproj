@@ -200,7 +200,10 @@
 		3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C571290367EB001643C1 /* ReagentImpactView.swift */; };
 		3FF8C574290367FC001643C1 /* ReagentImpactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8C573290367FC001643C1 /* ReagentImpactView.xib */; };
 		3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */; };
-		67CACB982A83D0DB0090AD28 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CACB972A83D0DB0090AD28 /* NewChatView.swift */; };
+		672C1AFE2A8987340001FC7D /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C1AFD2A8987340001FC7D /* Conversation.swift */; };
+		672C1B002A8987850001FC7D /* ConversationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C1AFF2A8987850001FC7D /* ConversationMessage.swift */; };
+		673008422A8A28BE002B055C /* ChatBotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673008412A8A28BE002B055C /* ChatBotListView.swift */; };
+		67CACB982A83D0DB0090AD28 /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CACB972A83D0DB0090AD28 /* ChatBotView.swift */; };
 		67D94D7E2A84FE700052A09E /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D94D7D2A84FE700052A09E /* ChatViewModel.swift */; };
 		7206C4E128837AE6000130DA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C4DE28837AE6000130DA /* MainTabBarController.swift */; };
 		7206C4E328837AE6000130DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7206C4E028837AE6000130DA /* Main.storyboard */; };
@@ -557,7 +560,10 @@
 		3FF8C571290367EB001643C1 /* ReagentImpactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReagentImpactView.swift; sourceTree = "<group>"; };
 		3FF8C573290367FC001643C1 /* ReagentImpactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReagentImpactView.xib; sourceTree = "<group>"; };
 		3FF8C57529038223001643C1 /* ImpactScoreSlideupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactScoreSlideupViewController.swift; sourceTree = "<group>"; };
-		67CACB972A83D0DB0090AD28 /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		672C1AFD2A8987340001FC7D /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		672C1AFF2A8987850001FC7D /* ConversationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessage.swift; sourceTree = "<group>"; };
+		673008412A8A28BE002B055C /* ChatBotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotListView.swift; sourceTree = "<group>"; };
+		67CACB972A83D0DB0090AD28 /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
 		67D94D7D2A84FE700052A09E /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7206C4DE28837AE6000130DA /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7206C4E028837AE6000130DA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -1201,13 +1207,24 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
-		67D94D7C2A84EEC20052A09E /* NewChatBot */ = {
+		672C1AFC2A8987130001FC7D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				67CACB972A83D0DB0090AD28 /* NewChatView.swift */,
-				67D94D7D2A84FE700052A09E /* ChatViewModel.swift */,
+				672C1AFD2A8987340001FC7D /* Conversation.swift */,
+				672C1AFF2A8987850001FC7D /* ConversationMessage.swift */,
 			);
-			path = NewChatBot;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		67D94D7C2A84EEC20052A09E /* ChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				673008412A8A28BE002B055C /* ChatBotListView.swift */,
+				67CACB972A83D0DB0090AD28 /* ChatBotView.swift */,
+				67D94D7D2A84FE700052A09E /* ChatViewModel.swift */,
+				672C1AFC2A8987130001FC7D /* Models */,
+			);
+			path = ChatBot;
 			sourceTree = "<group>";
 		};
 		7206C4DD28837AE6000130DA /* Main */ = {
@@ -1363,7 +1380,7 @@
 			children = (
 				7295133128F7DEC600E4E950 /* CoachTab.storyboard */,
 				3FD3BDBD2960A88A00AEF9C3 /* CoachViewController.swift */,
-				67D94D7C2A84EEC20052A09E /* NewChatBot */,
+				67D94D7C2A84EEC20052A09E /* ChatBot */,
 			);
 			path = CoachTab;
 			sourceTree = "<group>";
@@ -2004,6 +2021,7 @@
 				72D3C76F293216EC0009BBB0 /* InputLessonStepViewController.swift in Sources */,
 				3F0D387028E2884600D7C3A3 /* UIStackViewExtensions.swift in Sources */,
 				72F2484C28A606B500B0BE02 /* FoodPreferencesViewModel.swift in Sources */,
+				672C1B002A8987850001FC7D /* ConversationMessage.swift in Sources */,
 				3F12F00F287B43AB00FCC52E /* UIScrollViewExtension.swift in Sources */,
 				7282D417288F7CBA00B4E26D /* MoreViewController.swift in Sources */,
 				3F0547D027CAEE3B006E3098 /* Contact.swift in Sources */,
@@ -2022,6 +2040,7 @@
 				72411CF8287E413C004A312E /* Resolver.swift in Sources */,
 				3F0547AF27C9B8EA006E3098 /* UIViewExtensions.swift in Sources */,
 				3F426DB928DFA1CA00927B68 /* ChartView.swift in Sources */,
+				673008422A8A28BE002B055C /* ChatBotListView.swift in Sources */,
 				67D94D7E2A84FE700052A09E /* ChatViewModel.swift in Sources */,
 				72CF678828EFB3B10008B0F6 /* WaterIntakeView.swift in Sources */,
 				7295568228F6893E000DD006 /* ReagentFoodViewController.swift in Sources */,
@@ -2039,7 +2058,7 @@
 				7282D419288F7D4800B4E26D /* MoreViewModel.swift in Sources */,
 				3F0547BB27C9EB15006E3098 /* UINavigationControllerExtensions.swift in Sources */,
 				3F1A2497289B2A8700BC539F /* KeychainHelper.swift in Sources */,
-				67CACB982A83D0DB0090AD28 /* NewChatView.swift in Sources */,
+				67CACB982A83D0DB0090AD28 /* ChatBotView.swift in Sources */,
 				72798B80298D072100A5BD65 /* Reminder.swift in Sources */,
 				3F0547CD27CACF08006E3098 /* WKWebviewExtension.swift in Sources */,
 				72384F3628E2DB880033C3FC /* TodayCheckMarkCardTableViewCell.swift in Sources */,
@@ -2111,6 +2130,7 @@
 				3FA66837287F4CAC0006166D /* CaptureIntroViewController.swift in Sources */,
 				72F2484A28A6066B00B0BE02 /* FoodPreferencesViewController.swift in Sources */,
 				3FF8C57629038223001643C1 /* ImpactScoreSlideupViewController.swift in Sources */,
+				672C1AFE2A8987340001FC7D /* Conversation.swift in Sources */,
 				72BC24402928D48C002F6DA2 /* LessonsCoordinator.swift in Sources */,
 				3FEFDAF9297CC36C00A4FA2E /* URLExtensions.swift in Sources */,
 				72461EF52924AE2600A85AE5 /* LessonStep.swift in Sources */,
