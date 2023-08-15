@@ -19,7 +19,7 @@ struct ConversationHistoryResposne: Decodable
 
 struct ConversationMessage: Codable, Hashable
 {
-    let message: String
+    var message: String
     let role: String
     let created_at: String
     let updated_at: String

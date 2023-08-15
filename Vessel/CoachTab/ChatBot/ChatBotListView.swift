@@ -12,57 +12,76 @@ struct ChatBotListView: View
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: ChatBotViewModel
     @State private var willMoveToNextScreen = false
-    
+    @State private var selectedItem: Int? = nil
     var body: some View
     {
         header
-        NavigationView
+        VStack(spacing: 0)
         {
-            List
+            NavigationView
             {
-                startChatButton
-                Spacer()
-                ForEach(viewModel.conversations.reversed(), id: \.self)
-                { conversation in
-                    NavigationLink
-                    {
-                        ChatBotView(viewModel: viewModel, conversationId: conversation.id)
-                    } label: {
-                        Text("# \(conversation.id)")
+                List
+                {
+                    startChatButton
+                    Spacer()
+                    ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
+                    { conversation in
+                        HStack
+                        {
+                            Text("# \(conversation.id)")
+                                .onTapGesture
+                            {
+                                self.selectedItem = conversation.id
+                            }
+                            .background(
+                                NavigationLink(destination: ChatBotView(viewModel: viewModel, conversationId: conversation.id), tag: conversation.id,
+                                               selection: $selectedItem) { EmptyView() }
+                                    .opacity(0)
+                            )
+                            Spacer()
+                            Image(systemName: "chevron.forward")
+                                .font(Font.system(.caption).weight(.bold))
+                                .foregroundColor(Color(UIColor.tertiaryLabel))
+                        }
+                        .accentColor(Color(uiColor: Constants.vesselChatGreen))
                     }
+                    .listRowBackground(Color(uiColor: Constants.vesselChatGreen))
                 }
+                .listStyle(.plain)
+                .background(Color(uiColor: Constants.vesselChatGreen))
             }
-            .background(.clear)//(Color(uiColor: Constants.vesselChatGreen))
+            .onAppear
+            {
+                viewModel.getConversations()
+            }
+            .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
         }
-        .onAppear
-        {
-            viewModel.getConversations()
-        }
-        .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
+        .padding(.top, -20)
     }
     
     var header: some View
     {
         HStack
         {
-//            if viewModel.showBackButton
-//            {
-//                Button
-//                {
-//                    willMoveToNextScreen = false
-//                } label:
-//                {
-//                    Image(systemName: "arrow.left")
-//                        .foregroundColor(.black)
-//                        .imageScale(.medium)
-//                        .frame(width: 28, height: 28)
-//                        .padding([.leading, .top, .bottom, .trailing], 15)
-//                }
-//            }
+            if viewModel.showBackButton
+            {
+                Button
+                {
+                    willMoveToNextScreen = false
+                    selectedItem = nil
+                } label:
+                {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.black)
+                        .imageScale(.medium)
+                        .frame(width: 28, height: 28)
+                        .padding([.leading, .top, .bottom, .trailing], 15)
+                }
+            }
             Spacer()
             VStack(alignment: .center)
             {
-                Text("Vessel nutritionist")
+                Text("Violet - AI Wellness Coach")
                 .foregroundColor(.black)
                 .bold()
             }
@@ -80,7 +99,7 @@ struct ChatBotListView: View
             }
         }
         .background(Color(uiColor: Constants.vesselChatGreen))
-        .frame(minHeight: 60)
+        .frame(minHeight: 80)
         .offset(y: -20)
     }
     
