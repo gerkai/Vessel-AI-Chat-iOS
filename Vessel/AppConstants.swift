@@ -89,12 +89,7 @@ struct Constants
     static let vesselGreat = #colorLiteral(red: 0.7568627451, green: 0.8705882353, blue: 0.7294117647, alpha: 1)     //#C1DEBA
     static let vesselTope = #colorLiteral(red: 0.831372549, green: 0.7960784314, blue: 0.7725490196, alpha: 1)      //#D4CBC5
     static let vesselPeach = #colorLiteral(red: 0.9843137255, green: 0.9647058824, blue: 0.9294117647, alpha: 1)     //FBF6ED
-    
-    //color components
-    static let POOR_COLOR = Color(red: 0.9059, green: 0.7686, blue: 0.6941)
-    static let FAIR_COLOR = Color(red: 0.9451, green: 0.8627, blue: 0.8078)
-    static let GOOD_COLOR = Color(red: 0.8588, green: 0.9216, blue: 0.8353)
-    static let GREAT_COLOR = Color(red: 0.7569, green: 0.8706, blue: 0.7294)
+    static let vesselChatGreen = #colorLiteral(red: 0.8156862745, green: 0.8862745098, blue: 0.7843137255, alpha: 1) //d0e2c8
     
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"

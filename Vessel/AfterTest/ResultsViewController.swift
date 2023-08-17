@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct Color
-{
-    var red: CGFloat
-    var green: CGFloat
-    var blue: CGFloat
-}
-
 class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiable
 {
     @IBOutlet weak var wellnessScoreLabel: UILabel!
@@ -420,22 +413,6 @@ class ResultsViewController: AfterTestMVVMViewController, VesselScreenIdentifiab
             return Constants.GOOD_STRING
         }
         return Constants.GREAT_STRING
-    }
-    
-    func setBackgroundColor(startColor: Color, endColor: Color, percentage: Double)
-    {
-        print("Setting color from: \(startColor) to \(endColor), percentage: \(percentage)")
-        var percent = CGFloat(percentage)
-        if percent > 1.0
-        {
-            percent = 1.0
-        }
-        let red = startColor.red + (endColor.red - startColor.red) * percent
-        let green = startColor.green + (endColor.green - startColor.green) * percent
-        let blue = startColor.blue + (endColor.blue - startColor.blue) * percent
-
-        self.wellnessCard.backgroundColor = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
-        self.wellnessCard.setNeedsDisplay()
     }
     
     func clearStackViews()

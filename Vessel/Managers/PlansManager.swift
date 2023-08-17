@@ -375,7 +375,7 @@ extension PlansManager
         guard let contact = Contact.main(),
               let createdDate = contact.createdDate, createdDate <= date else
         {
-            assertionFailure("PlansManager-calculateProgressFor: mainContact not available or mainContact's createdDate not set")
+//            assertionFailure("PlansManager-calculateProgressFor: mainContact not available or mainContact's createdDate not set")
 
             return 0
         }

@@ -7,6 +7,7 @@
 
 import UIKit
 import LiveChat
+import SwiftUI
 
 class CoachViewController: UIViewController, VesselScreenIdentifiable
 {
@@ -47,7 +48,17 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
 
     @IBAction func onLaunchChat()
     {
-        LiveChatManager.shared.navigateToLiveChat(in: self)
+        if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
+        {
+            let chatBot = ChatBotListView(viewModel: ChatBotViewModel())
+            let viewController = UIHostingController(rootView: chatBot)
+            viewController.modalPresentationStyle = .fullScreen
+            present(viewController, animated: true)
+        }
+        else
+        {
+            LiveChatManager.shared.navigateToLiveChat(in: self)
+        }
     }
     
     @objc
