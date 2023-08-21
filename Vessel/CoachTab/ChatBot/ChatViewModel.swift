@@ -256,7 +256,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
             for try await character in bytes.characters
             {
                 self.conversationHistory.removeLast()
-                message.message.append(character)
+                message.appendChar(character)
                 self.conversationHistory.append(message)
             }
             self.isProcessing = false

@@ -181,7 +181,7 @@ struct MessageView: View
                 .foregroundColor(.gray)
             HStack
             {
-                Text(messageModel.text)
+                Text(.init(messageModel.text))
                     .font(.system(size: 14))
                     .padding()
                     .foregroundColor(.black)
