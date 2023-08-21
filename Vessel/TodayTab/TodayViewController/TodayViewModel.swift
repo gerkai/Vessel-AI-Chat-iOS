@@ -160,43 +160,43 @@ enum TodayViewSection: Equatable
                 }
             }
             
-            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
-            {
-                RemindersManager.shared.reloadReminders()
-                let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
-                if plan.completed.contains(selectedDate)
-                {
-                    cells.append(.foldedCheckMarkCard(title: activity.title,
-                                                      subtitle: "",
-                                                      backgroundImage: activity.imageUrl))
-                }
-                else
-                {
-                    let description: String
-                    if activity.isLifestyleRecommendation && activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID
-                    {
-                        var goals = Contact.main()?.getGoals() ?? []
-                        if goals.contains("Sleep") && goals.count > 1
-                        {
-                            goals.removeAll(where: { $0 == "Sleep" })
-                        }
-                        description = String(format: activity.description ?? "", goals.map({ $0.lowercased() }).joined(separator: ", "))
-                    }
-                    else
-                    {
-                        description = activity.description ?? ""
-                    }
-                    cells.append(.checkMarkCard(title: activity.title,
-                                                subtitle: activity.frequency,
-                                                description: description,
+//            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
+//            {
+//                RemindersManager.shared.reloadReminders()
+//                let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+//                if plan.completed.contains(selectedDate)
+//                {
+//                    cells.append(.foldedCheckMarkCard(title: activity.title,
+//                                                      subtitle: "",
+//                                                      backgroundImage: activity.imageUrl))
+//                }
+//                else
+//                {
+//                    let description: String
+//                    if activity.isLifestyleRecommendation && activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID
+//                    {
+//                        var goals = Contact.main()?.getGoals() ?? []
+//                        if goals.contains("Sleep") && goals.count > 1
+//                        {
+//                            goals.removeAll(where: { $0 == "Sleep" })
+//                        }
+//                        description = String(format: activity.description ?? "", goals.map({ $0.lowercased() }).joined(separator: ", "))
+//                    }
+//                    else
+//                    {
+//                        description = activity.description ?? ""
+//                    }
+                    cells.append(.checkMarkCard(title: "Get your supplement plan",// activity.title,
+                                                subtitle: "Take a simple 3 minute quiz",// activity.frequency,
+                                                description: "Get a precise supplement plan personilized to you. get started",// activity.description ?? "test desc",
                                                 backgroundImage: activity.imageUrl,
                                                 isCompleted: false,
                                                 id: activity.id,
                                                 type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
-                                                remindersButtonState: reminders.count > 0,
-                                                remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan.id)))
-                }
-            }
+                                                remindersButtonState: true, // reminders.count > 0,
+                                                remindersButtonText: "remindersButtonText"))// RemindersManager.shared.getNextReminderTime(forPlan: plan.id)))
+//                }
+//            }
         }
         return cells
     }
@@ -398,16 +398,21 @@ class TodayViewModel
         let todayDate = Date.serverDateFormatter.string(from: Date())
         // LESSONS
         let lessons = showInsights ? ( isToday ? LessonsManager.shared.todayLessons : LessonsManager.shared.getLessonsCompletedOn(dateString: selectedDate)) : []
-        
+//        print("lessons: \(lessons)")
         //ACTIVITIES
         let activityPlans = PlansManager.shared.getActivityPlans()
+//        print("activityPlans: \(activityPlans)")
         let lifestyleRecommendationPlans = PlansManager.shared.getLifestyleRecommendationPlans()
-        let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
-            return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
-        }).sorted(by: { $0.id < $1.id }) : []
-        let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
-            return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
-        }).sorted(by: { $0.id < $1.id }) : []
+//        print("lifestyleRecommendationPlans: \(lifestyleRecommendationPlans)")
+//        print("showActivites: \(showActivites)")
+//        print("PlansManager.shared.activities.: \(PlansManager.shared.activities)")
+        let activities = PlansManager.shared.activities
+//        let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
+//            return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
+//        }).sorted(by: { $0.id < $1.id }) : []
+//        let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
+//            return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
+//        }).sorted(by: { $0.id < $1.id }) : []
         
         // FOOD
         let food = showFood ? contact.suggestedFood : []
@@ -423,7 +428,9 @@ class TodayViewModel
             .header(name: contact.first_name ?? "", goals: contact.getGoals()),
             .progressDays(progress: progressDays),
             .insights(insights: lessons, isToday: self.isToday),
-            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate, isToday: self.isToday),
+//            .activities(activities: [Tip(id: 100, last_updated: 100, title: "Activity test", description: "Desc test", imageUrl: "", frequency: "")], selectedDate: "", isToday: self.isToday),
+//            .activities(activities: lifestyleRecommendationsActivities + activities, selectedDate: selectedDate, isToday: self.isToday),
+            .activities(activities: activities, selectedDate: selectedDate, isToday: self.isToday),
             .food(food: food, selectedDate: selectedDate, userHasTakenATest: !(resultsViewModel?.isEmpty ?? true)),
             .water(glassesNumber: dailyWaterIntake, checkedGlasses: drinkedWaterGlasses, isWaterPlanCreatedForSelectedDay: isWaterPlanCreatedForSelectedDay, lastSelectedGlassesNumber: lastSelectedGlasesNumber, isWaterPlanCreatedToday: isWaterPlanCreatedToday),
             .footer

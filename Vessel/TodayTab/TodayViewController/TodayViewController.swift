@@ -299,7 +299,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             assertionFailure("Can't get cell data from viewModel in TodayViewController")
             return UITableViewCell()
         }
-        
+        print("identifier: \(cellData.identifier) for: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: cellData.identifier, for: indexPath)
         switch cellData
         {
@@ -405,6 +405,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         guard let section = viewModel.sections[safe: indexPath.section] else { return }
+        print("section: \(section)")
         switch section
         {
         case .insights(let lessons, _):
@@ -448,6 +449,12 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             }
             else
             {
+                let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
+                let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
+                navigationController?.pushViewController(activityDetailsVC, animated: true)
+                
+                return
+                
                 let activityPlans: [Plan] = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDate: viewModel.selectedDate)
                
                 let plans: [Plan] = activityPlans + PlansManager.shared.getLifestyleRecommendationPlans()
