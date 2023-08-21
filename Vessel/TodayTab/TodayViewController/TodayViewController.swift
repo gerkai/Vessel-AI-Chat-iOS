@@ -450,7 +450,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             else
             {
                 let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
-                let activityDetailsVC = storyboard.instantiateViewController(identifier: "ActivityDetailsViewController") as! ActivityDetailsViewController
+                let activityDetailsVC = storyboard.instantiateViewController(identifier: "NewActivityDetailsViewController") as! NewActivityDetailsViewController
                 navigationController?.pushViewController(activityDetailsVC, animated: true)
                 
                 return
