@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -281,7 +281,7 @@
                                                                             <fragment content="Description">
                                                                                 <attributes>
                                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <font key="NSFont" size="13" name="NoeText-Book"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -784,7 +784,7 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="Water is a natural resource that is required by every person to help satisfy our health-related needs. ">
                                                                 <attributes>
-                                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -796,7 +796,7 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="It is evident that water is one of the key elements responsible for human life on earth and is vital for our survival.">
                                                                 <attributes>
-                                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <real key="NSKern" value="0.0"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="28" maximumLineHeight="28" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                                         <tabStops/>
@@ -827,7 +827,7 @@
 </string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -838,14 +838,14 @@ However, most people drink below what their body needs because it's hard to know
 </string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content="Vessel can help by showing you how much water you need and reminding you to drink.">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="16" name="NoeText"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
@@ -867,7 +867,7 @@ However, most people drink below what their body needs because it's hard to know
                                                                     <fragment content="The human brain is composed of">
                                                                         <attributes>
                                                                             <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -1099,15 +1099,15 @@ However, most people drink below what their body needs because it's hard to know
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="gZm-Yf-eCN">
-                                                        <rect key="frame" x="19.999999999999986" y="548" width="234.66666666666663" height="28"/>
+                                                        <rect key="frame" x="19.999999999999986" y="548" width="224.66666666666663" height="28"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHB-tH-Vww">
-                                                                <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="28"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="· Reagents">
                                                                         <attributes>
                                                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <font key="NSFont" size="20" name="BananaGrotesk-Semibold"/>
+                                                                            <font key="NSFont" metaFont="system" size="20"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -1115,12 +1115,12 @@ However, most people drink below what their body needs because it's hard to know
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfO-Lt-s9e">
-                                                                <rect key="frame" x="137.33333333333334" y="0.0" width="97.333333333333343" height="28"/>
+                                                                <rect key="frame" x="132.33333333333334" y="0.0" width="92.333333333333343" height="28"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Quantities">
                                                                         <attributes>
                                                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <font key="NSFont" size="20" name="BananaGrotesk-Semibold"/>
+                                                                            <font key="NSFont" metaFont="system" size="20"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -1136,12 +1136,12 @@ However, most people drink below what their body needs because it's hard to know
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IG5-1c-3A5">
-                                                        <rect key="frame" x="20" y="498" width="87.333333333333329" height="28"/>
+                                                        <rect key="frame" x="20" y="498" width="83.333333333333329" height="28"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Description">
                                                                 <attributes>
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="28" maximumLineHeight="28" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -1418,21 +1418,21 @@ However, most people drink below what their body needs because it's hard to know
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftw-cw-4dF">
-                                <rect key="frame" x="20" y="157" width="350" height="160"/>
+                                <rect key="frame" x="20" y="157" width="350" height="159.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="An insight a day keeps the doctor away" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYn-tL-agd">
-                                        <rect key="frame" x="20" y="20" width="310" height="56"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="54"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxz-pE-g2A">
-                                        <rect key="frame" x="20" y="84" width="310" height="56"/>
+                                        <rect key="frame" x="20" y="82" width="310" height="57.333333333333343"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Each day, you'll get one new insight to help you reach your goals.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1457,7 +1457,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xt8-On-wfA">
-                                <rect key="frame" x="20" y="333" width="350" height="207"/>
+                                <rect key="frame" x="20" y="332.33333333333331" width="350" height="206.99999999999994"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KPg-l7-35g">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="207"/>
@@ -1468,13 +1468,13 @@ However, most people drink below what their body needs because it's hard to know
                                         <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29g-Pk-ysb">
-                                        <rect key="frame" x="20" y="20" width="310" height="25.666666666666671"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="24.666666666666671"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjd-LP-qVg">
-                                        <rect key="frame" x="20" y="49.666666666666686" width="48" height="16"/>
+                                        <rect key="frame" x="19.999999999999996" y="48.666666666666686" width="50.666666666666657" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1491,7 +1491,7 @@ However, most people drink below what their body needs because it's hard to know
                                                         <fragment content="Description">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <font key="NSFont" size="13" name="NoeText-Book"/>
+                                                                <font key="NSFont" metaFont="system"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -1545,7 +1545,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </variation>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointer-finger" translatesAutoresizingMaskIntoConstraints="NO" id="bjE-X8-S6L">
-                                <rect key="frame" x="171.66666666666666" y="516" width="47" height="71"/>
+                                <rect key="frame" x="171.66666666666666" y="515.33333333333337" width="47" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" id="jbr-vf-cnY"/>
                                     <constraint firstAttribute="height" constant="71" id="ouG-JP-yeu"/>
@@ -1597,7 +1597,7 @@ However, most people drink below what their body needs because it's hard to know
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eo5-Zk-PRw">
-                                <rect key="frame" x="0.0" y="87" width="390" height="723"/>
+                                <rect key="frame" x="0.0" y="88.333333333333314" width="390" height="721.66666666666674"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -1605,13 +1605,13 @@ However, most people drink below what their body needs because it's hard to know
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eig-qD-zG5">
-                                <rect key="frame" x="20" y="47" width="44" height="32"/>
+                                <rect key="frame" x="20" y="47" width="43" height="33.333333333333343"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Done">
                                             <attributes>
-                                                <font key="NSFont" size="18" name="BananaGrotesk-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="18"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -1660,21 +1660,21 @@ However, most people drink below what their body needs because it's hard to know
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKY-MO-huq">
-                                <rect key="frame" x="20" y="157" width="350" height="160"/>
+                                <rect key="frame" x="20" y="157" width="350" height="159.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Congrats on adding your first activity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FH-Xx-APY">
-                                        <rect key="frame" x="20" y="20" width="310" height="56"/>
+                                        <rect key="frame" x="20" y="20" width="310" height="54"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Imy-7L-N8G">
-                                        <rect key="frame" x="20" y="84" width="310" height="56"/>
+                                        <rect key="frame" x="20" y="82" width="310" height="57.333333333333343"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Track how many times you complete this and build healthy habits.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1699,7 +1699,7 @@ However, most people drink below what their body needs because it's hard to know
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfW-Cd-52N">
-                                <rect key="frame" x="20" y="333" width="350" height="207"/>
+                                <rect key="frame" x="20" y="332.33333333333331" width="350" height="206.99999999999994"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nYJ-bu-7Nb">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="207"/>
@@ -1710,13 +1710,13 @@ However, most people drink below what their body needs because it's hard to know
                                         <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bx8-sb-96e">
-                                        <rect key="frame" x="282" y="20" width="48" height="25.666666666666671"/>
+                                        <rect key="frame" x="279.33333333333331" y="20" width="50.666666666666686" height="24.666666666666671"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE5-j8-BmX">
-                                        <rect key="frame" x="282" y="49.666666666666686" width="48" height="16"/>
+                                        <rect key="frame" x="279.33333333333331" y="48.666666666666686" width="50.666666666666686" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1733,7 +1733,7 @@ However, most people drink below what their body needs because it's hard to know
                                                         <fragment content="Description">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <font key="NSFont" size="13" name="NoeText-Book"/>
+                                                                <font key="NSFont" metaFont="system"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -1839,21 +1839,21 @@ However, most people drink below what their body needs because it's hard to know
                                 </connections>
                             </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWe-dZ-BWz">
-                                <rect key="frame" x="43" y="333" width="327" height="132"/>
+                                <rect key="frame" x="43" y="333" width="327" height="132.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="When you're ready" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpd-Qv-itI">
-                                        <rect key="frame" x="20" y="20" width="287" height="28"/>
+                                        <rect key="frame" x="20" y="20" width="287" height="27"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e9-r2-n9C">
-                                        <rect key="frame" x="20" y="56" width="287" height="56"/>
+                                        <rect key="frame" x="20" y="55" width="287" height="57.333333333333343"/>
                                         <attributedString key="attributedText">
                                             <fragment content="You can find your personalized supplement formula here.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="NoeText-Book"/>
+                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1889,13 +1889,13 @@ However, most people drink below what their body needs because it's hard to know
                                         <color key="backgroundColor" white="0.0" alpha="0.46000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egi-TU-u8V">
-                                        <rect key="frame" x="38" y="20" width="216" height="25.666666666666671"/>
+                                        <rect key="frame" x="38" y="20" width="216" height="24.666666666666671"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK1-FF-Yxh">
-                                        <rect key="frame" x="38" y="49.666666666666657" width="48" height="16"/>
+                                        <rect key="frame" x="38" y="48.666666666666657" width="50.666666666666657" height="16"/>
                                         <fontDescription key="fontDescription" name="BananaGrotesk-Semibold" family="Banana Grotesk" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1912,7 +1912,7 @@ However, most people drink below what their body needs because it's hard to know
                                                         <fragment content="Description">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <font key="NSFont" size="13" name="NoeText-Book"/>
+                                                                <font key="NSFont" metaFont="system"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -1999,10 +1999,133 @@ However, most people drink below what their body needs because it's hard to know
             </objects>
             <point key="canvasLocation" x="4420" y="-41.232227488151658"/>
         </scene>
+        <!--New Activity Details View Controller-->
+        <scene sceneID="Iko-TI-oEz">
+            <objects>
+                <viewController storyboardIdentifier="NewActivityDetailsViewController" automaticallyAdjustsScrollViewInsets="NO" id="S39-eE-53k" customClass="NewActivityDetailsViewController" customModule="Vessel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2WW-dh-uvq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1076"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8I-h7-uN4">
+                                <rect key="frame" x="0.0" y="-13" width="375" height="1055"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="i60-Rd-ztS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1108"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="133-IO-wG7" userLabel="Header View">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1108"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" image="activityBackground" translatesAutoresizingMaskIntoConstraints="NO" id="zZ8-my-6CA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1108"/>
+                                                    </imageView>
+                                                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2n9-nj-dg8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1108"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JU-60-zlX">
+                                                        <rect key="frame" x="20" y="160" width="335" height="22.666666666666657"/>
+                                                        <fontDescription key="fontDescription" name="BananaGrotesk-Bold" family="Banana Grotesk" pointSize="20"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="2n9-nj-dg8" secondAttribute="trailing" id="4RR-Sx-8ed"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1JU-60-zlX" secondAttribute="trailing" constant="20" id="8tw-TH-FsF"/>
+                                                    <constraint firstItem="1JU-60-zlX" firstAttribute="leading" secondItem="133-IO-wG7" secondAttribute="leading" constant="20" id="Aoj-wF-i3d"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zZ8-my-6CA" secondAttribute="trailing" id="Ebl-hm-sOL"/>
+                                                    <constraint firstItem="1JU-60-zlX" firstAttribute="top" secondItem="133-IO-wG7" secondAttribute="top" constant="160" id="Ogx-uu-Cuu"/>
+                                                    <constraint firstAttribute="bottom" secondItem="2n9-nj-dg8" secondAttribute="bottom" id="ZcL-Em-QV6"/>
+                                                    <constraint firstItem="2n9-nj-dg8" firstAttribute="top" secondItem="133-IO-wG7" secondAttribute="top" id="kTv-ub-H8u"/>
+                                                    <constraint firstItem="zZ8-my-6CA" firstAttribute="top" secondItem="133-IO-wG7" secondAttribute="top" id="nnq-Rc-RFq"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zZ8-my-6CA" secondAttribute="bottom" id="oQO-LO-ua0"/>
+                                                    <constraint firstItem="zZ8-my-6CA" firstAttribute="leading" secondItem="133-IO-wG7" secondAttribute="leading" id="p3d-uG-X2t"/>
+                                                    <constraint firstItem="2n9-nj-dg8" firstAttribute="leading" secondItem="133-IO-wG7" secondAttribute="leading" id="xx0-qj-ROp"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1108" id="ebk-iM-qio"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="leading" secondItem="P8I-h7-uN4" secondAttribute="leading" id="B4q-Mr-lw0"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="leading" secondItem="K4x-2i-3fy" secondAttribute="leading" id="B86-4m-3U3"/>
+                                    <constraint firstAttribute="bottom" secondItem="i60-Rd-ztS" secondAttribute="bottom" constant="-537" id="H6P-Sv-cvS"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="top" secondItem="P8I-h7-uN4" secondAttribute="top" id="I1y-kb-b3w"/>
+                                    <constraint firstAttribute="trailing" secondItem="i60-Rd-ztS" secondAttribute="trailing" id="InH-ev-iIu"/>
+                                    <constraint firstItem="K4x-2i-3fy" firstAttribute="trailing" secondItem="i60-Rd-ztS" secondAttribute="trailing" id="PkL-zN-raD"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="width" secondItem="P8I-h7-uN4" secondAttribute="width" id="S5p-eo-Rk6"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="leading" secondItem="P8I-h7-uN4" secondAttribute="leading" id="XYn-Dg-4Gq"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="width" secondItem="P8I-h7-uN4" secondAttribute="width" id="Z2m-QI-Qvk"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="top" secondItem="K4x-2i-3fy" secondAttribute="top" id="bTO-Tp-EcE"/>
+                                    <constraint firstAttribute="trailing" secondItem="i60-Rd-ztS" secondAttribute="trailing" id="cVF-CS-YB2"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="top" secondItem="P8I-h7-uN4" secondAttribute="top" id="fFd-hR-sFZ"/>
+                                    <constraint firstItem="i60-Rd-ztS" firstAttribute="bottom" secondItem="K4x-2i-3fy" secondAttribute="bottom" id="zsp-7P-Vc8"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="K4x-2i-3fy"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="wjc-Oc-7Fl"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="B4q-Mr-lw0"/>
+                                        <exclude reference="H6P-Sv-cvS"/>
+                                        <exclude reference="I1y-kb-b3w"/>
+                                        <exclude reference="InH-ev-iIu"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhI-ML-sAI" userLabel="Back Button" customClass="BounceButton" customModule="Vessel" customModuleProvider="target">
+                                <rect key="frame" x="20" y="47" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Sod-ZW-PQR"/>
+                                    <constraint firstAttribute="height" constant="50" id="TpL-4N-oii"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BananaGrotesk-Regular" family="Banana Grotesk" pointSize="16"/>
+                                <state key="normal" image="square_back_button">
+                                    <color key="titleColor" red="0.086274509799999996" green="0.08235294118" blue="0.078431372550000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onBack" destination="S39-eE-53k" eventType="touchUpInside" id="saf-N7-Mxc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UP5-ai-lvs"/>
+                        <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UP5-ai-lvs" firstAttribute="top" secondItem="P8I-h7-uN4" secondAttribute="top" constant="60" id="8V2-3O-spG"/>
+                            <constraint firstItem="P8I-h7-uN4" firstAttribute="bottom" secondItem="UP5-ai-lvs" secondAttribute="bottom" id="AFS-fF-cSD"/>
+                            <constraint firstItem="xhI-ML-sAI" firstAttribute="top" secondItem="UP5-ai-lvs" secondAttribute="top" id="OUF-GP-62h"/>
+                            <constraint firstItem="xhI-ML-sAI" firstAttribute="leading" secondItem="2WW-dh-uvq" secondAttribute="leading" constant="20" id="bsi-dM-7hR"/>
+                            <constraint firstItem="P8I-h7-uN4" firstAttribute="centerX" secondItem="UP5-ai-lvs" secondAttribute="centerX" id="epy-1I-QUv"/>
+                            <constraint firstAttribute="width" secondItem="P8I-h7-uN4" secondAttribute="width" id="iNG-W2-lzx"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1076"/>
+                    <connections>
+                        <outlet property="headerImageView" destination="zZ8-my-6CA" id="AaE-WT-mt9"/>
+                        <outlet property="headerView" destination="133-IO-wG7" id="bBp-lp-Xlk"/>
+                        <outlet property="scrollView" destination="P8I-h7-uN4" id="1xt-EU-gm1"/>
+                        <outlet property="subtitleLabel" destination="1JU-60-zlX" id="yX0-Qc-BPE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HzM-QB-sQN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2006.9230769230769" y="884.36018957345971"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Checkbox_beige_unselected" width="48" height="48"/>
         <image name="Plan-Icon" width="18" height="18"/>
+        <image name="activityBackground" width="1480" height="1032"/>
         <image name="checkbox_locked" width="48" height="48"/>
         <image name="close-icon" width="10" height="10"/>
         <image name="edit-icon" width="14" height="14"/>

@@ -195,7 +195,7 @@ private extension ActivityDetailsViewController
         
         guard let url = viewModel?.imageURL else
         {
-            assertionFailure("CheckMarkCardView-setup: imageURL not available")
+//            assertionFailure("CheckMarkCardView-setup: imageURL not available")
             return
         }
         headerImageView.kf.setImage(with: url)
