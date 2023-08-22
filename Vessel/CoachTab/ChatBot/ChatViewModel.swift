@@ -12,6 +12,7 @@ let GET_CONVERSATION_HISTORY = "api/get_conversation_history"
 let GET_CONVERSATIONS = "api/conversations"
 let SEND_MESSAGE = "api/chat_2"
 let CREATE_CONVERSATION = "api/create_conversation"
+let TOKEN = "Token 4d1b601650564b78b2d4cd79ef31b10b681dfe99"
 
 class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 {
@@ -29,10 +30,10 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         //        if let accessToken = Server.shared.accessToken
         //        {
-        request.setValue("Token df58168903ed49b916226af46ffaba7d005dd220", forHTTPHeaderField: AUTH_KEY)
+        request.setValue(TOKEN, forHTTPHeaderField: AUTH_KEY)
         //        }
         
-        let dictBody: Dictionary = ["username": "jovancho"]
+        let dictBody: Dictionary = ["username": "mp"]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -84,11 +85,11 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 //        if let accessToken = Server.shared.accessToken
 //        {
 //            request.setValue("\(AUTH_PREFIX) \(accessToken)", forHTTPHeaderField: AUTH_KEY)
-            request.setValue("Token df58168903ed49b916226af46ffaba7d005dd220", forHTTPHeaderField: AUTH_KEY)
+            request.setValue(TOKEN, forHTTPHeaderField: AUTH_KEY)
 //        }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": "jovancho"]
+        let dictBody: Dictionary = ["username": "mp"]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -137,11 +138,11 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 //        if let accessToken = Server.shared.accessToken
 //        {
 //            request.setValue("\(AUTH_PREFIX) \(accessToken)", forHTTPHeaderField: AUTH_KEY)
-            request.setValue("Token df58168903ed49b916226af46ffaba7d005dd220", forHTTPHeaderField: AUTH_KEY)
+            request.setValue(TOKEN, forHTTPHeaderField: AUTH_KEY)
 //        }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": "jovancho", "conversation_id": conversationId] as [String: Any]
+        let dictBody: Dictionary = ["username": "mp", "conversation_id": conversationId] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -191,10 +192,10 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 //        if let accessToken = Server.shared.accessToken
 //        {
 //            request.setValue("\(AUTH_PREFIX) \(accessToken)", forHTTPHeaderField: AUTH_KEY)
-            request.setValue("Token df58168903ed49b916226af46ffaba7d005dd220", forHTTPHeaderField: AUTH_KEY)
+            request.setValue(TOKEN, forHTTPHeaderField: AUTH_KEY)
 //        }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        let dictBody: Dictionary = ["username": "jovancho", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
+        let dictBody: Dictionary = ["username": "mp", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -241,10 +242,10 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 //        if let accessToken = Server.shared.accessToken
 //        {
 //            request.setValue("\(AUTH_PREFIX) \(accessToken)", forHTTPHeaderField: AUTH_KEY)
-            request.setValue("Token df58168903ed49b916226af46ffaba7d005dd220", forHTTPHeaderField: AUTH_KEY)
+            request.setValue(TOKEN, forHTTPHeaderField: AUTH_KEY)
 //        }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        let dictBody: Dictionary = ["username": "jovancho", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
+        let dictBody: Dictionary = ["username": "mp", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
