@@ -106,7 +106,8 @@ enum TodayViewSection: Equatable
                                             id: lesson.id,
                                             type: .lesson,
                                             remindersButtonState: nil,
-                                            remindersButtonText: nil))
+                                            remindersButtonText: nil,
+                                            longDescription: nil))
             }
             else
             {
@@ -160,45 +161,70 @@ enum TodayViewSection: Equatable
                 }
             }
             
-//            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
-//            {
-//                RemindersManager.shared.reloadReminders()
-//                let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
-//                if plan.completed.contains(selectedDate)
-//                {
-//                    cells.append(.foldedCheckMarkCard(title: activity.title,
-//                                                      subtitle: "",
-//                                                      backgroundImage: activity.imageUrl))
-//                }
-//                else
-//                {
-//                    let description: String
-//                    if activity.isLifestyleRecommendation && activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID
-//                    {
-//                        var goals = Contact.main()?.getGoals() ?? []
-//                        if goals.contains("Sleep") && goals.count > 1
-//                        {
-//                            goals.removeAll(where: { $0 == "Sleep" })
-//                        }
-//                        description = String(format: activity.description ?? "", goals.map({ $0.lowercased() }).joined(separator: ", "))
-//                    }
-//                    else
-//                    {
-//                        description = activity.description ?? ""
-//                    }
-                    cells.append(.checkMarkCard(title: "Get your supplement plan",// activity.title,
-                                                subtitle: "Take a simple 3 minute quiz",// activity.frequency,
-                                                description: "Get a precise supplement plan personilized to you. get started",// activity.description ?? "test desc",
+            if activity.isPlan
+            {
+                cells.append(.checkMarkCard(title: activity.title,
+                                            subtitle: activity.frequency,
+                                            description: activity.description ?? "test desc",
+                                            backgroundImage: activity.imageUrl,
+                                            isCompleted: false,
+                                            id: activity.id,
+                                            type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
+                                            remindersButtonState: true,
+                                            remindersButtonText: "",
+                                            longDescription: activity.longDescription))
+            }
+            
+            if let plan = plan, activity.isLifestyleRecommendation || (isToday ? plan.removedDate == nil : (selectedDate >= plan.createdDate && selectedDate < (plan.removedDate ?? todayDate)))
+            {
+                RemindersManager.shared.reloadReminders()
+                let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+                if plan.completed.contains(selectedDate)
+                {
+                    cells.append(.foldedCheckMarkCard(title: activity.title,
+                                                      subtitle: "",
+                                                      backgroundImage: activity.imageUrl))
+                }
+                else
+                {
+                    let description: String
+                    if activity.isLifestyleRecommendation && activity.id == -Constants.FUEL_AM_LIFESTYLE_RECOMMENDATION_ID
+                    {
+                        var goals = Contact.main()?.getGoals() ?? []
+                        if goals.contains("Sleep") && goals.count > 1
+                        {
+                            goals.removeAll(where: { $0 == "Sleep" })
+                        }
+                        description = String(format: activity.description ?? "", goals.map({ $0.lowercased() }).joined(separator: ", "))
+                    }
+                    else
+                    {
+                        description = activity.description ?? ""
+                    }
+                    cells.append(.checkMarkCard(title: activity.title,
+                                                subtitle: activity.frequency,
+                                                description: activity.description ?? "test desc",
                                                 backgroundImage: activity.imageUrl,
                                                 isCompleted: false,
                                                 id: activity.id,
                                                 type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
-                                                remindersButtonState: true, // reminders.count > 0,
-                                                remindersButtonText: "remindersButtonText"))// RemindersManager.shared.getNextReminderTime(forPlan: plan.id)))
-//                }
-//            }
+                                                remindersButtonState: reminders.count > 0,
+                                                remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan.id),
+                                                longDescription: activity.longDescription))
+                }
+            }
         }
         return cells
+        
+//        cells.append(.checkMarkCard(title: "Get your supplement plan",// activity.title,
+//                                    subtitle: "Take a simple 3 minute quiz",// activity.frequency,
+//                                    description: "Get a precise supplement plan personilized to you. get started",// activity.description ?? "test desc",
+//                                    backgroundImage: activity.imageUrl,
+//                                    isCompleted: false,
+//                                    id: activity.id,
+//                                    type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
+//                                    remindersButtonState: true, // reminders.count > 0,
+//                                    remindersButtonText: "remindersButtonText"))
     }
     
     func createFoodSection(food: [Food], selectedDate: String, userHasTakenATest: Bool) -> [TodayViewCell]
@@ -285,7 +311,7 @@ enum TodayViewCell: Equatable
     case foodDetails(food: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, subtext: String)
-    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?)
+    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?, longDescription: String?)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String, alignment: NSTextAlignment)
     case loader
@@ -354,7 +380,8 @@ class TodayViewModel
     // Feature flags
     var showProgressDays: Bool = RemoteConfigManager.shared.getValue(for: .progressDaysFeature) as? Bool ?? false
     private var showInsights: Bool = RemoteConfigManager.shared.getValue(for: .insightsFeature) as? Bool ?? false
-    private var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
+//    private var showActivites: Bool = RemoteConfigManager.shared.getValue(for: .activitiesFeature) as? Bool ?? false
+    private var showActivites: Bool = true
     private var showFood: Bool = RemoteConfigManager.shared.getValue(for: .foodFeature) as? Bool ?? false
     private var showWater: Bool = RemoteConfigManager.shared.getValue(for: .waterFeature) as? Bool ?? false
     var showReminders: Bool = RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false
@@ -406,13 +433,20 @@ class TodayViewModel
 //        print("lifestyleRecommendationPlans: \(lifestyleRecommendationPlans)")
 //        print("showActivites: \(showActivites)")
 //        print("PlansManager.shared.activities.: \(PlansManager.shared.activities)")
-        let activities = PlansManager.shared.activities
-//        let activities = showActivites ? PlansManager.shared.activities.filter({ activity in
-//            return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
-//        }).sorted(by: { $0.id < $1.id }) : []
-//        let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
-//            return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
-//        }).sorted(by: { $0.id < $1.id }) : []
+        var activityImageURL = "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80"
+        var activities = [
+            Tip(id: 1, last_updated: 1, title: "Get your supplement plan", description: "get a precise supplement plan personalized to you. Get started", imageUrl: activityImageURL, frequency: "take a simple 3 minute quiz", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus in nibh a placerat. Pellentesque gravida magna vitae justo lobortis, quis dictum orci commodo. Pellentesque ut leo eu mauris dictum cursus vitae sed sem. Cras consectetur porta odio, eu dapibus lacus iaculis ac. Donec eget lobortis arcu. Donec eu nulla ullamcorper, dictum augue eu, condimentum quam. Maecenas eleifend rutrum ipsum id feugiat. Curabitur sodales purus a nibh consectetur, a ultricies sapien euismod. Nullam malesuada aliquet urna sit amet feugiat."),
+            Tip(id: 1, last_updated: 1, title: "Get your supplement plan", description: "get a precise supplement plan personalized to you. Get started", imageUrl: activityImageURL, frequency: "take a simple 3 minute quiz", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus in nibh a placerat. Pellentesque gravida magna vitae justo lobortis, quis dictum orci commodo. Pellentesque ut leo eu mauris dictum cursus vitae sed sem. Cras consectetur porta odio, eu dapibus lacus iaculis ac. Donec eget lobortis arcu. Donec eu nulla ullamcorper, dictum augue eu, condimentum quam. Maecenas eleifend rutrum ipsum id feugiat. Curabitur sodales purus a nibh consectetur, a ultricies sapien euismod. Nullam malesuada aliquet urna sit amet feugiat."),
+            Tip(id: 1, last_updated: 1, title: "Get your supplement plan", description: "get a precise supplement plan personalized to you. Get started", imageUrl: activityImageURL, frequency: "take a simple 3 minute quiz", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus in nibh a placerat. Pellentesque gravida magna vitae justo lobortis, quis dictum orci commodo. Pellentesque ut leo eu mauris dictum cursus vitae sed sem. Cras consectetur porta odio, eu dapibus lacus iaculis ac. Donec eget lobortis arcu. Donec eu nulla ullamcorper, dictum augue eu, condimentum quam. Maecenas eleifend rutrum ipsum id feugiat. Curabitur sodales purus a nibh consectetur, a ultricies sapien euismod. Nullam malesuada aliquet urna sit amet feugiat."),
+            Tip(id: 1, last_updated: 1, title: "Get your supplement plan", description: "get a precise supplement plan personalized to you. Get started", imageUrl: activityImageURL, frequency: "take a simple 3 minute quiz", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus in nibh a placerat. Pellentesque gravida magna vitae justo lobortis, quis dictum orci commodo. Pellentesque ut leo eu mauris dictum cursus vitae sed sem. Cras consectetur porta odio, eu dapibus lacus iaculis ac. Donec eget lobortis arcu. Donec eu nulla ullamcorper, dictum augue eu, condimentum quam. Maecenas eleifend rutrum ipsum id feugiat. Curabitur sodales purus a nibh consectetur, a ultricies sapien euismod. Nullam malesuada aliquet urna sit amet feugiat."),
+            Tip(id: 1, last_updated: 1, title: "Get your supplement plan", description: "get a precise supplement plan personalized to you. Get started", imageUrl: activityImageURL, frequency: "take a simple 3 minute quiz", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus in nibh a placerat. Pellentesque gravida magna vitae justo lobortis, quis dictum orci commodo. Pellentesque ut leo eu mauris dictum cursus vitae sed sem. Cras consectetur porta odio, eu dapibus lacus iaculis ac. Donec eget lobortis arcu. Donec eu nulla ullamcorper, dictum augue eu, condimentum quam. Maecenas eleifend rutrum ipsum id feugiat. Curabitur sodales purus a nibh consectetur, a ultricies sapien euismod. Nullam malesuada aliquet urna sit amet feugiat.")]
+        let additionalAactivities = showActivites ? PlansManager.shared.activities.filter({ activity in
+            return activityPlans.contains(where: { $0.typeId == activity.id }) && !activity.isLifestyleRecommendation
+        }).sorted(by: { $0.id < $1.id }) : []
+        activities.append(contentsOf: additionalAactivities)
+        let lifestyleRecommendationsActivities = showActivites ? PlansManager.shared.activities.filter({ activity in
+            return lifestyleRecommendationPlans.contains(where: { $0.typeId == activity.id }) && activity.isLifestyleRecommendation && activity.id != Constants.WATER_LIFESTYLE_RECOMMENDATION_ID
+        }).sorted(by: { $0.id < $1.id }) : []
         
         // FOOD
         let food = showFood ? contact.suggestedFood : []

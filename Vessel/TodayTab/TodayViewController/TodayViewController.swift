@@ -345,7 +345,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.setup(backgroundImage: backgroundImage, subtext: subtext)
-        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText):
+        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText, let longDescription):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else
             {
                 assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
@@ -447,14 +447,17 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                                                                                                  subtitle: GenericAlertLabelInfo(title: NSLocalizedString("These are the actions you can take to build the habits needed to reach your goals.", comment: ""), font: Constants.FontBodyAlt16, alignment: .center, height: 80.0),
                                                                                                  button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
             }
-            else
+            else if activities[indexPath.row - 1].isPlan
             {
                 let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                 let activityDetailsVC = storyboard.instantiateViewController(identifier: "NewActivityDetailsViewController") as! NewActivityDetailsViewController
+                let activity = activities[indexPath.row - 1]
+                activityDetailsVC.imageUrl = activity.imageUrl
+                activityDetailsVC.text = activity.longDescription
                 navigationController?.pushViewController(activityDetailsVC, animated: true)
-                
-                return
-                
+            }
+            else
+            {
                 let activityPlans: [Plan] = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDate: viewModel.selectedDate)
                
                 let plans: [Plan] = activityPlans + PlansManager.shared.getLifestyleRecommendationPlans()

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewActivityDetailsViewController: UIViewController, VesselScreenIdentifiable
 {
@@ -17,6 +18,16 @@ class NewActivityDetailsViewController: UIViewController, VesselScreenIdentifiab
     
     @Resolved internal var analytics: Analytics
     let flowName: AnalyticsFlowName = .todayTabFlow
+    var text: String = ""
+    var imageUrl: String = ""
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        headerImageView.kf.setImage(with: URL(string: imageUrl))
+        subtitleLabel.text = text
+    }
     
     // MARK: - Actions
     @IBAction func onBack()

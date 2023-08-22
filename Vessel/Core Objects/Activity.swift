@@ -18,6 +18,9 @@ class Tip: CoreObjectProtocol
     //let smallImage: String?
     let storage: StorageType = .cacheAndDisk
     var isLifestyleRecommendation = false
+    var isPlan = false
+    var subtitle = ""
+    var longDescription = ""
     
     init(id: Int,
          last_updated: Int,
@@ -25,7 +28,10 @@ class Tip: CoreObjectProtocol
          description: String?,
          imageUrl: String,
          frequency: String,
-         isLifestyleRecommendation: Bool = false)
+         isLifestyleRecommendation: Bool = false,
+         isPlan: Bool = false,
+         subtitle: String = "",
+         longDescription: String = "")
     {
         self.id = id
         self.last_updated = last_updated
@@ -34,6 +40,9 @@ class Tip: CoreObjectProtocol
         self.imageUrl = imageUrl
         self.frequency = frequency
         self.isLifestyleRecommendation = isLifestyleRecommendation
+        self.isPlan = isPlan
+        self.subtitle = subtitle
+        self.longDescription = longDescription
     }
     
     enum CodingKeys: String, CodingKey
