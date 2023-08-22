@@ -12,7 +12,7 @@ let GET_CONVERSATION_HISTORY = "api/get_conversation_history"
 let GET_CONVERSATIONS = "api/conversations"
 let SEND_MESSAGE = "api/chat_2"
 let CREATE_CONVERSATION = "api/create_conversation"
-let TOKEN = "Token 4d1b601650564b78b2d4cd79ef31b10b681dfe99"
+let TOKEN = "Token 852a988c1b4d7f56978564c78b207e21ef1933ba"
 
 class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 {

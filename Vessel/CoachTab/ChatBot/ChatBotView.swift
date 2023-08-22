@@ -182,7 +182,7 @@ struct MessageView: View
             HStack
             {
                 Text(.init(messageModel.text))
-                    .font(.system(size: 14))
+                    .font(.system(size: 18))
                     .padding()
                     .foregroundColor(.black)
                     .background(isUserMessage ? .gray.opacity(0.2) : Color(uiColor: Constants.vesselChatGreen))
