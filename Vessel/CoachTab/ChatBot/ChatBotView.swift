@@ -93,10 +93,10 @@ struct ChatBotView: View
             ScrollView
             {
                 ForEach(viewModel.conversationHistory, id: \.self) { message in
-                    let timestamp = time(createdAt: message.created_at)
+                    let timestamp = viewModel.time(createdAt: message.created_at)
                     let model = MessageModel(text: message.message,
                                              timestamp: timestamp ?? Date())
-                    MessageView(messageModel: model, isUserMessage: message.role == "assistant")
+                    MessageView(messageModel: model, isAssistant: message.role == "assistant")
                 }
                 .rotationEffect(.degrees(180))
             }
@@ -148,15 +148,6 @@ struct ChatBotView: View
         }
     }
     
-    func time(createdAt: String) -> Date?
-    {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let createdAtDate = formatter.date(from: createdAt) ?? Date()
-        let date = Calendar.current.date(byAdding: .hour, value: 2, to: createdAtDate)
-        return date
-    }
-    
     var header: some View
     {
         HStack
@@ -187,44 +178,51 @@ struct ChatBotView: View
     }
 }
 
-struct SystemMessageView: View
-{
-    var message: String
-    var body: some View
-    {
-        Text(message)
-            .font(.system(size: 16))
-            .foregroundColor(.gray)
-            .padding([.leading, .trailing], 25)
-    }
-}
-
 struct MessageView: View
 {
     var messageModel: MessageModel
     var showTime = false
-    var isUserMessage: Bool
+    var isAssistant: Bool
     
     var body: some View
     {
-        VStack(alignment: isUserMessage ? .leading : .trailing)
+        VStack(alignment: isAssistant ? .leading : .trailing)
         {
-            Text("\(messageModel.timestamp.formatted(.dateTime.hour().minute()))")
-                .font(.caption)
-                .foregroundColor(.gray)
+            HStack
+            {
+                if isAssistant
+                {
+                    Image("chat-bot-avatar")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .cornerRadius(6)
+                }
+                else
+                {
+                    if let firstName = Contact.main()?.first_name
+                    {
+                        Text(firstName)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                Text("\(messageModel.timestamp.formatted(.dateTime.hour().minute()))")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
             HStack
             {
                 Text(.init(messageModel.text))
-                    .font(.system(size: 14))
+                    .font(.system(size: 15))
                     .padding()
                     .foregroundColor(.black)
-                    .background(isUserMessage ? .gray.opacity(0.2) : Color(uiColor: Constants.vesselChatGreen))
+                    .background(isAssistant ? .gray.opacity(0.2) : Color(uiColor: Constants.vesselChatGreen))
                     .cornerRadius(15)
             }
-            .frame(maxWidth: 300, alignment: isUserMessage ? .leading : .trailing)
+            .frame(maxWidth: 300, alignment: isAssistant ? .leading : .trailing)
         }
-        .frame(maxWidth: .infinity, alignment: isUserMessage ? .leading : .trailing)
-        .padding(isUserMessage ? .leading : .trailing)
+        .frame(maxWidth: .infinity, alignment: isAssistant ? .leading : .trailing)
+        .padding(isAssistant ? .leading : .trailing)
         .padding(.horizontal, 10)
     }
 }

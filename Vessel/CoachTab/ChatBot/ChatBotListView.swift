@@ -13,55 +13,63 @@ struct ChatBotListView: View
     @ObservedObject var viewModel: ChatBotViewModel
     @State private var willMoveToNextScreen = false
     @State private var selectedItem: Int? = nil
+    @State var isLoading: Bool = false
+    
     var body: some View
     {
         header
         VStack(spacing: 0)
         {
-            NavigationView
+            LoadingView(isShowing: $isLoading)
             {
-                List
+                NavigationView
                 {
-                    startChatButton
-                    Spacer()
-                    ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
-                    { conversation in
-                        HStack
-                        {
-                            Text("# \(conversation.id)")
-                                .onTapGesture
+                    List
+                    {
+                        startChatButton
+                        Spacer()
+                        ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
+                        { conversation in
+                            HStack
                             {
-                                self.selectedItem = conversation.id
+                                Text("# \(conversation.id)")
+                                    .onTapGesture
+                                {
+                                    self.selectedItem = conversation.id
+                                }
+                                .background(
+                                    NavigationLink(destination: ChatBotView(viewModel: viewModel, conversationId: conversation.id), tag: conversation.id,
+                                                   selection: $selectedItem) { EmptyView() }
+                                        .opacity(0)
+                                )
+                                Spacer()
+                                Image(systemName: "chevron.forward")
+                                    .font(Font.system(.caption).weight(.bold))
+                                    .foregroundColor(Color(UIColor.tertiaryLabel))
                             }
-                            .background(
-                                NavigationLink(destination: ChatBotView(viewModel: viewModel, conversationId: conversation.id), tag: conversation.id,
-                                               selection: $selectedItem) { EmptyView() }
-                                    .opacity(0)
-                            )
-                            Spacer()
-                            Image(systemName: "chevron.forward")
-                                .font(Font.system(.caption).weight(.bold))
-                                .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .accentColor(Color(uiColor: Constants.vesselChatGreen))
                         }
-                        .accentColor(Color(uiColor: Constants.vesselChatGreen))
+                        .listRowBackground(Color(uiColor: Constants.vesselChatGreen))
                     }
-                    .listRowBackground(Color(uiColor: Constants.vesselChatGreen))
+                    .listStyle(.plain)
+                    .background(Color(uiColor: Constants.vesselChatGreen))
                 }
-                .listStyle(.plain)
-                .background(Color(uiColor: Constants.vesselChatGreen))
-            }
-            .onAppear
-            {
-                if Server.shared.chatToken == nil
+                
+                .onAppear
                 {
-                    handleChatAuth()
+                    isLoading = true
+                    if Server.shared.chatToken == nil
+                    {
+                        handleChatAuth()
+                    }
+                    else
+                    {
+                        viewModel.getConversations()
+                        isLoading = false
+                    }
                 }
-                else
-                {
-                    viewModel.getConversations()
-                }
+                .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
             }
-            .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
         }
         .padding(.top, -20)
     }
@@ -137,6 +145,7 @@ struct ChatBotListView: View
                 {
                 case .success:
                     viewModel.getConversations()
+                    isLoading = false
                 case .invalidCredentials:
                     viewModel.signup(username: username, completion: { success in
                         if success
@@ -147,9 +156,11 @@ struct ChatBotListView: View
                         {
                             print("login error")
                         }
+                        isLoading = false
                     })
                 case .error:
                     print("login error")
+                    isLoading = false
                 }
             })
         }
@@ -184,5 +195,49 @@ extension View
             }
         }
         .navigationViewStyle(.stack)
+    }
+}
+
+struct ActivityIndicator: UIViewRepresentable
+{
+    @Binding var isAnimating: Bool
+    let style: UIActivityIndicatorView.Style
+
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView
+    {
+        return UIActivityIndicatorView(style: style)
+    }
+
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>)
+    {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+    }
+}
+
+struct LoadingView<Content>: View where Content: View
+{
+    @Binding var isShowing: Bool
+    var content: () -> Content
+
+    var body: some View
+    {
+        GeometryReader { geometry in
+            ZStack(alignment: .center)
+            {
+                self.content()
+                    .disabled(self.isShowing)
+                    .blur(radius: self.isShowing ? 3 : 0)
+
+                VStack
+                {
+                    ActivityIndicator(isAnimating: .constant(true), style: .large)
+                }
+                .frame(width: geometry.size.width / 2,
+                       height: geometry.size.height / 5)
+                .foregroundColor(Color.primary)
+                .cornerRadius(20)
+                .opacity(self.isShowing ? 1 : 0)
+            }
+        }
     }
 }

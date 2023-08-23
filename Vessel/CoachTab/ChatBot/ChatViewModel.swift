@@ -348,8 +348,22 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     
     private func messageDate() -> String
     {
-        let dateFormatter = DateFormatter()
-        return dateFormatter.string(from: Date())
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        if let date = Calendar.current.date(byAdding: .hour, value: -2, to: Date())
+        {
+            return formatter.string(from: date)
+        }
+        return formatter.string(from: Date())
+    }
+    
+    func time(createdAt: String) -> Date?
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        let createdAtDate = formatter.date(from: createdAt) ?? Date()
+        let date = Calendar.current.date(byAdding: .hour, value: 2, to: createdAtDate)
+        return date
     }
 }
 
