@@ -15,6 +15,7 @@ struct ChatBotView: View
     
     @State private var messageText = ""
     @State var conversationId: Int?
+    @FocusState private var focusedField: Bool
     
     var footer: some View
     {
@@ -24,13 +25,30 @@ struct ChatBotView: View
             {
                 TextEditor(text: $messageText)
                     .disabled(viewModel.isProcessing)
-                    .cornerRadius(30)
+                    .frame(width: .infinity, height: .infinity)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(.gray, lineWidth: 1)
+                    )
+                    .focused($focusedField)
                 if messageText == ""
                 {
                     Text(viewModel.isProcessing ? "Violet is thinking..." : "Write a message...")
+                        .disabled(true)
                         .foregroundColor(.gray)
                         .padding(.bottom, 35)
                         .padding(.leading, 5)
+                        .onTapGesture
+                        {
+                            if viewModel.isProcessing
+                            {
+                                focusedField = false
+                            }
+                            else
+                            {
+                                focusedField = true
+                            }
+                        }
                 }
                 else
                 {
@@ -134,7 +152,8 @@ struct ChatBotView: View
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let date = formatter.date(from: createdAt)
+        let createdAtDate = formatter.date(from: createdAt) ?? Date()
+        let date = Calendar.current.date(byAdding: .hour, value: 2, to: createdAtDate)
         return date
     }
     
