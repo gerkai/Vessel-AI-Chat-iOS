@@ -111,6 +111,7 @@ class Server: NSObject
     //TODO: Move access and refresh tokens to secure storage
     var accessToken: String?
     var refreshToken: String?
+    var chatToken: String?
     
     // MARK: - URLs and Keys
     func API() -> String
