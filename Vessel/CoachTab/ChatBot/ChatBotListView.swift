@@ -52,7 +52,14 @@ struct ChatBotListView: View
             }
             .onAppear
             {
-                viewModel.getConversations()
+                if Server.shared.chatToken == nil
+                {
+                    handleChatAuth()
+                }
+                else
+                {
+                    viewModel.getConversations()
+                }
             }
             .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
         }
@@ -118,6 +125,34 @@ struct ChatBotListView: View
             RoundedRectangle(cornerRadius: 5)
                 .foregroundColor(.black)
         )
+    }
+    
+    private func handleChatAuth()
+    {
+        if let contact = Contact.main(), let firstName = contact.first_name, let lastName = contact.last_name
+        {
+            let username = String((firstName + lastName).prefix(15))
+            viewModel.login(username: username, completion: { result in
+                switch result
+                {
+                case .success:
+                    viewModel.getConversations()
+                case .invalidCredentials:
+                    viewModel.signup(username: username, completion: { success in
+                        if success
+                        {
+                            willMoveToNextScreen = true
+                        }
+                        else
+                        {
+                            print("login error")
+                        }
+                    })
+                case .error:
+                    print("login error")
+                }
+            })
+        }
     }
 }
 

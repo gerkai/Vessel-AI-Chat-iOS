@@ -15,18 +15,32 @@ struct ChatBotView: View
     
     @State private var messageText = ""
     @State var conversationId: Int?
-    @State var textHeight: CGFloat = 100
     
     var footer: some View
     {
         HStack
         {
-            TextField(viewModel.isProcessing ? "Violet is thinking..." : "Write a message...", text: $messageText)
-                .disabled(viewModel.isProcessing)
-                .foregroundColor(.black)
-                .padding(.horizontal, 20)
-                .cornerRadius(30)
-            
+            ZStack(alignment: .leading)
+            {
+                TextEditor(text: $messageText)
+                    .disabled(viewModel.isProcessing)
+                    .cornerRadius(30)
+                if messageText == ""
+                {
+                    Text(viewModel.isProcessing ? "Violet is thinking..." : "Write a message...")
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 35)
+                        .padding(.leading, 5)
+                }
+                else
+                {
+                    Text(messageText)
+                        .opacity(0)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 10)
+                }
+            }
+            .frame(maxHeight: 80)
             HStack
             {
                 Button
@@ -50,7 +64,7 @@ struct ChatBotView: View
             }
             .padding(.horizontal, 10)
         }
-        .padding(.top, 23)
+        .padding(.top, 8)
         .padding(.horizontal)
     }
     
