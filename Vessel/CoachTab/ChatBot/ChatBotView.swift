@@ -7,10 +7,12 @@
 
 import SwiftUI
 
+extension NSNotification.Name {
+    static let chatbotDismissed = Notification.Name.init("chatbotDismissed")
+}
+
 struct ChatBotView: View
 {
-    @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var viewModel: ChatBotViewModel
     
     @State private var messageText = ""
@@ -162,7 +164,7 @@ struct ChatBotView: View
             Spacer()
             Button
             {
-                presentationMode.wrappedValue.dismiss()
+                NotificationCenter.default.post(name: .chatbotDismissed, object: nil)
             } label:
             {
                 Image(systemName: "xmark")

@@ -329,6 +329,9 @@
 		72FCD54928F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FCD54828F1351400591069 /* TodayFoodDetailsSectionTableViewCell.swift */; };
 		BBA0B68F6BCE15D107E5BC2A /* Pods_Vessel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3073DE68B36C49BE4FE4E6 /* Pods_Vessel.framework */; };
 		E2AF62F96BBD8767707BFE9A /* Pods_VesselTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */; };
+		E773428B2A96B41F00E9A1D8 /* ChatBotIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773428A2A96B41F00E9A1D8 /* ChatBotIntro.swift */; };
+		E773428D2A96BCB000E9A1D8 /* ChatBotIntro2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773428C2A96BCB000E9A1D8 /* ChatBotIntro2.swift */; };
+		E773428F2A96BEB200E9A1D8 /* ChatBotIntro3.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773428E2A96BEB200E9A1D8 /* ChatBotIntro3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -694,6 +697,9 @@
 		7C6A2A253BB2A71EFF9DB0A4 /* Pods_VesselTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VesselTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A908E6F627578F12D75215FF /* Pods-Vessel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vessel.debug.xcconfig"; path = "Target Support Files/Pods-Vessel/Pods-Vessel.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9A90603D850318166A5CB /* Pods-VesselTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VesselTests.debug.xcconfig"; path = "Target Support Files/Pods-VesselTests/Pods-VesselTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E773428A2A96B41F00E9A1D8 /* ChatBotIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotIntro.swift; sourceTree = "<group>"; };
+		E773428C2A96BCB000E9A1D8 /* ChatBotIntro2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotIntro2.swift; sourceTree = "<group>"; };
+		E773428E2A96BEB200E9A1D8 /* ChatBotIntro3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotIntro3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1225,6 +1231,9 @@
 			isa = PBXGroup;
 			children = (
 				673008412A8A28BE002B055C /* ChatBotListView.swift */,
+				E773428A2A96B41F00E9A1D8 /* ChatBotIntro.swift */,
+				E773428C2A96BCB000E9A1D8 /* ChatBotIntro2.swift */,
+				E773428E2A96BEB200E9A1D8 /* ChatBotIntro3.swift */,
 				67CACB972A83D0DB0090AD28 /* ChatBotView.swift */,
 				67D94D7D2A84FE700052A09E /* ChatViewModel.swift */,
 				672C1AFC2A8987130001FC7D /* Models */,
@@ -2072,6 +2081,7 @@
 				7215E9572893ADB100C22A24 /* HeightComponents.swift in Sources */,
 				3F0547DC27CB0455006E3098 /* GiftedCardRegisterViewController.swift in Sources */,
 				72798B7E298C7A3E00A5BD65 /* AddReminderViewModel.swift in Sources */,
+				E773428F2A96BEB200E9A1D8 /* ChatBotIntro3.swift in Sources */,
 				72C86EF6294C2B5900E194E9 /* TodayProgressDaysCell.swift in Sources */,
 				725BD181295299A900D266E9 /* GamificationCongratulationsDayView.swift in Sources */,
 				3F9C679928FDF36D00BC44FA /* Source.swift in Sources */,
@@ -2100,6 +2110,7 @@
 				72E25340287E49C9004C99C7 /* Analytics+Injection.swift in Sources */,
 				7299878328F68E6C0010C8D4 /* ReagentFoodTableViewCell.swift in Sources */,
 				3F15ACE4288734F5004716CA /* ScanningDropletsTipViewController.swift in Sources */,
+				E773428B2A96B41F00E9A1D8 /* ChatBotIntro.swift in Sources */,
 				72DF48002890EE4A00DF33BE /* ChangePasswordViewModel.swift in Sources */,
 				3F0547B527C9E82B006E3098 /* LoadingButton.swift in Sources */,
 				3FF8C572290367EB001643C1 /* ReagentImpactView.swift in Sources */,
@@ -2198,6 +2209,7 @@
 				725131C629C04A49006156EF /* UIDevice+Extension.swift in Sources */,
 				3F1A248B2891B5FB00BC539F /* Reagent.swift in Sources */,
 				72C0BCC529CB858500843586 /* RouteManager.swift in Sources */,
+				E773428D2A96BCB000E9A1D8 /* ChatBotIntro2.swift in Sources */,
 				3F9D6D892953612100664EA8 /* WellnessPopupViewController.swift in Sources */,
 				3FD3BDC02966302200AEF9C3 /* LifestyleRecommendation.swift in Sources */,
 				7271DFB128FA88ED00909A9D /* ReagentFood.swift in Sources */,
