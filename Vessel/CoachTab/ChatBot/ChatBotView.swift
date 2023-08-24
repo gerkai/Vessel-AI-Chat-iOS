@@ -108,9 +108,6 @@ struct ChatBotView: View
         }
         .navigationBarBackButtonHidden(true)
         .background()
-        .ignoresSafeArea(.all)
-        .padding(.vertical)
-        .background(.clear)
         .onAppear
         {
             viewModel.showBackButton = true
@@ -148,35 +145,6 @@ struct ChatBotView: View
                 print("streamMessage catch")
             }
         }
-    }
-    
-    var header: some View
-    {
-        HStack
-        {
-            Spacer()
-            VStack(alignment: .center)
-            {
-                Text("Vessel nutritionist")
-                .foregroundColor(.black)
-                .bold()
-            }
-            Spacer()
-            Button
-            {
-                NotificationCenter.default.post(name: .chatbotDismissed, object: nil)
-            } label:
-            {
-                Image(systemName: "xmark")
-                    .foregroundColor(.black)
-                    .imageScale(.medium)
-                    .frame(width: 28, height: 28)
-                    .padding([.top, .bottom, .trailing], 15)
-            }
-        }
-        .background(Color(uiColor: Constants.vesselChatGreen))
-        .frame(minHeight: 60)
-        .offset(y: -20)
     }
 }
 

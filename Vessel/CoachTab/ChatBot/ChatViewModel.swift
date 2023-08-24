@@ -252,7 +252,8 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     
     func makeRequest<T>(urlString: String, parameters: [String: Any], type: T.Type, completion: @escaping (T?) -> ()) where T: Decodable
     {
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: urlString) else
+        {
             completion(nil)
             return
         }
