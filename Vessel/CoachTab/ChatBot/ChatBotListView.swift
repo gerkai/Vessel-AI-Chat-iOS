@@ -80,6 +80,7 @@ struct ChatBotListView: View
                 {
                     willMoveToNextScreen = false
                     selectedItem = nil
+                    viewModel.conversationHistory.removeAll()
                 } label:
                 {
                     Image(systemName: "arrow.left")

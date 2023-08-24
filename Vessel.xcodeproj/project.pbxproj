@@ -1227,13 +1227,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		67D94D7C2A84EEC20052A09E /* ChatBot */ = {
+		677E82932A9769010012695F /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				673008412A8A28BE002B055C /* ChatBotListView.swift */,
 				E773428A2A96B41F00E9A1D8 /* ChatBotIntro.swift */,
 				E773428C2A96BCB000E9A1D8 /* ChatBotIntro2.swift */,
 				E773428E2A96BEB200E9A1D8 /* ChatBotIntro3.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		67D94D7C2A84EEC20052A09E /* ChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				677E82932A9769010012695F /* Intro */,
+				673008412A8A28BE002B055C /* ChatBotListView.swift */,
 				67CACB972A83D0DB0090AD28 /* ChatBotView.swift */,
 				67D94D7D2A84FE700052A09E /* ChatViewModel.swift */,
 				672C1AFC2A8987130001FC7D /* Models */,
