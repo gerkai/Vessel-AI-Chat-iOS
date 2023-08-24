@@ -37,11 +37,11 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": username, "password": "123qweQWE"]
+        let parameters: Dictionary = ["username": username, "password": "123qweQWE"]
         
         do
         {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
@@ -63,7 +63,6 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
                     let jsonData = try JSONSerialization.data(withJSONObject: json)
                     let response = try JSONDecoder().decode(ChatUser.self, from: jsonData)
                     Server.shared.chatToken = response.token
-                    print("signup json: \(String(describing: json))")
                     completion(true)
                 } catch let responseError
                 {
@@ -89,13 +88,12 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("userName: \(username)")
 
-        let dictBody: Dictionary = ["username": username, "password": "123qweQWE"]
+        let parameters: Dictionary = ["username": username, "password": "123qweQWE"]
         
         do
         {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
@@ -144,162 +142,73 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         }
     }
     
+    @MainActor
+    func startChat() async -> Int
+    {
+        await withCheckedContinuation { continuation in
+            startChat() { id in
+                continuation.resume(returning: id)
+            }
+        }
+    }
+    
+    @MainActor
     func startChat(completion: @escaping (Int) -> ())
     {
         let urlString = "\(CHAT_URL)\(CREATE_CONVERSATION)"
-        guard let url = URL(string: urlString) else {return}
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = Server.shared.chatToken
-        {
-            request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
-        }
-
-        let dictBody: Dictionary = ["username": username]
-        do
-        {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-            request.httpBody = jsonData
-            
-            let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-                guard error == nil else
-                {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return
-                }
-                guard let serverData = data else
-                {
-                    print("server data error")
-                    return
-                }
-                do
-                {                    
-                    let json = try JSONSerialization.jsonObject(with: serverData, options: [])
-                    let jsonData = try JSONSerialization.data(withJSONObject: json)
-                    let response = try JSONDecoder().decode(NewConversationResponse.self, from: jsonData)
-                    self.conversations.append(Conversation(id: response.conversation.id))
-                    self.getConversationHistory(response.conversation.id)
-                    completion(response.conversation.id)
-                    print("startChat json: \(String(describing: json))")
-                } catch let responseError
-                {
-                    print("Serialisation in error in creating response body: \(responseError.localizedDescription)")
-                    let message = String(bytes: serverData, encoding: .ascii)
-                    print(message as Any)
-                }
-            })
-            task.resume()
-        }
-        catch let error
-        {
-            print("JSONSerialization in error in creating response body: \(error.localizedDescription)")
-        }
+        let parameters = ["username": username]
+        makeRequest(urlString: urlString,
+                    parameters: parameters,
+                    type: NewConversationResponse.self,
+                    completion:
+        { response in
+            guard let response else
+            {
+                print("getConversationHistory error")
+                return
+            }
+            self.conversations.append(Conversation(id: response.conversation.id))
+            self.getConversationHistory(response.conversation.id)
+            completion(response.conversation.id)
+        })
     }
     
     @MainActor
     func getConversations()
     {
         let urlString = "\(CHAT_URL)\(GET_CONVERSATIONS)"
-        guard let url = URL(string: urlString) else {return}
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "POST"
-        if let token = Server.shared.chatToken
-        {
-            request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
-        }
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        
-        let dictBody: Dictionary = ["username": username]
-        do
-        {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-            request.httpBody = jsonData
-            
-            let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-                guard error == nil else
-                {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return
-                }
-                guard let serverData = data else
-                {
-                    print("server data error")
-                    return
-                }
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: serverData, options: [])
-                    let jsonData = try JSONSerialization.data(withJSONObject: json)
-                    let response = try JSONDecoder().decode(ConversationResponse.self, from: jsonData)
-                    self.conversations = response.conversations
-                    print("getConversations json: \(String(describing: self.conversations))")
-                } catch let responseError
-                {
-                    print("Serialisation in error in creating response body: \(responseError.localizedDescription)")
-                    let message = String(bytes: serverData, encoding: .ascii)
-                    print(message as Any)
-                }
-            })
-            task.resume()
-        }
-        catch let error
-        {
-            print("JSONSerialization in error in creating response body: \(error.localizedDescription)")
-        }
+        let parameters = ["username": username]
+        makeRequest(urlString: urlString,
+                    parameters: parameters,
+                    type: ConversationResponse.self,
+                    completion:
+        { response in
+            guard let response else
+            {
+                print("getConversationHistory error")
+                return
+            }
+            self.conversations = response.conversations
+        })
     }
     
+    @MainActor
     func getConversationHistory(_ conversationId: Int)
     {
         let urlString = "\(CHAT_URL)\(GET_CONVERSATION_HISTORY)"
-        guard let url = URL(string: urlString) else {return}
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "POST"
-        if let token = Server.shared.chatToken
-        {
-            request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
-        }
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        
-        let dictBody: Dictionary = ["username": username, "conversation_id": conversationId] as [String: Any]
-        do
-        {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
-            request.httpBody = jsonData
-            
-            let task = URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-                guard error == nil else
-                {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return
-                }
-                guard let serverData = data else
-                {
-                    print("server data error")
-                    return
-                }
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: serverData, options: [])
-                    let jsonData = try JSONSerialization.data(withJSONObject: json)
-                    let response = try JSONDecoder().decode(ConversationHistoryResposne.self, from: jsonData)
-                    self.conversationHistory = response.conversationHistory
-                    print("getConversationHistory json: \(String(describing: self.conversationHistory))")
-                } catch let responseError
-                {
-                    print("Serialisation in error in creating response body: \(responseError.localizedDescription)")
-                    let message = String(bytes: serverData, encoding: .ascii)
-                    print(message as Any)
-                }
-            })
-            task.resume()
-        }
-        catch let error
-        {
-            print("JSONSerialization in error in creating response body: \(error.localizedDescription)")
-        }
+        let parameters: Dictionary = ["username": username, "conversation_id": conversationId] as [String: Any]
+        makeRequest(urlString: urlString,
+                    parameters: parameters,
+                    type: ConversationHistoryResposne.self,
+                    completion:
+        { response in
+            guard let response else
+            {
+                print("getConversationHistory error")
+                return
+            }
+            self.conversationHistory = response.conversationHistory
+        })
     }
 
     @MainActor
@@ -309,17 +218,18 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         let urlString = "\(CHAT_URL)\(SEND_MESSAGE)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
-        
         request.httpMethod = "POST"
+        
         if let token = Server.shared.chatToken
         {
             request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
         }
+        
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        let dictBody: Dictionary = ["username": username, "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
+        let parameters: Dictionary = ["username": username, "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
         do
         {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
             
             let (bytes, _) = try await URLSession.shared.bytes(for: request)
@@ -340,6 +250,64 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         }
     }
     
+    func makeRequest<T>(urlString: String, parameters: [String: Any], type: T.Type, completion: @escaping (T?) -> ()) where T: Decodable
+    {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = Server.shared.chatToken
+        {
+            request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
+        }
+
+        if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        {
+            request.httpBody = jsonData
+                
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+                guard error == nil else
+                {
+                    print(error?.localizedDescription ?? "Response Error")
+                    completion(nil)
+                    return
+                }
+                guard let serverData = data else
+                {
+                    print("server data error")
+                    completion(nil)
+                    return
+                }
+                
+                do
+                {
+                    let json = try JSONSerialization.jsonObject(with: serverData, options: [])
+                    let jsonData = try JSONSerialization.data(withJSONObject: json)
+                    let response = try JSONDecoder().decode(T.self, from: jsonData)
+                    completion(response)
+                }
+                catch
+                {
+                    print("JSONSerialization in error in creating response body: \(error.localizedDescription)")
+                    completion(nil)
+                    return
+                }
+            })
+            task.resume()
+        }
+        else
+        {
+            completion(nil)
+        }
+    }
+}
+
+//MARK: Messages
+extension ChatBotViewModel
+{
     func addUserMessage(_ message: String)
     {
         let message = ConversationMessage(message: message, role: "user", created_at: messageDate(), updated_at: messageDate())

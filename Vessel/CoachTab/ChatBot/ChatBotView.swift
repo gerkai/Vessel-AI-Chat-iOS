@@ -117,9 +117,9 @@ struct ChatBotView: View
                 viewModel.getConversationHistory(id)
             } else
             {
-                viewModel.startChat
-                { id in
-                    self.conversationId = id
+                Task
+                {
+                    conversationId = await viewModel.startChat()
                 }
             }
         }
