@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChatBotListView: View
 {
-    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: ChatBotViewModel
     @State private var willMoveToNextScreen = false
     @State private var selectedItem: Int? = nil
@@ -22,56 +21,53 @@ struct ChatBotListView: View
         {
             LoadingView(isShowing: $isLoading)
             {
-                NavigationView
+                List
                 {
-                    List
-                    {
-                        startChatButton
-                        Spacer()
-                        ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
-                        { conversation in
-                            HStack
+                    startChatButton
+                    Spacer()
+                    ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
+                    { conversation in
+                        HStack
+                        {
+                            Text("# \(conversation.id)")
+                                .onTapGesture
                             {
-                                Text("# \(conversation.id)")
-                                    .onTapGesture
-                                {
-                                    self.selectedItem = conversation.id
-                                }
-                                .background(
-                                    NavigationLink(destination: ChatBotView(viewModel: viewModel, conversationId: conversation.id), tag: conversation.id,
-                                                   selection: $selectedItem) { EmptyView() }
-                                        .opacity(0)
-                                )
-                                Spacer()
-                                Image(systemName: "chevron.forward")
-                                    .font(Font.system(.caption).weight(.bold))
-                                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                                self.selectedItem = conversation.id
                             }
-                            .accentColor(Color(uiColor: Constants.vesselChatGreen))
+                            .background(
+                                NavigationLink(destination: ChatBotView(viewModel: viewModel, conversationId: conversation.id), tag: conversation.id,
+                                               selection: $selectedItem) { EmptyView() }
+                                    .opacity(0)
+                            )
+                            Spacer()
+                            Image(systemName: "chevron.forward")
+                                .font(Font.system(.caption).weight(.bold))
+                                .foregroundColor(Color(UIColor.tertiaryLabel))
                         }
-                        .listRowBackground(Color(uiColor: Constants.vesselChatGreen))
+                        .accentColor(Color(uiColor: Constants.vesselChatGreen))
                     }
-                    .listStyle(.plain)
-                    .background(Color(uiColor: Constants.vesselChatGreen))
+                    .listRowBackground(Color(uiColor: Constants.vesselChatGreen))
                 }
-                
-                .onAppear
-                {
-                    isLoading = true
-                    if Server.shared.chatToken == nil
-                    {
-                        handleChatAuth()
-                    }
-                    else
-                    {
-                        viewModel.getConversations()
-                        isLoading = false
-                    }
-                }
-                .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
+                .listStyle(.plain)
+                .background(Color(uiColor: Constants.vesselChatGreen))
             }
+            
+            .onAppear
+            {
+                isLoading = true
+                if Server.shared.chatToken == nil
+                {
+                    handleChatAuth()
+                }
+                else
+                {
+                    viewModel.getConversations()
+                    isLoading = false
+                }
+            }
+            .navigate(to: ChatBotView(viewModel: viewModel, conversationId: nil), when: $willMoveToNextScreen)
         }
-        .padding(.top, -20)
+        .navigationBarBackButtonHidden(true)
     }
     
     var header: some View
@@ -103,7 +99,7 @@ struct ChatBotListView: View
             Spacer()
             Button
             {
-                presentationMode.wrappedValue.dismiss()
+                NotificationCenter.default.post(name: .chatbotDismissed, object: nil)
             } label:
             {
                 Image(systemName: "xmark")

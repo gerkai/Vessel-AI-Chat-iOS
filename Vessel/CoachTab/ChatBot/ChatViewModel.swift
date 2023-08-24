@@ -14,7 +14,6 @@ let SEND_MESSAGE = "api/chat_2"
 let CREATE_CONVERSATION = "api/create_conversation"
 let LOGIN = "authentication/auth/login/"
 let SIGNUP = "authentication/auth/signup/"
-let TOKEN = "Token 852a988c1b4d7f56978564c78b207e21ef1933ba"
 
 class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
 {

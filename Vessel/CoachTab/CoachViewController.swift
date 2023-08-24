@@ -18,6 +18,8 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     var flowName: AnalyticsFlowName = .coachTabFlow
     @Resolved internal var analytics: Analytics
     
+    var chatBotViewController = UIHostingController(rootView: ChatBotIntro())
+
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
     {
@@ -34,6 +36,8 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
         {
             print("❇️ \(self)")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDismissChat), name: .chatbotDismissed, object: nil)
     }
     
     deinit
@@ -50,15 +54,20 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
         {
-            let chatBot = ChatBotListView(viewModel: ChatBotViewModel())
-            let viewController = UIHostingController(rootView: chatBot)
-            viewController.modalPresentationStyle = .fullScreen
-            present(viewController, animated: true)
+            chatBotViewController = UIHostingController(rootView: ChatBotIntro())
+            chatBotViewController.modalPresentationStyle = .fullScreen
+            present(chatBotViewController, animated: true)
         }
         else
         {
             LiveChatManager.shared.navigateToLiveChat(in: self)
         }
+    }
+    
+    @objc
+    func onDismissChat()
+    {
+        chatBotViewController.dismiss(animated: true)
     }
     
     @objc
