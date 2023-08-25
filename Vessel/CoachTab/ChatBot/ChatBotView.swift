@@ -261,6 +261,10 @@ struct MessageView: View
                         .resizable()
                         .frame(width: 22, height: 22)
                         .cornerRadius(6)
+                    
+                    Text("Violet")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 }
                 else
                 {
