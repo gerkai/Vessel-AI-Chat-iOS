@@ -339,10 +339,11 @@ extension ChatBotViewModel
 {
     var username: String
     {
-        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
-        {
-            return ""
-        }
-        return String((firstName + lastName).prefix(15))
+        return "mpes"
+//        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
+//        {
+//            return ""
+//        }
+//        return String((firstName + lastName).prefix(15))
     }
 }

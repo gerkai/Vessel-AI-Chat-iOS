@@ -18,7 +18,8 @@ struct ChatBotIntro: View
                 Image("apple")
                 Text(.init("**Nutritionist** - Meal & grocery plan"))
                     .font(.system(size: 14))
-                    .padding([.top, .bottom], 12)
+                    .padding(.bottom, 12)
+                    .padding(.top, 16)
             }
             HStack
             {
@@ -39,35 +40,42 @@ struct ChatBotIntro: View
                 Image("happy")
                 Text(.init("**Therapist** - Mental health plan"))
                     .font(.system(size: 14))
-                    .padding([.top, .bottom], 12)
+                    .padding(.top, 12)
+                    .padding(.bottom, 16)
             }
         }
-        .padding([.leading, .trailing])
+        .padding([.leading, .trailing], 39)
     }
     
     var leftAlignedContent: some View
     {
-        VStack(alignment: .leading)
+        HStack
         {
-            Text("She is a powerful AI that can be your...")
-                .font(.system(size: 14))
-            itemList
-            Text("And she can answer health questions.")
-                .font(.system(size: 14))
+            VStack(alignment: .leading)
+            {
+                Text("She is a powerful AI that can be your...")
+                    .font(.system(size: 14))
+                itemList
+                Text("And she can answer health questions.")
+                    .font(.system(size: 14))
+            }
+            Spacer()
         }
         .padding(.top, 24)
-        .padding(.leading, -30)
+        .padding(.leading, 17)
     }
     
     var body: some View
     {
         NavigationView
         {
-            VStack
+            VStack(spacing: 0)
             {
                 Image("violet-circle")
+                    .padding([.top, .bottom], 24)
                 Text("Meet Violet")
                     .font(.system(size: 35, weight: .semibold))
+                    .padding(.bottom, 8)
                 Text("Your personal welness coach.")
                     .font(.system(size: 16))
                 leftAlignedContent
@@ -77,9 +85,9 @@ struct ChatBotIntro: View
                     ZStack
                     {
                         Color(.black)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .clipShape(RoundedRectangle(cornerRadius: 22))
                             .frame(height: 60)
-                            .padding([.leading, .trailing], 50)
+                            .padding([.leading, .trailing], 30)
                         
                         Text("Cool!")
                             .foregroundColor(.white)

@@ -26,6 +26,7 @@ struct ChatBotView: View
         HStack
         {
             Menu(content: {
+                startChatButton
                 ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
                     { conversation in
                         Button("# \(conversation.id)", action: {
@@ -64,6 +65,22 @@ struct ChatBotView: View
         .offset(y: -20)
     }
     
+    public var startChatButton: some View
+    {
+        Button
+        {
+            isLoading = true
+            Task
+            {
+                conversationId = await viewModel.startChat()
+                isLoading = false
+            }
+        } label:
+        {
+            Label("Start chat", systemImage: "plus")
+        }
+    }
+
     var footer: some View
     {
         HStack
