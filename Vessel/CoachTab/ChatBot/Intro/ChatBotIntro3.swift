@@ -20,7 +20,7 @@ struct ChatBotIntro3: View
                 .padding()
                 .font(.system(size: 14))
             Spacer()
-            NavigationLink(destination: ChatBotListView(viewModel: ChatBotViewModel()))
+            NavigationLink(destination: ChatBotView(viewModel: ChatBotViewModel()))
             {
                 ZStack
                 {
@@ -36,13 +36,5 @@ struct ChatBotIntro3: View
             }
         }
         .navigationBarBackButtonHidden(true)
-    }
-}
-
-struct ChatBotIntro3_Previews: PreviewProvider
-{
-    static var previews: some View
-    {
-        ChatBotIntro3()
     }
 }

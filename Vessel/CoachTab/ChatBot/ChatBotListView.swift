@@ -51,7 +51,6 @@ struct ChatBotListView: View
                 .listStyle(.plain)
                 .background(Color(uiColor: Constants.vesselChatGreen))
             }
-            
             .onAppear
             {
                 isLoading = true
@@ -74,8 +73,8 @@ struct ChatBotListView: View
     {
         HStack
         {
-            if viewModel.showBackButton
-            {
+//            if viewModel.showBackButton
+//            {
                 Button
                 {
                     willMoveToNextScreen = false
@@ -89,7 +88,7 @@ struct ChatBotListView: View
                         .frame(width: 28, height: 28)
                         .padding([.leading, .top, .bottom, .trailing], 15)
                 }
-            }
+//            }
             Spacer()
             VStack(alignment: .center)
             {

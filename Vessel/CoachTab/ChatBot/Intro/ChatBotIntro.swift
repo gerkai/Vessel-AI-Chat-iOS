@@ -92,11 +92,3 @@ struct ChatBotIntro: View
         .navigationBarBackButtonHidden()
     }
 }
-
-struct ChatBotIntro_Previews: PreviewProvider
-{
-    static var previews: some View
-    {
-        ChatBotIntro()
-    }
-}

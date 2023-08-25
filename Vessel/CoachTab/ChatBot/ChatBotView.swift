@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-extension NSNotification.Name {
+extension NSNotification.Name
+{
     static let chatbotDismissed = Notification.Name.init("chatbotDismissed")
 }
 
@@ -17,7 +18,57 @@ struct ChatBotView: View
     
     @State private var messageText = ""
     @State var conversationId: Int?
+    @State var isLoading: Bool = false
     @FocusState private var focusedField: Bool
+    
+    var header: some View
+    {
+        HStack
+        {
+            Menu(content: {
+                ForEach(viewModel.conversations.sorted(by: { $0.id > $1.id }), id: \.self)
+                    { conversation in
+                        Button("# \(conversation.id)", action: {
+                            openChat(conversation: conversation.id)
+                        })
+                    }
+            }, label: {
+                Image(systemName: "line.3.horizontal")
+                    .foregroundColor(.black)
+                    .imageScale(.medium)
+                    .frame(width: 28, height: 28)
+                    .padding([.leading, .top, .bottom, .trailing], 15)
+            })
+            Spacer()
+            VStack(alignment: .center)
+            {
+                Text("Violet - AI Wellness Coach")
+                .foregroundColor(.black)
+                .bold()
+            }
+            Spacer()
+            Button
+            {
+                NotificationCenter.default.post(name: .chatbotDismissed, object: nil)
+            } label:
+            {
+                Image(systemName: "xmark")
+                    .foregroundColor(.black)
+                    .imageScale(.medium)
+                    .frame(width: 28, height: 28)
+                    .padding([.top, .bottom, .trailing], 15)
+            }
+        }
+        .background(Color(uiColor: Constants.vesselChatGreen))
+        .frame(minHeight: 80)
+        .offset(y: -20)
+    }
+    
+    func openChat(conversation id: Int)
+    {
+        print("openChat: \(id)")
+        viewModel.getConversationHistory(id)
+    }
     
     var footer: some View
     {
@@ -90,41 +141,47 @@ struct ChatBotView: View
     
     var body: some View
     {
-        VStack
+        LoadingView(isShowing: $isLoading)
         {
-            ScrollView
+            VStack
             {
-                ForEach(viewModel.conversationHistory, id: \.self) { message in
-                    let timestamp = viewModel.time(createdAt: message.created_at)
-                    let model = MessageModel(text: message.message,
-                                             timestamp: timestamp ?? Date())
-                    MessageView(messageModel: model, isAssistant: message.role == "assistant")
+                header
+                ScrollView
+                {
+                    ForEach(viewModel.conversationHistory, id: \.self) { message in
+                        let timestamp = viewModel.time(createdAt: message.created_at)
+                        let model = MessageModel(text: message.message,
+                                                 timestamp: timestamp ?? Date())
+                        MessageView(messageModel: model, isAssistant: message.role == "assistant")
+                    }
+                    .rotationEffect(.degrees(180))
                 }
                 .rotationEffect(.degrees(180))
+                Divider()
+                footer
             }
-            .rotationEffect(.degrees(180))
-            Divider()
-            footer
         }
         .navigationBarBackButtonHidden(true)
         .background()
         .onAppear
         {
-            viewModel.showBackButton = true
-            if let id = conversationId
+            isLoading = true
+            if Server.shared.chatToken == nil
             {
-                viewModel.getConversationHistory(id)
-            } else
+                Task
+                {
+                    await handleChatAuth()
+                }
+            }
+            else
             {
                 Task
                 {
                     conversationId = await viewModel.startChat()
+                    isLoading = false
                 }
+                viewModel.getConversations()
             }
-        }
-        .onDisappear
-        {
-            viewModel.showBackButton = false
         }
     }
     
@@ -144,6 +201,45 @@ struct ChatBotView: View
             {
                 print("streamMessage catch")
             }
+        }
+    }
+    
+    private func handleChatAuth() async
+    {
+        if let contact = Contact.main(), let firstName = contact.first_name, let lastName = contact.last_name
+        {
+            let username = String((firstName + lastName).prefix(15))
+            viewModel.login(username: username, completion: { result in
+                switch result
+                {
+                case .success:
+                    Task
+                    {
+                        conversationId = await viewModel.startChat()
+                        isLoading = false
+                        viewModel.getConversations()
+                    }
+                case .invalidCredentials:
+                    viewModel.signup(username: username, completion: { success in
+                        if success
+                        {
+                            Task
+                            {
+                                conversationId = await viewModel.startChat()
+                                viewModel.getConversations()
+                            }
+                        }
+                        else
+                        {
+                            print("login error")
+                        }
+                        isLoading = false
+                    })
+                case .error:
+                    print("login error")
+                    isLoading = false
+                }
+            })
         }
     }
 }
