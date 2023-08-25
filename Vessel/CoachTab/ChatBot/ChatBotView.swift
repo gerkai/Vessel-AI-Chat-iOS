@@ -64,12 +64,6 @@ struct ChatBotView: View
         .offset(y: -20)
     }
     
-    func openChat(conversation id: Int)
-    {
-        print("openChat: \(id)")
-        viewModel.getConversationHistory(id)
-    }
-    
     var footer: some View
     {
         HStack
@@ -143,7 +137,7 @@ struct ChatBotView: View
     {
         LoadingView(isShowing: $isLoading)
         {
-            VStack
+            VStack(spacing: 1)
             {
                 header
                 ScrollView
@@ -157,12 +151,12 @@ struct ChatBotView: View
                     .rotationEffect(.degrees(180))
                 }
                 .rotationEffect(.degrees(180))
+                .padding(.top, -24)
                 Divider()
                 footer
             }
         }
         .navigationBarBackButtonHidden(true)
-        .background()
         .onAppear
         {
             isLoading = true
@@ -241,6 +235,11 @@ struct ChatBotView: View
                 }
             })
         }
+    }
+    
+    func openChat(conversation id: Int)
+    {
+        viewModel.getConversationHistory(id)
     }
 }
 
