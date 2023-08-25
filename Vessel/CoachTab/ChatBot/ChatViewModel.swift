@@ -37,7 +37,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": username, "password": "123qweQWE"]
+        let dictBody: Dictionary = ["username": "mpes", "password": "123qweQWE"]
         
         do
         {
@@ -91,7 +91,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("userName: \(username)")
 
-        let dictBody: Dictionary = ["username": username, "password": "123qweQWE"]
+        let dictBody: Dictionary = ["username": "mpes", "password": "123qweQWE"]
         
         do
         {
@@ -156,7 +156,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
             request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
         }
 
-        let dictBody: Dictionary = ["username": username]
+        let dictBody: Dictionary = ["username": "mpes"]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -211,7 +211,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": username]
+        let dictBody: Dictionary = ["username": "mpes"]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -263,7 +263,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
-        let dictBody: Dictionary = ["username": username, "conversation_id": conversationId] as [String: Any]
+        let dictBody: Dictionary = ["username": "mpes", "conversation_id": conversationId] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -316,7 +316,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
             request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
         }
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        let dictBody: Dictionary = ["username": username, "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
+        let dictBody: Dictionary = ["username": "mpes", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: dictBody, options: .prettyPrinted)
@@ -371,10 +371,11 @@ extension ChatBotViewModel
 {
     var username: String
     {
-        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
-        {
-            return ""
-        }
-        return String((firstName + lastName).prefix(15))
+        return "mpes"
+//        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
+//        {
+//            return ""
+//        }
+//        return String((firstName + lastName).prefix(15))
     }
 }
