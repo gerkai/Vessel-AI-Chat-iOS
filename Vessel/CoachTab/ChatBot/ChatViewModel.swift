@@ -20,7 +20,6 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     @Published var conversations: [Conversation] = []
     @Published var conversationHistory: [ConversationMessage] = []
     @Published var isProcessing: Bool = false
-    @Published var showBackButton = false
     
     enum LoginResponse
     {
@@ -164,7 +163,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         { response in
             guard let response else
             {
-                print("getConversationHistory error")
+                print("start chat error")
                 return
             }
             self.conversations.append(Conversation(id: response.conversation.id))
@@ -185,7 +184,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         { response in
             guard let response else
             {
-                print("getConversationHistory error")
+                print("getConversations error")
                 return
             }
             self.conversations = response.conversations
@@ -265,9 +264,9 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
             request.setValue("Token \(token)", forHTTPHeaderField: AUTH_KEY)
         }
 
-        if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        if let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         {
-            request.httpBody = jsonData
+            request.httpBody = httpBody
                 
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                 guard error == nil else
@@ -340,10 +339,11 @@ extension ChatBotViewModel
 {
     var username: String
     {
-        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
-        {
-            return ""
-        }
-        return String((firstName + lastName).prefix(15))
+        return "mpes"
+//        guard let firstName = Contact.main()?.first_name, let lastName = Contact.main()?.last_name else
+//        {
+//            return ""
+//        }
+//        return String((firstName + lastName).prefix(15))
     }
 }
