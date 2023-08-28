@@ -17,55 +17,62 @@ struct ChatBotIntro2: View
             {
                 Image("question")
                 Text(.init("Answer her questions"))
-                    .font(.system(size: 14))
-                    .padding([.top, .bottom], 12)
+                    .font(.custom("NoeText", size: 14))
+                    .padding(.top, 16)
+                    .padding(.bottom, 12)
             }
             HStack
             {
                 Image("test")
                 Text(.init("Take a Vessel pee test"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("apple-bite")
                 Text(.init("Connect Apple Health"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("blood")
                 Text(.init("Add a blood test, DNA report, etc"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
         }
-        .padding([.leading, .trailing])
+        .padding([.leading, .trailing], 51)
     }
     
     var leftAlignedContent: some View
     {
-        VStack(alignment: .leading)
+        HStack
         {
-            Text("Some ways to teach her about you:")
-                .font(.system(size: 14))
-            itemList
+            VStack(alignment: .leading)
+            {
+                Text("Some ways to teach her about you:")
+                    .font(.custom("NoeText", size: 14))
+                itemList
+            }
+            Spacer()
         }
         .padding(.top, 24)
-        .padding(.leading, -30)
+        .padding(.leading, 16)
     }
     
     var body: some View
     {
-        VStack
+        VStack(spacing: 0)
         {
             Image("violet-circle")
+                .padding([.top, .bottom], 24)
             Text("Personalized to you")
-                .font(.system(size: 35, weight: .semibold))
+                .font(.custom("BananaGrotesk-Semibold", size: 35))
+                .padding(.bottom, 8)
             Text("The more you teach violet about you,\n the more helpful she will be.")
-                .font(.system(size: 16))
+                .font(.custom("NoeText", size: 16))
                 .multilineTextAlignment(.center)
             leftAlignedContent
             Spacer()
@@ -74,13 +81,13 @@ struct ChatBotIntro2: View
                 ZStack
                 {
                     Color(.black)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .clipShape(RoundedRectangle(cornerRadius: 22))
                         .frame(height: 60)
-                        .padding([.leading, .trailing], 50)
+                        .padding([.leading, .trailing], 30)
                     
                     Text("Got it!")
                         .foregroundColor(.white)
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.custom("BananaGrotesk-Bold", size: 16))
                 }
             }
         }
