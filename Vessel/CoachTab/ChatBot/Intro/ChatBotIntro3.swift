@@ -22,7 +22,7 @@ struct ChatBotIntro3: View
                 .font(.custom("NoeText", size: 14))
                 .padding([.leading, .trailing], 16)
             Spacer()
-            NavigationLink(destination: ChatBotListView(viewModel: ChatBotViewModel()))
+            NavigationLink(destination: ChatBotView(viewModel: ChatBotViewModel()))
             {
                 ZStack
                 {
