@@ -21,6 +21,7 @@ class Tip: CoreObjectProtocol
     var isPlan = false
     var subtitle = ""
     var longDescription = ""
+    var isCompleted = false
     
     init(id: Int,
          last_updated: Int,
@@ -31,7 +32,8 @@ class Tip: CoreObjectProtocol
          isLifestyleRecommendation: Bool = false,
          isPlan: Bool = false,
          subtitle: String = "",
-         longDescription: String = "")
+         longDescription: String = "",
+         isCompleted: Bool = false)
     {
         self.id = id
         self.last_updated = last_updated
@@ -43,6 +45,7 @@ class Tip: CoreObjectProtocol
         self.isPlan = isPlan
         self.subtitle = subtitle
         self.longDescription = longDescription
+        self.isCompleted = isCompleted
     }
     
     enum CodingKeys: String, CodingKey

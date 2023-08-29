@@ -667,6 +667,12 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             let activities = PlansManager.shared.activities
             let activityPlans: [Plan] = PlansManager.shared.getActivityPlans(shouldFilterForToday: viewModel.isToday, shouldFilterForSelectedDate: viewModel.selectedDate)
             
+            if let activity = activities.first(where: { $0.id == id }) //hardcoded activities
+            {
+                activity.isCompleted = true
+                return
+            }
+            
             guard let plan = activityPlans.first(where: { $0.typeId == id }) else
             {
                 assertionFailure("TodayViewController-onCardChecked: Couldn't find activity with id: \(id)")
