@@ -16,32 +16,52 @@ struct ChatBotIntro: View
             HStack
             {
                 Image("apple")
-                Text(.init("**Nutritionist** - Meal & grocery plan"))
-                    .font(.custom("NoeText", size: 14))
-                    .padding(.bottom, 12)
-                    .padding(.top, 16)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Nutritionist"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Meal & grocery plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding(.bottom, 12)
+                .padding(.top, 16)
             }
             HStack
             {
                 Image("weight")
-                Text(.init("**Trainer** - Fitness & weight loss plan"))
-                    .font(.custom("NoeText", size: 14))
-                    .padding([.top, .bottom], 12)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Trainer"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Fitness & weight loss plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("pill")
-                Text(.init("**Functional Dr** - Supplement plan"))
-                    .font(.custom("NoeText", size: 14))
-                    .padding([.top, .bottom], 12)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Functional Dr"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Supplement plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("happy")
-                Text(.init("**Therapist** - Mental health plan"))
-                    .font(.custom("NoeText", size: 14))
-                    .padding(.top, 12)
-                    .padding(.bottom, 16)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Therapist"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Mental health plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding(.top, 12)
+                .padding(.bottom, 16)
             }
         }
         .padding([.leading, .trailing], 39)
@@ -76,7 +96,7 @@ struct ChatBotIntro: View
                 Text("Meet Violet")
                     .padding(.bottom, 8)
                     .font(.custom("BananaGrotesk-Semibold", size: 35))
-                Text("Your personal welness coach.")
+                Text("Your personal wellness coach.")
                     .font(.custom("NoeText", size: 16))
                 leftAlignedContent
                 Spacer()

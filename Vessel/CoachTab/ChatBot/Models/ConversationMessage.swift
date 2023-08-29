@@ -63,9 +63,20 @@ struct ConversationMessage: Codable, Hashable
             currentTag = currentTag.replacingOccurrences(of: "</b>", with: "**")
             currentTag = currentTag.replacingOccurrences(of: "<strong>", with: "**")
             currentTag = currentTag.replacingOccurrences(of: "</strong>", with: "**")
+
             message.append(currentTag)
             currentTag = ""
             tagCounter += 1
+            
+            if isBetweenTags, currentTag == "<br>" { //handle <br>
+                currentTag = currentTag.replacingOccurrences(of: "<br>", with: "\n")
+                tagCounter += 1
+            }
+            if isBetweenTags, currentTag == "</br>" { //handle <br></br>
+                currentTag = currentTag.replacingOccurrences(of: "</br>", with: "")
+                tagCounter += 1
+            }
+            
             if isBetweenTags { message.append("**") }
             else if message.hasSuffix("**")
             {
