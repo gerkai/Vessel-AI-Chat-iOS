@@ -57,7 +57,8 @@ class PlansManager
         addTakeATestActivityIfNeeded()
     }
     
-    func addHardcodedActivities() {
+    func addHardcodedActivities()
+    {
         let act =
         [
             Tip(id: 1, last_updated: 1, title: "Meal Plan", description: "Research shows a well-crafted meal plan boosts nutrition, manages weight, and sustains energy", imageUrl: "https://s3.amazonaws.com/violetdemo.com/meal_plan_home.jpg", frequency: "Made just for you", isPlan: true, subtitle: "take a simple 3 minute quiz", longDescription: "Meal Plan:\n\nDay 1:\n\nLunch: Grilled Chicken Salad\n\nIngredients:\n2 chicken breasts\n2 cups mixed greens\n1 tomato\n1 cucumber\n1/4 cup feta cheese\n1/4 cup balsamic vinaigrette\nInstructions:\nGrill the chicken until no longer pink in the center.\nSlice the chicken and place it on top of the mixed greens.\nAdd sliced tomato and cucumber.\nSprinkle feta cheese on top.\nDrizzle with balsamic vinaigrette.\nSnack: Protein Shake\n\nIngredients:\n1 scoop protein powder\n1 cup almond milk\n1 banana\n1 tbsp peanut butter\nInstructions:\nBlend all ingredients until smooth.\nDinner: Salmon with Quinoa and Steamed Vegetables\n\nIngredients:\n1 salmon fillet\n1 cup quinoa\n2 cups mixed vegetables\nInstructions:\nCook the salmon until it flakes easily with a fork.\nCook the quinoa according to package instructions.\nSteam the vegetables until tender.\nServe the salmon with the quinoa and vegetables.\n...same for the rest of the week..."),
