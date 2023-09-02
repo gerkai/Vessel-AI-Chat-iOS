@@ -44,7 +44,7 @@ struct ChatBotView: View
             Spacer()
             VStack(alignment: .center)
             {
-                Text("Violet - AI Wellness Coach")
+                Text("Wellness Coach")
                 .foregroundColor(.black)
                 .bold()
             }
