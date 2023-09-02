@@ -140,7 +140,7 @@ struct ChatBotView: View
                     {
                         Circle()
                             .frame(width: 38, height: 38)
-                            .foregroundColor(isStreaming ? .gray : Color(Constants.vesselChatGreen))
+                            .foregroundColor(isStreaming ? .gray.opacity(0.2) : Color(Constants.vesselChatGreen))
                         Image(systemName: "paperplane")
                     }
                 }
