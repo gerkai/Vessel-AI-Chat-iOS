@@ -17,7 +17,7 @@ struct ChatBotIntro2: View
             {
                 Image("question")
                 Text(.init("Answer her questions"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding(.top, 16)
                     .padding(.bottom, 12)
             }
@@ -25,21 +25,21 @@ struct ChatBotIntro2: View
             {
                 Image("test")
                 Text(.init("Take a Vessel pee test"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("apple-bite")
                 Text(.init("Connect Apple Health"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("blood")
                 Text(.init("Add a blood test, DNA report, etc"))
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                     .padding([.top, .bottom], 12)
             }
         }
@@ -53,7 +53,7 @@ struct ChatBotIntro2: View
             VStack(alignment: .leading)
             {
                 Text("Some ways to teach her about you:")
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                 itemList
             }
             Spacer()
@@ -69,10 +69,10 @@ struct ChatBotIntro2: View
             Image("violet-circle")
                 .padding([.top, .bottom], 24)
             Text("Personalized to you")
-                .font(.system(size: 35, weight: .semibold))
+                .font(.custom("BananaGrotesk-Semibold", size: 35))
                 .padding(.bottom, 8)
             Text("The more you teach violet about you,\n the more helpful she will be.")
-                .font(.system(size: 16))
+                .font(.custom("NoeText", size: 16))
                 .multilineTextAlignment(.center)
             leftAlignedContent
             Spacer()
@@ -87,10 +87,18 @@ struct ChatBotIntro2: View
                     
                     Text("Got it!")
                         .foregroundColor(.white)
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.custom("BananaGrotesk-Bold", size: 16))
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct ChatBotIntro2_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        ChatBotIntro2()
     }
 }

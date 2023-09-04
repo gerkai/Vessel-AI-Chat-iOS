@@ -19,6 +19,7 @@ struct ChatBotView: View
     @State private var messageText = ""
     @State var conversationId: Int?
     @State var isLoading: Bool = false
+    @State var isStreaming: Bool = false
     @FocusState private var focusedField: Bool
     
     var header: some View
@@ -43,7 +44,7 @@ struct ChatBotView: View
             Spacer()
             VStack(alignment: .center)
             {
-                Text("Violet - AI Wellness Coach")
+                Text("Wellness Coach")
                 .foregroundColor(.black)
                 .bold()
             }
@@ -80,7 +81,7 @@ struct ChatBotView: View
             Label("Start chat", systemImage: "plus")
         }
     }
-
+    
     var footer: some View
     {
         HStack
@@ -139,7 +140,7 @@ struct ChatBotView: View
                     {
                         Circle()
                             .frame(width: 38, height: 38)
-                            .foregroundColor(.gray)
+                            .foregroundColor(isStreaming ? .gray.opacity(0.2) : Color(Constants.vesselChatGreen))
                         Image(systemName: "paperplane")
                     }
                 }
@@ -203,13 +204,16 @@ struct ChatBotView: View
             {
                 viewModel.addUserMessage(message)
                 self.messageText = ""
+                isStreaming = true
             }
             do
             {
                 try await viewModel.streamMessage(message, conversationId: conversationId)
+                isStreaming = false
             }
             catch
             {
+                isStreaming = false
                 print("streamMessage catch")
             }
         }

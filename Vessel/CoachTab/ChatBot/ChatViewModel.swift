@@ -36,7 +36,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let parameters: Dictionary = ["username": username, "password": "123qweQWE"]
+        let parameters: Dictionary = ["username": "mpes", "password": "123qweQWE"]
         
         do
         {
@@ -88,7 +88,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let parameters: Dictionary = ["username": username, "password": "123qweQWE"]
+        let parameters: Dictionary = ["username": "mpes", "password": "123qweQWE"]
         
         do
         {
@@ -155,7 +155,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     func startChat(completion: @escaping (Int) -> ())
     {
         let urlString = "\(CHAT_URL)\(CREATE_CONVERSATION)"
-        let parameters = ["username": username]
+        let parameters = ["username": "mpes"]
         makeRequest(urlString: urlString,
                     parameters: parameters,
                     type: NewConversationResponse.self,
@@ -176,7 +176,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     func getConversations()
     {
         let urlString = "\(CHAT_URL)\(GET_CONVERSATIONS)"
-        let parameters = ["username": username]
+        let parameters = ["username": "mpes"]
         makeRequest(urlString: urlString,
                     parameters: parameters,
                     type: ConversationResponse.self,
@@ -195,7 +195,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     func getConversationHistory(_ conversationId: Int)
     {
         let urlString = "\(CHAT_URL)\(GET_CONVERSATION_HISTORY)"
-        let parameters: Dictionary = ["username": username, "conversation_id": conversationId] as [String: Any]
+        let parameters: Dictionary = ["username": "mpes", "conversation_id": conversationId] as [String: Any]
         makeRequest(urlString: urlString,
                     parameters: parameters,
                     type: ConversationHistoryResposne.self,
@@ -225,7 +225,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
         }
         
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        let parameters: Dictionary = ["username": username, "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
+        let parameters: Dictionary = ["username": "mpes", "conversation_id": conversationId, "Body": message, "isNotPhoneCall": "Not a phone call"] as [String: Any]
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)

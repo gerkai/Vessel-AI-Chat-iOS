@@ -128,44 +128,31 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
     
     func checkInternet()
     {
-        Log_Add("Check Internet")
-        if Reachability.isConnectedToNetwork()
+        if Server.shared.isLoggedIn()
         {
-            if Server.shared.isLoggedIn()
-            {
-                Log_Add("Is Logged In")
-                ObjectStore.shared.loadMainContact
-                { [weak self] in
-                    guard let self = self else { return }
-                    //Log_Add("Loaded Main Contact")
-                    Log_Add("Successfully loaded contact during auto-login. Jumping to Onboarding")
-                    if let id = Contact.PractitionerID
-                    {
-                        Log_Add("checkInternet: Setting attribution: \(id)")
-                        if let contact = Contact.main()
-                        {
-                            contact.pa_id = id
-                            ObjectStore.shared.clientSave(contact)
-                            Contact.PractitionerID = nil
-                        }
-                    }
-                    LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
-                }
-                onFailure:
+            Log_Add("Is Logged In")
+            ObjectStore.shared.loadMainContact
+            { [weak self] in
+                guard let self = self else { return }
+                //Log_Add("Loaded Main Contact")
+                Log_Add("Successfully loaded contact during auto-login. Jumping to Onboarding")
+                if let id = Contact.PractitionerID
                 {
-                    Log_Add("Unsuccessful at re-logging in. Making user sign-in again")
-                    //fade splash screen in right away since we already spent time trying to load contact from back end
-                    UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
+                    Log_Add("checkInternet: Setting attribution: \(id)")
+                    if let contact = Contact.main()
                     {
-                        self.splashView.alpha = 0.0
+                        contact.pa_id = id
+                        ObjectStore.shared.clientSave(contact)
+                        Contact.PractitionerID = nil
                     }
                 }
+                LoginCoordinator.shared.pushLastViewController(to: self.navigationController)
             }
-            else
+        onFailure:
             {
-                //fade splash screen in after 1 second. (Normal login flow)
-                Log_Add("Normal sign-in flow. Not re-logging in.")
-                UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+                Log_Add("Unsuccessful at re-logging in. Making user sign-in again")
+                //fade splash screen in right away since we already spent time trying to load contact from back end
+                UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveLinear)
                 {
                     self.splashView.alpha = 0.0
                 }
@@ -173,9 +160,12 @@ class WelcomeSignInViewController: UIViewController, DebugViewControllerDelegate
         }
         else
         {
-            GenericAlertViewController.presentAlert(in: self, type: .titleSubtitleButton(title: GenericAlertLabelInfo(title: NSLocalizedString("Internet Error", comment: "")),
-                                                                                         subtitle: GenericAlertLabelInfo(title: Constants.INTERNET_CONNECTION_STRING, alignment: .center, height: 40.0),
-                                                                                         button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("OK", comment: "")), type: .dark)), delegate: self)
+            //fade splash screen in after 1 second. (Normal login flow)
+            Log_Add("Normal sign-in flow. Not re-logging in.")
+            UIView.animate(withDuration: 0.25, delay: 1.0, options: .curveLinear)
+            {
+                self.splashView.alpha = 0.0
+            }
         }
     }
     

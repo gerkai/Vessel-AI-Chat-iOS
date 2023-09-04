@@ -16,32 +16,52 @@ struct ChatBotIntro: View
             HStack
             {
                 Image("apple")
-                Text(.init("**Nutritionist** - Meal & grocery plan"))
-                    .font(.system(size: 14))
-                    .padding(.bottom, 12)
-                    .padding(.top, 16)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Nutritionist"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Meal & grocery plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding(.bottom, 12)
+                .padding(.top, 16)
             }
             HStack
             {
                 Image("weight")
-                Text(.init("**Trainer** - Fitness & weight loss plan"))
-                    .font(.system(size: 14))
-                    .padding([.top, .bottom], 12)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Trainer"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Fitness & weight loss plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("pill")
-                Text(.init("**Functional Dr** - Supplement plan"))
-                    .font(.system(size: 14))
-                    .padding([.top, .bottom], 12)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Functional Dr"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Supplement plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding([.top, .bottom], 12)
             }
             HStack
             {
                 Image("happy")
-                Text(.init("**Therapist** - Mental health plan"))
-                    .font(.system(size: 14))
-                    .padding(.top, 12)
-                    .padding(.bottom, 16)
+                HStack(spacing: 0)
+                {
+                    Text(.init("Therapist"))
+                        .font(.custom("BananaGrotesk-Semibold", size: 14))
+                    Text(.init(" - Mental health plan"))
+                        .font(.custom("NoeText", size: 14))
+                }
+                .padding(.top, 12)
+                .padding(.bottom, 16)
             }
         }
         .padding([.leading, .trailing], 39)
@@ -54,10 +74,10 @@ struct ChatBotIntro: View
             VStack(alignment: .leading)
             {
                 Text("She is a powerful AI that can be your...")
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
                 itemList
                 Text("And she can answer health questions.")
-                    .font(.system(size: 14))
+                    .font(.custom("NoeText", size: 14))
             }
             Spacer()
         }
@@ -74,10 +94,10 @@ struct ChatBotIntro: View
                 Image("violet-circle")
                     .padding([.top, .bottom], 24)
                 Text("Meet Violet")
-                    .font(.system(size: 35, weight: .semibold))
                     .padding(.bottom, 8)
-                Text("Your personal welness coach.")
-                    .font(.system(size: 16))
+                    .font(.custom("BananaGrotesk-Semibold", size: 35))
+                Text("Your personal wellness coach.")
+                    .font(.custom("NoeText", size: 16))
                 leftAlignedContent
                 Spacer()
                 NavigationLink(destination: ChatBotIntro2())
@@ -91,12 +111,20 @@ struct ChatBotIntro: View
                         
                         Text("Cool!")
                             .foregroundColor(.white)
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.custom("BananaGrotesk-Bold", size: 16))
                     }
                 }
             }
         }
         .padding(.top, -20)
         .navigationBarBackButtonHidden()
+    }
+}
+
+struct ChatBotIntro_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        ChatBotIntro()
     }
 }
