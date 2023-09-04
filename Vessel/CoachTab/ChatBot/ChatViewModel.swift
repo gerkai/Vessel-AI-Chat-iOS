@@ -318,9 +318,9 @@ extension ChatBotViewModel
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        if let date = Calendar.current.date(byAdding: .hour, value: -2, to: Date())
+        if let timeZone = TimeZone(secondsFromGMT: 0)
         {
-            return formatter.string(from: date)
+            formatter.timeZone = timeZone
         }
         return formatter.string(from: Date())
     }
@@ -329,9 +329,12 @@ extension ChatBotViewModel
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        if let timeZone = TimeZone(secondsFromGMT: 0)
+        {
+            formatter.timeZone = timeZone
+        }
         let createdAtDate = formatter.date(from: createdAt) ?? Date()
-        let date = Calendar.current.date(byAdding: .hour, value: 2, to: createdAtDate)
-        return date
+        return createdAtDate
     }
 }
 
