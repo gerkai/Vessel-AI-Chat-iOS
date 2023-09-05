@@ -140,6 +140,8 @@ enum TodayViewSection: Equatable
     func createActivitiesSection(activities: [Tip], selectedDate: String, isToday: Bool) -> [TodayViewCell]
     {
         let todayDate = Date.serverDateFormatter.string(from: Date())
+        print("dayNumberOfWeek: \(Date().dayNumberOfWeek()!)")
+        let dayOfWeek = Date().dayNumberOfWeek()!
         guard activities.count > 0 else { return [] }
         var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities", showInfoIcon: true)]
         for activity in activities
@@ -496,5 +498,14 @@ class TodayViewModel
     func refreshLastWeekProgress()
     {
         lastWeekProgress = PlansManager.shared.getLastWeekPlansProgress()
+    }
+}
+
+extension Date
+{
+    // returns an integer from 0 - 6, with 0 being Monday and 6 being Sunday
+    func dayNumberOfWeek() -> Int?
+    {
+        return (Calendar.current.dateComponents([.weekday], from: self).weekday ?? 0) - 2
     }
 }
