@@ -135,6 +135,7 @@ class AddReminderViewModel
         {
             analytics.log(event: .reminderAdded(planId: reminder.id, typeId: typeId, planType: type, howMuch: shouldShowHowMuchSection ? quantityText : nil, whatTime: selectedTime, daysOfTheWeek: selectedWeekdays))
         }
+        RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
     }
     
     private func getWeekday(for number: Int) -> String

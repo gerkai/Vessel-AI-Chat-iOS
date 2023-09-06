@@ -57,6 +57,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
         reloadUI()
     }
     

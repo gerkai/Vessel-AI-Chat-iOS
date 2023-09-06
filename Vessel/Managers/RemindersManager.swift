@@ -165,4 +165,53 @@ class RemindersManager
             }
         })
     }
+    
+    func setupActivityReminders(activities: [Tip])
+    {
+        let dayOfWeek = Date().dayNumberOfWeek()!
+        let reminders = RemindersManager.shared.reminders
+        
+        // Arrange reminders to every activity
+        activities.forEach({ activity in
+            reminders.forEach({ reminder in
+                if reminder.planId == activity.id
+                {
+                    activity.reminders.append(reminder)
+                }
+            })
+        })
+        
+        // Select closest reminder for activity
+        activities.forEach({ activity in
+            activity.closestReminder = activity.reminders.first(where: { reminder in
+                if let first = reminder.dayOfWeek.first(where: { $0 >= dayOfWeek })
+                {
+                    return first >= dayOfWeek
+                }
+                return false
+            })
+        })
+        
+        // Sort activitires by closest reminder
+        var sortedActivities = [Tip]()
+        activities.forEach({ activity in
+            if let reminder = activity.closestReminder
+            {
+                if reminder.dayOfWeek.contains(where: { $0 == dayOfWeek })
+                {
+                    sortedActivities.insert(activity, at: 0)
+                }
+                else
+                {
+                    sortedActivities.append(activity)
+                }
+            }
+            else
+            {
+                sortedActivities.append(activity)
+            }
+        })
+        
+        PlansManager.shared.activities = sortedActivities
+    }
 }

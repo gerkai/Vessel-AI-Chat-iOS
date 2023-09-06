@@ -22,6 +22,8 @@ class Tip: CoreObjectProtocol
     var subtitle = ""
     var longDescription = ""
     var isCompleted = false
+    var reminders = [Reminder]()
+    var closestReminder: Reminder?
     
     init(id: Int,
          last_updated: Int,
