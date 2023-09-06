@@ -38,6 +38,11 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
         
+        HealthKitManager.shared.authorizeHealthKit(completion: { success, error in
+            print("success: \(success)")
+            print("error: \(String(describing: error))")
+        })
+        
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")

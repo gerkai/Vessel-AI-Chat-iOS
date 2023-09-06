@@ -203,6 +203,7 @@
 		672C1AFE2A8987340001FC7D /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C1AFD2A8987340001FC7D /* Conversation.swift */; };
 		672C1B002A8987850001FC7D /* ConversationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C1AFF2A8987850001FC7D /* ConversationMessage.swift */; };
 		6751362F2A98CC8700ACCDFE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751362E2A98CC8700ACCDFE /* LoadingView.swift */; };
+		678EC9472AA8AF670081C209 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678EC9462AA8AF670081C209 /* HealthKitManager.swift */; };
 		67C7AF8A2A93A67F002A0C14 /* NewActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7AF892A93A67F002A0C14 /* NewActivityDetailsViewController.swift */; };
 		67CACB982A83D0DB0090AD28 /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CACB972A83D0DB0090AD28 /* ChatBotView.swift */; };
 		67D82BA02A94EB4500A08D2B /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D82B9F2A94EB4500A08D2B /* ChatUser.swift */; };
@@ -568,6 +569,7 @@
 		672C1AFD2A8987340001FC7D /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		672C1AFF2A8987850001FC7D /* ConversationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessage.swift; sourceTree = "<group>"; };
 		6751362E2A98CC8700ACCDFE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		678EC9462AA8AF670081C209 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		67C7AF892A93A67F002A0C14 /* NewActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		67CACB972A83D0DB0090AD28 /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
 		67D82B9F2A94EB4500A08D2B /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
@@ -1555,6 +1557,7 @@
 				72798B81298D0A2100A5BD65 /* RemindersManager.swift */,
 				726A545A29ADDBA600E63B32 /* LocalNotificationsManager.swift */,
 				72C0BCC429CB858500843586 /* RouteManager.swift */,
+				678EC9462AA8AF670081C209 /* HealthKitManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2039,6 +2042,7 @@
 				3F244280293EDEB70043E4B4 /* ObjectLoader.swift in Sources */,
 				3F15AD04288C9ADC004716CA /* TestCardUploader.swift in Sources */,
 				3F9CB7B628C7F7410093228E /* UploadErrorSlideupViewController.swift in Sources */,
+				678EC9472AA8AF670081C209 /* HealthKitManager.swift in Sources */,
 				3F9C67AA28FE61D000BC44FA /* VitaminB7.swift in Sources */,
 				3F0547B327C9E421006E3098 /* SignupEmailCheckingViewController.swift in Sources */,
 				3F244286293FFAE80043E4B4 /* log.swift in Sources */,
