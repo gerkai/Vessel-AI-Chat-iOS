@@ -304,7 +304,6 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             assertionFailure("Can't get cell data from viewModel in TodayViewController")
             return UITableViewCell()
         }
-        print("identifier: \(cellData.identifier) for: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: cellData.identifier, for: indexPath)
         switch cellData
         {
