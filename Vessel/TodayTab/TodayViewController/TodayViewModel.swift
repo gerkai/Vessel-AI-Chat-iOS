@@ -142,6 +142,7 @@ enum TodayViewSection: Equatable
         let todayDate = Date.serverDateFormatter.string(from: Date())
         guard activities.count > 0 else { return [] }
         var cells: [TodayViewCell] = [.sectionTitle(icon: "activities-icon", name: "Activities", showInfoIcon: true)]
+        
         for activity in activities
         {
             var plan: Plan?
@@ -389,7 +390,7 @@ class TodayViewModel
     var selectedDate: String = Date.serverDateFormatter.string(from: Date())
     var lastWeekProgress: [String: Double] = PlansManager.shared.getLastWeekPlansProgress()
     var lastDayProgress: Double = PlansManager.shared.calculateProgressFor(date: Date.serverDateFormatter.string(from: Date()))
-    
+        
     var numberOfGlasses: Int?
     {
         WaterManager.shared.getDailyWaterIntake(date: selectedDate)
@@ -496,5 +497,14 @@ class TodayViewModel
     func refreshLastWeekProgress()
     {
         lastWeekProgress = PlansManager.shared.getLastWeekPlansProgress()
+    }
+}
+
+extension Date
+{
+    // returns an integer from 0 - 6, with 0 being Monday and 6 being Sunday
+    func dayNumberOfWeek() -> Int?
+    {
+        return (Calendar.current.dateComponents([.weekday], from: self).weekday ?? 0) - 2
     }
 }

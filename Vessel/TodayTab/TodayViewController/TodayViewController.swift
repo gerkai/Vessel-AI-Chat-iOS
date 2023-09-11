@@ -33,6 +33,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         super.viewDidLoad()
         resultsViewModel.refresh()
         viewModel.resultsViewModel = resultsViewModel
+        viewModel.showReminders = true
         
         //get notified when new food, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
@@ -61,6 +62,7 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
         reloadUI()
     }
     
@@ -355,9 +357,9 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
                 return UITableViewCell()
             }
-            let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
-            let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
-            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: remindersButtonState, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
+//            let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
+//            let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
+            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: type == .activity, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
         case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else
             {
@@ -728,27 +730,28 @@ extension TodayViewController: TodayCheckMarkCardDelegate
     
     func onReminderTapped(id: Int, type: CheckMarkCardType)
     {
+        RemindersManager.shared.reloadReminders()
         guard viewModel.showReminders else { return }
         if type == .activity
         {
             let activities = PlansManager.shared.activities
             let activityPlans = PlansManager.shared.getActivityPlans()
-            guard let plan = activityPlans.first(where: { $0.typeId == id }),
-                  let activity = activities.first(where: { $0.id == plan.typeId }) else
-            {
-                assertionFailure("TodayViewController-onReminderTapped: Can't find plan or activity with id: \(id)")
-                return
-            }
+//            guard let plan = activityPlans.first(where: { $0.typeId == id }),
+//                  let activity = activities.first(where: { $0.id == plan.typeId }) else
+//            {
+//                assertionFailure("TodayViewController-onReminderTapped: Can't find plan or activity with id: \(id)")
+//                return
+//            }
             
-            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
+//            analytics.log(event: .addReminder(planId: plan.id, typeId: plan.typeId, planType: .activity))
             
-            let reminders = RemindersManager.shared.getRemindersForPlan(planId: plan.id)
+            let reminders = RemindersManager.shared.getRemindersForPlan(planId: id)
             if reminders.count > 0
             {
                 let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
                 let addReminderVC = storyboard.instantiateViewController(identifier: "RemindersViewController") as! RemindersViewController
                 addReminderVC.hidesBottomBarWhenPushed = true
-                addReminderVC.viewModel = RemindersViewModel(planId: plan.id, reminders: reminders, activity: activity)
+                addReminderVC.viewModel = RemindersViewModel(planId: id, reminders: reminders, activity: activities.first(where: {$0.id == id}))
                 navigationController?.pushViewController(addReminderVC, animated: true)
             }
             else
@@ -756,7 +759,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
                 let storyboard = UIStoryboard(name: "Reminders", bundle: nil)
                 let addReminderVC = storyboard.instantiateViewController(identifier: "AddReminderViewController") as! AddReminderViewController
                 addReminderVC.hidesBottomBarWhenPushed = true
-                addReminderVC.viewModel = AddReminderViewModel(planId: plan.id, activity: activity)
+                addReminderVC.viewModel = AddReminderViewModel(planId: id, activity: activities.first(where: {$0.id == id}))
                 navigationController?.pushViewController(addReminderVC, animated: true)
             }
         }
