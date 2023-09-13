@@ -90,6 +90,7 @@ struct Constants
     static let vesselTope = #colorLiteral(red: 0.831372549, green: 0.7960784314, blue: 0.7725490196, alpha: 1)      //#D4CBC5
     static let vesselPeach = #colorLiteral(red: 0.9843137255, green: 0.9647058824, blue: 0.9294117647, alpha: 1)     //FBF6ED
     static let vesselChatGreen = #colorLiteral(red: 0.8156862745, green: 0.8862745098, blue: 0.7843137255, alpha: 1) //d0e2c8
+    static let vesselHealthBg = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.9254901961, alpha: 1)  //FFF4EC
     
     //common date formats
     static let SERVER_DATE_FORMAT = "yyyy-MM-dd"

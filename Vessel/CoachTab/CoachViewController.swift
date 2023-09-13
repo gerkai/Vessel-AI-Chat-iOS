@@ -18,7 +18,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     var flowName: AnalyticsFlowName = .coachTabFlow
     @Resolved internal var analytics: Analytics
     
-    var chatBotViewController = UIHostingController(rootView: ChatBotIntro())
+    var chatBotViewController = UIHostingController(rootView: ConnectHealthKitView())
 
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
@@ -54,7 +54,8 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
         {
-            chatBotViewController = UIHostingController(rootView: ChatBotIntro())
+            chatBotViewController = UIHostingController(rootView: ConnectHealthKitView())
+//            navigationController?.pushViewController(chatBotViewController, animated: true)
             chatBotViewController.modalPresentationStyle = .fullScreen
             present(chatBotViewController, animated: true)
         }
@@ -65,9 +66,13 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     }
     
     @objc
-    func onDismissChat()
+    func onDismissChat(notification: NSNotification)
     {
         chatBotViewController.dismiss(animated: true)
+        if let userInfo = notification.userInfo, let tabIndex = userInfo["tab"]
+        {
+            NotificationCenter.default.post(name: .selectTabNotification, object: nil, userInfo: ["tab": tabIndex])
+        }
     }
     
     @objc
