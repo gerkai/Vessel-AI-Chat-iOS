@@ -215,6 +215,7 @@ enum TodayViewSection: Equatable
                 }
             }
         }
+        cells.append(.lockedCheckMarkCard(backgroundImage: "food-placeholder", title: "Apple Health", subtext: "Connect to personalize your fitness plan"))
         return cells
         
 //        cells.append(.checkMarkCard(title: "Get your supplement plan",// activity.title,
@@ -236,7 +237,7 @@ enum TodayViewSection: Equatable
             {
                 return [
                     .sectionTitle(icon: "food-icon", name: "Food", showInfoIcon: true),
-                    .lockedCheckMarkCard(backgroundImage: "food-placeholder", subtext: NSLocalizedString("Get personalized food recommendations", comment: ""))
+                    .lockedCheckMarkCard(backgroundImage: "food-placeholder", title: "Take a test to unlock", subtext: NSLocalizedString("Get personalized food recommendations", comment: ""))
                 ]
             }
             else
@@ -271,7 +272,7 @@ enum TodayViewSection: Equatable
                 {
                     return [
                         .sectionTitle(icon: "water-icon", name: NSLocalizedString("Water", comment: ""), showInfoIcon: true),
-                        .lockedCheckMarkCard(backgroundImage: "water-placeholder", subtext: NSLocalizedString("Get precise hydration recommendations", comment: ""))
+                        .lockedCheckMarkCard(backgroundImage: "water-placeholder", title: "Take a test to unlock", subtext: NSLocalizedString("Get precise hydration recommendations", comment: ""))
                     ]
                 }
             }
@@ -311,7 +312,7 @@ enum TodayViewCell: Equatable
     case sectionTitle(icon: String, name: String, showInfoIcon: Bool)
     case foodDetails(food: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
-    case lockedCheckMarkCard(backgroundImage: String, subtext: String)
+    case lockedCheckMarkCard(backgroundImage: String, title: String, subtext: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?, longDescription: String?)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String, alignment: NSTextAlignment)

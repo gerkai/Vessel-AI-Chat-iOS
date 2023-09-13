@@ -10,13 +10,15 @@ import UIKit
 class TodayLockedCheckMarkCardCell: UITableViewCell
 {
     @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtextLabel: UILabel!
     
     var type: CheckMarkCardType?
     
-    func setup(backgroundImage: String, subtext: String)
+    func setup(backgroundImage: String, title: String, subtext: String)
     {
         backgroundImageView.image = UIImage(named: backgroundImage)
+        titleLabel.text = title
         subtextLabel.text = subtext
     }
 }

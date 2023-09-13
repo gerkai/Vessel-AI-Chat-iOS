@@ -344,13 +344,13 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.setup(glassesNumber: glassesNumber, checkedGlasses: checkedGlasses, delegate: self)
-        case .lockedCheckMarkCard(let backgroundImage, let subtext):
+        case .lockedCheckMarkCard(let backgroundImage, let title, let subtext):
             guard let cell = cell as? TodayLockedCheckMarkCardCell else
             {
                 assertionFailure("Can't dequeue cell TodayLockedCheckMarkCardCell from tableView in TodayViewController")
                 return UITableViewCell()
             }
-            cell.setup(backgroundImage: backgroundImage, subtext: subtext)
+            cell.setup(backgroundImage: backgroundImage, title: title, subtext: subtext)
         case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText, let longDescription):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else
             {
@@ -453,7 +453,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                                                                                                  subtitle: GenericAlertLabelInfo(title: NSLocalizedString("These are the actions you can take to build the habits needed to reach your goals.", comment: ""), font: Constants.FontBodyAlt16, alignment: .center, height: 80.0),
                                                                                                  button: GenericAlertButtonInfo(label: GenericAlertLabelInfo(title: NSLocalizedString("Got it!", comment: "")), type: .dark)))
             }
-            else if activities[indexPath.row - 1].isPlan
+            else if indexPath.row <= activities.count && activities[indexPath.row - 1].isPlan
             {
                 let storyboard = UIStoryboard(name: "TodayTab", bundle: nil)
                 let activityDetailsVC = storyboard.instantiateViewController(identifier: "NewActivityDetailsViewController") as! NewActivityDetailsViewController
@@ -461,6 +461,11 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 activityDetailsVC.imageUrl = activity.imageUrl
                 activityDetailsVC.text = activity.longDescription
                 navigationController?.pushViewController(activityDetailsVC, animated: true)
+            }
+            // Handle Apple Health cell case
+            else if indexPath.row == 5
+            {
+                return
             }
             else
             {
