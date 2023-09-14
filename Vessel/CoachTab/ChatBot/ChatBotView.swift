@@ -158,18 +158,35 @@ struct ChatBotView: View
             VStack(spacing: 1)
             {
                 header
-                ScrollView
+                ZStack(alignment: .bottomTrailing)
                 {
-                    ForEach(viewModel.conversationHistory, id: \.self) { message in
-                        let timestamp = viewModel.time(createdAt: message.created_at)
-                        let model = MessageModel(text: message.message,
-                                                 timestamp: timestamp ?? Date())
-                        MessageView(messageModel: model, isAssistant: message.role == "assistant")
+                    ScrollView
+                    {
+                        ForEach(viewModel.conversationHistory, id: \.self) { message in
+                            let timestamp = viewModel.time(createdAt: message.created_at)
+                            let model = MessageModel(text: message.message,
+                                                     timestamp: timestamp ?? Date())
+                            MessageView(messageModel: model, isAssistant: message.role == "assistant")
+                        }
+                        .rotationEffect(.degrees(180))
                     }
                     .rotationEffect(.degrees(180))
+                    .padding(.top, -24)
+                    
+                    Button
+                    {
+                        
+                    } label: {
+                         Image(systemName: "heart.square")
+                             .font(.title.weight(.semibold))
+                             .padding()
+                             .background(Color.pink)
+                             .foregroundColor(.white)
+                             .clipShape(Circle())
+                             .shadow(radius: 4, x: 0, y: 4)
+                     }
+                     .padding()
                 }
-                .rotationEffect(.degrees(180))
-                .padding(.top, -24)
                 Divider()
                 footer
             }
