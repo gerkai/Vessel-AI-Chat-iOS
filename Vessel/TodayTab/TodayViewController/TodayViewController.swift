@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import SwiftUI
 
 class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebViewControllerDelegate
 {
@@ -48,6 +49,8 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         {
             print("❇️ \(self)")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDismissChat), name: .chatbotDismissed, object: nil)
     }
     
     deinit
@@ -465,7 +468,8 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             // Handle Apple Health cell case
             else if indexPath.row == 5
             {
-                return
+                let chatBotViewController = UIHostingController(rootView: ChatBotView(viewModel: ChatBotViewModel()))
+                navigationController?.pushViewController(chatBotViewController, animated: true)
             }
             else
             {
@@ -825,5 +829,14 @@ extension TodayViewController: GenericAlertDelegate
         {
             tabBarController?.selectedIndex = Constants.TAB_BAR_COACH_INDEX
         }
+    }
+}
+
+extension TodayViewController
+{
+    @objc
+    func onDismissChat(notification: NSNotification)
+    {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
