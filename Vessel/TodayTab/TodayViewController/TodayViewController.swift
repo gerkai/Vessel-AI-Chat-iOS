@@ -40,11 +40,6 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
         
-        HealthKitManager.shared.authorizeHealthKit(completion: { success, error in
-            print("success: \(success)")
-            print("error: \(String(describing: error))")
-        })
-        
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")
@@ -363,6 +358,14 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
 //            let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
 //            let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
             cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: type == .activity, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
+            
+        case .fitnessCard(let backgroundImage, let title, let subtext):
+            guard let cell = cell as? TodayFitnessCardCell else
+            {
+                assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
+                return UITableViewCell()
+            }
+            cell.setup(title: title, description: subtext, backgroundImage: backgroundImage, completed: false, delegate: self)
         case .foldedCheckMarkCard(let title, let subtitle, let backgroundImage):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else
             {
@@ -414,7 +417,6 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         guard let section = viewModel.sections[safe: indexPath.section] else { return }
-        print("section: \(section)")
         switch section
         {
         case .insights(let lessons, _):
@@ -468,8 +470,11 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
             // Handle Apple Health cell case
             else if indexPath.row == 5
             {
-                let chatBotViewController = UIHostingController(rootView: ChatBotView(viewModel: ChatBotViewModel()))
-                navigationController?.pushViewController(chatBotViewController, animated: true)
+                if !HealthKitManager.shared.isAccessGranted
+                {
+                    let chatBotViewController = UIHostingController(rootView: ChatBotView(viewModel: ChatBotViewModel(showHealthButton: true)))
+                    navigationController?.pushViewController(chatBotViewController, animated: true)
+                }
             }
             else
             {
@@ -838,5 +843,6 @@ extension TodayViewController
     func onDismissChat(notification: NSNotification)
     {
         navigationController?.popToRootViewController(animated: true)
+        self.tableView.reloadData()
     }
 }

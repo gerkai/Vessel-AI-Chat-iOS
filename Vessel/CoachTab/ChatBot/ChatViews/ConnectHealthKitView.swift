@@ -54,20 +54,6 @@ struct ConnectHealthKitView: View
                             .font(.custom("BananaGrotesk-Bold", size: 16))
                     }
                 })
-//                NavigationLink(destination: RequestHealthKitAccessView())
-//                {
-//                    ZStack
-//                    {
-//                        Color(.black)
-//                            .clipShape(RoundedRectangle(cornerRadius: 22))
-//                            .frame(height: 60)
-//                            .padding([.leading, .trailing], 30)
-//                        
-//                        Text("Continue")
-//                            .foregroundColor(.white)
-//                            .font(.custom("BananaGrotesk-Bold", size: 16))
-//                    }
-//                }
             }
             
             Spacer()
@@ -75,10 +61,6 @@ struct ConnectHealthKitView: View
         .background(Color(uiColor: Constants.vesselHealthBg))
         .navigationBarBackButtonHidden(true)
         .fullScreenCover(isPresented: $isPresented, content: RequestHealthKitAccessView.init)
-//        .sheet(isPresented: $isPresented)
-//        {
-//            RequestHealthKitAccessView()
-//        }
     }
     
     var header: some View

@@ -21,6 +21,14 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     @Published var conversationHistory: [ConversationMessage] = []
     @Published var isProcessing: Bool = false
     
+    var showHealthButton: Bool = false
+    var didAskForAppleHealth: Bool = false
+    
+    init(showHealthButton: Bool)
+    {
+        self.showHealthButton = showHealthButton
+    }
+    
     enum LoginResponse
     {
         case success
@@ -164,6 +172,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
             guard let response else
             {
                 print("start chat error")
+                completion(0)
                 return
             }
             self.conversations.append(Conversation(id: response.conversation.id))
@@ -173,8 +182,9 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
     }
     
     @MainActor
-    func getConversations()
+    func getConversations(completion: @escaping () -> ())
     {
+        print("getConversations")
         let urlString = "\(CHAT_URL)\(GET_CONVERSATIONS)"
         let parameters = ["username": "mpes"]
         makeRequest(urlString: urlString,
@@ -188,6 +198,7 @@ class ChatBotViewModel: NSObject, ObservableObject, URLSessionTaskDelegate
                 return
             }
             self.conversations = response.conversations
+            completion()
         })
     }
     

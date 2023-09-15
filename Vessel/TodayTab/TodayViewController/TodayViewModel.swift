@@ -215,18 +215,15 @@ enum TodayViewSection: Equatable
                 }
             }
         }
-        cells.append(.lockedCheckMarkCard(backgroundImage: "food-placeholder", title: "Apple Health", subtext: "Connect to personalize your fitness plan"))
+        if HealthKitManager.shared.isAccessGranted
+        {
+            cells.append(.fitnessCard(backgroundImage: "https://s3.amazonaws.com/violetdemo.com/supplements.jpeg", title: "Fitness", subtext: "Running 10 min, 234 cal - Cycling 33 min, 435 cal - Steps 1,556 - Distance 4.8 mil - Flights Climbed 4"))
+        }
+        else
+        {
+            cells.append(.lockedCheckMarkCard(backgroundImage: "food-placeholder", title: "Apple Health", subtext: "Connect to personalize your fitness plan"))
+        }
         return cells
-        
-//        cells.append(.checkMarkCard(title: "Get your supplement plan",// activity.title,
-//                                    subtitle: "Take a simple 3 minute quiz",// activity.frequency,
-//                                    description: "Get a precise supplement plan personilized to you. get started",// activity.description ?? "test desc",
-//                                    backgroundImage: activity.imageUrl,
-//                                    isCompleted: false,
-//                                    id: activity.id,
-//                                    type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
-//                                    remindersButtonState: true, // reminders.count > 0,
-//                                    remindersButtonText: "remindersButtonText"))
     }
     
     func createFoodSection(food: [Food], selectedDate: String, userHasTakenATest: Bool) -> [TodayViewCell]
@@ -314,6 +311,7 @@ enum TodayViewCell: Equatable
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, title: String, subtext: String)
     case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?, longDescription: String?)
+    case fitnessCard(backgroundImage: String, title: String, subtext: String)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String, alignment: NSTextAlignment)
     case loader
@@ -343,7 +341,7 @@ enum TodayViewCell: Equatable
             return CGFloat(foodHeight + spacingHeight + 32)
         case .waterDetails(let glassesNumber, _): return glassesNumber < 10 ? 61.0 : 130.0
         case .lockedCheckMarkCard: return 96.0
-        case .checkMarkCard: return 219.0
+        case .checkMarkCard, .fitnessCard: return 219.0
         case .foldedCheckMarkCard: return 132.0
         case .text: return 38.0
         case .loader: return 38.0
@@ -363,6 +361,7 @@ enum TodayViewCell: Equatable
         case .waterDetails: return "TodayWaterDetailsSectionCell"
         case .lockedCheckMarkCard: return "LockedCheckmarkCardCell"
         case .checkMarkCard: return "CheckmarkCardCell"
+        case .fitnessCard: return "FitnessCardCell"
         case .foldedCheckMarkCard: return "FoldedCheckmarkCardCell"
         case .text: return "TodayTextCell"
         case .loader: return "TodayLoaderCell"

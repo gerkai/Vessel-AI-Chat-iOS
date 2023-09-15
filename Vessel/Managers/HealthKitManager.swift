@@ -19,6 +19,11 @@ class HealthKitManager: HKHealthStore
     
     private let healthStore = HKHealthStore()
     
+    var isAccessGranted: Bool
+    {
+        UserDefaults.standard.bool(forKey: Constants.KEY_HEALTH_KIT_AUTH)
+    }
+    
     func authorizeHealthKit(completion: @escaping (Bool, Error?) -> ())
     {
         guard HKHealthStore.isHealthDataAvailable() else
@@ -37,11 +42,13 @@ class HealthKitManager: HKHealthStore
             if !success
             {
                 // Handle the error here.
+                UserDefaults.standard.setValue(false, forKey: Constants.KEY_HEALTH_KIT_AUTH)
                 
             }
             else
             {
                 completion(true, nil)
+                UserDefaults.standard.setValue(true, forKey: Constants.KEY_HEALTH_KIT_AUTH)
             }
         }
         

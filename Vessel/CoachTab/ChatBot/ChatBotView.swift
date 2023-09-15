@@ -172,20 +172,21 @@ struct ChatBotView: View
                     }
                     .rotationEffect(.degrees(180))
                     .padding(.top, -24)
-                    
-                    Button
+                
+                    if viewModel.showHealthButton
                     {
-                        
-                    } label: {
-                         Image(systemName: "heart.square")
-                             .font(.title.weight(.semibold))
-                             .padding()
-                             .background(Color.pink)
-                             .foregroundColor(.white)
-                             .clipShape(Circle())
-                             .shadow(radius: 4, x: 0, y: 4)
-                     }
-                     .padding()
+                        NavigationLink(destination: ConnectHealthKitView())
+                        {
+                            Image(systemName: "heart.square")
+                                .font(.title.weight(.semibold))
+                                .padding()
+                                .background(Color.pink)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 4, x: 0, y: 4)
+                        }
+                        .padding()
+                    }
                 }
                 Divider()
                 footer
@@ -194,6 +195,10 @@ struct ChatBotView: View
         .navigationBarBackButtonHidden(true)
         .onAppear
         {
+            guard viewModel.didAskForAppleHealth == false else
+            {
+                return
+            }
             isLoading = true
             if Server.shared.chatToken == nil
             {
@@ -208,8 +213,14 @@ struct ChatBotView: View
                 {
                     conversationId = await viewModel.startChat()
                     isLoading = false
+                    viewModel.getConversations
+                    {
+                        Task
+                        {
+                            await askForHealthConfig()
+                        }
+                    }
                 }
-                viewModel.getConversations()
             }
         }
     }
@@ -249,7 +260,13 @@ struct ChatBotView: View
                     {
                         conversationId = await viewModel.startChat()
                         isLoading = false
-                        viewModel.getConversations()
+                        viewModel.getConversations
+                        {
+                            Task
+                            {
+                                await askForHealthConfig()
+                            }
+                        }
                     }
                 case .invalidCredentials:
                     viewModel.signup(username: username, completion: { success in
@@ -258,7 +275,13 @@ struct ChatBotView: View
                             Task
                             {
                                 conversationId = await viewModel.startChat()
-                                viewModel.getConversations()
+                                viewModel.getConversations
+                                {
+                                    Task
+                                    {
+                                        await askForHealthConfig()
+                                    }
+                                }
                             }
                         }
                         else
@@ -278,5 +301,17 @@ struct ChatBotView: View
     func openChat(conversation id: Int)
     {
         viewModel.getConversationHistory(id)
+    }
+}
+
+extension ChatBotView
+{
+    func askForHealthConfig() async
+    {
+        if viewModel.showHealthButton, let id = conversationId
+        {
+            viewModel.didAskForAppleHealth = true
+            await sendMessage(message: "Hi Violet, can you help me connect Apple health", conversationId: id)
+        }
     }
 }

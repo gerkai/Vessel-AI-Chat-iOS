@@ -18,7 +18,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     var flowName: AnalyticsFlowName = .coachTabFlow
     @Resolved internal var analytics: Analytics
     
-    var chatBotViewController = UIHostingController(rootView: ConnectHealthKitView())
+    var chatBotViewController = UIHostingController(rootView: ChatBotIntro())
 
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad()
@@ -54,8 +54,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
         {
-            chatBotViewController = UIHostingController(rootView: ConnectHealthKitView())
-//            navigationController?.pushViewController(chatBotViewController, animated: true)
+            chatBotViewController = UIHostingController(rootView: ChatBotIntro())
             chatBotViewController.modalPresentationStyle = .fullScreen
             present(chatBotViewController, animated: true)
         }

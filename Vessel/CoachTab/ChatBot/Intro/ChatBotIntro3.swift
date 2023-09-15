@@ -22,7 +22,7 @@ struct ChatBotIntro3: View
                 .font(.custom("NoeText", size: 14))
                 .padding([.leading, .trailing], 16)
             Spacer()
-            NavigationLink(destination: ChatBotView(viewModel: ChatBotViewModel()))
+            NavigationLink(destination: ChatBotView(viewModel: ChatBotViewModel(showHealthButton: false)))
             {
                 ZStack
                 {
@@ -38,13 +38,5 @@ struct ChatBotIntro3: View
             }
         }
         .navigationBarBackButtonHidden(true)
-    }
-}
-
-struct ChatBotIntro3_Previews: PreviewProvider
-{
-    static var previews: some View
-    {
-        ChatBotIntro3()
     }
 }
