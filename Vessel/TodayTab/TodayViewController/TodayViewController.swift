@@ -468,7 +468,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 navigationController?.pushViewController(activityDetailsVC, animated: true)
             }
             // Handle Apple Health cell case
-            else if indexPath.row == 5
+            else if indexPath.row == activities.count + 1
             {
                 if !HealthKitManager.shared.isAccessGranted
                 {
@@ -496,7 +496,8 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 })[safe: indexPath.row - 1 ],
                       let plan = plans.first(where: { activity.isLifestyleRecommendation ? $0.typeId == activity.id && $0.type == .reagentLifestyleRecommendation : $0.typeId == activity.id && $0.type == .activity }) else
                 {
-                    assertionFailure("TodayViewController-tableViewDidSelectRowAt.activities: Couldn't find the tapped activity")
+//                    assertionFailure("TodayViewController-tableViewDidSelectRowAt.activities: Couldn't find the tapped activity")
+                    print("couldn't find the selected activity")
                     return
                 }
                 if (plan.typeId == Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID) && (activity.isLifestyleRecommendation)
