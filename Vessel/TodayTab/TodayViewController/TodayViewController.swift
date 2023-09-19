@@ -39,13 +39,20 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
         //get notified when new food, plans or results comes in from After Test Flow
         NotificationCenter.default.addObserver(self, selector: #selector(self.dataUpdated(_:)), name: .newDataArrived, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newPlanAdded(_:)), name: .newPlanAddedOrRemoved, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDismissChat), name: .chatbotDismissed, object: nil)
         
         if UserDefaults.standard.bool(forKey: Constants.KEY_PRINT_INIT_DEINIT)
         {
             print("❇️ \(self)")
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDismissChat), name: .chatbotDismissed, object: nil)
+        if HealthKitManager.shared.isAccessGranted
+        {
+            HealthKitManager.shared.getSteps(completion: {steps in
+                print("getSteps: \(steps)")
+                //TODO: update UI with new value
+            })
+        }
     }
     
     deinit

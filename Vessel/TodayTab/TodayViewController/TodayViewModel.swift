@@ -217,7 +217,9 @@ enum TodayViewSection: Equatable
         }
         if HealthKitManager.shared.isAccessGranted
         {
-            cells.append(.fitnessCard(backgroundImage: "https://s3.amazonaws.com/violetdemo.com/supplements.jpeg", title: "Fitness", subtext: "Running 10 min, 234 cal - Cycling 33 min, 435 cal - Steps 1,556 - Distance 4.8 mil - Flights Climbed 4"))
+            cells.append(.fitnessCard(backgroundImage: "https://s3.amazonaws.com/violetdemo.com/supplements.jpeg",
+                                      title: "Fitness",
+                                      subtext: "Running 10 min, 234 cal - Cycling 33 min, 435 cal - Steps 1,556 - Distance 4.8 mil - Flights Climbed 4"))
         }
         else
         {
