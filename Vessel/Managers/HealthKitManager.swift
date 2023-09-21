@@ -21,7 +21,15 @@ class HealthKitManager: HKHealthStore
     
     var isAccessGranted: Bool
     {
-        UserDefaults.standard.bool(forKey: Constants.KEY_HEALTH_KIT_AUTH)
+        // TODO: check for Authorization Status for required types
+        get
+        {
+            UserDefaults.standard.bool(forKey: Constants.KEY_HEALTH_KIT_AUTH)
+        }
+        set
+        {
+            UserDefaults.standard.set(newValue, forKey: Constants.KEY_HEALTH_KIT_AUTH)
+        }
     }
     
     func authorizeHealthKit(completion: @escaping (Bool, Error?) -> ())
@@ -40,36 +48,15 @@ class HealthKitManager: HKHealthStore
                             HKObjectType.quantityType(forIdentifier: .stepCount)!])
 
         healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
-            if !success
-            {
-                completion(false, nil)
-                UserDefaults.standard.setValue(false, forKey: Constants.KEY_HEALTH_KIT_AUTH)
-            }
-            else
-            {
-                completion(true, nil)
-                UserDefaults.standard.setValue(true, forKey: Constants.KEY_HEALTH_KIT_AUTH)
-            }
+            self.isAccessGranted = success
+            completion(success, nil)
+            UserDefaults.standard.setValue(success, forKey: Constants.KEY_HEALTH_KIT_AUTH)
         }
-        
-//        let status = healthStore.authorizationStatus(for: HKObjectType.workoutType())
-//        switch status
-//        {
-//            case .notDetermined, .sharingDenied:
-//                healthStore.getRequestStatusForAuthorization(toShare: Set([HKObjectType.workoutType()]), read: Set([HKObjectType.workoutType()]), completion: { status, error in
-//                    print("getRequestStatusForAuthorization: \(status)")
-//                })
-//                healthStore.requestAuthorization(toShare: Set([HKObjectType.workoutType()]), read: Set([HKObjectType.workoutType()])) {(success, error) in
-//                }
-//            default:
-//            break
-//        }
     }
 }
 
 extension HealthKitManager
 {
-    
     func getSteps(completion: @escaping (Double) -> Void)
     {
         let type = HKQuantityType.quantityType(forIdentifier: .stepCount)!

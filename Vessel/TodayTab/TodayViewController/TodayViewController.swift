@@ -698,6 +698,10 @@ extension TodayViewController: TodayCheckMarkCardDelegate
             if let activity = activities.first(where: { $0.id == id }) //hardcoded activities
             {
                 activity.isCompleted = true
+                if viewModel.isToday
+                {
+                    analytics.log(event: .checkedOffPlanActivityForToday)
+                }
                 return
             }
             

@@ -10,7 +10,7 @@ import SwiftUI
 struct RequestHealthKitAccessView: View
 {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    let analytics = Resolver.resolve(Analytics.self)
     var body: some View
     {
         VStack
@@ -27,13 +27,14 @@ struct RequestHealthKitAccessView: View
                     .font(.custom("BananaGrotesk", size: 16))
                 Button
                 {
-                    print("Request Access")
+                    trackEventAuthStarted()
                     HealthKitManager.shared.authorizeHealthKit
                     { success, error in
                         guard error == nil else
                         {
                             return
                         }
+                        trackEventAuthCompleted()
                         presentationMode.wrappedValue.dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute:
                         {
@@ -83,6 +84,16 @@ struct RequestHealthKitAccessView: View
                 .font(.custom("BananaGrotesk-Bold", size: 22))
             Spacer()
         }
+    }
+    
+    private func trackEventAuthStarted()
+    {
+        analytics.log(event: .appleHealthAuthStarted)
+    }
+    
+    private func trackEventAuthCompleted()
+    {
+          analytics.log(event: .appleHealthAuthCompleted)
     }
 }
 
