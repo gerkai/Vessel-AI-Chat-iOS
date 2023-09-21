@@ -55,6 +55,11 @@ enum AnalyticsEvent
     case viewedPage(screenName: String, flowName: AnalyticsFlowName, associatedValue: String? = nil)
     case waterAdded
     case waterComplete(waterAmount: Int, totalWaterAmount: Int)
+    case chatOnboardingStarted
+    case chatOnboardingCompleted
+    case appleHealthAuthStarted
+    case appleHealthAuthCompleted
+    case checkedOffPlanActivityForToday
     
     var name: String
     {
@@ -106,6 +111,11 @@ enum AnalyticsEvent
         case .viewedPage: return "Viewed Page"
         case .waterAdded: return "Water Added"
         case .waterComplete: return "Water Complete"
+        case .chatOnboardingStarted: return "Started onboarding AI chat (building plans)"
+        case .chatOnboardingCompleted: return "Completed onboarding (all plans they selected)"
+        case .appleHealthAuthStarted: return "Started Apple Health Connect"
+        case .appleHealthAuthCompleted: return "Connected Apple Health"
+        case .checkedOffPlanActivityForToday: return "Checked off a plan activity on today"
         }
     }
     
@@ -285,6 +295,16 @@ enum AnalyticsEvent
         case .waterComplete(let waterAmount, let totalWaterAmount):
             return ["Water Amount": waterAmount,
                     "Total Water Amount": totalWaterAmount]
+        case .chatOnboardingStarted:
+            return [:]
+        case .chatOnboardingCompleted:
+            return [:]
+        case .appleHealthAuthStarted:
+            return [:]
+        case .appleHealthAuthCompleted:
+            return [:]
+        case .checkedOffPlanActivityForToday:
+            return [:]
         }
     }
 }
