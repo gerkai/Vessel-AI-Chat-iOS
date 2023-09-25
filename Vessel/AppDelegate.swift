@@ -65,6 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             }
         }
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {(accepted, error) in
+            if !accepted
+            {
+                print("Notification access denied")
+            }
+         }
+        
         return true
     }
     

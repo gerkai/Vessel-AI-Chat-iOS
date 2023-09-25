@@ -28,36 +28,39 @@ class RemindersManager
 
         for reminder in reminders
         {
-            guard let plan = PlansManager.shared.plans.first(where: { $0.id == reminder.planId }) else { continue }
+//            guard let plan = PlansManager.shared.plans.first(where: { $0.id == reminder.planId }) else { continue }
             
             let content = UNMutableNotificationContent()
             
-            switch plan.type
-            {
-            case .activity:
-                guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == false && $0.id == plan.typeId }) else { continue }
+//            switch plan.type
+//            {
+//            case .activity:
+            guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == false && $0.id == reminder.planId }) else { continue }
                 content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
                 content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do activity"), tip.title.lowercased())
-            case .reagentLifestyleRecommendation:
-                guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == true && $0.id == plan.typeId }) else { continue }
-                content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
-                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do lifestyle recommendation"), tip.title.lowercased())
-            case .food:
-                guard let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId }) else { continue }
-                content.title = String(format: NSLocalizedString("Eat %@.", comment: ""), food.title.lowercased())
-                content.body = String(format: NSLocalizedString("Remember to eat %@ today!", comment: "Instructions when to eat food"), food.title.lowercased())
-            }
+//            case .reagentLifestyleRecommendation:
+//                guard let tip = PlansManager.shared.activities.first(where: { $0.isLifestyleRecommendation == true && $0.id == plan.typeId }) else { continue }
+//                content.title = String(format: NSLocalizedString("%@.", comment: ""), tip.title)
+//                content.body = String(format: NSLocalizedString("Remember to %@ now!", comment: "Instructions when to do lifestyle recommendation"), tip.title.lowercased())
+//            case .food:
+//                guard let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId }) else { continue }
+//                content.title = String(format: NSLocalizedString("Eat %@.", comment: ""), food.title.lowercased())
+//                content.body = String(format: NSLocalizedString("Remember to eat %@ today!", comment: "Instructions when to eat food"), food.title.lowercased())
+//            }
                         
             let timeOfDay = getTimeOfDay(from: reminder.timeOfDay)
             let hour = timeOfDay.hour
             let minute = timeOfDay.minute
-            
             for day in reminder.dayOfWeek
             {
-                let adjustedDay = (day + 6) % 7 + 1
+                var adjustedDay = day + 2
+                if adjustedDay > 7
+                {
+                    adjustedDay = 1
+                }
                 let dateComponents = DateComponents(hour: hour, minute: minute, weekday: adjustedDay)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                
+
                 let identifier = "\(reminder.id)+\(day)"
                 center.getPendingNotificationRequests { (requests) in
                     let existingRequests = requests.filter({ $0.identifier == identifier })
@@ -170,13 +173,15 @@ class RemindersManager
     {
         let dayOfWeek = Date().dayNumberOfWeek()!
         let reminders = RemindersManager.shared.reminders
-        
         // Arrange reminders to every activity
         activities.forEach({ activity in
             reminders.forEach({ reminder in
-                if reminder.planId == activity.id
+                if !activity.reminders.contains(where: { $0.id == reminder.id })
                 {
-                    activity.reminders.append(reminder)
+                    if reminder.planId == activity.id
+                    {
+                        activity.reminders.append(reminder)
+                    }
                 }
             })
         })
@@ -213,5 +218,23 @@ class RemindersManager
         })
         
         PlansManager.shared.activities = sortedActivities
+    }
+    
+    func removeActivityReminder(with id: Int)
+    {
+        let center = UNUserNotificationCenter.current()
+        PlansManager.shared.activities.forEach({ activity in
+            if let index = activity.reminders.firstIndex(where: { $0.id == id })
+            {
+                let reminder = activity.reminders[index]
+                var identifiers = [String]()
+                for day in reminder.dayOfWeek
+                {
+                    identifiers.append("\(reminder.id)+\(day)")
+                }
+                center.removePendingNotificationRequests(withIdentifiers: identifiers)
+                activity.reminders.remove(at: index)
+            }
+        })
     }
 }

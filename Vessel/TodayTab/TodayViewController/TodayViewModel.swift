@@ -107,6 +107,7 @@ enum TodayViewSection: Equatable
                                             type: .lesson,
                                             remindersButtonState: nil,
                                             remindersButtonText: nil,
+                                            remindersCount: nil,
                                             longDescription: nil))
             }
             else
@@ -173,6 +174,7 @@ enum TodayViewSection: Equatable
                                             type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
                                             remindersButtonState: true,
                                             remindersButtonText: "",
+                                            remindersCount: activity.reminders.count,
                                             longDescription: activity.longDescription))
             }
             
@@ -211,6 +213,7 @@ enum TodayViewSection: Equatable
                                                 type: activity.isLifestyleRecommendation ? .lifestyleRecommendation : .activity,
                                                 remindersButtonState: reminders.count > 0,
                                                 remindersButtonText: RemindersManager.shared.getNextReminderTime(forPlan: plan.id),
+                                                remindersCount: activity.reminders.count,
                                                 longDescription: activity.longDescription))
                 }
             }
@@ -312,7 +315,7 @@ enum TodayViewCell: Equatable
     case foodDetails(food: [Food], selectedDate: String)
     case waterDetails(glassesNumber: Int, checkedGlasses: Int)
     case lockedCheckMarkCard(backgroundImage: String, title: String, subtext: String)
-    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?, longDescription: String?)
+    case checkMarkCard(title: String, subtitle: String, description: String, backgroundImage: String, isCompleted: Bool, id: Int, type: CheckMarkCardType, remindersButtonState: Bool?, remindersButtonText: String?, remindersCount: Int?, longDescription: String?)
     case fitnessCard(backgroundImage: String, title: String, subtext: String)
     case foldedCheckMarkCard(title: String, subtitle: String, backgroundImage: String)
     case text(text: String, alignment: NSTextAlignment)
