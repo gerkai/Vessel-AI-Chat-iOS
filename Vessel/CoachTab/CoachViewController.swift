@@ -54,6 +54,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     {
         if UserDefaults.standard.bool(forKey: Constants.KEY_ENABLE_CHAT_GPT_COACH)
         {
+            analytics.log(event: .chatOnboardingStarted)
             chatBotViewController = UIHostingController(rootView: ChatBotIntro())
             chatBotViewController.modalPresentationStyle = .fullScreen
             present(chatBotViewController, animated: true)
@@ -67,6 +68,7 @@ class CoachViewController: UIViewController, VesselScreenIdentifiable
     @objc
     func onDismissChat(notification: NSNotification)
     {
+        analytics.log(event: .chatOnboardingCompleted)
         chatBotViewController.dismiss(animated: true)
         if let userInfo = notification.userInfo, let tabIndex = userInfo["tab"]
         {

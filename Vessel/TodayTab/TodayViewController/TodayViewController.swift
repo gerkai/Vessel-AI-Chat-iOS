@@ -764,7 +764,7 @@ extension TodayViewController: TodayCheckMarkCardDelegate
         if type == .activity
         {
             let activities = PlansManager.shared.activities
-            let activityPlans = PlansManager.shared.getActivityPlans()
+//            let activityPlans = PlansManager.shared.getActivityPlans()
 //            guard let plan = activityPlans.first(where: { $0.typeId == id }),
 //                  let activity = activities.first(where: { $0.id == plan.typeId }) else
 //            {
@@ -857,6 +857,7 @@ extension TodayViewController
     @objc
     func onDismissChat(notification: NSNotification)
     {
+        analytics.log(event: .chatOnboardingCompleted)
         navigationController?.popToRootViewController(animated: true)
         self.tableView.reloadData()
     }
