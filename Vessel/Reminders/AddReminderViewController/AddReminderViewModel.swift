@@ -5,7 +5,7 @@
 //  Created by Nicolas Medina on 2/2/23.
 //
 
-import Foundation
+import UIKit
 
 class AddReminderViewModel
 {
@@ -126,16 +126,10 @@ class AddReminderViewModel
     func saveReminder()
     {
         ObjectStore.shared.clientSave(reminder)
-        RemindersManager.shared.reloadReminders()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            RemindersManager.shared.setupRemindersIfNeeded()
-        })
-
         if let typeId = typeId, let type = type
         {
             analytics.log(event: .reminderAdded(planId: reminder.id, typeId: typeId, planType: type, howMuch: shouldShowHowMuchSection ? quantityText : nil, whatTime: selectedTime, daysOfTheWeek: selectedWeekdays))
         }
-        RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
     }
     
     private func getWeekday(for number: Int) -> String

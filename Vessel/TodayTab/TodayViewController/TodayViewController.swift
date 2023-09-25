@@ -212,6 +212,9 @@ class TodayViewController: UIViewController, VesselScreenIdentifiable, TodayWebV
             }
             else if type == String(describing: Reminder.self)
             {
+                RemindersManager.shared.reloadReminders()
+                RemindersManager.shared.setupRemindersIfNeeded()
+                RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
                 reloadUI()
             }
         }
@@ -356,15 +359,15 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.setup(backgroundImage: backgroundImage, title: title, subtext: subtext)
-        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText, let longDescription):
+        case .checkMarkCard(let title, let subtitle, let description, let backgroundImage, let isCompleted, let id, let type, let remindersButtonState, let remindersButtonText, let remindersCount, let longDescription):
             guard let cell = cell as? TodayCheckMarkCardTableViewCell else
             {
                 assertionFailure("Can't dequeue cell TodayCheckMarkCardTableViewCell from tableView in TodayViewController")
                 return UITableViewCell()
             }
-//            let shouldShowReminderButton = viewModel.showReminders && (type != .lifestyleRecommendation || id != Constants.GET_SUPPLEMENTS_LIFESTYLE_RECOMMENDATION_ID)
-//            let remindersButtonState = shouldShowReminderButton ? remindersButtonState : nil
-            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: type == .activity, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
+            let shouldShowReminderButton = viewModel.showReminders && (type == .activity)// && remindersCount ?? 0 > 0)
+            let remindersButtonState = shouldShowReminderButton ? remindersCount ?? 0 > 0 : nil
+            cell.setup(title: title, subtitle: subtitle, description: description, backgroundImage: backgroundImage, completed: isCompleted, remindersButtonState: remindersButtonState, remindersButtonTitle: remindersButtonText, id: id, type: type, delegate: self)
             
         case .fitnessCard(let backgroundImage, let title, let subtext):
             guard let cell = cell as? TodayFitnessCardCell else

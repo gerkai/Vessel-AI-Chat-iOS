@@ -36,38 +36,38 @@ class LocalNotificationsManager: NSObject
     
     func setupRemindersNotificationsIfNeeded()
     {
-        guard RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false else { return }
-        let center = UNUserNotificationCenter.current()
+//        guard RemoteConfigManager.shared.getValue(for: .remindersFeature) as? Bool ?? false else { return }
+            let center = UNUserNotificationCenter.current()
 
         for reminder in RemindersManager.shared.reminders
         {
-            guard let plan = PlansManager.shared.plans.first(where: { $0.id == reminder.planId }) else
-            {
-                continue
-            }
+//            guard let plan = PlansManager.shared.plans.first(where: { $0.id == reminder.planId }) else
+//            {
+//                continue
+//            }
             
             let content = UNMutableNotificationContent()
             content.title = NSLocalizedString("Remember your plan", comment: "")
             
             var message: String = ""
-            if plan.type == .food
-            {
-                let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId })
-                let title = food?.title ?? ""
-                message = String(format: NSLocalizedString("Remember to eat %i %@ today", comment: ""), reminder.quantity, reminder.quantity > 1 ? title + "s" : title)
-            }
-            else if plan.type == .activity
-            {
-                let activity = PlansManager.shared.activities.first(where: {  $0.id == plan.typeId })
+//            if plan.type == .food
+//            {
+//                let food = Contact.main()?.suggestedFood.first(where: { $0.id == plan.typeId })
+//                let title = food?.title ?? ""
+//                message = String(format: NSLocalizedString("Remember to eat %i %@ today", comment: ""), reminder.quantity, reminder.quantity > 1 ? title + "s" : title)
+//            }
+//            else if plan.type == .activity
+//            {
+                let activity = PlansManager.shared.activities.first(where: {  $0.id == reminder.planId })
                 let title = activity?.title ?? ""
                 message = String(format: NSLocalizedString("Remember to do %@ %i times today", comment: ""), title, reminder.quantity)
-            }
-            else if plan.type == .reagentLifestyleRecommendation
-            {
-                let lifestyleRecommendation = PlansManager.shared.activities.first(where: {  $0.id == plan.typeId && $0.isLifestyleRecommendation })
-                let title = lifestyleRecommendation?.title ?? ""
-                message = String(format: NSLocalizedString("Remember to %@ today", comment: ""), title)
-            }
+//            }
+//            else if plan.type == .reagentLifestyleRecommendation
+//            {
+//                let lifestyleRecommendation = PlansManager.shared.activities.first(where: {  $0.id == plan.typeId && $0.isLifestyleRecommendation })
+//                let title = lifestyleRecommendation?.title ?? ""
+//                message = String(format: NSLocalizedString("Remember to %@ today", comment: ""), title)
+//            }
             
             content.body = message
             
@@ -77,11 +77,15 @@ class LocalNotificationsManager: NSObject
             
             for day in reminder.dayOfWeek
             {
-                let adjustedDay = (day + 6) % 7 + 1
+                var adjustedDay = day + 2
+                if adjustedDay > 7
+                {
+                    adjustedDay = 1
+                }
                 let dateComponents = DateComponents(hour: hour, minute: minute, weekday: adjustedDay)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 
-                let identifier = "REMINDER:\(reminder.id)"
+                let identifier = "\(reminder.id)+\(day)"
                 center.getPendingNotificationRequests { (requests) in
                     let existingRequests = requests.filter({ $0.identifier == identifier })
                     if existingRequests.isEmpty

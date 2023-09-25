@@ -91,7 +91,7 @@ class RemindersViewModel
         Storage.remove(reminderId, objectType: Reminder.self)
         ObjectStore.shared.removeFromCache(reminder)
         RemindersManager.shared.reloadReminders()
+        RemindersManager.shared.removeActivityReminder(with: reminderId)
         NotificationCenter.default.post(name: .newDataArrived, object: nil, userInfo: ["objectType": String(describing: Reminder.self)])
-        RemindersManager.shared.setupActivityReminders(activities: PlansManager.shared.activities)
     }
 }
